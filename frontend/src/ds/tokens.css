@@ -1,0 +1,97 @@
+/* Vào Được design tokens.
+   Map-led and light. The base map and the semantic fit/flood colours carry the meaning; chrome stays quiet.
+   Type: Bricolage Grotesque for decisions and numbers, Be Vietnam Pro for everything else (both ship Vietnamese). */
+:root {
+  /* neutrals (warm-cool slate, tuned to sit on Goong's pale base map) */
+  --n-0: #ffffff;
+  --n-25: #fbfcfb;
+  --n-50: #f4f6f5;
+  --n-100: #eaedec;
+  --n-200: #dbe0df;
+  --n-300: #c3cac9;
+  --n-500: #6b7876;
+  --n-600: #52605e;
+  --n-700: #36423f;
+  --n-900: #101816;
+
+  /* roles */
+  --surface: var(--n-0);
+  --surface-sunk: var(--n-50);
+  --surface-raised: var(--n-0);
+  --outline: var(--n-200);
+  --outline-strong: var(--n-300);
+  --text: var(--n-900);
+  --text-2: var(--n-600);
+  --text-3: var(--n-500);
+  --on-dark: #f5f8f7;
+
+  /* brand: deep road-sign teal, and a signal orange for the walk and the selected stop */
+  --brand: #0b4a52;
+  --brand-600: #0e5d67;
+  --brand-tint: #e3f0ef;
+  --signal: #f0562a;
+  --signal-tint: #fdebe4;
+
+  /* routes */
+  --route: #1f5eff;
+  --route-casing: #ffffff;
+  --route-goong: #3a4246;
+
+  /* semantic: fit of an alley for THIS car */
+  --fit-fits: #18915a;
+  --fit-tight: #e09a12;
+  --fit-no: #d33a3a;
+  --fit-unknown: #9aa6a8;
+  --fit-blocked: #7b45e0;
+  --fit-fits-tint: #e4f4ec;
+  --fit-tight-tint: #fdf2dc;
+  --fit-no-tint: #fbe6e6;
+  --fit-unknown-tint: #eef1f1;
+
+  /* semantic: water relative to this car's safe wading depth */
+  --flood-low: #9cc7ff;
+  --flood-risky: #3b6df0;
+  --flood-over: #1b2f86;
+  --flood-tint: #e8f0ff;
+
+  /* type */
+  --font-ui: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --fs-11: 11.5px;
+  --fs-12: 12.5px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-17: 17px;
+  --fs-22: 22px;
+  --fs-28: 28px;
+  --fs-36: 36px;
+
+  /* space (4pt) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+
+  /* shape */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  /* elevation: hairline + soft ambient, never heavy */
+  --e-1: 0 0 0 1px rgb(16 24 22 / 0.06), 0 1px 2px rgb(16 24 22 / 0.06);
+  --e-2: 0 0 0 1px rgb(16 24 22 / 0.06), 0 6px 20px -6px rgb(16 24 22 / 0.18);
+  --e-3: 0 0 0 1px rgb(16 24 22 / 0.07), 0 18px 48px -12px rgb(16 24 22 / 0.28);
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 120ms;
+  --t-med: 220ms;
+
+  --tap: 44px;
+}

@@ -1,0 +1,6 @@
+[out:json][timeout:180];
+(
+  way["highway"="service"]["service"="alley"](10.70,106.60,10.86,106.78);
+  way["highway"~"^(residential|service|living_street|unclassified|tertiary|pedestrian|footway)$"]["name"~"^(Hẻm|hẻm|HẺM|Kiệt)"](10.70,106.60,10.86,106.78);
+);
+out tags center;

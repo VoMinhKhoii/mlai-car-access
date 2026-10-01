@@ -1,0 +1,320 @@
+{
+  "Code": 1,
+  "Content": [
+    {
+      "TramId": "3",
+      "TenTram": "Cao Bá Quát (cổng Cty Môi trường đô thị)",
+      "Lng": "105.839500",
+      "Lat": "21.030180",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "5",
+      "TenTram": "Thụy Khuê (trường Chu Văn An - Dốc La Pho)",
+      "Lng": "105.828879",
+      "Lat": "21.041384",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "6",
+      "TenTram": "Đội Cấn (SN209- Chùa Bát Tháp)",
+      "Lng": "105.822550",
+      "Lat": "21.035160",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "9",
+      "TenTram": "Nguyễn Khuyến (Khu vực trước cổng trường Lý Thường Kiệt)",
+      "Lng": "105.838249",
+      "Lat": "21.028427",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "10",
+      "TenTram": "Ngã tư Phan Bội Châu - Lý Thường Kiệt",
+      "Lng": "105.843262",
+      "Lat": "21.025475",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "11",
+      "TenTram": "Phùng Hưng - Bát Đàn - Đường Thành - Nhà Hỏa",
+      "Lng": "105.845801",
+      "Lat": "21.033834",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "12",
+      "TenTram": "Trường Chinh (đoạn Bệnh Viện PKKQ)",
+      "Lng": "105.825721",
+      "Lat": "21.001605",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "13",
+      "TenTram": "Trần Bình (UBND phường Mai Dịch đến bệnh viện 19/8)",
+      "Lng": "105.778829",
+      "Lat": "21.035861",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "17",
+      "TenTram": "Bến xe phía Nam - đường Giải Phóng",
+      "Lng": "105.840849",
+      "Lat": "20.980906",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "18",
+      "TenTram": "Nguyễn Chính ( từ ngõ 74 đến cống  hóa mương Tân Mai)",
+      "Lng": "105.847655",
+      "Lat": "20.981314",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "34",
+      "TenTram": "Ngã tư Điện Biên Phủ - Nguyễn Tri Phương",
+      "Lng": "105.840396",
+      "Lat": "21.031400",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "50",
+      "TenTram": "Phạm Văn Đồng (trước và đối diện công ty Cầu 7)",
+      "Lng": "105.785674",
+      "Lat": "21.073424",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "53",
+      "TenTram": "Phạm Văn Đồng (ngã 3 Xuân Đỉnh - Tân Xuân)",
+      "Lng": "105.787156",
+      "Lat": "21.078091",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "80",
+      "TenTram": "Phố Thanh Đàm",
+      "Lng": "105.886204",
+      "Lat": "20.997903",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "87",
+      "TenTram": "Ngã tư Tây Sơn - Thái Hà",
+      "Lng": "105.824682",
+      "Lat": "21.009461",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "105",
+      "TenTram": "Phố Tông Đản (khách sạn Thủy Tiên)",
+      "Lng": "105.857265",
+      "Lat": "21.028143",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "114",
+      "TenTram": "Đường Ngọc Lâm (từ ngã ba Long  Biên 1 đến XN MTĐT Gia  Lâm)",
+      "Lng": "105.870388",
+      "Lat": "21.046026",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "120",
+      "TenTram": "Ngã ba Vũ Trọng Phụng - Quan Nhân",
+      "Lng": "105.809286",
+      "Lat": "20.998115",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "122",
+      "TenTram": "Nguyễn Trãi (trường ĐHKH và NV-bên chẵn làn xe buýt)",
+      "Lng": "105.807495",
+      "Lat": "20.994291",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "124",
+      "TenTram": "Phố Cự Lộc (SN12 đến ngõ 95)",
+      "Lng": "105.814117",
+      "Lat": "21.000143",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "131",
+      "TenTram": "Nguyễn Xiển (từ ngã ba Nguyễn Trãi-Nguyễn Xiển đến ngõ 214)",
+      "Lng": "105.805592",
+      "Lat": "20.987856",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "142",
+      "TenTram": "Phan Văn Trường (cổng chợ - doanh trại quân đội)",
+      "Lng": "105.785955",
+      "Lat": "21.036655",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "148",
+      "TenTram": "Ngã tư Liên Trì - Nguyễn Gia Thiều",
+      "Lng": "105.846142",
+      "Lat": "21.020930",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "149",
+      "TenTram": "Ngã năm Bà Triệu",
+      "Lng": "105.849344",
+      "Lat": "21.018713",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "152",
+      "TenTram": "Mạc Thị Buởi",
+      "Lng": "105.869291",
+      "Lat": "20.999812",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "153",
+      "TenTram": "Bùi Xương Trạch (SN49 đến SN93 Bùi Xương Trạch)",
+      "Lng": "105.817404",
+      "Lat": "20.990948",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "155",
+      "TenTram": "Phạm Ngọc Thạch (nhà B7 Phạm Ngọc Thạch)",
+      "Lng": "105.836010",
+      "Lat": "21.010196",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "164",
+      "TenTram": "Phùng Khoang (đình Phùng Khoang)",
+      "Lng": "105.793000",
+      "Lat": "20.989479",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "167",
+      "TenTram": "Phố Hoàng Như Tiếp (trường tiểu học Ngọc Lâm đến ngã ba Hoàng Như Tiếp - Ái Mộ)",
+      "Lng": "105.875426",
+      "Lat": "21.044239",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "179",
+      "TenTram": "Hoa Bằng (SN 54-56)",
+      "Lng": "105.796635",
+      "Lat": "21.026475",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "180",
+      "TenTram": "Hoa Bằng (SN 91-97)",
+      "Lng": "105.795908",
+      "Lat": "21.025416",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "181",
+      "TenTram": "Phố Minh Khai (chân cầu Vĩnh Tuy)",
+      "Lng": "105.870572",
+      "Lat": "20.999640",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "193",
+      "TenTram": "Đỗ Đức Dục (đường vào Miếu Đầm)",
+      "Lng": "105.781872",
+      "Lat": "21.006942",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "199",
+      "TenTram": "Đại lộ Thăng Long (Ngã ba giao Lê Trọng Tấn)",
+      "Lng": "105.730843",
+      "Lat": "21.009754",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "237",
+      "TenTram": "Yên Nghĩa (từ BX Yên Nghĩa đến ngã ba Ba La)",
+      "Lng": "105.75056988024608",
+      "Lat": "20.95151435237648",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "244",
+      "TenTram": "Tô Hiệu (trước chi cục thuế và tòa nhà HUD3)",
+      "Lng": "105.77729904375299",
+      "Lat": "20.966640683966187",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "253",
+      "TenTram": " Đường Quyết Thắng",
+      "Lng": "105.754192",
+      "Lat": "20.956580",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "313",
+      "TenTram": "Ngõ 211 Ngọc Lâm",
+      "Lng": "105.870495",
+      "Lat": "21.046205",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "338",
+      "TenTram": "Ngõ 42, 58 Triều Khúc",
+      "Lng": "105.800400",
+      "Lat": "20.983544",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "376",
+      "TenTram": "Quang Trung (từ ngã ba Phan Đình Giót - ngã tư Lê Trọng Tấn)",
+      "Lng": "105.765419",
+      "Lat": "20.962566",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "399",
+      "TenTram": "Đường QL6 (đoạn tổ dan phố 1+4 phường Yên Nghĩa)",
+      "Lng": "0",
+      "Lat": "0",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "1414",
+      "TenTram": "Vương Thừa Vũ",
+      "Lng": "105.821941",
+      "Lat": "20.999527",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "9436",
+      "TenTram": "Khu đô thị RESCO",
+      "Lng": "105.782960",
+      "Lat": "21.064465",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "11449",
+      "TenTram": "Quang Trung (trước trường THPT Nguyễn Huệ)",
+      "Lng": "105.76132328655187",
+      "Lat": "20.9596869829691",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    },
+    {
+      "TramId": "11459",
+      "TenTram": "Võ Chí Công (Tòa nhà UDIC)",
+      "Lng": "105.81332",
+      "Lat": "21.07905",
+      "Icon": "202608311105287262087_Flood_level1.png"
+    }
+  ]
+}

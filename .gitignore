@@ -1,0 +1,15 @@
+.env*
+!.env.example
+data/raw/
+pipelines/.venv/
+__pycache__/
+.vercel
+node_modules/
+frontend/dist/
+backend/store/
+backend/flags.json
+backend/cache/live/chotot/
+backend/cache/live/photos/
+backend/cache/osm/area_*
+.DS_Store
+*.log

@@ -1,0 +1,6 @@
+[out:json][timeout:90];
+(way["building"](20.996,105.8124,21.014,105.8316);relation["building"](20.996,105.8124,21.014,105.8316););
+out count;
+node["noexit"](20.996,105.8124,21.014,105.8316);out count;
+node["barrier"](20.996,105.8124,21.014,105.8316);out count;
+nwr["amenity"="parking"](20.996,105.8124,21.014,105.8316);out count;

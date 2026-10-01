@@ -1,0 +1,7 @@
+[out:json][timeout:90];
+(
+way["highway"]["motorcar"](10.786,106.67585,10.804,106.69415);
+way["highway"]["motor_vehicle"](10.786,106.67585,10.804,106.69415);
+way["highway"]["width"](10.786,106.67585,10.804,106.69415);
+);
+out meta;

@@ -1,0 +1,4901 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.7050579,
+      10.7788759
+     ],
+     [
+      106.7045538,
+      10.7783352
+     ],
+     [
+      106.7038862,
+      10.7776192
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Cao Bá Quát",
+    "osm_name": "Cao Bá Quát",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Cao Bá Quát - 180m",
+    "published_length_m": 180.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35113279
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.7039506,
+      10.7752637
+     ],
+     [
+      106.7042122,
+      10.7755555
+     ],
+     [
+      106.7043114,
+      10.7756661
+     ],
+     [
+      106.7047032,
+      10.7761032
+     ],
+     [
+      106.7050971,
+      10.7765349
+     ],
+     [
+      106.7054054,
+      10.7768717
+     ],
+     [
+      106.7055167,
+      10.7769933
+     ],
+     [
+      106.7057341,
+      10.7772268
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Đông Du",
+    "osm_name": "Đông Du",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Đông Du - 170m",
+    "published_length_m": 170.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35113365,
+     326848030,
+     1308971677
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.696647,
+      10.7711721
+     ],
+     [
+      106.6965249,
+      10.7711199
+     ],
+     [
+      106.6963125,
+      10.7710328
+     ],
+     [
+      106.6961025,
+      10.7709468
+     ],
+     [
+      106.695792,
+      10.7708196
+     ],
+     [
+      106.6951674,
+      10.7705636
+     ],
+     [
+      106.6951218,
+      10.7705449
+     ],
+     [
+      106.6944283,
+      10.7702607
+     ],
+     [
+      106.694322,
+      10.7702172
+     ],
+     [
+      106.6941984,
+      10.7701665
+     ],
+     [
+      106.6941025,
+      10.7701272
+     ],
+     [
+      106.6940282,
+      10.7700967
+     ],
+     [
+      106.694003,
+      10.7700864
+     ],
+     [
+      106.6938409,
+      10.7700233
+     ],
+     [
+      106.6934621,
+      10.7698706
+     ],
+     [
+      106.6932454,
+      10.7697832
+     ],
+     [
+      106.6928798,
+      10.7696381
+     ],
+     [
+      106.6927424,
+      10.7695804
+     ],
+     [
+      106.6926934,
+      10.7695606
+     ],
+     [
+      106.6926455,
+      10.7695413
+     ],
+     [
+      106.6923796,
+      10.7694341
+     ],
+     [
+      106.6922527,
+      10.7693829
+     ],
+     [
+      106.6917571,
+      10.769183
+     ],
+     [
+      106.6912955,
+      10.7689969
+     ],
+     [
+      106.6911834,
+      10.7689517
+     ],
+     [
+      106.6911454,
+      10.7689363
+     ],
+     [
+      106.6900057,
+      10.7684767
+     ],
+     [
+      106.6899228,
+      10.7684433
+     ],
+     [
+      106.6898512,
+      10.768413
+     ],
+     [
+      106.6894587,
+      10.7682486
+     ],
+     [
+      106.6894239,
+      10.7682294
+     ],
+     [
+      106.6892166,
+      10.7681447
+     ],
+     [
+      106.6889456,
+      10.7680353
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Lai",
+    "osm_name": "Lê Lai",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Lê Lai - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     245571623,
+     326770977,
+     723893361,
+     1128345000,
+     1128345001,
+     1132278756,
+     1175008029,
+     1185425438,
+     1220049397,
+     1265213606,
+     1289160316
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.696647,
+      10.7711721
+     ],
+     [
+      106.6967915,
+      10.7712071
+     ],
+     [
+      106.6976507,
+      10.7715581
+     ],
+     [
+      106.6977245,
+      10.7715755
+     ],
+     [
+      106.6977998,
+      10.7715843
+     ],
+     [
+      106.6978757,
+      10.7715843
+     ],
+     [
+      106.697938,
+      10.771577
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Lai",
+    "osm_name": "Lê Lai",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Lê Lai - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     245571623,
+     326770977,
+     723893361,
+     1128345000,
+     1128345001,
+     1132278756,
+     1175008029,
+     1185425438,
+     1220049397,
+     1265213606,
+     1289160316
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6978751,
+      10.771686
+     ],
+     [
+      106.6978075,
+      10.771683
+     ],
+     [
+      106.6977572,
+      10.7716735
+     ],
+     [
+      106.697706,
+      10.7716611
+     ],
+     [
+      106.6967655,
+      10.7712593
+     ],
+     [
+      106.696647,
+      10.7711721
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Lai",
+    "osm_name": "Lê Lai",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Lê Lai - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     245571623,
+     326770977,
+     723893361,
+     1128345000,
+     1128345001,
+     1132278756,
+     1175008029,
+     1185425438,
+     1220049397,
+     1265213606,
+     1289160316
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.696647,
+      10.7711721
+     ],
+     [
+      106.6965398,
+      10.7713572
+     ],
+     [
+      106.6964406,
+      10.7715056
+     ],
+     [
+      106.6963287,
+      10.7716674
+     ],
+     [
+      106.6962056,
+      10.7718453
+     ],
+     [
+      106.6960571,
+      10.7720328
+     ],
+     [
+      106.696004,
+      10.7720998
+     ],
+     [
+      106.6954284,
+      10.772787
+     ],
+     [
+      106.6944794,
+      10.7736186
+     ],
+     [
+      106.6943908,
+      10.7736946
+     ],
+     [
+      106.6942522,
+      10.7738135
+     ],
+     [
+      106.6938276,
+      10.7741777
+     ],
+     [
+      106.6935496,
+      10.7744161
+     ],
+     [
+      106.6934554,
+      10.7744969
+     ],
+     [
+      106.6932328,
+      10.7746878
+     ],
+     [
+      106.6930013,
+      10.7748791
+     ],
+     [
+      106.6924946,
+      10.7752976
+     ],
+     [
+      106.6922385,
+      10.7755091
+     ],
+     [
+      106.6919606,
+      10.7757386
+     ],
+     [
+      106.6917862,
+      10.7758843
+     ],
+     [
+      106.6917505,
+      10.7759122
+     ],
+     [
+      106.6916588,
+      10.7759826
+     ],
+     [
+      106.6915719,
+      10.7760683
+     ],
+     [
+      106.6911352,
+      10.776467
+     ],
+     [
+      106.6907827,
+      10.7767888
+     ],
+     [
+      106.6906189,
+      10.7769384
+     ],
+     [
+      106.6901448,
+      10.7773714
+     ],
+     [
+      106.6900761,
+      10.7774342
+     ],
+     [
+      106.6899605,
+      10.7775397
+     ],
+     [
+      106.6896865,
+      10.7777899
+     ],
+     [
+      106.6895565,
+      10.7779086
+     ],
+     [
+      106.689348,
+      10.778099
+     ],
+     [
+      106.6891758,
+      10.7782562
+     ],
+     [
+      106.6890662,
+      10.7783563
+     ],
+     [
+      106.6887298,
+      10.7786635
+     ],
+     [
+      106.6883468,
+      10.7790111
+     ],
+     [
+      106.687913,
+      10.7794094
+     ],
+     [
+      106.6878009,
+      10.7795116
+     ],
+     [
+      106.6873566,
+      10.7799174
+     ],
+     [
+      106.6872062,
+      10.7800575
+     ],
+     [
+      106.6864552,
+      10.7805701
+     ],
+     [
+      106.6863121,
+      10.7806715
+     ],
+     [
+      106.6858985,
+      10.7809517
+     ],
+     [
+      106.6855668,
+      10.7811791
+     ],
+     [
+      106.6854156,
+      10.7812847
+     ],
+     [
+      106.6838429,
+      10.7823607
+     ],
+     [
+      106.683615,
+      10.782517
+     ],
+     [
+      106.6824661,
+      10.7830458
+     ],
+     [
+      106.682391,
+      10.7830804
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Trương Định",
+    "osm_name": "Trương Định",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Trương Định - 20m",
+    "published_length_m": 20.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114023,
+     654858471,
+     1162414403,
+     1228550741,
+     1228550742,
+     1267913080,
+     1344042985
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6978751,
+      10.771686
+     ],
+     [
+      106.6978156,
+      10.7717717
+     ],
+     [
+      106.6975561,
+      10.7721929
+     ],
+     [
+      106.6972368,
+      10.7727342
+     ],
+     [
+      106.6971681,
+      10.7728506
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phan Chu Trinh",
+    "osm_name": "Phan Chu Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Phan Chu Trinh - 100m",
+    "published_length_m": 100.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     691380029,
+     1185864080
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6981058,
+      10.7734407
+     ],
+     [
+      106.6981566,
+      10.7733579
+     ],
+     [
+      106.6985066,
+      10.7727875
+     ],
+     [
+      106.6988354,
+      10.7722615
+     ],
+     [
+      106.6989052,
+      10.7721665
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phan Bội Châu",
+    "osm_name": "Phan Bội Châu",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Phan Bội Châu - 50m",
+    "published_length_m": 50.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114874,
+     1178195271,
+     1211088878
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6961505,
+      10.7748182
+     ],
+     [
+      106.6962731,
+      10.7748015
+     ],
+     [
+      106.6964659,
+      10.7746183
+     ],
+     [
+      106.697121,
+      10.7739958
+     ],
+     [
+      106.6973539,
+      10.7736252
+     ],
+     [
+      106.6976142,
+      10.7732112
+     ],
+     [
+      106.6976491,
+      10.7731556
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Thủ Khoa Huân",
+    "osm_name": "Thủ Khoa Huân",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Thủ Khoa Huân - 50m",
+    "published_length_m": 50.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     1205444142,
+     1262797778
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6866872,
+      10.7920861
+     ],
+     [
+      106.6866836,
+      10.7921154
+     ],
+     [
+      106.6866725,
+      10.7922068
+     ],
+     [
+      106.6865338,
+      10.7924447
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6865947,
+      10.7921191
+     ],
+     [
+      106.6866833,
+      10.7920818
+     ],
+     [
+      106.6866917,
+      10.7920776
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6866917,
+      10.7920776
+     ],
+     [
+      106.6866872,
+      10.7920861
+     ],
+     [
+      106.686642,
+      10.7921704
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6866917,
+      10.7920776
+     ],
+     [
+      106.6867999,
+      10.7919898
+     ],
+     [
+      106.6871727,
+      10.7916957
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 3,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6871727,
+      10.7916957
+     ],
+     [
+      106.6872088,
+      10.7916287
+     ],
+     [
+      106.6874025,
+      10.7914723
+     ],
+     [
+      106.6874992,
+      10.791433
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 4,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6874992,
+      10.791433
+     ],
+     [
+      106.6874623,
+      10.7915049
+     ],
+     [
+      106.6872522,
+      10.7916649
+     ],
+     [
+      106.6871727,
+      10.7916957
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 5,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6874992,
+      10.791433
+     ],
+     [
+      106.6877407,
+      10.7912438
+     ],
+     [
+      106.6878837,
+      10.791133
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 6,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6878837,
+      10.791133
+     ],
+     [
+      106.6879412,
+      10.7910375
+     ],
+     [
+      106.6880863,
+      10.7909329
+     ],
+     [
+      106.6881596,
+      10.7909188
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 7,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6881596,
+      10.7909188
+     ],
+     [
+      106.6881279,
+      10.7909897
+     ],
+     [
+      106.6879847,
+      10.7911022
+     ],
+     [
+      106.6878837,
+      10.791133
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 8,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6896367,
+      10.7897277
+     ],
+     [
+      106.689596,
+      10.7897584
+     ],
+     [
+      106.6895635,
+      10.7897843
+     ],
+     [
+      106.6895131,
+      10.7898241
+     ],
+     [
+      106.6894744,
+      10.7898551
+     ],
+     [
+      106.6893182,
+      10.7899798
+     ],
+     [
+      106.6890874,
+      10.7901544
+     ],
+     [
+      106.6888955,
+      10.7903128
+     ],
+     [
+      106.6887827,
+      10.7904003
+     ],
+     [
+      106.6887356,
+      10.7904368
+     ],
+     [
+      106.688612,
+      10.7905401
+     ],
+     [
+      106.6884139,
+      10.7907006
+     ],
+     [
+      106.688343,
+      10.7907571
+     ],
+     [
+      106.6881596,
+      10.7909188
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 9,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6896367,
+      10.7897277
+     ],
+     [
+      106.6896502,
+      10.7896844
+     ],
+     [
+      106.6897564,
+      10.7896045
+     ],
+     [
+      106.6898071,
+      10.7895934
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 10,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6898071,
+      10.7895934
+     ],
+     [
+      106.689793,
+      10.7896323
+     ],
+     [
+      106.6897055,
+      10.7897014
+     ],
+     [
+      106.6896856,
+      10.7897171
+     ],
+     [
+      106.6896367,
+      10.7897277
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 11,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6910676,
+      10.7885911
+     ],
+     [
+      106.6910611,
+      10.788596
+     ],
+     [
+      106.6907681,
+      10.7888242
+     ],
+     [
+      106.690639,
+      10.7889271
+     ],
+     [
+      106.6904115,
+      10.7891102
+     ],
+     [
+      106.690236,
+      10.7892498
+     ],
+     [
+      106.6900344,
+      10.789409
+     ],
+     [
+      106.6899537,
+      10.7894733
+     ],
+     [
+      106.6898071,
+      10.7895934
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 12,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6910676,
+      10.7885911
+     ],
+     [
+      106.691085,
+      10.7885527
+     ],
+     [
+      106.6916153,
+      10.7881161
+     ],
+     [
+      106.6917986,
+      10.7879696
+     ],
+     [
+      106.691878,
+      10.787906
+     ],
+     [
+      106.6918985,
+      10.7878896
+     ],
+     [
+      106.6919281,
+      10.7878659
+     ],
+     [
+      106.6928047,
+      10.7871699
+     ],
+     [
+      106.6935998,
+      10.7865267
+     ],
+     [
+      106.693623,
+      10.7865079
+     ],
+     [
+      106.6936817,
+      10.7864593
+     ],
+     [
+      106.6940409,
+      10.7861621
+     ],
+     [
+      106.6941206,
+      10.7860975
+     ],
+     [
+      106.694391,
+      10.7858816
+     ],
+     [
+      106.6947229,
+      10.7856166
+     ],
+     [
+      106.6948247,
+      10.7856078
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 13,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6948247,
+      10.7856078
+     ],
+     [
+      106.6947919,
+      10.785685
+     ],
+     [
+      106.6943467,
+      10.7860406
+     ],
+     [
+      106.6941801,
+      10.7861739
+     ],
+     [
+      106.6938165,
+      10.7864537
+     ],
+     [
+      106.6937362,
+      10.7865155
+     ],
+     [
+      106.6936775,
+      10.7865606
+     ],
+     [
+      106.692851,
+      10.7872154
+     ],
+     [
+      106.6922375,
+      10.787688
+     ],
+     [
+      106.6920307,
+      10.7878499
+     ],
+     [
+      106.691964,
+      10.7879022
+     ],
+     [
+      106.69184,
+      10.7880011
+     ],
+     [
+      106.6916455,
+      10.7881525
+     ],
+     [
+      106.691637,
+      10.7881593
+     ],
+     [
+      106.6912698,
+      10.7884531
+     ],
+     [
+      106.6911142,
+      10.7885799
+     ],
+     [
+      106.6910831,
+      10.788587
+     ],
+     [
+      106.6910676,
+      10.7885911
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 14,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.7060822,
+      10.7756531
+     ],
+     [
+      106.7060029,
+      10.7757236
+     ],
+     [
+      106.7059198,
+      10.7757982
+     ],
+     [
+      106.7057121,
+      10.7759815
+     ],
+     [
+      106.7055219,
+      10.7761461
+     ],
+     [
+      106.7050971,
+      10.7765349
+     ],
+     [
+      106.7046996,
+      10.7768839
+     ],
+     [
+      106.7041193,
+      10.7773934
+     ],
+     [
+      106.7038862,
+      10.7776192
+     ],
+     [
+      106.7037422,
+      10.777771
+     ],
+     [
+      106.7035687,
+      10.77794
+     ],
+     [
+      106.7034918,
+      10.778015
+     ],
+     [
+      106.7032752,
+      10.7782094
+     ],
+     [
+      106.7029239,
+      10.778525
+     ],
+     [
+      106.7028701,
+      10.7785732
+     ],
+     [
+      106.7025362,
+      10.7788726
+     ],
+     [
+      106.702175,
+      10.7791968
+     ],
+     [
+      106.7016787,
+      10.7796568
+     ],
+     [
+      106.7010602,
+      10.7801873
+     ],
+     [
+      106.7005323,
+      10.7806722
+     ],
+     [
+      106.700454,
+      10.7807442
+     ],
+     [
+      106.7001598,
+      10.781005
+     ],
+     [
+      106.7001212,
+      10.7810392
+     ],
+     [
+      106.6997399,
+      10.7813823
+     ],
+     [
+      106.6996356,
+      10.7814762
+     ],
+     [
+      106.6995731,
+      10.7815337
+     ],
+     [
+      106.6994651,
+      10.7816335
+     ],
+     [
+      106.6989238,
+      10.782134
+     ],
+     [
+      106.6981158,
+      10.782881
+     ],
+     [
+      106.6971361,
+      10.783729
+     ],
+     [
+      106.697051,
+      10.7838024
+     ],
+     [
+      106.6969207,
+      10.7839081
+     ],
+     [
+      106.6968045,
+      10.7840018
+     ],
+     [
+      106.6967208,
+      10.7840692
+     ],
+     [
+      106.6966426,
+      10.7841322
+     ],
+     [
+      106.6965633,
+      10.7841962
+     ],
+     [
+      106.6964821,
+      10.7842616
+     ],
+     [
+      106.6963368,
+      10.7843787
+     ],
+     [
+      106.6960368,
+      10.7846204
+     ],
+     [
+      106.6959835,
+      10.7846634
+     ],
+     [
+      106.6959397,
+      10.7847012
+     ],
+     [
+      106.6948653,
+      10.7855769
+     ],
+     [
+      106.6948247,
+      10.7856078
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hai Bà Trưng",
+    "osm_name": "Hai Bà Trưng",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hai Ba Trưng - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114854,
+     224445489,
+     225372720,
+     306641038,
+     326848006,
+     329878177,
+     329878178,
+     673254417,
+     863689512,
+     1077610913,
+     1163556238,
+     1163559039,
+     1178198376,
+     1178198378,
+     1200728225,
+     1218900523,
+     1221994726,
+     1265822569,
+     1265997659,
+     1278461437,
+     1343964590,
+     1345417676,
+     1345417677,
+     1351504560,
+     1351504561,
+     1351504562,
+     1414410212,
+     1414410215,
+     1422795954,
+     1422795955,
+     1422795958,
+     1431332944,
+     1431332946,
+     1431332947,
+     1443551462,
+     1443551463,
+     1464602836,
+     1464602838,
+     1468560038
+    ],
+    "part": 15,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6867683,
+      10.7625665
+     ],
+     [
+      106.6866939,
+      10.7625407
+     ],
+     [
+      106.6864983,
+      10.7624784
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6875445,
+      10.7628693
+     ],
+     [
+      106.6874576,
+      10.7628874
+     ],
+     [
+      106.6867845,
+      10.7626324
+     ],
+     [
+      106.6867683,
+      10.7625665
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6867683,
+      10.7625665
+     ],
+     [
+      106.6868208,
+      10.7625382
+     ],
+     [
+      106.6869998,
+      10.7626011
+     ],
+     [
+      106.6874965,
+      10.7627907
+     ],
+     [
+      106.6875445,
+      10.7628693
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6879276,
+      10.763025
+     ],
+     [
+      106.687691,
+      10.762927
+     ],
+     [
+      106.6875445,
+      10.7628693
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 3,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6879276,
+      10.763025
+     ],
+     [
+      106.6880963,
+      10.7630443
+     ],
+     [
+      106.688499,
+      10.7632178
+     ],
+     [
+      106.688879,
+      10.7633571
+     ],
+     [
+      106.6895428,
+      10.7636533
+     ],
+     [
+      106.6901152,
+      10.7638811
+     ],
+     [
+      106.6902108,
+      10.763922
+     ],
+     [
+      106.6902532,
+      10.7639911
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 4,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6902532,
+      10.7639911
+     ],
+     [
+      106.690158,
+      10.7639983
+     ],
+     [
+      106.6900305,
+      10.7639481
+     ],
+     [
+      106.6894568,
+      10.7637142
+     ],
+     [
+      106.6888425,
+      10.7634579
+     ],
+     [
+      106.6885634,
+      10.7633538
+     ],
+     [
+      106.6881488,
+      10.7631912
+     ],
+     [
+      106.6880412,
+      10.7631424
+     ],
+     [
+      106.6879276,
+      10.763025
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 5,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.690666,
+      10.7641487
+     ],
+     [
+      106.6904484,
+      10.7640631
+     ],
+     [
+      106.6902532,
+      10.7639911
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 6,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.691016,
+      10.7643028
+     ],
+     [
+      106.6909592,
+      10.7642816
+     ],
+     [
+      106.6907978,
+      10.7642203
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 7,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6919853,
+      10.7646584
+     ],
+     [
+      106.6919034,
+      10.7646756
+     ],
+     [
+      106.6913279,
+      10.7644597
+     ],
+     [
+      106.6910731,
+      10.7643652
+     ],
+     [
+      106.691016,
+      10.7643028
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 8,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.691016,
+      10.7643028
+     ],
+     [
+      106.6910963,
+      10.7642962
+     ],
+     [
+      106.6919376,
+      10.7645988
+     ],
+     [
+      106.6919853,
+      10.7646584
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 9,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6927925,
+      10.7648658
+     ],
+     [
+      106.6926747,
+      10.7648521
+     ],
+     [
+      106.6926032,
+      10.7648449
+     ],
+     [
+      106.6925294,
+      10.7648363
+     ],
+     [
+      106.6924284,
+      10.7648243
+     ],
+     [
+      106.6920777,
+      10.7646897
+     ],
+     [
+      106.6920579,
+      10.7646821
+     ],
+     [
+      106.6920381,
+      10.7646757
+     ],
+     [
+      106.6919853,
+      10.7646584
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Nguyễn Cư Trinh",
+    "osm_name": "Nguyễn Cư Trinh",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Nguyễn Cư Trinh - 570m",
+    "published_length_m": 570.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     431068519,
+     431068521,
+     466122296,
+     472412761,
+     1206785149,
+     1206785150,
+     1206785151,
+     1220451731,
+     1220451732,
+     1225812110,
+     1225812111,
+     1225812112,
+     1268643574,
+     1268643580,
+     1319661275
+    ],
+    "part": 10,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6930424,
+      10.7774837
+     ],
+     [
+      106.6939463,
+      10.7766465
+     ],
+     [
+      106.6941251,
+      10.7764847
+     ],
+     [
+      106.6945378,
+      10.7761108
+     ],
+     [
+      106.6958118,
+      10.774957
+     ],
+     [
+      106.6959007,
+      10.7748765
+     ],
+     [
+      106.6959718,
+      10.7748121
+     ],
+     [
+      106.6961505,
+      10.7748182
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Huyền Trân Công Chúa",
+    "osm_name": "Huyền Trân Công Chúa",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Huyền Trân Công Chúa - 440m",
+    "published_length_m": 440.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     35114852
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.7050468,
+      10.7742525
+     ],
+     [
+      106.7053963,
+      10.7745123
+     ],
+     [
+      106.705512,
+      10.7745983
+     ],
+     [
+      106.7055238,
+      10.7746071
+     ],
+     [
+      106.7058636,
+      10.7748598
+     ],
+     [
+      106.7059388,
+      10.7749157
+     ],
+     [
+      106.7060302,
+      10.774986
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hồ Huấn Nghiệp",
+    "osm_name": "Hồ Huấn Nghiệp",
+    "district_published": "Quận 1",
+    "segment_note": "Đường Hồ Huấn Nghiệp - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     1201603875
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6663288,
+      10.7559828
+     ],
+     [
+      106.6665419,
+      10.7560288
+     ],
+     [
+      106.6677469,
+      10.7562816
+     ],
+     [
+      106.6684335,
+      10.7564244
+     ],
+     [
+      106.6693845,
+      10.7566262
+     ],
+     [
+      106.6694622,
+      10.7566415
+     ]
+    ]
+   },
+   "properties": {
+    "street": "An Dương Vương",
+    "osm_name": "An Dương Vương",
+    "district_published": "Quận 5",
+    "segment_note": "Đường An Dương Vương - 1km",
+    "published_length_m": 1000.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     189067596,
+     467581823,
+     468653970,
+     715792606,
+     715819445,
+     715914016,
+     715914017,
+     1344783036,
+     1380812752,
+     1493349920,
+     1524238285,
+     1524238286
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6742856,
+      10.7575684
+     ],
+     [
+      106.6742271,
+      10.7575754
+     ],
+     [
+      106.6741683,
+      10.757577
+     ],
+     [
+      106.6741151,
+      10.7575739
+     ],
+     [
+      106.674067,
+      10.7575678
+     ],
+     [
+      106.6739917,
+      10.7575535
+     ],
+     [
+      106.6738623,
+      10.7575294
+     ],
+     [
+      106.6737607,
+      10.7575105
+     ],
+     [
+      106.6733835,
+      10.7574391
+     ],
+     [
+      106.6732684,
+      10.7574173
+     ],
+     [
+      106.6729589,
+      10.7573587
+     ],
+     [
+      106.6729051,
+      10.7573485
+     ],
+     [
+      106.672616,
+      10.7572937
+     ],
+     [
+      106.6723686,
+      10.7572469
+     ],
+     [
+      106.6721119,
+      10.7571982
+     ],
+     [
+      106.6718575,
+      10.7571501
+     ],
+     [
+      106.6717609,
+      10.7571317
+     ],
+     [
+      106.6716535,
+      10.7571114
+     ],
+     [
+      106.671441,
+      10.7570712
+     ],
+     [
+      106.6714147,
+      10.7570674
+     ],
+     [
+      106.6711908,
+      10.7570247
+     ],
+     [
+      106.6707023,
+      10.7569315
+     ],
+     [
+      106.6705434,
+      10.7569012
+     ],
+     [
+      106.6697559,
+      10.756752
+     ],
+     [
+      106.6696503,
+      10.7567319
+     ],
+     [
+      106.6695531,
+      10.7567138
+     ],
+     [
+      106.6694622,
+      10.7566415
+     ]
+    ]
+   },
+   "properties": {
+    "street": "An Dương Vương",
+    "osm_name": "An Dương Vương",
+    "district_published": "Quận 5",
+    "segment_note": "Đường An Dương Vương - 1km",
+    "published_length_m": 1000.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     189067596,
+     467581823,
+     468653970,
+     715792606,
+     715819445,
+     715914016,
+     715914017,
+     1344783036,
+     1380812752,
+     1493349920,
+     1524238285,
+     1524238286
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6694622,
+      10.7566415
+     ],
+     [
+      106.6695852,
+      10.7566006
+     ],
+     [
+      106.6696781,
+      10.7566174
+     ],
+     [
+      106.6697798,
+      10.7566353
+     ],
+     [
+      106.6714308,
+      10.7569589
+     ],
+     [
+      106.6714621,
+      10.7569649
+     ],
+     [
+      106.6716761,
+      10.7570058
+     ],
+     [
+      106.6718005,
+      10.7570304
+     ],
+     [
+      106.6718804,
+      10.7570457
+     ],
+     [
+      106.6721288,
+      10.7570942
+     ],
+     [
+      106.6722397,
+      10.7571159
+     ],
+     [
+      106.6723878,
+      10.7571448
+     ],
+     [
+      106.6726373,
+      10.7571936
+     ],
+     [
+      106.6729272,
+      10.7572502
+     ],
+     [
+      106.6729808,
+      10.7572607
+     ],
+     [
+      106.6731475,
+      10.7572933
+     ],
+     [
+      106.6732868,
+      10.7573205
+     ],
+     [
+      106.6734034,
+      10.7573433
+     ],
+     [
+      106.6737808,
+      10.757417
+     ],
+     [
+      106.6738823,
+      10.7574361
+     ],
+     [
+      106.6740031,
+      10.7574588
+     ],
+     [
+      106.6740918,
+      10.7574755
+     ],
+     [
+      106.6741439,
+      10.7574878
+     ],
+     [
+      106.6741937,
+      10.7575072
+     ],
+     [
+      106.674242,
+      10.7575344
+     ],
+     [
+      106.6742856,
+      10.7575684
+     ]
+    ]
+   },
+   "properties": {
+    "street": "An Dương Vương",
+    "osm_name": "An Dương Vương",
+    "district_published": "Quận 5",
+    "segment_note": "Đường An Dương Vương - 1km",
+    "published_length_m": 1000.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     189067596,
+     467581823,
+     468653970,
+     715792606,
+     715819445,
+     715914016,
+     715914017,
+     1344783036,
+     1380812752,
+     1493349920,
+     1524238285,
+     1524238286
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6742856,
+      10.7575684
+     ],
+     [
+      106.6743738,
+      10.7575875
+     ],
+     [
+      106.674449,
+      10.7576114
+     ],
+     [
+      106.6745277,
+      10.757639
+     ],
+     [
+      106.6747455,
+      10.7577255
+     ],
+     [
+      106.6748075,
+      10.7577501
+     ],
+     [
+      106.6757474,
+      10.7581234
+     ],
+     [
+      106.6758525,
+      10.7581657
+     ],
+     [
+      106.6762928,
+      10.758343
+     ],
+     [
+      106.6763682,
+      10.7583734
+     ],
+     [
+      106.6768789,
+      10.758579
+     ],
+     [
+      106.6775154,
+      10.7588354
+     ],
+     [
+      106.6775851,
+      10.7588634
+     ],
+     [
+      106.6776764,
+      10.7589002
+     ],
+     [
+      106.6781292,
+      10.7590822
+     ],
+     [
+      106.6785758,
+      10.7592617
+     ],
+     [
+      106.6786768,
+      10.7593023
+     ],
+     [
+      106.6788742,
+      10.7593816
+     ],
+     [
+      106.6792551,
+      10.7595347
+     ],
+     [
+      106.6793812,
+      10.7595853
+     ],
+     [
+      106.6795471,
+      10.759652
+     ],
+     [
+      106.6796755,
+      10.7597036
+     ],
+     [
+      106.6801307,
+      10.7598866
+     ],
+     [
+      106.6814036,
+      10.7603982
+     ],
+     [
+      106.6815473,
+      10.7604559
+     ],
+     [
+      106.6818227,
+      10.7605666
+     ],
+     [
+      106.6819265,
+      10.7606083
+     ],
+     [
+      106.6823363,
+      10.760773
+     ],
+     [
+      106.6825864,
+      10.7608735
+     ],
+     [
+      106.6829774,
+      10.7610307
+     ],
+     [
+      106.6831064,
+      10.7610825
+     ],
+     [
+      106.6831645,
+      10.7611058
+     ],
+     [
+      106.6832325,
+      10.7611332
+     ],
+     [
+      106.6832789,
+      10.7611518
+     ]
+    ]
+   },
+   "properties": {
+    "street": "An Dương Vương",
+    "osm_name": "An Dương Vương",
+    "district_published": "Quận 5",
+    "segment_note": "Đường An Dương Vương - 1km",
+    "published_length_m": 1000.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     189067596,
+     467581823,
+     468653970,
+     715792606,
+     715819445,
+     715914016,
+     715914017,
+     1344783036,
+     1380812752,
+     1493349920,
+     1524238285,
+     1524238286
+    ],
+    "part": 3,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6647177,
+      10.7506561
+     ],
+     [
+      106.6647005,
+      10.7507445
+     ],
+     [
+      106.6646441,
+      10.7510347
+     ],
+     [
+      106.6645546,
+      10.751484
+     ],
+     [
+      106.6644243,
+      10.7521655
+     ],
+     [
+      106.6644037,
+      10.7522711
+     ],
+     [
+      106.6643804,
+      10.7523913
+     ],
+     [
+      106.6642793,
+      10.7529113
+     ],
+     [
+      106.6641864,
+      10.7533892
+     ],
+     [
+      106.6641576,
+      10.7535373
+     ],
+     [
+      106.6641331,
+      10.7536632
+     ],
+     [
+      106.664056,
+      10.75406
+     ],
+     [
+      106.6640109,
+      10.7542917
+     ],
+     [
+      106.6639288,
+      10.754714
+     ],
+     [
+      106.6639108,
+      10.7548068
+     ],
+     [
+      106.6637934,
+      10.7554104
+     ],
+     [
+      106.6637786,
+      10.7554865
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Tản Đà",
+    "osm_name": "Tản Đà",
+    "district_published": "Quận 5",
+    "segment_note": "Đường Tản Đà - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     1226372882
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6537508,
+      10.7549668
+     ],
+     [
+      106.6529294,
+      10.7548094
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phạm Hữu Chí",
+    "osm_name": "Phạm Hữu Chí",
+    "district_published": "Quận 5",
+    "segment_note": "Đường Phạm Hữu Chí - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     32586065,
+     165791826,
+     165791828,
+     614645590,
+     1455706669,
+     1486236787
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6611941,
+      10.7563016
+     ],
+     [
+      106.660069,
+      10.7560894
+     ],
+     [
+      106.6583892,
+      10.7557708
+     ],
+     [
+      106.6572021,
+      10.7555729
+     ],
+     [
+      106.6560833,
+      10.7553746
+     ],
+     [
+      106.655502,
+      10.7552743
+     ],
+     [
+      106.6553374,
+      10.7552459
+     ],
+     [
+      106.6552254,
+      10.7552266
+     ],
+     [
+      106.6549467,
+      10.7551785
+     ],
+     [
+      106.6548636,
+      10.7551642
+     ],
+     [
+      106.6547752,
+      10.7551489
+     ],
+     [
+      106.6542768,
+      10.755063
+     ],
+     [
+      106.6538874,
+      10.7549937
+     ],
+     [
+      106.6538198,
+      10.7549806
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phạm Hữu Chí",
+    "osm_name": "Phạm Hữu Chí",
+    "district_published": "Quận 5",
+    "segment_note": "Đường Phạm Hữu Chí - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     32586065,
+     165791826,
+     165791828,
+     614645590,
+     1455706669,
+     1486236787
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6631262,
+      10.7568774
+     ],
+     [
+      106.6621695,
+      10.756678
+     ],
+     [
+      106.6620078,
+      10.7566432
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phạm Hữu Chí",
+    "osm_name": "Phạm Hữu Chí",
+    "district_published": "Quận 5",
+    "segment_note": "Đường Phạm Hữu Chí - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     32586065,
+     165791826,
+     165791828,
+     614645590,
+     1455706669,
+     1486236787
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6620444,
+      10.756511
+     ],
+     [
+      106.6621991,
+      10.7565436
+     ],
+     [
+      106.6630421,
+      10.7567152
+     ],
+     [
+      106.6631541,
+      10.756738
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Phạm Hữu Chí",
+    "osm_name": "Phạm Hữu Chí",
+    "district_published": "Quận 5",
+    "segment_note": "Đường Phạm Hữu Chí - 200m",
+    "published_length_m": 200.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     32586065,
+     165791826,
+     165791828,
+     614645590,
+     1455706669,
+     1486236787
+    ],
+    "part": 3,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6743765,
+      10.7679222
+     ],
+     [
+      106.6743548,
+      10.7679707
+     ],
+     [
+      106.6742198,
+      10.7683416
+     ],
+     [
+      106.6741859,
+      10.7684332
+     ],
+     [
+      106.67402,
+      10.7688488
+     ],
+     [
+      106.6739012,
+      10.7691631
+     ],
+     [
+      106.673787,
+      10.7694524
+     ],
+     [
+      106.6736566,
+      10.7697754
+     ],
+     [
+      106.6735186,
+      10.7701307
+     ],
+     [
+      106.6734599,
+      10.7702739
+     ],
+     [
+      106.6733155,
+      10.7706484
+     ],
+     [
+      106.6732547,
+      10.7707931
+     ],
+     [
+      106.6732104,
+      10.7708558
+     ],
+     [
+      106.6731563,
+      10.7709034
+     ],
+     [
+      106.673064,
+      10.770973
+     ],
+     [
+      106.6729992,
+      10.7710614
+     ],
+     [
+      106.6724992,
+      10.7720187
+     ],
+     [
+      106.6723963,
+      10.7722186
+     ],
+     [
+      106.6722238,
+      10.7725304
+     ],
+     [
+      106.6719901,
+      10.7730434
+     ],
+     [
+      106.6717603,
+      10.7735244
+     ],
+     [
+      106.6716326,
+      10.7736509
+     ],
+     [
+      106.6716743,
+      10.7734877
+     ],
+     [
+      106.6721331,
+      10.7724891
+     ],
+     [
+      106.6729069,
+      10.7710153
+     ],
+     [
+      106.6729713,
+      10.7709221
+     ],
+     [
+      106.6730592,
+      10.7708474
+     ],
+     [
+      106.6731127,
+      10.770802
+     ],
+     [
+      106.6731464,
+      10.770754
+     ],
+     [
+      106.6731983,
+      10.7706231
+     ],
+     [
+      106.6734389,
+      10.7700113
+     ],
+     [
+      106.6735695,
+      10.7696918
+     ],
+     [
+      106.6737017,
+      10.769337
+     ],
+     [
+      106.6738452,
+      10.7689688
+     ],
+     [
+      106.6739727,
+      10.7686492
+     ],
+     [
+      106.6742163,
+      10.7680383
+     ],
+     [
+      106.6742327,
+      10.7679837
+     ],
+     [
+      106.6742445,
+      10.7679413
+     ],
+     [
+      106.6742558,
+      10.7678879
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Hồng Phong",
+    "osm_name": "Lê Hồng Phong",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Lê Hồng Phong - 500m",
+    "published_length_m": 500.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     330374257,
+     470511619,
+     585932605,
+     585932686,
+     585932687,
+     585932708,
+     585932709,
+     706565704,
+     719474411,
+     722342823,
+     724472695,
+     817504914,
+     817504916,
+     971692815,
+     971692817,
+     1253458368,
+     1269264060
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.67441,
+      10.7674402
+     ],
+     [
+      106.6744452,
+      10.7673938
+     ],
+     [
+      106.6744646,
+      10.7673628
+     ],
+     [
+      106.6744944,
+      10.7672934
+     ],
+     [
+      106.6745887,
+      10.7670357
+     ],
+     [
+      106.6749262,
+      10.7661445
+     ],
+     [
+      106.6751262,
+      10.7656172
+     ],
+     [
+      106.6751759,
+      10.7654633
+     ],
+     [
+      106.6752479,
+      10.7653002
+     ],
+     [
+      106.6755728,
+      10.7644118
+     ],
+     [
+      106.6756006,
+      10.7643438
+     ],
+     [
+      106.6756964,
+      10.7640542
+     ],
+     [
+      106.6757566,
+      10.7639177
+     ],
+     [
+      106.6757725,
+      10.7638821
+     ],
+     [
+      106.6758544,
+      10.7636524
+     ],
+     [
+      106.6759746,
+      10.7633356
+     ],
+     [
+      106.6760038,
+      10.7632311
+     ],
+     [
+      106.6761385,
+      10.7628528
+     ],
+     [
+      106.6763295,
+      10.7623212
+     ],
+     [
+      106.6763867,
+      10.76218
+     ],
+     [
+      106.6764313,
+      10.7620641
+     ],
+     [
+      106.676557,
+      10.7617379
+     ],
+     [
+      106.6769365,
+      10.7606916
+     ],
+     [
+      106.6770309,
+      10.7604314
+     ],
+     [
+      106.6770976,
+      10.7602356
+     ],
+     [
+      106.6771615,
+      10.7600863
+     ],
+     [
+      106.6772834,
+      10.7597166
+     ],
+     [
+      106.6775471,
+      10.7589777
+     ],
+     [
+      106.6775851,
+      10.7588634
+     ],
+     [
+      106.6776478,
+      10.758692
+     ],
+     [
+      106.6777448,
+      10.7584285
+     ],
+     [
+      106.6778091,
+      10.7582536
+     ],
+     [
+      106.6780576,
+      10.7575782
+     ],
+     [
+      106.6781134,
+      10.7574268
+     ],
+     [
+      106.6781932,
+      10.7572097
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Hồng Phong",
+    "osm_name": "Lê Hồng Phong",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Lê Hồng Phong - 500m",
+    "published_length_m": 500.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     330374257,
+     470511619,
+     585932605,
+     585932686,
+     585932687,
+     585932708,
+     585932709,
+     706565704,
+     719474411,
+     722342823,
+     724472695,
+     817504914,
+     817504916,
+     971692815,
+     971692817,
+     1253458368,
+     1269264060
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6782666,
+      10.7572392
+     ],
+     [
+      106.6777356,
+      10.7587232
+     ],
+     [
+      106.6776764,
+      10.7589002
+     ],
+     [
+      106.6776399,
+      10.7590129
+     ],
+     [
+      106.677377,
+      10.7597424
+     ],
+     [
+      106.6771918,
+      10.7602889
+     ],
+     [
+      106.6771345,
+      10.7605325
+     ],
+     [
+      106.6770533,
+      10.7607535
+     ],
+     [
+      106.6768974,
+      10.7611776
+     ],
+     [
+      106.6767662,
+      10.7615348
+     ],
+     [
+      106.6766725,
+      10.7617896
+     ],
+     [
+      106.6765458,
+      10.7621345
+     ],
+     [
+      106.6764902,
+      10.7622427
+     ],
+     [
+      106.6764275,
+      10.7623569
+     ],
+     [
+      106.676205,
+      10.7629853
+     ],
+     [
+      106.6760713,
+      10.7633629
+     ],
+     [
+      106.676039,
+      10.7634475
+     ],
+     [
+      106.6759356,
+      10.7637223
+     ],
+     [
+      106.6758628,
+      10.7639157
+     ],
+     [
+      106.6758492,
+      10.7639447
+     ],
+     [
+      106.6757695,
+      10.7641526
+     ],
+     [
+      106.6755769,
+      10.7646552
+     ],
+     [
+      106.6754374,
+      10.7650193
+     ],
+     [
+      106.6753203,
+      10.7653248
+     ],
+     [
+      106.6753017,
+      10.7653734
+     ],
+     [
+      106.675252,
+      10.76549
+     ],
+     [
+      106.675205,
+      10.7656431
+     ],
+     [
+      106.675147,
+      10.7658034
+     ],
+     [
+      106.6750555,
+      10.7660615
+     ],
+     [
+      106.6749597,
+      10.7663305
+     ],
+     [
+      106.6748895,
+      10.7665388
+     ],
+     [
+      106.6747738,
+      10.7668179
+     ],
+     [
+      106.6746386,
+      10.7672245
+     ],
+     [
+      106.6746108,
+      10.7672867
+     ],
+     [
+      106.6745914,
+      10.7673302
+     ],
+     [
+      106.6745625,
+      10.7674294
+     ],
+     [
+      106.6745435,
+      10.7674993
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Lê Hồng Phong",
+    "osm_name": "Lê Hồng Phong",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Lê Hồng Phong - 500m",
+    "published_length_m": 500.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     330374257,
+     470511619,
+     585932605,
+     585932686,
+     585932687,
+     585932708,
+     585932709,
+     706565704,
+     719474411,
+     722342823,
+     724472695,
+     817504914,
+     817504916,
+     971692815,
+     971692817,
+     1253458368,
+     1269264060
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6775694,
+      10.7741705
+     ],
+     [
+      106.6775183,
+      10.7742504
+     ],
+     [
+      106.6774893,
+      10.7742866
+     ],
+     [
+      106.6774058,
+      10.7743685
+     ],
+     [
+      106.6772992,
+      10.774436
+     ],
+     [
+      106.6771816,
+      10.7744872
+     ],
+     [
+      106.6770477,
+      10.7745245
+     ],
+     [
+      106.676759,
+      10.7745885
+     ],
+     [
+      106.6766413,
+      10.7746096
+     ],
+     [
+      106.676113,
+      10.7747107
+     ],
+     [
+      106.6757943,
+      10.7747742
+     ],
+     [
+      106.6752651,
+      10.7748633
+     ],
+     [
+      106.6748691,
+      10.7748892
+     ],
+     [
+      106.6744699,
+      10.7749153
+     ],
+     [
+      106.6740427,
+      10.7749433
+     ],
+     [
+      106.6731791,
+      10.774973
+     ],
+     [
+      106.6728797,
+      10.7749906
+     ],
+     [
+      106.6720252,
+      10.7750407
+     ],
+     [
+      106.671928,
+      10.7750907
+     ],
+     [
+      106.6718243,
+      10.7751528
+     ],
+     [
+      106.6712566,
+      10.7752268
+     ],
+     [
+      106.6707184,
+      10.7752595
+     ],
+     [
+      106.6705099,
+      10.7756747
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Cao Thắng",
+    "osm_name": "Cao Thắng",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Cao Thắng",
+    "published_length_m": null,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     227742840,
+     327097629,
+     327181426,
+     408166703,
+     608488603,
+     724495503,
+     724495504,
+     724495505,
+     724495506,
+     818991382,
+     1225333220,
+     1264407532,
+     1294699043,
+     1344042981
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6775694,
+      10.7741705
+     ],
+     [
+      106.6775539,
+      10.7740951
+     ],
+     [
+      106.6776577,
+      10.773916
+     ],
+     [
+      106.6777029,
+      10.7738558
+     ],
+     [
+      106.6777723,
+      10.7737711
+     ],
+     [
+      106.6778564,
+      10.7737145
+     ],
+     [
+      106.6780256,
+      10.7735547
+     ],
+     [
+      106.6781026,
+      10.7735473
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Cao Thắng",
+    "osm_name": "Cao Thắng",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Cao Thắng",
+    "published_length_m": null,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     227742840,
+     327097629,
+     327181426,
+     408166703,
+     608488603,
+     724495503,
+     724495504,
+     724495505,
+     724495506,
+     818991382,
+     1225333220,
+     1264407532,
+     1294699043,
+     1344042981
+    ],
+    "part": 1,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6781026,
+      10.7735473
+     ],
+     [
+      106.6780769,
+      10.7736148
+     ],
+     [
+      106.6779937,
+      10.7736972
+     ],
+     [
+      106.677917,
+      10.7737707
+     ],
+     [
+      106.6778543,
+      10.773822
+     ],
+     [
+      106.6777895,
+      10.7739093
+     ],
+     [
+      106.6777593,
+      10.7739699
+     ],
+     [
+      106.6776449,
+      10.7741426
+     ],
+     [
+      106.6775694,
+      10.7741705
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Cao Thắng",
+    "osm_name": "Cao Thắng",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Cao Thắng",
+    "published_length_m": null,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     227742840,
+     327097629,
+     327181426,
+     408166703,
+     608488603,
+     724495503,
+     724495504,
+     724495505,
+     724495506,
+     818991382,
+     1225333220,
+     1264407532,
+     1294699043,
+     1344042981
+    ],
+    "part": 2,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6807953,
+      10.7712
+     ],
+     [
+      106.6805843,
+      10.7713779
+     ],
+     [
+      106.6804243,
+      10.7715173
+     ],
+     [
+      106.6799883,
+      10.7718894
+     ],
+     [
+      106.6797415,
+      10.7721003
+     ],
+     [
+      106.6796956,
+      10.7721395
+     ],
+     [
+      106.6796216,
+      10.7722051
+     ],
+     [
+      106.6795097,
+      10.7722999
+     ],
+     [
+      106.6790928,
+      10.7726702
+     ],
+     [
+      106.679015,
+      10.7727361
+     ],
+     [
+      106.678976,
+      10.7727725
+     ],
+     [
+      106.6787866,
+      10.7729428
+     ],
+     [
+      106.6786533,
+      10.7730575
+     ],
+     [
+      106.6785064,
+      10.773184
+     ],
+     [
+      106.6784345,
+      10.7732428
+     ],
+     [
+      106.6783604,
+      10.7733124
+     ],
+     [
+      106.6782371,
+      10.7734247
+     ],
+     [
+      106.6781026,
+      10.7735473
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Cao Thắng",
+    "osm_name": "Cao Thắng",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Cao Thắng",
+    "published_length_m": null,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     227742840,
+     327097629,
+     327181426,
+     408166703,
+     608488603,
+     724495503,
+     724495504,
+     724495505,
+     724495506,
+     818991382,
+     1225333220,
+     1264407532,
+     1294699043,
+     1344042981
+    ],
+    "part": 3,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6705996,
+      10.7717142
+     ],
+     [
+      106.67112,
+      10.7719603
+     ],
+     [
+      106.6716121,
+      10.7722116
+     ],
+     [
+      106.6718039,
+      10.7723173
+     ],
+     [
+      106.6721331,
+      10.7724891
+     ],
+     [
+      106.6722238,
+      10.7725304
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hẻm 781 Lê Hồng Phong & Hẻm 16 Trần Thiện Chánh",
+    "osm_name": "Hẻm 781 Lê Hồng Phong",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Lê Hồng Phong - 330m",
+    "published_length_m": 330.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     518855259
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.671157,
+      10.7706669
+     ],
+     [
+      106.6716472,
+      10.7709183
+     ],
+     [
+      106.6721589,
+      10.7711759
+     ],
+     [
+      106.6723532,
+      10.7712698
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hẻm 781 Lê Hồng Phong & Hẻm 16 Trần Thiện Chánh",
+    "osm_name": "Hẻm 16 Trần Thiện Chánh",
+    "district_published": "Quận 10",
+    "segment_note": "Đường Lê Hồng Phong - 330m",
+    "published_length_m": 330.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     1039050648,
+     1352843518
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      106.6651369,
+      10.7724864
+     ],
+     [
+      106.6645907,
+      10.7722551
+     ],
+     [
+      106.6637057,
+      10.7718786
+     ],
+     [
+      106.6630805,
+      10.7716041
+     ],
+     [
+      106.663012,
+      10.771574
+     ],
+     [
+      106.6627142,
+      10.7714425
+     ],
+     [
+      106.662281,
+      10.7712531
+     ]
+    ]
+   },
+   "properties": {
+    "street": "Hẻm 51 Thành Thái",
+    "osm_name": "Hẻm 51 Thành Thái",
+    "district_published": "Quận 10",
+    "segment_note": "Hẻm 51 Thành Thái -320m",
+    "published_length_m": 320.0,
+    "fee_note": "Thu phí sử dụng tạm thời lòng đường để đỗ ô tô (TNXP quản lý); trả qua VETC bằng quét QR hoặc tự động trừ tài khoản giao thông. Nguồn không công bố mức phí.",
+    "source_url": "https://vetc.com.vn/vetc-trien-khai-he-thong-20-bai-gui-xe-khong-tien-mat-dau-tien-tai-thanh-pho-ho-chi-minh-n257.html",
+    "segment_source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "osm_way_ids": [
+     32584384
+    ],
+    "part": 0,
+    "geometry_note": "Toàn bộ đoạn tuyến theo OSM trong phạm vi quận (ước lượng); VETC chỉ công bố chiều dài đoạn thu phí, không công bố vị trí đoạn."
+   }
+  }
+ ]
+}

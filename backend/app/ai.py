@@ -1,0 +1,218 @@
+"""AI features (D22), each behind its own flag (see flags.py).
+
+- ai_text_rules:     text (ordinance, news, social post) → Stop Rules / flood reports, through the review gate
+- ai_photo_evidence: driver photo → sign / alley width / flood depth
+- ai_camera_flood:   public HCMC traffic-camera still → flood-now evidence
+
+Everything goes through one LLM adapter. Set one of GEMINI_API_KEY, OPENAI_API_KEY or
+ANTHROPIC_API_KEY in .env.local (optionally AI_MODEL). Output always passes the
+review gate (Trí's JEV): ACCEPT / REVIEW / INSUFFICIENT_INFORMATION.
+"""
+from __future__ import annotations
+
+import base64
+import json
+import os
+import re
+from datetime import datetime, timedelta, timezone
+
+import httpx
+
+from . import flags
+from .config import STORE
+
+VN_TZ = timezone(timedelta(hours=7))
+REVIEW_FILE = STORE / "review_queue.jsonl"
+LIVE_FLOOD_FILE = STORE / "live_flood_reports.jsonl"
+CAMERA_URL = "https://giaothong.hochiminhcity.gov.vn/render/ImageHandler.ashx?id={cam}&t={ms}"
+
+
+class FeatureOff(Exception):
+    pass
+
+
+class NoModel(Exception):
+    pass
+
+
+def _require(flag: str) -> None:
+    if not flags.enabled(flag):
+        raise FeatureOff(flag)
+
+
+_rr = 0
+
+
+def gemini_keys() -> list[str]:
+    """All AI Studio keys (GEMINI_API_KEY, GEMINI_API_KEY_2…), rotated round-robin."""
+    global _rr
+    keys = [os.environ[k] for k in sorted(os.environ, key=lambda k: (len(k), k))
+            if k == "GEMINI_API_KEY" or k.startswith("GEMINI_API_KEY_")]
+    if not keys:
+        return []
+    _rr = (_rr + 1) % len(keys)
+    return keys[_rr:] + keys[:_rr]
+
+
+def provider() -> tuple[str, str] | None:
+    for env, name, default in (("GEMINI_API_KEY", "gemini", "gemini-3.5-flash"),
+                               ("OPENAI_API_KEY", "openai", "gpt-4.1-mini"),
+                               ("ANTHROPIC_API_KEY", "anthropic", "claude-haiku-4-5")):
+        if os.environ.get(env):
+            return name, os.environ.get("AI_MODEL", default)
+    return None
+
+
+def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> dict:
+    prov = provider()
+    if not prov:
+        raise NoModel("Cần GEMINI_API_KEY, OPENAI_API_KEY hoặc ANTHROPIC_API_KEY trong .env.local")
+    name, model = prov
+    b64 = base64.b64encode(image).decode() if image else None
+    if name == "gemini":
+        parts = [{"text": prompt}] + ([{"inline_data": {"mime_type": mime, "data": b64}}] if b64 else [])
+        body = {"contents": [{"parts": parts}],
+                "generationConfig": {"responseMimeType": "application/json", "temperature": 0}}
+        r = None
+        for key in gemini_keys():  # rotate past rate limits and keys that cannot serve this model
+            r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                           params={"key": key}, json=body, timeout=60)
+            bad_key = r.status_code == 400 and "API key" in r.text
+            if r.status_code not in (429, 503, 403, 404) and not bad_key:
+                break
+        r.raise_for_status()
+        text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+    elif name == "openai":
+        content = [{"type": "text", "text": prompt}]
+        if b64:
+            content.append({"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}})
+        r = httpx.post("https://api.openai.com/v1/chat/completions",
+                       headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
+                       json={"model": model, "temperature": 0, "response_format": {"type": "json_object"},
+                             "messages": [{"role": "user", "content": content}]}, timeout=60)
+        r.raise_for_status()
+        text = r.json()["choices"][0]["message"]["content"]
+    else:
+        content = ([{"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}}] if b64 else []) \
+            + [{"type": "text", "text": prompt + "\nRespond with JSON only."}]
+        r = httpx.post("https://api.anthropic.com/v1/messages",
+                       headers={"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01"},
+                       json={"model": model, "max_tokens": 1500, "messages": [{"role": "user", "content": content}]},
+                       timeout=60)
+        r.raise_for_status()
+        text = r.json()["content"][0]["text"]
+    m = re.search(r"\{.*\}", text, re.S)
+    return json.loads(m.group(0) if m else text)
+
+
+def _gate(item: dict, needed: list[str]) -> str:
+    """Deterministic review gate: the model extracts, it never publishes on its own."""
+    present = [k for k in needed if item.get(k) not in (None, "", [])]
+    conf = float(item.get("confidence") or 0)
+    if len(present) == len(needed) and conf >= 0.75:
+        return "ACCEPT"
+    if present:
+        return "REVIEW"
+    return "INSUFFICIENT_INFORMATION"
+
+
+def _append(path, obj) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+
+TEXT_PROMPT = """Bạn trích xuất dữ liệu có cấu trúc từ văn bản tiếng Việt về giao thông đô thị TP.HCM.
+Trả về JSON {"items": [...]}. Mỗi item là một trong hai loại:
+1) {"kind":"stop_rule","street":"tên đường/hẻm","segment":"đoạn từ ... đến ... hoặc null","rule":"cam_dung_do|cam_do|cam_do_ngay_le|cam_do_ngay_chan|duoc_do_co_thu_phi","hours":"HH:MM-HH:MM hoặc null","vehicle":"o_to|tat_ca|null","source_quote":"trích nguyên văn","confidence":0-1}
+2) {"kind":"flood_report","street":"tên đường/hẻm","place_detail":"đoạn/số nhà hoặc null","depth_cm":số hoặc null,"cause":"mua|trieu|ca_hai|null","observed_at":"ISO datetime hoặc null","source_quote":"trích nguyên văn","confidence":0-1}
+Không suy đoán. Trường nào văn bản không nói thì để null.
+Văn bản:
+"""
+
+
+def extract_text(text: str, source: str = "") -> dict:
+    _require("ai_text_rules")
+    out = _call(TEXT_PROMPT + text[:12000])
+    results = []
+    for it in out.get("items", []):
+        needed = ["street", "rule"] if it.get("kind") == "stop_rule" else ["street", "depth_cm", "observed_at"]
+        gate = _gate(it, needed)
+        rec = {**it, "gate": gate, "source": source, "extracted_at": datetime.now(VN_TZ).isoformat(),
+               "model": "/".join(provider() or ())}
+        _append(REVIEW_FILE, rec)
+        if gate == "ACCEPT" and it.get("kind") == "flood_report":
+            _append(LIVE_FLOOD_FILE, rec)
+        results.append(rec)
+    return {"items": results}
+
+
+PHOTO_PROMPT = """Ảnh do tài xế gửi tại TP.HCM. Xác định loại ảnh và trả về JSON:
+{"type":"sign|alley|flood|other",
+ "sign_code":"P.130|P.131a|P.131b|P.131c|khác|null","sign_text":"chữ trên biển/biển phụ hoặc null",
+ "alley_width_m":số hoặc null,"width_reference":"vật tham chiếu dùng để ước lượng (xe máy dài ~1.9 m, cửa ~0.9 m...) hoặc null",
+ "flood_depth_cm":số hoặc null,"depth_reference":"vật tham chiếu (bánh xe máy ~60 cm, lề đường ~15 cm...) hoặc null",
+ "confidence":0-1,"notes":"ngắn gọn"}
+Chỉ ước lượng khi có vật tham chiếu rõ ràng; nếu không thì để null."""
+
+
+def read_photo(image: bytes, mime: str, lat: float | None, lon: float | None, way_id: int | None) -> dict:
+    _require("ai_photo_evidence")
+    out = _call(PHOTO_PROMPT, image, mime)
+    needed = {"sign": ["sign_code"], "alley": ["alley_width_m", "width_reference"],
+              "flood": ["flood_depth_cm", "depth_reference"]}.get(out.get("type"), ["type"])
+    gate = _gate(out, needed)
+    rec = {**out, "gate": gate, "lat": lat, "lon": lon, "way_id": way_id, "source": "photo",
+           "extracted_at": datetime.now(VN_TZ).isoformat(), "model": "/".join(provider() or ())}
+    _append(REVIEW_FILE, rec)
+    if gate == "ACCEPT" and out.get("type") == "flood":
+        _append(LIVE_FLOOD_FILE, {**rec, "kind": "flood_report", "depth_cm": out.get("flood_depth_cm"),
+                                  "observed_at": rec["extracted_at"]})
+    return rec
+
+
+LISTING_PHOTO_PROMPT = """Ảnh lấy từ tin rao bán/cho thuê nhà trong hẻm ở TP.HCM. Trả về JSON:
+{"shows_alley":true|false,"view":"hem_truoc_nha|mat_tien|trong_nha|khac",
+ "alley_width_m":số hoặc null,"reference":"vật tham chiếu dùng để ước lượng (xe máy dài ~1.9 m, rộng ~0.7 m; ô tô rộng ~1.8 m; cửa ~0.9 m; gạch lát ~0.6 m) hoặc null",
+ "cars_visible":true|false,"confidence":0-1,"notes":"ngắn gọn"}
+alley_width_m là bề rộng thông thủy từ tường/mép nhà bên này sang bên kia của con hẻm trước nhà.
+Chỉ ước lượng khi ảnh chụp chính con hẻm và thấy rõ vật tham chiếu; nếu không thì để null."""
+
+
+def read_listing_photo(image: bytes, mime: str = "image/jpeg") -> dict:
+    _require("ai_photo_evidence")
+    out = _call(LISTING_PHOTO_PROMPT, image, mime)
+    if not out.get("shows_alley"):
+        out["alley_width_m"] = None
+    out["gate"] = _gate(out, ["alley_width_m", "reference"])
+    out["model"] = "/".join(provider() or ())
+    return out
+
+
+CAMERA_PROMPT = """Ảnh camera giao thông TP.HCM. Mặt đường có ngập nước không? Trả về JSON:
+{"flooded":true|false,"depth_class":"kho|duoi_15cm|15_30cm|30_50cm|tren_50cm|khong_ro",
+ "evidence":"dựa vào đâu (bánh xe, lề đường, sóng nước...)","confidence":0-1}"""
+
+
+def read_camera(camera_id: str, street: str, lat: float, lon: float) -> dict:
+    _require("ai_camera_flood")
+    ms = int(datetime.now().timestamp() * 1000)
+    img = httpx.get(CAMERA_URL.format(cam=camera_id, ms=ms), timeout=20,
+                    headers={"User-Agent": "VaoDuoc-hackathon/0.1"}).content
+    out = _call(CAMERA_PROMPT, img, "image/jpeg")
+    depth = {"duoi_15cm": 10, "15_30cm": 25, "30_50cm": 40, "tren_50cm": 60}.get(out.get("depth_class"))
+    rec = {"kind": "flood_report", "street": street, "lat": lat, "lon": lon, "camera_id": camera_id,
+           "depth_cm": depth if out.get("flooded") else 0, "observed_at": datetime.now(VN_TZ).isoformat(),
+           "confidence": out.get("confidence"), "evidence": out.get("evidence"), "source": "camera"}
+    rec["gate"] = _gate(rec, ["street", "depth_cm", "observed_at"])
+    _append(REVIEW_FILE, rec)
+    if rec["gate"] == "ACCEPT":
+        _append(LIVE_FLOOD_FILE, rec)
+    return rec
+
+
+def review_queue(limit: int = 50) -> list[dict]:
+    if not REVIEW_FILE.exists():
+        return []
+    lines = REVIEW_FILE.read_text(encoding="utf-8").splitlines()
+    return [json.loads(x) for x in lines[-limit:] if x.strip()][::-1]

@@ -1,0 +1,13 @@
+.env*
+!.env.example
+**/__pycache__
+**/node_modules
+frontend/dist
+data/raw
+data/alley
+data/analysis
+pipelines/.venv
+backend/cache/live/chotot
+backend/cache/live/photos
+backend/cache/osm/area_*
+docs

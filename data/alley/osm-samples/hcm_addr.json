@@ -1,0 +1,6626 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-28T04:15:21Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 729604702,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "amenity": "fuel",
+    "compressed_air": "yes",
+    "name": "Cửa Hàng Xăng Dầu Petrolimex Số 31",
+    "name:vi": "Petrolimex",
+    "not:brand:wikidata": "Q10831598",
+    "operator": "Cong Ty Tnhh Sx Tm Bien Xanh"
+  }
+},
+{
+  "type": "node",
+  "id": 729604929,
+  "tags": {
+    "addr:housenumber": "372",
+    "addr:street": "Dường Lê Văn Sỹ",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "fuel:diesel": "yes",
+    "fuel:octane_91": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Cửa Hàng Xăng Dầu Petrolimex",
+    "operator": "Store Petroleum No.7",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1998781602,
+  "tags": {
+    "addr:housenumber": "243",
+    "addr:street": "Hai Bà Trưng",
+    "name": "Cửa Hàng Tiện Lợi Shop & Go",
+    "shop": "convenience",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 2119278909,
+  "tags": {
+    "addr:city": "Phú Nhuận",
+    "addr:country": "VN",
+    "addr:housenumber": "174",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Xích Long",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Trà sữa Tea Cup"
+  }
+},
+{
+  "type": "node",
+  "id": 2119279066,
+  "tags": {
+    "addr:housenumber": "176",
+    "addr:street": "Phan Xích Long",
+    "amenity": "cafe",
+    "name": "Cà Phê Bud's",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2155768488,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "93",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "restaurant",
+    "branch": "Phan Xích Long",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "capacity": "300",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "Pizza Hut",
+    "opening_hours": "10:00-22:00",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2158685400,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Hoa Phượng",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Quán Ăn Vương Gia Tửu",
+    "wifi": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2158685402,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "195-197",
+    "addr:street": "Phan Xích Long",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Nhà Hàng Quảng Đông San Fu Lou",
+    "phone": "(+848) 35176168"
+  }
+},
+{
+  "type": "node",
+  "id": 2760310171,
+  "tags": {
+    "addr:city": "Phường 7, Quận Phú Nhuận, Thành Phố Hồ Chí Minh",
+    "addr:housenumber": "33",
+    "addr:postcode": "08",
+    "addr:street": "Hoa Sứ",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "yes",
+    "name": "Cà Phê Milano Radio",
+    "note": "Cà phê giá chỉ từ 12.000vnđ/ly",
+    "opening_hours": "06:30",
+    "phone": "0942 869 233",
+    "smoking": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2926929401,
+  "tags": {
+    "addr:housenumber": "49B",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "amenity": "restaurant",
+    "name": "Nhà Hàng Bích Liên"
+  }
+},
+{
+  "type": "node",
+  "id": 3193069589,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "177",
+    "addr:street": "Phan Xích Long",
+    "amenity": "ice_cream",
+    "brand": "Baskin-Robbins",
+    "brand:wikidata": "Q584601",
+    "cuisine": "ice_cream",
+    "name": "Baskin-Robbins"
+  }
+},
+{
+  "type": "node",
+  "id": 3193184663,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "214-216",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "cafe",
+    "brand": "Starbucks",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "name": "Starbucks",
+    "official_name": "Starbucks Coffee",
+    "operator": "Viet Idea Foo & Beverages Company Limited",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3197117890,
+  "tags": {
+    "addr:housenumber": "76",
+    "addr:street": "Phan Xích Long",
+    "amenity": "college",
+    "name": "Trường CĐ Kinh Tế Đối Ngoại Thành phố Hồ Chí Minh"
+  }
+},
+{
+  "type": "node",
+  "id": 3197117891,
+  "tags": {
+    "addr:housenumber": "152",
+    "addr:street": "Phan Xích Long",
+    "amenity": "bank",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 3197168332,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "130",
+    "addr:street": "Trần Quang Khải",
+    "name": "Thế Giới Di Động",
+    "name:de": "Thegioididong",
+    "opening_hours": "08:00-22:30",
+    "shop": "mobile_phone",
+    "website": "https://www.thegioididong.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3198068121,
+  "tags": {
+    "addr:housenumber": "130",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "name": "Vikki Bank",
+    "operator": "Vikki Bank"
+  }
+},
+{
+  "type": "node",
+  "id": 3204858085,
+  "tags": {
+    "addr:city": "Phường 3",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "98A",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Nha Khoa Sài Gòn Smile"
+  }
+},
+{
+  "type": "node",
+  "id": 3204874848,
+  "tags": {
+    "addr:city": "Phường 3",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "98E",
+    "addr:street": "Phan Đăng Lưu",
+    "name": "Cửa Hàng Đồng Hồ Đăng Quang",
+    "shop": "watches"
+  }
+},
+{
+  "type": "node",
+  "id": 3204894398,
+  "tags": {
+    "addr:city": "Phường 3",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "120",
+    "addr:street": "Phan Đăng Lưu",
+    "name": "Cửa Hàng Thời Trang Bolzano Italy",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 3204915262,
+  "tags": {
+    "addr:city": "Phường 3",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "132",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "school",
+    "name": "Trung Tâm Ngoại Ngữ Dương Minh"
+  }
+},
+{
+  "type": "node",
+  "id": 3230868715,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "153B",
+    "addr:street": "Phan Đăng Lưu",
+    "name": "Thế Giới Di Động",
+    "shop": "mobile_phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3230873280,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "128B",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "brand": "VIB",
+    "brand:wikidata": "Q49054349",
+    "name": "VIB"
+  }
+},
+{
+  "type": "node",
+  "id": 3235649458,
+  "tags": {
+    "addr:city": "Phường 6",
+    "addr:district": "3",
+    "addr:housenumber": "261",
+    "addr:street": "Hai Bà Trưng",
+    "name": "Khách Sạn Liên Phương",
+    "name:de": "EverGreen",
+    "name:en": "EverGreen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3235666541,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 3",
+    "addr:housenumber": "377",
+    "addr:street": "Hẻm 373 Hai Bà Trưng;Hai Bà Trưng",
+    "addr:subdistrict": "Phuong 8",
+    "amenity": "cafe",
+    "cuisine": "ice_cream",
+    "internet_access": "wlan"
+  }
+},
+{
+  "type": "node",
+  "id": 3257719599,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Đặng Dung",
+    "amenity": "cafe",
+    "cuisine": "regional",
+    "name": "Cà Phê Yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3257722044,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Đặng Dung",
+    "name": "Khách Sạn Sunny",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3463000309,
+  "tags": {
+    "addr:city": "Phường 17",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "82",
+    "addr:subdistrict": "cư xá Nguyễn Văn Trỗi",
+    "amenity": "restaurant",
+    "cuisine": "Các_món_ăn_Huế",
+    "name": "Quán Ngự Bình"
+  }
+},
+{
+  "type": "node",
+  "id": 3506699501,
+  "tags": {
+    "addr:housenumber": "46A",
+    "addr:street": "Đinh Công Tráng",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Bánh Xèo 46A",
+    "note": "Touristy"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066324,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "197",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "brand": "Sacombank",
+    "brand:wikidata": "Q6123772",
+    "name": "Sacombank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066925,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "118",
+    "addr:street": "Hoàng Văn Thụ"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066928,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "146",
+    "addr:street": "Hồ Văn Huê",
+    "amenity": "atm",
+    "operator": "ACB"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066935,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "89",
+    "addr:street": "Hoàng Văn Thụ"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066946,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "5",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "atm",
+    "brand": "SeABank",
+    "brand:wikidata": "Q10800276",
+    "operator": "SeABank",
+    "operator:wikidata": "Q10800276"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066947,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "101",
+    "addr:street": "Hoàng Văn Thụ",
+    "amenity": "bank",
+    "brand": "SCB",
+    "brand:wikidata": "Q101575325",
+    "name": "SCB"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066957,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "135A",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "brand": "Agribank",
+    "brand:wikidata": "Q1924723",
+    "brand:wikipedia": "vi:Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
+    "name": "Agribank",
+    "official_name": "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
+    "official_name:en": "Vietnam Bank for Agriculture and Rural Development",
+    "official_name:vi": "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066967,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "135",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "name": "VietCapitalbank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066981,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "159",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 3",
+    "brand": "PNJ",
+    "brand:wikidata": "Q61129183",
+    "brand:wikipedia": "vi:PNJ",
+    "name": "PNJ",
+    "opening_hours": "Mo-Su 08:30-20:30",
+    "operator": "PNJ Group",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "shop": "jewelry",
+    "website": "https://www.pnj.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066994,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "174",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "bank",
+    "brand": "HDBank",
+    "brand:wikidata": "Q10800273",
+    "name": "HDBank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654066996,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "121",
+    "addr:street": "Hoàng Văn Thụ",
+    "amenity": "bank",
+    "brand": "Techcombank",
+    "brand:wikidata": "Q10541776",
+    "name": "Techcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654067009,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "74",
+    "addr:street": "Hoàng Văn Thụ",
+    "amenity": "bank",
+    "name": "BaoVietbank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654067010,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "127",
+    "addr:street": "Hoàng Văn Thụ",
+    "name": "Thế Giới Di Động",
+    "shop": "mobile_phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3654067019,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "60",
+    "addr:street": "Hoàng Văn Thụ"
+  }
+},
+{
+  "type": "node",
+  "id": 3654067032,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "116",
+    "addr:street": "Hoàng Văn Thụ"
+  }
+},
+{
+  "type": "node",
+  "id": 3654067035,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "33",
+    "addr:street": "Hồ Văn Huê",
+    "amenity": "bank",
+    "brand": "VietinBank",
+    "brand:wikidata": "Q7928459",
+    "name": "VietinBank"
+  }
+},
+{
+  "type": "node",
+  "id": 3654562875,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "54A",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Bánh Xèo Mười Xiềm"
+  }
+},
+{
+  "type": "node",
+  "id": 3771398683,
+  "tags": {
+    "addr:city": "Phường 17",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "83",
+    "addr:subdistrict": "Cư xá Nguyễn Văn Trỗi",
+    "name": "Cửa Hàng Thời Trang",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 3780395065,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "26",
+    "addr:postcode": "700000",
+    "addr:province": "Ho Chi Minh",
+    "addr:street": "Hoa Đào",
+    "addr:subdistrict": "2",
+    "amenity": "restaurant",
+    "capacity": "100",
+    "cuisine": "nướng",
+    "name": "Nhà Hàng K-Pub Hoa Đào",
+    "opening_hours": "10:00-22:00",
+    "smoking": "outside",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4027190813,
+  "tags": {
+    "addr:city": "Phường Tân Định",
+    "addr:district": "1",
+    "addr:housenumber": "10A",
+    "addr:street": "Trần Nhật Duật",
+    "landuse": "residential",
+    "name": "Chung Cư 10A Trần Nhật Duật",
+    "residential": "apartments"
+  }
+},
+{
+  "type": "node",
+  "id": 4165620493,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Lý Chính Thắng",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Nha Khoa Tân Định",
+    "opening_hours": "24/7",
+    "phone": "0838468938"
+  }
+},
+{
+  "type": "node",
+  "id": 4213286993,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Tân Định",
+    "addr:housenumber": "81",
+    "addr:postcode": "100081",
+    "addr:street": "Trần Quang Khải",
+    "internet_access": "wlan",
+    "name": "Viện Di Động",
+    "operator": "Ha Vu",
+    "shop": "mobile_phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4242307790,
+  "tags": {
+    "addr:housenumber": "100",
+    "addr:street": "Trần Huy Liệu",
+    "amenity": "cafe",
+    "internet_access": "wlan",
+    "name": "Cà Phê Trầm"
+  }
+},
+{
+  "type": "node",
+  "id": 4269777696,
+  "tags": {
+    "addr:housenumber": "436",
+    "addr:postcode": "700000",
+    "addr:street": "Nguyễn Kiệm",
+    "club": "sport",
+    "email": "natechpte@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Câu Lạc Bộ Billiards",
+    "opening_hours": "24/7",
+    "phone": "+84 8 39951657",
+    "website": "http://Bidalyp.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4274832591,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "43;41",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Hồng",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "cafe",
+    "brand": "The Coffee House",
+    "brand:wikidata": "Q60775742",
+    "cuisine": "coffee_shop;vietnamese",
+    "description": "Chuyên Mua Bán Đá Muối Nhập Khẩu Từ Pakistan Chất Lượng Cao.",
+    "name": "The Coffee House;Đá Muối Himalaya DamiLama",
+    "name:en": "The Coffee House",
+    "payment:cash": "yes",
+    "phone": "0931880674",
+    "shop": "yes",
+    "takeaway": "yes",
+    "website": "https://damilama.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4310134635,
+  "tags": {
+    "addr:housenumber": "198",
+    "addr:street": "Phan Xích Long",
+    "amenity": "restaurant",
+    "cuisine": "grill",
+    "internet_access": "wlan",
+    "name": "Nhà Hàng Gogi",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "phone": "(08)35178283"
+  }
+},
+{
+  "type": "node",
+  "id": 4348630592,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Ðặng Tất",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2024-12-27",
+    "check_date:diet:vegan": "2024-12-27",
+    "check_date:diet:vegetarian": "2024-12-27",
+    "check_date:opening_hours": "2024-12-27",
+    "check_date:smoking": "2024-12-27",
+    "cuisine": "vietnamese",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Nhà Hàng Chay Phi Nhung",
+    "name:en": "Buddha chay",
+    "opening_hours": "Mo-Su 10:00-21:00",
+    "outdoor_seating": "no",
+    "phone": "+84 28 3526 5138",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4454814943,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Trần Nhật Duật",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "description": "Vegetarian restaurant",
+    "diet:gluten_free": "yes",
+    "diet:vegan": "only",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Chay Việt An",
+    "opening_hours": "Mo-Su 09:00-14:00,17:00-21:30",
+    "outdoor_seating": "no",
+    "smoking": "no",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4466741689,
+  "tags": {
+    "addr:housenumber": "220/68",
+    "addr:street": "Hẻm 220 Lê Văn Sỹ",
+    "amenity": "cafe",
+    "internet_access": "wlan",
+    "name:en": "Cafe Lowther"
+  }
+},
+{
+  "type": "node",
+  "id": 4478937090,
+  "tags": {
+    "addr:housenumber": "37A",
+    "addr:street": "Phan Xich Long",
+    "name:en": "Elinext",
+    "name:vi": "Elinext",
+    "shop": "computer",
+    "website": "https://www.elinext.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4483057494,
+  "tags": {
+    "addr:housenumber": "268",
+    "addr:street": "Hoàng Sa",
+    "amenity": "cafe",
+    "name": "Cà Phê Lisa",
+    "name:vi": "Lisa"
+  }
+},
+{
+  "type": "node",
+  "id": 4483936900,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Hẻm 331 Lê Văn Sỹ",
+    "name:en": "Vy Laundry",
+    "opening_hours": "6:00-21:00",
+    "phone": "090360069",
+    "shop": "laundry"
+  }
+},
+{
+  "type": "node",
+  "id": 4502466090,
+  "tags": {
+    "addr:housenumber": "210",
+    "addr:street": "Hai Bà Trưng",
+    "amenity": "cafe",
+    "name:de": "The Gioi Donut",
+    "name:en": "The Gioi Donut"
+  }
+},
+{
+  "type": "node",
+  "id": 4548750091,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:postcode": "70000",
+    "addr:street": "Hoa Sữa",
+    "name": "Khách Sạn Lê Ngân Phụng",
+    "name:en": "Le Ngan Phung hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4561370930,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:postcode": "700000",
+    "addr:street": "Trần Khắc Chân",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "email": "masterphutran@gmail.com",
+    "internet_access": "wlan",
+    "name": "Lẩu Mắm Bà Dú",
+    "name:de": "Lẩu Mắm Bà Du Vietnamese Cuisine",
+    "name:en": "Vietnamese Cuisine Lẩu Mắm Bà Du",
+    "name:vi": "Lẩu Mắm Bà Dú",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "operator": "Công Ty TNHH MTV An Quý",
+    "phone": "84916489923",
+    "website": "http://laumambadu.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 4598301589,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:postcode": "70000",
+    "addr:street": "Tran quy khoach",
+    "leisure": "fitness_centre",
+    "name:en": "yoga Sivananda"
+  }
+},
+{
+  "type": "node",
+  "id": 4613965190,
+  "tags": {
+    "addr:housenumber": "464-466-468",
+    "addr:postcode": "10000",
+    "addr:street": "Phan Xích Long",
+    "leisure": "fitness_centre",
+    "name": "Phòng Tập California Fitness & Yoga",
+    "name:en": "California Fitness & Yoga - Cali Tower",
+    "opening_hours": "Mo-Su 06:30-23:00",
+    "website": "https://www.cfyc.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 4624875391,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Lý Chính Thắng",
+    "amenity": "restaurant",
+    "cuisine": "american;asian;vietnamese",
+    "name": "Nhà Hàng Nhật Phương"
+  }
+},
+{
+  "type": "node",
+  "id": 4644092691,
+  "tags": {
+    "addr:housenumber": "225",
+    "addr:street": "Phan Xích Long",
+    "amenity": "restaurant",
+    "name": "Nhà Hàng Bún Chả Phố Cổ"
+  }
+},
+{
+  "type": "node",
+  "id": 4674922391,
+  "tags": {
+    "addr:housenumber": "458",
+    "addr:street": "Nguyễn Kiệm",
+    "amenity": "place_of_worship",
+    "name": "Nhà Thờ Phát Diệm",
+    "name:vi": "Nhà Thờ Phát Diệm"
+  }
+},
+{
+  "type": "node",
+  "id": 4694584391,
+  "tags": {
+    "addr:housenumber": "73/12",
+    "addr:street": "Hoàng Văn Thụ",
+    "internet_access": "wlan",
+    "name": "Cửa Hàng Spa Đan Thi",
+    "name:en": "DAN THI SPA",
+    "opening_hours": "Mo-Su 08:00-20:00",
+    "phone": "0909991719",
+    "shop": "beauty"
+  }
+},
+{
+  "type": "node",
+  "id": 4707519389,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Đường Ðặng Tất",
+    "amenity": "restaurant",
+    "name": "Cục Gạch Quán",
+    "opening_hours": "Mo-Su 09:00-23:30",
+    "phone": "+84 838 480 144"
+  }
+},
+{
+  "type": "node",
+  "id": 4711409189,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Lý Chính Thắng",
+    "craft": "tailor",
+    "name": "Thợ May Hương",
+    "name:vi": "Huong Tailor – Denim"
+  }
+},
+{
+  "type": "node",
+  "id": 4757339545,
+  "tags": {
+    "addr:housenumber": "18/153",
+    "addr:street": "Trường Sa",
+    "name": "Cửa Hàng Tạp Hóa Út Nga",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4757339546,
+  "tags": {
+    "addr:housenumber": "648",
+    "addr:street": "Trường Sa",
+    "name": "Cửa Hàng Mini Shop",
+    "shop": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4768959625,
+  "tags": {
+    "addr:housenumber": "135",
+    "addr:street": "Nguyễn Hữu Cầu",
+    "name": "Tạp Hóa Thu Bé Bự",
+    "shop": "department_store"
+  }
+},
+{
+  "type": "node",
+  "id": 4772826221,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Huỳnh Tịnh Của",
+    "amenity": "cafe",
+    "cuisine": "bubble_tea",
+    "name": "Trà Sữa Bò Mập"
+  }
+},
+{
+  "type": "node",
+  "id": 4773918025,
+  "tags": {
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "231",
+    "addr:street": "Huỳnh Văn Bánh",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4773918026,
+  "tags": {
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "3",
+    "addr:street": "Trần Cao Vân",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4780316226,
+  "tags": {
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "83",
+    "addr:street": "Trần Huy Liệu",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4780319921,
+  "tags": {
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "68",
+    "addr:street": "Trần Huy Liệu",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4815252323,
+  "tags": {
+    "addr:housenumber": "52",
+    "addr:street": "Trương Quyền",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Cà Phê Cy Cy",
+    "phone": "0909129569"
+  }
+},
+{
+  "type": "node",
+  "id": 4815270221,
+  "tags": {
+    "addr:housenumber": "290/21A",
+    "addr:street": "Hẻm 290 Nam Kỳ Khởi Nghĩa",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Nhà Hàng Việt Chay",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "outdoor_seating": "no",
+    "phone": "+84942232242",
+    "smoking": "no",
+    "website": "https://www.vietchay.vn/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4815270322,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Trương Quyền",
+    "air_conditioning": "no",
+    "amenity": "restaurant",
+    "changing_table": "no",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Phở Chay Nhu",
+    "name:en": "Pho Chay Vegan/Vegetarian Restaurant",
+    "outdoor_seating": "no",
+    "payment:credit_cards": "no",
+    "payment:debit_cards": "no",
+    "smoking": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4819130522,
+  "tags": {
+    "addr:housenumber": "521",
+    "addr:street": "Hoàng Sa",
+    "amenity": "cafe",
+    "name": "Cà Phê Nấm Linh Chi"
+  }
+},
+{
+  "type": "node",
+  "id": 4824316023,
+  "tags": {
+    "addr:housenumber": "148EF",
+    "addr:street": "Lý Chính Thắng",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "email": "linhdung2304@gmail.com",
+    "internet_access": "wlan",
+    "name": "Cà Phê Oto",
+    "website": "http://www.facebook.com/otocoffe"
+  }
+},
+{
+  "type": "node",
+  "id": 4833860723,
+  "tags": {
+    "addr:housenumber": "14",
+    "addr:street": "Trần Huy Liệu",
+    "amenity": "restaurant",
+    "name": "Lẩu Mắm 140"
+  }
+},
+{
+  "type": "node",
+  "id": 4835913121,
+  "tags": {
+    "addr:housenumber": "269 - 271",
+    "addr:street": "Hoàng Sa",
+    "amenity": "restaurant",
+    "cuisine": "fine_dining;breakfast;deli;diner;asian",
+    "internet_access": "wlan",
+    "name": "Bánh Canh Trảng Bàng Cô Ba",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "operator": "BÁNH CANH TRẢNG BÀNG CÔ BA",
+    "phone": "38481648"
+  }
+},
+{
+  "type": "node",
+  "id": 4848565322,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "1",
+    "addr:housenumber": "220",
+    "addr:postcode": "710880",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trần Quang Khải",
+    "addr:subdistrict": "Tân Định",
+    "amenity": "karaoke_box",
+    "name": "Quán Karaoke Kingdom",
+    "name:vi": "Karaoke Kingdom"
+  }
+},
+{
+  "type": "node",
+  "id": 4982108608,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "482/14",
+    "addr:postcode": "725060",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 3",
+    "email": "bigdolphin@bigdolphin.com.vn",
+    "name": "Công Ty TNHH Cá Heo Lớn",
+    "office": "company"
+  }
+},
+{
+  "type": "node",
+  "id": 5015735821,
+  "tags": {
+    "addr:housenumber": "260C",
+    "addr:street": "Đường Pasteur",
+    "alt_name:en": "Pho Hoa Pasteur",
+    "alt_name:vi": "Phở Hoà Pasteur",
+    "amenity": "restaurant",
+    "cuisine": "beef_bowl;noodle",
+    "name": "Phở Hòa Pasteur",
+    "name:ja": "フォー ホア",
+    "name:vi": "Phở Hòa Pasteur",
+    "not:brand": "Phở Hòa",
+    "not:brand:wikidata": "Q55629932",
+    "not:brand:wikipedia": "en:Phở Hòa"
+  }
+},
+{
+  "type": "node",
+  "id": 5027272024,
+  "tags": {
+    "addr:housenumber": "130D",
+    "addr:postcode": "76000",
+    "addr:street": "Trần Huy Liệu",
+    "internet_access": "wlan",
+    "name": "Cửa Hàng Tóc Giả Sài Gòn",
+    "opening_hours": "Mo-Su 08:30-20:00",
+    "phone": "0912003003",
+    "shop": "hairdresser",
+    "website": "https://www.tocsaigon.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 5308161122,
+  "tags": {
+    "addr:housenumber": "212",
+    "addr:street": "Phan Xích Long",
+    "internet_access": "wlan",
+    "name": "Khách Sạn Cao Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5324090929,
+  "tags": {
+    "addr:housenumber": "357 - 359",
+    "addr:postcode": "79000",
+    "addr:street": "Hoàng Sa",
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "Nhà Hàng Lẩu và Nướng Grill Riverside",
+    "opening_hours": "Mo-Su 10:00-00:00",
+    "phone": "0938022123",
+    "website": "http://grillriverside.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5346289222,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "87",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Trần Khắc Chân",
+    "addr:subdistrict": "Phường Tân Định",
+    "amenity": "food_court",
+    "name": "Bánh Canh Cua 87"
+  }
+},
+{
+  "type": "node",
+  "id": 5346289223,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Trần Quốc Toản",
+    "amenity": "restaurant",
+    "name": "Quán Bún Bò Huế Nhung"
+  }
+},
+{
+  "type": "node",
+  "id": 5346686822,
+  "tags": {
+    "addr:housenumber": "353",
+    "addr:street": "Lê Văn Sỹ",
+    "amenity": "food_court",
+    "name": "Bánh Cuốn Nhớ"
+  }
+},
+{
+  "type": "node",
+  "id": 5350664472,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan Binh Thanh",
+    "addr:housenumber": "70",
+    "addr:street": "Trần Quang Khải",
+    "amenity": "school",
+    "education": "school",
+    "name:en": "Language"
+  }
+},
+{
+  "type": "node",
+  "id": 5350664482,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "3",
+    "addr:street": "Trần Khắc Chân",
+    "name": "Khách Sạn Du Xuân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5350664490,
+  "tags": {
+    "addr:full": "403 Hai Bà Trưng, Phường 8, Quận 3, TPHCM",
+    "addr:housenumber": "403",
+    "addr:street": "Hai Bà Trưng",
+    "alt_name": "VinMart+ 403 Hai Bà Trưng",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "phone": "862916177",
+    "shop": "convenience",
+    "website": "http://www.vinmartplus.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5350664492,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 3",
+    "addr:housenumber": "379",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Phuong 8"
+  }
+},
+{
+  "type": "node",
+  "id": 5350664493,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 3",
+    "addr:housenumber": "375",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Phuong 8"
+  }
+},
+{
+  "type": "node",
+  "id": 5352152226,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "163",
+    "addr:postcode": "76000",
+    "addr:street": "Trần Huy Liệu",
+    "addr:ward": "Phường Phú Nhuận",
+    "name": "Công ty TNHH Faroson",
+    "office": "company",
+    "opening_hours": "Mo-Fr 09:00-18:00"
+  }
+},
+{
+  "type": "node",
+  "id": 5352152227,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "163",
+    "addr:postcode": "76000",
+    "addr:street": "Trần Huy Liệu",
+    "addr:ward": "Phường Phú Nhuận",
+    "air_conditioning": "yes",
+    "email": "marketing@profa.com.vn",
+    "name": "Công ty TNHH Profa",
+    "office": "company",
+    "opening_hours": "Mo-Fr 09:00-18:00",
+    "operator": "Công ty TNHH Profa",
+    "phone": "+84 28 3835 2630"
+  }
+},
+{
+  "type": "node",
+  "id": 5352152234,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 3",
+    "addr:housenumber": "120/4",
+    "addr:street": "Hẻm 120 Trần Quang Diệu"
+  }
+},
+{
+  "type": "node",
+  "id": 5352152237,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "120/17",
+    "addr:street": "Hẻm 120 Trần Quang Diệu",
+    "addr:ward": "Phường Phú Nhuận"
+  }
+},
+{
+  "type": "node",
+  "id": 5352258663,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "28A",
+    "addr:street": "Trần Huy Liệu",
+    "addr:subdistrict": "Phường 11",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 5352258664,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "28",
+    "addr:street": "Trần Huy Liệu",
+    "addr:subdistrict": "Phường 11"
+  }
+},
+{
+  "type": "node",
+  "id": 5352258666,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "63",
+    "addr:street": "Trần Huy Liệu",
+    "addr:subdistrict": "Phường 11"
+  }
+},
+{
+  "type": "node",
+  "id": 5379954521,
+  "tags": {
+    "addr:housenumber": "25A",
+    "addr:postcode": "700000",
+    "addr:street": "Hem 339 Le Van Sy",
+    "email": "contact@chouchoushop.com",
+    "internet_access": "wlan",
+    "name": "Cửa Hàng Thời Trang Chou Chou",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "phone": "01224969862",
+    "shop": "clothes",
+    "website": "http://www.facebook.com/ChouChouClothing"
+  }
+},
+{
+  "type": "node",
+  "id": 5419193026,
+  "tags": {
+    "addr:housenumber": "139",
+    "addr:street": "Trần Huy Liệu",
+    "amenity": "police",
+    "name": "Chốt CSGT Tân Sơn Nhất",
+    "opening_hours": "24/7"
+  }
+},
+{
+  "type": "node",
+  "id": 5434677422,
+  "tags": {
+    "addr:housenumber": "148",
+    "addr:street": "Đường Lý Chính Thắng",
+    "amenity": "restaurant",
+    "name": "Phở Bò Phú Gia"
+  }
+},
+{
+  "type": "node",
+  "id": 5458117021,
+  "tags": {
+    "addr:housenumber": "262/9",
+    "addr:street": "Lê Văn Sỹ",
+    "internet_access": "wlan",
+    "name": "Nhà Khách Kings Valley",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5547112521,
+  "tags": {
+    "addr:housenumber": "46",
+    "addr:street": "Huỳnh Tịnh Của",
+    "amenity": "restaurant",
+    "name": "Nhà Hàng Đất Phương Nam"
+  }
+},
+{
+  "type": "node",
+  "id": 5568791023,
+  "tags": {
+    "addr:housenumber": "247",
+    "addr:street": "Hoàng Sa",
+    "amenity": "place_of_worship",
+    "name": "Chùa Vạn Thọ",
+    "name:en": "Longevity Temple"
+  }
+},
+{
+  "type": "node",
+  "id": 5609997912,
+  "tags": {
+    "addr:full": "103 Trần Huy Liệu. Phường 12, Quận Phú Nhuận, TP HCM",
+    "addr:housenumber": "103",
+    "addr:street": "Trần Huy Liệu",
+    "alt_name": "VinMart+ 103 Trần Huy Liệu",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "phone": "862926903",
+    "shop": "convenience",
+    "website": "http://www.vinmartplus.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5609998737,
+  "tags": {
+    "addr:full": "13 Trần Khắc Trân, Phường Tân Định, Quận 1, TP Hồ Chí Minh",
+    "addr:housenumber": "13",
+    "addr:street": "Trần Khắc Chân",
+    "amenity": "restaurant",
+    "name": "Vườn Chay Giác Duyên"
+  }
+},
+{
+  "type": "node",
+  "id": 5609998803,
+  "tags": {
+    "addr:full": "68/5A Trần Quang Khải, Phường Tân Định, Quận 1, TP. Hồ Chí Minh",
+    "addr:housenumber": "68/5A",
+    "addr:street": "Trần Quang Khải",
+    "alt_name": "VinMart+ 68/5A Trần Quang Khải",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "phone": "901722058",
+    "shop": "convenience",
+    "website": "http://www.vinmartplus.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5609999036,
+  "tags": {
+    "addr:full": "33 Lý Văn Phức, Phường Tân Định, Quận 1, Tp. Hồ Chí Minh",
+    "addr:housenumber": "33",
+    "addr:street": "Lý Văn Phức",
+    "alt_name": "VinMart+ 33 Lý Văn Phức",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "phone": "901702719",
+    "shop": "convenience",
+    "website": "http://www.vinmartplus.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5690005922,
+  "tags": {
+    "addr:housenumber": "268-270",
+    "addr:street": "Đường Pasteur",
+    "name:en": "POXI shop",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 5710080821,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Trần Khánh Dư",
+    "name": "Công Ty TNHH BroTher",
+    "office": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5769562627,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "58",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hồ Biểu Chánh",
+    "addr:subdistrict": "Phường 11",
+    "description": "Cửa hàng thực phẩm dưỡng sinh Ohsawa",
+    "name": "Shop Thực Dưỡng Sen Hồng",
+    "shop": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5834106085,
+  "tags": {
+    "addr:housenumber": "24/16",
+    "addr:street": "Doan Thi Diem",
+    "internet_access": "wlan",
+    "name:en": "Data Recovery \"Vo Nguyen\"",
+    "shop": "electronics"
+  }
+},
+{
+  "type": "node",
+  "id": 5835767185,
+  "tags": {
+    "addr:housenumber": "10D",
+    "addr:street": "Trần Nhật Duật",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;asian",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "internet_access": "wlan",
+    "name:en": "Lien Huong - Vegetarian Restaurant",
+    "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-21:00",
+    "phone": "+84 93 348 50 64"
+  }
+},
+{
+  "type": "node",
+  "id": 5870964485,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Hoa Lan",
+    "brand": "Ministop",
+    "brand:wikidata": "Q1038929",
+    "internet_access": "wlan",
+    "name": "Ministop",
+    "name:en": "Ministop",
+    "opening_hours": "24/7",
+    "shop": "convenience",
+    "website": "https://www.ministop.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 6124512017,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "20/24",
+    "addr:street": "Cô Bắc",
+    "addr:subdistrict": "Ward 1",
+    "internet_access": "yes",
+    "name": "Khách Sạn The Moana House",
+    "phone": "+84 98 338 90 08",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6124516478,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "1",
+    "addr:housenumber": "15/1",
+    "addr:street": "Bà Lê Chân",
+    "brand": "OYO",
+    "brand:wikidata": "Q24906315",
+    "name": "Khách Sạn OYO 111 Apa Saigon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6150821986,
+  "tags": {
+    "addr:housenumber": "97",
+    "addr:postcode": "700000",
+    "addr:street": "Hoa Lan",
+    "email": "ksthaianh6497@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Khách Sạn Thái Anh 1",
+    "opening_hours": "24/7",
+    "phone": "02835172237",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6150831685,
+  "tags": {
+    "addr:housenumber": "64/20",
+    "addr:postcode": "700000",
+    "addr:street": "Cù Lao",
+    "email": "ksthaianh6497@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Khách Sạn Thái Anh 2",
+    "name:en": "HOTEL THAI ANH 2",
+    "opening_hours": "24/7",
+    "phone": "02835172586",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6297384685,
+  "tags": {
+    "addr:housenumber": "194 Van Kiep",
+    "addr:postcode": "700000",
+    "addr:street": "Vạn Kiếp",
+    "amenity": "fast_food",
+    "cuisine": "asian;vietnamese",
+    "name": "Bánh Tráng Nướng",
+    "name:en": "Grill paper rice with topping",
+    "name:vi": "Bánh tráng nướng 194 Vạn Kiếp",
+    "opening_hours": "Mo-Su 15:00-23:00"
+  }
+},
+{
+  "type": "node",
+  "id": 6376885127,
+  "tags": {
+    "addr:district": "Quận 1",
+    "addr:housenumber": "262",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Tân Định",
+    "clothes": "women",
+    "name": "Cửa Hàng Thời Trang Labella",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6397830946,
+  "tags": {
+    "addr:city": "Hồ Chí Minh City",
+    "addr:district": "District 3",
+    "addr:housenumber": "259B",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Ward 6",
+    "amenity": "school",
+    "description": "Trường đào tạo quản trị nhà hàng khách sạn á âu, với các khóa học quản trị quản lý nhà hàng khách sạn ngắn hạn chuẩn quốc tế 5 sao.\nWebsite: https://quantrinhahang.edu.vn/\nĐiện thoại: 18006148",
+    "education": "school",
+    "name": "Trung Tâm Đào Tạo Quản Trị Nhà Hàng Khách Sạn Á Âu"
+  }
+},
+{
+  "type": "node",
+  "id": 6592907188,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "253a",
+    "addr:street": "Hoàng Sa",
+    "name": "Cửa Hàng Sophie Beauty International",
+    "opening_hours": "Mo-Su 09:00-18:00",
+    "shop": "beauty"
+  }
+},
+{
+  "type": "node",
+  "id": 6669294586,
+  "tags": {
+    "addr:housenumber": "278",
+    "addr:street": "Lê Văn Sỹ",
+    "amenity": "restaurant",
+    "name": "Quán Mực 280"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546228,
+  "tags": {
+    "addr:full": "351 Phan Đăng Lưu, phường 1, Phú Nhuận, Hồ Chí Minh, Việt Nam",
+    "addr:housenumber": "351",
+    "addr:street": "Phan Đăng Lưu",
+    "alt_name": "An Phước Phan Đăng Lưu 1",
+    "clothes": "suits",
+    "name": "Cửa Hàn Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "028 62 976 779",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546236,
+  "tags": {
+    "addr:full": "311 Lê Văn Sỹ, phường 13, Quận 3, Hồ Chí Minh, Vietnam",
+    "addr:housenumber": "311",
+    "addr:street": "Lê Văn Sỹ",
+    "alt_name": "An Phước Lê Văn Sỹ",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "028 35 260 410",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546239,
+  "tags": {
+    "addr:full": "30 Phan Đăng Lưu, Bình Thạnh, Hồ Chí Minh, Việt Nam",
+    "addr:housenumber": "30",
+    "addr:street": "Phan Đăng Lưu",
+    "alt_name": "An Phước Phan Đăng Lưu 2",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "028 35 109 495",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546272,
+  "tags": {
+    "addr:full": "169-171 Phan Đình Phùng, Hồ Chí Minh, quận Phú Nhuận, Việt Nam",
+    "addr:housenumber": "169-171",
+    "addr:street": "Phan Đình Phùng",
+    "alt_name": "An Phước Phan Đình Phùng",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "028 39 904 281",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546290,
+  "tags": {
+    "addr:full": "123 Nguyễn Văn Trỗi, phường 12, Hồ Chí Minh, quận Phú Nhuận, Việt Nam",
+    "addr:housenumber": "123",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "alt_name": "An Phước Nguyễn Văn Trỗi",
+    "check_date": "2025-08-26",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "phone": "028 3999 1879",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6815557085,
+  "tags": {
+    "addr:housenumber": "230",
+    "addr:street": "Phan Xích Long",
+    "amenity": "karaoke_box",
+    "name": "Karaoke Nnice Phan Xích Long",
+    "name:en": "Karaoke Nnice",
+    "opening_hours": "Mo-Su 08:00-00:00",
+    "phone": "02835170046",
+    "website": "http://Nnice.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 6959713285,
+  "tags": {
+    "addr:housenumber": "88",
+    "addr:street": "Nguyễn Phi Khanh",
+    "amenity": "cafe",
+    "name": "Cà Phê Và Kem Nếp Cẩm"
+  }
+},
+{
+  "type": "node",
+  "id": 7017406575,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "34",
+    "addr:street": "Phan Tây Hồ",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "place_of_worship",
+    "name": "Chùa Viên Giác",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "node",
+  "id": 7017412700,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "40/17",
+    "addr:street": "Phan Tây Hồ",
+    "addr:subdistrict": "Phường 7"
+  }
+},
+{
+  "type": "node",
+  "id": 7017469629,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "206",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "name": "Tiệm Bánh Mì Givral",
+    "shop": "bakery"
+  }
+},
+{
+  "type": "node",
+  "id": 7017476727,
+  "tags": {
+    "addr:city": "Phú Nhuận",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "274-276",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "alt_name": "Church's Chicken",
+    "amenity": "fast_food",
+    "brand": "Texas Chicken",
+    "brand:wikidata": "Q1089932",
+    "cuisine": "chicken",
+    "name": "Texas Chicken",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7017476728,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "242 - 244",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Nhà Hàng Tokyo Deli"
+  }
+},
+{
+  "type": "node",
+  "id": 7017490803,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "45",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "name": "Cửa Hàng Bách Hóa Thuận",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 7017490804,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "430",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "air_conditioning": "no",
+    "amenity": "restaurant",
+    "changing_table": "no",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Quán Cơm Chay 27",
+    "opening_hours": "Mo-Su 07:00-20:00",
+    "outdoor_seating": "no",
+    "payment:credit_cards": "no",
+    "payment:debit_cards": "no",
+    "phone": "+84909533083",
+    "smoking": "no",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7017490805,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "432",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "amenity": "restaurant",
+    "cuisine": "chicken;fried_chicken",
+    "name": "Otoke Chicken"
+  }
+},
+{
+  "type": "node",
+  "id": 7017490806,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "438A",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Cà Phê Sorriso"
+  }
+},
+{
+  "type": "node",
+  "id": 7017552332,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "139D",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "amenity": "bank",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "PGD Phú Thạnh - CN Phú Nhuận - Ngân hàng TMCP Đầu tư & Phát triển Việt Nam (BIDV)"
+  }
+},
+{
+  "type": "node",
+  "id": 7017552333,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "141B",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "name": "Toà Nhà MPC",
+    "office": "company"
+  }
+},
+{
+  "type": "node",
+  "id": 7017552334,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "141",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "amenity": "cafe",
+    "brand": "The Coffee House",
+    "brand:wikidata": "Q60775742",
+    "cuisine": "coffee_shop;vietnamese",
+    "name": "The Coffee House",
+    "name:en": "The Coffee House",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7017564495,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "456",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "amenity": "bank",
+    "brand": "Eximbank",
+    "brand:wikidata": "Q10800271",
+    "name": "Eximbank"
+  }
+},
+{
+  "type": "node",
+  "id": 7017564497,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "462",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "phường 2",
+    "name": "Công Ty LogiGear VN",
+    "office": "company"
+  }
+},
+{
+  "type": "node",
+  "id": 7017564499,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "143C",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "name": "Công Ty TNHH Xuân Cầu - Đại lý Piaggio",
+    "shop": "motorcycle_repair"
+  }
+},
+{
+  "type": "node",
+  "id": 7017564501,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "Hẻm 139",
+    "addr:street": "Phan đăng lưu",
+    "addr:subdistrict": "phường 2"
+  }
+},
+{
+  "type": "node",
+  "id": 7017574256,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "121",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "landuse": "residential",
+    "name": "Chung Cư Thành Đạt",
+    "operator": "Chung Cư Thành Đạt",
+    "residential": "apartments"
+  }
+},
+{
+  "type": "node",
+  "id": 7017574257,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "98",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "amenity": "childcare",
+    "name": "Trường Mầm Non Hương Sen"
+  }
+},
+{
+  "type": "node",
+  "id": 7017574260,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "125",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 7",
+    "brand": "Honda",
+    "brand:wikidata": "Q9584",
+    "name": "Cửa Hàng Xe Máy Head Hào Quang",
+    "operator": "Cửa Hàng Xe Máy Honda Ủy Nhiệm - Head Hào Quang",
+    "shop": "motorcycle"
+  }
+},
+{
+  "type": "node",
+  "id": 7017574261,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "11A",
+    "addr:street": "Ký Con",
+    "addr:subdistrict": "Phường 7",
+    "name": "Công Ty CP KT Sinh Học Nông Nghiệp Sài Gòn",
+    "office": "company"
+  }
+},
+{
+  "type": "node",
+  "id": 7017574262,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "115/26",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 7",
+    "name": "Công Ty TNHH Thương Mại Kỹ Thuật Thuận Phát",
+    "office": "company"
+  }
+},
+{
+  "type": "node",
+  "id": 7017596604,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "139D",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "amenity": "bank",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam"
+  }
+},
+{
+  "type": "node",
+  "id": 7017596605,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "139",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "name": "Công Ty TNHH Nệm Vạn Thành",
+    "operator": "SHOWROOM Công Ty TNHH Nệm Vạn Thành",
+    "shop": "bed"
+  }
+},
+{
+  "type": "node",
+  "id": 7017596607,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "137",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "amenity": "restaurant",
+    "name": "Nhà Hàng ZooZoo Deluxy"
+  }
+},
+{
+  "type": "node",
+  "id": 7017596608,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "123",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "brand": "Sunglass Hut",
+    "brand:wikidata": "Q136311",
+    "brand:wikipedia": "en:Sunglass Hut",
+    "name": "Sunglass Hut",
+    "operator": "Cửa Hàng Mắt Kính Manchester",
+    "shop": "optician"
+  }
+},
+{
+  "type": "node",
+  "id": 7018017797,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "94-96",
+    "addr:street": "Huỳnh Văn Bánh",
+    "addr:subdistrict": "Phường 15",
+    "brand": "Harley-Davidson",
+    "brand:wikidata": "Q192814",
+    "brand:wikipedia": "en:Harley-Davidson",
+    "name": "Cửa Hàng Xe Máy Central Saigon Harley-Davidson",
+    "shop": "motorcycle"
+  }
+},
+{
+  "type": "node",
+  "id": 7018424191,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "school",
+    "name": "Trường Trung học cơ sở Châu Văn Liêm",
+    "operator": "Châu Văn Liêm Secondary School"
+  }
+},
+{
+  "type": "node",
+  "id": 7024847528,
+  "tags": {
+    "addr:district": "3",
+    "addr:housenumber": "19-19A",
+    "addr:street": "Trần Quang Diệu",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Nha Khoa Vạn Hạnh"
+  }
+},
+{
+  "type": "node",
+  "id": 7048855585,
+  "tags": {
+    "addr:housenumber": "237-239",
+    "addr:postcode": "700000",
+    "addr:street": "Phan Đăng Lưu",
+    "email": "dntnphatthanhhung@gmail.com",
+    "internet_access": "wlan",
+    "name": "Xe Máy Phát Thành Hưng",
+    "name:en": "Phat Thanh Hung motobike shop",
+    "opening_hours": "24/7",
+    "phone": "0932056788",
+    "shop": "motorcycle",
+    "website": "https://phatthanhhung.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 7077962271,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "386-388",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;coffee;tea;teahouse",
+    "internet_access": "yes",
+    "name": "Cà Phê - Trà Early Morning",
+    "website": "https://earlymorning.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 7078025375,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "386-388",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 2",
+    "brand": "BambooBebe",
+    "description": "Bamboo Bebe mang đến các sản phẩm đa dạng như: khăn sữa, khăn đa năng, khăn tắm, khăn mặt,thảm lót chống thấm, gối chống bẹp đầu, quần áo, các sản phẩm hỗ trợ cho mẹ và bé, tã vải, nước giặt…",
+    "email": "store@gureumi.vn",
+    "name": "BambooBebe Việt Nam",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "operator": "Công ty TNHH Gureumi",
+    "phone": "090 951 11 94",
+    "shop": "supermarket",
+    "website": "www.bamboobebevietnam.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7078048746,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "386-388",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 2",
+    "email": "store@gureumi.vn",
+    "name": "Công ty TNHH Gureumi",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "operator": "Công ty TNHH Gureumi",
+    "shop": "supermarket",
+    "website": "https://gureumi.store/"
+  }
+},
+{
+  "type": "node",
+  "id": 7094702392,
+  "tags": {
+    "addr:housenumber": "280",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "name": "Khách sạn La Vela Sài Gòn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7095322585,
+  "tags": {
+    "addr:housenumber": "150",
+    "addr:street": "Võ Thị Sáu",
+    "amenity": "cafe",
+    "brand": "Royaltea",
+    "brand:en": "Royaltea",
+    "brand:wikidata": "Q112778483",
+    "brand:zh": "皇茶",
+    "cuisine": "bubble_tea",
+    "name": "Royaltea",
+    "name:en": "Royaltea",
+    "name:zh": "皇茶",
+    "phone": "0903904166",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7125483786,
+  "tags": {
+    "addr:housenumber": "12/7 - 12/9",
+    "addr:street": "Hẻm 12 Cù Lao",
+    "internet_access": "wlan",
+    "name": "Khách Sạn Linh Đan",
+    "name:en": "Linh Dan Hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "website": "http://hotellinhdan.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7279413385,
+  "tags": {
+    "addr:housenumber": "66/2",
+    "addr:street": "Phạm Ngọc Thạch",
+    "email": "ykcwellnessspa@gmail.com",
+    "name": "Cửa Hàng Chăm Sóc Sắc Đẹp YKC Wellness Spa & Hair Studio",
+    "opening_hours": "Mo-Su 09:00-23:30",
+    "phone": "02838201233",
+    "shop": "massage",
+    "website": "http://www.ykcwellness.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 7417168288,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "1",
+    "addr:housenumber": "274",
+    "addr:street": "Đường Hai Bà Trưng",
+    "addr:subdistrict": "Tân Định",
+    "amenity": "cafe",
+    "brand": "Cộng Cà Phê",
+    "brand:wikidata": "Q63864181",
+    "cuisine": "coffee_shop;vietnamese",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Cộng Cà Phê",
+    "name:vi": "Cộng Cà Phê",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "smoking": "outside",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 7461343334,
+  "tags": {
+    "addr:city": "Hồ Chí Minh City",
+    "addr:district": "3",
+    "addr:housenumber": "62A",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phạm Ngọc Thạch",
+    "addr:subdistrict": "6",
+    "email": "info@intekco.com",
+    "name": "Công Ty TNHH TM Công Nghệ Intekco",
+    "office": "it",
+    "opening_hours": "Mo-Sa 09:00-18:00",
+    "phone": "+84938532529",
+    "ref:vatin": "0314478083",
+    "start_date": "2017-06-23",
+    "website": "www.intekco.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7597735069,
+  "tags": {
+    "addr:city": "Sài Gòn",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "126",
+    "addr:postcode": "70000",
+    "addr:street": "Phan Đình Phùng",
+    "addr:subdistrict": "Phường 2",
+    "name": "Beauty Salon Ngàn Tóc Đẹp",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "payment:cash": "yes",
+    "shop": "hairdresser"
+  }
+},
+{
+  "type": "node",
+  "id": 7812770850,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "1",
+    "addr:housenumber": "222",
+    "addr:postcode": "710880",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trần Quang Khải",
+    "addr:subdistrict": "Tân Định",
+    "description": "Thời trang nữ: Đầm | Áo  | Váy  | Quần | Liền quần",
+    "image": "https://www.nhamaylien.com/Data/Sites/1/News/1/bang-hieu-nha-may-lien.jpg",
+    "name": "Nhà May Liên",
+    "note": "Shop thời trang nữ",
+    "shop": "tailor",
+    "start_date": "2018-03-23"
+  }
+},
+{
+  "type": "node",
+  "id": 7905887894,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Q. Bình Thạnh",
+    "addr:housenumber": "24C",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 6"
+  }
+},
+{
+  "type": "node",
+  "id": 7912176633,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "89",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Lan",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "shower",
+    "name": "Gội Đầu Thảo Dược Cỏ May",
+    "opening_hours": "24/7",
+    "supervised": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7923011979,
+  "tags": {
+    "addr:city": "TP Hồ Chí Minh",
+    "addr:district": "quận 3",
+    "addr:housenumber": "315",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "phường 14"
+  }
+},
+{
+  "type": "node",
+  "id": 7934283112,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "349",
+    "addr:street": "Phan Đình Phùng",
+    "addr:subdistrict": "Phường 15"
+  }
+},
+{
+  "type": "node",
+  "id": 8032694065,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "258",
+    "addr:postcode": "7000",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "amenity": "bank",
+    "name": "Hangout Timo HCM",
+    "opening_hours": "Mo-Sat 08:00-20:00",
+    "operator": "Ngân Hàng Số Timo (Timo Bank Digital)"
+  }
+},
+{
+  "type": "node",
+  "id": 8032750066,
+  "tags": {
+    "addr:housenumber": "195",
+    "addr:street": "Nam Kỳ Khởi Nghĩa"
+  }
+},
+{
+  "type": "node",
+  "id": 8032750073,
+  "tags": {
+    "addr:housenumber": "235",
+    "addr:street": "Nam Kỳ Khởi Nghĩa"
+  }
+},
+{
+  "type": "node",
+  "id": 8725996071,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "65",
+    "addr:postcode": "72210",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "cafe",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "DO HOI",
+    "name": "Cà Phê Đô Hội",
+    "opening_hours": "24/7",
+    "phone": "+842835352994",
+    "website": "https://www.facebook.com/caphedohoi"
+  }
+},
+{
+  "type": "node",
+  "id": 8900220593,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Bình Thạnh",
+    "addr:housenumber": "60/18",
+    "addr:postcode": "70000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hẻm 60 Vạn Kiếp",
+    "addr:subdistrict": "Phường 3",
+    "currency:VND": "yes",
+    "description": "Minhshop.vn là hệ thống cửa hàng phân phối chuyên phân phối đồ thể thao, đồng hồ, nước hoa chính hãng, chính ngạch, xách tay từ US, UK, Korea, Japan. Phone: 0346.75.75.75",
+    "email": "support@minhshop.vn",
+    "image": "https://lh5.googleusercontent.com/p/AF1QipMvGKkVMuvu_11JREDCm-puN70zAaaz2HUnfqlL=w408-h306-k-no",
+    "name": "Cửa Hàng Giày Dép MinhShop",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "operator": "Minhshop",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "0346757575",
+    "shop": "shoes",
+    "website": "https://minhshop.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 9584824721,
+  "tags": {
+    "addr:housenumber": "251",
+    "addr:street": "Hai Bà Trưng"
+  }
+},
+{
+  "type": "node",
+  "id": 9584833482,
+  "tags": {
+    "addr:housenumber": "62",
+    "addr:street": "Trần Quang Khải",
+    "amenity": "cinema",
+    "brand": "rạp chiếu phim CGV",
+    "brand:en": "CGV Cinema",
+    "brand:vi": "rạp chiếu phim CGV",
+    "brand:wikidata": "Q5012261",
+    "check_date": "2026-03-13",
+    "internet_access": "wlan",
+    "level": "2",
+    "name": "Rạp Phim Beta Cinemas - Trần Quang Khải",
+    "name:en": "Beta Cinemas",
+    "name:vi": "Rạp Phim Beta Cinemas - Trần Quang Khải",
+    "official_name": "CGV Cinemas Vietnam",
+    "website": "https://www.betacinemas.vn/beta-imc-tran-quang-khai.htm"
+  }
+},
+{
+  "type": "node",
+  "id": 9587309948,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Phan Đăng Lưu",
+    "name": "45 Phan Đăng Lưu"
+  }
+},
+{
+  "type": "node",
+  "id": 9671017825,
+  "tags": {
+    "addr:housenumber": "193A/6",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "amenity": "restaurant",
+    "name:en": "Naked sushi bar"
+  }
+},
+{
+  "type": "node",
+  "id": 9673961262,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Bình Thạnh",
+    "addr:housenumber": "72",
+    "addr:postcode": "72317",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trần Kế Xương",
+    "addr:subdistrict": "Phường 3",
+    "name": "Công ty TNHH Thích Ẩm Thực",
+    "office": "company",
+    "opening_hours": "Mo-Fr 09:00-17:00",
+    "phone": "+84942619333",
+    "website": "https://www.thichcay.com"
+  }
+},
+{
+  "type": "node",
+  "id": 9734891598,
+  "tags": {
+    "addr:housenumber": "262",
+    "addr:street": "Đường Nam Kỳ Khởi Nghĩa",
+    "amenity": "college",
+    "name": "Trường Cao đẳng Nova"
+  }
+},
+{
+  "type": "node",
+  "id": 9774273819,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "19/2B",
+    "addr:postcode": "100081",
+    "addr:street": "Đường Thạch Thị Thanh",
+    "addr:subdistrict": "Tân Định"
+  }
+},
+{
+  "type": "node",
+  "id": 9832482117,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Đường Ðặng Tất",
+    "leisure": "sauna",
+    "name": "Thé SixtyNine Zone",
+    "name:en": "the 69 sauna zone",
+    "website": "http://69sauna.zone"
+  }
+},
+{
+  "type": "node",
+  "id": 9906699018,
+  "tags": {
+    "addr:housenumber": "25A",
+    "addr:postcode": "700000",
+    "addr:street": "Nguyễn Thị Huỳnh",
+    "email": "hello@psa.com.vn",
+    "name": "PSA Solutions",
+    "office": "company",
+    "website": "https://www.psa.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 10042404321,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "6",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Nguyễn Văn Nguyễn",
+    "addr:subdistrict": "Tân Định",
+    "email": "info@hangdiathoidai.com",
+    "name": "Hãng Đĩa Thời Đại",
+    "name:en": "Times Records",
+    "opening_hours": "Tu-Su 10:00-20:00",
+    "phone": "+84 983 567 633",
+    "shop": "music",
+    "source": "local knowledge",
+    "website": "https://www.hangdiathoidai.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10115640432,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "300",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "name": "Khách sạn Cali",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10115640433,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "302",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "name": "CÔNG TY GIÁM ĐỊNH PNJ LAB",
+    "opening_hours": "Mo-Fr 08:00-17:00",
+    "phone": "028 3844 6199",
+    "shop": "jewelry"
+  }
+},
+{
+  "type": "node",
+  "id": 10137213715,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "221/9",
+    "addr:postcode": "70000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Lê Văn Sỹ",
+    "addr:subdistrict": "Phường 14",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Missing Garden",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "outdoor_seating": "yes",
+    "phone": "+84932909982",
+    "power_supply": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "toilets:unisex": "yes",
+    "toilets:wheelchair": "no",
+    "website": "https://www.facebook.com/missing.garden/about",
+    "wheelchair": "limited",
+    "wheelchair:description:en": "Gravel access path. The second floor and toilets are inaccessible."
+  }
+},
+{
+  "type": "node",
+  "id": 10147782182,
+  "tags": {
+    "addr:city": "Hồ Chí Minh City",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "191",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Ðiện Biên Phủ",
+    "addr:subdistrict": "Phường 6",
+    "email": "topzonehcm@gmail.com",
+    "name": "TOPZONE 191 ĐIỆN BIÊN PHỦ",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "operator": "Công Ty Cổ Phần Thế Giới Di Động",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "1900969642",
+    "shop": "mobile_phone",
+    "website": "https://zalo.me/2449957816551686131"
+  }
+},
+{
+  "type": "node",
+  "id": 10203358050,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "15",
+    "addr:postcode": "70000",
+    "addr:street": "Đường Ðinh Công Tráng",
+    "addr:subdistrict": "Tân Định",
+    "name": "The Suits House",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 10227814809,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "242-244",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Hai Bà Trưng",
+    "addr:subdistrict": "Tân Định",
+    "beauty": "skin_care",
+    "name": "Phòng khám Genki Dermatology",
+    "opening_hours": "Mo-Su 08:00-20:00",
+    "operator": "Phòng khám Genki Dermatology",
+    "phone": "028 54 484 188",
+    "shop": "beauty"
+  }
+},
+{
+  "type": "node",
+  "id": 10279231081,
+  "tags": {
+    "addr:city": "Phường 6",
+    "addr:district": "3",
+    "addr:housenumber": "61",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Võ Thị Sáu",
+    "addr:subdistrict": "Ward 6",
+    "name": "Vina Talents - Khai Sáng Tài Năng Việt",
+    "office": "educational_institution",
+    "opening_hours": "24/7",
+    "phone": "84 34 306 0809",
+    "website": "https://vinatalents.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10284359935,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "District 3",
+    "addr:housenumber": "61",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Võ Thị Sáu",
+    "addr:subdistrict": "Ward 6",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "diet:vegetarian": "yes",
+    "name": "Vina Talents - Khai Sáng Tài Năng Việt",
+    "opening_hours": "24/7",
+    "phone": "+84 343 060 809",
+    "website": "https://vinatalents.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10292637510,
+  "tags": {
+    "addr:housenumber": "53",
+    "addr:street": "Hoa Sứ",
+    "contact:facebook": "https://www.facebook.com/ChunLiTattooArt/?epa=SEARCH_BOX",
+    "name": "ChunLi Tattoo",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "phone": "+84 093 3334220",
+    "shop": "tattoo"
+  }
+},
+{
+  "type": "node",
+  "id": 10292645109,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Hoa Huệ",
+    "contact:facebook": "thehoodbarbershop.vn",
+    "name": "TheHood Barbershop",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "phone": "+84 093 7860851",
+    "shop": "hairdresser"
+  }
+},
+{
+  "type": "node",
+  "id": 10609410705,
+  "tags": {
+    "addr:housenumber": "27/1",
+    "addr:street": "Đường Nguyễn Văn Nguyễn",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "changing_table": "no",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "name:en": "Heal and Celeb",
+    "opening_hours": "Mo-Su 11:00-21:00",
+    "outdoor_seating": "no",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10610721206,
+  "tags": {
+    "addr:housenumber": "466bis/1",
+    "addr:street": "Đường Hai Bà Trưng",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "diet:vegan": "yes",
+    "name:en": "An Vegan",
+    "opening_hours": "Mo-Sa 08:00-20:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10950814605,
+  "tags": {
+    "addr:housenumber": "87",
+    "addr:street": "Đường Võ Thị Sáu",
+    "amenity": "bar",
+    "name:en": "Lagom Cafe - Coffee & Belgian Beer Lounge",
+    "opening_hours": "Mo-Su 10:00-11:00",
+    "phone": "0919000915"
+  }
+},
+{
+  "type": "node",
+  "id": 11040495502,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "371/4",
+    "addr:postcode": "70000",
+    "addr:street": "Hai Bà Trưng",
+    "name": "Annam Gallery",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "tourism": "gallery"
+  }
+},
+{
+  "type": "node",
+  "id": 11184810285,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "175",
+    "addr:street": "Nguyễn Trọng Tuyển",
+    "addr:ward": "Phường Phú Nhuận"
+  }
+},
+{
+  "type": "node",
+  "id": 11389260043,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "53/9",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Nhiêu Tứ",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "cafe",
+    "cuisine": "cafe",
+    "internet_access": "wlan",
+    "internet_access:fee": "yes",
+    "name": "Nus Coffee & Tea",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "phone": "0325021095",
+    "website": "facebook.com/nus.coffeeandtea/"
+  }
+},
+{
+  "type": "node",
+  "id": 11527037759,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "117",
+    "addr:postcode": "70000",
+    "addr:street": "Đường Lý Chính Thắng",
+    "name": "Đậu Visa - Tư vấn visa Mỹ Úc Canada",
+    "opening_hours": "Mo-Fr 08:00-17:00",
+    "operator": "company",
+    "payment:cash": "yes",
+    "phone": "+84772567772",
+    "shop": "travel_agency",
+    "website": "https://dauvisa.com"
+  }
+},
+{
+  "type": "node",
+  "id": 11774694347,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "227/37",
+    "addr:street": "Nguyễn Trọng Tuyển",
+    "addr:ward": "Phường Phú Nhuận"
+  }
+},
+{
+  "type": "node",
+  "id": 11836366614,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "288",
+    "addr:street": "Pasteur",
+    "name": "288 Pasteur,"
+  }
+},
+{
+  "type": "node",
+  "id": 11917289769,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Hẻm 58 Đường Phạm Ngọc Thạch",
+    "contact:facebook": "KosalaVN",
+    "name": "Kosala – Chón Bình Yên",
+    "name:en": "Kosala – Peaceful Place",
+    "opening_hours": "Mo-Su 08:00-17:30",
+    "phone": "0988818289",
+    "shop": "tea",
+    "website": "http://kosalavn.com"
+  }
+},
+{
+  "type": "node",
+  "id": 11932115964,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "63",
+    "addr:street": "Phạm Ngọc Thạch",
+    "addr:ward": "Phường Xuân Hòa"
+  }
+},
+{
+  "type": "node",
+  "id": 11939020294,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "72",
+    "addr:street": "Phạm Ngọc Thạch",
+    "addr:ward": "Phường Xuân Hòa"
+  }
+},
+{
+  "type": "node",
+  "id": 11951453526,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "65",
+    "addr:street": "Phạm Ngọc Thạch",
+    "addr:ward": "Phường Xuân Hòa"
+  }
+},
+{
+  "type": "node",
+  "id": 12416637037,
+  "tags": {
+    "addr:city": "Hồ Chí Minh",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "28",
+    "addr:street": "Trần Cao Vân",
+    "addr:subdistrict": "Phường 11",
+    "amenity": "restaurant",
+    "mobile": "+84906825090",
+    "name": "Pergola Garden",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "phone": "+842838442526",
+    "website": "https://pergola.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 12495530443,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "103",
+    "addr:street": "Hẻm 121 Cù Lao",
+    "addr:subdistrict": "Phường 2",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Phong Tra",
+    "outdoor_seating": "no",
+    "power_supply": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "toilets:unisex": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12495803361,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Hoa Sứ",
+    "amenity": "cafe",
+    "check_date": "2025-01-12",
+    "cuisine": "dessert",
+    "name": "Tàu Hủ Cóc",
+    "opening_hours": "Mo-Fr 11:00-22:30; Sa-Su 14:30-22:30",
+    "outdoor_seating": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12497402096,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "22",
+    "addr:street": "Hoa Cau",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "The22 Coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 12497402097,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "25",
+    "addr:street": "Hoa Huệ",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;soup",
+    "name": "Bún Cá Châu Đốc Bà Bảy"
+  }
+},
+{
+  "type": "node",
+  "id": 12497421028,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "127",
+    "addr:street": "Cù Lao",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;brunch",
+    "name": "Bánh Cuốn Cao Bằng"
+  }
+},
+{
+  "type": "node",
+  "id": 12497421029,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "384",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;curry",
+    "name": "Cà Ri Gà Ngọc Hân"
+  }
+},
+{
+  "type": "node",
+  "id": 12506370247,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "1",
+    "addr:street": "Phùng Văn Cung",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;noodle",
+    "name": "Bánh Canh Cá Lóc Huế",
+    "opening_hours": "Mo-Su 10:30-16:00+ open \"Bán hết là đóng cửa; đóng cửa vào mùng 1, 15 âm lịch.\"",
+    "opening_hours:en": "Mo-Su 10:30-16:00+ open \"Closes when sold out. Closed on the 1st and 15th day of the lunar month.\""
+  }
+},
+{
+  "type": "node",
+  "id": 12506848566,
+  "tags": {
+    "addr:housenumber": "21G",
+    "addr:street": "Hẻm 21 Nguyễn Văn Trỗi",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-10-31",
+    "check_date:diet:gluten_free": "2025-10-31",
+    "check_date:diet:halal": "2025-10-31",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegan": "only",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Nhà Hàng Chay Bà Xã",
+    "opening_hours": "Mo-Su 09:00-22:00",
+    "outdoor_seating": "no",
+    "phone": "+84899183188",
+    "smoking": "no",
+    "website": "https://chaybaxa.com",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12508590902,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "260",
+    "addr:street": "Vạn Kiếp",
+    "addr:subdistrict": "Phường 3",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;seafood",
+    "name": "Ốc Zuka",
+    "opening_hours": "Mo-Su 16:00+"
+  }
+},
+{
+  "type": "node",
+  "id": 12508590903,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "101",
+    "addr:street": "Vạn Kiếp",
+    "addr:subdistrict": "Phường 3",
+    "amenity": "fast_food",
+    "cuisine": "vietnamese",
+    "name": "Xôi Ngọc",
+    "opening_hours": "Mo-Su 16:00+"
+  }
+},
+{
+  "type": "node",
+  "id": 12511445225,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Bình Thạnh",
+    "addr:housenumber": "109",
+    "addr:street": "Trần Nguyên Đán",
+    "addr:subdistrict": "Phường 3",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Cơm Tấm Hao"
+  }
+},
+{
+  "type": "node",
+  "id": 12513700782,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "112",
+    "addr:street": "Hẻm 270 Phan Đình Phùng",
+    "addr:ward": "Phường Cầu Kiệu",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Cơm Tấm 270"
+  }
+},
+{
+  "type": "node",
+  "id": 12513714752,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "7",
+    "addr:street": "Hẻm 393 Hai Bà Trưng",
+    "addr:subdistrict": "Phường 8",
+    "amenity": "bar",
+    "brewery": "deme_brewing",
+    "contact:facebook": "https://www.facebook.com/deme.brewing",
+    "name": "Deme Brewing",
+    "opening_hours": "Mo-Su 17:00-00:00"
+  }
+},
+{
+  "type": "node",
+  "id": 12559624394,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "37",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Sứ",
+    "addr:subdistrict": "Phường 7",
+    "cuisine": "cake;sandwich",
+    "name": "Tiệm Bánh Dinh Dưỡng BiSu Bread",
+    "opening_hours": "08:00-22:00",
+    "phone": "+84346993986",
+    "shop": "bakery",
+    "website": "http://facebook.com/biíubreadhcm"
+  }
+},
+{
+  "type": "node",
+  "id": 12570727098,
+  "tags": {
+    "addr:housenumber": "63A",
+    "addr:street": "Đinh Công Tráng",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-02-09",
+    "cuisine": "vietnamese;international",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Nấm",
+    "name:vi": "Nấm",
+    "outdoor_seating": "patio",
+    "phone": "+84911025282",
+    "smoking": "no",
+    "website": "https://www.namvegetarian.com",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 12632989030,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Đặng Dung",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-03-03",
+    "cuisine": "vietnamese",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "SoHa Nhà Chay",
+    "outdoor_seating": "no",
+    "phone": "+84981139039",
+    "smoking": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12662614723,
+  "tags": {
+    "addr:housenumber": "194A",
+    "addr:street": "Phan Xích Long",
+    "amenity": "fast_food",
+    "description": "Cơm gà Tam Kỳ",
+    "name": "Cơm gà Tam Kỳ Hồng Nga",
+    "phone": "0356602989"
+  }
+},
+{
+  "type": "node",
+  "id": 12696377133,
+  "tags": {
+    "addr:housenumber": "92,94",
+    "addr:street": "Hoa Cúc",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-03-24",
+    "cuisine": "vietnamese;international",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Heli Vegetarian Bistro",
+    "outdoor_seating": "roof",
+    "phone": "+84825252508",
+    "smoking": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12715785160,
+  "tags": {
+    "addr:district": "Quận 3",
+    "addr:housenumber": "19",
+    "addr:street": "Hẻm 290 Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "Phường 8",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-03-31",
+    "contact:facebook": "huequangchay",
+    "cuisine": "vietnamese",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "Huệ Quang Chay",
+    "phone": "+84 93 132 72 89",
+    "smoking": "no",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 12722424805,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:housenumber": "62B",
+    "addr:street": "Đường Phạm Ngọc Thạch",
+    "addr:ward": "Phường Xuân Hòa",
+    "amenity": "fast_food",
+    "contact:instagram": "thedonutclub.sg",
+    "cuisine": "donut",
+    "name": "The Donut Club",
+    "opening_hours": "Mo-Sa 11:30+",
+    "street_vendor": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12799683288,
+  "tags": {
+    "addr:housenumber": "266",
+    "addr:street": "Hai Bà Trưng"
+  }
+},
+{
+  "type": "node",
+  "id": 12799683289,
+  "tags": {
+    "addr:housenumber": "299",
+    "addr:street": "Hai Bà Trưng"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703803,
+  "tags": {
+    "addr:housenumber": "276",
+    "addr:street": "Hai Bà Trưng"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703805,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Lý Chính Thắng"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703807,
+  "tags": {
+    "addr:housenumber": "45B",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703809,
+  "tags": {
+    "addr:housenumber": "475/32",
+    "addr:street": "Hẻm 475 Hai Bà Trưng",
+    "air_conditioning": "no",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Sa Đéc Quán",
+    "opening_hours": "Mo-Su 06:00-14:00,16:00-21:00",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703811,
+  "tags": {
+    "addr:housenumber": "280",
+    "addr:street": "Hai Bà Trưng"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703818,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703835,
+  "tags": {
+    "addr:housenumber": "170D",
+    "addr:street": "Võ Thị Sáu"
+  }
+},
+{
+  "type": "node",
+  "id": 12799703838,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 12860099563,
+  "tags": {
+    "addr:district": "Quận 3",
+    "addr:housenumber": "290/20",
+    "addr:street": "Hẻm 290 Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "Phường 8",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "pasta;pizza;italian",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "level": "1",
+    "name": "Tomato Kitchen",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "outdoor_seating": "no",
+    "phone": "+84 793 732 939"
+  }
+},
+{
+  "type": "node",
+  "id": 12860099568,
+  "tags": {
+    "addr:housenumber": "290/3",
+    "addr:street": "Hẻm 290 Nam Kỳ Khởi Nghĩa",
+    "amenity": "ice_cream",
+    "name": "Kem Bố Già"
+  }
+},
+{
+  "type": "node",
+  "id": 12860099575,
+  "tags": {
+    "addr:housenumber": "290/15A",
+    "addr:street": "Hẻm 290 Nam Kỳ Khởi Nghĩa",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Cơm Niêu Đẩu"
+  }
+},
+{
+  "type": "node",
+  "id": 12906297420,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "345",
+    "addr:street": "Hoàng Sa",
+    "addr:subdistrict": "Tân Định"
+  }
+},
+{
+  "type": "node",
+  "id": 12913990224,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "212/251",
+    "addr:street": "Nguyễn Văn Nguyễn",
+    "addr:subdistrict": "Tân Định"
+  }
+},
+{
+  "type": "node",
+  "id": 12914072272,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "347",
+    "addr:street": "Hoàng Sa",
+    "addr:subdistrict": "Tân Định",
+    "amenity": "cafe",
+    "name": "An Coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 12965761701,
+  "tags": {
+    "addr:housenumber": "290",
+    "addr:postcode": "72200",
+    "addr:street": "Trường Sa",
+    "contact:facebook": "vadagym.fitness",
+    "contact:instagram": "vadagym.phunhuan",
+    "email": "vadagym290@gmail.com",
+    "internet_access": "wlan",
+    "leisure": "fitness_centre",
+    "name": "VADA GYM",
+    "opening_hours": "Mo-Su 05:30-22:00",
+    "phone": "0931871248",
+    "website": "https://vadagym.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12990807328,
+  "tags": {
+    "addr:city": "Thành Phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "186",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "brand": "7-Eleven",
+    "brand:wikidata": "Q259340",
+    "name": "7-Eleven",
+    "operator": "7-Eleven",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 12990807330,
+  "tags": {
+    "addr:city": "Thành Phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "39",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 2",
+    "name": "Khách Sạn Nguyêt Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13015375442,
+  "tags": {
+    "addr:housenumber": "152",
+    "addr:street": "Nguyễn Trọng Tuyển",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "check_date": "2025-07-21",
+    "cuisine": "vietnamese",
+    "diet:gluten_free": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "indoor_seating": "yes",
+    "name": "An Yên",
+    "outdoor_seating": "no",
+    "phone": "+84397646600",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13086173847,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "143/7",
+    "addr:postcode": "700000",
+    "addr:province": "VN",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 2",
+    "description": "Đức Tâm là cơ sở chăm sóc sức khỏe chuyên sâu, tập trung vào phương pháp Khai Thông Kinh Lạc giúp giảm căng thẳng, đau nhức và phục hồi thể trạng",
+    "healthcare": "centre",
+    "name": "Đức Tâm - Chăm Sóc Sức Khỏe & Khai Thông Kinh Lạc",
+    "opening_hours": "Mo-Su 09:00-20:00",
+    "phone": "+84941767227",
+    "website": "https://ductamkhaithongkinhlac.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13133054170,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Hẻm 339 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13133065641,
+  "tags": {
+    "addr:housenumber": "28D1",
+    "addr:street": "Hẻm 339 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13206676701,
+  "tags": {
+    "addr:housenumber": "386/67A1 Đ.",
+    "addr:postcode": "70000",
+    "addr:street": "Hẻm 386 Lê Văn Sỹ",
+    "amenity": "cafe",
+    "contact:instagram": "brokenrice.cafe",
+    "internet_access": "wlan",
+    "name": "Cafe Broken Rice - Coffee Hidden Local",
+    "opening_hours": "Mo-Su 08:15-22:30"
+  }
+},
+{
+  "type": "node",
+  "id": 13245328602,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Đường Trần Nguyên Đán",
+    "amenity": "cafe",
+    "name": "anh cafe",
+    "phone": "0908192372"
+  }
+},
+{
+  "type": "node",
+  "id": 13245988901,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:postcode": "72212",
+    "addr:street": "Hẻm 53 Nhiêu Tứ",
+    "amenity": "cafe",
+    "contact:facebook": "hannahkitchen.vn",
+    "name": "Hannah's Kitchen VN",
+    "opening_hours": "Mo-Su 06:00-23:30"
+  }
+},
+{
+  "type": "node",
+  "id": 13245993101,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:postcode": "72212",
+    "addr:street": "Hẻm 53 Nhiêu Tứ",
+    "amenity": "cafe",
+    "contact:facebook": "hannahkitchen.vn",
+    "name": "Hannah's Kitchen VN",
+    "opening_hours": "Mo-Su 06:00-23:30",
+    "phone": "0834 065 222"
+  }
+},
+{
+  "type": "node",
+  "id": 13276961023,
+  "tags": {
+    "addr:housenumber": "46",
+    "addr:street": "Hoa Hồng",
+    "amenity": "cafe",
+    "brand": "Highlands Coffee",
+    "brand:wikidata": "Q5759361",
+    "cuisine": "coffee_shop;vietnamese",
+    "name": "Highlands Coffee",
+    "name:en": "Highlands Coffee",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13353085401,
+  "tags": {
+    "addr:housenumber": "423/1",
+    "addr:street": "Hai Bà Trưng",
+    "amenity": "cafe",
+    "name": "Gòn Cà phê",
+    "opening_hours": "Mo-Su 07:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 13417492950,
+  "tags": {
+    "addr:housenumber": "160/22",
+    "addr:street": "Hẻm 160 Võ Thị Sáu"
+  }
+},
+{
+  "type": "node",
+  "id": 13434427391,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Hẻm 33 Đường Lý Văn Phức"
+  }
+},
+{
+  "type": "node",
+  "id": 13434436104,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Hẻm 33 Đường Lý Văn Phức"
+  }
+},
+{
+  "type": "node",
+  "id": 13441234013,
+  "tags": {
+    "addr:housenumber": "25E",
+    "addr:street": "Phan Đăng Lưu"
+  }
+},
+{
+  "type": "node",
+  "id": 13451788922,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13475939141,
+  "tags": {
+    "addr:housenumber": "53/6",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475941439,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475949680,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475954053,
+  "tags": {
+    "addr:housenumber": "2C",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475954054,
+  "tags": {
+    "addr:housenumber": "2A",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475956208,
+  "tags": {
+    "addr:housenumber": "2D",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475959150,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475959161,
+  "tags": {
+    "addr:housenumber": "63",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475960799,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475965258,
+  "tags": {
+    "addr:housenumber": "-",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13475970145,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13475970480,
+  "tags": {
+    "addr:housenumber": "77A",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475972983,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475973204,
+  "tags": {
+    "addr:housenumber": "59",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475975402,
+  "tags": {
+    "addr:housenumber": "2B",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475978559,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Trần Quý Khoách",
+    "amenity": "cafe",
+    "name": "Gờ Café"
+  }
+},
+{
+  "type": "node",
+  "id": 13475979853,
+  "tags": {
+    "addr:housenumber": "15A",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475984341,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13475984437,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475984938,
+  "tags": {
+    "addr:housenumber": "77",
+    "addr:street": "Trần Khánh Dư",
+    "name": "Heracare",
+    "shop": "beauty"
+  }
+},
+{
+  "type": "node",
+  "id": 13475985510,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Trần Khánh Dư"
+  }
+},
+{
+  "type": "node",
+  "id": 13475986408,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:street": "Nguyễn Văn Nguyễn"
+  }
+},
+{
+  "type": "node",
+  "id": 13475990090,
+  "tags": {
+    "addr:housenumber": "-",
+    "addr:street": "Trần Nhật Duật",
+    "name": "Hớt tóc Vinh Hoa",
+    "shop": "hairdresser"
+  }
+},
+{
+  "type": "node",
+  "id": 13475990756,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13475995564,
+  "tags": {
+    "addr:housenumber": "9A",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13476007865,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Trần Nhật Duật"
+  }
+},
+{
+  "type": "node",
+  "id": 13476010422,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Đặng Dung"
+  }
+},
+{
+  "type": "node",
+  "id": 13502931199,
+  "tags": {
+    "addr:housenumber": "19A",
+    "addr:street": "Hẻm 19 Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13502996217,
+  "tags": {
+    "addr:housenumber": "19C",
+    "addr:street": "Hẻm 19 Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13503002350,
+  "tags": {
+    "addr:housenumber": "19B",
+    "addr:street": "Hẻm 19 Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512480463,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512483205,
+  "tags": {
+    "addr:housenumber": "2A",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512483206,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512485530,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512489789,
+  "tags": {
+    "addr:housenumber": "70",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512491945,
+  "tags": {
+    "addr:housenumber": "32A",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512493648,
+  "tags": {
+    "addr:housenumber": "128",
+    "addr:street": "Nguyễn Phi Khanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512502331,
+  "tags": {
+    "addr:housenumber": "56",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512502332,
+  "tags": {
+    "addr:housenumber": "72",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512510325,
+  "tags": {
+    "addr:housenumber": "68",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512513660,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512513662,
+  "tags": {
+    "addr:housenumber": "60",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512516531,
+  "tags": {
+    "addr:housenumber": "88",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512517814,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512523671,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512525366,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Huyền Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 13512525526,
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512528492,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512530512,
+  "tags": {
+    "addr:housenumber": "66",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13512532024,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512537232,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Huyền Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 13512537347,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Hẻm 79 Nguyễn Hữu Cầu"
+  }
+},
+{
+  "type": "node",
+  "id": 13512538190,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512538219,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Hẻm 79 Nguyễn Hữu Cầu"
+  }
+},
+{
+  "type": "node",
+  "id": 13512542751,
+  "tags": {
+    "addr:housenumber": "14",
+    "addr:street": "Hẻm 79 Nguyễn Hữu Cầu"
+  }
+},
+{
+  "type": "node",
+  "id": 13512549072,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Ðinh Công Tráng"
+  }
+},
+{
+  "type": "node",
+  "id": 13512552724,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Huyền Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 13512558802,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Huyền Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 13528189519,
+  "tags": {
+    "addr:housenumber": "113A",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528203274,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528244707,
+  "tags": {
+    "addr:housenumber": "94 C1",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528255975,
+  "tags": {
+    "addr:housenumber": "111",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528279847,
+  "tags": {
+    "addr:housenumber": "115",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528279849,
+  "tags": {
+    "addr:housenumber": "94 C2",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528279850,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13528313114,
+  "tags": {
+    "addr:housenumber": "94 B1",
+    "addr:street": "Phùng Văn Cung"
+  }
+},
+{
+  "type": "node",
+  "id": 13543854408,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13543858255,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13543858887,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13543863379,
+  "tags": {
+    "addr:housenumber": "57",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13543865264,
+  "tags": {
+    "addr:housenumber": "59",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 13597320367,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13597342425,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13597348932,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13597358938,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13597361108,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13597361376,
+  "tags": {
+    "addr:housenumber": "53",
+    "addr:street": "Trần Khắc Chân"
+  }
+},
+{
+  "type": "node",
+  "id": 13674757501,
+  "tags": {
+    "addr:housenumber": "72/17",
+    "addr:street": "Trần Quốc Toản",
+    "amenity": "cafe",
+    "check_date": "2026-03-24",
+    "check_date:opening_hours": "2026-03-24",
+    "opening_hours": "Mo-Su 08:30-18:00",
+    "phone": "+84862312815"
+  }
+},
+{
+  "type": "node",
+  "id": 13710033289,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "64",
+    "addr:postcode": "700000",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Trần Quang Khải",
+    "addr:subdistrict": "Phường Tân Định",
+    "name": "Trung Tâm Văn Hóa Đa Năng iMC",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "node",
+  "id": 13710080320,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "104",
+    "addr:postcode": "72200",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 53 Trần Khánh Dư",
+    "addr:subdistrict": "Phường Tân Định",
+    "amenity": "cafe",
+    "internet_access": "yes",
+    "name": "Dế Garden",
+    "outdoor_seating": "yes",
+    "website": "https://www.facebook.com/DeGarden.PlantWorkshop/"
+  }
+},
+{
+  "type": "node",
+  "id": 13713974601,
+  "tags": {
+    "addr:housenumber": "164",
+    "addr:street": "Trần Quang Khải",
+    "check_date": "2026-04-07",
+    "check_date:opening_hours": "2026-04-07",
+    "name": "Viettel Store",
+    "opening_hours": "Mo-Su 08:00-20:00",
+    "shop": "mobile_phone"
+  }
+},
+{
+  "type": "node",
+  "id": 13719964574,
+  "tags": {
+    "addr:housenumber": "27B",
+    "addr:street": "Hoa Sư"
+  }
+},
+{
+  "type": "node",
+  "id": 13719975900,
+  "tags": {
+    "addr:housenumber": "27A",
+    "addr:street": "Hoa Sư"
+  }
+},
+{
+  "type": "node",
+  "id": 13819980487,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "25/1",
+    "addr:street": "Hẻm 25 Nhiêu Tứ"
+  }
+},
+{
+  "type": "node",
+  "id": 13847912901,
+  "tags": {
+    "addr:housenumber": "1L Gia Định",
+    "addr:street": "Phan Xích Long",
+    "amenity": "community_centre",
+    "internet_access": "wlan",
+    "name": "Nhà văn hoá phụ nữ - cơ sở Phan Xích Long",
+    "opening_hours": "Mo-Su 07:30-11:30, 13:00-20:00",
+    "phone": "028 3931 6447",
+    "website": "http://nvphunu.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13847918601,
+  "tags": {
+    "addr:housenumber": "25 Gia Định",
+    "addr:street": "Phan Xích Long",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "internet_access": "wlan",
+    "name": "Đậu Homemade - Bún đậu mắm tôm",
+    "opening_hours": "Mo-Su 10:00-21:30",
+    "phone": "0938 888 284",
+    "self_service": "no",
+    "website": "http://dauhomade.com",
+    "website:menu": "http://dauhomemade.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13847924601,
+  "tags": {
+    "addr:housenumber": "22L Gia Định",
+    "addr:street": "Vũ Huy Tấn",
+    "name": "Circle K",
+    "opening_hours": "24/7",
+    "phone": "028 3517 4984",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 13873212501,
+  "tags": {
+    "addr:housenumber": "06 Cầu Kiệu",
+    "addr:street": "Đường Hoa Cau",
+    "amenity": "cafe",
+    "cuisine": "asian;tea",
+    "internet_access": "wlan",
+    "name": "Chidori - Coffee in Bed®",
+    "opening_hours": "Mo-Su 08:30-23:00",
+    "phone": "0968 636 302",
+    "website": "https://chidori.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864577,
+  "tags": {
+    "addr:housenumber": "349",
+    "addr:street": "Lê Văn Sĩ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864578,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/32A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864579,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/34B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864580,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/34",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864581,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/34A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864582,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/36",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864583,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/38",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864584,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/40",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864585,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/30",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864586,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/30B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864587,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/30C",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864589,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/28B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864590,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/26A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864592,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/24",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864593,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/16A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864594,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/14B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864595,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/16",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864596,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/14",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864597,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/12B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864598,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/12Bis",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864599,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/12",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937864600,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/10",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867001,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/8",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867002,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/8A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867003,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/6",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867004,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/4",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867005,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/2",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ"
+  }
+},
+{
+  "type": "node",
+  "id": 13937867006,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Lê Văn Sĩ"
+  }
+},
+{
+  "type": "node",
+  "id": 13959436701,
+  "tags": {
+    "addr:housenumber": "2/5",
+    "addr:street": "Hẻm 2 Đoàn Thị Điểm",
+    "check_date": "2026-06-23",
+    "check_date:opening_hours": "2026-06-23",
+    "contact:facebook": "thuquanhuongtich",
+    "name": "Thư quán Hương Tích",
+    "opening_hours": "Mo-Sa 08:00-12:00, 13:30-16:30",
+    "phone": "0902854164",
+    "shop": "books",
+    "website": "https://thuquanhuongtich.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13973612681,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Hoa Cau"
+  }
+},
+{
+  "type": "node",
+  "id": 13973623536,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Hoa Cau"
+  }
+},
+{
+  "type": "node",
+  "id": 14053331111,
+  "tags": {
+    "addr:housenumber": "62",
+    "addr:street": "Thạch Thị Thanh"
+  }
+},
+{
+  "type": "node",
+  "id": 14121896001,
+  "tags": {
+    "addr:housenumber": "375",
+    "addr:street": "Hoàng Sa",
+    "amenity": "cafe",
+    "check_date": "2026-08-25",
+    "internet_access": "wlan",
+    "name": "MIA CAFÉ"
+  }
+},
+{
+  "type": "node",
+  "id": 14177255790,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "612",
+    "addr:postcode": "72221",
+    "addr:street": "Trường Sa",
+    "name": "QUỐC KỲ ACADEMY",
+    "operator": "SALON QUỐC KỲ",
+    "phone": "0867892509",
+    "shop": "hairdresser",
+    "website": "https://salonquocky.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 14213373301,
+  "tags": {
+    "addr:housenumber": "5E",
+    "addr:street": "Trần Nhật Duật",
+    "amenity": "cafe",
+    "check_date": "2026-09-24",
+    "check_date:opening_hours": "2026-09-24",
+    "internet_access": "wlan",
+    "name": "80+ Coffee Roastery",
+    "opening_hours": "Mo-Su 07:30-22:30"
+  }
+},
+{
+  "type": "node",
+  "id": 14213373401,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Nguyễn Văn Nguyễn",
+    "amenity": "cafe",
+    "check_date": "2026-09-24",
+    "check_date:opening_hours": "2026-09-24",
+    "internet_access": "wlan",
+    "name": "Saveur Café",
+    "opening_hours": "Mo-Su 07:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 14213803815,
+  "tags": {
+    "addr:housenumber": "4A1",
+    "addr:street": "Hẻm 55 Phan Đăng Lưu"
+  }
+},
+{
+  "type": "node",
+  "id": 14213817119,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Hẻm 55 Phan Đăng Lưu"
+  }
+},
+{
+  "type": "node",
+  "id": 14213817323,
+  "tags": {
+    "addr:housenumber": "4A",
+    "addr:street": "Hẻm 55 Phan Đăng Lưu"
+  }
+},
+{
+  "type": "way",
+  "id": 57889614,
+  "tags": {
+    "addr:city": "Phường 2",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "1",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Phượng",
+    "addr:subdistrict": "Phường 2",
+    "building": "yes",
+    "name": "Trung tâm Thể dục Thể thao Rạch Miễu",
+    "name:en": "Rach Mieu Sports Center"
+  }
+},
+{
+  "type": "way",
+  "id": 60118189,
+  "tags": {
+    "addr:city": "Hồ Chí Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "289",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hai Bà Trưng",
+    "alt_name": "Giáo xứ Tân Địn;nhà thờ màu hồng",
+    "alt_name:en": "The Tan Dinh Church of Sacred Heart;Tân Định Parish Church",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "denomination": "catholic",
+    "name": "Nhà thờ Tân Định",
+    "name:en": "Tân Định Church",
+    "name:es": "Iglesia Tan Dinh o del Sagrado Corazón",
+    "name:zh": "新定天主教堂",
+    "official_name": "Nhà thờ Thánh Tâm Chúa Giêsu, Tân Định",
+    "official_name:en": "Church of the Sacred Heart of Jesus",
+    "religion": "christian",
+    "wikidata": "Q7682043",
+    "wikipedia": "vi:Nhà thờ Tân Định"
+  }
+},
+{
+  "type": "way",
+  "id": 127299421,
+  "tags": {
+    "addr:district": "Bình Thạnh",
+    "addr:housenumber": "6",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoàng Hoa Thám",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "school",
+    "education": "school",
+    "grades": "10-12",
+    "name": "Trường Trung học phổ thông Hoàng Hoa Thám",
+    "website": "https://thpthoanghoatham.hcm.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 130506886,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Phan Đăng Lưu",
+    "leisure": "park",
+    "name": "Công viên Văn hóa Phú Nhuận",
+    "old_name": "Nghĩa trang Hải Nam",
+    "was:landuse": "cemetery"
+  }
+},
+{
+  "type": "way",
+  "id": 193092896,
+  "tags": {
+    "addr:housenumber": "167",
+    "addr:street": "Đường Pasteur",
+    "amenity": "hospital",
+    "barrier": "wall",
+    "check_date": "2025-03-29",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Viện Pasteur Thành phố Hồ Chí Minh"
+  }
+},
+{
+  "type": "way",
+  "id": 207420114,
+  "tags": {
+    "addr:housenumber": "home C 3",
+    "addr:postcode": "848",
+    "addr:street": "Trường Sa",
+    "building": "yes",
+    "building:levels": "20",
+    "name": "Screc Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 207445585,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "91",
+    "addr:street": "Hoàng Văn Thụ",
+    "amenity": "place_of_worship",
+    "name": "Nhà Thờ Phú Nhuận",
+    "name:en": "Phu Nhuan Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 262966602,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "70-72",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "addr:subdistrict": "Phường 8",
+    "amenity": "theatre",
+    "building": "yes",
+    "check_date": "2025-08-26",
+    "name": "Kịch Phú Nhuận",
+    "name:en": "Phu Nhuan Theatre"
+  }
+},
+{
+  "type": "way",
+  "id": 262966603,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "68",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "addr:subdistrict": "Phường 8",
+    "building": "office",
+    "name": "BCH Quân sự Quận Phú Nhuận"
+  }
+},
+{
+  "type": "way",
+  "id": 263447467,
+  "tags": {
+    "addr:district": "Tân Định",
+    "addr:housenumber": "338",
+    "addr:street": "Hai Bà Trưng",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general;dentistry;ophthalmology;emergency;surgery;dermatology;gynaecology",
+    "name": "Bệnh viện Đa khoa Tân Định",
+    "name:en": "Tan Dinh General Hospital",
+    "old_name": "Bệnh viện Quận 1"
+  }
+},
+{
+  "type": "way",
+  "id": 277747232,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "145/5",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hẻm 145 Nguyễn Văn Trỗi",
+    "addr:subdistrict": "Phường Phú Nhuận",
+    "building": "yes",
+    "government": "tax",
+    "name": "Thuế cơ sở 13 Thành phố Hồ Chí Minh",
+    "office": "government",
+    "old_name": "Chi Cục Thuế quận Phú Nhuận"
+  }
+},
+{
+  "type": "way",
+  "id": 308447398,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "48",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Sứ",
+    "addr:subdistrict": "Phường 7",
+    "building": "apartments",
+    "building:levels": "18",
+    "layer": "1",
+    "name": "Chung cư PN-Techcons"
+  }
+},
+{
+  "type": "way",
+  "id": 313192288,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "287",
+    "addr:street": "Phan Đình Phùng",
+    "amenity": "college",
+    "building": "yes",
+    "name": "Trường Cao đẳng Kinh tế Đối ngoại",
+    "name:en": "College of Foreign Economy and Relations"
+  }
+},
+{
+  "type": "way",
+  "id": 320763448,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "98",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "kindergarten",
+    "name": "Mẫu giáo Hương Sen"
+  }
+},
+{
+  "type": "way",
+  "id": 359022741,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Trần Quốc Toản",
+    "amenity": "school",
+    "grades": "10-12",
+    "name": "Trường Trung học phổ thông Nguyễn Thị Diệu",
+    "short_name": "Trường THPT Nguyễn Thị Diệu"
+  }
+},
+{
+  "type": "way",
+  "id": 369668989,
+  "tags": {
+    "addr:district": "Quận 3",
+    "addr:housenumber": "870",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 14",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "image": "https://statics.vinpearl.com/chua-phap-hoa-1_1630420080.jpg",
+    "name": "Chùa Pháp Hoa",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 372304999,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Nguyễn Văn Trỗi",
+    "amenity": "courthouse",
+    "building": "yes",
+    "building:levels": "3",
+    "name": "Tòa án chuyên biệt tại Trung tâm tài chính quốc tế"
+  }
+},
+{
+  "type": "way",
+  "id": 381439794,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "164",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "phường 1",
+    "building": "apartments",
+    "name": "Chung Cư Satra Eximland"
+  }
+},
+{
+  "type": "way",
+  "id": 405092259,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "3",
+    "addr:housenumber": "117-119",
+    "addr:street": "Lý Chính Thắng",
+    "building": "yes",
+    "name": "An Phú Plaza",
+    "name:simple": "An Phu Plaza"
+  }
+},
+{
+  "type": "way",
+  "id": 405092620,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "3",
+    "addr:housenumber": "111",
+    "addr:street": "Lý Chính Thắng",
+    "building": "yes",
+    "name": "IDD Building",
+    "name:simple": "DC Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 405092961,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "3",
+    "addr:housenumber": "111D",
+    "addr:street": "Lý Chính Thắng",
+    "building": "yes",
+    "name": "D.C Tower",
+    "name:simple": "IDD Building"
+  }
+},
+{
+  "type": "way",
+  "id": 405094120,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "3",
+    "addr:housenumber": "201",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "building": "yes",
+    "name": "Tòa Nhà Bernard"
+  }
+},
+{
+  "type": "way",
+  "id": 405236018,
+  "tags": {
+    "addr:city": "Phường 13",
+    "addr:district": "3",
+    "addr:housenumber": "13",
+    "addr:street": "Trần Quang Diệu",
+    "building": "yes",
+    "name": "HDZone Sài Gòn",
+    "name:simple": "HDZone Sai Gon"
+  }
+},
+{
+  "type": "way",
+  "id": 418891949,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "10",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trần Huy Liệu",
+    "addr:subdistrict": "Phường 12",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "internet_access": "wlan",
+    "name": "Bệnh viện An Sinh",
+    "name:en": "An Sinh Hospital",
+    "phone": "028 3845 7777",
+    "website": "http://www.anhsinh.com.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 440707744,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:country": "VN",
+    "addr:district": "Phu Nhuan",
+    "addr:housenumber": "145/8",
+    "addr:street": "Nguyen Van Troi",
+    "addr:subdistrict": "Phường 11",
+    "building": "yes",
+    "email": "reservation@saigonhanoihotel.vn",
+    "fax": "+84 8 384 200 34",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Saigon Hanoi Hotel",
+    "phone": "+84 8 384 203 33",
+    "stars": "3",
+    "tourism": "hotel",
+    "website": "http://saigonhanoihotel.vn/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "way",
+  "id": 494789243,
+  "tags": {
+    "addr:housenumber": "72/12",
+    "addr:street": "Hẻm 72 Trần Quốc Toản",
+    "building": "yes",
+    "name": "Văn phòng Hội đồng Giám mục Việt Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 494789244,
+  "tags": {
+    "addr:housenumber": "266-268",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "building": "commercial",
+    "building:levels": "15",
+    "height": "60",
+    "name": "Sacombank Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 494789247,
+  "tags": {
+    "addr:district": "Quận 3",
+    "addr:housenumber": "290",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "Phường 8",
+    "amenity": "bank",
+    "brand": "BIDV",
+    "building": "yes",
+    "height": "152",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 494789259,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "3",
+    "addr:housenumber": "391A",
+    "addr:postcode": "700000",
+    "addr:province": "Ho Chi Minh City",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "14",
+    "amenity": "college",
+    "building:part": "yes",
+    "name": "FPT Skillking HCM"
+  }
+},
+{
+  "type": "way",
+  "id": 494789264,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "294",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:suburb": "Quận 3",
+    "amenity": "place_of_worship",
+    "building": "temple",
+    "denomination": "mahayana",
+    "name": "Thiền viện Quảng Đức",
+    "name:en": "Quang Duc Monastery",
+    "name:zh": "广德禅院",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 554604908,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 3",
+    "addr:housenumber": "82",
+    "addr:street": "Trần Huy Liệu",
+    "building": "yes",
+    "name": "Phu Nuan Plaza"
+  }
+},
+{
+  "type": "way",
+  "id": 680569909,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "414",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Chùa Hải Đức",
+    "name:ko": "하이득",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 680569913,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "384",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 2",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Quan Âm Tu Viện",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 750511344,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "48",
+    "addr:street": "Hoa Sứ",
+    "addr:subdistrict": "Phường 7",
+    "building": "yes",
+    "name": "Co.opmart Rạch Miễu",
+    "shop": "supermarket"
+  }
+},
+{
+  "type": "way",
+  "id": 846873761,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "3",
+    "addr:street": "Hẻm 9 Hoàng Văn Thụ",
+    "addr:subdistrict": "15",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 847237372,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Q. Bình Thạnh",
+    "addr:housenumber": "24C",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 6",
+    "building": "yes",
+    "name": "Toà Nhà Dali"
+  }
+},
+{
+  "type": "way",
+  "id": 849209640,
+  "tags": {
+    "addr:city": "TP Hồ Chí Minh",
+    "addr:district": "quận 3",
+    "addr:housenumber": "315",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "phường 14",
+    "building": "office"
+  }
+},
+{
+  "type": "way",
+  "id": 850429928,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "10N",
+    "addr:street": "Trần Hữu Trang",
+    "addr:subdistrict": "Phường 11",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 854573859,
+  "tags": {
+    "addr:district": "Bình Thạnh",
+    "addr:housenumber": "7",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 3",
+    "amenity": "school",
+    "education": "school",
+    "name": "Trường Trung học cơ sở Hà Huy Tập",
+    "old_name": "Trường Tiểu học Chi Lăng",
+    "short_name": "Trường THCS Hà Huy Tập"
+  }
+},
+{
+  "type": "way",
+  "id": 854573860,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 854573869,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "99",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "school",
+    "name": "Trường Tiểu Học Đông Ba"
+  }
+},
+{
+  "type": "way",
+  "id": 854573870,
+  "tags": {
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "99",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 7",
+    "building": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 854573871,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "92",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 5",
+    "amenity": "school",
+    "name": "Trường Tiểu học Cao Bá Quát"
+  }
+},
+{
+  "type": "way",
+  "id": 854573872,
+  "tags": {
+    "addr:housenumber": "92",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 854573873,
+  "tags": {
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "94",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 5",
+    "building": "yes",
+    "name": "Uỷ Ban Nhân Dân Phường 5",
+    "office": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 862121575,
+  "tags": {
+    "addr:housenumber": "215",
+    "addr:street": "Đường Nam Kỳ Khởi Nghĩa",
+    "building": "yes",
+    "name": "Tòa nhà 215"
+  }
+},
+{
+  "type": "way",
+  "id": 862121595,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Xuân Hòa",
+    "addr:housenumber": "384-1C",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "building": "yes",
+    "building:levels": "8",
+    "name": "TOJI BUILDING"
+  }
+},
+{
+  "type": "way",
+  "id": 862121641,
+  "tags": {
+    "addr:housenumber": "90G",
+    "addr:street": "Trần Quốc Toản",
+    "building": "yes",
+    "name": "Sở Tài chính Thành phố Hồ Chí Minh (trụ sở 3)",
+    "office": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 900802285,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Đặng Tất",
+    "amenity": "clinic",
+    "building": "yes",
+    "healthcare": "clinic"
+  }
+},
+{
+  "type": "way",
+  "id": 954460170,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "193",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "addr:subdistrict": "Phường 7",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "building": "yes",
+    "cuisine": "coffee_shop",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "Oromia Coffee & Lounge",
+    "name": "Oromia Coffee & Lounge",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "opening_hours:covid19": "Mo-Sa 09:00-19:00",
+    "smoking": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 954795481,
+  "tags": {
+    "addr:city": "Thành Phố Hồ Chí Minh",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "1",
+    "addr:street": "Ngô Thời Nhiệm",
+    "addr:subdistrict": "Phường 7",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "building": "yes",
+    "cuisine": "coffee_shop;ice_cream",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "Chanchamayo Coffee",
+    "name": "Chanchamayo Coffee",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "opening_hours:covid19": "Mo-Sa 09:00-19:00",
+    "outdoor_seating": "yes",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 954859846,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:country": "VN",
+    "addr:housenumber": "23",
+    "addr:street": "Huynh Van Banh",
+    "check_date:currency:XBT": "2023-02-03",
+    "colour": "#e36ea5",
+    "currency:XBT": "yes",
+    "name": "Vy bakery",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "payment:cash": "yes",
+    "payment:lightning": "yes",
+    "payment:lightning_contactless": "no",
+    "payment:mastercard": "yes",
+    "payment:onchain": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "01236547885",
+    "shop": "bakery",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 987255733,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Đoàn Thị Điểm",
+    "amenity": "townhall",
+    "building": "yes",
+    "government": "administrative",
+    "name": "Ủy ban nhân dân phường Cầu Kiệu",
+    "name:en": "People's Committee of Cau Kieu ward",
+    "office": "government",
+    "short_name": "UBND phường Cầu Kiệu"
+  }
+},
+{
+  "type": "way",
+  "id": 1041009964,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "30",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Nhiêu Tứ",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Khánh Nam Phật Đường",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1042817943,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "District 3",
+    "addr:housenumber": "51",
+    "addr:postcode": "700000",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Đường Võ Thị Sáu",
+    "addr:subdistrict": "Ward 6",
+    "building": "yes",
+    "building:levels": "6",
+    "description": "Education",
+    "height": "24",
+    "name": "Vina Talents - Khai Sáng Tài Năng Việt"
+  }
+},
+{
+  "type": "way",
+  "id": 1042878367,
+  "tags": {
+    "addr:city": "Phường 15",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "15",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Đường Hoàng Văn Thụ",
+    "addr:subdistrict": "Phường 15",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "building": "yes",
+    "fuel:octane_92": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Cửa hàng Xăng dầu Petrolimex Số 8"
+  }
+},
+{
+  "type": "way",
+  "id": 1043641927,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "280",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Phan Xích Long",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "fuel:octane_92": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Cửa Hàng Xăng Dầu Petrolimex số 53"
+  }
+},
+{
+  "type": "way",
+  "id": 1052285576,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quan 1",
+    "addr:housenumber": "45 bis A",
+    "addr:postcode": "100081",
+    "addr:province": "Ho Chi Minh",
+    "addr:street": "Nguyễn Phi Khanh",
+    "addr:subdistrict": "Tân Định",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 1059566392,
+  "tags": {
+    "addr:housenumber": "262",
+    "addr:street": "Đường Nam Kỳ Khởi Nghĩa",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1075633301,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "168",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 3",
+    "area": "yes",
+    "name": "Daan Interior",
+    "website": "http://www.daaninterior.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1085954987,
+  "tags": {
+    "addr:housenumber": "222",
+    "addr:street": "Lê Văn Sỹ",
+    "amenity": "university",
+    "name": "Trường Đại học Sư phạm Thành phố Hồ Chí Minh (cơ sở 2)"
+  }
+},
+{
+  "type": "way",
+  "id": 1087240206,
+  "tags": {
+    "addr:housenumber": "179-187",
+    "addr:street": "Đường Nam Kỳ Khởi Nghĩa",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Y học cổ truyền Thành phố Hồ Chí Minh"
+  }
+},
+{
+  "type": "way",
+  "id": 1096884756,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "284",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Le Van  Sy Str.",
+    "addr:subdistrict": "Phường 14",
+    "building": "house",
+    "building:levels": "3",
+    "height": "20",
+    "name": "ABC Bakery"
+  }
+},
+{
+  "type": "way",
+  "id": 1169321000,
+  "tags": {
+    "addr:housenumber": "196",
+    "addr:street": "Đường Trần Quang Khải",
+    "amenity": "university",
+    "education": "university",
+    "name": "Đại học Kinh tế Thành phố Hồ Chí Minh - cơ sở D"
+  }
+},
+{
+  "type": "way",
+  "id": 1198217668,
+  "tags": {
+    "addr:city": "TP.HCM",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "199",
+    "addr:street": "Hoa Lan",
+    "addr:subdistrict": "phường 2",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "building": "yes",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "internet_access:ssid": "Café Lafam",
+    "name": "Cafe Lafam",
+    "opening_hours": "07:00-22:30",
+    "outdoor_seating": "yes",
+    "payment:app": "yes",
+    "payment:apple_pay": "no",
+    "payment:cards": "no",
+    "payment:cash": "yes",
+    "payment:google_pay": "no",
+    "phone": "+84 896652861",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840362,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "247",
+    "addr:street": "Hoàng Sa",
+    "addr:subdistrict": "Tân Định",
+    "amenity": "place_of_worship",
+    "name": "Chùa Vạn Thọ",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840363,
+  "tags": {
+    "addr:city": "Phường Tân Định",
+    "addr:district": "Qu=ận 1",
+    "addr:housenumber": "247",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoàng Sa",
+    "addr:subdistrict": "Tân Định",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840364,
+  "tags": {
+    "addr:city": "Phường 9",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "2",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Đường Hoàng Văn Thụ",
+    "addr:subdistrict": "Phường 9",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "denomination": "seventh_day_adventist",
+    "name": "Thánh đường Cơ Đốc Phục lâm Phú Nhuận",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840365,
+  "tags": {
+    "addr:city": "Phường 3",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "224",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 3",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "fuel:octane_92": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Cửa hàng Xăng dầu Petrolimex Số 34"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840368,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Hoa Sữa",
+    "amenity": "school",
+    "name": "Trường Trung học cơ sở Cầu Kiệu",
+    "short_name": "Trường THCS Cầu Kiệu"
+  }
+},
+{
+  "type": "way",
+  "id": 1216840369,
+  "tags": {
+    "addr:city": "Phường 7",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "32",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Hoa Sữa",
+    "addr:subdistrict": "Phường 7",
+    "building": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 1216969607,
+  "tags": {
+    "addr:city": "Phường 1",
+    "addr:district": "Phú Nhuận",
+    "addr:housenumber": "19",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Cô Giang",
+    "addr:subdistrict": "Phường 1",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Đền thờ Võ Di Nguy",
+    "religion": "vietnamese_folk"
+  }
+},
+{
+  "type": "way",
+  "id": 1220207266,
+  "tags": {
+    "addr:city": "Phường 12",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "974A",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 12",
+    "landuse": "residential",
+    "name": "Chung cư Screc Tower",
+    "residential": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 1220207267,
+  "tags": {
+    "addr:city": "Phường 12",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "974A",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 12",
+    "building": "apartments",
+    "name": "Block C"
+  }
+},
+{
+  "type": "way",
+  "id": 1220207269,
+  "tags": {
+    "addr:city": "Phường 12",
+    "addr:district": "Quận 3",
+    "addr:housenumber": "974A",
+    "addr:province": "Hồ Chí Minh",
+    "addr:street": "Trường Sa",
+    "addr:subdistrict": "Phường 12",
+    "building": "apartments",
+    "name": "Block B"
+  }
+},
+{
+  "type": "way",
+  "id": 1223121500,
+  "tags": {
+    "addr:housenumber": "36",
+    "addr:street": "Đường Lý Văn Phức",
+    "landuse": "commercial",
+    "name": "Trung tâm Ứng dụng công nghệ thông tin và Dữ liệu phía Nam",
+    "office": "government",
+    "operator": "Cục Chuyển đổi số và Thông tin dữ liệu tài nguyên môi trường"
+  }
+},
+{
+  "type": "way",
+  "id": 1295556792,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Đặng Dung",
+    "amenity": "kindergarten",
+    "education": "kindergarten",
+    "name": "Trường Mầm non Tân Định"
+  }
+},
+{
+  "type": "way",
+  "id": 1295556793,
+  "tags": {
+    "addr:housenumber": "38",
+    "addr:street": "Đặng Dung",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1295638394,
+  "tags": {
+    "addr:housenumber": "181",
+    "addr:street": "Hoàng Sa",
+    "amenity": "school",
+    "education": "school",
+    "email": "thtrankhanhduq1@quan01.hcm.edu.vn",
+    "grades": "1-5",
+    "name": "Trường Tiểu học Trần Khánh Dư",
+    "phone": "+84 028 38484255;+84 028 38481680",
+    "website": "https://thtrankhanhdu.hcm.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1295638395,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Ðinh Công Tráng",
+    "amenity": "school",
+    "building": "school",
+    "building:levels": "5",
+    "education": "school",
+    "email": "thduocsongq1@quan01.hcm.edu.vn",
+    "grades": "1-5",
+    "name": "Trường Tiểu học Đuốc Sống",
+    "phone": "+84 028 38290977",
+    "roof:levels": "0",
+    "roof:shape": "flat",
+    "website": "https://thduocsong.hcm.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1295735911,
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Trần Nguyên Đán",
+    "amenity": "school",
+    "education": "school",
+    "grades": "1-5",
+    "name": "Trường Tiểu học Trần Quang Khải (cơ sở 1)",
+    "website": "https://thtranqgkhaiq1.hcm.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1295735914,
+  "tags": {
+    "addr:housenumber": "60",
+    "addr:street": "Võ Thị Sáu",
+    "amenity": "school",
+    "education": "school",
+    "grades": "1-5",
+    "name": "Trường Tiểu học Trần Quang Khải (cơ sở 2)",
+    "website": "https://thtranqgkhaiq1.hcm.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1381826602,
+  "tags": {
+    "addr:housenumber": "129",
+    "addr:street": "Lý Chính Thắng",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Đình Xuân Hòa",
+    "religion": "vietnamese_folk"
+  }
+},
+{
+  "type": "way",
+  "id": 1415645361,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:street": "Hẻm 386 Lê Văn Sỹ",
+    "building": "yes",
+    "government": "social_security",
+    "name": "Bảo hiểm xã hội cơ sở Nhiêu Lộc",
+    "office": "government",
+    "old_name": "Bảo hiểm xã hội quận 3"
+  }
+},
+{
+  "type": "way",
+  "id": 1447058989,
+  "tags": {
+    "addr:housenumber": "2A",
+    "addr:street": "Hoa Hồng",
+    "building": "yes",
+    "building:levels": "4",
+    "name": "Quán KỆ"
+  }
+},
+{
+  "type": "way",
+  "id": 1447058993,
+  "tags": {
+    "addr:housenumber": "1A",
+    "addr:street": "Hoa Hồng",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447058994,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Hoa Hồng",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1447058995,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:street": "Hoa Hồng",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1447058996,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Hoa Hồng",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1447059001,
+  "tags": {
+    "addr:housenumber": "43",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447059002,
+  "tags": {
+    "addr:housenumber": "41",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447059003,
+  "tags": {
+    "addr:housenumber": "39",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637213,
+  "tags": {
+    "addr:housenumber": "162",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637214,
+  "tags": {
+    "addr:housenumber": "164",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes",
+    "building:levels": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637215,
+  "tags": {
+    "addr:housenumber": "164",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637216,
+  "tags": {
+    "addr:housenumber": "166",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637223,
+  "tags": {
+    "addr:housenumber": "160",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1447637224,
+  "tags": {
+    "addr:housenumber": "158",
+    "addr:street": "Phan Đăng Lưu",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1458444094,
+  "tags": {
+    "addr:housenumber": "123",
+    "addr:street": "Võ Thị Sáu",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "building": "yes",
+    "name": "Cửa hàng Xăng dầu Petrolimex Số 06",
+    "self_service": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 1459174907,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Quận Phú Nhuận",
+    "addr:housenumber": "95C",
+    "addr:street": "Phan Đăng Lưu",
+    "addr:subdistrict": "Phường 7",
+    "amenity": "bank",
+    "brand": "PVcomBank",
+    "brand:wikidata": "Q65171780",
+    "building": "yes",
+    "name": "PVcomBank",
+    "operator": "PVcomBank Phú Nhuận"
+  }
+},
+{
+  "type": "way",
+  "id": 1468822144,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "38/16B Trần Khắc Chân",
+    "addr:street": "Hẻm 38 Trần Khắc Chân",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 1468822145,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "38/18 Trần Khắc Chân",
+    "addr:street": "Hẻm 38 Trần Khắc Chân",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 1468822146,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "38/20 Trần Khắc Chân",
+    "addr:street": "Hẻm 38 Trần Khắc Chân",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 1468822150,
+  "tags": {
+    "addr:housenumber": "-",
+    "addr:street": "Trần Khắc Chân",
+    "building": "house"
+  }
+},
+{
+  "type": "way",
+  "id": 1468822151,
+  "tags": {
+    "addr:city": "Thành phố Hồ Chí Minh",
+    "addr:district": "Quận 1",
+    "addr:housenumber": "79",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Trần Khắc Chân",
+    "addr:subdistrict": "Phường Tân Định",
+    "brand": "Ministop",
+    "brand:wikidata": "Q1038929",
+    "building": "retail",
+    "name": "Ministop",
+    "opening_hours": "24/7",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "way",
+  "id": 1469427213,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Đặng Dung",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1471524221,
+  "tags": {
+    "addr:housenumber": "21A",
+    "addr:street": "Trần Nhật Duật",
+    "amenity": "cafe",
+    "building": "yes",
+    "name": "Gờ Cafe"
+  }
+},
+{
+  "type": "way",
+  "id": 1472755827,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Nguyễn Hữu Cầu",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1472755828,
+  "tags": {
+    "addr:housenumber": "53",
+    "addr:street": "Nguyễn Hữu Cầu",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1474910967,
+  "tags": {
+    "addr:housenumber": "94",
+    "addr:street": "Phùng Văn Cung",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1474910969,
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Phùng Văn Cung",
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Cô Kim"
+  }
+},
+{
+  "type": "way",
+  "id": 1512359541,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:postcode": "700000",
+    "addr:street": "Nhiêu Tứ",
+    "amenity": "cafe",
+    "building": "yes",
+    "contact:facebook": "p/Th%C3%A0nh-61560746504477",
+    "contact:instagram": "thanhnhieutu",
+    "name": "Thành Coffee",
+    "opening_hours": "Mo-Su 07:00-00:00",
+    "phone": "0396 803 459"
+  }
+},
+{
+  "type": "way",
+  "id": 1529308709,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/18",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "building": "apartments",
+    "building:levels": "5",
+    "fixme": "How far the area extends towards hẻm 359/1 needs rechecking, outline towards hẻm 351 should be accurate",
+    "roof:levels": "1"
+  }
+},
+{
+  "type": "way",
+  "id": 1529308710,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/18A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "building": "house",
+    "fixme": "How far the area extends towards hẻm 359/1 needs rechecking, outline towards hẻm 351 should be accurate"
+  }
+},
+{
+  "type": "way",
+  "id": 1529308711,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/20",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "building": "yes",
+    "building:levels": "1",
+    "fixme": "How far the area extends towards hẻm 359/1 needs rechecking, outline towards hẻm 351 should be accurate"
+  }
+},
+{
+  "type": "way",
+  "id": 1529308712,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/20A",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "air_conditioning": "yes",
+    "building": "yes",
+    "building:levels": "1",
+    "check_date": "2026-06-09",
+    "clothes": "denim",
+    "contact:facebook": "copperthebrand",
+    "contact:instagram": "copperthebrand",
+    "contact:phone": "+84 395377939",
+    "contact:website": "https://copperdenim.vn",
+    "contact:zalo": "+84 395377939",
+    "description": "Nhận làm quần áo custom, may đo theo yêu cầu nếu có thừa vải",
+    "fixme": "How far the area extends towards hẻm 359/1 needs rechecking, outline towards hẻm 351 should be accurate",
+    "name": "Copper Denim",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "payment:bank_transfer": "yes",
+    "payment:cash": "yes",
+    "payment:qr_code": "yes",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "way",
+  "id": 1529308713,
+  "tags": {
+    "addr:district": "Phường Nhiêu Lộc",
+    "addr:housenumber": "351/22",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 351 Lê Văn Sỹ",
+    "building": "house",
+    "fixme": "How far the area extends towards hẻm 359/1 needs rechecking, outline towards hẻm 351 should be accurate"
+  }
+},
+{
+  "type": "way",
+  "id": 1530552216,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Huỳnh Văn Bánh",
+    "amenity": "place_of_worship",
+    "heritage": "4",
+    "name": "Chùa Phú Long",
+    "religion": "buddhist"
+  }
+},
+{
+  "type": "way",
+  "id": 1551671365,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:district": "Phường Cậu Kiệu",
+    "addr:housenumber": "98",
+    "addr:street": "Phùng Văn Cung",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1562147316,
+  "tags": {
+    "addr:city": "Ho Chi Minh City",
+    "addr:housenumber": "4B",
+    "addr:province": "Thành phố Hồ Chí Minh",
+    "addr:street": "Hẻm 55 Phan Đăng Lưu",
+    "amenity": "cafe",
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "UniVini",
+    "outdoor_seating": "no",
+    "website": "https://univini.com/en/overview"
+  }
+}
+
+  ]
+}

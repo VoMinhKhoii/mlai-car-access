@@ -1,0 +1,741 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Điểm gửi xe Lake View 3.2",
+    "address": "Lakeview 3.2",
+    "vehicle": "both",
+    "lot_type": "closed_building",
+    "lot_type_published": "Bãi kín tòa nhà",
+    "roadside": false,
+    "operator": "CÔNG TY TNHH MỘT THÀNH VIÊN KHU BẮC THỦ THIÊM",
+    "district_published": "Quận 2",
+    "deployed_on": "6/2/2025",
+    "pdf_row": 1,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Lakeview 3.2 | Thủ Thiêm Lakeview 3",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Điểm gửi xe Lake View 3.1",
+    "address": "Lakeview 3.1",
+    "vehicle": "both",
+    "lot_type": "closed_building",
+    "lot_type_published": "Bãi kín tòa nhà",
+    "roadside": false,
+    "operator": "CÔNG TY TNHH MỘT THÀNH VIÊN KHU BẮC THỦ THIÊM",
+    "district_published": "Quận 2",
+    "deployed_on": "10/1/2024",
+    "pdf_row": 2,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Lakeview 3.1 | Thủ Thiêm Lakeview 3",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Bãi xe thông minh Lô 41",
+    "address": "Bãi xe Lô 41",
+    "vehicle": "both",
+    "lot_type": "closed",
+    "lot_type_published": "Bãi kín",
+    "roadside": false,
+    "operator": "Công ty TNHH DV Thương Mại Tư Vấn Sài Gòn",
+    "district_published": "Quận 12",
+    "deployed_on": "4/19/2025",
+    "pdf_row": 3,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Bãi xe Lô 41 | Lô 41",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.69279641503574,
+     10.769603083170034
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Lê Lai",
+    "address": "Đường Lê Lai - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 6,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Lê Lai",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.7005087406009,
+     10.780693863815264
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Hai Bà Trưng",
+    "address": "Đường Hai Ba Trưng - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 7,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Hai Bà Trưng",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.68906996174388,
+     10.763552802238248
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Nguyễn Cư Trinh",
+    "address": "Đường Nguyễn Cư Trinh - 570m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 5, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 8,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Nguyễn Cư Trinh",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.68990186790155,
+     10.777593239237337
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Trương Định",
+    "address": "Đường Trương Định - 20m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 9,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Trương Định",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.69751429430009,
+     10.772263771986713
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Phan Chu Trinh",
+    "address": "Đường Phan Chu Trinh - 100m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 3, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 10,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Phan Chu Trinh",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.69849923473478,
+     10.772799503277945
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Phan Bội Châu",
+    "address": "Đường Phan Bội Châu - 50m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 11,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Phan Bội Châu",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.69456871141833,
+     10.776082805027897
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Huyền Trân Công Chúa",
+    "address": "Đường Huyền Trân Công Chúa - 440m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 12,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Huyền Trân Công Chúa",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.70553908930367,
+     10.774618470238496
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Hồ Huấn Nghiệp",
+    "address": "Đường Hồ Huấn Nghiệp - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 13,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Hồ Huấn Nghiệp",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Ngô Đức Kế",
+    "address": "Đường Ngô Đức Kế - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 14,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Ngô Đức Kế",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.70483713628722,
+     10.77624998927442
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Đông Du",
+    "address": "Đường Đông Du - 170m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 15,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Đông Du",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.70447206334389,
+     10.77824753755875
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Cao Bá Quát",
+    "address": "Đường Cao Bá Quát - 180m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 16,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Cao Bá Quát",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.69701190018591,
+     10.774099470636946
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Thủ Khoa Huân",
+    "address": "Đường Thủ Khoa Huân - 50m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 17,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Thủ Khoa Huân",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.657510037819,
+     10.755624235940003
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Phạm Hữu Chí",
+    "address": "Đường Phạm Hữu Chí - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 18,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Phạm Hữu Chí",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.6677248,
+     10.7564754
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_An Dương Vương",
+    "address": "Đường An Dương Vương - 1km",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 5, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 19,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.5,
+    "geocode_level": "street",
+    "geocode_query": "An Dương Vương",
+    "geocode_label": "Văn Lang, An Dương Vương, An Đông, Hồ Chí Minh"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.67164338605014,
+     10.773640215306639
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Lê Hồng Phong",
+    "address": "Đường Lê Hồng Phong - 500m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 5, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 20,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Lê Hồng Phong",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.66424819632218,
+     10.753071304818425
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Tản Đà",
+    "address": "Đường Tản Đà - 200m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 10, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 21,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Tản Đà",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.67141696201016,
+     10.77211194916308
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_781 Lê Hồng Phong",
+    "address": "Đường Lê Hồng Phong - 330m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 10, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 22,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Lê Hồng Phong",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.66372157930458,
+     10.771864302317395
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Thành Thái",
+    "address": "Hẻm 51 Thành Thái -320m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 10, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 23,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.5,
+    "geocode_level": "street",
+    "geocode_query": "Hẻm 51 Thành Thái",
+    "geocode_label": "Hẻm 51 Thành Thái, Diên Hồng, Hồ Chí Minh"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_283-285 CMT8",
+    "address": "Hẻm 283 và 285 CMT8 - 800m",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 10, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 24,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Hẻm 283 và 285 CMT8",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.6739752110198,
+     10.774945621008236
+    ]
+   },
+   "properties": {
+    "name": "Điểm đỗ ô tô TNXP_Cao Thắng",
+    "address": "Đường Cao Thắng",
+    "vehicle": "car",
+    "lot_type": "open",
+    "lot_type_published": "Bãi mở",
+    "roadside": true,
+    "operator": "Công ty TNHH MTV Dịch vụ Công ích TNXP",
+    "district_published": "Quận 10, HCM",
+    "deployed_on": "4/15/2025",
+    "pdf_row": 25,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "osm-overpass-street-midpoint",
+    "geocode_confidence": 0.4,
+    "geocode_level": "street",
+    "geocode_query": "Cao Thắng",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.7197879,
+     10.7960477
+    ]
+   },
+   "properties": {
+    "name": "Điểm xe máy kín Tasco Tân Cảng",
+    "address": "220 bis, Nguyễn Hữu Cảnh, Phường Thạnh Mỹ Tây, Thành phố Hồ Chí",
+    "vehicle": "motorbike",
+    "lot_type": "closed_building",
+    "lot_type_published": "Bãi kín tòa nhà",
+    "roadside": false,
+    "operator": "Công ty Cổ Phần Tasco",
+    "district_published": "Bình Thạnh, HCM",
+    "deployed_on": "9/1/2024",
+    "pdf_row": 26,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.5,
+    "geocode_level": "street",
+    "geocode_query": "Tasco Tân Cảng",
+    "geocode_label": "TASCO TÂN CẢNG, 220 Đường Nguyễn Hữu Cảnh, Vinhomes Tân Cảng, Thạnh Mỹ Tây, Hồ Chí Minh"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.70442216400005,
+     10.771843299000068
+    ]
+   },
+   "properties": {
+    "name": "Bãi xe ô tô hầm bãi xe tòa nhà Bitexco Finalcial tower",
+    "address": "Bãi xe ô tô hầm bãi xe tòa nhà Bitexco Finalcial tower",
+    "vehicle": "car",
+    "lot_type": "closed",
+    "lot_type_published": "Bãi kín",
+    "roadside": false,
+    "operator": "Công ty TNHH Bitexco Văn Phòng",
+    "district_published": "Quận 1, HCM",
+    "deployed_on": null,
+    "pdf_row": 29,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.5,
+    "geocode_level": "street",
+    "geocode_query": "Bitexco Financial Tower",
+    "geocode_label": "Bitexco Financial Tower, 2 Hải Triều, Sài Gòn, Hồ Chí Minh"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Kho Bãi ô tô Savico",
+    "address": "Kho Bãi ô tô Savico",
+    "vehicle": "car",
+    "lot_type": "closed",
+    "lot_type_published": "Bãi kín",
+    "roadside": false,
+    "operator": "Công ty Cổ Phần Dịch Vụ Tổng Hợp Sài Gòn",
+    "district_published": "Quận 7, HCM",
+    "deployed_on": "12/3/2025",
+    "pdf_row": 30,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Savico",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Kho Bãi xe máy Savico",
+    "address": "Kho Bãi xe máy Savico",
+    "vehicle": "motorbike",
+    "lot_type": "closed",
+    "lot_type_published": "Bãi kín",
+    "roadside": false,
+    "operator": "Công ty Cổ Phần Dịch Vụ Tổng Hợp Sài Gòn",
+    "district_published": "Quận 7, HCM",
+    "deployed_on": "12/3/2025",
+    "pdf_row": 31,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Savico",
+    "geocode_label": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "name": "Trạm thu phí Chợ Bình Điền",
+    "address": "Trạm thu phí Chợ Bình Điền",
+    "vehicle": "car",
+    "lot_type": "closed",
+    "lot_type_published": "Bãi kín",
+    "roadside": false,
+    "operator": "Công ty Quản lý và Kinh doanh Chợ Bình Điền",
+    "district_published": "Quận 8",
+    "deployed_on": "3/15/2026",
+    "pdf_row": 32,
+    "source_url": "https://vetc.com.vn/upload_images/files/Tong%20hop%20bai%20do%202026%20-%20MIEN%20NAM.pdf",
+    "geocoder": "goong",
+    "geocode_confidence": 0.0,
+    "geocode_level": "not_found",
+    "geocode_query": "Chợ Bình Điền",
+    "geocode_label": null
+   }
+  }
+ ]
+}

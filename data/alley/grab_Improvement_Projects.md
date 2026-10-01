@@ -1,0 +1,107 @@
+## Cities (Specific areas served by Grab are in scope) edited in Indonesia:
+ - Jakarta - Completed
+ - Medan - Completed
+ - Bandung - Completed
+ - Bali - Completed
+ - Makassar - Completed
+ - Yogyakarta - Completed
+ - Surabaya - Completed
+ - Singapore - Completed
+ - Palembang - Completed - Digiglobe Premium and ESRI
+ - Hanoi -Completed- Digiglobe standard
+  -Kaula lumpur - completed - Imagery used - ESRI and Digiglobe standard
+ - Hochin minh - completed - Imagery used - ESRI and Digiglobe standard
+ - Yangon - Specific areas served by Grab are in scope - Imagery used- ESRI and Digiglobe standard
+ - Naga - Completed- Entire city is in scope - Imagery used - DigiGlobe 
+ - Tagaytay - Completed- Entire city is in scope - Imagery used - DigiGlobe
+ - Binalonan - Entire city is in scope
+  - San Fernando - Entire city is in scope
+ 
+ ## Cities currently editing Inprogress
+ 
+ - Bangkok -  Specific areas served by Grab are in scope - Imagery used- Bing and Digiglobe standard
+ - Manila -  Specific areas served by Grab are in scope - Imagery used- Bing and Digiglobe standard - On Hold
+ - Semarang - Specific areas served by Grab are in scope - Imagery used- Bing and Mapbox - On Hold
+  Johor Bahru - Specific areas served by Grab are in scope - Imagery used- ESRI
+ - Penang - Specific areas served by Grab are in scope - Imagery used- ESRI
+ - Kuching - Specific areas served by Grab are in scope - Imagery used- ESRI
+ - Kota Kinabalu - Specific areas served by Grab are in scope - Imagery used- ESRI
+ - Padang -  Specific areas served by Grab are in scope - Imagery Used - Bing & ESRI- 
+ - Da Nang -  Specific areas served by Grab are in scope - Bing & ESRI
+ - Chiang Mai -  Specific areas served by Grab are in scope - Bing & ESRI
+ - Cebu -  Specific areas served by Grab are in scope -
+ - Melaka - Specific areas served by Grab are in scope -
+ - Padang -  Specific areas served by Grab are in scope -
+ - Kendari-Specific areas served by Grab are in scope
+ - Phnom Penh - Specific areas served by Grab are in scope
+ - IPOH - Specific areas served by Grab are in scope
+ - PEKANBARU - Specific areas served by Grab are in scope
+ - JAMBI - Specific areas served by Grab are in scope
+ - LAMPUNG - Specific areas served by Grab are in scope
+ - BATAM- Specific areas served by Grab are in scope
+ - ACEH - Specific areas served by Grab are in scope
+ - NIGERI SEMBILAN - Specific areas served by Grab are in scope
+ - Klang Valley - Specific areas served by Grab are in scope
+
+ 
+ ## Revisit cities
+ 
+ - Jakarta
+ - Bandung
+ - Hanoi
+ - Ho chi Minh
+ 
+ ## Improve osm map(~2kms-5kms radius) for specific Airports listed below:
+
+Completed:
+City | Airport Name | Status|Imagery used
+
+Jakarta-   Soekarno Hatta International Airport - DigiGlobe Standard Imagery
+Jakarta-	  Halim Perdana Kusuma Airport - DigiGlobe Standard Imagery
+Surabaya-	 Juanda International Airport - Digistandard/Bing
+Medan-	    Kualanamu International Airport- Digistandard/Bing
+Bali-     	Ngurah Rai International Airport - Esri Imagery
+Makassar-	 Sultan Hasanuddin International Airport - Esri Imagery
+Bandung-  	Husein Sastranegara Airport - Esri Imagery
+Cebu-	     Mactan-Cebu International Airport - Bing Imagery
+Singapore-	Singapore Changi Airport - DigiGlobe Standard Imagery
+Manila-   	Ninoy Aquino International Airport - Bing Aerial imagery
+Bangkok-  	Don Mueang International Airport - Bing Aerial imagery
+Hanoi-  	Noi Bai International Airport - MapBox Satellite
+Klang Valley-	Kuala Lumpur International Airport - Bing Aerial imagery
+Bangkok-	Suvarnabhumi Airport - Esri Imagery
+Johor-	  Senai International Airport - MapBox Satellite
+Klang Valley-	    Sultan Abdul Azziz Shah Airport - Esri Imagery
+Ho Chi Minh City-	Tan Son Nhat International Airport - Esri Imagery / Bing
+Penang-	          Penang International Airport - Esri Imagery
+Yangon-	          Yangon International Airport - Esri Imagery
+
+
+## OSM Enhancement - New attribute addition
+
+Scope: Compare existing OSM map with open street cam and evaluate enhancemnet opportunities with reference to below
+mentioned attributes and make appropriate changes
+- Missing Roads
+- DOT - Direction of Travel
+- U -turn - Explicit U-turn possibility 
+- Intersections - Configuration and geometry fixes 
+- Restrictions - All turn restrictions except U-turn 
+- Street Names - Name of the street in osm Vs open street cam data
+- Lanes -  Lane count validated ( street cam vs OSM data)
+- Highway Signs - Sign boards representing name of highway
+- Speeds - Speed limit
+- Road priority - classification gaps
+- Turn lanes - Possible turns from an intersection
+
+Here are the list of cities in scope - 
+Singapore - Completed
+Jakarta - In-Progress
+
+
+To know about the ongoing projects, please refer to the following [link](https://github.com/GRABOSM/Grab-Data/issues?q=is%3Aissue+is%3Aopen+label%3A%22In+Progress%22).
+
+
+
+
+
+ 

@@ -1,0 +1,9476 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-28T04:10:18Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 28913702,
+  "timestamp": "2025-06-04T11:29:50Z",
+  "version": 12,
+  "changeset": 167174721,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    317817149,
+    317817150,
+    317817151,
+    8266280631
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 146 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 36083480,
+  "timestamp": "2024-01-09T08:08:31Z",
+  "version": 9,
+  "changeset": 146055863,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    421490240,
+    1758651209,
+    1758651201
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ vào tổ 12",
+    "service": "alley",
+    "source": "AsiaGPS"
+  }
+},
+{
+  "type": "way",
+  "id": 36084916,
+  "timestamp": "2025-09-06T13:27:38Z",
+  "version": 19,
+  "changeset": 171542454,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    421482702,
+    8266280708,
+    421490255,
+    421482718,
+    9355831041,
+    12143983911,
+    13123383608,
+    8266280710,
+    6661314140
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "lanes": "1",
+    "motorcar": "destination",
+    "motorcycle": "yes",
+    "name": "Ngõ 132 Phố Khương Trung",
+    "source": "AsiaGPS",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 36084922,
+  "timestamp": "2026-06-05T15:11:01Z",
+  "version": 17,
+  "changeset": 183701059,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13912542790,
+    13912542789,
+    8266592496,
+    12496012023,
+    8266592497,
+    8266592493,
+    13230058504,
+    8266592494,
+    5689499432,
+    8266592452,
+    5689499433,
+    5689499421,
+    5689499434,
+    5689499435,
+    443399761,
+    443399762,
+    443399763,
+    443399764,
+    443399765
+  ],
+  "tags": {
+    "highway": "residential",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 69A Phố Hoàng Văn Thái",
+    "source": "AsiaGPS",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 179995745,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 9,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    1916123600,
+    1916123604,
+    2105986490,
+    12968899577,
+    1904395873
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 1 Phố Tôn Thất Tùng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 179995750,
+  "timestamp": "2025-10-21T15:05:08Z",
+  "version": 10,
+  "changeset": 173587730,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    1904395866,
+    10130548020,
+    1904395873,
+    12185673529,
+    5683888507,
+    1904395865
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 1 Phố Tôn Thất Tùng",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 179998311,
+  "timestamp": "2025-10-04T15:11:11Z",
+  "version": 7,
+  "changeset": 172835107,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    1904426009,
+    10170867104,
+    1904426018,
+    11937439507,
+    11937439509,
+    1904426008,
+    1904426012,
+    1904426011
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 198 Phố Thái Hà",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 198407217,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 12,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    2085393467,
+    2085393468,
+    2085393462,
+    9599043448,
+    10180194261,
+    2085393478
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 100 Phố Yên Lãng",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 198407220,
+  "timestamp": "2024-04-09T06:19:48Z",
+  "version": 7,
+  "changeset": 149760974,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    2085393472,
+    2085393473,
+    9599043448
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 198407221,
+  "timestamp": "2024-04-09T06:19:48Z",
+  "version": 7,
+  "changeset": 149760974,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    2085393471,
+    2085393479,
+    2085393462,
+    2085393466,
+    2085393459,
+    2085393457,
+    2085393461
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 82/15 Phố Yên Lãng",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 198407223,
+  "timestamp": "2026-07-27T08:00:50Z",
+  "version": 6,
+  "changeset": 186441377,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    2085393475,
+    2085393477
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 104/5 Phố Yên Lãng",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 198407224,
+  "timestamp": "2024-04-09T06:19:48Z",
+  "version": 7,
+  "changeset": 149760974,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    2085393456,
+    2085393458,
+    2085393468,
+    2105986493,
+    2085393470,
+    2085393469,
+    2085393465
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 237330432,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 6,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    2452491161,
+    11308815946,
+    2452491162
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 168 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 330602536,
+  "timestamp": "2022-10-21T07:31:44Z",
+  "version": 8,
+  "changeset": 127867451,
+  "user": "Mapping_95",
+  "uid": 10498092,
+  "nodes": [
+    3375847716,
+    8991912106,
+    8991912116,
+    8991914327,
+    8991912093
+  ],
+  "tags": {
+    "bicycle": "designated",
+    "foot": "designated",
+    "highway": "footway",
+    "layer": "-1",
+    "lit": "yes",
+    "motor_vehicle": "no",
+    "name": "Hầm đường bộ Ngã Tư Sở",
+    "oneway": "no",
+    "surface": "paved",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 330602538,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 8,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991912094,
+    3375847704
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 330602539,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 9,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    3375847705,
+    8996675670
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 330602542,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 9,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    9128599364,
+    3375847711
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 330602556,
+  "timestamp": "2021-09-28T05:42:30Z",
+  "version": 6,
+  "changeset": 111798047,
+  "user": "Mapping_95",
+  "uid": 10498092,
+  "nodes": [
+    8991912093,
+    8991905222,
+    8991905223,
+    3375847703,
+    8991912096,
+    8991912100,
+    8991912104,
+    9128599364,
+    3375847722
+  ],
+  "tags": {
+    "bicycle": "designated",
+    "foot": "designated",
+    "highway": "footway",
+    "layer": "-1",
+    "lit": "yes",
+    "motor_vehicle": "no",
+    "name": "Hầm đường bộ Ngã Tư Sở",
+    "oneway": "no",
+    "surface": "paved",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 330602558,
+  "timestamp": "2021-09-28T05:42:30Z",
+  "version": 6,
+  "changeset": 111798047,
+  "user": "Mapping_95",
+  "uid": 10498092,
+  "nodes": [
+    3375847722,
+    8999179579,
+    8991912112,
+    8991912108,
+    3375847716
+  ],
+  "tags": {
+    "bicycle": "designated",
+    "foot": "designated",
+    "highway": "footway",
+    "layer": "-1",
+    "lit": "yes",
+    "motor_vehicle": "no",
+    "name": "Hầm đường bộ Ngã Tư Sở",
+    "oneway": "no",
+    "surface": "paved",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 331798236,
+  "timestamp": "2024-10-10T09:36:03Z",
+  "version": 9,
+  "changeset": 157706241,
+  "user": "iloveosm2004",
+  "uid": 20517681,
+  "nodes": [
+    6667989766,
+    3389007922,
+    3389007923,
+    3389007924,
+    7513713093,
+    5707407588,
+    7513713088,
+    3389007925,
+    7513713130
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 53 Phố Quan Nhân",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 399830837,
+  "timestamp": "2025-11-27T07:14:36Z",
+  "version": 15,
+  "changeset": 175184374,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5707300756,
+    8266275604,
+    4025115182,
+    4025115181,
+    4025115180,
+    11075180183,
+    4025115179,
+    9716978001,
+    5721705546,
+    4025115178,
+    8266280621,
+    12655899524,
+    4025115177,
+    5721705542,
+    13335422916,
+    8999216050,
+    4025115176
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ Thịnh Quang",
+    "name:en": "Thinh Quang Alley",
+    "old_name": "Ngõ 438 Tây Sơn",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 570570881,
+  "timestamp": "2025-10-21T14:23:33Z",
+  "version": 9,
+  "changeset": 173585471,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5485634266,
+    10156264213,
+    5485634267,
+    8277275999,
+    5485634268,
+    5485634269
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 100 Phố Tây Sơn",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 596721700,
+  "timestamp": "2023-08-29T11:38:42Z",
+  "version": 3,
+  "changeset": 140537085,
+  "user": "GrabVN_Ngaan",
+  "uid": 14519322,
+  "nodes": [
+    5683792668,
+    5683792666,
+    5683792664,
+    5683792663
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 597111780,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 13,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    5686385629,
+    13134398337,
+    5686397286,
+    5686385632,
+    8277275799,
+    13134398335,
+    10076403385,
+    8277275797,
+    13134398334,
+    13134398331
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 3 Phố Cù Chính Lan",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 597111784,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 7,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    5686385643,
+    12434872364,
+    5686385642
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 597112345,
+  "timestamp": "2019-12-26T08:08:29Z",
+  "version": 2,
+  "changeset": 78870392,
+  "user": "GrabVN-DucMC",
+  "uid": 10257187,
+  "nodes": [
+    5686389097,
+    5686389096
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 597112346,
+  "timestamp": "2019-12-26T08:08:29Z",
+  "version": 2,
+  "changeset": 78870392,
+  "user": "GrabVN-DucMC",
+  "uid": 10257187,
+  "nodes": [
+    5686389099,
+    5686389098,
+    5686389100
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 597112347,
+  "timestamp": "2019-12-26T08:08:29Z",
+  "version": 2,
+  "changeset": 78870392,
+  "user": "GrabVN-DucMC",
+  "uid": 10257187,
+  "nodes": [
+    5686389100,
+    5686389097,
+    5686389101
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 597112348,
+  "timestamp": "2019-12-26T08:08:29Z",
+  "version": 2,
+  "changeset": 78870392,
+  "user": "GrabVN-DucMC",
+  "uid": 10257187,
+  "nodes": [
+    5686389102,
+    5686389101
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 597113038,
+  "timestamp": "2022-10-12T11:06:04Z",
+  "version": 5,
+  "changeset": 127408404,
+  "user": "Mapping_95",
+  "uid": 10498092,
+  "nodes": [
+    7226991848,
+    10095032281,
+    5686389099,
+    5686389102
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 597116990,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 11,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5686426664,
+    5686426663,
+    10973298139,
+    10130548087,
+    5686426661
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 390 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 597158122,
+  "timestamp": "2026-08-04T08:40:25Z",
+  "version": 8,
+  "changeset": 186910269,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5686397290,
+    5686737490
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 62 Phố Cù Chính Lan",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 597200970,
+  "timestamp": "2026-09-02T12:50:58Z",
+  "version": 7,
+  "changeset": 188417676,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    5835646733,
+    11183208130,
+    13476754279,
+    5686987661
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 149 Phố Nguyễn Ngọc Nại",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 597200995,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 10,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    12141257554,
+    5686987712,
+    7505045895,
+    13476754278,
+    6443358074
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 2 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?lat=20.999602558&lng=105.826013887&picId=74030ba5-6780-4933-bba7-0d181161c51b&yaw=107&pitch=-3",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 597579692,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 6,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6662832764,
+    1905193213,
+    5689469359
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 119 Phố Hoàng Văn Thái",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600062985,
+  "timestamp": "2025-08-29T15:20:25Z",
+  "version": 13,
+  "changeset": 171190384,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273495987,
+    5707298916,
+    5707298915,
+    8273495942,
+    5707298914,
+    5707911148,
+    5707298913,
+    7062815523,
+    7062815521,
+    10180179089,
+    5707911156
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 67 Phố Thái Thịnh",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 600062986,
+  "timestamp": "2024-11-19T03:59:34Z",
+  "version": 3,
+  "changeset": 159307911,
+  "user": "iloveosm2004",
+  "uid": 20517681,
+  "nodes": [
+    6405942892,
+    10180179091,
+    5707300768,
+    5707298911,
+    5707298918
+  ],
+  "tags": {
+    "highway": "residential",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 61 Thái Thịnh",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600062999,
+  "timestamp": "2024-01-03T04:15:13Z",
+  "version": 4,
+  "changeset": 145822223,
+  "user": "vietnam321",
+  "uid": 11196308,
+  "nodes": [
+    5707300760,
+    10180179096,
+    5707300759
+  ],
+  "tags": {
+    "highway": "path",
+    "motor_vehicle": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600063000,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 4,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    5707300762,
+    10180179097,
+    5707300761
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600083174,
+  "timestamp": "2025-04-21T14:33:53Z",
+  "version": 5,
+  "changeset": 165243288,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5707407600,
+    5707407599
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "name": "Ngõ 24 Phố Quan Nhân",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600496940,
+  "timestamp": "2025-08-23T07:10:18Z",
+  "version": 5,
+  "changeset": 170863060,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6665941281,
+    13091966464,
+    5709996133
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 424 Đường Láng",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600496943,
+  "timestamp": "2024-10-01T06:49:32Z",
+  "version": 4,
+  "changeset": 157323771,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5709996177,
+    10180671225,
+    5709996137,
+    5709996140,
+    12213488112,
+    12213488113,
+    5709996139,
+    5709996152,
+    9599189662,
+    5709996170
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 151 Phố Láng Hạ",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 600496946,
+  "timestamp": "2023-12-20T04:47:38Z",
+  "version": 8,
+  "changeset": 145315498,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5709996146,
+    10180671246,
+    5709996145
+  ],
+  "tags": {
+    "highway": "service",
+    "maxheight": "below_default",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 470 Đường Láng",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 600496955,
+  "timestamp": "2025-08-23T07:10:18Z",
+  "version": 13,
+  "changeset": 170863060,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6665941281,
+    13091966465,
+    5709996179,
+    5709996132,
+    8273495998,
+    5709996143,
+    5709996145,
+    5709996176,
+    13091966463,
+    5709996173
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 426 Đường Láng",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 600510784,
+  "timestamp": "2025-10-21T14:23:33Z",
+  "version": 7,
+  "changeset": 173585471,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5710091950,
+    10156264214,
+    6405822559,
+    5710091949
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 90 Phố Tây Sơn",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 600550054,
+  "timestamp": "2025-11-27T14:33:05Z",
+  "version": 6,
+  "changeset": 175200912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5710297030,
+    13336224778,
+    13336224779,
+    13336224789,
+    13336224780,
+    13336224781,
+    13336224785,
+    13336224784,
+    13336224782
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 218 Phố Tây Sơn",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 600582020,
+  "timestamp": "2025-08-26T05:17:31Z",
+  "version": 7,
+  "changeset": 171007234,
+  "user": "GrabVN_Ngaan",
+  "uid": 14519322,
+  "nodes": [
+    5485640509,
+    10130399671,
+    5710482858
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 52 Phố Nguyễn Ngọc Doãn",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 601446108,
+  "timestamp": "2026-07-15T16:58:08Z",
+  "version": 11,
+  "changeset": 185797177,
+  "user": "Ky_AT",
+  "uid": 17281421,
+  "nodes": [
+    6415579537,
+    12156901289,
+    5716393885,
+    8266281019,
+    8266281022,
+    5716393884,
+    14018087425,
+    8266281032,
+    5716393883,
+    7513713113,
+    5716393882,
+    8266281027,
+    8266281023,
+    5716393881,
+    8266281029,
+    7513713140,
+    7513713139,
+    7513713138,
+    11959976385,
+    11959976386,
+    11959976387,
+    7513713132
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 145 Phố Quan Nhân"
+  }
+},
+{
+  "type": "way",
+  "id": 601448211,
+  "timestamp": "2026-08-02T15:08:48Z",
+  "version": 10,
+  "changeset": 186816111,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5716408820,
+    10180179100,
+    5716408813
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 27 Phố Thái Thịnh",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 601450228,
+  "timestamp": "2026-01-22T16:26:12Z",
+  "version": 3,
+  "changeset": 177570085,
+  "user": "1273462819345",
+  "uid": 15151608,
+  "nodes": [
+    5716421329,
+    5716421328
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 602349046,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 9,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5721795698,
+    10156114591,
+    11149866765,
+    10156114592,
+    5721795697,
+    8277275776
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 123 Phố Khương Thượng"
+  }
+},
+{
+  "type": "way",
+  "id": 675260222,
+  "timestamp": "2025-10-11T09:01:44Z",
+  "version": 6,
+  "changeset": 173127178,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    5717110578,
+    5717110577
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 203 Phố Chùa Bộc",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 675318615,
+  "timestamp": "2026-01-19T15:14:26Z",
+  "version": 4,
+  "changeset": 177434225,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5707300778,
+    13468461142,
+    13468461146,
+    13468461141,
+    13468461147,
+    13468461145,
+    13468461148,
+    5707300734,
+    13468461151,
+    13468461152,
+    5707300733,
+    5707300731
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 51 Phố Thái Thịnh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 675318616,
+  "timestamp": "2026-01-19T15:14:26Z",
+  "version": 6,
+  "changeset": 177434225,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5707300779,
+    10180179092,
+    5707298910,
+    13468461136,
+    13468461137,
+    13468461143,
+    13468461144,
+    5707300778
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 51 Phố Thái Thịnh",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 683844935,
+  "timestamp": "2025-10-21T15:05:08Z",
+  "version": 7,
+  "changeset": 173587730,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6405730795,
+    10180194289,
+    6405730791
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 83 Phố Yên Lãng",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 683863918,
+  "timestamp": "2025-02-23T13:54:13Z",
+  "version": 9,
+  "changeset": 162852939,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6405942898,
+    7887624769,
+    6405942905
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 22 Phố Tôn Thất Tùng",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 683863923,
+  "timestamp": "2026-08-02T15:08:48Z",
+  "version": 9,
+  "changeset": 186816111,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6405942894,
+    6441123927,
+    7887549412,
+    10180179066,
+    5716408820
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 88 Phố Thái Thịnh",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 683863924,
+  "timestamp": "2022-03-30T18:03:58Z",
+  "version": 4,
+  "changeset": 119127329,
+  "user": "Mapping_95",
+  "uid": 10498092,
+  "nodes": [
+    6405942904,
+    9624461965,
+    6405942893
+  ],
+  "tags": {
+    "highway": "residential",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 366 Tây Sơn",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 683863925,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 5,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6405942895,
+    8999216049,
+    6405942902
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 58 Láng",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684531318,
+  "timestamp": "2025-08-22T14:38:20Z",
+  "version": 8,
+  "changeset": 170835840,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6413581234,
+    8266280699,
+    8266280693,
+    8266280692,
+    6413581240
+  ],
+  "tags": {
+    "alt_name": "Ngõ 124 Phố Khương Trung",
+    "highway": "residential",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 93 Phố Vũ Tông Phan",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684531322,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 6,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6413581244,
+    8266280671,
+    13019222203,
+    13019222207,
+    13019222205,
+    13019222208,
+    6413581249,
+    13019222204,
+    13019222206,
+    13019222202,
+    8266280921,
+    8266280920,
+    8266280919,
+    8266280918,
+    8266280917,
+    8266280916,
+    13019222211,
+    13019222213,
+    13019222215,
+    8266280915,
+    13019222214,
+    13019222212,
+    11478291684,
+    11478291685,
+    11478291686,
+    11478291687,
+    11478291688,
+    11478291689
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motorcar": "destination",
+    "name": "Ngõ 47 Phố Khương Trung",
+    "service": "alley",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684531323,
+  "timestamp": "2024-10-23T00:58:06Z",
+  "version": 6,
+  "changeset": 158233580,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6413581235,
+    9355831056,
+    6413581242
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 147 Vũ Tông Phan",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684531324,
+  "timestamp": "2025-10-21T15:05:08Z",
+  "version": 7,
+  "changeset": 173587730,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7388633677,
+    9577144575,
+    13154730599,
+    9577144576,
+    9577144574,
+    9577144578,
+    9577144573,
+    13154730598,
+    6413581247,
+    8994244794,
+    6413581241
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 244 Phố Thượng Đình",
+    "service": "alley",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684531325,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 9,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    6413581254,
+    8994244790,
+    6413581239
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motorcar": "no",
+    "name": "Ngõ 44 Phố Thượng Đình",
+    "service": "alley",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684531326,
+  "timestamp": "2024-12-29T15:50:31Z",
+  "version": 6,
+  "changeset": 160756038,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6413581245,
+    8266280697
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 111 Phố Vũ Tông Phan",
+    "source": "grab_hanoi_2018_t5",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684543152,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 10,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    6413709264,
+    9609399070,
+    6413709266
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 127 Đường Nguyễn Trãi",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684707942,
+  "timestamp": "2026-03-16T19:06:44Z",
+  "version": 9,
+  "changeset": 179967402,
+  "user": "ZioDragon",
+  "uid": 13799024,
+  "nodes": [
+    5645750065,
+    10181785035,
+    6688499091,
+    6415548224
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "yes",
+    "name": "Ngõ 72 Nguyễn Trãi",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684707947,
+  "timestamp": "2025-06-05T10:46:45Z",
+  "version": 8,
+  "changeset": 167216527,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6415548226,
+    12662392183,
+    11591012205
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 211 Giáp Nhất",
+    "service": "alley",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 684709532,
+  "timestamp": "2024-12-29T15:50:31Z",
+  "version": 13,
+  "changeset": 160756038,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    10116934221,
+    10116925909,
+    6415563267,
+    7432988969,
+    7432988968,
+    11106163793,
+    7432988967,
+    7432988966,
+    11106163772,
+    7432988962
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 108 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 684709535,
+  "timestamp": "2024-12-29T15:50:31Z",
+  "version": 8,
+  "changeset": 160756038,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415563273,
+    10116934217,
+    12461072613,
+    6415563259,
+    11083408239,
+    11083408238
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 210 Đường Nguyễn Trãi",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684712528,
+  "timestamp": "2025-04-21T14:33:53Z",
+  "version": 7,
+  "changeset": 165243288,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7513713088,
+    7513713089,
+    7513713090,
+    7513713091,
+    7513713092,
+    9580347431,
+    6415585888,
+    6415585887
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 89 Phố Quan Nhân",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684715585,
+  "timestamp": "2026-07-31T08:05:39Z",
+  "version": 6,
+  "changeset": 186691166,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    6415612693,
+    6415612685
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 25 Vương Thừa Vũ",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684715587,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 3,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6415612687,
+    6415612691
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 26 Vương Thừa Vũ",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684715589,
+  "timestamp": "2025-10-21T15:05:08Z",
+  "version": 7,
+  "changeset": 173587730,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415612692,
+    8999216089,
+    6415611484,
+    12300620507,
+    12300620508,
+    12300620509,
+    12300620510
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 61 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 684717263,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 5,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6415627977,
+    6415627961
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 174 Phố Nguyễn Ngọc Nại",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684717264,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 9,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    443399770,
+    6415627974,
+    12141257596,
+    12141257595
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 50 Phố Hoàng Văn Thái",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?lat=20.99649041&lng=105.827843991&picId=81c4e351-3e85-4592-ad12-90308153049b&yaw=126&pitch=-1",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684717267,
+  "timestamp": "2026-09-02T12:50:58Z",
+  "version": 7,
+  "changeset": 188417676,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    6415627964,
+    6415627973
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 141 Phố Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684717270,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 7,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    6415627970,
+    13190884491,
+    12141257596,
+    6415627980,
+    12141257593,
+    12141257594
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 235 Phố Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684717271,
+  "timestamp": "2024-01-09T08:08:31Z",
+  "version": 5,
+  "changeset": 146055863,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6415627975,
+    6415627960
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 111 Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684717272,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 5,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415627983,
+    6415627967
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 59 Phố Nguyễn Ngọc Nại",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684717275,
+  "timestamp": "2025-09-10T15:15:16Z",
+  "version": 6,
+  "changeset": 171741464,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6415627962,
+    11502553328,
+    5686737627
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 97 Phố Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684717276,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 4,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6415627968,
+    6415627978
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 34 Nguyễn Ngọc Nại",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684722222,
+  "timestamp": "2024-10-28T09:53:28Z",
+  "version": 5,
+  "changeset": 158447639,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415667369,
+    6415667376
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 179 Phố Khương Trung",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684722224,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 5,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415667371,
+    6441569805,
+    317816924
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 61 Phố Khương Trung",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684722225,
+  "timestamp": "2025-10-01T14:29:45Z",
+  "version": 14,
+  "changeset": 172709551,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    1758651190,
+    1758651192,
+    1758651194,
+    1758651197,
+    8266280625,
+    1758651208,
+    1758651210
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "hgv": "no",
+    "highway": "service",
+    "lanes": "1",
+    "moped": "yes",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 97 Phố Khương Trung",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684722228,
+  "timestamp": "2026-03-12T04:15:21Z",
+  "version": 10,
+  "changeset": 179731062,
+  "user": "Mr Chat GPT",
+  "uid": 23044470,
+  "nodes": [
+    6415667375,
+    13640023982,
+    13457221411,
+    12141629865,
+    6415667363,
+    12141629866
+  ],
+  "tags": {
+    "hgv": "no",
+    "highway": "service",
+    "maxwidth": "1",
+    "motorcar": "no",
+    "name": "Ngõ 237 Phố Khương Trung",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?lat=20.995896989&lng=105.818135053&picId=9b2b27dd-c1dd-40f1-82ea-1dca1bf85878&yaw=105&pitch=-10",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684722229,
+  "timestamp": "2025-10-01T14:29:45Z",
+  "version": 7,
+  "changeset": 172709551,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    317816920,
+    8266280689,
+    6415667373
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 72 Phố Khương Trung",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684722232,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 5,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    9491918810,
+    8266280665,
+    9491918811,
+    9491918812,
+    9491918813,
+    9491918814,
+    9491918815
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 63 Phố Khương Trung",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684723656,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 8,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6415675304,
+    11259462978,
+    12434872356,
+    6415675293
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 108 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 684723658,
+  "timestamp": "2025-09-04T07:42:53Z",
+  "version": 5,
+  "changeset": 171438420,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6415675296,
+    6415675300
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 66 Phố Vương Thừa Vũ",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 684723659,
+  "timestamp": "2024-10-28T09:53:28Z",
+  "version": 7,
+  "changeset": 158447639,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6415675291,
+    12293517129,
+    12094574021,
+    12293517135,
+    5686737621
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 210 Phố Hoàng Văn Thái",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684723660,
+  "timestamp": "2026-08-27T06:51:08Z",
+  "version": 8,
+  "changeset": 188079567,
+  "user": "danv_grab",
+  "uid": 23590307,
+  "nodes": [
+    6415675299,
+    8272697105,
+    14127716655,
+    14127716654,
+    5686987671
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 96 Phố Hoàng Văn Thái",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 684723662,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 7,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5686737487,
+    6662832774,
+    6415675293,
+    12434872355,
+    6415675301
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 98 Phố Vương Thừa Vũ",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 687392828,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 12,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    4245721358,
+    7505045893,
+    13476754278
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 181 Đường Trường Chinh",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 704011449,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 3,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    442594939,
+    6610625861,
+    6415667373
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 708581284,
+  "timestamp": "2025-10-04T15:11:11Z",
+  "version": 7,
+  "changeset": 172835107,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11508021927,
+    7887622387,
+    12185671575,
+    8277275894
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "yes",
+    "name": "Ngõ 59 Phố Chùa Bộc"
+  }
+},
+{
+  "type": "way",
+  "id": 709001362,
+  "timestamp": "2024-05-10T14:06:02Z",
+  "version": 4,
+  "changeset": 151148673,
+  "user": "CasGroenigen",
+  "uid": 8821717,
+  "nodes": [
+    6662262482,
+    10180194257,
+    2085393476,
+    10828704312,
+    10828704315,
+    10828704316
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 142 Phố Yên Lãng",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 709278598,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 4,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6666290772,
+    10180655881,
+    6666290771
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 188 Phố Thái Thịnh",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 709284505,
+  "timestamp": "2025-10-04T15:11:11Z",
+  "version": 6,
+  "changeset": 172835107,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6666408647,
+    10180655885,
+    6666408646
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 156 Phố Thái Thịnh",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 709361703,
+  "timestamp": "2024-03-04T10:44:51Z",
+  "version": 4,
+  "changeset": 148200214,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    2291014482,
+    10180179060,
+    2291014484
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 112 Thái Thịnh",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 709684917,
+  "timestamp": "2025-01-19T02:03:59Z",
+  "version": 5,
+  "changeset": 161511480,
+  "user": "vietnam321",
+  "uid": 11196308,
+  "nodes": [
+    10100966682,
+    6670504255,
+    12513272961,
+    12513272962,
+    12513272963
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 318 Đường Láng",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 710072101,
+  "timestamp": "2019-08-02T15:59:17Z",
+  "version": 2,
+  "changeset": 72947613,
+  "user": "MTBdude",
+  "uid": 9564561,
+  "nodes": [
+    6676204592,
+    6676204591
+  ],
+  "tags": {
+    "highway": "residential",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 21 Nguyễn Ngọc Nại",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 711401501,
+  "timestamp": "2025-01-26T14:20:49Z",
+  "version": 6,
+  "changeset": 161782038,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6688497762,
+    10170867109,
+    8277275802
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 98 Phố Thái Hà",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 711422040,
+  "timestamp": "2025-10-16T01:59:18Z",
+  "version": 9,
+  "changeset": 173343697,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6688976442,
+    10156272142,
+    12222026351,
+    12222026352,
+    12222026353,
+    12222026350,
+    11993550706,
+    12222026363,
+    12222026369,
+    11993550708,
+    11993550707,
+    6688976441
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 61 Phố Tây Sơn",
+    "service": "alley",
+    "smoothness": "intermediate",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 711424402,
+  "timestamp": "2022-11-04T07:30:02Z",
+  "version": 2,
+  "changeset": 128468678,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    6689074610,
+    10156272143,
+    6689074609
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 711531751,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 3,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6689750515,
+    6689750514
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 91 Phố Đặng Tiến Đông",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 723159052,
+  "timestamp": "2026-08-02T15:08:48Z",
+  "version": 5,
+  "changeset": 186816111,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8273495956,
+    6782941064,
+    5707300758,
+    5707300722,
+    13106136807,
+    5707300757,
+    13106136804,
+    5707300755,
+    10845355012,
+    5707300726,
+    10941497945,
+    5707300756
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ Thịnh Quang",
+    "name:en": "Thinh Quang Alley",
+    "old_name": "Ngõ 438 Tây Sơn",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 756171741,
+  "timestamp": "2026-08-29T04:58:22Z",
+  "version": 8,
+  "changeset": 188179175,
+  "user": "pepsi_max2k",
+  "uid": 14719801,
+  "nodes": [
+    4025481200,
+    11106163757,
+    14132607925
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 12 Phố Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 758317885,
+  "timestamp": "2023-12-08T10:14:12Z",
+  "version": 5,
+  "changeset": 144896907,
+  "user": "GrabVN_QThoai",
+  "uid": 15740602,
+  "nodes": [
+    5710091961,
+    7081932953,
+    11257598722
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 758646384,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 9,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    7085592554,
+    10095032290,
+    4245721360,
+    4245721358
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 181 Đường Trường Chinh",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 764396132,
+  "timestamp": "2025-06-05T10:46:45Z",
+  "version": 6,
+  "changeset": 167216527,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6415548224,
+    12210565725,
+    7141103574
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 50 Ngõ 72 Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 764396133,
+  "timestamp": "2025-10-06T14:26:55Z",
+  "version": 9,
+  "changeset": 172917566,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7141103570,
+    12888505019,
+    7141103571,
+    12143983927,
+    7141103572,
+    11591012200,
+    7141103573,
+    6415548228,
+    12662363856,
+    7513713101,
+    7513713100,
+    10055857262
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 72 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 764396134,
+  "timestamp": "2025-10-06T14:26:55Z",
+  "version": 5,
+  "changeset": 172917566,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7141103570,
+    5206119178
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 153 Phố Giáp Nhất",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 764396135,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 6,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7141103571,
+    7141103575,
+    8266280982,
+    8266280987,
+    7141103576,
+    8266280985,
+    7141103577,
+    7141103578,
+    7141103579,
+    13444702179,
+    7141103582
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 72/1 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 764396136,
+  "timestamp": "2023-11-10T07:18:52Z",
+  "version": 7,
+  "changeset": 143850230,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    7141103582,
+    7141103583,
+    8266280990,
+    7141103584,
+    11337701452,
+    7141166585,
+    11337701453,
+    7141166586,
+    7141166587,
+    8266280966,
+    7141166588
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 782645565,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 4,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    4245721358,
+    4245721359
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 28 Phố Lê Trọng Tấn",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 791684661,
+  "timestamp": "2025-12-01T06:46:35Z",
+  "version": 19,
+  "changeset": 175342795,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7401211873,
+    13343973560,
+    12612823558,
+    7401211871,
+    13343973550,
+    13343973552,
+    7401211869,
+    7401211867,
+    13343973557,
+    7401211866,
+    7401211865,
+    7401211863,
+    7401211861,
+    7401211860,
+    7887624767,
+    7401211859
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 72 Phố Tôn Thất Tùng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 791684662,
+  "timestamp": "2025-02-23T13:54:13Z",
+  "version": 8,
+  "changeset": 162852939,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7401242714,
+    7401242716,
+    7401242718,
+    7401242719,
+    7401242720,
+    7401242721,
+    7401211877,
+    7401211873,
+    10973278407,
+    7401211874,
+    10130548063,
+    10973298139
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 354 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 791684663,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 8,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    4025085947,
+    7401211879,
+    7401211880,
+    7401211881,
+    7401211882,
+    7401211883,
+    7401211884,
+    7401242685,
+    10130548086,
+    6781810839
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 199 Phố Khương Thượng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 803248825,
+  "timestamp": "2023-11-10T07:18:52Z",
+  "version": 4,
+  "changeset": 143850230,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    7513713105,
+    8266280983,
+    7513713104,
+    7513713103,
+    7513713102,
+    7141166586
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 803248826,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 4,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7513713108,
+    8266280895,
+    7513713107,
+    7513713106
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 72/1 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 803248827,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 4,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7513713116,
+    7513713115,
+    7513713114,
+    8266280892,
+    7513713113
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 32/145 Phố Quan Nhân",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 803248828,
+  "timestamp": "2023-06-16T13:53:57Z",
+  "version": 3,
+  "changeset": 137415770,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    7513713120,
+    7513713119,
+    7513713118,
+    7513713116,
+    7513713106,
+    7513713117
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 20 Phố Cự Lộc"
+  }
+},
+{
+  "type": "way",
+  "id": 803248829,
+  "timestamp": "2024-05-16T10:10:16Z",
+  "version": 4,
+  "changeset": 151399804,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    7513713136,
+    7513713127,
+    7513713126,
+    10839206948,
+    7513713125
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 803248830,
+  "timestamp": "2024-05-16T10:10:16Z",
+  "version": 6,
+  "changeset": 151399804,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    7513713133,
+    8266281039,
+    7513713131,
+    8266280995,
+    10839206949,
+    7513713130,
+    7513713125,
+    8266280992,
+    7513713129,
+    7513713128
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 109 Quan Nhân"
+  }
+},
+{
+  "type": "way",
+  "id": 856460790,
+  "timestamp": "2026-02-07T16:56:42Z",
+  "version": 24,
+  "changeset": 178236579,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7771967122,
+    13532420568,
+    10130548081,
+    7771967123,
+    7119384385,
+    8093872388,
+    12726065966,
+    7119373780,
+    10131967155,
+    12726065968,
+    7119373782
+  ],
+  "tags": {
+    "bicycle": "no",
+    "bridge": "yes",
+    "foot": "no",
+    "highway": "trunk",
+    "horse": "no",
+    "lanes": "2",
+    "layer": "2",
+    "lit": "yes",
+    "maxspeed": "80",
+    "moped": "no",
+    "motor_vehicle": "yes",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "motorroad": "yes",
+    "name": "Đường Vành đai 2",
+    "name:en": "Ring Road 2",
+    "oneway": "yes",
+    "shoulder": "no",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 856460791,
+  "timestamp": "2025-04-03T15:50:14Z",
+  "version": 21,
+  "changeset": 164471656,
+  "user": "ZioDragon",
+  "uid": 13799024,
+  "nodes": [
+    7119384389,
+    12726065969,
+    10131967154,
+    7119384388,
+    12726065967,
+    8093872387,
+    7119384387,
+    7771967128,
+    10130548080,
+    7771967127
+  ],
+  "tags": {
+    "bicycle": "no",
+    "bridge": "yes",
+    "foot": "no",
+    "highway": "trunk",
+    "horse": "no",
+    "lanes": "2",
+    "layer": "2",
+    "lit": "yes",
+    "maxspeed": "80",
+    "moped": "no",
+    "motor_vehicle": "yes",
+    "motorcar": "yes",
+    "motorcycle": "no",
+    "motorroad": "yes",
+    "name": "Đường Vành đai 2",
+    "name:en": "Ring Road 2",
+    "oneway": "yes",
+    "shoulder": "no",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 862423878,
+  "timestamp": "2024-03-15T07:25:38Z",
+  "version": 6,
+  "changeset": 148673368,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    10130569871,
+    10130569870,
+    8034817829,
+    8034817828,
+    8034817827,
+    8034817826,
+    8034817825,
+    8034817824,
+    8034817823,
+    11224700067,
+    8034817822,
+    8034817821,
+    8034817844,
+    8034817812,
+    8034817813,
+    8034817814,
+    8034817815
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 862423881,
+  "timestamp": "2024-03-15T07:25:38Z",
+  "version": 5,
+  "changeset": 148673368,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    104838920,
+    10130399605,
+    8034817815
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "moped": "yes",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 883126628,
+  "timestamp": "2024-02-01T06:18:20Z",
+  "version": 6,
+  "changeset": 146931942,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    10180671257,
+    8869800038,
+    8212496498,
+    6356474917,
+    10180120734,
+    10180120735,
+    10180120736,
+    10180120737,
+    6356474918,
+    6356474919,
+    6688297604
+  ],
+  "tags": {
+    "bicycle": "designated",
+    "foot": "designated",
+    "highway": "cycleway",
+    "lit": "yes",
+    "moped": "no",
+    "motor_vehicle": "no",
+    "motorcycle": "no",
+    "name": "Đường xe đạp sông Tô Lịch",
+    "oneway": "no",
+    "segregated": "yes",
+    "surface": "asphalt",
+    "width": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 889148284,
+  "timestamp": "2024-12-20T04:42:43Z",
+  "version": 3,
+  "changeset": 160418348,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266275576,
+    8266275575,
+    8266275574
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148293,
+  "timestamp": "2025-05-21T12:25:00Z",
+  "version": 3,
+  "changeset": 166566521,
+  "user": "rajdhani",
+  "uid": 20051396,
+  "nodes": [
+    8266275599,
+    8266275598
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148294,
+  "timestamp": "2025-05-21T12:25:00Z",
+  "version": 3,
+  "changeset": 166566521,
+  "user": "rajdhani",
+  "uid": 20051396,
+  "nodes": [
+    8266275601,
+    8266275599,
+    8266275600
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148295,
+  "timestamp": "2025-08-24T06:23:33Z",
+  "version": 3,
+  "changeset": 170907917,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266275604,
+    8266275603,
+    8266275602,
+    9880317682,
+    9880317683
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 121 Ngõ Thịnh Quang"
+  }
+},
+{
+  "type": "way",
+  "id": 889148296,
+  "timestamp": "2026-02-26T10:04:00Z",
+  "version": 5,
+  "changeset": 179076965,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    8266275608,
+    8266275607,
+    8266275601,
+    9880317685,
+    9880317684,
+    8266275606,
+    13602147980,
+    8266275605,
+    8266275602
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 122 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148297,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266275610,
+    8266275615
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148298,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266275612,
+    8266275611
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148299,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280617,
+    8266275613
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148300,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266275615,
+    8266275614
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148301,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280621,
+    8266280620,
+    8266280619,
+    8266280618,
+    8266280617,
+    8266275612,
+    8266275616,
+    9716978005,
+    8266275615
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148302,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280625,
+    8266280624,
+    8266280623,
+    8266280622
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148303,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280627,
+    8266280626
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148304,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 3,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280629,
+    8266280628,
+    8266280632
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148305,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 3,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280630,
+    8266280632
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148306,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 3,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280632,
+    8266280631
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148307,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 3,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280635,
+    8266280630,
+    8266280634,
+    8266280633
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148308,
+  "timestamp": "2026-04-14T09:09:05Z",
+  "version": 3,
+  "changeset": 181311879,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    8266280639,
+    13729457449,
+    13729457450,
+    8266280636
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148309,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280640,
+    8266280639,
+    8266280638,
+    8266280637
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148311,
+  "timestamp": "2026-03-12T04:14:54Z",
+  "version": 7,
+  "changeset": 179731044,
+  "user": "Mr Chat GPT",
+  "uid": 23044470,
+  "nodes": [
+    421493624,
+    13457205249,
+    8266280645,
+    12129452069,
+    8266280641
+  ],
+  "tags": {
+    "hgv": "no",
+    "highway": "service",
+    "maxwidth": "2",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 211/1 Phố Khương Trung",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148312,
+  "timestamp": "2026-05-07T09:02:15Z",
+  "version": 7,
+  "changeset": 182328384,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    8266280656,
+    8266280655,
+    8266280654,
+    8266280653,
+    13805675797,
+    8266280652,
+    8266280651,
+    8266280650,
+    8266280649,
+    12434887929,
+    317817137
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 164/62 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148313,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 4,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    1758651197,
+    8266280662,
+    12434872365,
+    8266280661,
+    8266280660,
+    8266280626,
+    8266280659,
+    8266280658,
+    8266280656,
+    8266280657
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148315,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280668,
+    8266280667,
+    8266280666
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148316,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 3,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280671,
+    8266280666,
+    8266280670,
+    6415667371
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148317,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 4,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266280676,
+    13019222217,
+    8266280672,
+    8823725865
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 86/16 Phố Tô Vĩnh Diện",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148318,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 5,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266280676,
+    8266280675,
+    8266280674
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 86/16 Phố Tô Vĩnh Diện",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148319,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 4,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266280677,
+    8266280676
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 86/16/17 Phố Tô Vĩnh Diện",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148320,
+  "timestamp": "2024-01-02T07:12:24Z",
+  "version": 4,
+  "changeset": 145786430,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11478291682,
+    8266280677,
+    8266280679
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 889148321,
+  "timestamp": "2024-01-02T07:12:24Z",
+  "version": 4,
+  "changeset": 145786430,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8705226560,
+    8705226559,
+    8266280680,
+    8705226557,
+    8705226558,
+    8705226556,
+    8705226555,
+    8266280679
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 889148322,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 6,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266280674,
+    8705226563,
+    8266280683
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 86/16 Phố Tô Vĩnh Diện"
+  }
+},
+{
+  "type": "way",
+  "id": 889148325,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280689,
+    8266280688
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148326,
+  "timestamp": "2023-09-11T07:29:15Z",
+  "version": 2,
+  "changeset": 141095955,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280692,
+    8266280691,
+    8266280690
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148327,
+  "timestamp": "2025-08-22T14:38:20Z",
+  "version": 3,
+  "changeset": 170835840,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266280696,
+    13089313421,
+    8266280695,
+    8266280694,
+    8266280693
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 124/24 Phố Khương Trung",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148328,
+  "timestamp": "2023-09-11T07:29:15Z",
+  "version": 2,
+  "changeset": 141095955,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280699,
+    8266280698,
+    8266280697
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148330,
+  "timestamp": "2023-09-11T07:29:15Z",
+  "version": 3,
+  "changeset": 141095955,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6413581242,
+    8266280705
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148339,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 9,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8266280738,
+    9083673381,
+    8266280737,
+    8266280736,
+    8266280735,
+    9911047105,
+    8266280734,
+    8266280733
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 105 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148340,
+  "timestamp": "2024-08-29T11:05:21Z",
+  "version": 4,
+  "changeset": 155922556,
+  "user": "openmap-vn",
+  "uid": 21213273,
+  "nodes": [
+    8266280740,
+    11909456008,
+    11909456007,
+    8266280739,
+    12143983951,
+    12143983950,
+    12143983949,
+    12143983948,
+    11909456008
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?picId=650609c5-9ffc-4071-aa22-fc20941aa145&lat=20.99880931&lng=105.816811913&yaw=64&pitch=-9"
+  }
+},
+{
+  "type": "way",
+  "id": 889148349,
+  "timestamp": "2026-04-23T06:05:23Z",
+  "version": 5,
+  "changeset": 181700997,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    12143983936,
+    8266280760,
+    8266280759,
+    8266280758,
+    12143983938,
+    8266280757,
+    8266280756,
+    8266280755,
+    9491906562,
+    8266280754,
+    8266280753
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 129 Đường Nguyễn Trãi",
+    "source": "https://www.streetview.vn/?picId=0861d28a-4275-4f87-8633-77ceca3c53f6&lat=20.998128892&lng=105.816177348&yaw=346&pitch=0"
+  }
+},
+{
+  "type": "way",
+  "id": 889148351,
+  "timestamp": "2026-07-29T05:52:39Z",
+  "version": 5,
+  "changeset": 186563245,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8266280766,
+    8266280765,
+    9577086632,
+    8266280764,
+    12477790996,
+    12477790997,
+    12477790991
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148352,
+  "timestamp": "2026-07-29T05:52:39Z",
+  "version": 5,
+  "changeset": 186563245,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8266280768,
+    2294881188
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148353,
+  "timestamp": "2026-07-29T05:52:39Z",
+  "version": 6,
+  "changeset": 186563245,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8266280770,
+    8709046610,
+    2294881189
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148354,
+  "timestamp": "2026-07-29T05:52:39Z",
+  "version": 5,
+  "changeset": 186563245,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8266280774,
+    14057539101,
+    8266280773,
+    8266280772,
+    14057509400,
+    8266280771
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148355,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 4,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280777,
+    8266280776,
+    8994244793,
+    8266280775
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 244 Thượng Đình"
+  }
+},
+{
+  "type": "way",
+  "id": 889148356,
+  "timestamp": "2024-07-03T10:57:38Z",
+  "version": 3,
+  "changeset": 153496482,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5485805583,
+    8266280779,
+    8266280778
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148357,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 5,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    7388633674,
+    7388633679,
+    7388633675
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 65 PhoKhương Đình",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148400,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280892,
+    8266280891
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148401,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280895,
+    8266280894,
+    8266280893
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148409,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 3,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6413581249,
+    8266280914
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148412,
+  "timestamp": "2023-12-25T08:56:14Z",
+  "version": 5,
+  "changeset": 145489257,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5710231821,
+    8266280929
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148414,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280936,
+    10100966707,
+    8266280935,
+    8266280934,
+    8266280933
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148415,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280939,
+    10100966706,
+    8266280938,
+    8266280937,
+    8266280942
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148416,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280947,
+    10100992418,
+    8266280946,
+    8266280945,
+    8266280944,
+    8266280943,
+    8266280942,
+    8266280941,
+    8266280940
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148417,
+  "timestamp": "2025-06-05T10:46:45Z",
+  "version": 3,
+  "changeset": 167216527,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280949,
+    8266280948
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148418,
+  "timestamp": "2025-08-27T12:40:29Z",
+  "version": 6,
+  "changeset": 171078794,
+  "user": "psfrangeu_grab",
+  "uid": 23058369,
+  "nodes": [
+    8266280955,
+    8266280954,
+    8266280949,
+    8266280952,
+    8266280951,
+    8266280950
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 33 Phố Cự Lộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148426,
+  "timestamp": "2026-09-20T03:19:34Z",
+  "version": 8,
+  "changeset": 189278893,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    12497460908,
+    8266280976,
+    14199053193,
+    8266280975
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 25/8 Phố Cự Lộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148427,
+  "timestamp": "2026-03-28T09:37:09Z",
+  "version": 5,
+  "changeset": 180534439,
+  "user": "solenoid jam",
+  "uid": 10129333,
+  "nodes": [
+    7141103569,
+    8266280979
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 889148429,
+  "timestamp": "2023-11-10T07:18:52Z",
+  "version": 3,
+  "changeset": 143850230,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11337701448,
+    8266280983
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination"
+  }
+},
+{
+  "type": "way",
+  "id": 889148431,
+  "timestamp": "2024-08-29T11:05:21Z",
+  "version": 3,
+  "changeset": 155922556,
+  "user": "openmap-vn",
+  "uid": 21213273,
+  "nodes": [
+    8266280990,
+    8266280989,
+    12143983935,
+    8266280988
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148432,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280992,
+    8266280991
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148433,
+  "timestamp": "2023-04-25T07:51:39Z",
+  "version": 2,
+  "changeset": 135330892,
+  "user": "Arkskyle",
+  "uid": 17344224,
+  "nodes": [
+    10839206949,
+    8266280994,
+    8266280993
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 30 Ngõ 109 Phố Quan Nhân",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148434,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266280997,
+    8266280996
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148435,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281039,
+    8266280997,
+    8266280998
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148439,
+  "timestamp": "2024-09-05T03:42:30Z",
+  "version": 3,
+  "changeset": 156211087,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8266280950,
+    8266281010
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148440,
+  "timestamp": "2023-06-16T13:53:57Z",
+  "version": 2,
+  "changeset": 137415770,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281015,
+    8266281014,
+    8266281013,
+    8266281012
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148441,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 3,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266281017,
+    8266281016,
+    13444702174
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 26 Phố Cự Lộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889148445,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281027,
+    8266281026
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148446,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281029,
+    8266281028
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148447,
+  "timestamp": "2023-06-16T14:03:20Z",
+  "version": 2,
+  "changeset": 137416137,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281032,
+    8266281031,
+    8266281030
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889148450,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 2,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8266281039,
+    8266281038,
+    8266281037
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 889985055,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 4,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    8272697068,
+    8272697067
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 61 Phố Nguyễn Viết Xuân",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889985060,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 5,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8272697077,
+    12434872354,
+    6415675295
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889985062,
+  "timestamp": "2026-07-29T05:49:47Z",
+  "version": 7,
+  "changeset": 186563166,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    317817125,
+    8272697080,
+    13729467017,
+    8272697079
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 125 Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "way",
+  "id": 889985064,
+  "timestamp": "2026-07-21T14:11:35Z",
+  "version": 4,
+  "changeset": 186118387,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8272697086,
+    8272697083,
+    8272697084
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 131/8 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889985065,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 7,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    8272697087,
+    8272697086,
+    8272697085
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 889985068,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 5,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8272697095,
+    8705051254,
+    10127344739
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 134/3 Phố Lê Trọng Tấn"
+  }
+},
+{
+  "type": "way",
+  "id": 889985069,
+  "timestamp": "2025-12-24T16:42:53Z",
+  "version": 4,
+  "changeset": 176369490,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8272697097,
+    10127354217,
+    12141257553,
+    8272697096
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 134/15 Phố Lê Trọng Tấn"
+  }
+},
+{
+  "type": "way",
+  "id": 889985070,
+  "timestamp": "2026-05-02T12:03:00Z",
+  "version": 4,
+  "changeset": 182113198,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    421482480,
+    8272697104
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 128 Phố Hoàng Văn Thái"
+  }
+},
+{
+  "type": "way",
+  "id": 889985071,
+  "timestamp": "2026-05-02T12:03:00Z",
+  "version": 3,
+  "changeset": 182113198,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8272697100,
+    8272697099
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 128/4 Phố Hoàng Văn Thái",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 889985072,
+  "timestamp": "2026-08-24T13:19:04Z",
+  "version": 5,
+  "changeset": 187938708,
+  "user": "danv_grab",
+  "uid": 23590307,
+  "nodes": [
+    421482480,
+    14119406870,
+    14119406871,
+    421484444,
+    8272697099,
+    8272697101
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 128 Phố Hoàng Văn Thái",
+    "source": "AsiaGPS"
+  }
+},
+{
+  "type": "way",
+  "id": 889985073,
+  "timestamp": "2026-05-02T12:03:00Z",
+  "version": 4,
+  "changeset": 182113198,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8272697104,
+    421482471,
+    8272697100,
+    13786871451,
+    8272697103
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 126/1 Phố Hoàng Văn Thái"
+  }
+},
+{
+  "type": "way",
+  "id": 889985074,
+  "timestamp": "2025-10-21T06:02:07Z",
+  "version": 6,
+  "changeset": 173565241,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    421482836,
+    8272697106,
+    8272697105
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 126/2 Phố Hoàng Văn Thái"
+  }
+},
+{
+  "type": "way",
+  "id": 889985077,
+  "timestamp": "2024-12-20T04:54:05Z",
+  "version": 4,
+  "changeset": 160418573,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8272697118,
+    12434872357,
+    2452491618
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 164/41 Phố Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078701,
+  "timestamp": "2025-08-30T06:07:10Z",
+  "version": 5,
+  "changeset": 171211542,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13108150781,
+    8273495953
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 161 Ngõ Thịnh Quang",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078706,
+  "timestamp": "2023-09-25T04:42:43Z",
+  "version": 2,
+  "changeset": 141711672,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273495973,
+    8273495972,
+    8273495971,
+    8273495970,
+    8273495969
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078710,
+  "timestamp": "2025-08-29T15:20:25Z",
+  "version": 5,
+  "changeset": 171190384,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13106131189,
+    8273495983,
+    12597520468,
+    8273495982,
+    5707298912
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ Thịnh Quang",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078711,
+  "timestamp": "2025-08-29T15:20:25Z",
+  "version": 4,
+  "changeset": 171190384,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273495987,
+    8273495986,
+    10129890475,
+    8273495985
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 67 Phố Thái Thịnh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078712,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 2,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273495989,
+    8273495988
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078713,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 3,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273495992,
+    8273495989,
+    8273495991,
+    8273495990
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078714,
+  "timestamp": "2023-12-20T04:47:38Z",
+  "version": 4,
+  "changeset": 145315498,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5709996145,
+    8273495993
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 470 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078715,
+  "timestamp": "2026-08-15T14:06:55Z",
+  "version": 4,
+  "changeset": 187490585,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273495998,
+    8273495997,
+    8273495996,
+    14096821682,
+    8273495995
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 426/20 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078716,
+  "timestamp": "2023-12-20T04:47:38Z",
+  "version": 3,
+  "changeset": 145315498,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8273496000,
+    8273495999
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078717,
+  "timestamp": "2023-12-20T04:47:38Z",
+  "version": 3,
+  "changeset": 145315498,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5709996152,
+    8273496001
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078719,
+  "timestamp": "2024-07-20T21:16:08Z",
+  "version": 5,
+  "changeset": 154196346,
+  "user": "logus2",
+  "uid": 21611817,
+  "nodes": [
+    8273496006,
+    8273496005
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 508/91 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890078720,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 2,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273496009,
+    8273496008,
+    8273496007
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078723,
+  "timestamp": "2026-03-11T10:34:27Z",
+  "version": 3,
+  "changeset": 179688454,
+  "user": "ruchitha_reddy",
+  "uid": 17540386,
+  "nodes": [
+    13637943681,
+    8273496014
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078726,
+  "timestamp": "2024-10-07T03:08:49Z",
+  "version": 3,
+  "changeset": 157563148,
+  "user": "GrabVN_HHanh",
+  "uid": 21825758,
+  "nodes": [
+    8273496021,
+    8273496020,
+    8273496019,
+    12230809167,
+    12230809168
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078728,
+  "timestamp": "2025-07-19T07:02:01Z",
+  "version": 3,
+  "changeset": 169138555,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273496024,
+    8273496023
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 161/27 Phố Thái Hà"
+  }
+},
+{
+  "type": "way",
+  "id": 890078729,
+  "timestamp": "2025-10-04T15:11:11Z",
+  "version": 5,
+  "changeset": 172835107,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8273496028,
+    8273496026,
+    8273496023,
+    8273496025,
+    13011221837,
+    13011221833,
+    13011221836,
+    13011221835,
+    13011221834
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 161/27 Phố Thái Hà"
+  }
+},
+{
+  "type": "way",
+  "id": 890078730,
+  "timestamp": "2026-04-20T06:56:15Z",
+  "version": 8,
+  "changeset": 181566902,
+  "user": "GrabVN_HHanh",
+  "uid": 21825758,
+  "nodes": [
+    2291014387,
+    8273496029,
+    12230809170,
+    12230809166,
+    8273496028,
+    2291013618
+  ],
+  "tags": {
+    "highway": "residential",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 161 Phố Thái Hà"
+  }
+},
+{
+  "type": "way",
+  "id": 890078731,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 2,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273496032,
+    8273496031
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078732,
+  "timestamp": "2026-01-31T05:12:48Z",
+  "version": 3,
+  "changeset": 177914348,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273496034,
+    13513704907
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078733,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 2,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273496036,
+    8273496035
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890078734,
+  "timestamp": "2023-09-26T07:46:11Z",
+  "version": 2,
+  "changeset": 141761173,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8273496038,
+    8273496037
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573887,
+  "timestamp": "2024-04-26T08:01:07Z",
+  "version": 3,
+  "changeset": 150525644,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275635,
+    8277275631
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573888,
+  "timestamp": "2025-12-16T08:45:24Z",
+  "version": 5,
+  "changeset": 175994183,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    8277275639,
+    8277275636,
+    8277275635,
+    13208173140,
+    8277275634,
+    8277275633,
+    13208173141
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573889,
+  "timestamp": "2024-06-20T10:34:13Z",
+  "version": 4,
+  "changeset": 152936847,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275639,
+    11849697364,
+    8277275638,
+    8277275637
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573890,
+  "timestamp": "2025-09-25T01:03:31Z",
+  "version": 5,
+  "changeset": 172416927,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    8277275644,
+    8277275643,
+    8277275642,
+    8277275641
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 890573891,
+  "timestamp": "2024-04-26T08:01:07Z",
+  "version": 3,
+  "changeset": 150525644,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275646,
+    8277275645
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573892,
+  "timestamp": "2025-09-27T16:57:10Z",
+  "version": 6,
+  "changeset": 172535003,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275649,
+    10130399667,
+    8277275648,
+    8277275647
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 81 Phố Đặng Văn Ngữ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573935,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275814,
+    8277275753
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573936,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275755,
+    8277275754
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573937,
+  "timestamp": "2024-05-03T08:55:35Z",
+  "version": 4,
+  "changeset": 150826006,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8277275763,
+    8277355710,
+    8277275762,
+    8277275761,
+    11876052153,
+    8277275760,
+    8277275759,
+    10118163081,
+    11876052152,
+    8277275758,
+    8277275757,
+    8277275756
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573938,
+  "timestamp": "2024-05-23T09:19:26Z",
+  "version": 3,
+  "changeset": 151712578,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5683715148,
+    8277275765,
+    8277275764
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573939,
+  "timestamp": "2024-08-23T06:42:46Z",
+  "version": 4,
+  "changeset": 155635921,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275769,
+    10130548084,
+    8277275768,
+    12129049271,
+    12129049272,
+    8277275767
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573944,
+  "timestamp": "2024-01-26T04:41:26Z",
+  "version": 3,
+  "changeset": 146696089,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    7401211866,
+    8277275778
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573946,
+  "timestamp": "2024-05-19T04:05:54Z",
+  "version": 3,
+  "changeset": 151518045,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275784,
+    8277275783
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573947,
+  "timestamp": "2024-06-10T15:04:18Z",
+  "version": 3,
+  "changeset": 152502208,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    7401242714,
+    11969314193,
+    8277275785
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573949,
+  "timestamp": "2025-11-18T09:43:15Z",
+  "version": 8,
+  "changeset": 174809339,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    8277275794,
+    10095032282,
+    11276434841,
+    8277275793,
+    11276434842,
+    8277275792,
+    11276434846,
+    11276434845,
+    11276434847,
+    11276434849,
+    8277275791,
+    11276434851,
+    11276434855,
+    11276434852,
+    8277275789,
+    11276434857
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 203 Trường Chinh",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 890573950,
+  "timestamp": "2025-09-10T15:15:16Z",
+  "version": 6,
+  "changeset": 171741464,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8277275797,
+    8277275796,
+    8277275798
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 3/29 Phố Cù Chính Lan",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573951,
+  "timestamp": "2025-09-10T15:15:16Z",
+  "version": 4,
+  "changeset": 171741464,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8277275799,
+    13134398333,
+    8277275798
+  ],
+  "tags": {
+    "highway": "service",
+    "layer": "-1",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 3/15 Phố Cù Chính Lan",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573952,
+  "timestamp": "2025-04-19T18:57:37Z",
+  "version": 3,
+  "changeset": 165167421,
+  "user": "Tewuzij",
+  "uid": 16194143,
+  "nodes": [
+    8277275801,
+    8277275800
+  ],
+  "tags": {
+    "highway": "service",
+    "layer": "-1",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573954,
+  "timestamp": "2026-02-24T14:23:18Z",
+  "version": 3,
+  "changeset": 178991944,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8277275805,
+    8277275804
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 3/79 Phố Thái Hà",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573955,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275807,
+    5716408774
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573959,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 4,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275814,
+    13246226893,
+    8277275755,
+    8277275813
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573960,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 6,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275817,
+    8277275816,
+    11893159820,
+    8277275815,
+    11893159822,
+    11893159823
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 51 Phố Tam Khương",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573962,
+  "timestamp": "2024-05-10T08:57:28Z",
+  "version": 4,
+  "changeset": 151134235,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8277275822,
+    8277275821,
+    8277275820
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573963,
+  "timestamp": "2023-05-12T08:47:42Z",
+  "version": 2,
+  "changeset": 136007784,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8277275824,
+    8277275823
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573964,
+  "timestamp": "2023-05-12T08:47:42Z",
+  "version": 5,
+  "changeset": 136007784,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8277275830,
+    8277275829,
+    8277275824,
+    8277275828,
+    8277275827,
+    8277275826,
+    5683715151
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573965,
+  "timestamp": "2024-08-23T06:42:46Z",
+  "version": 4,
+  "changeset": 155635921,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    7085612953,
+    8277275767
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573966,
+  "timestamp": "2024-08-23T06:42:46Z",
+  "version": 3,
+  "changeset": 155635921,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275835,
+    8277275767
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573968,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 3,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275843,
+    8277275841
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 91 Phố Tam Khương",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573969,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 4,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275846,
+    11025311230,
+    8277275845,
+    8277275844,
+    11025311223
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Hẻm 354/137/34 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573970,
+  "timestamp": "2025-02-23T13:54:13Z",
+  "version": 8,
+  "changeset": 162852939,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7401242714,
+    8277275822,
+    8277275847,
+    11893159824,
+    11893159825,
+    11893159822
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngách 354/159 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573972,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275854,
+    8277275853,
+    8277275852,
+    8277275851
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573973,
+  "timestamp": "2024-08-23T07:18:45Z",
+  "version": 4,
+  "changeset": 155636947,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    4025085951,
+    8277275857,
+    8277275855
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573974,
+  "timestamp": "2026-06-02T03:05:12Z",
+  "version": 5,
+  "changeset": 183525290,
+  "user": "Nguyen Duc Viet",
+  "uid": 22603645,
+  "nodes": [
+    7401242695,
+    8277275855,
+    8277275859
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 165 Phố Khương Thượng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573979,
+  "timestamp": "2023-07-04T10:51:49Z",
+  "version": 2,
+  "changeset": 138102062,
+  "user": "Arkskyle",
+  "uid": 17344224,
+  "nodes": [
+    11025311232,
+    8277275878,
+    8277275876
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573980,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 8,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    7401242718,
+    8277275876,
+    8277275880,
+    8277275840,
+    11025311227
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 354/137 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573981,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    5683792696,
+    8277275883
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573982,
+  "timestamp": "2024-09-19T08:16:43Z",
+  "version": 5,
+  "changeset": 156807317,
+  "user": "vietnam321",
+  "uid": 11196308,
+  "nodes": [
+    8277275888,
+    12185673542,
+    8277275885
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573983,
+  "timestamp": "2022-01-22T13:53:50Z",
+  "version": 2,
+  "changeset": 116466514,
+  "user": "vietnam321",
+  "uid": 11196308,
+  "nodes": [
+    8277275890,
+    9439529100,
+    8277275889
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573985,
+  "timestamp": "2024-01-11T08:21:54Z",
+  "version": 4,
+  "changeset": 146132368,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    8277275895,
+    11508021926
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573987,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275899,
+    8277275898
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573988,
+  "timestamp": "2026-08-02T15:08:48Z",
+  "version": 5,
+  "changeset": 186816111,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    10939618810,
+    8277275898,
+    10170867111,
+    8277275900
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 70 Phố Thái Hà"
+  }
+},
+{
+  "type": "way",
+  "id": 890573989,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275903,
+    8277275902
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573990,
+  "timestamp": "2026-03-04T14:54:05Z",
+  "version": 5,
+  "changeset": 179353422,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8277275905,
+    10226806914,
+    13617994694,
+    8277275904
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 178/45 Phố Tây Sơn"
+  }
+},
+{
+  "type": "way",
+  "id": 890573991,
+  "timestamp": "2026-03-04T15:11:32Z",
+  "version": 5,
+  "changeset": 179354114,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    1905162491,
+    8277275906
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 178/5 Phố Tây Sơn",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573992,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275909,
+    8277275908
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573994,
+  "timestamp": "2026-08-02T15:08:48Z",
+  "version": 6,
+  "changeset": 186816111,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275912,
+    9596704583,
+    8277275909,
+    8277275911
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 306 Phố Tây Sơn"
+  }
+},
+{
+  "type": "way",
+  "id": 890573995,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275914,
+    8277275913
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573996,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275919,
+    8277275918,
+    8277275917,
+    8277275916,
+    8277275915
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573997,
+  "timestamp": "2024-03-04T10:44:51Z",
+  "version": 3,
+  "changeset": 148200214,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    5710297037,
+    8277275921,
+    8277275920
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890573998,
+  "timestamp": "2020-12-31T08:19:19Z",
+  "version": 2,
+  "changeset": 96715121,
+  "user": "GrabVN_Nha",
+  "uid": 12125212,
+  "nodes": [
+    8277275924,
+    8277275923,
+    8277275925
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890573999,
+  "timestamp": "2020-12-31T08:19:19Z",
+  "version": 2,
+  "changeset": 96715121,
+  "user": "GrabVN_Nha",
+  "uid": 12125212,
+  "nodes": [
+    8277275926,
+    8277275927,
+    8277275925
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574000,
+  "timestamp": "2025-10-04T15:11:11Z",
+  "version": 4,
+  "changeset": 172835107,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275928,
+    11542315034
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 41/33 Phố Thái Hà"
+  }
+},
+{
+  "type": "way",
+  "id": 890574001,
+  "timestamp": "2024-03-04T10:44:51Z",
+  "version": 3,
+  "changeset": 148200214,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275930,
+    8277275929
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574002,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275934,
+    8277275933,
+    8277275932,
+    8277275931
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574003,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 2,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    8277275935,
+    8277275934
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574004,
+  "timestamp": "2026-07-14T19:27:21Z",
+  "version": 6,
+  "changeset": 185738070,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5710091978,
+    10074809268,
+    8277275934,
+    14015597181,
+    8277275936
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 69 Phố Trung Liệt",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 890574005,
+  "timestamp": "2024-10-04T09:36:00Z",
+  "version": 6,
+  "changeset": 157452156,
+  "user": "vietnam321",
+  "uid": 11196308,
+  "nodes": [
+    9419760413,
+    12222026364,
+    9419765723,
+    11993550704,
+    8277275938
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574006,
+  "timestamp": "2024-06-20T10:34:13Z",
+  "version": 3,
+  "changeset": 152936847,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275999,
+    8277275940
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574018,
+  "timestamp": "2026-08-27T06:28:49Z",
+  "version": 4,
+  "changeset": 188078857,
+  "user": "anamariac_grab",
+  "uid": 24387876,
+  "nodes": [
+    8277275969,
+    14127696550,
+    8277275968,
+    8034817813
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574019,
+  "timestamp": "2024-11-13T02:19:40Z",
+  "version": 3,
+  "changeset": 159073909,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275973,
+    8277275972,
+    8277275971,
+    8277275970
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574020,
+  "timestamp": "2024-11-06T03:12:05Z",
+  "version": 5,
+  "changeset": 158801785,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275975,
+    5710091941
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ Liên Việt",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574021,
+  "timestamp": "2024-11-13T02:19:40Z",
+  "version": 3,
+  "changeset": 159073909,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275978,
+    8277275977
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574022,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 3,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    13415994160,
+    8277275979
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574023,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 4,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    13415994160,
+    5485634269
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574024,
+  "timestamp": "2024-06-20T10:34:13Z",
+  "version": 4,
+  "changeset": 152936847,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275983,
+    11993550703,
+    1753888594
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 890574025,
+  "timestamp": "2024-11-13T02:19:40Z",
+  "version": 3,
+  "changeset": 159073909,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275985,
+    8277275984
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 890574031,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 5,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5710091952,
+    8277276000,
+    8277275999
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 896754253,
+  "timestamp": "2026-06-22T13:44:28Z",
+  "version": 10,
+  "changeset": 184432975,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    8267244602,
+    12185671558,
+    8335715903,
+    12185671557,
+    12185671555,
+    12185671556,
+    8335715902,
+    8335715901,
+    8335715900,
+    8335715899,
+    8335715898,
+    8335715897,
+    8335715894,
+    8767931826,
+    10941195746
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 65 Phố Nguyễn Ngọc Doãn",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 900842184,
+  "timestamp": "2025-12-17T07:03:55Z",
+  "version": 4,
+  "changeset": 176035613,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    8368116823,
+    10130548093,
+    11425060773,
+    8368116824,
+    8368116825,
+    8368116826,
+    8368116827,
+    8368116828,
+    8368116829,
+    8368116830,
+    8368116831,
+    5686426691
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 948942114,
+  "timestamp": "2026-09-02T12:50:58Z",
+  "version": 6,
+  "changeset": 188417676,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    6443358073,
+    5686987660
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 20 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 953306409,
+  "timestamp": "2025-07-23T14:45:40Z",
+  "version": 7,
+  "changeset": 169348912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8823725865,
+    8823725864,
+    12141629851,
+    8823741063,
+    11478291689,
+    8823725863,
+    8823725862
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 86/16 Phố Tô Vĩnh Diện"
+  }
+},
+{
+  "type": "way",
+  "id": 962360833,
+  "timestamp": "2024-09-05T03:52:57Z",
+  "version": 4,
+  "changeset": 156211280,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8901870746,
+    8901870745,
+    9533723034
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 45 Phố Cự Lộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 971527604,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 7,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991912097,
+    8991912099
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527606,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 7,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991912099,
+    8991912100
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527608,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 6,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991912110,
+    8991912107
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "oneway": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527610,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 7,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991912108,
+    8991912110
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527617,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 8,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991914319,
+    8991914320
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "ramp:stroller": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527618,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 9,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991914324,
+    8991914323
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "ramp:stroller": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 971527620,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 7,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991914327,
+    8999179574,
+    8999179575,
+    8991914324
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "ramp:stroller": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972053633,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 6,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    3375847711,
+    3375847712
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972053635,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 6,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8996675670,
+    8991905222
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972053636,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 8,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8991914320,
+    10118163082,
+    8999179576,
+    8991912106
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "ramp:stroller": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972053639,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 6,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    3375847703,
+    8991912094
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "no",
+    "exit": "yes",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "up",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972325114,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 5,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8999179577,
+    8999179578
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 972325115,
+  "timestamp": "2023-12-28T06:57:49Z",
+  "version": 5,
+  "changeset": 145603987,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8999179578,
+    8999179579
+  ],
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "entrance": "yes",
+    "exit": "no",
+    "foot": "no",
+    "handrail": "no",
+    "highway": "steps",
+    "incline": "down",
+    "layer": "-1",
+    "lit": "yes",
+    "oneway": "yes",
+    "ramp": "yes",
+    "surface": "paved",
+    "tactile_paving": "no",
+    "tunnel": "yes",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 1004875571,
+  "timestamp": "2026-07-29T03:56:53Z",
+  "version": 7,
+  "changeset": 186559634,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    6441639139,
+    11106163760
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 12 Phố Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1033735449,
+  "timestamp": "2024-11-24T23:51:07Z",
+  "version": 4,
+  "changeset": 159553294,
+  "user": "alexarf",
+  "uid": 22217005,
+  "nodes": [
+    11699896975,
+    11699896974,
+    11699896973,
+    11699896972,
+    11699803266,
+    11699803267,
+    11699803268,
+    6668147065,
+    11699896969,
+    11699896970,
+    6782941064
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 88 Ngõ Thịnh Quang"
+  }
+},
+{
+  "type": "way",
+  "id": 1040127480,
+  "timestamp": "2022-03-14T07:14:49Z",
+  "version": 1,
+  "changeset": 118456943,
+  "user": "pa_vani",
+  "uid": 10677987,
+  "nodes": [
+    9577086631,
+    9577086630
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1040132549,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 4,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    6413581239,
+    6413709266
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1040138502,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 5,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    7388633677,
+    12143983942,
+    9577144582
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1040138618,
+  "timestamp": "2023-06-16T18:22:20Z",
+  "version": 4,
+  "changeset": 137424459,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    6689709218,
+    9577151831
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1040195375,
+  "timestamp": "2026-01-19T15:14:26Z",
+  "version": 4,
+  "changeset": 177434225,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    9577630018,
+    9596704584,
+    9577630017
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 44 Phố Thái Thịnh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1040436421,
+  "timestamp": "2023-09-26T10:00:08Z",
+  "version": 3,
+  "changeset": 141766434,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    9579874405,
+    10130548090,
+    9579874404,
+    9579874403
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1040438651,
+  "timestamp": "2023-09-11T12:03:48Z",
+  "version": 2,
+  "changeset": 141108994,
+  "user": "Hoàng Tuấn Việt",
+  "uid": 13707170,
+  "nodes": [
+    9579894671,
+    5686385643
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1040441992,
+  "timestamp": "2024-05-23T09:19:26Z",
+  "version": 3,
+  "changeset": 151712578,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275824,
+    10889239015,
+    9579945953
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1040489028,
+  "timestamp": "2025-05-21T12:25:00Z",
+  "version": 3,
+  "changeset": 166566521,
+  "user": "rajdhani",
+  "uid": 20051396,
+  "nodes": [
+    9580243470,
+    9580243469
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1040489029,
+  "timestamp": "2025-05-21T12:25:00Z",
+  "version": 3,
+  "changeset": 166566521,
+  "user": "rajdhani",
+  "uid": 20051396,
+  "nodes": [
+    8266275608,
+    9580243469,
+    9580243471
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1042880627,
+  "timestamp": "2025-10-21T14:23:33Z",
+  "version": 3,
+  "changeset": 173585471,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    12079446909,
+    12079446908,
+    12079446907,
+    12079446906,
+    12079446905,
+    12079446904,
+    12079446903,
+    12079446902,
+    12079446901,
+    12079446900,
+    12079446899,
+    12079446898,
+    9599271678,
+    9599271679,
+    5710091927
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 180/84 Phố Nguyễn Lương Bằng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1077606133,
+  "timestamp": "2025-08-24T06:23:33Z",
+  "version": 2,
+  "changeset": 170907917,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266275608,
+    5722079350
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 122 Đường Láng",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1081340523,
+  "timestamp": "2022-07-26T08:27:57Z",
+  "version": 1,
+  "changeset": 124083217,
+  "user": "GrabVN_QThoai",
+  "uid": 15740602,
+  "nodes": [
+    6413581239,
+    9911121039
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1098246224,
+  "timestamp": "2025-09-05T07:17:01Z",
+  "version": 2,
+  "changeset": 171482521,
+  "user": "GrabVN_HHanh",
+  "uid": 21825758,
+  "nodes": [
+    7141166588,
+    7141166589,
+    7141166590,
+    7141166591,
+    7141166592,
+    5707407609
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 213 Phố Giáp Nhất",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1098768157,
+  "timestamp": "2025-10-23T04:38:16Z",
+  "version": 4,
+  "changeset": 173654717,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    7887622385,
+    1884765801
+  ],
+  "tags": {
+    "highway": "residential",
+    "lane_markings": "no",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 165 Phố Chùa Bộc",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1098781496,
+  "timestamp": "2025-06-17T05:46:06Z",
+  "version": 3,
+  "changeset": 167721796,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    10060600235,
+    10060600236,
+    10060600237,
+    5716408805,
+    12920610392,
+    12920610393,
+    5716408804
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 257 Phố Chùa Bộc",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1098781501,
+  "timestamp": "2025-06-17T05:45:05Z",
+  "version": 2,
+  "changeset": 167721782,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    1884765805,
+    7887554283,
+    5716408805
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 249 Phố Chùa Bộc",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1124409208,
+  "timestamp": "2023-12-20T04:47:38Z",
+  "version": 2,
+  "changeset": 145315498,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6688297604,
+    420456642
+  ],
+  "tags": {
+    "highway": "cycleway",
+    "lit": "yes",
+    "moped": "no",
+    "motor_vehicle": "no",
+    "motorcycle": "no",
+    "name": "Đường đi bộ sông Tô Lịch",
+    "oneway": "no",
+    "segregated": "no",
+    "surface": "asphalt",
+    "width": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1164326024,
+  "timestamp": "2023-04-21T03:55:41Z",
+  "version": 1,
+  "changeset": 135175371,
+  "user": "Arkskyle",
+  "uid": 17344224,
+  "nodes": [
+    2085393477,
+    2085393476
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 9 Ngõ 120 Phố Yên Lãng",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1177799185,
+  "timestamp": "2023-05-31T08:12:07Z",
+  "version": 1,
+  "changeset": 136776874,
+  "user": "GrabVN_Yen",
+  "uid": 13613834,
+  "nodes": [
+    10941497945,
+    5707300766
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1181708240,
+  "timestamp": "2025-02-23T13:54:13Z",
+  "version": 6,
+  "changeset": 162852939,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    10973278407,
+    10973278409,
+    10973278408
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 354 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1187258129,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 2,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11025311226,
+    11025311225,
+    8277275840
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Hẻm 354/137/21 Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1196980457,
+  "timestamp": "2024-09-05T03:52:57Z",
+  "version": 4,
+  "changeset": 156211280,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    7062664926,
+    11106163760
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 12 Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1196980458,
+  "timestamp": "2026-09-20T03:19:34Z",
+  "version": 6,
+  "changeset": 189278893,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6441639136,
+    11106163774,
+    12318188703,
+    14199053194,
+    11106163776
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 12/87 Phố Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1196980459,
+  "timestamp": "2026-09-20T03:19:34Z",
+  "version": 4,
+  "changeset": 189278893,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11106163781,
+    11106163778,
+    14199053197,
+    14199053195,
+    11106163779,
+    14199053196,
+    12318188703
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 12/87 Phố Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1196980498,
+  "timestamp": "2024-09-05T03:52:57Z",
+  "version": 3,
+  "changeset": 156211280,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    7432988962,
+    11106163771,
+    11106163770,
+    6441639139
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 108 Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1201834310,
+  "timestamp": "2025-12-23T07:34:08Z",
+  "version": 3,
+  "changeset": 176294587,
+  "user": "GrabVN_HHanh",
+  "uid": 21825758,
+  "nodes": [
+    11142690831,
+    11142690834,
+    11142690833,
+    11142690832
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1204913756,
+  "timestamp": "2024-12-13T07:25:33Z",
+  "version": 4,
+  "changeset": 160234017,
+  "user": "tuan_gsm",
+  "uid": 22005783,
+  "nodes": [
+    1758644523,
+    5721795698,
+    12318525972,
+    8277275813,
+    1758644520
+  ],
+  "tags": {
+    "highway": "residential",
+    "motorcar": "destination",
+    "name": "Phố Khương Thượng",
+    "name:en": "Khuong Thuong Street",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1205688203,
+  "timestamp": "2025-10-11T15:36:12Z",
+  "version": 3,
+  "changeset": 173142569,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    11173433345,
+    11173433346,
+    11173433347,
+    11173433349,
+    11173433348
+  ],
+  "tags": {
+    "highway": "service",
+    "layer": "1",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 231 Phố Chùa Bộc",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1207954290,
+  "timestamp": "2023-09-15T07:17:14Z",
+  "version": 1,
+  "changeset": 141288493,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11192580312,
+    11192580318,
+    11192580319,
+    11192580320,
+    11192580321,
+    11192580322,
+    11192580323,
+    11192580324,
+    11192580325,
+    11192580333,
+    11192580332
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 269 Ngõ Thịnh Quang",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1207954293,
+  "timestamp": "2023-09-15T07:17:14Z",
+  "version": 1,
+  "changeset": 141288493,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11192580320,
+    11192580335,
+    11192580336,
+    11192615537,
+    11192615538,
+    11192615539
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 269 Ngõ Thịnh Quang",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1215063390,
+  "timestamp": "2023-10-12T13:25:47Z",
+  "version": 1,
+  "changeset": 142480096,
+  "user": "ItsLouisAnderson",
+  "uid": 11691953,
+  "nodes": [
+    8277275939,
+    9419760413
+  ],
+  "tags": {
+    "access": "private",
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1216977122,
+  "timestamp": "2025-11-18T09:43:15Z",
+  "version": 4,
+  "changeset": 174809339,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    11276434842,
+    11276434843,
+    11276434844
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 26 Ngõ 203 Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1216977123,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 3,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275791,
+    11276434848
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 203 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1216977124,
+  "timestamp": "2023-10-20T04:22:23Z",
+  "version": 2,
+  "changeset": 142848321,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11276434851,
+    11276434853,
+    11276434854
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1216978025,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 2,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11276434859,
+    11276456807,
+    11276456809
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 203 Đường Trường Chinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1220418323,
+  "timestamp": "2023-11-03T03:01:39Z",
+  "version": 1,
+  "changeset": 143555546,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11308815946,
+    4530855100
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 168 Vương Thừa Vũ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1222432204,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 3,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7141103582,
+    7141103580,
+    13444702192,
+    7141103581
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 64 Ngách 1 Ngõ 72 Nguyễn Trãi",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?picId=952684a2-707e-463f-b4f7-de38762b0f77&lat=21.004369614&lng=105.813825298&yaw=153&pitch=-4"
+  }
+},
+{
+  "type": "way",
+  "id": 1222432205,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 2,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11337701455,
+    11337701457,
+    13444702181,
+    13444702180
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Hẻm 72/1/141 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1222432206,
+  "timestamp": "2026-07-29T03:56:53Z",
+  "version": 3,
+  "changeset": 186559634,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11337701454,
+    7513713111,
+    13444737003,
+    8266275597
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 72/1/101 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1222432207,
+  "timestamp": "2026-07-29T03:56:53Z",
+  "version": 2,
+  "changeset": 186559634,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11337701456,
+    11337701458,
+    8266280899,
+    7513713111
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 72/1/101 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1222432208,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 2,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11337701456,
+    13444702193,
+    11337701455
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 101 Ngách 1 Ngõ 72 Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1232579334,
+  "timestamp": "2026-06-25T06:34:57Z",
+  "version": 3,
+  "changeset": 184567181,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11433519749,
+    8273496005,
+    13964119239,
+    5709996151
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "name": "Ngõ 508 Đường Láng",
+    "service": "alley",
+    "width": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 1232579336,
+  "timestamp": "2026-07-27T08:00:50Z",
+  "version": 2,
+  "changeset": 186441377,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    418658892,
+    5709996158,
+    8273496004
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "residential",
+    "name": "Ngõ 105 Phố Láng Hạ",
+    "width": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 1236851203,
+  "timestamp": "2024-06-20T10:34:13Z",
+  "version": 2,
+  "changeset": 152936847,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    11486224310,
+    11993550702,
+    9580225853
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1243070839,
+  "timestamp": "2025-06-12T05:49:26Z",
+  "version": 5,
+  "changeset": 167517570,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11552959637,
+    12344217044,
+    11552959636,
+    11552959644,
+    11552959635,
+    11552959634,
+    11552959633,
+    11552959632,
+    11552959643,
+    11552959631,
+    11552959629,
+    11552959638,
+    11552959640,
+    11552959641,
+    12908889689,
+    11552959642
+  ],
+  "tags": {
+    "highway": "residential",
+    "motorcar": "destination",
+    "name": "Ngõ 47 Đường Láng"
+  }
+},
+{
+  "type": "way",
+  "id": 1243070840,
+  "timestamp": "2024-01-26T02:09:05Z",
+  "version": 1,
+  "changeset": 146694275,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    11552959635,
+    11552959639
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 22 Ngõ 47 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1243070841,
+  "timestamp": "2025-10-01T14:29:45Z",
+  "version": 2,
+  "changeset": 172709551,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11552959633,
+    11552959645
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 47/33 Đường Láng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1246781486,
+  "timestamp": "2025-06-05T10:46:45Z",
+  "version": 3,
+  "changeset": 167216527,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    11591012200,
+    11591012201,
+    11591012202,
+    11591012203,
+    11591012204,
+    11591012205
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1267367251,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 3,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    5710229620,
+    11771110016,
+    11771110015,
+    12011683074
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 73/26A Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 1267367252,
+  "timestamp": "2026-08-27T06:50:32Z",
+  "version": 6,
+  "changeset": 188079542,
+  "user": "larisaI_grab",
+  "uid": 24408395,
+  "nodes": [
+    11771110016,
+    11771110021,
+    14127735089,
+    11771110017,
+    11771110018
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 73/26B Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 1267367253,
+  "timestamp": "2025-10-03T15:12:18Z",
+  "version": 5,
+  "changeset": 172797185,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    12011653579,
+    11771110018
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 73/26B/32 Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 1267367254,
+  "timestamp": "2026-08-27T06:50:32Z",
+  "version": 4,
+  "changeset": 188079542,
+  "user": "larisaI_grab",
+  "uid": 24408395,
+  "nodes": [
+    11771110021,
+    14127735085,
+    11771110022
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Hẻm 73/26B/3 Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 1276334495,
+  "timestamp": "2025-09-25T01:01:59Z",
+  "version": 2,
+  "changeset": 172416927,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    11849697341,
+    11849697342,
+    11849697343,
+    11849697344,
+    11849697345,
+    11849697346,
+    11849697347,
+    11849697348
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1276334496,
+  "timestamp": "2024-06-20T10:34:13Z",
+  "version": 2,
+  "changeset": 152936847,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275641,
+    1758642519
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1279283120,
+  "timestamp": "2025-07-21T13:27:59Z",
+  "version": 3,
+  "changeset": 169244420,
+  "user": "Tewuzij",
+  "uid": 16194143,
+  "nodes": [
+    1494041361,
+    13015491630,
+    11876052152
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 317 Phố Tây Sơn",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1281383144,
+  "timestamp": "2025-10-20T16:28:29Z",
+  "version": 3,
+  "changeset": 173546249,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    11893159820,
+    11893159821
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 51 Phố Tam Khương",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1284552893,
+  "timestamp": "2025-10-11T03:12:08Z",
+  "version": 3,
+  "changeset": 173119119,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    11917153986,
+    11917153985,
+    11917153984
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 161A Tây Sơn",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1289567046,
+  "timestamp": "2024-08-23T06:42:46Z",
+  "version": 3,
+  "changeset": 155635921,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    8277275839,
+    4025085955
+  ],
+  "tags": {
+    "highway": "residential",
+    "motorcar": "no",
+    "name": "Phố Khương Thượng",
+    "name:en": "Khuong Thuong Street",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1289849006,
+  "timestamp": "2024-06-06T09:56:47Z",
+  "version": 1,
+  "changeset": 152323259,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    7513713113,
+    11959976383,
+    11959976384
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1311992667,
+  "timestamp": "2025-11-11T03:48:31Z",
+  "version": 4,
+  "changeset": 174491324,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    12143983917,
+    12143983915
+  ],
+  "tags": {
+    "alt_name": "Ngõ 133 Phố Giáp Nhất",
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 72/136 Đường Nguyễn Trãi",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?picId=182cc1fd-2e58-439b-9ddb-9d8719ca5086&lat=21.004144487&lng=105.816326841&yaw=325&pitch=2"
+  }
+},
+{
+  "type": "way",
+  "id": 1317811431,
+  "timestamp": "2025-04-28T07:43:21Z",
+  "version": 3,
+  "changeset": 165535612,
+  "user": "map_newbie_206",
+  "uid": 21825913,
+  "nodes": [
+    12196460270,
+    12443050321,
+    12443050320,
+    12443050322,
+    12196460271
+  ],
+  "tags": {
+    "highway": "service",
+    "layer": "1",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1333368251,
+  "timestamp": "2024-11-13T02:19:40Z",
+  "version": 1,
+  "changeset": 159073909,
+  "user": "phoenixsaigon1698",
+  "uid": 3323343,
+  "nodes": [
+    6685024898,
+    12335966674
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1334975755,
+  "timestamp": "2025-01-15T08:58:19Z",
+  "version": 2,
+  "changeset": 161371980,
+  "user": "Grab_Cong",
+  "uid": 18820325,
+  "nodes": [
+    5686449814,
+    12350515132,
+    12504078514,
+    12350515133,
+    12504078511,
+    12504078512,
+    8070851986
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ Hồ Hố Mẻ",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1349573947,
+  "timestamp": "2026-08-12T06:44:11Z",
+  "version": 3,
+  "changeset": 187320484,
+  "user": "AndreePham",
+  "uid": 24403502,
+  "nodes": [
+    5645069498,
+    5645069499
+  ],
+  "tags": {
+    "destination:street": "Đường Nguyễn Trãi",
+    "highway": "primary_link",
+    "motorcar": "no",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1362302993,
+  "timestamp": "2025-02-23T13:54:13Z",
+  "version": 1,
+  "changeset": 162852939,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6405942898,
+    7401242704,
+    7401242705,
+    7401242706,
+    7401242707,
+    7401242708,
+    8277275784,
+    7401242709,
+    7401242710,
+    7401242711,
+    7401242712,
+    7401242713,
+    7401242714
+  ],
+  "tags": {
+    "alt_name": "Ngõ 354 Đường Trường Chinh",
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 22 Phố Tôn Thất Tùng",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1365331509,
+  "timestamp": "2025-09-04T07:42:53Z",
+  "version": 2,
+  "changeset": 171438420,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    12643556845,
+    12643556846,
+    12643556847,
+    13118866470,
+    6415675300
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 43 Phố Tô Vĩnh Diện",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1373292959,
+  "timestamp": "2025-07-21T13:27:59Z",
+  "version": 2,
+  "changeset": 169244420,
+  "user": "Tewuzij",
+  "uid": 16194143,
+  "nodes": [
+    12715419581,
+    13015491629,
+    12715419582,
+    12715419583,
+    12715419584
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 20 Chùa Bộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1373292960,
+  "timestamp": "2025-07-21T13:27:59Z",
+  "version": 2,
+  "changeset": 169244420,
+  "user": "Tewuzij",
+  "uid": 16194143,
+  "nodes": [
+    12715419585,
+    13015491627,
+    12715419586
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 60 Chùa Bộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1373292961,
+  "timestamp": "2025-07-21T13:27:59Z",
+  "version": 2,
+  "changeset": 169244420,
+  "user": "Tewuzij",
+  "uid": 16194143,
+  "nodes": [
+    12715419587,
+    13015491628,
+    12715419588,
+    12715419589
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 56 Chùa Bộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1394473415,
+  "timestamp": "2025-06-12T05:49:26Z",
+  "version": 1,
+  "changeset": 167517570,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    12908889680,
+    12908889687,
+    12908889681,
+    12908889682,
+    12908889683,
+    12908889684,
+    12908889686,
+    12908889688,
+    12908889685
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1395648405,
+  "timestamp": "2025-06-16T05:20:55Z",
+  "version": 1,
+  "changeset": 167676029,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6415627971,
+    6415627981,
+    12918519887
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 98 Phố Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1395893016,
+  "timestamp": "2025-10-11T15:21:55Z",
+  "version": 2,
+  "changeset": 173142569,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    5717110578,
+    12920633556,
+    12920633557,
+    12920633558,
+    12920633560,
+    12920633559
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1395893787,
+  "timestamp": "2025-06-17T05:45:05Z",
+  "version": 1,
+  "changeset": 167721782,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11173433347,
+    12920644746,
+    5716408804
+  ],
+  "tags": {
+    "highway": "service",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 231 Phố Chùa Bộc",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1416437461,
+  "timestamp": "2025-09-25T01:01:55Z",
+  "version": 2,
+  "changeset": 172416927,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    5710678264,
+    13016543333,
+    5710678265
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1419317809,
+  "timestamp": "2025-08-02T06:03:41Z",
+  "version": 1,
+  "changeset": 169846040,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8277275646,
+    8277275637,
+    13042459089,
+    13042459087,
+    13042459090,
+    13042459088
+  ],
+  "tags": {
+    "highway": "service",
+    "mofa": "yes",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 25 Phố Hồ Đắc Di",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1424142568,
+  "timestamp": "2025-08-22T14:38:20Z",
+  "version": 1,
+  "changeset": 170835840,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6661313503,
+    13089313421
+  ],
+  "tags": {
+    "highway": "service",
+    "mofa": "yes",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 102 Phố Khương Trung",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1425974925,
+  "timestamp": "2025-08-30T06:07:10Z",
+  "version": 1,
+  "changeset": 171211542,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273495956,
+    13106136803,
+    13108150786,
+    11182446869,
+    13108150781,
+    13108150782,
+    13108150789,
+    13108150788,
+    13108150783,
+    13108150791,
+    13108150784,
+    13108150790,
+    13108150785,
+    13108150787,
+    13108150792,
+    13108150793,
+    13108150794
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 175 Ngõ Thịnh Quang",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1428771663,
+  "timestamp": "2026-07-29T06:01:59Z",
+  "version": 3,
+  "changeset": 186563583,
+  "user": "Fizzie-DWG",
+  "uid": 461130,
+  "nodes": [
+    13134398331,
+    5686385631,
+    5686385630
+  ],
+  "tags": {
+    "highway": "service",
+    "moped": "yes",
+    "motor_vehicle": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 89 Phố Nguyễn Ngọc Nại",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1442070922,
+  "timestamp": "2026-06-22T13:44:28Z",
+  "version": 2,
+  "changeset": 184432975,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    10941195748,
+    10941195749,
+    10941195747,
+    10941195752,
+    10941195746,
+    10941195745
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 12/2 Phố Chùa Bộc",
+    "service": "alley",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 1442763232,
+  "timestamp": "2025-10-17T06:50:42Z",
+  "version": 1,
+  "changeset": 173394874,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13238456256,
+    13238456258,
+    13238456257
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 6 Phố Thái Hà",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1443633343,
+  "timestamp": "2025-10-21T06:02:07Z",
+  "version": 1,
+  "changeset": 173565241,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5686987671,
+    13247239653,
+    13247239655,
+    13247239654
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngõ 96 Phố Hoàng Văn Thái",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1450456183,
+  "timestamp": "2025-11-14T06:52:49Z",
+  "version": 1,
+  "changeset": 174634779,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    2291014487,
+    13303078714,
+    13303078715,
+    13303078717,
+    13303078716
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1451543250,
+  "timestamp": "2025-11-18T05:46:38Z",
+  "version": 1,
+  "changeset": 174802643,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13312854511,
+    11521201047
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1451543251,
+  "timestamp": "2025-11-18T05:46:38Z",
+  "version": 1,
+  "changeset": 174802643,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    11521201047,
+    1494035416
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1454173820,
+  "timestamp": "2025-11-27T14:33:05Z",
+  "version": 1,
+  "changeset": 175200912,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    13336224784,
+    13336224788
+  ],
+  "tags": {
+    "access": "no",
+    "bicycle": "yes",
+    "foot": "yes",
+    "highway": "service",
+    "motor_vehicle": "no",
+    "note": "đường rất hẹp",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1462601093,
+  "timestamp": "2025-12-29T15:53:17Z",
+  "version": 1,
+  "changeset": 176584896,
+  "user": "Hung159",
+  "uid": 22065819,
+  "nodes": [
+    8277275979,
+    8277276002,
+    5710091952
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 136 Phố Tây Sơn",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1465786039,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 1,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    7513713108,
+    7513713109,
+    11337701455
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Hẻm 72/1/141 Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 1465786043,
+  "timestamp": "2026-01-10T06:44:47Z",
+  "version": 1,
+  "changeset": 177050559,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8266275597,
+    13444702196,
+    7513713112,
+    13444702178,
+    13444702179
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngách 72/1 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1469386073,
+  "timestamp": "2026-01-22T07:54:06Z",
+  "version": 1,
+  "changeset": 177552843,
+  "user": "GrabVN_HHanh",
+  "uid": 21825758,
+  "nodes": [
+    13475738472,
+    13475738473,
+    13475738474
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1469515240,
+  "timestamp": "2026-09-02T12:50:58Z",
+  "version": 2,
+  "changeset": 188417676,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    6443358073,
+    5686987710,
+    6443358071
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 36/8 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1469515241,
+  "timestamp": "2026-09-02T12:49:19Z",
+  "version": 2,
+  "changeset": 188417606,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    6443358074,
+    5686987711
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 2 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "source": "https://www.streetview.vn/?lat=20.999602558&lng=105.826013887&picId=74030ba5-6780-4933-bba7-0d181161c51b&yaw=107&pitch=-3",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1469515242,
+  "timestamp": "2026-01-22T15:05:31Z",
+  "version": 1,
+  "changeset": 177568638,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    6443358074,
+    6443358073
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngách 20/8 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1469515244,
+  "timestamp": "2026-09-11T03:28:34Z",
+  "version": 3,
+  "changeset": 188851880,
+  "user": "NTDo",
+  "uid": 24526942,
+  "nodes": [
+    5686987661,
+    6443358073
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 20 Phố Nguyễn Viết Xuân",
+    "service": "alley",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1482572868,
+  "timestamp": "2026-02-24T14:23:18Z",
+  "version": 1,
+  "changeset": 178991944,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    5710309830,
+    5710309829
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "name": "Ngách 3/81 Phố Thái Hà",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1518363045,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 7,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    5485805590,
+    13858200172,
+    13669013159,
+    6606542982
+  ],
+  "tags": {
+    "access": "no",
+    "check_date": "2026-09-03",
+    "construction": "primary",
+    "highway": "construction",
+    "lanes": "3",
+    "name": "Đường Vành đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+},
+{
+  "type": "way",
+  "id": 1518363047,
+  "timestamp": "2026-09-09T09:48:00Z",
+  "version": 6,
+  "changeset": 188763498,
+  "user": "dinosaur_",
+  "uid": 24492417,
+  "nodes": [
+    6606542981,
+    12280295935,
+    12280295936,
+    13858200171
+  ],
+  "tags": {
+    "access": "no",
+    "check_date": "2026-09-03",
+    "construction": "primary",
+    "highway": "construction",
+    "lanes": "3",
+    "name": "Đường Vành đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+},
+{
+  "type": "way",
+  "id": 1521157384,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 3,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    13875106109,
+    5485805590
+  ],
+  "tags": {
+    "highway": "proposed",
+    "name": "Đường Vành Đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+},
+{
+  "type": "way",
+  "id": 1521157385,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 3,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    13858200171,
+    14222404389,
+    13875106108
+  ],
+  "tags": {
+    "highway": "proposed",
+    "name": "Đường Vành Đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+},
+{
+  "type": "way",
+  "id": 1532178776,
+  "timestamp": "2026-06-25T06:34:57Z",
+  "version": 1,
+  "changeset": 184567181,
+  "user": "Hung Tran 9x0",
+  "uid": 20910140,
+  "nodes": [
+    8273496004,
+    8273496003,
+    11938490255,
+    13964119251,
+    13964119250,
+    11433519749
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "highway": "service",
+    "name": "Ngõ 105 Phố Láng Hạ",
+    "service": "alley",
+    "width": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 1547068854,
+  "timestamp": "2026-09-27T14:05:28Z",
+  "version": 2,
+  "changeset": 189632198,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    12143983947,
+    8266275589
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "no",
+    "motorcycle": "yes",
+    "name": "Ngõ 41 Đường Khương Đình",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1553348536,
+  "timestamp": "2026-08-29T04:58:22Z",
+  "version": 1,
+  "changeset": 188179175,
+  "user": "pepsi_max2k",
+  "uid": 14719801,
+  "nodes": [
+    11106163756,
+    6441639149,
+    7062664926
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 190 Đường Nguyễn Trãi",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1553348537,
+  "timestamp": "2026-08-29T04:58:22Z",
+  "version": 1,
+  "changeset": 188179175,
+  "user": "pepsi_max2k",
+  "uid": 14719801,
+  "nodes": [
+    14132607924,
+    7062664926
+  ],
+  "tags": {
+    "highway": "service",
+    "motorcar": "destination",
+    "name": "Ngõ 12 Phố Chính Kinh",
+    "service": "alley"
+  }
+},
+{
+  "type": "way",
+  "id": 1554564652,
+  "timestamp": "2026-09-11T03:55:02Z",
+  "version": 2,
+  "changeset": 188852249,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    13875106108,
+    14142813083,
+    14142813081,
+    14142813079,
+    14142813077,
+    14142813085,
+    2186671585
+  ],
+  "tags": {
+    "access": "no",
+    "check_date": "2026-09-03",
+    "construction": "primary",
+    "highway": "construction",
+    "lanes": "3",
+    "name": "Đường Vành đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+},
+{
+  "type": "way",
+  "id": 1554564653,
+  "timestamp": "2026-09-11T03:55:02Z",
+  "version": 2,
+  "changeset": 188852249,
+  "user": "Vmosnokia31",
+  "uid": 23326231,
+  "nodes": [
+    444393381,
+    14142813086,
+    14142813078,
+    14142813080,
+    14142813082,
+    14142813084,
+    13875106109
+  ],
+  "tags": {
+    "access": "no",
+    "check_date": "2026-09-03",
+    "construction": "primary",
+    "highway": "construction",
+    "lanes": "3",
+    "name": "Đường Vành đai 2.5",
+    "name:en": "Ring Road 2.5",
+    "oneway": "yes",
+    "width": "30"
+  }
+}
+
+  ]
+}

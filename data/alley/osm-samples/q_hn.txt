@@ -1,0 +1,5 @@
+[out:json][timeout:90];
+way["highway"](20.993,105.8093,21.017,105.8347);
+out body;
+>;
+out skel qt;

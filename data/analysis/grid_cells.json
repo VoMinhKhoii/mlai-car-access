@@ -1,0 +1,1499 @@
+[
+ {
+  "cell": [
+   5,
+   6
+  ],
+  "center": [
+   10.79946,
+   106.71888
+  ],
+  "score": 0.666,
+  "alleys": 634,
+  "car_tag_share": 0.24,
+  "car_ok": 93,
+  "car_no": 61,
+  "parking": 16,
+  "flood_all": 36,
+  "flood_hm": 16,
+  "flood_tide": 16,
+  "flood_rain": 14,
+  "flood_recent": 5,
+  "top_alley_parents": [
+   "Xô viết Nghệ Tĩnh",
+   "Điện Biên Phủ",
+   "Nguyễn Hữu Cảnh",
+   "Ung Văn Khiêm"
+  ],
+  "flood_wards": [
+   "Phường Thạnh Mỹ Tây",
+   "Phường An Khánh",
+   "Phường Thanh My Tay"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   5
+  ],
+  "center": [
+   10.76329,
+   106.70059
+  ],
+  "score": 0.599,
+  "alleys": 843,
+  "car_tag_share": 0.69,
+  "car_ok": 172,
+  "car_no": 408,
+  "parking": 18,
+  "flood_all": 10,
+  "flood_hm": 7,
+  "flood_tide": 3,
+  "flood_rain": 7,
+  "flood_recent": 2,
+  "top_alley_parents": [
+   "Đoàn Văn Bơ",
+   "Tôn Đản",
+   "Cô Giang",
+   "Đường Tôn Đản"
+  ],
+  "flood_wards": [
+   "Phường Sài Gòn",
+   "Phường Bến Thành",
+   "Phường Cầu Ông Lãnh"
+  ]
+ },
+ {
+  "cell": [
+   5,
+   5
+  ],
+  "center": [
+   10.79946,
+   106.70059
+  ],
+  "score": 0.544,
+  "alleys": 1145,
+  "car_tag_share": 0.37,
+  "car_ok": 330,
+  "car_no": 95,
+  "parking": 2,
+  "flood_all": 20,
+  "flood_hm": 9,
+  "flood_tide": 9,
+  "flood_rain": 4,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Điện Biên Phủ",
+   "Bùi Đình Túy",
+   "Bạch Đằng",
+   "Lê Văn Duyệt"
+  ],
+  "flood_wards": [
+   "Phường Gia Định",
+   "Phường Bình Thạnh",
+   "Phường Tân Định"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   4
+  ],
+  "center": [
+   10.76329,
+   106.6823
+  ],
+  "score": 0.522,
+  "alleys": 1237,
+  "car_tag_share": 0.54,
+  "car_ok": 275,
+  "car_no": 399,
+  "parking": 10,
+  "flood_all": 4,
+  "flood_hm": 3,
+  "flood_tide": 0,
+  "flood_rain": 4,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Nguyễn Trãi",
+   "Nguyễn Thiện Thuật",
+   "Lê Hồng Phong",
+   "Trần Bình Trọng"
+  ],
+  "flood_wards": [
+   "Phường Chợ Quán",
+   "Phường Cầu Ông Lãnh"
+  ]
+ },
+ {
+  "cell": [
+   8,
+   8
+  ],
+  "center": [
+   10.85371,
+   106.75546
+  ],
+  "score": 0.473,
+  "alleys": 301,
+  "car_tag_share": 0.16,
+  "car_ok": 36,
+  "car_no": 12,
+  "parking": 1,
+  "flood_all": 29,
+  "flood_hm": 14,
+  "flood_tide": 1,
+  "flood_rain": 26,
+  "flood_recent": 19,
+  "top_alley_parents": [
+   "Kha Vạn Cân",
+   "Đường Võ Văn Ngân",
+   "Đường Linh Đông",
+   "Đường Tô Ngọc Vân"
+  ],
+  "flood_wards": [
+   "Phường Linh Xuân",
+   "Phường Thủ Đức",
+   "Phường Hiệp Bình"
+  ]
+ },
+ {
+  "cell": [
+   2,
+   3
+  ],
+  "center": [
+   10.74521,
+   106.66401
+  ],
+  "score": 0.455,
+  "alleys": 830,
+  "car_tag_share": 0.53,
+  "car_ok": 94,
+  "car_no": 348,
+  "parking": 5,
+  "flood_all": 13,
+  "flood_hm": 5,
+  "flood_tide": 6,
+  "flood_rain": 5,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Phạm Thế Hiển",
+   "Tùng Thiện Vương",
+   "Nguyễn Duy",
+   "Hưng Phú"
+  ],
+  "flood_wards": [
+   "Phường Phú Định",
+   "Phường Chánh Hưng",
+   "Phường Chợ Lớn"
+  ]
+ },
+ {
+  "cell": [
+   5,
+   4
+  ],
+  "center": [
+   10.79946,
+   106.6823
+  ],
+  "score": 0.434,
+  "alleys": 1641,
+  "car_tag_share": 0.3,
+  "car_ok": 372,
+  "car_no": 114,
+  "parking": 3,
+  "flood_all": 3,
+  "flood_hm": 3,
+  "flood_tide": 2,
+  "flood_rain": 0,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Phan Đình Phùng",
+   "Phan Xích Long",
+   "Phan Đăng Lưu",
+   "Nguyễn Đình Chiểu"
+  ],
+  "flood_wards": [
+   "Phường Đức Nhuận",
+   "Phường Cầu Kiệu",
+   "Phường Tân Định"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   3
+  ],
+  "center": [
+   10.76329,
+   106.66401
+  ],
+  "score": 0.414,
+  "alleys": 1076,
+  "car_tag_share": 0.51,
+  "car_ok": 110,
+  "car_no": 443,
+  "parking": 8,
+  "flood_all": 2,
+  "flood_hm": 1,
+  "flood_tide": 1,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Bà Hạt",
+   "Đường 3 Tháng 2",
+   "Nhật Tảo",
+   "Vĩnh Viễn"
+  ],
+  "flood_wards": [
+   "Phường Phú Thọ"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   2
+  ],
+  "center": [
+   10.78137,
+   106.64572
+  ],
+  "score": 0.374,
+  "alleys": 1179,
+  "car_tag_share": 0.25,
+  "car_ok": 181,
+  "car_no": 108,
+  "parking": 9,
+  "flood_all": 3,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 3,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lạc Long Quân",
+   "Âu Cơ",
+   "Trịnh Đình Trọng",
+   "Trần Văn Quang"
+  ],
+  "flood_wards": [
+   "Phường Tân Bình",
+   "Phường Bảy Hiền",
+   "Phường Tân Phú"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   2
+  ],
+  "center": [
+   10.76329,
+   106.64572
+  ],
+  "score": 0.374,
+  "alleys": 1442,
+  "car_tag_share": 0.39,
+  "car_ok": 121,
+  "car_no": 441,
+  "parking": 1,
+  "flood_all": 2,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 2,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lạc Long Quân",
+   "Âu Cơ",
+   "Hồng Bàng",
+   "Bình Thới"
+  ],
+  "flood_wards": [
+   "Phường Bình Tây",
+   "Phường Bình Thới"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   5
+  ],
+  "center": [
+   10.78137,
+   106.70059
+  ],
+  "score": 0.362,
+  "alleys": 211,
+  "car_tag_share": 0.27,
+  "car_ok": 34,
+  "car_no": 22,
+  "parking": 40,
+  "flood_all": 11,
+  "flood_hm": 6,
+  "flood_tide": 1,
+  "flood_rain": 9,
+  "flood_recent": 2,
+  "top_alley_parents": [
+   "Nguyễn Thị Minh Khai",
+   "Đinh Tiên Hoàng",
+   "Phạm Ngọc Thạch",
+   "Hai Bà Trưng"
+  ],
+  "flood_wards": [
+   "Phường Sài Gòn",
+   "Phường Bến Thành",
+   "Đường Nam Kỳ Khởi Nghĩa"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   4
+  ],
+  "center": [
+   10.78137,
+   106.6823
+  ],
+  "score": 0.342,
+  "alleys": 890,
+  "car_tag_share": 0.47,
+  "car_ok": 300,
+  "car_no": 118,
+  "parking": 5,
+  "flood_all": 4,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 3,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lê Văn Sỹ",
+   "Lý Chính Thắng",
+   "Cách Mạng Tháng 8",
+   "Hòa Hưng"
+  ],
+  "flood_wards": [
+   "Phường Xuân Hòa",
+   "Phường Vườn Lài",
+   "Phường Hòa Hưng"
+  ]
+ },
+ {
+  "cell": [
+   1,
+   0
+  ],
+  "center": [
+   10.72712,
+   106.60914
+  ],
+  "score": 0.341,
+  "alleys": 274,
+  "car_tag_share": 0.35,
+  "car_ok": 36,
+  "car_no": 61,
+  "parking": 10,
+  "flood_all": 8,
+  "flood_hm": 4,
+  "flood_tide": 1,
+  "flood_rain": 6,
+  "flood_recent": 4,
+  "top_alley_parents": [
+   "Bùi Tư Toàn",
+   "Kinh Dương Vương",
+   "Hồ Học Lãm",
+   "Nguyễn Quý Yêm"
+  ],
+  "flood_wards": [
+   "Phường An Lạc",
+   "Phường Bình Phú"
+  ]
+ },
+ {
+  "cell": [
+   2,
+   4
+  ],
+  "center": [
+   10.74521,
+   106.6823
+  ],
+  "score": 0.329,
+  "alleys": 988,
+  "car_tag_share": 0.47,
+  "car_ok": 192,
+  "car_no": 273,
+  "parking": 2,
+  "flood_all": 3,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Phạm Thế Hiển",
+   "Âu Dương Lân",
+   "Dương Bá Trạc",
+   "Hưng Phú"
+  ],
+  "flood_wards": [
+   "Phường Chánh Hưng"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   1
+  ],
+  "center": [
+   10.76329,
+   106.62743
+  ],
+  "score": 0.328,
+  "alleys": 824,
+  "car_tag_share": 0.32,
+  "car_ok": 79,
+  "car_no": 188,
+  "parking": 3,
+  "flood_all": 8,
+  "flood_hm": 3,
+  "flood_tide": 0,
+  "flood_rain": 8,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Tân Hòa Đông",
+   "Bà Hom",
+   "Phan Anh",
+   "Lũy Bán Bích"
+  ],
+  "flood_wards": [
+   "Phường Phú Lâm",
+   "Phường Phú Thạnh",
+   "Phường Minh Phụng"
+  ]
+ },
+ {
+  "cell": [
+   2,
+   2
+  ],
+  "center": [
+   10.74521,
+   106.64572
+  ],
+  "score": 0.328,
+  "alleys": 1134,
+  "car_tag_share": 0.34,
+  "car_ok": 116,
+  "car_no": 272,
+  "parking": 0,
+  "flood_all": 6,
+  "flood_hm": 2,
+  "flood_tide": 2,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Hậu Giang",
+   "Phạm Văn Chí",
+   "Phạm Thế Hiển",
+   "Hồng Bàng"
+  ],
+  "flood_wards": [
+   "Phường Phú Định",
+   "Phường Bình Tiên",
+   "Phường Bình Tây"
+  ]
+ },
+ {
+  "cell": [
+   6,
+   6
+  ],
+  "center": [
+   10.81754,
+   106.71888
+  ],
+  "score": 0.319,
+  "alleys": 310,
+  "car_tag_share": 0.18,
+  "car_ok": 36,
+  "car_no": 19,
+  "parking": 1,
+  "flood_all": 16,
+  "flood_hm": 8,
+  "flood_tide": 13,
+  "flood_rain": 2,
+  "flood_recent": 5,
+  "top_alley_parents": [
+   "Xô viết Nghệ Tĩnh",
+   "Bình Quới",
+   "Thanh Đa",
+   "Đường Số 17"
+  ],
+  "flood_wards": [
+   "Phường Bình Quới",
+   "Phường An Khánh",
+   "Phường Bình Thạnh"
+  ]
+ },
+ {
+  "cell": [
+   5,
+   3
+  ],
+  "center": [
+   10.79946,
+   106.66401
+  ],
+  "score": 0.317,
+  "alleys": 772,
+  "car_tag_share": 0.25,
+  "car_ok": 113,
+  "car_no": 77,
+  "parking": 12,
+  "flood_all": 2,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 2,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lê Văn Sỹ",
+   "Bùi Thị Xuân",
+   "Hoàng Văn Thụ",
+   "Nguyễn Trọng Tuyển"
+  ],
+  "flood_wards": [
+   "Phường Tân Sơn",
+   "Phường Tân Sơn Hòa"
+  ]
+ },
+ {
+  "cell": [
+   2,
+   5
+  ],
+  "center": [
+   10.74521,
+   106.70059
+  ],
+  "score": 0.316,
+  "alleys": 416,
+  "car_tag_share": 0.6,
+  "car_ok": 84,
+  "car_no": 166,
+  "parking": 7,
+  "flood_all": 8,
+  "flood_hm": 1,
+  "flood_tide": 6,
+  "flood_rain": 1,
+  "flood_recent": 3,
+  "top_alley_parents": [
+   "Trần Xuân Soạn",
+   "Đường Trần Xuân Soạn",
+   "Lê Văn Lương",
+   "Tôn Thất Thuyết"
+  ],
+  "flood_wards": [
+   "Phường Tân Hưng",
+   "Phường Vĩnh Hội"
+  ]
+ },
+ {
+  "cell": [
+   6,
+   4
+  ],
+  "center": [
+   10.81754,
+   106.6823
+  ],
+  "score": 0.29,
+  "alleys": 1269,
+  "car_tag_share": 0.23,
+  "car_ok": 235,
+  "car_no": 60,
+  "parking": 2,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Nguyễn Thái Sơn",
+   "Lê Quang Định",
+   "Nguyễn Kiệm",
+   "Nguyễn Văn Công"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   6,
+   5
+  ],
+  "center": [
+   10.81754,
+   106.70059
+  ],
+  "score": 0.277,
+  "alleys": 886,
+  "car_tag_share": 0.25,
+  "car_ok": 170,
+  "car_no": 53,
+  "parking": 4,
+  "flood_all": 7,
+  "flood_hm": 1,
+  "flood_tide": 1,
+  "flood_rain": 4,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Nơ Trang Long",
+   "Phan Văn Trị",
+   "Chu Văn An",
+   "Nguyễn Xí"
+  ],
+  "flood_wards": [
+   "Phường Bình Thạnh",
+   "Phường Bình Lợi Trung"
+  ]
+ },
+ {
+  "cell": [
+   5,
+   2
+  ],
+  "center": [
+   10.79946,
+   106.64572
+  ],
+  "score": 0.266,
+  "alleys": 397,
+  "car_tag_share": 0.16,
+  "car_ok": 46,
+  "car_no": 18,
+  "parking": 8,
+  "flood_all": 5,
+  "flood_hm": 3,
+  "flood_tide": 0,
+  "flood_rain": 5,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Trường Chinh",
+   "Nguyễn Hồng Đào",
+   "Cộng Hòa",
+   "Nguyễn Thái Bình"
+  ],
+  "flood_wards": [
+   "Phường Tân Bình",
+   "Phường Bảy Hiền"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   3
+  ],
+  "center": [
+   10.78137,
+   106.66401
+  ],
+  "score": 0.254,
+  "alleys": 1009,
+  "car_tag_share": 0.26,
+  "car_ok": 168,
+  "car_no": 97,
+  "parking": 2,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Cách Mạng Tháng 8",
+   "Tô Hiến Thành",
+   "Đường Cách Mạng Tháng 8",
+   "Cách mạng tháng 8"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   2,
+   6
+  ],
+  "center": [
+   10.74521,
+   106.71888
+  ],
+  "score": 0.232,
+  "alleys": 453,
+  "car_tag_share": 0.52,
+  "car_ok": 89,
+  "car_no": 146,
+  "parking": 0,
+  "flood_all": 8,
+  "flood_hm": 1,
+  "flood_tide": 8,
+  "flood_rain": 0,
+  "flood_recent": 3,
+  "top_alley_parents": [
+   "Lâm Văn Bền",
+   "Huỳnh Tấn Phát",
+   "Tân Mỹ",
+   "Nguyễn Thị Thập"
+  ],
+  "flood_wards": [
+   "Phường Tân Hưng",
+   "Phường Tân Thuận",
+   "Phường Tân Mỹ"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   3
+  ],
+  "center": [
+   10.83562,
+   106.66401
+  ],
+  "score": 0.23,
+  "alleys": 1035,
+  "car_tag_share": 0.15,
+  "car_ok": 91,
+  "car_no": 65,
+  "parking": 2,
+  "flood_all": 3,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 3,
+  "flood_recent": 2,
+  "top_alley_parents": [
+   "Quang Trung",
+   "Thống Nhất",
+   "Nguyễn Văn Lượng",
+   "Lê Văn Thọ"
+  ],
+  "flood_wards": [
+   "Thông Tây Hội",
+   "Phường Gò Vấp"
+  ]
+ },
+ {
+  "cell": [
+   1,
+   2
+  ],
+  "center": [
+   10.72712,
+   106.64572
+  ],
+  "score": 0.23,
+  "alleys": 335,
+  "car_tag_share": 0.7,
+  "car_ok": 61,
+  "car_no": 173,
+  "parking": 0,
+  "flood_all": 4,
+  "flood_hm": 0,
+  "flood_tide": 2,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Phạm Thế Hiển",
+   "Lưu Hữu Phước",
+   "Bến Bình Đông",
+   "Bùi Minh Trực"
+  ],
+  "flood_wards": [
+   "Phường Chánh Hưng",
+   "Phường Phú Định",
+   "Phường Bình Đông"
+  ]
+ },
+ {
+  "cell": [
+   3,
+   0
+  ],
+  "center": [
+   10.76329,
+   106.60914
+  ],
+  "score": 0.224,
+  "alleys": 659,
+  "car_tag_share": 0.35,
+  "car_ok": 162,
+  "car_no": 69,
+  "parking": 0,
+  "flood_all": 1,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Chiến Lược",
+   "Bình Trị Đông",
+   "Mã Lò",
+   "Hương lộ 2"
+  ],
+  "flood_wards": [
+   "Phường Bình Trị Đông"
+  ]
+ },
+ {
+  "cell": [
+   1,
+   3
+  ],
+  "center": [
+   10.72712,
+   106.66401
+  ],
+  "score": 0.221,
+  "alleys": 354,
+  "car_tag_share": 0.65,
+  "car_ok": 69,
+  "car_no": 160,
+  "parking": 0,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "đường Liên tỉnh 5",
+   "Bông Sao",
+   "Phạm Hùng",
+   "Tạ Quang Bửu"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   7,
+   6
+  ],
+  "center": [
+   10.83562,
+   106.71888
+  ],
+  "score": 0.221,
+  "alleys": 312,
+  "car_tag_share": 0.25,
+  "car_ok": 57,
+  "car_no": 21,
+  "parking": 0,
+  "flood_all": 6,
+  "flood_hm": 4,
+  "flood_tide": 3,
+  "flood_rain": 3,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Đường Số 2",
+   "Quốc Lộ 13",
+   "Đường Số 1",
+   "Đường Số 47"
+  ],
+  "flood_wards": [
+   "Phường Hiệp Bình"
+  ]
+ },
+ {
+  "cell": [
+   1,
+   1
+  ],
+  "center": [
+   10.72712,
+   106.62743
+  ],
+  "score": 0.214,
+  "alleys": 498,
+  "car_tag_share": 0.2,
+  "car_ok": 26,
+  "car_no": 75,
+  "parking": 0,
+  "flood_all": 7,
+  "flood_hm": 3,
+  "flood_tide": 4,
+  "flood_rain": 3,
+  "flood_recent": 2,
+  "top_alley_parents": [
+   "Lưu Hữu Phước",
+   "An Dương Vương",
+   "Bến Phú Định",
+   "Phạm Thế Hiển"
+  ],
+  "flood_wards": [
+   "Phường Phú Định",
+   "Phường Bình Phú",
+   "Phường Bình Đông"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   2
+  ],
+  "center": [
+   10.83562,
+   106.64572
+  ],
+  "score": 0.201,
+  "alleys": 908,
+  "car_tag_share": 0.16,
+  "car_ok": 81,
+  "car_no": 64,
+  "parking": 1,
+  "flood_all": 2,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 2,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Quang Trung",
+   "Phan Huy Ích",
+   "Bùi Quang Là",
+   "Nguyễn Tư Giản"
+  ],
+  "flood_wards": [
+   "Phường Thông Tây Hội"
+  ]
+ },
+ {
+  "cell": [
+   8,
+   3
+  ],
+  "center": [
+   10.85371,
+   106.66401
+  ],
+  "score": 0.175,
+  "alleys": 792,
+  "car_tag_share": 0.17,
+  "car_ok": 30,
+  "car_no": 106,
+  "parking": 0,
+  "flood_all": 3,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 3,
+  "flood_recent": 2,
+  "top_alley_parents": [
+   "Lê Đức Thọ",
+   "Thống Nhất",
+   "Phạm Văn Chiêu",
+   "Lê Văn Thọ"
+  ],
+  "flood_wards": [
+   "Phường An Hội Đông"
+  ]
+ },
+ {
+  "cell": [
+   1,
+   7
+  ],
+  "center": [
+   10.72712,
+   106.73717
+  ],
+  "score": 0.165,
+  "alleys": 238,
+  "car_tag_share": 0.32,
+  "car_ok": 30,
+  "car_no": 45,
+  "parking": 2,
+  "flood_all": 3,
+  "flood_hm": 1,
+  "flood_tide": 2,
+  "flood_rain": 1,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Huỳnh Tấn Phát",
+   "Đường Huỳnh Tấn Phát",
+   "Gò Ô Môi",
+   "Nguyễn Văn Quỳ"
+  ],
+  "flood_wards": [
+   "Phường Phú Thuận",
+   "Phường Tân Mỹ"
+  ]
+ },
+ {
+  "cell": [
+   2,
+   1
+  ],
+  "center": [
+   10.74521,
+   106.62743
+  ],
+  "score": 0.162,
+  "alleys": 354,
+  "car_tag_share": 0.33,
+  "car_ok": 51,
+  "car_no": 66,
+  "parking": 2,
+  "flood_all": 4,
+  "flood_hm": 0,
+  "flood_tide": 2,
+  "flood_rain": 2,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Nguyễn Văn Luông",
+   "Hậu Giang",
+   "Kinh Dương Vương",
+   "Lê Công Phép"
+  ],
+  "flood_wards": [
+   "Phường Phú Lâm",
+   "Phường Bình Tiên",
+   "Phường Bình Phú"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   0
+  ],
+  "center": [
+   10.78137,
+   106.60914
+  ],
+  "score": 0.157,
+  "alleys": 734,
+  "car_tag_share": 0.14,
+  "car_ok": 36,
+  "car_no": 65,
+  "parking": 0,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lê Văn Quới",
+   "Gò Xoài",
+   "Đường Số 3",
+   "Đường Số 4"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   5,
+   1
+  ],
+  "center": [
+   10.79946,
+   106.62743
+  ],
+  "score": 0.155,
+  "alleys": 704,
+  "car_tag_share": 0.11,
+  "car_ok": 51,
+  "car_no": 26,
+  "parking": 1,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Gò Dầu",
+   "Tân Kỳ Tân Quý",
+   "Tân Sơn Nhì",
+   "Đường Tân Kỳ Tân Quý"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   3,
+   6
+  ],
+  "center": [
+   10.76329,
+   106.71888
+  ],
+  "score": 0.154,
+  "alleys": 212,
+  "car_tag_share": 0.43,
+  "car_ok": 38,
+  "car_no": 54,
+  "parking": 1,
+  "flood_all": 2,
+  "flood_hm": 0,
+  "flood_tide": 2,
+  "flood_rain": 0,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Đoàn Văn Bơ",
+   "Huỳnh Tấn Phát",
+   "Đường Đoàn Văn Bơ",
+   "Xóm Chiếu"
+  ],
+  "flood_wards": [
+   "Phường An Khánh",
+   "Xã Nhà Bè"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   4
+  ],
+  "center": [
+   10.83562,
+   106.6823
+  ],
+  "score": 0.149,
+  "alleys": 661,
+  "car_tag_share": 0.11,
+  "car_ok": 36,
+  "car_no": 40,
+  "parking": 1,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Lê Đức Thọ",
+   "Dương Quảng Hàm",
+   "Quang Trung",
+   "Nguyễn Văn Lượng"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   2,
+   7
+  ],
+  "center": [
+   10.74521,
+   106.73717
+  ],
+  "score": 0.143,
+  "alleys": 217,
+  "car_tag_share": 0.24,
+  "car_ok": 16,
+  "car_no": 36,
+  "parking": 2,
+  "flood_all": 1,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Huỳnh Tấn Phát",
+   "Bùi Văn Ba",
+   "Nguyễn Văn Quỳ",
+   "Đường Huỳnh Tấn Phát"
+  ],
+  "flood_wards": [
+   "Phường Tân Thuận"
+  ]
+ },
+ {
+  "cell": [
+   4,
+   1
+  ],
+  "center": [
+   10.78137,
+   106.62743
+  ],
+  "score": 0.137,
+  "alleys": 581,
+  "car_tag_share": 0.12,
+  "car_ok": 42,
+  "car_no": 27,
+  "parking": 1,
+  "flood_all": 1,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Phú Thọ Hòa",
+   "Vườn Lài",
+   "Nguyễn Sơn",
+   "Thoại Ngọc Hầu"
+  ],
+  "flood_wards": [
+   "Phường Phú Thọ Hòa"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   1
+  ],
+  "center": [
+   10.83562,
+   106.62743
+  ],
+  "score": 0.127,
+  "alleys": 434,
+  "car_tag_share": 0.07,
+  "car_ok": 27,
+  "car_no": 5,
+  "parking": 1,
+  "flood_all": 2,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 2,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Phan Huy Ích",
+   "Trường Chinh",
+   "Nguyễn Văn Quá",
+   "Huỳnh Văn Nghệ"
+  ],
+  "flood_wards": [
+   "Phường Tân Sơn"
+  ]
+ },
+ {
+  "cell": [
+   8,
+   2
+  ],
+  "center": [
+   10.85371,
+   106.64572
+  ],
+  "score": 0.126,
+  "alleys": 564,
+  "car_tag_share": 0.13,
+  "car_ok": 34,
+  "car_no": 38,
+  "parking": 0,
+  "flood_all": 1,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Phạm Văn Chiêu",
+   "Đường số 59",
+   "Đường số 51",
+   "Quang Trung"
+  ],
+  "flood_wards": [
+   "Phường An Hội Tây"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   0
+  ],
+  "center": [
+   10.83562,
+   106.60914
+  ],
+  "score": 0.125,
+  "alleys": 205,
+  "car_tag_share": 0.26,
+  "car_ok": 29,
+  "car_no": 24,
+  "parking": 0,
+  "flood_all": 1,
+  "flood_hm": 1,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 1,
+  "top_alley_parents": [
+   "Tân Thới Nhất 1",
+   "Phan Văn Hớn",
+   "Trường Chinh",
+   "Tân Thới Nhất 8"
+  ],
+  "flood_wards": [
+   "Đông Hưng Thuận"
+  ]
+ },
+ {
+  "cell": [
+   6,
+   1
+  ],
+  "center": [
+   10.81754,
+   106.62743
+  ],
+  "score": 0.123,
+  "alleys": 370,
+  "car_tag_share": 0.12,
+  "car_ok": 27,
+  "car_no": 19,
+  "parking": 3,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Nguyễn Sỹ Sách",
+   "Nguyễn Phúc Chu",
+   "Trường Chinh",
+   "Tây Thạnh"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   5,
+   0
+  ],
+  "center": [
+   10.79946,
+   106.60914
+  ],
+  "score": 0.119,
+  "alleys": 463,
+  "car_tag_share": 0.05,
+  "car_ok": 16,
+  "car_no": 5,
+  "parking": 3,
+  "flood_all": 0,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "đường 26/3",
+   "Tân Kỳ Tân Quý",
+   "Hương lộ 3",
+   "đường số 5"
+  ],
+  "flood_wards": []
+ },
+ {
+  "cell": [
+   7,
+   9
+  ],
+  "center": [
+   10.83562,
+   106.77375
+  ],
+  "score": 0.098,
+  "alleys": 220,
+  "car_tag_share": 0.16,
+  "car_ok": 7,
+  "car_no": 29,
+  "parking": 2,
+  "flood_all": 1,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 1,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Đường Số 8",
+   "Đường Số 79",
+   "Trần Thị Điệu",
+   "Đặng Văn Bi"
+  ],
+  "flood_wards": [
+   "Phường Phước Long"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   5
+  ],
+  "center": [
+   10.83562,
+   106.70059
+  ],
+  "score": 0.095,
+  "alleys": 250,
+  "car_tag_share": 0.07,
+  "car_ok": 13,
+  "car_no": 4,
+  "parking": 1,
+  "flood_all": 1,
+  "flood_hm": 1,
+  "flood_tide": 1,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Bình Lợi",
+   "Đặng Thùy Trâm",
+   "Nguyễn Thái Sơn",
+   "Dương Quảng Hàm"
+  ],
+  "flood_wards": [
+   "Phường Hiệp Bình"
+  ]
+ },
+ {
+  "cell": [
+   7,
+   7
+  ],
+  "center": [
+   10.83562,
+   106.73717
+  ],
+  "score": 0.076,
+  "alleys": 201,
+  "car_tag_share": 0.17,
+  "car_ok": 20,
+  "car_no": 14,
+  "parking": 0,
+  "flood_all": 1,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Bình Quới",
+   "Đường Số 49",
+   "Đường Số 36",
+   "Phạm Văn Đồng"
+  ],
+  "flood_wards": [
+   "Phường Hiệp Bình"
+  ]
+ },
+ {
+  "cell": [
+   8,
+   4
+  ],
+  "center": [
+   10.85371,
+   106.6823
+  ],
+  "score": 0.069,
+  "alleys": 227,
+  "car_tag_share": 0.12,
+  "car_ok": 23,
+  "car_no": 5,
+  "parking": 0,
+  "flood_all": 2,
+  "flood_hm": 0,
+  "flood_tide": 0,
+  "flood_rain": 0,
+  "flood_recent": 0,
+  "top_alley_parents": [
+   "Nguyễn Oanh",
+   "Lê Đức Thọ",
+   "Đường số 5",
+   "Hà Huy Giáp"
+  ],
+  "flood_wards": [
+   "Phường Gò Vấp",
+   "Phường An Phú Đông"
+  ]
+ }
+]

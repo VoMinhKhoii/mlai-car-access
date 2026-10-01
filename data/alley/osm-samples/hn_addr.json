@@ -1,0 +1,7957 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-28T04:10:18Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 444227294,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Phố Chùa Bộc",
+    "amenity": "bank",
+    "atm": "yes",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 1279138536,
+  "tags": {
+    "addr:country": "VN",
+    "addr:housenumber": "112D1",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "amenity": "cafe",
+    "name": "Cà Phê Newlife"
+  }
+},
+{
+  "type": "node",
+  "id": 1491047984,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "76",
+    "addr:street": "Đường Nguyễn Trãi",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491047985,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "20",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491047999,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "110",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491048004,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "89",
+    "addr:street": "Thái Hà",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491048116,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "319",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491048128,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "21",
+    "addr:street": "Phố Vương Thừa Vũ",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1491048129,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "102",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "atm",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "name": "Vietcombank",
+    "operator": "Vietcombank",
+    "operator:wikidata": "Q6122995"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025718,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025721,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:street": "Phố Chùa Bộc",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "cash_in": "yes",
+    "name": "BIDV CRM",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025726,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "45",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025732,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "169",
+    "addr:street": "Tây Sơn",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025734,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "198B",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025735,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "176",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025739,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "167",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025958,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "225",
+    "addr:street": "Hoàng Văn Thái",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 1498025962,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "36",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "atm",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "operator": "BIDV",
+    "operator:wikidata": "Q1003180"
+  }
+},
+{
+  "type": "node",
+  "id": 2085393457,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "Số 14 ngõ 66",
+    "addr:street": "Ngõ 120 Yên Lãng",
+    "addr:subdistrict": "Thịnh Quang",
+    "name": "Trekking Coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 2182514715,
+  "tags": {
+    "addr:country": "VN",
+    "addr:housename": "MIPEC Tower",
+    "addr:housenumber": "226",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "bank",
+    "atm": "yes",
+    "name": "PG Bank"
+  }
+},
+{
+  "type": "node",
+  "id": 3327079260,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "111",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ 231 Chùa Bộc",
+    "addr:subdistrict": "Trung Liệt",
+    "fixme": "Add closing time to opening_hours",
+    "name": "Tink Shop",
+    "opening_hours": "9:00",
+    "phone": "01663746929",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 3628650832,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "20A/98",
+    "addr:province": "Hà Nội",
+    "addr:street": "Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "name": "iWay Vietnam",
+    "office": "yes",
+    "phone": "+84 3537 8684",
+    "website": "https://www.iwayvietnam.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3729397844,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "592",
+    "addr:postcode": "100000",
+    "addr:street": "Đường Trường Chinh",
+    "craft": "photographer",
+    "name": "RARE Studio"
+  }
+},
+{
+  "type": "node",
+  "id": 3747365124,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "36",
+    "addr:street": "Phố Yên Lãng",
+    "addr:subdistrict": "Láng Hạ",
+    "amenity": "cafe",
+    "cuisine": "vietnamese;italian",
+    "internet_access": "yes",
+    "name": "Cà Phê Grazio's"
+  }
+},
+{
+  "type": "node",
+  "id": 3883603836,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:housenumber": "Số 14 ngõ 66",
+    "addr:street": "Ngõ 120 Yên Lãng",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "name": "Trekking Coffee",
+    "opening_hours": "08:00-23:00",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 4090277644,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "72A",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Thượng Đình",
+    "amenity": "restaurant",
+    "branch": "Royal City",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "delivery": "no",
+    "name": "Pizza Hut",
+    "opening_hours": "10:00-22:00",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4123546069,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "ĐốngĐa",
+    "addr:housenumber": "12",
+    "addr:postcode": "100000",
+    "addr:street": "Ngách 592/29 Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "level": "4",
+    "name": "Thời Trang Nam VFASHION"
+  }
+},
+{
+  "type": "node",
+  "id": 4134741789,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "15",
+    "addr:street": "Phố Yên Lãng",
+    "addr:subdistrict": "Trung Liệt",
+    "description": "sửa chữa, cung cấp linh kiện điện thoại di động. 0943456539",
+    "name": "Tungmobile.com",
+    "shop": "mobile_phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4171931890,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "72A",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Thượng Đình",
+    "air_conditioning": "yes",
+    "brand": "Vincom",
+    "contact:facebook": "https://www.facebook.com/vmmroyalcity",
+    "currency:VND": "yes",
+    "email": "v.cskh-vmmroyalcity@vincom.com.vn",
+    "internet_access": "wlan",
+    "level": "0;-1;-2",
+    "name": "Vincom Mega Mall Royal City",
+    "opening_hours": "Mo-Su 10:00-21:30",
+    "phone": "+84979901101",
+    "shop": "mall",
+    "toilets": "yes",
+    "website": "https://vincom.com.vn/vincom-mega-mall-royal-city"
+  }
+},
+{
+  "type": "node",
+  "id": 4286225207,
+  "tags": {
+    "addr:city": "Ha Noi",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "153",
+    "addr:postcode": "+84",
+    "addr:province": "Ha Noi",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "restaurant",
+    "cuisine": "japan_food",
+    "delivery": "no",
+    "description": "Quán Cơm Nhanh Nhật Bản đầu tiên tại Việt Nam",
+    "name": "OiShi Ngon",
+    "phone": "0917409312",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4353999536,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "18",
+    "addr:postcode": "10000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ 11 Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "name": "Tòa nhà Hoa Cương"
+  }
+},
+{
+  "type": "node",
+  "id": 4484956794,
+  "tags": {
+    "addr:country": "VN",
+    "addr:housenumber": "72A, R2",
+    "addr:street": "Đường Nguyễn Trãi",
+    "amenity": "school",
+    "education": "school",
+    "name:en": "American Preschool"
+  }
+},
+{
+  "type": "node",
+  "id": 4646860090,
+  "tags": {
+    "addr:country": "VN",
+    "addr:housenumber": "22",
+    "addr:street": "Cù Chính Lan",
+    "internet_access": "wlan",
+    "name": "Công Ty Cổ Phần Kỹ Thuật Số SBC",
+    "name:en": "SBC Digital Jsc",
+    "office": "yes",
+    "opening_hours": "Mo-Sa 08:30-18:00",
+    "phone": "0437472768",
+    "website": "https://thegioimayin.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4737415321,
+  "tags": {
+    "addr:housenumber": "76",
+    "addr:street": "Khương Trung",
+    "name": "Cửa Hàng Bibi Mart",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4737431921,
+  "tags": {
+    "addr:housenumber": "110",
+    "addr:street": "Khương Trung",
+    "name": "yến anh",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4737497821,
+  "tags": {
+    "addr:housenumber": "122",
+    "addr:street": "Khương Trung",
+    "name": "thanh hảo",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739081345,
+  "tags": {
+    "addr:housenumber": "38",
+    "addr:street": "Ngõ 164 Vương Thừa Vũ",
+    "name": "thành lộc",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739081346,
+  "tags": {
+    "addr:housenumber": "57",
+    "addr:street": "Phố Hòang Văn Thái",
+    "name": "thanh tâm",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739081347,
+  "tags": {
+    "addr:housenumber": "77",
+    "addr:street": "Ngõ 164 Vương Thừa Vũ",
+    "name": "Đại Lý Tuyết Minh",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739122725,
+  "tags": {
+    "addr:housenumber": "169",
+    "addr:street": "Hòang Văn Thái",
+    "name": "Đại Lý 169",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739182233,
+  "tags": {
+    "addr:housenumber": "102",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "name": "zoo mart",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739262922,
+  "tags": {
+    "addr:housenumber": "208",
+    "addr:street": "Hòang Văn Thái",
+    "name": "vinamart",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 4739304237,
+  "tags": {
+    "addr:housenumber": "171",
+    "addr:street": "Phố Nguyễn Ngọc Nại",
+    "name": "pub game",
+    "shop": "computer"
+  }
+},
+{
+  "type": "node",
+  "id": 4985099121,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Phố Yên Lãng",
+    "email": "sales@d2n.com.vn",
+    "name": "Công Ty CP TM Và DV D2N",
+    "name:en": "D2N CORP",
+    "name:vi": "Công ty CP TM và DV D2N",
+    "office": "company",
+    "opening_hours": "24/7",
+    "phone": "02466506680",
+    "website": "https://www.d2n.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 5188065121,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Phố Thái Thịnh",
+    "name:en": "KidsPlaza",
+    "shop": "toys"
+  }
+},
+{
+  "type": "node",
+  "id": 5485632918,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "14",
+    "addr:street": "Đặng Tiến Đông",
+    "addr:subdistrict": "Trung Liệt",
+    "leisure": "swimming_pool",
+    "name": "Bể Bơi Bốn Mùa",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "node",
+  "id": 5485647877,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "Nhà A2 TT Thảm May ngõ 155",
+    "addr:street": "Đặng Tiến Đông",
+    "addr:subdistrict": "Trung Liệt",
+    "name": "Shop Áo Phông Trắng Trơn Authentic",
+    "name:vi": "#WhiteTshirt - Shop áo phông trắng trơn Authentic",
+    "opening_hours": "Sa 09:00-17:00",
+    "payment:cash": "yes",
+    "shop": "clothes",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "node",
+  "id": 5485657266,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Quan Nhân",
+    "amenity": "marketplace",
+    "name": "Chợ Tình Sapa",
+    "source": "grab_hanoi_2018_t2",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5485779523,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "42",
+    "addr:postcode": "100000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngách 8, Ngõ 95",
+    "addr:subdistrict": "Trung Liệt",
+    "name": "Laptop Thảo Linh - Chuyên Laptop Xách Tay Mỹ",
+    "opening_hours": "09:00-21:00",
+    "operator": "Thảo Linh",
+    "shop": "computer",
+    "source": "grab_hanoi_2018_t3"
+  }
+},
+{
+  "type": "node",
+  "id": 5485816793,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Đặng Tiến Đông",
+    "name": "Siêu thị Minh Hoa",
+    "shop": "supermarket",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "node",
+  "id": 5485879965,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "229",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "alt_name": "Gà Rán Kentucky",
+    "alt_name:en": "Kentucky Fried Chicken",
+    "alt_name:vi": "Gà Rán Kentucky",
+    "amenity": "fast_food",
+    "brand": "KFC",
+    "brand:wikidata": "Q524757",
+    "brand:wikipedia": "en:KFC",
+    "cuisine": "fried_chicken",
+    "drive_through": "no",
+    "level": "1",
+    "name": "KFC",
+    "name:en": "KFC",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "operator": "KFC Vietnam",
+    "phone": "+84 1900 6886",
+    "source": "grab_hanoi_2018_t3",
+    "takeaway": "yes",
+    "website": "https://kfcvietnam.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5606598224,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "3",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "addr:subdistrict": "Khương Mai",
+    "branch": "Lê Trọng Tấn",
+    "internet_access": "wlan",
+    "name": "Tops Market",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "operator": "CÔNG TY TNHH DỊCH VỤ EB",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:qr_pay": "yes",
+    "phone": "+84 865 671 423",
+    "shop": "supermarket",
+    "website": "https://topsmarket.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 5609997886,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:full": "Số nhà 3, phố Tô Vĩnh Diện, phường Khương Trung, quận Thanh Xuân, Hà Nội",
+    "addr:housenumber": "3",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "brand:wikipedia": "vi:VinMart",
+    "name": "WinMart+",
+    "phone": "18006968",
+    "shop": "convenience",
+    "website": "http://www.vinmartplus.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 5609999114,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:full": "1A Phố Hồ Đắc Di, Nam Đồng, Đống Đa, Hà Nội, Vietnam",
+    "addr:housenumber": "1A",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Nam Đồng",
+    "brand": "Circle K",
+    "brand:wikidata": "Q3268010",
+    "brand:wikipedia": "en:Circle K",
+    "name": "Circle K",
+    "phone": "+84 24 3998 3536",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn/en/"
+  }
+},
+{
+  "type": "node",
+  "id": 6050808957,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "25",
+    "addr:postcode": "100000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Khương Trung",
+    "addr:subdistrict": "Khương Trung",
+    "description": "Video Bài Hát Việt Nam",
+    "email": "ngocanhvnart@gmail.com",
+    "name": "Ngoc Anh",
+    "phone": "+84966443580",
+    "start_date": "10/11/2018",
+    "website": "https://www.youtube.com/watch?v=Rm_K5OW8MiY"
+  }
+},
+{
+  "type": "node",
+  "id": 6287575889,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "72A",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Thượng Đình",
+    "landuse": "residential",
+    "name": "Sảnh B Khu căn hộ R2 Royal City",
+    "residential": "apartments"
+  }
+},
+{
+  "type": "node",
+  "id": 6307912000,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "269",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Trung Liệt",
+    "name": "Trung tâm Công nghệ Phần mềm Thủy lợi",
+    "office": "government"
+  }
+},
+{
+  "type": "node",
+  "id": 6603137802,
+  "tags": {
+    "addr:housenumber": "129",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6603137803,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6603137804,
+  "tags": {
+    "addr:housenumber": "101",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6603137805,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6606566499,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Phố Thượng Đình"
+  }
+},
+{
+  "type": "node",
+  "id": 6610574242,
+  "tags": {
+    "addr:housenumber": "41",
+    "addr:street": "Khương Trung"
+  }
+},
+{
+  "type": "node",
+  "id": 6610574243,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Khương Trung"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625860,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625862,
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625863,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625864,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625865,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625866,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "59",
+    "addr:province": "Hà Nội",
+    "addr:street": "Khương Trung",
+    "addr:subdistrict": "Khương Trung",
+    "amenity": "cafe",
+    "name": "Cà Phê B59",
+    "opening_hours": "Mo-Su 06:00-23:00",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6610625867,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:street": "Khương Trung",
+    "addr:unit": "A"
+  }
+},
+{
+  "type": "node",
+  "id": 6610713083,
+  "tags": {
+    "addr:housenumber": "145",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610713084,
+  "tags": {
+    "addr:housenumber": "137",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736885,
+  "tags": {
+    "addr:housenumber": "125",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736886,
+  "tags": {
+    "addr:housenumber": "117",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736887,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736888,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736889,
+  "tags": {
+    "addr:housenumber": "97",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736890,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736891,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736892,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610736893,
+  "tags": {
+    "addr:housenumber": "53",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610761196,
+  "tags": {
+    "addr:housenumber": "153",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610761199,
+  "tags": {
+    "addr:housenumber": "185",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610761200,
+  "tags": {
+    "addr:housenumber": "181",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610761201,
+  "tags": {
+    "addr:housenumber": "171",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6610761202,
+  "tags": {
+    "addr:housenumber": "157",
+    "addr:street": "Phố Vũ Tông Phan"
+  }
+},
+{
+  "type": "node",
+  "id": 6616936895,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Phó Lê Trọng Tấn"
+  }
+},
+{
+  "type": "node",
+  "id": 6617075641,
+  "tags": {
+    "addr:housenumber": "173",
+    "addr:street": "Đường Trường Chinh",
+    "addr:unit": "B"
+  }
+},
+{
+  "type": "node",
+  "id": 6617270501,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Phố Lê Trọng Tấn"
+  }
+},
+{
+  "type": "node",
+  "id": 6617270504,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "3",
+    "addr:province": "Hà Nội",
+    "addr:street": "Tôn Thất Tùng",
+    "addr:subdistrict": "Khương Mai",
+    "amenity": "bank",
+    "atm": "yes",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "brand:wikipedia": "vi:Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "drive_through": "no",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "opening_hours": "Mo-Fr 07:30-11:30,13:00-17:00",
+    "phone": "+84 043 574 5698",
+    "website": "https://www.bidv.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 6617270505,
+  "tags": {
+    "addr:housenumber": "124",
+    "addr:street": "Phó Lê Trọng Tấn"
+  }
+},
+{
+  "type": "node",
+  "id": 6617292917,
+  "tags": {
+    "addr:housenumber": "46",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "atm"
+  }
+},
+{
+  "type": "node",
+  "id": 6617292921,
+  "tags": {
+    "addr:housenumber": "14",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "bank",
+    "name": "Saigon Comercial Bank"
+  }
+},
+{
+  "type": "node",
+  "id": 6617292922,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6617393639,
+  "tags": {
+    "addr:housenumber": "173",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6644634129,
+  "tags": {
+    "addr:housenumber": "147",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6644634130,
+  "tags": {
+    "addr:housenumber": "149",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6651392273,
+  "tags": {
+    "addr:housenumber": "101",
+    "addr:street": "Phõ Láng Hạ"
+  }
+},
+{
+  "type": "node",
+  "id": 6651392274,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Phõ Láng Hạ"
+  }
+},
+{
+  "type": "node",
+  "id": 6651392275,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Phõ Láng Hạ"
+  }
+},
+{
+  "type": "node",
+  "id": 6651892599,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:street": "Phõ Láng Hạ"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635304,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635305,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635306,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635307,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635308,
+  "tags": {
+    "addr:housenumber": "57",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635318,
+  "tags": {
+    "addr:housenumber": "227",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635319,
+  "tags": {
+    "addr:housenumber": "235",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635320,
+  "tags": {
+    "addr:housenumber": "243",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635321,
+  "tags": {
+    "addr:housenumber": "249",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635322,
+  "tags": {
+    "addr:housenumber": "63",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658635323,
+  "tags": {
+    "addr:housenumber": "269",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723743,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723744,
+  "tags": {
+    "addr:housenumber": "112",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723745,
+  "tags": {
+    "addr:housenumber": "102",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723746,
+  "tags": {
+    "addr:housenumber": "82",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723747,
+  "tags": {
+    "addr:housenumber": "68",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723748,
+  "tags": {
+    "addr:housenumber": "60",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723749,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723750,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723751,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723752,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6658723753,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6662262479,
+  "tags": {
+    "addr:housenumber": "142",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662262480,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662262483,
+  "tags": {
+    "addr:housenumber": "122",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662262484,
+  "tags": {
+    "addr:housenumber": "120",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662367785,
+  "tags": {
+    "addr:housenumber": "116",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662367786,
+  "tags": {
+    "addr:housenumber": "106",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662367787,
+  "tags": {
+    "addr:housenumber": "100",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662367788,
+  "tags": {
+    "addr:housenumber": "74",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662367789,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605243,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605244,
+  "tags": {
+    "addr:housenumber": "71",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605245,
+  "tags": {
+    "addr:housenumber": "107",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605246,
+  "tags": {
+    "addr:housenumber": "123",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605247,
+  "tags": {
+    "addr:housenumber": "133",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605248,
+  "tags": {
+    "addr:housenumber": "155",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662605249,
+  "tags": {
+    "addr:housenumber": "167",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662639323,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662639325,
+  "tags": {
+    "addr:housenumber": "59",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6662832770,
+  "tags": {
+    "addr:housenumber": "168",
+    "addr:street": "Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6665903933,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Ngõ 120 Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665903934,
+  "tags": {
+    "addr:housenumber": "124",
+    "addr:street": "Ngõ 82 Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665903935,
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Ngõ 120 Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665903936,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Ngõ 120 Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665903937,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Ngõ 120 Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941274,
+  "tags": {
+    "addr:housenumber": "484",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941275,
+  "tags": {
+    "addr:housenumber": "480",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941276,
+  "tags": {
+    "addr:housenumber": "474",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941277,
+  "tags": {
+    "addr:housenumber": "470",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941278,
+  "tags": {
+    "addr:housenumber": "448",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941279,
+  "tags": {
+    "addr:housenumber": "438",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941282,
+  "tags": {
+    "addr:housenumber": "418",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941283,
+  "tags": {
+    "addr:housenumber": "402",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6665941284,
+  "tags": {
+    "addr:housenumber": "180",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6666290765,
+  "tags": {
+    "addr:housenumber": "162",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666290766,
+  "tags": {
+    "addr:housenumber": "170",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666290769,
+  "tags": {
+    "addr:housenumber": "184",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666290770,
+  "tags": {
+    "addr:housenumber": "188",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666290775,
+  "tags": {
+    "addr:housenumber": "196",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666408645,
+  "tags": {
+    "addr:housenumber": "131",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6666408648,
+  "tags": {
+    "addr:housenumber": "158",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082108,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082109,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082110,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082111,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082112,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082113,
+  "tags": {
+    "addr:housenumber": "76",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082114,
+  "tags": {
+    "addr:housenumber": "82",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082115,
+  "tags": {
+    "addr:housenumber": "88",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082116,
+  "tags": {
+    "addr:housenumber": "92",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082117,
+  "tags": {
+    "addr:housenumber": "98",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082121,
+  "tags": {
+    "addr:housenumber": "111",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668082122,
+  "tags": {
+    "addr:housenumber": "110",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096540,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096541,
+  "tags": {
+    "addr:housenumber": "107",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096542,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096546,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096547,
+  "tags": {
+    "addr:housenumber": "119",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668096548,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Yên Lãng"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134315,
+  "tags": {
+    "addr:housenumber": "436",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134316,
+  "tags": {
+    "addr:housenumber": "424",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134317,
+  "tags": {
+    "addr:housenumber": "334",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134318,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134319,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134320,
+  "tags": {
+    "addr:housenumber": "39",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134321,
+  "tags": {
+    "addr:housenumber": "41",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134322,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134323,
+  "tags": {
+    "addr:housenumber": "59",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134324,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134325,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134326,
+  "tags": {
+    "addr:housenumber": "110",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134327,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134328,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6668134329,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Phố Thái Thịnh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632887,
+  "tags": {
+    "addr:housenumber": "218",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632888,
+  "tags": {
+    "addr:housenumber": "202",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632889,
+  "tags": {
+    "addr:housenumber": "192",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632890,
+  "tags": {
+    "addr:housenumber": "180",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632891,
+  "tags": {
+    "addr:housenumber": "168",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632892,
+  "tags": {
+    "addr:housenumber": "162",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632893,
+  "tags": {
+    "addr:housenumber": "152",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632894,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632895,
+  "tags": {
+    "addr:housenumber": "628",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632896,
+  "tags": {
+    "addr:housenumber": "604",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632897,
+  "tags": {
+    "addr:housenumber": "602",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632898,
+  "tags": {
+    "addr:housenumber": "560",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670632899,
+  "tags": {
+    "addr:housenumber": "588",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667048,
+  "tags": {
+    "addr:housenumber": "312",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667049,
+  "tags": {
+    "addr:housenumber": "302",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667050,
+  "tags": {
+    "addr:housenumber": "290",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667051,
+  "tags": {
+    "addr:housenumber": "276",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667052,
+  "tags": {
+    "addr:housenumber": "260",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667053,
+  "tags": {
+    "addr:housenumber": "248",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667054,
+  "tags": {
+    "addr:housenumber": "244",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667055,
+  "tags": {
+    "addr:housenumber": "242",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670667056,
+  "tags": {
+    "addr:housenumber": "238",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692703,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692704,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692705,
+  "tags": {
+    "addr:housenumber": "123",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692706,
+  "tags": {
+    "addr:housenumber": "125",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692707,
+  "tags": {
+    "addr:housenumber": "133",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692708,
+  "tags": {
+    "addr:housenumber": "147",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692709,
+  "tags": {
+    "addr:housenumber": "149",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692710,
+  "tags": {
+    "addr:housenumber": "344",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692711,
+  "tags": {
+    "addr:housenumber": "326",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692712,
+  "tags": {
+    "addr:housenumber": "320",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692713,
+  "tags": {
+    "addr:housenumber": "318",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670692714,
+  "tags": {
+    "addr:housenumber": "316",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729912,
+  "tags": {
+    "addr:housenumber": "104",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729913,
+  "tags": {
+    "addr:housenumber": "118",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729914,
+  "tags": {
+    "addr:housenumber": "122",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729915,
+  "tags": {
+    "addr:housenumber": "126",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729916,
+  "tags": {
+    "addr:housenumber": "158",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729917,
+  "tags": {
+    "addr:housenumber": "164",
+    "addr:street": "Ngõ Thái Thịnh 1"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729918,
+  "tags": {
+    "addr:housenumber": "265",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729919,
+  "tags": {
+    "addr:housenumber": "255",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729920,
+  "tags": {
+    "addr:housenumber": "237",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729921,
+  "tags": {
+    "addr:housenumber": "225",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6670729922,
+  "tags": {
+    "addr:housenumber": "221",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646836,
+  "tags": {
+    "addr:housenumber": "238",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646837,
+  "tags": {
+    "addr:housenumber": "224",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646838,
+  "tags": {
+    "addr:housenumber": "210",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646839,
+  "tags": {
+    "addr:housenumber": "196",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646840,
+  "tags": {
+    "addr:housenumber": "176",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646841,
+  "tags": {
+    "addr:housenumber": "166",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672646842,
+  "tags": {
+    "addr:housenumber": "164",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715791,
+  "tags": {
+    "addr:housenumber": "162",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715792,
+  "tags": {
+    "addr:housenumber": "150",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715793,
+  "tags": {
+    "addr:housenumber": "142",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715794,
+  "tags": {
+    "addr:housenumber": "132",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715795,
+  "tags": {
+    "addr:housenumber": "120",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715796,
+  "tags": {
+    "addr:housenumber": "108",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715797,
+  "tags": {
+    "addr:housenumber": "106",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715798,
+  "tags": {
+    "addr:housenumber": "102",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715799,
+  "tags": {
+    "addr:housenumber": "84",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715800,
+  "tags": {
+    "addr:housenumber": "74",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715801,
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715802,
+  "tags": {
+    "addr:housenumber": "36",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715803,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715804,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715805,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715806,
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715807,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715808,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715809,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715810,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715811,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715812,
+  "tags": {
+    "addr:housenumber": "38",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715813,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715814,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715815,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715816,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715817,
+  "tags": {
+    "addr:housenumber": "319",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715818,
+  "tags": {
+    "addr:housenumber": "329",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715819,
+  "tags": {
+    "addr:housenumber": "351",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715821,
+  "tags": {
+    "addr:housenumber": "363",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715822,
+  "tags": {
+    "addr:housenumber": "367",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715823,
+  "tags": {
+    "addr:housenumber": "371",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715824,
+  "tags": {
+    "addr:housenumber": "379",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6672715825,
+  "tags": {
+    "addr:housenumber": "399",
+    "addr:street": "Đường Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 6676185382,
+  "tags": {
+    "addr:housenumber": "59",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676185383,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676185384,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204585,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204586,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204587,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204588,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204589,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204590,
+  "tags": {
+    "addr:housenumber": "23",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204593,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204594,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204595,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204596,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204597,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204598,
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204599,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204600,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204601,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204602,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204603,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Phố Vương Thừa Vũ"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204604,
+  "tags": {
+    "addr:housenumber": "110",
+    "addr:street": "Phó Lê Trọng Tấn"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204605,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204606,
+  "tags": {
+    "addr:housenumber": "39",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204607,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204608,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204609,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204610,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204611,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676204612,
+  "tags": {
+    "addr:housenumber": "71",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211461,
+  "tags": {
+    "addr:housenumber": "119",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211462,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211463,
+  "tags": {
+    "addr:housenumber": "99",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211464,
+  "tags": {
+    "addr:housenumber": "97",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211465,
+  "tags": {
+    "addr:housenumber": "91",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211466,
+  "tags": {
+    "addr:housenumber": "83",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211467,
+  "tags": {
+    "addr:housenumber": "73",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676211468,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225711,
+  "tags": {
+    "addr:housenumber": "235",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225712,
+  "tags": {
+    "addr:housenumber": "217",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225713,
+  "tags": {
+    "addr:housenumber": "215",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225714,
+  "tags": {
+    "addr:housenumber": "191",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225715,
+  "tags": {
+    "addr:housenumber": "187",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225716,
+  "tags": {
+    "addr:housenumber": "177",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225717,
+  "tags": {
+    "addr:housenumber": "165",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225718,
+  "tags": {
+    "addr:housenumber": "155",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225719,
+  "tags": {
+    "addr:housenumber": "151",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225720,
+  "tags": {
+    "addr:housenumber": "143",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676225721,
+  "tags": {
+    "addr:housenumber": "121",
+    "addr:street": "Phố Nguyễn Ngọc Nại"
+  }
+},
+{
+  "type": "node",
+  "id": 6676381818,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676381819,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676381820,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676381821,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6676381822,
+  "tags": {
+    "addr:housenumber": "512",
+    "addr:street": "Phố Hòang Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591353,
+  "tags": {
+    "addr:housenumber": "102",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591354,
+  "tags": {
+    "addr:housenumber": "94",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591355,
+  "tags": {
+    "addr:housenumber": "72",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591356,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591357,
+  "tags": {
+    "addr:housenumber": "54",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591358,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591359,
+  "tags": {
+    "addr:housenumber": "36",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591360,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677591361,
+  "tags": {
+    "addr:housenumber": "112",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677604548,
+  "tags": {
+    "addr:housenumber": "106",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677604549,
+  "tags": {
+    "addr:housenumber": "104",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677604550,
+  "tags": {
+    "addr:housenumber": "101",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677604551,
+  "tags": {
+    "addr:housenumber": "102",
+    "addr:street": "Phố Tôn Thất Tùng"
+  }
+},
+{
+  "type": "node",
+  "id": 6677804251,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Ngõ 95 Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6677804252,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Ngõ 95 Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6677804254,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Ngõ 95 Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6677804255,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Ngõ 95 Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6677804256,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Ngõ 95 Chùa Bộc"
+  }
+},
+{
+  "type": "node",
+  "id": 6679611341,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "120",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "addr:subdistrict": "Phương Liên – Trung Tự",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Cà Phê Chợ - Trung Tự",
+    "outdoor_seating": "yes",
+    "phone": "+84 24 6292 4842",
+    "website": "https://www.facebook.com/caphecho.trungtu/"
+  }
+},
+{
+  "type": "node",
+  "id": 6679685131,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "120D1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "addr:subdistrict": "Phương Liên – Trung Tự",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Cà Phê Gemax",
+    "name:en": "Cafe GEMAX",
+    "outdoor_seating": "yes",
+    "phone": "+84 96 900 01 33"
+  }
+},
+{
+  "type": "node",
+  "id": 6679712288,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "119D1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "addr:subdistrict": "Phương Liên – Trung Tự",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;noodles",
+    "name": "Phở Lý Quốc Sư",
+    "name:en": "Pho Ly Quoc Su",
+    "outdoor_seating": "no",
+    "phone": "+84 24 3599 3636"
+  }
+},
+{
+  "type": "node",
+  "id": 6684446692,
+  "tags": {
+    "addr:district": "quận Đống Đa",
+    "addr:housenumber": "169",
+    "addr:province": "thành phố Hà Nội",
+    "addr:street": "Phố Đặng Tiến Đông",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 6685024893,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Phố Hồ Đắc Di"
+  }
+},
+{
+  "type": "node",
+  "id": 6685024894,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685024899,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685024900,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685024901,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685028561,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685028562,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685028563,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 6685254468,
+  "tags": {
+    "addr:housenumber": "81",
+    "addr:street": "Phố Đặng Văn Ngữ"
+  }
+},
+{
+  "type": "node",
+  "id": 6685254469,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:street": "Phố Đặng Văn Ngữ"
+  }
+},
+{
+  "type": "node",
+  "id": 6685434908,
+  "tags": {
+    "addr:housenumber": "380",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6685434909,
+  "tags": {
+    "addr:housenumber": "370",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6685434910,
+  "tags": {
+    "addr:housenumber": "358",
+    "addr:street": "Đường Láng"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239620,
+  "tags": {
+    "addr:housenumber": "23",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239621,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239622,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239623,
+  "tags": {
+    "addr:housenumber": "71",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239624,
+  "tags": {
+    "addr:housenumber": "91",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239625,
+  "tags": {
+    "addr:housenumber": "107",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688239631,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688240992,
+  "tags": {
+    "addr:housenumber": "166",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688306382,
+  "tags": {
+    "addr:housenumber": "174",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688306383,
+  "tags": {
+    "addr:housenumber": "158",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688306384,
+  "tags": {
+    "addr:housenumber": "148",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688336427,
+  "tags": {
+    "addr:housenumber": "212",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688336428,
+  "tags": {
+    "addr:housenumber": "206",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688336429,
+  "tags": {
+    "addr:housenumber": "200",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688336430,
+  "tags": {
+    "addr:housenumber": "196",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338585,
+  "tags": {
+    "addr:housenumber": "130",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338586,
+  "tags": {
+    "addr:housenumber": "112",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338587,
+  "tags": {
+    "addr:housenumber": "108",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338588,
+  "tags": {
+    "addr:housenumber": "96",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338589,
+  "tags": {
+    "addr:housenumber": "90",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688338590,
+  "tags": {
+    "addr:housenumber": "80",
+    "addr:street": "Đường Nguyễn Trãi"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497755,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497758,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497759,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497760,
+  "tags": {
+    "addr:housenumber": "98",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497763,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688497767,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Phố Thái Hà"
+  }
+},
+{
+  "type": "node",
+  "id": 6688503841,
+  "tags": {
+    "addr:housenumber": "178",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976439,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976440,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976443,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976444,
+  "tags": {
+    "addr:housenumber": "83",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976445,
+  "tags": {
+    "addr:housenumber": "107",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976446,
+  "tags": {
+    "addr:housenumber": "82",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976447,
+  "tags": {
+    "addr:housenumber": "88",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976448,
+  "tags": {
+    "addr:housenumber": "104",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976449,
+  "tags": {
+    "addr:housenumber": "110",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976450,
+  "tags": {
+    "addr:housenumber": "134",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976451,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976452,
+  "tags": {
+    "addr:housenumber": "162",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976454,
+  "tags": {
+    "addr:housenumber": "127",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6688976455,
+  "tags": {
+    "addr:housenumber": "139",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6689074608,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6689074612,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6689074613,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phố Tây Sơn"
+  }
+},
+{
+  "type": "node",
+  "id": 6689709221,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Phố Quan Nhân",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6689709222,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Phố Quan Nhân"
+  }
+},
+{
+  "type": "node",
+  "id": 6689709223,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Phố Quan Nhân"
+  }
+},
+{
+  "type": "node",
+  "id": 6776001092,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "192",
+    "addr:province": "Hà Nội",
+    "addr:street": "Thái Thịnh",
+    "addr:subdistrict": "Láng Hạ",
+    "amenity": "restaurant",
+    "cuisine": "pizza;pasta;burger",
+    "name": "Roma Pizza",
+    "phone": "+8496 576 60 66",
+    "website": "http://romapizza.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546207,
+  "tags": {
+    "addr:full": "57 Chùa Bộc, Hà Nội, Đống Đa, Việt Nam",
+    "addr:housenumber": "57",
+    "addr:street": "Chùa Bộc",
+    "disused:clothes": "suits",
+    "disused:shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546261,
+  "tags": {
+    "addr:full": "196a-b Trường Chinh, phường Khương Thượng, Hà Nội, quận Đống Đa, Việt Nam",
+    "addr:housenumber": "196A-196B",
+    "addr:street": "Trường Chinh",
+    "alt_name": "An Phước Hà Nội 2 - Trường Chinh",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "024 3232 3347",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6813546284,
+  "tags": {
+    "addr:full": "132 Thái Hà, Hà Nội, Đống Đa, Việt Nam",
+    "addr:housenumber": "132",
+    "addr:street": "Thái Hà",
+    "alt_name": "An Phước Hà Nội 16 - Thái Hà",
+    "clothes": "suits",
+    "name": "Cửa Hàng Thời Trang An Phước",
+    "name:en": "An Phuoc",
+    "opening_hours": "7:30-21:30",
+    "phone": "024 3537 9860",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "node",
+  "id": 6880982195,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "fast_food",
+    "brand": "McDonald's",
+    "brand:wikidata": "Q38076",
+    "brand:wikipedia": "en:McDonald's",
+    "cuisine": "burger",
+    "name": "McDonald's",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6904546311,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "367",
+    "addr:province": "Việt Nam",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Trung",
+    "brand": "Hồng Lam",
+    "name": "Ô mai Hồng Lam Trường Chinh",
+    "opening_hours": "Mo-Su 07:30-22:00",
+    "operator": "Hồng Lam",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "+84 24 3568 3101",
+    "shop": "yes",
+    "website": "https://honglam.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 6904546312,
+  "tags": {
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "102C",
+    "addr:street": "Phố Thái Thịnh",
+    "brand": "Hồng Lam",
+    "name": "Ô mai Hồng Lam Thái Thịnh",
+    "opening_hours": "Mo-Su 07:30-22:00",
+    "operator": "Hồng Lam",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+84 24 6275 0202",
+    "shop": "yes",
+    "website": "https://honglam.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 6986697627,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "186",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Thịnh",
+    "addr:subdistrict": "Láng Hạ",
+    "brand": "Circle K",
+    "brand:wikidata": "Q3268010",
+    "brand:wikipedia": "en:Circle K",
+    "name": "Circle K",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn/en/"
+  }
+},
+{
+  "type": "node",
+  "id": 7055986815,
+  "tags": {
+    "addr:city": "hà nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "131",
+    "addr:province": "hà nội",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "thượng đình"
+  }
+},
+{
+  "type": "node",
+  "id": 7056041787,
+  "tags": {
+    "addr:housenumber": "214",
+    "addr:street": "Phố Thái Hà",
+    "amenity": "bank",
+    "name": "Ngân hàng SCB"
+  }
+},
+{
+  "type": "node",
+  "id": 7056055193,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuan",
+    "addr:housenumber": "11",
+    "addr:street": "Vương Thừa Vũ",
+    "amenity": "cafe",
+    "brand": "The Coffee House",
+    "brand:wikidata": "Q60775742",
+    "brand:wikipedia": "en:The Coffee House (coffeehouse chain)",
+    "cuisine": "coffee_shop;vietnamese",
+    "delivery": "yes",
+    "internet_access": "yes",
+    "name": "The Coffee House",
+    "name:en": "The Coffee House",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7056055201,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "01",
+    "addr:province": "Hà Nội",
+    "addr:street": "Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "cafe",
+    "brand": "The Coffee House",
+    "brand:wikidata": "Q60775742",
+    "brand:wikipedia": "en:The Coffee House (coffeehouse chain)",
+    "cuisine": "coffee_shop;vietnamese",
+    "delivery": "yes",
+    "internet_access": "yes",
+    "name": "The Coffee House",
+    "name:en": "The Coffee House",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7056057600,
+  "tags": {
+    "addr:housenumber": "101",
+    "addr:street": "Phõ Láng Hạ",
+    "amenity": "bank",
+    "brand": "Techcombank",
+    "brand:wikidata": "Q10541776",
+    "name": "Techcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 7056058601,
+  "tags": {
+    "addr:housenumber": "41",
+    "addr:street": "Ngõ 554 Trường Chinh"
+  }
+},
+{
+  "type": "node",
+  "id": 7056058602,
+  "tags": {
+    "addr:housenumber": "494",
+    "addr:street": "Đường Trường Chinh",
+    "name": "FPT Shop",
+    "shop": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7056058603,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Ngõ 554 Trường Chinh",
+    "shop": "dry_cleaning"
+  }
+},
+{
+  "type": "node",
+  "id": 7056088685,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Phõ Láng Hạ",
+    "amenity": "bank",
+    "brand": "BIDV",
+    "brand:wikidata": "Q1003180",
+    "name": "BIDV",
+    "official_name": "Ngân hàng Đầu tư và Phát triển Việt Nam",
+    "official_name:en": "Bank for Investment and Development of Vietnam",
+    "official_name:vi": "Ngân hàng Đầu tư và Phát triển Việt Nam"
+  }
+},
+{
+  "type": "node",
+  "id": 7089810485,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:postcode": "10000",
+    "addr:street": "Ngõ 134 Lê Trọng Tấn",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "email": "giatruyenkhuongthuong@gmail.com",
+    "internet_access": "wlan",
+    "name": "Lẩu Ốc Bún Ốc Gia Truyền Khương Thượng",
+    "name:en": "Snail Hotpot - Rice noodle with snail from Khuong Thuong old village",
+    "opening_hours": "Mo-Su 06:00-23:00",
+    "operator": "bbc and partners jsc",
+    "phone": "0963081390",
+    "website": "https://facebook.com/lauocgiatruyen"
+  }
+},
+{
+  "type": "node",
+  "id": 7516955871,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "111D1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "addr:subdistrict": "Phương Liên – Trung Tự",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;noodle",
+    "name": "Bún Chả Sinh Từ",
+    "name:en": "Bun Cha Sinh Tu"
+  }
+},
+{
+  "type": "node",
+  "id": 7842712607,
+  "tags": {
+    "addr:housenumber": "173",
+    "addr:street": "Đường Trường Chinh",
+    "addr:unit": "B"
+  }
+},
+{
+  "type": "node",
+  "id": 7856622554,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "35",
+    "addr:street": "Phố Thái Thịnh",
+    "addr:subdistrict": "Thịnh Quang",
+    "amenity": "post_office",
+    "name": "Bưu điện Đống Đa",
+    "operator": "Vietnam Post",
+    "operator:wikidata": "Q112150791"
+  }
+},
+{
+  "type": "node",
+  "id": 7858056541,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "01",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "bank",
+    "atm": "yes",
+    "branch": "Thành Công",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "brand:wikipedia": "en:Vietcombank",
+    "name": "Vietcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 7921727184,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "Số nhà 20",
+    "addr:postcode": "+84",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ 120 Yên Lãng",
+    "addr:subdistrict": "Thịnh Quang",
+    "name": "Xưởng In Thun Việt - ThunVietJSC",
+    "opening_hours": "24/7",
+    "operator": "Công Ty Cổ Phần Thương Mại Và Sản Xuất Thun Việt",
+    "shop": "printer_ink"
+  }
+},
+{
+  "type": "node",
+  "id": 8132877478,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "25",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ 167 Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;coffee_shop",
+    "diet:kosher": "yes",
+    "diet:meat": "yes",
+    "min_age": "15",
+    "name": "Bún Ngan Cô Tuyết",
+    "note": "- Quán bán bún Ngan và bún Hải Sản  - Kèm theo Cafe + nước ép trái cây mang về - Tối sẽ có bán thêm Lẩu & Nướng",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "outdoor_seating": "yes",
+    "phone": "0968652099",
+    "reservation": "yes",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8516000218,
+  "tags": {
+    "addr:housenumber": "R4",
+    "addr:postcode": "100000",
+    "addr:street": "Royal City Complex",
+    "email": "info@qbrows.com",
+    "internet_access": "wlan",
+    "name": "Q Brows Microblading",
+    "name:en": "Q Brows Microblading - Permanent Makeup",
+    "name:vi": "Q Brows Microblading - Permanent Makeup",
+    "opening_hours": "Mo-Sa 09:00-18:00",
+    "phone": "+84974718078",
+    "shop": "beauty",
+    "website": "http://microblading.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 8563466268,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "7",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Nam Đồng",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Cafe Ông Bầu",
+    "name:en": "Ong Bau Coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 8778018117,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:postcode": "11415",
+    "addr:street": "Ngách 40/109 Quan Nhân",
+    "email": "huvitz.vn@gmail.com",
+    "name": "Công Ty TNHH Công Nghệ Henry Ai",
+    "office": "company",
+    "opening_hours": "24/7",
+    "phone": "+84946861123",
+    "website": "https://huvitzvn.com"
+  }
+},
+{
+  "type": "node",
+  "id": 8823633595,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "268",
+    "addr:postcode": "10000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Trung Liệt",
+    "facebook": "https://www.facebook.com/bep365",
+    "issuu": "https://issuu.com/bep365showroom",
+    "name": "Siêu Thị Bếp 365",
+    "opening_hours": "8:00-21:00",
+    "uid": "http://uid.me/bep365_sieuthi",
+    "website": "https://bep365.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 8929112749,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "292",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hoàng Văn Thái",
+    "addr:subdistrict": "Khương Trung",
+    "brand": "Circle K",
+    "brand:wikidata": "Q3268010",
+    "brand:wikipedia": "en:Circle K",
+    "name": "Circle K",
+    "opening_hours": "24/7",
+    "operator": "Red Circle Co., Ltd",
+    "payment:QR_Pay": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 24 3200 7058",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 8937618770,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "52",
+    "addr:postcode": "100000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "addr:subdistrict": "Khương Mai",
+    "amenity": "pharmacy",
+    "brand": "Pharmacity",
+    "brand:wikidata": "Q115324413",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity",
+    "opening_hours": "Mo-Su 06:00-23:30",
+    "operator": "Pharmacity",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 1800 6821",
+    "shop": "chemist",
+    "website": "https://www.pharmacity.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 8937618771,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "46",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "addr:subdistrict": "Khương Mai",
+    "brand": "Circle K",
+    "brand:wikidata": "Q3268010",
+    "brand:wikipedia": "en:Circle K",
+    "name": "Circle K",
+    "opening_hours": "24/7",
+    "operator": "Red Circle Co., Ltd",
+    "payment:QR_Pay": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 24 3200 6067",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 8957577167,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "94",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "addr:subdistrict": "Khương Trung",
+    "amenity": "pharmacy",
+    "brand": "Pharmacity",
+    "brand:wikidata": "Q115324413",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity",
+    "opening_hours": "Mo-Su 06:00-23:30",
+    "operator": "Pharmacity",
+    "payment:QR_Pay": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 1800 6821",
+    "shop": "chemist",
+    "website": "https://www.pharmacity.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 8984048766,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "addr:subdistrict": "Khương Trung",
+    "brand": "Circle K",
+    "brand:wikidata": "Q3268010",
+    "brand:wikipedia": "en:Circle K",
+    "name": "Circle K",
+    "opening_hours": "24/7",
+    "operator": "Red Circle Co., Ltd",
+    "payment:QR_Pay": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 243 204 5215",
+    "shop": "convenience",
+    "website": "https://www.circlek.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 8984048767,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "282",
+    "addr:postcode": "120911",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hoàng Văn Thái",
+    "addr:subdistrict": "Khương Trung",
+    "name": "Công Ty Cổ Phần Quốc Tế Homefarm",
+    "opening_hours": "Mo-Su 08:00-20:00",
+    "operator": "CÔNG TY CỔ PHẦN QUỐC TẾ HOMEFARM",
+    "payment:QR_Pay": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84 247 108 1008",
+    "shop": "frozen_food",
+    "website": "https://homefarm.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 9420432152,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "47",
+    "addr:street": "Phố Đặng Tiến Đông",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "post_office",
+    "name": "Bưu cục Đặng Tiến Đông",
+    "operator": "Vietnam Post",
+    "operator:wikidata": "Q112150791"
+  }
+},
+{
+  "type": "node",
+  "id": 9420432154,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "185",
+    "addr:street": "Phố Nguyễn Ngọc Nại",
+    "addr:subdistrict": "Khương Mai",
+    "amenity": "post_office",
+    "name": "Bưu Điện Khương Mai",
+    "name:en": "Khuong Mai Post Office",
+    "name:tr": "Khuong Mai Postanesi",
+    "operator": "Bưu điện Trung tâm 3"
+  }
+},
+{
+  "type": "node",
+  "id": 9420438150,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "20",
+    "addr:street": "Đường Khương Đình",
+    "addr:subdistrict": "Khương Đình",
+    "amenity": "post_office",
+    "name": "Bưu Điện Khương Đình",
+    "operator": "Bưu điện Trung tâm 3"
+  }
+},
+{
+  "type": "node",
+  "id": 9658535627,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "136",
+    "addr:province": "Hà Nội",
+    "addr:street": "Nguyễn Trãi",
+    "addr:subdistrict": "Thanh Xuân Trung",
+    "amenity": "hospital",
+    "description": "Cơ sở Nguyễn Trãi của hệ thống bệnh viện đa khoa quốc tế Thu Cúc",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Thu Cúc TCI Thanh Xuân",
+    "name:en": "Thu Cuc International General Hospital",
+    "opening_hours": "Mo-Su 08:00-17:00",
+    "phone": "+84 936 188 584",
+    "website": "https://benhvienthucuc.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 9805222054,
+  "tags": {
+    "addr:district": "Ba Đình",
+    "addr:housenumber": "56",
+    "addr:street": "Ngõ 169 Tây Sơn",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "contact:facebook": "https://www.facebook.com/thesheltercafe/",
+    "lgbtq": "welcome",
+    "name": "The Shelter Tây Sơn",
+    "opening_hours": "Mo-Su 08:30-23:00",
+    "payment:credit_cards": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9942330789,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "133",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "brand": "Eva de Eva",
+    "clothes": "women",
+    "level": "0",
+    "name": "Eva de Eva",
+    "phone": "+84971312466",
+    "shop": "clothes",
+    "website": "https://evadeeva.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 9942330802,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "125",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "level": "0;1;2;3",
+    "name": "Grand Vin de Bordeux",
+    "shop": "wine"
+  }
+},
+{
+  "type": "node",
+  "id": 10118715687,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "229",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "level": "9",
+    "name": "Ahamove",
+    "office": "moving_company",
+    "phone": "+84 190 054 5411",
+    "website": "https://www.ahamove.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10656829305,
+  "tags": {
+    "addr:housenumber": "112E3",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "fast_food",
+    "name": "Đặc sản Bánh cuốn Cao Bằng"
+  }
+},
+{
+  "type": "node",
+  "id": 10749951833,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "29",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngách 31/167 Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "name": "COMPLEX 01",
+    "shop": "mall"
+  }
+},
+{
+  "type": "node",
+  "id": 11104487739,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "29",
+    "addr:postcode": "+84",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngách 31/167 Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "name": "fLeuriste amusée",
+    "phone": "+84 96 950 29 89",
+    "shop": "florist"
+  }
+},
+{
+  "type": "node",
+  "id": 11198940937,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "91",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Hoàng Văn Thái",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11198943437,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "147",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Hoàng Văn Thái",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11198957537,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "2",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Vương Thừa Vũ",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11198966337,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "92",
+    "addr:province": "phố tô vĩnh diện",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11209346437,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "60",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11211915136,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "166",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "name": "Cine Cafe"
+  }
+},
+{
+  "type": "node",
+  "id": 11403532576,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Trung Tự",
+    "amenity": "bank",
+    "atm": "yes",
+    "brand": "TPBank",
+    "brand:wikidata": "Q7801033",
+    "name": "TPBank",
+    "opening_hours": "Mo-Fr 08:00-12:00,13:00-17:00"
+  }
+},
+{
+  "type": "node",
+  "id": 11425024852,
+  "tags": {
+    "addr:district": "Quận Đống Đa",
+    "addr:housenumber": "158",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Thái Thịnh",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 11590941891,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "Phố Láng Hạ",
+    "amenity": "police",
+    "name": "Công an phường Láng",
+    "phone": "+84 024 38533528"
+  }
+},
+{
+  "type": "node",
+  "id": 11649175869,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "100000",
+    "addr:street": "Ngõ 93 Tô Vĩnh Diện",
+    "internet_access": "wlan",
+    "name": "Máy tính Hoàng Hà",
+    "name:en": "Hoang Ha Computer",
+    "opening_hours": "Mo-Su 09:00-18:00",
+    "operator": "CÔNG TY TNHH DỊCH VỤ MÁY TÍNH HOÀNG HÀ",
+    "shop": "computer",
+    "website": "http://maytinhhoangha.com"
+  }
+},
+{
+  "type": "node",
+  "id": 11743357281,
+  "tags": {
+    "addr:district": "Quận Thanh Xuân",
+    "addr:housenumber": "3",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Nguyễn Viết Xuân",
+    "addr:subdistrict": "Phường Khương Mai"
+  }
+},
+{
+  "type": "node",
+  "id": 11745319463,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "contact:facebook": "https://www.facebook.com/cogo.vn",
+    "email": "info@cogo.com.vn",
+    "level": "2;3",
+    "mobile": "+84 866 145 586",
+    "name": "CoGo Coworking Space",
+    "office": "coworking",
+    "phone": "+84 24 3553 2288",
+    "website": "https://cogo.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 12156929453,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Phố Cự Lộc"
+  }
+},
+{
+  "type": "node",
+  "id": 12185671587,
+  "tags": {
+    "addr:housenumber": "95",
+    "addr:street": "Phố Chùa Bộc",
+    "name": "Tiệm kính Daisy",
+    "name:en": "Daisy Eyewear",
+    "shop": "optician"
+  }
+},
+{
+  "type": "node",
+  "id": 12335966670,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Phố Trần Hữu Tước"
+  }
+},
+{
+  "type": "node",
+  "id": 12408612278,
+  "tags": {
+    "addr:district": "Quận Đống Đa",
+    "addr:housenumber": "90",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Ngõ Thịnh Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 12549262758,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "324",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Thịnh Quang",
+    "name": "FujiMart",
+    "opening_hours": "Mo-Su 07:30-22:00",
+    "phone": "+84 24 3205 2324",
+    "shop": "supermarket",
+    "website": "https://fujimart.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 12549262759,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "324",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Thịnh Quang",
+    "amenity": "bank",
+    "brand": "SeABank",
+    "brand:wikidata": "Q10800276",
+    "name": "SeABank",
+    "website": "https://www.seabank.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 12552981505,
+  "tags": {
+    "addr:housenumber": "290",
+    "addr:street": "phố Tây Sơn, quận Đống Đa, thành phố Hà Nội",
+    "amenity": "school",
+    "education": "school",
+    "name": "Trường Trung học phổ thông Anhxtanh Hà Nội"
+  }
+},
+{
+  "type": "node",
+  "id": 12608813293,
+  "tags": {
+    "addr:housenumber": "96",
+    "addr:street": "Phố Thượng Đình"
+  }
+},
+{
+  "type": "node",
+  "id": 12628841472,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:housenumber": "75",
+    "addr:street": "Phố Yên Lãng",
+    "amenity": "restaurant",
+    "name": "Quán Nhau Tu Do",
+    "opening_hours": "Mo-Su 10:00-24:00",
+    "phone": "+842432021386",
+    "website": "https://quannhautudo.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12644828218,
+  "tags": {
+    "addr:housenumber": "188",
+    "addr:street": "Đường Trường Chinh",
+    "amenity": "bank",
+    "brand": "Vietcombank",
+    "brand:wikidata": "Q6122995",
+    "level": "1",
+    "name": "Vietcombank"
+  }
+},
+{
+  "type": "node",
+  "id": 12651100308,
+  "tags": {
+    "addr:housenumber": "139",
+    "addr:street": "Nguyễn Văn Tuyết",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese;snack;dessert",
+    "name": "Ăn Vặt Mẹ Sữa"
+  }
+},
+{
+  "type": "node",
+  "id": 12655899525,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "ĐốngĐa",
+    "addr:housenumber": "16",
+    "addr:postcode": "116920",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Thịnh Quang",
+    "addr:subdistrict": "Thịnh Quang",
+    "air_conditioning": "yes",
+    "contact:facebook": "https://www.facebook.com/notesperfumevn/",
+    "email": "pianisttit@gmail.com",
+    "internet_access": "wlan",
+    "loc_name": "Notes Perfume",
+    "name": "Notes Perfume",
+    "nat_name": "Notes Perfume Vietnam",
+    "opening_hours": "Mo-Su 09:00-22:00",
+    "operator": "Notes Perfume",
+    "payment:cash": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+84988574169",
+    "shop": "perfumery",
+    "start_date": "2024/12/09",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12878208846,
+  "tags": {
+    "addr:housenumber": "82",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "name": "Điểm cung cấp dịch vụ Viettel",
+    "office": "telecommunication"
+  }
+},
+{
+  "type": "node",
+  "id": 12973991420,
+  "tags": {
+    "addr:housenumber": "155",
+    "addr:street": "Phố Vương Thừa Vũ",
+    "brand": "WinMart+",
+    "brand:wikidata": "Q113236478",
+    "name": "WinMart+",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 13013690753,
+  "tags": {
+    "addr:housenumber": "36",
+    "addr:street": "Hoàng Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 13430335515,
+  "tags": {
+    "addr:housenumber": "76",
+    "addr:street": "Đường Nguyễn Trãi",
+    "name": "Cửa hàng Xe máy điện VinFast Mạnh Phát 2",
+    "shop": "motorcycle"
+  }
+},
+{
+  "type": "node",
+  "id": 13431656135,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:housenumber": "112",
+    "addr:postcode": "100000",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Thượng Đình",
+    "addr:subdistrict": "Khương Đình",
+    "contact:facebook": "https://www.facebook.com/happyfloralvn",
+    "contact:instagram": "https://www.instagram.com/happyfloral.hanoi",
+    "description": "Chuyên hoa tươi thiết kế, hoa khai trương, hoa sinh nhật, hoa chúc mừng các dịp, điện hoa toàn Hà Nội.",
+    "email": "admin@happyfloralvn.com",
+    "loc_name": "Happy Floral",
+    "name": "Happy Floral - Shop Hoa Tươi Hà Nội",
+    "opening_hours": "Mo-Su 07:30-21:00",
+    "payment:cash": "yes",
+    "payment:qr_code": "yes",
+    "phone": "+84988610988",
+    "shop": "florist",
+    "website": "https://happyfloralvn.com/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13786414588,
+  "tags": {
+    "addr:housenumber": "62",
+    "addr:street": "Phố Hoàng Văn Thái"
+  }
+},
+{
+  "type": "node",
+  "id": 13849330212,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "144",
+    "addr:street": "Phố Vương Thừa Vũ",
+    "addr:subdistrict": "Khương Trung",
+    "contact:facebook": "https://www.facebook.com/BanGiuong/",
+    "name": "Bạn Giường",
+    "phone": "+84 369 958 247",
+    "shop": "furniture",
+    "website": "https://bangiuong.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13906481702,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:postcode": "100000",
+    "addr:street": "Đường Nguyễn Ngọc Vũ",
+    "internet_access": "wlan",
+    "name": "Siêu Thanh Hà Nội",
+    "office": "company",
+    "opening_hours": "Mo-Fr 08:00-17:00",
+    "phone": "02438223888",
+    "website": "http://sieuthanh.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13979743582,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "name": "Kính mắt Quang Hưng",
+    "shop": "optician"
+  }
+},
+{
+  "type": "node",
+  "id": 14079699746,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "58A",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Ngõ 38 Phố Yên Lãng",
+    "addr:subdistrict": "Láng Hạ",
+    "beauty": "skin_care",
+    "name": "Heni Skin Beauty & Spa",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "operator": "Heni Skin",
+    "phone": "0968727000",
+    "shop": "beauty"
+  }
+},
+{
+  "type": "way",
+  "id": 38042806,
+  "tags": {
+    "access": "yes",
+    "addr:city": "Hà Nội",
+    "addr:housenumber": "129",
+    "addr:postcode": "100000",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Khương Đình",
+    "leisure": "pitch",
+    "lit": "yes",
+    "name": "Sân bóng Thượng Đình",
+    "source": "grab_hanoi_2018_t2",
+    "sport": "pickleball"
+  }
+},
+{
+  "type": "way",
+  "id": 136256050,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "173C",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Mai",
+    "building": "museum"
+  }
+},
+{
+  "type": "way",
+  "id": 136257265,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Đống Đa",
+    "addr:housename": "Viet Tower",
+    "addr:housenumber": "1",
+    "addr:postcode": "10000",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "commercial",
+    "name": "Việt Tower",
+    "source": "Survey"
+  }
+},
+{
+  "type": "way",
+  "id": 136258988,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "292",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "building": "yes",
+    "building:levels": "8",
+    "name": "Tòa nhà Kinh Đô",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "way",
+  "id": 136259020,
+  "tags": {
+    "addr:housenumber": "106",
+    "addr:street": "Phố Thái Thịnh",
+    "building": "yes",
+    "building:levels": "7",
+    "name": "Ban Quản lý dự án Đường Hồ Chí Minh",
+    "office": "government",
+    "website": "https://dhcm.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 136259022,
+  "tags": {
+    "addr:housenumber": "104",
+    "addr:street": "Phố Thái Thịnh",
+    "building": "yes",
+    "building:levels": "7",
+    "name": "Công ty Cổ phần Phát triển Bất động sản Văn Phú",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 136259226,
+  "tags": {
+    "addr:housenumber": "80",
+    "addr:street": "Ngõ 82 Yên Lãng",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Nội tiết Trung ương"
+  }
+},
+{
+  "type": "way",
+  "id": 164212384,
+  "tags": {
+    "addr:block": "C3",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "dormitory",
+    "building:levels": "4",
+    "name": "Kí túc xá C3"
+  }
+},
+{
+  "type": "way",
+  "id": 164212387,
+  "tags": {
+    "addr:block": "C4",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "dormitory",
+    "building:levels": "4",
+    "name": "Kí túc xá C4"
+  }
+},
+{
+  "type": "way",
+  "id": 164212390,
+  "tags": {
+    "addr:block": "C2",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "dormitory",
+    "building:levels": "4",
+    "name": "Kí túc xá C2"
+  }
+},
+{
+  "type": "way",
+  "id": 164212395,
+  "tags": {
+    "addr:block": "C1",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "dormitory",
+    "building:levels": "4",
+    "name": "Kí túc xá C1"
+  }
+},
+{
+  "type": "way",
+  "id": 164212404,
+  "tags": {
+    "addr:housenumber": "1A",
+    "addr:postcode": "100000",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 179996741,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Ngõ 4C Đặng Văn Ngữ",
+    "amenity": "school",
+    "education": "school",
+    "email": "c3kimlien@hanoi.edu.vn",
+    "grades": "10-12",
+    "isced:level": "3",
+    "name": "Trường Trung học phổ thông Kim Liên",
+    "name:en": "Kim Lien High School",
+    "operator": "Sở Giáo dục và Đào tạo Hà Nội",
+    "operator:type": "public",
+    "phone": "+84 24 3852 2758",
+    "website": "http://thptkimlien-hanoi.edu.vn/",
+    "wikidata": "Q111025884",
+    "wikipedia": "vi:Trường Trung học phổ thông Kim Liên"
+  }
+},
+{
+  "type": "way",
+  "id": 179998403,
+  "tags": {
+    "addr:housenumber": "100",
+    "addr:street": "Ngõ 91 Phố Trần Quang Diệu",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "2",
+    "name": "Trường Trung học cơ sở Đống Đa (phân hiệu)",
+    "old_name": "Trường Trung học cơ sở Quang Trung",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "way",
+  "id": 180075246,
+  "tags": {
+    "addr:country": "VN",
+    "addr:district": "Quận Đống Đa",
+    "addr:housename": "MIPEC Tower",
+    "addr:housenumber": "229",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Phường Ngã Tư Sở",
+    "building": "commercial",
+    "name": "Toà nhà MIPEC",
+    "name:en": "MIPEC Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 219977469,
+  "tags": {
+    "addr:district": "Kim Liên",
+    "addr:housenumber": "12",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "amenity": "university",
+    "barrier": "wall",
+    "education": "university",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Học viện Ngân hàng",
+    "name:en": "Banking Academy",
+    "website": "https://hvnh.edu.vn/",
+    "wikidata": "Q10771894",
+    "wikipedia": "vi:Học viện Ngân hàng (Việt Nam)"
+  }
+},
+{
+  "type": "way",
+  "id": 438373210,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "addr:subdistrict": "Kim Liên",
+    "amenity": "hospital",
+    "building": "hospital",
+    "ele": "20m",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đại học Y Hà Nội"
+  }
+},
+{
+  "type": "way",
+  "id": 500040429,
+  "tags": {
+    "addr:housenumber": "131A",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "school",
+    "education": "school",
+    "name": "Trường Trung học cơ sở Thái Thịnh"
+  }
+},
+{
+  "type": "way",
+  "id": 570569864,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "155",
+    "addr:street": "Đặng Tiến Đông",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "apartments",
+    "building:levels": "4",
+    "name": "Tập thể Thảm May",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "way",
+  "id": 570570399,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Phố Đặng Tiến Đông",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "1",
+    "name": "Trường Tiểu học Đống Đa (cơ sở 2)",
+    "old_name": "Trường Tiểu học Quang Trung",
+    "source": "Grab_Hanoi_2018_T2"
+  }
+},
+{
+  "type": "way",
+  "id": 570570880,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "185",
+    "addr:street": "Phố Nguyễn Lương Bằng",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "brand:wikipedia": "en:Petrolimex",
+    "compressed_air": "no",
+    "fuel:diesel": "yes",
+    "fuel:e10": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Petrolimex",
+    "opening_hours": "24/7",
+    "operator": "Cửa hàng xăng dầu số 30",
+    "source": "grab_hanoi_2018_t2"
+  }
+},
+{
+  "type": "way",
+  "id": 677190115,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "97-99",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Láng Hạ",
+    "building": "apartments",
+    "building:levels": "27",
+    "name": "Chung cư Petrowaco Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 698722897,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "220",
+    "addr:postcode": "10165",
+    "addr:province": "Hanoi",
+    "addr:street": "Đường Láng",
+    "amenity": "college",
+    "building:levels": "7",
+    "education": "college",
+    "height": "30",
+    "name": "Trường Đào tạo Cán bộ Lê Hồng Phong",
+    "name:etymology:wikidata": "Q4255657"
+  }
+},
+{
+  "type": "way",
+  "id": 707150388,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "156",
+    "addr:postcode": "100000",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "23",
+    "name": "C'Land Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 709271919,
+  "tags": {
+    "addr:housenumber": "194",
+    "addr:street": "Thái Thịnh",
+    "amenity": "fuel",
+    "brand": "PV Oil",
+    "brand:wikidata": "Q2089536",
+    "brand:wikipedia": "en:Petrovietnam",
+    "building": "roof",
+    "name": "PV Oil Thái Thịnh"
+  }
+},
+{
+  "type": "way",
+  "id": 710355837,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "111",
+    "addr:province": "Hanoi",
+    "addr:street": "Đường Láng",
+    "addr:subdistrict": "Thịnh Quang",
+    "amenity": "fuel",
+    "brand": "Petrolimex",
+    "brand:wikidata": "Q10831598",
+    "brand:wikipedia": "en:Petrolimex",
+    "building": "roof",
+    "fuel:diesel": "yes",
+    "fuel:octane_92": "yes",
+    "fuel:octane_95": "yes",
+    "name": "Petrolimex",
+    "operator": "Cửa hàng Xăng dầu số 31 (Petrolimex)",
+    "self_service": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 755367129,
+  "tags": {
+    "addr:housenumber": "131",
+    "addr:street": "Đường Nguyễn Trãi",
+    "amenity": "school",
+    "education": "school",
+    "name": "Trường Trung học phổ thông Huỳnh Thúc Kháng"
+  }
+},
+{
+  "type": "way",
+  "id": 802431699,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Ngõ 122 Đường Láng",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "2",
+    "name": "Trường Trung học cơ sở Thái Thịnh (phân hiệu)",
+    "old_name": "Trường Trung học cơ sở Thịnh Quang"
+  }
+},
+{
+  "type": "way",
+  "id": 802431700,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Ngõ 122 Đường Láng",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "1",
+    "name": "Trường Tiểu học Bế Văn Đàn (phân hiệu)",
+    "old_name": "Trường Tiểu học Thịnh Quang"
+  }
+},
+{
+  "type": "way",
+  "id": 802433054,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "178",
+    "addr:street": "Đường Láng",
+    "addr:subdistrict": "Thịnh Quang",
+    "amenity": "school",
+    "education": "school",
+    "grades": "10-12",
+    "layer": "1",
+    "name": "Trường Trung học phổ thông Quang Trung - Đống Đa",
+    "name:etymology:wikidata": "Q379775",
+    "website": "http://thptquangtrungdongda.edu.vn/",
+    "wikipedia": "vi:Trường Trung học phổ thông Quang Trung – Đống Đa"
+  }
+},
+{
+  "type": "way",
+  "id": 810475989,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "6",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "school",
+    "education": "school",
+    "layer": "1",
+    "name": "Trường Phổ thông Liên cấp TH School",
+    "operator": "TH Group",
+    "operator:type": "private",
+    "phone": "+84 91 938 22 55",
+    "website": "https://thschool.edu.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 821395351,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "8",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "amenity": "school",
+    "education": "school",
+    "grades": "1-5",
+    "name": "Trường Tiểu học Khương Thượng",
+    "name:en": "Khuong Thuong Primary School",
+    "operator": "Ủy ban nhân dân phường Kim Liên",
+    "operator:type": "public"
+  }
+},
+{
+  "type": "way",
+  "id": 821395352,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "10",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "amenity": "school",
+    "education": "school",
+    "grades": "6-9",
+    "name": "Trường Trung học cơ sở Khương Thượng",
+    "name:en": "Khuong Thuong Secondary School",
+    "operator": "Ủy ban nhân dân phường Kim Liên",
+    "operator:type": "public"
+  }
+},
+{
+  "type": "way",
+  "id": 821395356,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "175",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "university",
+    "education": "university",
+    "name": "Trường Đại học Thủy lợi",
+    "name:en": "Thuyloi University",
+    "website": "https://www.tlu.edu.vn/",
+    "wikidata": "Q7973360",
+    "wikimedia_commons": "Category:Thủy Lợi University",
+    "wikipedia": "vi:Trường Đại học Thủy lợi"
+  }
+},
+{
+  "type": "way",
+  "id": 826025406,
+  "tags": {
+    "addr:block": "A1",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "4",
+    "layer": "1",
+    "name": "A1"
+  }
+},
+{
+  "type": "way",
+  "id": 826025407,
+  "tags": {
+    "addr:block": "A2",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "8",
+    "name": "A2"
+  }
+},
+{
+  "type": "way",
+  "id": 826025408,
+  "tags": {
+    "addr:block": "B1",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "3",
+    "layer": "1",
+    "name": "B1"
+  }
+},
+{
+  "type": "way",
+  "id": 826025409,
+  "tags": {
+    "addr:block": "B2",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "5",
+    "name": "B2"
+  }
+},
+{
+  "type": "way",
+  "id": 826025410,
+  "tags": {
+    "addr:block": "B3",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "amenity": "library",
+    "building": "university",
+    "building:levels": "8",
+    "name": "Thư Viện HVNH B3",
+    "opening_hours": "Mo-Sa 07:30-20:45, Sa 07:30-17:00; Su,PH off"
+  }
+},
+{
+  "type": "way",
+  "id": 826025411,
+  "tags": {
+    "addr:block": "D1",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "3",
+    "name": "Hội trường lớn D1"
+  }
+},
+{
+  "type": "way",
+  "id": 826025412,
+  "tags": {
+    "addr:block": "D2",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "9",
+    "name": "D2"
+  }
+},
+{
+  "type": "way",
+  "id": 826025413,
+  "tags": {
+    "addr:block": "D3",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "5",
+    "name": "D3"
+  }
+},
+{
+  "type": "way",
+  "id": 826025414,
+  "tags": {
+    "addr:block": "D4",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "4",
+    "layer": "2",
+    "name": "D4"
+  }
+},
+{
+  "type": "way",
+  "id": 826025415,
+  "tags": {
+    "addr:block": "D5",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "4",
+    "layer": "2",
+    "name": "D5"
+  }
+},
+{
+  "type": "way",
+  "id": 826025416,
+  "tags": {
+    "addr:block": "D6",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "5",
+    "name": "D6"
+  }
+},
+{
+  "type": "way",
+  "id": 826025418,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "amenity": "restaurant",
+    "building": "retail",
+    "building:levels": "3",
+    "check_date:opening_hours": "2025-09-24",
+    "name": "Nhà Ăn HVNH",
+    "opening_hours:signed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 826025419,
+  "tags": {
+    "addr:block": "E1",
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "sports_centre",
+    "leisure": "sports_hall",
+    "name": "Nhà thể chất HVNH E1"
+  }
+},
+{
+  "type": "way",
+  "id": 840066506,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Ngõ 14 Hồ Đắc Di",
+    "amenity": "school",
+    "education": "school",
+    "grades": "1-5",
+    "isced:level": "1",
+    "name": "Trường Tiểu học Bế Văn Đàn",
+    "name:etymology:wikidata": "Q10743429",
+    "operator": "Ủy ban nhân dân phường Đống Đa",
+    "operator:type": "public",
+    "website": "http://tieuhocbevandan.edu.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 840066509,
+  "tags": {
+    "addr:housenumber": "181",
+    "addr:street": "Phố Nguyễn Lương Bằng",
+    "amenity": "school",
+    "education": "school",
+    "grades": "6-9",
+    "isced:level": "2",
+    "name": "Trường Trung học cơ sở Đống Đa",
+    "old_name": "Trường Trung học cơ sở Bế Văn Đàn",
+    "operator": "Ủy ban nhân dân phường Đống Đa",
+    "operator:type": "public"
+  }
+},
+{
+  "type": "way",
+  "id": 840066513,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "18",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "6",
+    "name": "Tòa nhà Cienco 8",
+    "roof:colour": "#36404A",
+    "roof:shape": "saltbox"
+  }
+},
+{
+  "type": "way",
+  "id": 840066514,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "16",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Nam Đồng",
+    "amenity": "community_centre",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 840074804,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "187",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "building": "apartments",
+    "building:levels": "17",
+    "name": "Sunrise Tower",
+    "roof:colour": "#758893"
+  }
+},
+{
+  "type": "way",
+  "id": 840074805,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "183",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Nguyễn Lương Bằng",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "bank",
+    "branch": "Đống Đa",
+    "brand": "VietinBank",
+    "brand:wikidata": "Q7928459",
+    "building": "yes",
+    "building:levels": "14",
+    "building:material": "glass",
+    "name": "VietinBank"
+  }
+},
+{
+  "type": "way",
+  "id": 840439591,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Trung Tự",
+    "building": "office",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 840439592,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "building": "office",
+    "building:levels": "17",
+    "building:levels:underground": "3",
+    "building:material": "glass",
+    "height": "46",
+    "name": "Toà nhà văn phòng Eurowindow"
+  }
+},
+{
+  "type": "way",
+  "id": 840439593,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "4",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "building": "office",
+    "building:levels": "19",
+    "building:levels:underground": "3",
+    "height": "51",
+    "name": "CONINCO Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 840467994,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "3",
+    "addr:street": "Phó Lê Trọng Tấn",
+    "addr:subdistrict": "Khương Mai",
+    "air_conditioning": "yes",
+    "building": "yes",
+    "name": "Trung tâm thương mại Artemis",
+    "name:en": "Artemis Shopping Center",
+    "opening_hours": "Mo-Su 07:30-22:00",
+    "shop": "mall"
+  }
+},
+{
+  "type": "way",
+  "id": 841601170,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "101",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Láng Hạ",
+    "building": "commercial",
+    "building:levels": "28",
+    "name": "Tòa nhà 101 Láng Hạ"
+  }
+},
+{
+  "type": "way",
+  "id": 845096116,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "27",
+    "addr:street": "Phố Thái Thịnh",
+    "addr:subdistrict": "Thịnh Quang",
+    "building": "apartments",
+    "building:levels": "21",
+    "building:levels:underground": "3",
+    "name": "Le Capitole"
+  }
+},
+{
+  "type": "way",
+  "id": 845096117,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "102",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Thịnh",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "commercial",
+    "building:levels": "4",
+    "name": "Hà Thành Plaza"
+  }
+},
+{
+  "type": "way",
+  "id": 850419282,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "air_conditioning": "yes",
+    "brand": "Novotel",
+    "brand:wikidata": "Q420545",
+    "brand:wikipedia": "en:Novotel",
+    "building": "hotel",
+    "contact:facebook": "https://www.facebook.com/NovotelHanoiThaiHa",
+    "email": "h9692@accor.com",
+    "name": "Novotel Hanoi Thai Ha",
+    "phone": "+84 24 3857 5588",
+    "reservation": "yes",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://novotelhanoithaiha.com"
+  }
+},
+{
+  "type": "way",
+  "id": 851595051,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "324",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "building": "office",
+    "building:levels:underground": "2",
+    "name": "Oriental Tower",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "way",
+  "id": 851595054,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "420",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "amenity": "townhall",
+    "building": "yes",
+    "building:levels": "4",
+    "government": "administrative",
+    "name": "UBND phường Ngã Tư Sở",
+    "phone": "+84 24 38 531 199"
+  }
+},
+{
+  "type": "way",
+  "id": 863044714,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "7",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office",
+    "building:levels": "7",
+    "name": "King Building"
+  }
+},
+{
+  "type": "way",
+  "id": 867981978,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "141",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Phường Nam Đồng",
+    "landuse": "military",
+    "name": "Tổng Công ty Thành An",
+    "wikidata": "Q18461139",
+    "wikipedia": "vi:Tổng Công ty Thành An, Bộ Quốc phòng (Việt Nam)"
+  }
+},
+{
+  "type": "way",
+  "id": 868988100,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "108",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Thượng Đình",
+    "building": "apartments",
+    "building:levels": "36",
+    "name": "King Palace"
+  }
+},
+{
+  "type": "way",
+  "id": 885842095,
+  "tags": {
+    "addr:housenumber": "1-3",
+    "addr:street": "Ngõ 165 Chùa Bộc",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Phòng Thí nghiệm trọng điểm Quốc gia về Động lực học sông biển",
+    "name:en": "Key Laboratory of River and Coastal Engineering",
+    "name:vi": "Phòng Thí nghiệm trọng điểm Quốc gia về Động lực học sông biển"
+  }
+},
+{
+  "type": "way",
+  "id": 885842096,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Ngõ 165 Chùa Bộc",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Nước, Tưới tiêu và Môi trường"
+  }
+},
+{
+  "type": "way",
+  "id": 888367932,
+  "tags": {
+    "addr:housenumber": "D3",
+    "addr:place": "Khu tập thể Nam Đồng",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 892577123,
+  "tags": {
+    "addr:housenumber": "R5",
+    "addr:street": "Đường Nguyễn Trãi",
+    "building": "apartments",
+    "building:levels": "40",
+    "height": "135",
+    "level": "0",
+    "name": "R5"
+  }
+},
+{
+  "type": "way",
+  "id": 892577318,
+  "tags": {
+    "addr:housenumber": "72, R4",
+    "addr:postcode": "100000",
+    "addr:street": "Đường Nguyễn Trãi",
+    "building": "apartments",
+    "building:levels": "40",
+    "height": "135",
+    "level": "0",
+    "name": "R4"
+  }
+},
+{
+  "type": "way",
+  "id": 893874553,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Ngõ 95 Chùa Bộc",
+    "building": "office",
+    "building:levels": "8",
+    "name": "Toà nhà HEC"
+  }
+},
+{
+  "type": "way",
+  "id": 900842177,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "188",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "building": "yes",
+    "building:levels": "12"
+  }
+},
+{
+  "type": "way",
+  "id": 900842178,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "190",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "amenity": "hospital",
+    "building": "hospital",
+    "building:levels": "9",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Thẩm mỹ Kangnam Hàn Quốc"
+  }
+},
+{
+  "type": "way",
+  "id": 900842179,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "198",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "building": "yes",
+    "building:levels": "7"
+  }
+},
+{
+  "type": "way",
+  "id": 900842181,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "196",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "building": "yes",
+    "building:levels": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 900842182,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "194",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "building": "yes",
+    "building:levels": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 900842183,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "192",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "building": "yes",
+    "building:levels": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 916879500,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Ngõ 149 phố Khương Thượng",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "1",
+    "name": "Trường Tiểu học Phương Mai (phân hiệu)",
+    "old_name": "Trường Tiểu học Tam Khương"
+  }
+},
+{
+  "type": "way",
+  "id": 916879506,
+  "tags": {
+    "addr:housenumber": "163",
+    "addr:street": "Phố Khương Thượng",
+    "amenity": "school",
+    "education": "school",
+    "isced:level": "2",
+    "name": "Trường Trung học cơ sở Khương Thượng (phân hiệu 2)",
+    "old_name": "Trường Trung học cơ sở Tam Khương"
+  }
+},
+{
+  "type": "way",
+  "id": 947208602,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:housenumber": "136",
+    "addr:street": "Phố Nguyễn Ngọc Nại",
+    "amenity": "townhall",
+    "building": "government",
+    "name": "UBND phường Phương Liệt",
+    "townhall:type": "ward"
+  }
+},
+{
+  "type": "way",
+  "id": 947208616,
+  "tags": {
+    "addr:housenumber": "126",
+    "addr:street": "Phố Khương Trung",
+    "amenity": "school",
+    "education": "school",
+    "name": "Trường Trung học cơ sở Nguyễn Trãi"
+  }
+},
+{
+  "type": "way",
+  "id": 956996505,
+  "tags": {
+    "addr:housenumber": "321",
+    "addr:street": "Phố Tây Sơn",
+    "landuse": "commercial"
+  }
+},
+{
+  "type": "way",
+  "id": 956996529,
+  "tags": {
+    "addr:housenumber": "388",
+    "addr:street": "Đường Trường Chinh",
+    "amenity": "police",
+    "name": "Công an phường Kim Liên",
+    "phone": "+84 24 3852 3855"
+  }
+},
+{
+  "type": "way",
+  "id": 958652608,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "75",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Đặng Văn Ngữ",
+    "addr:subdistrict": "Phương Liên – Trung Tự",
+    "amenity": "community_centre",
+    "building": "civic",
+    "name": "Trung tâm Văn hóa - Thông tin và Thể thao phường Kim Liên",
+    "operator": "Ủy ban nhân dân phường Kim Liên",
+    "operator:type": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 958652610,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "barrier": "wall",
+    "landuse": "commercial",
+    "name": "Công ty Dịch vụ Agribank"
+  }
+},
+{
+  "type": "way",
+  "id": 958652611,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office",
+    "building:levels": "1"
+  }
+},
+{
+  "type": "way",
+  "id": 958652612,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "industrial",
+    "building:levels": "1"
+  }
+},
+{
+  "type": "way",
+  "id": 958652613,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "industrial",
+    "building:levels": "2"
+  }
+},
+{
+  "type": "way",
+  "id": 958652614,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office",
+    "building:levels": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 958652615,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office"
+  }
+},
+{
+  "type": "way",
+  "id": 958652616,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "10",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "bank",
+    "brand": "Agribank",
+    "brand:wikidata": "Q1924723",
+    "brand:wikipedia": "vi:Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
+    "building": "office",
+    "name": "Agribank",
+    "official_name": "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
+    "official_name:en": "Vietnam Bank for Agriculture and Rural Development",
+    "official_name:vi": "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam",
+    "opening_hours": "Mo-Fr 08:00-24:00,13:00-17:00"
+  }
+},
+{
+  "type": "way",
+  "id": 958652617,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office"
+  }
+},
+{
+  "type": "way",
+  "id": 958652618,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "carport"
+  }
+},
+{
+  "type": "way",
+  "id": 958652619,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "carport"
+  }
+},
+{
+  "type": "way",
+  "id": 958652620,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "office"
+  }
+},
+{
+  "type": "way",
+  "id": 965225815,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "292",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hoàng Văn Thái",
+    "addr:subdistrict": "Khương Trung",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 977795572,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "173",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Mai",
+    "building": "yes",
+    "building:levels": "3",
+    "name": "FPT Shop",
+    "shop": "electronics"
+  }
+},
+{
+  "type": "way",
+  "id": 977795573,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "173B",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Mai",
+    "building": "yes",
+    "name": "Viet Brothers",
+    "shop": "clothes"
+  }
+},
+{
+  "type": "way",
+  "id": 977795576,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "173B",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Mai",
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Nhà hàng Cảnh Hồ"
+  }
+},
+{
+  "type": "way",
+  "id": 1021332449,
+  "tags": {
+    "addr:housenumber": "171",
+    "addr:street": "Phố Tây Sơn",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Khoa học Thuỷ lợi Việt Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 1023488513,
+  "tags": {
+    "addr:housenumber": "143",
+    "addr:street": "Phố Hồ Đắc Di",
+    "landuse": "commercial",
+    "office": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 1023488514,
+  "tags": {
+    "addr:housenumber": "149",
+    "addr:street": "Phố Hồ Đắc Di",
+    "landuse": "commercial",
+    "name": "Cục Trồng trọt và Bảo vệ thực vật",
+    "office": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 1023488515,
+  "tags": {
+    "addr:housenumber": "145",
+    "addr:street": "Phố Hồ Đắc Di",
+    "building": "yes",
+    "name": "Công ty Cổ phần Bảo vệ thực vật 1 Trung ương",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 1040723042,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "46",
+    "addr:postcode": "120911",
+    "addr:province": "Việt Nam",
+    "addr:street": "Phố Vương Thừa Vũ",
+    "addr:subdistrict": "Khương Trung",
+    "building": "yes",
+    "building:levels": "7",
+    "import": "grabremote",
+    "name": "Symper"
+  }
+},
+{
+  "type": "way",
+  "id": 1040743459,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Phố Tây Sơn",
+    "building": "yes",
+    "import": "grabremote"
+  }
+},
+{
+  "type": "way",
+  "id": 1046067196,
+  "tags": {
+    "addr:housenumber": "147",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1046067198,
+  "tags": {
+    "addr:housenumber": "137",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1085065491,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "133",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "yes",
+    "building:levels": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 1085065492,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "131",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "construction",
+    "building:levels": "19"
+  }
+},
+{
+  "type": "way",
+  "id": 1085065493,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "129",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "yes",
+    "building:levels": "6"
+  }
+},
+{
+  "type": "way",
+  "id": 1085065494,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "125",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "building": "yes",
+    "building:levels": "6"
+  }
+},
+{
+  "type": "way",
+  "id": 1088223327,
+  "tags": {
+    "addr:housenumber": "361",
+    "addr:street": "Đường Trường Chinh",
+    "amenity": "theatre",
+    "email": "nhahatmuaroivn@gmail.com",
+    "landuse": "commercial",
+    "name": "Nhà hát Múa rối Việt Nam",
+    "name:en": "Vietnam National Puppetry Theatre",
+    "phone": "+84 24 3853 4545",
+    "website": "https://nhahatmuaroivietnam.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1114985407,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "319",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "building": "commercial"
+  }
+},
+{
+  "type": "way",
+  "id": 1114989183,
+  "tags": {
+    "addr:housenumber": "94",
+    "addr:street": "Đường Láng",
+    "building": "retail"
+  }
+},
+{
+  "type": "way",
+  "id": 1114989184,
+  "tags": {
+    "addr:housenumber": "94",
+    "addr:street": "Đường Láng",
+    "building": "retail"
+  }
+},
+{
+  "type": "way",
+  "id": 1114989185,
+  "tags": {
+    "addr:housenumber": "94",
+    "addr:street": "Đường Láng",
+    "building": "retail"
+  }
+},
+{
+  "type": "way",
+  "id": 1114994887,
+  "tags": {
+    "addr:housenumber": "195, 197, 199",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1114994888,
+  "tags": {
+    "addr:housenumber": "201",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001257,
+  "tags": {
+    "addr:housenumber": "165",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001258,
+  "tags": {
+    "addr:housenumber": "159, 163",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001259,
+  "tags": {
+    "addr:housenumber": "153, 155, 157",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001260,
+  "tags": {
+    "addr:housenumber": "150",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001261,
+  "tags": {
+    "addr:housenumber": "145",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001262,
+  "tags": {
+    "addr:housenumber": "143",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001263,
+  "tags": {
+    "addr:housenumber": "141",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001264,
+  "tags": {
+    "addr:housenumber": "139",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001265,
+  "tags": {
+    "addr:housenumber": "131",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "government",
+    "name": "Viện Kinh tế và Quản lý Thuỷ lợi",
+    "name:en": "Institute of Water Resources Economics and Management",
+    "name:vi": "Viện Kinh tế và Quản lý Thuỷ lợi",
+    "office": "research"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001272,
+  "tags": {
+    "addr:housenumber": "167, 169, 171",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001273,
+  "tags": {
+    "addr:housenumber": "173, 175, 177",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001274,
+  "tags": {
+    "addr:housenumber": "179, 181",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001275,
+  "tags": {
+    "addr:housenumber": "183, 185",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001276,
+  "tags": {
+    "addr:housenumber": "187, 189, 191",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115001277,
+  "tags": {
+    "addr:housenumber": "193",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003674,
+  "tags": {
+    "addr:housenumber": "95",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003675,
+  "tags": {
+    "addr:housenumber": "93",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003676,
+  "tags": {
+    "addr:housenumber": "91",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace",
+    "building:levels": "5"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003677,
+  "tags": {
+    "addr:housenumber": "89",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003682,
+  "tags": {
+    "addr:housenumber": "75",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003683,
+  "tags": {
+    "addr:housenumber": "71",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003684,
+  "tags": {
+    "addr:housenumber": "69",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003685,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003686,
+  "tags": {
+    "addr:housenumber": "63",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003687,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1115003689,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Ngõ 95 Chùa Bộc",
+    "building": "yes",
+    "name": "Công ty Cổ phần Xây dựng và Chuyển giao công nghệ Thủy lợi",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 1115007470,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "29",
+    "addr:postcode": "+84",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngách 31 Ngõ 167 Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "building": "retail",
+    "building:levels": "3",
+    "name": "fLeuriste Amusée"
+  }
+},
+{
+  "type": "way",
+  "id": 1117030203,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "183",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Yên Lãng",
+    "addr:subdistrict": "Thịnh Quang",
+    "brand": "VinFast",
+    "brand:wikidata": "Q56660561",
+    "building": "yes",
+    "name": "VinFast",
+    "opening_hours": "Mo-Su 08:00-21:00",
+    "shop": "car"
+  }
+},
+{
+  "type": "way",
+  "id": 1151208419,
+  "tags": {
+    "addr:block": "G1",
+    "addr:housenumber": "82",
+    "addr:street": "Phố Nguyễn Ngọc Doãn",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 1151208420,
+  "tags": {
+    "addr:block": "A2",
+    "addr:housenumber": "102,103,106,107",
+    "addr:street": "Phố Nguyễn Ngọc Doãn",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228263,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "158",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "amenity": "restaurant",
+    "building": "yes",
+    "building:levels": "6",
+    "cuisine": "seafood",
+    "name": "Giang Dung 2"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228264,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "162",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228265,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "164",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "office",
+    "building:levels": "10"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228266,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "166",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "5"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228267,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "168",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "6"
+  }
+},
+{
+  "type": "way",
+  "id": 1210228268,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "170",
+    "addr:province": "Hà Nội",
+    "addr:street": "Ngõ Xã Đàn 2",
+    "addr:subdistrict": "Nam Đồng",
+    "building": "yes",
+    "building:levels": "6",
+    "name": "Nhà nghỉ Thùy Dương",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1210248938,
+  "tags": {
+    "addr:housenumber": "176",
+    "addr:street": "Phố Thái Hà",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Hàn lâm Khoa học xã hội Việt Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 1210248941,
+  "tags": {
+    "addr:housenumber": "183",
+    "addr:street": "Phố Đặng Tiến Đông",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Nghiên cứu Hán Nôm"
+  }
+},
+{
+  "type": "way",
+  "id": 1215063381,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "21",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Trung Liệt",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "landuse": "military",
+    "name": "Viện Y học dự phòng Quân đội",
+    "operator": "Cục Quân y",
+    "operator:type": "military"
+  }
+},
+{
+  "type": "way",
+  "id": 1215063388,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "72",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "addr:subdistrict": "Trung Liệt",
+    "landuse": "military",
+    "name": "Đoàn 68 - Cục Bảo vệ An ninh Quân đội"
+  }
+},
+{
+  "type": "way",
+  "id": 1215063389,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "141",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Hồ Đắc Di",
+    "addr:subdistrict": "Nam Đồng",
+    "landuse": "military",
+    "name": "Tổng Công ty 36",
+    "wikidata": "Q18461135",
+    "wikipedia": "vi:Tổng Công ty 36, Bộ Quốc phòng (Việt Nam)"
+  }
+},
+{
+  "type": "way",
+  "id": 1216451392,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "297",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Ngã Tư Sở",
+    "building": "yes",
+    "name": "Vinaphone",
+    "office": "telecommunication"
+  }
+},
+{
+  "type": "way",
+  "id": 1216451393,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "290",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Trung Liệt",
+    "amenity": "college",
+    "education": "college",
+    "name": "Trường Trung cấp Nghiệp vụ và Dạy nghề Công đoàn Hà Nội",
+    "operator": "Liên đoàn Lao động thành phố Hà Nội",
+    "operator:type": "association"
+  }
+},
+{
+  "type": "way",
+  "id": 1219524639,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:country": "VN",
+    "addr:district": "Thanh Xuân",
+    "addr:housenumber": "173C",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Mai",
+    "fee": "yes",
+    "landuse": "military",
+    "museum": "military",
+    "name": "Bảo tàng Phòng không - Không quân",
+    "opening_hours": "Mo-Su 08:00-11:00,13:00-16:00; Fr off",
+    "operator": "Quân chủng Phòng không - Không quân Việt Nam",
+    "operator:type": "military",
+    "tourism": "museum",
+    "wikidata": "Q7928536",
+    "wikimedia_commons": "Category:Vietnamese Air Force Museum in Hanoi",
+    "wikipedia": "vi:Bảo tàng Phòng không - Không quân (Việt Nam)"
+  }
+},
+{
+  "type": "way",
+  "id": 1228401040,
+  "tags": {
+    "addr:housenumber": "147",
+    "addr:street": "Phố Hồ Đắc Di",
+    "building": "yes",
+    "name": "Công ty Cổ phần Khử trùng Việt Nam",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 1229709566,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Trung Tự",
+    "building": "terrace",
+    "building:levels": "1",
+    "clothes": "men",
+    "name": "Torano",
+    "opening_hours": "Mo-Su 08:30-22:00",
+    "phone": "+84 97 640 8388",
+    "shop": "clothes",
+    "website": "https://torano.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1229709569,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "2",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Chùa Bộc",
+    "addr:subdistrict": "Trung Tự",
+    "email": "info@hanel.com.vn",
+    "fax": "+84 24 38525770",
+    "landuse": "commercial",
+    "name": "Công ty Cổ phần Hanel",
+    "office": "company",
+    "phone": "+84 24 38524555",
+    "website": "https://hanel.com.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1229709576,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "104",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Phạm Ngọc Thạch",
+    "addr:subdistrict": "Trung Tự",
+    "building": "yes",
+    "email": "phaleanhsao.hn@gmail.com",
+    "fixme": "A glassware shop that also sells pottery-related goods. Need a more proper tag.",
+    "name": "Pha lê Ánh Sao",
+    "phone": "+842435775959",
+    "shop": "pottery",
+    "website": "https://phaleanhsao.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1229709577,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "104A",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Phạm Ngọc Thạch",
+    "addr:subdistrict": "Trung Tự",
+    "building": "yes",
+    "name": "Túi Đẹp",
+    "phone": "+84 989 607 686;+84 904 300 089",
+    "shop": "fashion_accessories"
+  }
+},
+{
+  "type": "way",
+  "id": 1231847595,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "184",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "guest_house": "guest_house",
+    "landuse": "military",
+    "name": "Nhà khách 99",
+    "operator": "Quân chủng Phòng không - Không quân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1231847596,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "186",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "landuse": "military"
+  }
+},
+{
+  "type": "way",
+  "id": 1231847605,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "182",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường Trường Chinh",
+    "addr:subdistrict": "Khương Thượng",
+    "landuse": "military"
+  }
+},
+{
+  "type": "way",
+  "id": 1234236084,
+  "tags": {
+    "addr:housenumber": "39",
+    "addr:street": "Đường Nguyễn Trãi",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 1234236085,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Đường Nguyễn Trãi",
+    "building": "office",
+    "name": "Fafilm Việt Nam",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 1236491878,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Phố Đặng Tiến Đông",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1271711436,
+  "tags": {
+    "addr:housenumber": "359",
+    "addr:street": "Đường Trường Chinh",
+    "amenity": "police",
+    "building": "yes",
+    "name": "Công an phường Khương Đình"
+  }
+},
+{
+  "type": "way",
+  "id": 1271711437,
+  "tags": {
+    "addr:housenumber": "43",
+    "amenity": "courthouse",
+    "building": "yes",
+    "name": "Toà án Quân sự khu vực Thủ đô Hà Nội"
+  }
+},
+{
+  "type": "way",
+  "id": 1316399207,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Ngõ 95 Chùa Bộc",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Thuỷ công",
+    "name:en": "Hydraulic Construction Institute",
+    "operator": "Viện Khoa học Thuỷ lợi Việt Nam",
+    "website": "https://thuycong.ac.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1316399211,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Ngõ 95 Chùa Bộc",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Thuỷ điện và Năng lượng tái tạo",
+    "name:en": "Institute of Hydro Power and Renewable Energy",
+    "operator": "Viện Khoa học Thuỷ lợi Việt Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608546,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Phố Nguyễn Ngọc Doãn",
+    "building": "apartments"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608550,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608551,
+  "tags": {
+    "addr:housenumber": "73",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608552,
+  "tags": {
+    "addr:housenumber": "77",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608553,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608554,
+  "tags": {
+    "addr:housenumber": "87",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608555,
+  "tags": {
+    "addr:housenumber": "85",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608556,
+  "tags": {
+    "addr:housenumber": "81",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1316608557,
+  "tags": {
+    "addr:housenumber": "83",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1317103979,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:postcode": "100000",
+    "addr:street": "Đường Nguyễn Ngọc Vũ",
+    "building": "yes",
+    "building:levels": "8"
+  }
+},
+{
+  "type": "way",
+  "id": 1318024645,
+  "tags": {
+    "addr:housenumber": "229",
+    "addr:street": "Đường Nguyễn Trãi",
+    "amenity": "police",
+    "building": "yes",
+    "name": "Công an phường Khương Đình"
+  }
+},
+{
+  "type": "way",
+  "id": 1346893415,
+  "tags": {
+    "addr:district": "Quận Đống Đa",
+    "addr:housenumber": "174",
+    "addr:province": "Thành phố Hà Nội",
+    "addr:street": "Phố Thái Hà",
+    "building": "office",
+    "name": "TTG Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463312,
+  "tags": {
+    "addr:housenumber": "97",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463313,
+  "tags": {
+    "addr:housenumber": "99",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463314,
+  "tags": {
+    "addr:housenumber": "125",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463315,
+  "tags": {
+    "addr:housenumber": "123",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463316,
+  "tags": {
+    "addr:housenumber": "119",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463317,
+  "tags": {
+    "addr:housenumber": "117",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463318,
+  "tags": {
+    "addr:housenumber": "115",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463319,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463320,
+  "tags": {
+    "addr:housenumber": "111",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463321,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463322,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463323,
+  "tags": {
+    "addr:housenumber": "103",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463324,
+  "tags": {
+    "addr:housenumber": "101",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463325,
+  "tags": {
+    "addr:housenumber": "129",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1352463326,
+  "tags": {
+    "addr:housenumber": "129",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 1420752192,
+  "tags": {
+    "addr:housenumber": "108",
+    "addr:street": "Phố Khương Trung",
+    "building": "office",
+    "contact:email": "nretc@moc.gov.vn",
+    "contact:phone": "+84 24 3568 2858",
+    "contact:website": "https://nretc.gov.vn/",
+    "government": "public_service",
+    "name": "Trung tâm Kỹ thuật và Công nghệ đường bộ phía Bắc",
+    "name:en": "Northern Road Engineering and Technology Center",
+    "office": "government",
+    "operator": "Cục Đường bộ Việt Nam",
+    "short_name": "N-RETC"
+  }
+},
+{
+  "type": "way",
+  "id": 1431637142,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Phố Quan Nhân",
+    "building": "apartments",
+    "name": "Chung cư 129 - Ban Cơ yếu Chính Phủ"
+  }
+},
+{
+  "type": "way",
+  "id": 1436855973,
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Đường Nguyễn Trãi",
+    "building": "yes",
+    "name": "Ban Quản lý đầu tư dự án - hạ tầng phường Khương Đình",
+    "office": "government"
+  }
+},
+{
+  "type": "way",
+  "id": 1442262171,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "kiosk",
+    "check_date:opening_hours": "2025-10-16",
+    "name": "Kiot HVNH",
+    "opening_hours:signed": "no",
+    "shop": "kiosk"
+  }
+},
+{
+  "type": "way",
+  "id": 1443727507,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "shed",
+    "noname": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1443727508,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "yes",
+    "noname": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1444241100,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "leisure": "park",
+    "name": "Vườn hoa Học viện Ngân Hàng",
+    "name:en": "Banking Academy's Park",
+    "operator": "Học viện Ngân Hàng",
+    "operator:type": "university"
+  }
+},
+{
+  "type": "way",
+  "id": 1445338642,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phố Chùa Bộc",
+    "building": "university",
+    "building:levels": "2",
+    "name": "A3"
+  }
+},
+{
+  "type": "way",
+  "id": 1459211216,
+  "tags": {
+    "addr:housenumber": "201",
+    "addr:street": "Đường Trường Chinh",
+    "building": "yes",
+    "name": "Gem Empire Tower"
+  }
+},
+{
+  "type": "way",
+  "id": 1468500882,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Phố Thái Thịnh",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Châm cứu Trung ương",
+    "name:en": "National Hospital of Acupuncture"
+  }
+},
+{
+  "type": "way",
+  "id": 1473300995,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:housenumber": "86B",
+    "addr:street": "Phố Lê Trọng Tấn",
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Bia hơi Hải Xồm"
+  }
+},
+{
+  "type": "way",
+  "id": 1534179796,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "building": "yes",
+    "name": "Công ty Cổ phần Kim khí Hà Nội",
+    "office": "company"
+  }
+},
+{
+  "type": "way",
+  "id": 1549007501,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Ngõ 3 Phố Cù Chính Lan",
+    "amenity": "kindergarten",
+    "education": "kindergarten",
+    "name": "Trường Mầm non Mùa Xuân"
+  }
+},
+{
+  "type": "way",
+  "id": 1557512957,
+  "tags": {
+    "addr:housenumber": "43",
+    "addr:street": "Ngõ 178 Phố Tây Sơn",
+    "alt_name": "Từ đường Hoàng Cao Khải",
+    "amenity": "college",
+    "heritage": "2",
+    "name": "Cơ sở tại chức"
+  }
+},
+{
+  "type": "relation",
+  "id": 13706410,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "6",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "amenity": "research_institute",
+    "landuse": "commercial",
+    "name": "Viện Năng lượng",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 16802530,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "1",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "addr:subdistrict": "Kim Liên",
+    "amenity": "university",
+    "education": "university",
+    "email": "daihocyhn@hmu.edu.vn",
+    "lit": "yes",
+    "name": "Trường Đại học Y Hà Nội",
+    "name:en": "Hanoi Medical University",
+    "name:vi": "Trường Đại học Y Hà Nội",
+    "operator": "Bộ Y tế",
+    "operator:type": "public/government",
+    "phone": "+84 24 3852 3798",
+    "type": "multipolygon",
+    "website": "https://hmu.edu.vn",
+    "wikidata": "Q4383725",
+    "wikimedia_commons": "Category:Hanoi Medical University",
+    "wikipedia": "vi:Trường Đại học Y Hà Nội"
+  }
+},
+{
+  "type": "relation",
+  "id": 17666269,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Đống Đa",
+    "addr:housenumber": "169",
+    "addr:province": "Hà Nội",
+    "addr:street": "Phố Tây Sơn",
+    "addr:subdistrict": "Quang Trung",
+    "amenity": "university",
+    "education": "university",
+    "name": "Trường Đại học Công đoàn",
+    "name:en": "Trade Union University",
+    "type": "multipolygon",
+    "website": "http://dhcd.edu.vn/",
+    "wikidata": "Q16480704",
+    "wikipedia": "vi:Trường Đại học Công đoàn"
+  }
+},
+{
+  "type": "relation",
+  "id": 20693299,
+  "tags": {
+    "addr:housenumber": "317",
+    "addr:street": "Đường Trường Chinh",
+    "alt_name": "ICC Complex Tower",
+    "building": "yes",
+    "building:levels": "24",
+    "name": "Tân Hồng Hà Complex",
+    "type": "building"
+  }
+}
+
+  ]
+}
