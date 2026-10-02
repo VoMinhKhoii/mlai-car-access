@@ -1,0 +1,8560 @@
+{
+ "source": "QĐ 4582/QĐ-UBND TP.HCM ngày 24/7/2026, Phụ lục 2",
+ "url": "https://luatvietnam.vn/dat-dai/quyet-dinh-4582-qd-ubnd-tp-hcm-2026-cong-bo-danh-sach-khu-vuc-khong-dam-bao-ha-tang-giao-thong-nguon-nuoc-chua-chay-442277-d2.html",
+ "rule": "QCVN 06:2022/BXD: đường cho xe chữa cháy rộng thông thủy ≥ 3,5 m",
+ "items": [
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 90 Nguyễn Phúc Chu",
+   "way_ids": [
+    601891359
+   ],
+   "dist_m": 1876
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 33 Nguyễn Sỹ Sách",
+   "way_ids": [
+    605142482
+   ],
+   "dist_m": 1851
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 513 Phạm Văn Bạch",
+   "way_ids": [
+    525565411
+   ],
+   "dist_m": 2623
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 533 Phạm Văn Bạch",
+   "way_ids": [
+    713205758,
+    713205764,
+    713205774,
+    713205777
+   ],
+   "dist_m": 2680
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 571 Phạm Văn Bạch",
+   "way_ids": [
+    693381335,
+    713205759,
+    713205765
+   ],
+   "dist_m": 2773
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 257 Phạm Văn Bạch",
+   "way_ids": [
+    714755606
+   ],
+   "dist_m": 2182
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 7 Hoàng Bật Đạt",
+   "way_ids": [
+    712902797
+   ],
+   "dist_m": 2071
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 55 Nguyễn Phúc Chu",
+   "way_ids": [
+    360974240
+   ],
+   "dist_m": 1798
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 72 Phan H uy Ích",
+   "way_ids": [
+    714755650,
+    1125782547
+   ],
+   "dist_m": 2083
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 34 Trần Th ị Trọng",
+   "way_ids": [
+    523650607
+   ],
+   "dist_m": 2037
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 72 Huỳnh Văn Nghệ",
+   "way_ids": [
+    601891390,
+    601891393,
+    712583296
+   ],
+   "dist_m": 2471
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 36 Huỳnh Văn Nghệ",
+   "way_ids": [
+    606213064
+   ],
+   "dist_m": 2674
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 80 Huỳnh Văn Nghệ",
+   "way_ids": [
+    32582656
+   ],
+   "dist_m": 2661
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 52 Nguyễn Sỹ Sách",
+   "way_ids": [
+    290782655
+   ],
+   "dist_m": 1990
+  },
+  {
+   "ward": "Phường Tây Thạnh",
+   "name": "Hẻm 161 Phạm Văn Bạch",
+   "way_ids": [
+    604773486
+   ],
+   "dist_m": 1980
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 110/22 Tô Hiệu",
+   "way_ids": [
+    717308031
+   ],
+   "dist_m": 1849
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 99/1 Tô Hiệu",
+   "way_ids": [
+    636040491
+   ],
+   "dist_m": 1988
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 99/17 Tô Hiệu",
+   "way_ids": [
+    636040494
+   ],
+   "dist_m": 2067
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 99/7 Tô Hiệu",
+   "way_ids": [
+    636040492
+   ],
+   "dist_m": 2015
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 52 Trần V ăn Cẩn",
+   "way_ids": [
+    502729157
+   ],
+   "dist_m": 1768
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 66 Trần V ăn Cẩn",
+   "way_ids": [
+    502729159
+   ],
+   "dist_m": 1753
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 13 Nguyễn Văn Yến",
+   "way_ids": [
+    502526183
+   ],
+   "dist_m": 2253
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 152 Lý Thán h Tông",
+   "way_ids": [
+    456799177,
+    1215208590
+   ],
+   "dist_m": 2164
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 180/41 Lý Th ánh Tông",
+   "way_ids": [
+    502729160
+   ],
+   "dist_m": 2264
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 539/9 Lũy Bán Bích",
+   "way_ids": [
+    609365242
+   ],
+   "dist_m": 1456
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 151/31 Lũy Bán Bích",
+   "way_ids": [
+    595769369
+   ],
+   "dist_m": 1638
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 149/47 Lũy Bán Bích",
+   "way_ids": [
+    502526205
+   ],
+   "dist_m": 1751
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 67 Lũy Bán Bích",
+   "way_ids": [
+    595769410
+   ],
+   "dist_m": 1734
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 11 Hiền V ương",
+   "way_ids": [
+    901117037
+   ],
+   "dist_m": 1965
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 263/16 Th ạch Lam",
+   "way_ids": [
+    609358642
+   ],
+   "dist_m": 2570
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 65 Thạch Lam",
+   "way_ids": [
+    716907725
+   ],
+   "dist_m": 1644
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 96 Thạch Lam",
+   "way_ids": [
+    509647251
+   ],
+   "dist_m": 1800
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 237/32/4 5 Hòa Bình",
+   "way_ids": [
+    641904045
+   ],
+   "dist_m": 2129
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 127 Tho ại Ngọc Hầu",
+   "way_ids": [
+    523162075
+   ],
+   "dist_m": 1559
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 257/3 Th oại Ngọc Hầu",
+   "way_ids": [
+    609365254
+   ],
+   "dist_m": 1728
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 364/23 Th oại Ngọc Hầu",
+   "way_ids": [
+    511306335,
+    1060214501
+   ],
+   "dist_m": 2511
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 364/63 Th oại Ngọc Hầu",
+   "way_ids": [
+    511306333
+   ],
+   "dist_m": 2468
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 371 Tho ại Ngọc Hầu",
+   "way_ids": [
+    717201657
+   ],
+   "dist_m": 2304
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 119 Trần Quang Cơ",
+   "way_ids": [
+    511306331
+   ],
+   "dist_m": 2449
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 135 Trần Quang Cơ",
+   "way_ids": [
+    901116761,
+    1343680676
+   ],
+   "dist_m": 2483
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 17 Trần Q uang Cơ",
+   "way_ids": [
+    509647257
+   ],
+   "dist_m": 2091
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 33 Trần Q uang Cơ",
+   "way_ids": [
+    509647254
+   ],
+   "dist_m": 2101
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 33/18 Trần Quang Cơ",
+   "way_ids": [
+    829872891
+   ],
+   "dist_m": 2126
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 87 Trần Q uang Cơ",
+   "way_ids": [
+    511969228
+   ],
+   "dist_m": 2338
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 87/22 Trần Quang Cơ",
+   "way_ids": [
+    1343706518
+   ],
+   "dist_m": 2331
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 9 Trần Qu ang Cơ",
+   "way_ids": [
+    509647258
+   ],
+   "dist_m": 2073
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 98 Trần Q uang Cơ",
+   "way_ids": [
+    609361233
+   ],
+   "dist_m": 2508
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 42 Lương Thế Vinh",
+   "way_ids": [
+    502526200
+   ],
+   "dist_m": 1775
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 81 Lương Thế Vinh",
+   "way_ids": [
+    595769385
+   ],
+   "dist_m": 1865
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 85 Nguyễn Sơn",
+   "way_ids": [
+    1233212638
+   ],
+   "dist_m": 2071
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 2/11 Nguyễn Văn Vịnh",
+   "way_ids": [
+    502532606
+   ],
+   "dist_m": 1639
+  },
+  {
+   "ward": "Phường Hòa Bình",
+   "name": "Hẻm 2/11/6 Nguyễn Văn Vịnh",
+   "way_ids": [
+    641904048
+   ],
+   "dist_m": 1663
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 22/11 Tân Hóa",
+   "way_ids": [
+    651638303
+   ],
+   "dist_m": 2897
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 22/19 Tân Hóa",
+   "way_ids": [
+    651638301
+   ],
+   "dist_m": 2868
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 22/31 Tân Hóa",
+   "way_ids": [
+    555383165
+   ],
+   "dist_m": 2842
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 7 Lạc Long Quân",
+   "way_ids": [
+    655131064
+   ],
+   "dist_m": 2931
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 47 Lạc Long Quân",
+   "way_ids": [
+    502252350,
+    1269094523
+   ],
+   "dist_m": 2856
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 47/1 Lạc Long Quân",
+   "way_ids": [
+    613168805
+   ],
+   "dist_m": 2882
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 109 Lạc Long Quân",
+   "way_ids": [
+    460200205,
+    579794104,
+    1286759528
+   ],
+   "dist_m": 2733
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 129 Lạc Long Quân",
+   "way_ids": [
+    502729146
+   ],
+   "dist_m": 2787
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 151/1 Lạc Long Quân",
+   "way_ids": [
+    555383164,
+    692088388,
+    692088390
+   ],
+   "dist_m": 2731
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 151 Lạc Long Quân",
+   "way_ids": [
+    420287744
+   ],
+   "dist_m": 2825
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 159 Lạc Long Quân",
+   "way_ids": [
+    612897351
+   ],
+   "dist_m": 2730
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 437 Hàn Hải Nguyên",
+   "way_ids": [
+    597712878
+   ],
+   "dist_m": 2926
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 437/29 H àn Hải Nguyên",
+   "way_ids": [
+    655131052
+   ],
+   "dist_m": 2899
+  },
+  {
+   "ward": "Phường Phú Thạnh",
+   "name": "Hẻm 461 Hàn Hải Nguyên",
+   "way_ids": [
+    655131054
+   ],
+   "dist_m": 2925
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 23 Hoàn g Văn Thụ",
+   "way_ids": [
+    1169532659
+   ],
+   "dist_m": 562
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 237 Phan Đình Phùng",
+   "way_ids": [
+    372305004
+   ],
+   "dist_m": 566
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 243 Phan Đình Phùng",
+   "way_ids": [
+    372306541,
+    1121457704
+   ],
+   "dist_m": 526
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 321 Phan Đình Phùng",
+   "way_ids": [
+    1289810836
+   ],
+   "dist_m": 539
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 18 Huỳnh Văn Bánh",
+   "way_ids": [
+    716139079
+   ],
+   "dist_m": 579
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 28 Huỳnh Văn Bánh",
+   "way_ids": [
+    372305005
+   ],
+   "dist_m": 541
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 52 Huỳnh Văn Bánh",
+   "way_ids": [
+    716139131
+   ],
+   "dist_m": 544
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 58 Huỳnh Văn Bánh",
+   "way_ids": [
+    608494889
+   ],
+   "dist_m": 491
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 68 Huỳnh Văn Bánh",
+   "way_ids": [
+    716139130
+   ],
+   "dist_m": 475
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 39 Nguyễn Trọng Tuy ển",
+   "way_ids": [
+    372306539
+   ],
+   "dist_m": 504
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 69 Nguyễn Trọng Tuy ển",
+   "way_ids": [
+    716298752,
+    1219980458
+   ],
+   "dist_m": 409
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 104 Nguyễn Trọng Tuyển",
+   "way_ids": [
+    1181522533,
+    1181522534,
+    1181522536,
+    1181522538
+   ],
+   "dist_m": 376
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 53 đường Nguyễn Đình Chính",
+   "way_ids": [
+    713181237
+   ],
+   "dist_m": 416
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 69 đường Nguyễn Đình Chính",
+   "way_ids": [
+    219887544
+   ],
+   "dist_m": 397
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 87 đường Nguyễn Đình Chính",
+   "way_ids": [
+    608508215,
+    716298748,
+    716298749
+   ],
+   "dist_m": 311
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 13 đường Duy Tân",
+   "way_ids": [
+    716139136
+   ],
+   "dist_m": 512
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 63 đường Duy Tân",
+   "way_ids": [
+    716139140
+   ],
+   "dist_m": 466
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 73 đường Duy Tân",
+   "way_ids": [
+    716139143,
+    716139145
+   ],
+   "dist_m": 438
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 101 đườn g Duy Tân",
+   "way_ids": [
+    608508214,
+    716139150
+   ],
+   "dist_m": 421
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 107 đườn g Duy Tân",
+   "way_ids": [
+    716298734,
+    716298735
+   ],
+   "dist_m": 331
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 129 đườn g Duy Tân",
+   "way_ids": [
+    716298739
+   ],
+   "dist_m": 322
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 135 đườn g Duy Tân",
+   "way_ids": [
+    716298743
+   ],
+   "dist_m": 304
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 42 đường Duy Tân",
+   "way_ids": [
+    716139134
+   ],
+   "dist_m": 505
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 50 đường Duy Tân",
+   "way_ids": [
+    716139137
+   ],
+   "dist_m": 468
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 54 đường Duy Tân",
+   "way_ids": [
+    716139138
+   ],
+   "dist_m": 436
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72 đường Duy Tân",
+   "way_ids": [
+    716139142
+   ],
+   "dist_m": 410
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 80 đường Duy Tân",
+   "way_ids": [
+    716298725
+   ],
+   "dist_m": 386
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96 đường Duy Tân",
+   "way_ids": [
+    241070801
+   ],
+   "dist_m": 342
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 126 đườn g Duy Tân",
+   "way_ids": [
+    716298741
+   ],
+   "dist_m": 288
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 132 đườn g Duy Tân",
+   "way_ids": [
+    716298740
+   ],
+   "dist_m": 281
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 23 Trần Khắc Chân",
+   "way_ids": [
+    1181522535,
+    1181522537
+   ],
+   "dist_m": 434
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 27 Trần Khắc Chân",
+   "way_ids": [
+    213392898
+   ],
+   "dist_m": 1616
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 14 Trần Khắc Chân",
+   "way_ids": [
+    1140894940
+   ],
+   "dist_m": 520
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 29/28 Đo àn Thị Điểm",
+   "way_ids": [
+    675939379
+   ],
+   "dist_m": 839
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 29/32 Đo àn Thị Điểm",
+   "way_ids": [
+    675939378
+   ],
+   "dist_m": 884
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 29/60 Đo àn Thị Điểm",
+   "way_ids": [
+    675939375
+   ],
+   "dist_m": 915
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 29/84 Đo àn Thị Điểm",
+   "way_ids": [
+    602308844,
+    675939351
+   ],
+   "dist_m": 973
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 24/2 Đoà n Thị Điểm",
+   "way_ids": [
+    675939387
+   ],
+   "dist_m": 756
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181 Phan Đăng Lưu",
+   "way_ids": [
+    372305009,
+    381439719,
+    1409119652
+   ],
+   "dist_m": 824
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/18 Ph an Đăng Lưu",
+   "way_ids": [
+    125836593
+   ],
+   "dist_m": 843
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/61 Ph an Đăng Lưu",
+   "way_ids": [
+    675939370,
+    675939371
+   ],
+   "dist_m": 954
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/69 Ph an Đăng Lưu",
+   "way_ids": [
+    58414217
+   ],
+   "dist_m": 979
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/69 Ph an Đăng Lưu",
+   "way_ids": [
+    58414217
+   ],
+   "dist_m": 979
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/69 Ph an Đăng Lưu",
+   "way_ids": [
+    58414217
+   ],
+   "dist_m": 979
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/3 Pha n Đăng Lưu",
+   "way_ids": [
+    1346551348
+   ],
+   "dist_m": 850
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/7 Pha n Đăng Lưu",
+   "way_ids": [
+    675939367,
+    1164143044
+   ],
+   "dist_m": 864
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 181/37 Ph an Đăng Lưu",
+   "way_ids": [
+    381439718
+   ],
+   "dist_m": 887
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 353 Phan Xích Long",
+   "way_ids": [
+    675939364
+   ],
+   "dist_m": 1014
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 343 Phan Xích Long",
+   "way_ids": [
+    675939356
+   ],
+   "dist_m": 1003
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 293/2 Pha n Xích Long",
+   "way_ids": [
+    675939353
+   ],
+   "dist_m": 1014
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 224 Phan Đình Phùng",
+   "way_ids": [
+    675945673
+   ],
+   "dist_m": 690
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 224/2 Pha n Đình Phùn g",
+   "way_ids": [
+    675945678
+   ],
+   "dist_m": 686
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 224/1 Pha n Đình Phùn g",
+   "way_ids": [
+    675945677
+   ],
+   "dist_m": 653
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 224/2 Pha n Đình Phùn g",
+   "way_ids": [
+    675945678
+   ],
+   "dist_m": 686
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 258 Phan Đình Phùng",
+   "way_ids": [
+    675945676
+   ],
+   "dist_m": 641
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270 Phan Đình Phùng",
+   "way_ids": [
+    55879947,
+    693365616,
+    1079096738,
+    1185184265,
+    1363538981
+   ],
+   "dist_m": 651
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/3 Pha n Đình Phùn g",
+   "way_ids": [
+    675945665
+   ],
+   "dist_m": 645
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/4 Pha n Đình Phùn g",
+   "way_ids": [
+    608494899
+   ],
+   "dist_m": 697
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/2 Pha n Đình Phùn g",
+   "way_ids": [
+    608494898
+   ],
+   "dist_m": 708
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/68 Ph an Đình Phù ng",
+   "way_ids": [
+    675939405,
+    675939406
+   ],
+   "dist_m": 783
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/88 Ph an Đình Phù ng",
+   "way_ids": [
+    675939409
+   ],
+   "dist_m": 805
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/25A Phan Đình Phù ng",
+   "way_ids": [
+    608494890
+   ],
+   "dist_m": 702
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/25A Phan Đình Phù ng",
+   "way_ids": [
+    608494890
+   ],
+   "dist_m": 702
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/65/1 Phan Đình Ph ùng",
+   "way_ids": [
+    675939404
+   ],
+   "dist_m": 788
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/75 Ph an Đình Phù ng",
+   "way_ids": [
+    675939401
+   ],
+   "dist_m": 830
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 270/109 Phan Đình Ph ùng",
+   "way_ids": [
+    675939397
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 304 Phan Đình Phùng",
+   "way_ids": [
+    675939419
+   ],
+   "dist_m": 662
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 330/1 Pha n Đình Phùn g",
+   "way_ids": [
+    1114835485
+   ],
+   "dist_m": 647
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 20/2 Cô Bắ c",
+   "way_ids": [
+    675939331,
+    675945684
+   ],
+   "dist_m": 747
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19 Cô Bắc",
+   "way_ids": [
+    125836595
+   ],
+   "dist_m": 736
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19/21 Cô Bắc",
+   "way_ids": [
+    675945683
+   ],
+   "dist_m": 714
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19/31 Cô Bắc",
+   "way_ids": [
+    675945672
+   ],
+   "dist_m": 706
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19/45/10 Cô Bắc",
+   "way_ids": [
+    675945671
+   ],
+   "dist_m": 758
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19/66 Cô Bắc",
+   "way_ids": [
+    125836596
+   ],
+   "dist_m": 785
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 20/40 Cô Bắc",
+   "way_ids": [
+    675939336
+   ],
+   "dist_m": 849
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 20/40/2 Cô Bắc",
+   "way_ids": [
+    675939339
+   ],
+   "dist_m": 782
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 115 Cô G iang",
+   "way_ids": [
+    675939347
+   ],
+   "dist_m": 892
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 71 Cô Gian g",
+   "way_ids": [
+    675939342,
+    675939345,
+    1121675130
+   ],
+   "dist_m": 812
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 50 Phan Đ ình Phùng",
+   "way_ids": [
+    676059140,
+    741801734
+   ],
+   "dist_m": 921
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96 Phan Đ ình Phùng",
+   "way_ids": [
+    59783928,
+    676059136
+   ],
+   "dist_m": 875
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96/2 Phan Đình Phùng",
+   "way_ids": [
+    676059134
+   ],
+   "dist_m": 894
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96/1 Phan Đình Phùng",
+   "way_ids": [
+    676059132,
+    1182156965
+   ],
+   "dist_m": 838
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96/1/1 Phan Đình Phùn g",
+   "way_ids": [
+    676059133
+   ],
+   "dist_m": 819
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 2 Cô Giang",
+   "way_ids": [
+    608494884
+   ],
+   "dist_m": 771
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72A/22 Cô Giang",
+   "way_ids": [
+    1124133803,
+    1124133804
+   ],
+   "dist_m": 820
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72A/17 Cô Giang",
+   "way_ids": [
+    676059131
+   ],
+   "dist_m": 861
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72 Cô Gian g",
+   "way_ids": [
+    676059116
+   ],
+   "dist_m": 876
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72/1 Cô G iang",
+   "way_ids": [
+    676059117,
+    676059118,
+    676059119
+   ],
+   "dist_m": 851
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 88 Cô Gian g",
+   "way_ids": [
+    608494896
+   ],
+   "dist_m": 892
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 88/15 Cô Giang",
+   "way_ids": [
+    676059113
+   ],
+   "dist_m": 910
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 118 Cô G iang",
+   "way_ids": [
+    676059115
+   ],
+   "dist_m": 901
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 122 Cô G iang",
+   "way_ids": [
+    676059111
+   ],
+   "dist_m": 916
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 127 Cô G iang",
+   "way_ids": [
+    608494893
+   ],
+   "dist_m": 997
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 130 Cô G iang",
+   "way_ids": [
+    676049843
+   ],
+   "dist_m": 947
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 142 Cô G iang",
+   "way_ids": [
+    676049830
+   ],
+   "dist_m": 966
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 142D/25 Cô Giang",
+   "way_ids": [
+    676049831
+   ],
+   "dist_m": 994
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 142D/37 Cô Giang",
+   "way_ids": [
+    676049832
+   ],
+   "dist_m": 1007
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 142D/24 Cô Giang",
+   "way_ids": [
+    676049838,
+    676049839
+   ],
+   "dist_m": 1015
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 142E/54 Cô Giang",
+   "way_ids": [
+    676049837
+   ],
+   "dist_m": 1068
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 143 Phan Đăng Lưu",
+   "way_ids": [
+    676049794
+   ],
+   "dist_m": 1115
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 139 Phan Đăng Lưu",
+   "way_ids": [
+    750519992
+   ],
+   "dist_m": 1154
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 12 Cù Lao",
+   "way_ids": [
+    602308852,
+    1203409064
+   ],
+   "dist_m": 1472
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 36 Cù Lao",
+   "way_ids": [
+    676049810
+   ],
+   "dist_m": 1433
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 36/15 Cù Lao",
+   "way_ids": [
+    676049811
+   ],
+   "dist_m": 1418
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 52 Cù Lao",
+   "way_ids": [
+    608492734
+   ],
+   "dist_m": 1412
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 64 Cù Lao",
+   "way_ids": [
+    602308853
+   ],
+   "dist_m": 1361
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 119 Phan Đăng Lưu",
+   "way_ids": [
+    676484407
+   ],
+   "dist_m": 1351
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 115 Phan Đăng Lưu",
+   "way_ids": [
+    55481046,
+    676484406
+   ],
+   "dist_m": 1388
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 97 Phan Đ ăng Lưu",
+   "way_ids": [
+    676484442
+   ],
+   "dist_m": 1516
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 59 Phan Đ ăng Lưu",
+   "way_ids": [
+    676484446
+   ],
+   "dist_m": 1600
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 53 Phan Đ ăng Lưu",
+   "way_ids": [
+    676484449
+   ],
+   "dist_m": 1710
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 10 Nhiêu Tứ",
+   "way_ids": [
+    676847376
+   ],
+   "dist_m": 1601
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 18 Nhiêu Tứ",
+   "way_ids": [
+    676847374
+   ],
+   "dist_m": 1549
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 25 Nhiêu Tứ",
+   "way_ids": [
+    154646849
+   ],
+   "dist_m": 1599
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 45 Nhiêu Tứ",
+   "way_ids": [
+    676847367
+   ],
+   "dist_m": 1577
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 49 Nhiêu Tứ",
+   "way_ids": [
+    676847357
+   ],
+   "dist_m": 1547
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 46 Nhiêu Tứ",
+   "way_ids": [
+    57362452
+   ],
+   "dist_m": 1459
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 3 Phan Tây Hồ",
+   "way_ids": [
+    676853245
+   ],
+   "dist_m": 1420
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 9 Phan Tây Hồ",
+   "way_ids": [
+    154646832
+   ],
+   "dist_m": 1428
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 19 Phan Tâ y Hồ",
+   "way_ids": [
+    676853238
+   ],
+   "dist_m": 1426
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 28 Phan Tâ y Hồ",
+   "way_ids": [
+    54224019,
+    1066054013
+   ],
+   "dist_m": 1301
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 28/29 Pha n Tây Hồ",
+   "way_ids": [
+    57007197,
+    676853240
+   ],
+   "dist_m": 1312
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 37 Phan Tâ y Hồ",
+   "way_ids": [
+    676853236,
+    1193666413
+   ],
+   "dist_m": 1466
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 57 Phan Tâ y Hồ",
+   "way_ids": [
+    676853231,
+    676853232
+   ],
+   "dist_m": 1529
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 61 Phan Tâ y Hồ",
+   "way_ids": [
+    676853230
+   ],
+   "dist_m": 1540
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/9 Phan Tây Hồ",
+   "way_ids": [
+    676853225,
+    676853226
+   ],
+   "dist_m": 1483
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/17 Pha n Tây Hồ",
+   "way_ids": [
+    608256511
+   ],
+   "dist_m": 1487
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 86/44 Pha n Tây Hồ",
+   "way_ids": [
+    676853228
+   ],
+   "dist_m": 1475
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/22 Pha n Tây Hồ",
+   "way_ids": [
+    676853222
+   ],
+   "dist_m": 1415
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/31 Pha n Tây Hồ",
+   "way_ids": [
+    676853218
+   ],
+   "dist_m": 1417
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 48/11 Pha n Tây Hồ",
+   "way_ids": [
+    676853235
+   ],
+   "dist_m": 1422
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/41 Pha n Tây Hồ",
+   "way_ids": [
+    676853217
+   ],
+   "dist_m": 1410
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/47 Pha n Tây Hồ",
+   "way_ids": [
+    676853212
+   ],
+   "dist_m": 1383
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/61 Pha n Tây Hồ",
+   "way_ids": [
+    676853214
+   ],
+   "dist_m": 1353
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 76/47/18 Phan Tây Hồ",
+   "way_ids": [
+    676853213
+   ],
+   "dist_m": 1373
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 86 Phan Tâ y Hồ",
+   "way_ids": [
+    60906133
+   ],
+   "dist_m": 1514
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 48 Phan Tâ y Hồ",
+   "way_ids": [
+    676853234
+   ],
+   "dist_m": 1414
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 50 Phùng Văn Cu ng",
+   "way_ids": [
+    107393399
+   ],
+   "dist_m": 1265
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 128 Trần Kế Xương",
+   "way_ids": [
+    676484455
+   ],
+   "dist_m": 1652
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 126 Trần Kế Xương",
+   "way_ids": [
+    676484453
+   ],
+   "dist_m": 1671
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 75 Trần Kế Xươn g",
+   "way_ids": [
+    154646833
+   ],
+   "dist_m": 1627
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 67/27 Trần Kế Xương",
+   "way_ids": [
+    676484464
+   ],
+   "dist_m": 1685
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 41 Trần Kế Xươn g",
+   "way_ids": [
+    676847340
+   ],
+   "dist_m": 1845
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 27 Trần Kế Xươn g",
+   "way_ids": [
+    676484465
+   ],
+   "dist_m": 1879
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 23 Nguyễn Công Hoan",
+   "way_ids": [
+    608264351
+   ],
+   "dist_m": 1790
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 46 Nguyễn Công Hoan",
+   "way_ids": [
+    154646831
+   ],
+   "dist_m": 1678
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 69 Nguyễn Công Hoan",
+   "way_ids": [
+    676847329
+   ],
+   "dist_m": 1748
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 71/41 Nguyễn Công Hoan",
+   "way_ids": [
+    676847323
+   ],
+   "dist_m": 1696
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 86 Nguyễn Công Hoan",
+   "way_ids": [
+    676847346
+   ],
+   "dist_m": 1571
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 96 Nguyễn Công Hoan",
+   "way_ids": [
+    676847353
+   ],
+   "dist_m": 1603
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 99 Nguyễn Công Hoan",
+   "way_ids": [
+    676847324
+   ],
+   "dist_m": 1650
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 112 Nguyễn Công Hoan",
+   "way_ids": [
+    676847349
+   ],
+   "dist_m": 1588
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 120 Nguyễn Công Hoan",
+   "way_ids": [
+    608264345,
+    1461475979
+   ],
+   "dist_m": 1550
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 125 Nguyễn Công Hoan",
+   "way_ids": [
+    608264344,
+    676847319,
+    1076505780,
+    1076505781
+   ],
+   "dist_m": 1659
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 129 Nguyễn Công Hoan",
+   "way_ids": [
+    676847315
+   ],
+   "dist_m": 1658
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 145 Nguyễn Công Hoan",
+   "way_ids": [
+    608487237
+   ],
+   "dist_m": 1638
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 136 Nguyễn Công Hoan",
+   "way_ids": [
+    676847348
+   ],
+   "dist_m": 1603
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 64 Nguyễn Lâm",
+   "way_ids": [
+    676484476
+   ],
+   "dist_m": 1864
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 62 Nguyễn Lâm",
+   "way_ids": [
+    676484467
+   ],
+   "dist_m": 1815
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 70 Nguyễn Lâm",
+   "way_ids": [
+    676484477
+   ],
+   "dist_m": 1870
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 72 Nguyễn Lâm",
+   "way_ids": [
+    676484478
+   ],
+   "dist_m": 1873
+  },
+  {
+   "ward": "Phường Phú Nhuận",
+   "name": "Hẻm 78 Nguyễn Lâm",
+   "way_ids": [
+    608264348
+   ],
+   "dist_m": 1832
+  },
+  {
+   "ward": "Phường Cầu Kiệu",
+   "name": "Đường Đỗ Tấn Phong",
+   "way_ids": [
+    57039411,
+    678340351,
+    678340353,
+    941238523
+   ],
+   "dist_m": 1021
+  },
+  {
+   "ward": "Phường Cát Lái",
+   "name": "Hẻm 393 Nguyễn Thị Định",
+   "way_ids": [
+    604847603,
+    1348149695
+   ],
+   "dist_m": 2207
+  },
+  {
+   "ward": "Phường Cát Lái",
+   "name": "Hẻm 31/1 Đường số 2",
+   "way_ids": [
+    1348157198
+   ],
+   "dist_m": 1881
+  },
+  {
+   "ward": "Phường Cát Lái",
+   "name": "Hẻm 76 đường Thạnh Mỹ Lợi",
+   "way_ids": [
+    899707370
+   ],
+   "dist_m": 1719
+  },
+  {
+   "ward": "Phường Cát Lái",
+   "name": "Hẻm 1072 N guy ễ n Thị Định",
+   "way_ids": [
+    604101359
+   ],
+   "dist_m": 2506
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 119 Dương Bá Trạc",
+   "way_ids": [
+    685194000
+   ],
+   "dist_m": 2059
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 219 Dương Bá Trạc",
+   "way_ids": [
+    594474345
+   ],
+   "dist_m": 2106
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 301 Dương Bá Trạc",
+   "way_ids": [
+    685194021
+   ],
+   "dist_m": 2053
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 125 Nguyễn Thị Tần",
+   "way_ids": [
+    594474346
+   ],
+   "dist_m": 1775
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 290 Dương Bá Trạc",
+   "way_ids": [
+    608196276,
+    685194034
+   ],
+   "dist_m": 1934
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 306 Dương Bá Trạc",
+   "way_ids": [
+    608196277,
+    685194033
+   ],
+   "dist_m": 2002
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 342 Dương Bá Trạc",
+   "way_ids": [
+    685194031
+   ],
+   "dist_m": 2057
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 495 Dương Bá Trạc",
+   "way_ids": [
+    685194019
+   ],
+   "dist_m": 2221
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 511 Dương Bá Trạc",
+   "way_ids": [
+    685194018,
+    1183380935
+   ],
+   "dist_m": 2217
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 282 Dương Bá Trạc",
+   "way_ids": [
+    685270169
+   ],
+   "dist_m": 1965
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 125 Tạ Qu ang Bửu",
+   "way_ids": [
+    608213004
+   ],
+   "dist_m": 1506
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 451 Phạm Thế H iển",
+   "way_ids": [
+    613169752,
+    1322052085
+   ],
+   "dist_m": 1154
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 451 Phạm Thế H iển",
+   "way_ids": [
+    613169752,
+    1322052085
+   ],
+   "dist_m": 1154
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 608 Phạm Thế H iển",
+   "way_ids": [
+    686251525
+   ],
+   "dist_m": 715
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 718 Phạm Thế H iển",
+   "way_ids": [
+    608222340
+   ],
+   "dist_m": 457
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 726 Phạm Thế H iển",
+   "way_ids": [
+    608222350
+   ],
+   "dist_m": 394
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 728 Phạm Thế H iển",
+   "way_ids": [
+    608222348
+   ],
+   "dist_m": 367
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm lô 10 - 11 Phạ m Thế Hiển",
+   "way_ids": [
+    686251590
+   ],
+   "dist_m": 313
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm lô 24 - 25 Phạ m Thế Hiển",
+   "way_ids": [
+    686251569
+   ],
+   "dist_m": 172
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm lô 26 - 27 Phạ m Thế Hiển",
+   "way_ids": [
+    608222359
+   ],
+   "dist_m": 140
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm lô 28 - 29 Phạ m Thế Hiển",
+   "way_ids": [
+    686251576
+   ],
+   "dist_m": 149
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 769 Phạm Thế H iển",
+   "way_ids": [
+    262954950,
+    262954975,
+    262954983
+   ],
+   "dist_m": 444
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 1172 Phạ m Thế Hiển",
+   "way_ids": [
+    608255572
+   ],
+   "dist_m": 697
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 10 Trần V ăn Thành",
+   "way_ids": [
+    687736906
+   ],
+   "dist_m": 1363
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 232B Hưng Phú",
+   "way_ids": [
+    687736917
+   ],
+   "dist_m": 1169
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 14 Nguyễn Duy",
+   "way_ids": [
+    687895093
+   ],
+   "dist_m": 731
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 5 Võ Trứ",
+   "way_ids": [
+    193729342
+   ],
+   "dist_m": 556
+  },
+  {
+   "ward": "Phường Chánh Hưng",
+   "name": "Hẻm 49 Dã Tượng",
+   "way_ids": [
+    687900015
+   ],
+   "dist_m": 752
+  },
+  {
+   "ward": "Phường Bình Hưng Hòa",
+   "name": "Hẻm 610 Tân Kỳ Tân Quý",
+   "way_ids": [
+    899716799
+   ],
+   "dist_m": 474
+  },
+  {
+   "ward": "Phường Bình Hưng Hòa",
+   "name": "Đường 17A",
+   "way_ids": [
+    242554846,
+    623752740,
+    623752742,
+    693087197
+   ],
+   "dist_m": 677
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 9 Võ Trường Toản",
+   "way_ids": [
+    604168314
+   ],
+   "dist_m": 564
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 49 Lê Văn Du yệt",
+   "way_ids": [
+    816107091
+   ],
+   "dist_m": 1037
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 87 Lê Văn Du yệt",
+   "way_ids": [
+    554447763,
+    712219911
+   ],
+   "dist_m": 1016
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 125 Lê Văn D uyệt",
+   "way_ids": [
+    554447755,
+    1051550595
+   ],
+   "dist_m": 939
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 107 Lê Văn D uyệt",
+   "way_ids": [
+    554447754
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 95 Lê Văn Du yệt",
+   "way_ids": [
+    554447752,
+    608817691,
+    1214476161
+   ],
+   "dist_m": 865
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 54 Vũ Hu y Tấn",
+   "way_ids": [
+    608817747,
+    1309997973,
+    1411184995
+   ],
+   "dist_m": 981
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 125 Vạn Kiếp",
+   "way_ids": [
+    554447762
+   ],
+   "dist_m": 1055
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Đường Ng uyễn Lâm",
+   "way_ids": [
+    154140513,
+    213430077,
+    1180361858,
+    1180361860,
+    1411184990,
+    1411184991,
+    1411184992
+   ],
+   "dist_m": 1241
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 214 Vạn Kiếp",
+   "way_ids": [
+    608817712
+   ],
+   "dist_m": 1201
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 136 Vạn Kiếp",
+   "way_ids": [
+    602308846,
+    608817711,
+    1233201157
+   ],
+   "dist_m": 1188
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 93 Vạn Kiếp",
+   "way_ids": [
+    608817698,
+    608817700
+   ],
+   "dist_m": 1100
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 55 Vạn Kiếp",
+   "way_ids": [
+    608264356
+   ],
+   "dist_m": 1130
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 98 Vạn Kiếp",
+   "way_ids": [
+    608817709,
+    652376907
+   ],
+   "dist_m": 1197
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 60 Vạn Kiếp",
+   "way_ids": [
+    608817705,
+    1411184993
+   ],
+   "dist_m": 1230
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 33 Vạn Kiếp",
+   "way_ids": [
+    608817743
+   ],
+   "dist_m": 1144
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 21 Vạn Kiếp",
+   "way_ids": [
+    608264349,
+    1096197045,
+    1096197046,
+    1096197047,
+    1096197048
+   ],
+   "dist_m": 1134
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 69 Vạn Kiếp",
+   "way_ids": [
+    652376902
+   ],
+   "dist_m": 1115
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 106 Vạn Kiếp",
+   "way_ids": [
+    608817706
+   ],
+   "dist_m": 1219
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 37 Vạn Kiếp",
+   "way_ids": [
+    608264355
+   ],
+   "dist_m": 1150
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 128 Nguyễn Lâm",
+   "way_ids": [
+    608264354,
+    608817721
+   ],
+   "dist_m": 1276
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 156 Nguyễn Lâm",
+   "way_ids": [
+    608817717
+   ],
+   "dist_m": 1260
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 148 Nguyễn Lâm",
+   "way_ids": [
+    608817718,
+    608817719,
+    608817720,
+    652376834
+   ],
+   "dist_m": 1265
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 80 Nguyễn Lâm",
+   "way_ids": [
+    608817723
+   ],
+   "dist_m": 1318
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 23 Nơ Trang Long",
+   "way_ids": [
+    607212598,
+    608961490,
+    1063217653
+   ],
+   "dist_m": 1351
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 199 Lê Quan g Định",
+   "way_ids": [
+    136495063,
+    1309996160,
+    1309996161
+   ],
+   "dist_m": 1556
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 251 Lê Quan g Định",
+   "way_ids": [
+    567708996
+   ],
+   "dist_m": 1710
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 12 Hoàn g Hoa Thám",
+   "way_ids": [
+    191606962,
+    608961488
+   ],
+   "dist_m": 1512
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 158 Nguyễn Văn Đậu",
+   "way_ids": [
+    567708992,
+    608876736,
+    1154432417
+   ],
+   "dist_m": 1880
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 10 Hoàn g Hoa Thám",
+   "way_ids": [
+    32580167,
+    136495076,
+    191606530,
+    676847310,
+    1065499097,
+    1065499099,
+    1153965197,
+    1153965198
+   ],
+   "dist_m": 1423
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 42 Hoàn g Hoa Thám",
+   "way_ids": [
+    608876740
+   ],
+   "dist_m": 1726
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 80 Hoàn g Hoa Thám",
+   "way_ids": [
+    154140523,
+    567708994,
+    1062886314
+   ],
+   "dist_m": 1762
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 120 Nguyễn Văn Đậu",
+   "way_ids": [
+    157203322
+   ],
+   "dist_m": 1967
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 62 Điện Biê n Phủ",
+   "way_ids": [
+    313406607,
+    609731759
+   ],
+   "dist_m": 440
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 128 Điện Biên Phủ",
+   "way_ids": [
+    609731763
+   ],
+   "dist_m": 386
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 140 Điện Biên Phủ",
+   "way_ids": [
+    302854233
+   ],
+   "dist_m": 338
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 174 Điện Biên Phủ",
+   "way_ids": [
+    220685587,
+    1394918320
+   ],
+   "dist_m": 245
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 236 Điện Biên Phủ",
+   "way_ids": [
+    604133635,
+    987857149
+   ],
+   "dist_m": 260
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 155 Xô Viết Nghệ Tĩnh",
+   "way_ids": [
+    604168323,
+    681578622
+   ],
+   "dist_m": 646
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 292 Điện Biên Phủ",
+   "way_ids": [
+    604133639
+   ],
+   "dist_m": 387
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 372 Điện Biên Phủ",
+   "way_ids": [
+    604168316,
+    1295113557
+   ],
+   "dist_m": 439
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 117 Điện Biên Phủ",
+   "way_ids": [
+    604803386
+   ],
+   "dist_m": 286
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 192 Phan Văn Hân",
+   "way_ids": [
+    609731758,
+    1061690210
+   ],
+   "dist_m": 446
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 122 Phan Văn Hân",
+   "way_ids": [
+    552850644,
+    609731749,
+    609731750,
+    1062783176
+   ],
+   "dist_m": 519
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 67 Xô Viết N ghệ Tĩnh",
+   "way_ids": [
+    191663717
+   ],
+   "dist_m": 692
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 93 Xô Viết N ghệ Tĩnh",
+   "way_ids": [
+    73807108,
+    552850645
+   ],
+   "dist_m": 628
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 35 Xô Viết N ghệ Tĩnh",
+   "way_ids": [
+    604803398
+   ],
+   "dist_m": 643
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 133 Xô Viết Nghệ Tĩnh",
+   "way_ids": [
+    604803384
+   ],
+   "dist_m": 648
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 81 Nguyễn Cửu Vân",
+   "way_ids": [
+    609731769
+   ],
+   "dist_m": 512
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 75 Nguyễn Cửu Vân",
+   "way_ids": [
+    552850646
+   ],
+   "dist_m": 548
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 18 Nguyễn Cửu Vân",
+   "way_ids": [
+    604803383,
+    900214220,
+    900214221,
+    1062783173
+   ],
+   "dist_m": 493
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 30 Nguyễn Cửu Vân",
+   "way_ids": [
+    32576534
+   ],
+   "dist_m": 482
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 46/10 Nguyễn Cửu Vân",
+   "way_ids": [
+    604168315,
+    952661864,
+    1295113556
+   ],
+   "dist_m": 403
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 30 Trường Sa",
+   "way_ids": [
+    609731735
+   ],
+   "dist_m": 630
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 24 Vũ Tù ng",
+   "way_ids": [
+    608796083
+   ],
+   "dist_m": 739
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 26 Lê Văn Du yệt",
+   "way_ids": [
+    608796094
+   ],
+   "dist_m": 960
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 34 Lê Văn Du yệt",
+   "way_ids": [
+    608796092
+   ],
+   "dist_m": 906
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 34/22 Lê Văn D uyệt",
+   "way_ids": [
+    608796093
+   ],
+   "dist_m": 899
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 50 Lê Văn Du yệt",
+   "way_ids": [
+    608477657
+   ],
+   "dist_m": 909
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 50/42 Lê Văn D uyệt",
+   "way_ids": [
+    608796096
+   ],
+   "dist_m": 852
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 60 Lê Văn Du yệt",
+   "way_ids": [
+    608796100
+   ],
+   "dist_m": 898
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 60/25 Lê Văn D uyệt",
+   "way_ids": [
+    608796102
+   ],
+   "dist_m": 892
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 82 Lê Văn Du yệt",
+   "way_ids": [
+    608477659,
+    1082057561,
+    1082057564
+   ],
+   "dist_m": 761
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 82/17 Lê Văn D uyệt",
+   "way_ids": [
+    1059120308
+   ],
+   "dist_m": 843
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 82/78 Lê Văn D uyệt",
+   "way_ids": [
+    608796099,
+    1213187521
+   ],
+   "dist_m": 795
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 100 Lê Văn D uyệt",
+   "way_ids": [
+    608477658
+   ],
+   "dist_m": 793
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 100/40 Lê Văn Duyệt",
+   "way_ids": [
+    608796067
+   ],
+   "dist_m": 822
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 100/50 Lê Văn Duyệt",
+   "way_ids": [
+    608796103
+   ],
+   "dist_m": 785
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 100/33 Lê Văn Duyệt",
+   "way_ids": [
+    608796075
+   ],
+   "dist_m": 731
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 112 Lê Văn D uyệt",
+   "way_ids": [
+    608796061
+   ],
+   "dist_m": 839
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 114 Lê Văn D uyệt",
+   "way_ids": [
+    608796060
+   ],
+   "dist_m": 821
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 128 Lê Văn D uyệt",
+   "way_ids": [
+    608796104,
+    1176119259,
+    1218455149,
+    1360483242
+   ],
+   "dist_m": 618
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 128/22 Lê Văn Duyệt",
+   "way_ids": [
+    608796069,
+    1218455147,
+    1218455148
+   ],
+   "dist_m": 763
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 128/38 Lê Văn Duyệt",
+   "way_ids": [
+    608796071
+   ],
+   "dist_m": 746
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 298 Diên Hồng",
+   "way_ids": [
+    759540469,
+    1525975808
+   ],
+   "dist_m": 614
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 259 Bùi Hữu Nghĩa",
+   "way_ids": [
+    608475568
+   ],
+   "dist_m": 602
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 82 Vũ Tù ng",
+   "way_ids": [
+    608817686,
+    1185888332
+   ],
+   "dist_m": 480
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 84 Vũ Tù ng",
+   "way_ids": [
+    608817687
+   ],
+   "dist_m": 468
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 88 Vũ Tù ng",
+   "way_ids": [
+    898410462
+   ],
+   "dist_m": 447
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 90 Vũ Tù ng",
+   "way_ids": [
+    604140503,
+    1178008008
+   ],
+   "dist_m": 352
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 108 Vũ Tùng",
+   "way_ids": [
+    1125239168
+   ],
+   "dist_m": 409
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 120 Vũ Tùng",
+   "way_ids": [
+    604168310,
+    1040508839
+   ],
+   "dist_m": 362
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 140 Vũ Tùng",
+   "way_ids": [
+    1028891376,
+    1361612569
+   ],
+   "dist_m": 408
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 146 Vũ Tùng",
+   "way_ids": [
+    326338829
+   ],
+   "dist_m": 294
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 282 Bùi Hữu Nghĩa",
+   "way_ids": [
+    326338828
+   ],
+   "dist_m": 398
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 280 Bùi Hữu Nghĩa",
+   "way_ids": [
+    136502339,
+    694636118
+   ],
+   "dist_m": 225
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 350 Bùi Hữu Nghĩa",
+   "way_ids": [
+    608796110
+   ],
+   "dist_m": 635
+  },
+  {
+   "ward": "Phường Gia Định",
+   "name": "Hẻm 461 Bạc h Đằng",
+   "way_ids": [
+    608796113
+   ],
+   "dist_m": 588
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 17 Hoàn g Hoa Thám",
+   "way_ids": [
+    197803991
+   ],
+   "dist_m": 1697
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 254 Trường Chinh",
+   "way_ids": [
+    1154466218
+   ],
+   "dist_m": 1699
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 560 Trường Chinh",
+   "way_ids": [
+    197940870,
+    197940882,
+    197940898,
+    197940911
+   ],
+   "dist_m": 2733
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 111 Tân Hải",
+   "way_ids": [
+    197940932
+   ],
+   "dist_m": 2675
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 456 Trường Chinh",
+   "way_ids": [
+    197940878,
+    197940926
+   ],
+   "dist_m": 2474
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 305 Trường Chinh",
+   "way_ids": [
+    694444057
+   ],
+   "dist_m": 1687
+  },
+  {
+   "ward": "Phường Tân Bình",
+   "name": "Hẻm 277 Trường Chinh",
+   "way_ids": [
+    840074546
+   ],
+   "dist_m": 1629
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 68 Lê Văn Linh",
+   "way_ids": [
+    1040699848
+   ],
+   "dist_m": 772
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 83 Lê Văn Linh",
+   "way_ids": [
+    610069663,
+    1040703502
+   ],
+   "dist_m": 713
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 204 Lê Quốc Hưng",
+   "way_ids": [
+    609441404,
+    610069652,
+    1040699850
+   ],
+   "dist_m": 764
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 194 Lê Quốc Hưng",
+   "way_ids": [
+    683910670
+   ],
+   "dist_m": 791
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 184 Lê Quốc Hưng",
+   "way_ids": [
+    683910671
+   ],
+   "dist_m": 807
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 174 Lê Quốc Hưng",
+   "way_ids": [
+    683910672
+   ],
+   "dist_m": 844
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 164 Lê Quốc Hưng",
+   "way_ids": [
+    609441393
+   ],
+   "dist_m": 853
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 154 Lê Quốc Hưng",
+   "way_ids": [
+    418085104,
+    723265976,
+    1531490844,
+    1531490845
+   ],
+   "dist_m": 871
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 130 Lê Quốc Hưng",
+   "way_ids": [
+    683910669
+   ],
+   "dist_m": 920
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 120 Lê Quốc Hưng",
+   "way_ids": [
+    683910666
+   ],
+   "dist_m": 937
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 110 Lê Quốc Hưng",
+   "way_ids": [
+    683910667,
+    1040699847
+   ],
+   "dist_m": 944
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 109 Lê Quốc Hưng",
+   "way_ids": [
+    418085087
+   ],
+   "dist_m": 1085
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 20 Nguyễn Trường Tộ",
+   "way_ids": [
+    32579671
+   ],
+   "dist_m": 1176
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 83 Hoàn g Diệu",
+   "way_ids": [
+    609377646,
+    683910668,
+    722005331,
+    1061660300
+   ],
+   "dist_m": 917
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 112 Ho àng Diệu",
+   "way_ids": [
+    609372715
+   ],
+   "dist_m": 1046
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 68 Hoàn g Diệu",
+   "way_ids": [
+    609377662,
+    1540059782
+   ],
+   "dist_m": 1018
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 43 Hoàn g Diệu",
+   "way_ids": [
+    402661068
+   ],
+   "dist_m": 869
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 42 Hoàn g Diệu",
+   "way_ids": [
+    32579469
+   ],
+   "dist_m": 1016
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 37 Đoàn Như Hài",
+   "way_ids": [
+    1149037370
+   ],
+   "dist_m": 1122
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 43 Đoàn Như Hài",
+   "way_ids": [
+    683697184,
+    683697185,
+    1348162666
+   ],
+   "dist_m": 1124
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 65 Đoàn Như Hài",
+   "way_ids": [
+    683697186,
+    683697188
+   ],
+   "dist_m": 1124
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 125 Đo àn Văn Bơ",
+   "way_ids": [
+    722850661
+   ],
+   "dist_m": 385
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 303 Đo àn Văn Bơ",
+   "way_ids": [
+    723266508
+   ],
+   "dist_m": 686
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 277 Đo àn Văn Bơ",
+   "way_ids": [
+    609441385
+   ],
+   "dist_m": 692
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 267 Đo àn Văn Bơ",
+   "way_ids": [
+    1040702270,
+    1040702271
+   ],
+   "dist_m": 692
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 257 Đo àn Văn Bơ",
+   "way_ids": [
+    609441380
+   ],
+   "dist_m": 724
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 670 Đo àn Văn Bơ",
+   "way_ids": [
+    220314026
+   ],
+   "dist_m": 156
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 692 Đo àn Văn Bơ",
+   "way_ids": [
+    220314025
+   ],
+   "dist_m": 249
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 714 Đo àn Văn Bơ",
+   "way_ids": [
+    1345392411
+   ],
+   "dist_m": 314
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 720 Đo àn Văn Bơ",
+   "way_ids": [
+    610069682
+   ],
+   "dist_m": 329
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 730 Đo àn Văn Bơ",
+   "way_ids": [
+    1336363523,
+    1345392412
+   ],
+   "dist_m": 327
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 750 Đo àn Văn Bơ",
+   "way_ids": [
+    1165312733,
+    1165312734,
+    1385031892,
+    1385031893
+   ],
+   "dist_m": 350
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 756 Đo àn Văn Bơ",
+   "way_ids": [
+    610116083
+   ],
+   "dist_m": 349
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 792 Đo àn Văn Bơ",
+   "way_ids": [
+    1218168205
+   ],
+   "dist_m": 467
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 796 Đo àn Văn Bơ",
+   "way_ids": [
+    1218168201,
+    1218168202,
+    1218168203,
+    1218168204
+   ],
+   "dist_m": 492
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 830 Đo àn Văn Bơ",
+   "way_ids": [
+    694653648,
+    1067448286,
+    1218168210
+   ],
+   "dist_m": 537
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 874 Đo àn Văn Bơ",
+   "way_ids": [
+    32579344,
+    1218168208
+   ],
+   "dist_m": 627
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 713 Đo àn Văn Bơ",
+   "way_ids": [
+    1053663883
+   ],
+   "dist_m": 586
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 874 Đo àn Văn Bơ",
+   "way_ids": [
+    32579344,
+    1218168208
+   ],
+   "dist_m": 627
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 75 Nguyễn Tất Thành",
+   "way_ids": [
+    614380997,
+    614380998,
+    1040704708,
+    1061673684
+   ],
+   "dist_m": 817
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 214 Nguyễn Tất Thành",
+   "way_ids": [
+    609441409
+   ],
+   "dist_m": 576
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 280 Nguyễn Tất Thành",
+   "way_ids": [
+    683910633,
+    1502755926
+   ],
+   "dist_m": 492
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 322 Nguyễn Tất Thành",
+   "way_ids": [
+    220425965
+   ],
+   "dist_m": 381
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 330 Nguyễn Tất Thành",
+   "way_ids": [
+    220425963
+   ],
+   "dist_m": 424
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 332 Nguyễn Tất Thành",
+   "way_ids": [
+    1067448285
+   ],
+   "dist_m": 428
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 448B Nguyễn Tất Thành",
+   "way_ids": [
+    241071427
+   ],
+   "dist_m": 502
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 396 Nguyễn Tất Thành",
+   "way_ids": [
+    753696399
+   ],
+   "dist_m": 420
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 460 Nguyễn Tất Thành",
+   "way_ids": [
+    899789544,
+    1067448280,
+    1067448281
+   ],
+   "dist_m": 619
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 448 Nguyễn Tất Thành",
+   "way_ids": [
+    1067448282
+   ],
+   "dist_m": 583
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 396 Nguyễn Tất Thành",
+   "way_ids": [
+    753696399
+   ],
+   "dist_m": 420
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 181 Xó m Chiếu",
+   "way_ids": [
+    220411957
+   ],
+   "dist_m": 193
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 159 Xó m Chiếu",
+   "way_ids": [
+    1165342524
+   ],
+   "dist_m": 62
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 131 Xó m Chiếu",
+   "way_ids": [
+    1039286176
+   ],
+   "dist_m": 114
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 111 Xó m Chiếu",
+   "way_ids": [
+    609445904,
+    609460650
+   ],
+   "dist_m": 153
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 36 Tôn Đ ản",
+   "way_ids": [
+    1128359335
+   ],
+   "dist_m": 599
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 109 Tôn Thất Thuyết",
+   "way_ids": [
+    220412129,
+    1360589217
+   ],
+   "dist_m": 307
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 141 Tôn Thất Thuyết",
+   "way_ids": [
+    722352772
+   ],
+   "dist_m": 397
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 149 Tôn Thất Thuyết",
+   "way_ids": [
+    610102881
+   ],
+   "dist_m": 459
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 165 Tôn Thất Thuyết",
+   "way_ids": [
+    192116442,
+    898302649,
+    1049205668,
+    1049205669
+   ],
+   "dist_m": 404
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 58 Tôn Th ất Thuyết",
+   "way_ids": [
+    683917133,
+    1049255779
+   ],
+   "dist_m": 606
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 66 Tôn Th ất Thuyết",
+   "way_ids": [
+    683917139
+   ],
+   "dist_m": 552
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 66 Tôn Th ất Thuyết",
+   "way_ids": [
+    683917139
+   ],
+   "dist_m": 552
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 76 Tôn Th ất Thuyết",
+   "way_ids": [
+    188114262
+   ],
+   "dist_m": 495
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 78 Tôn Th ất Thuyết",
+   "way_ids": [
+    188114124,
+    694653649
+   ],
+   "dist_m": 300
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 89 Tôn Th ất Thuyết",
+   "way_ids": [
+    722273849
+   ],
+   "dist_m": 373
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 84 Tôn Th ất Thuyết",
+   "way_ids": [
+    722273848
+   ],
+   "dist_m": 361
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm 91 Tôn Th ất Thuyết",
+   "way_ids": [
+    722273850
+   ],
+   "dist_m": 367
+  },
+  {
+   "ward": "Phường Xóm Chiếu",
+   "name": "Hẻm B134 Nguyễn Thần Hiến",
+   "way_ids": [
+    722308429
+   ],
+   "dist_m": 681
+  },
+  {
+   "ward": "Phường Phú Thuận",
+   "name": "Hẻm 88/18 đ ường Ng uyễn Văn Quỳ",
+   "way_ids": [
+    1069922280
+   ],
+   "dist_m": 1443
+  },
+  {
+   "ward": "Phường Phú Thuận",
+   "name": "Hẻm 88/99 đ ường Ng uyễn Văn Quỳ",
+   "way_ids": [
+    224316382
+   ],
+   "dist_m": 1274
+  },
+  {
+   "ward": "Phường Phú Thuận",
+   "name": "Hẻm 160/91 đ ường Nguy ễn Văn Quỳ",
+   "way_ids": [
+    224616462
+   ],
+   "dist_m": 1116
+  },
+  {
+   "ward": "Phường Phú Thuận",
+   "name": "Hẻm 160/159 đường Nguy ễn Văn Quỳ",
+   "way_ids": [
+    1181709351
+   ],
+   "dist_m": 1311
+  },
+  {
+   "ward": "Phường An Nhơn",
+   "name": "Hẻm 80 Dương Quảng Hàm",
+   "way_ids": [
+    308616313,
+    605491851,
+    1190126074
+   ],
+   "dist_m": 2339
+  },
+  {
+   "ward": "Phường An Nhơn",
+   "name": "Hẻm 60 Huỳnh Khương An",
+   "way_ids": [
+    326052905
+   ],
+   "dist_m": 2088
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 870 An Dương Vương",
+   "way_ids": [
+    1211305599
+   ],
+   "dist_m": 1133
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 890 An Dương Vương",
+   "way_ids": [
+    794757596
+   ],
+   "dist_m": 1141
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 934 An Dương Vương",
+   "way_ids": [
+    502532595
+   ],
+   "dist_m": 1089
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 958 An Dương Vương",
+   "way_ids": [
+    504918023
+   ],
+   "dist_m": 1111
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 164 Đặn g Ng uyên Cần",
+   "way_ids": [
+    1361092922
+   ],
+   "dist_m": 366
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 275 Đặn g Ng uyên Cần",
+   "way_ids": [
+    721207533
+   ],
+   "dist_m": 312
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 68B Đặng Nguyên Cần",
+   "way_ids": [
+    612897395
+   ],
+   "dist_m": 407
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 64A Đặn g Ng u yên Cần",
+   "way_ids": [
+    639107006
+   ],
+   "dist_m": 407
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 24 Bà Ho m",
+   "way_ids": [
+    1209974488
+   ],
+   "dist_m": 252
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 34 Bà Ho m",
+   "way_ids": [
+    614615043,
+    717298876
+   ],
+   "dist_m": 278
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 153 Bà H om",
+   "way_ids": [
+    502532590,
+    694201291
+   ],
+   "dist_m": 668
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 217 Bà H om",
+   "way_ids": [
+    504918011,
+    1213514617
+   ],
+   "dist_m": 900
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 226 Bà H om",
+   "way_ids": [
+    1210071491
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 239 Bà H om",
+   "way_ids": [
+    504918003,
+    504918004
+   ],
+   "dist_m": 962
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 119 Tân Hòa Đông",
+   "way_ids": [
+    504918030,
+    504918036,
+    612856689,
+    1211224501
+   ],
+   "dist_m": 720
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 126 Tân Hòa Đông",
+   "way_ids": [
+    612875558
+   ],
+   "dist_m": 789
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 132 Tân Hòa Đông",
+   "way_ids": [
+    612875560
+   ],
+   "dist_m": 909
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 154 Tân Hòa Đông",
+   "way_ids": [
+    611062137
+   ],
+   "dist_m": 993
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 172 Tân Hòa Đông",
+   "way_ids": [
+    639107011
+   ],
+   "dist_m": 1107
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 184 Tân Hòa Đông",
+   "way_ids": [
+    611041059,
+    639107007,
+    639107008,
+    714018149,
+    721207539
+   ],
+   "dist_m": 1288
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 23 Tân Hó a",
+   "way_ids": [
+    715589363
+   ],
+   "dist_m": 258
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 35 Tân Hó a",
+   "way_ids": [
+    614615028
+   ],
+   "dist_m": 248
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 57 Tân Hó a",
+   "way_ids": [
+    612897364
+   ],
+   "dist_m": 272
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 63 Tân Hó a",
+   "way_ids": [
+    502729138
+   ],
+   "dist_m": 309
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 69 Tân Hó a",
+   "way_ids": [
+    715813268
+   ],
+   "dist_m": 318
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 87 Tân Hó a",
+   "way_ids": [
+    715813267
+   ],
+   "dist_m": 332
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 454 Hậu Giang",
+   "way_ids": [
+    763093873,
+    1210315496,
+    1286193119
+   ],
+   "dist_m": 505
+  },
+  {
+   "ward": "Phường Phú Lâm",
+   "name": "Hẻm 496 Hậu Giang",
+   "way_ids": [
+    763093875,
+    763093876
+   ],
+   "dist_m": 515
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 536/43 Â u Cơ",
+   "way_ids": [
+    373721601
+   ],
+   "dist_m": 1218
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 552 Âu Cơ",
+   "way_ids": [
+    714092679
+   ],
+   "dist_m": 1368
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 594 Âu Cơ",
+   "way_ids": [
+    223642550
+   ],
+   "dist_m": 1207
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 565 Lạc Long Quân",
+   "way_ids": [
+    675670595
+   ],
+   "dist_m": 1766
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 609 Lạc Long Quân",
+   "way_ids": [
+    675670594
+   ],
+   "dist_m": 1677
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 647 Lạc Long Quân",
+   "way_ids": [
+    675670593
+   ],
+   "dist_m": 1400
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 703 Lạc Long Quân",
+   "way_ids": [
+    675670585,
+    675670586
+   ],
+   "dist_m": 1264
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 781 Lạc Long Quân",
+   "way_ids": [
+    1139133812
+   ],
+   "dist_m": 1084
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 801 Lạc Long Quân",
+   "way_ids": [
+    241998189
+   ],
+   "dist_m": 1049
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 817 Lạc Long Quân",
+   "way_ids": [
+    675661966
+   ],
+   "dist_m": 1011
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 829 Lạc Long Quân",
+   "way_ids": [
+    675670546
+   ],
+   "dist_m": 995
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/29 Lạc Long Quân",
+   "way_ids": [
+    675670589
+   ],
+   "dist_m": 1349
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/9 Lạc Long Quân",
+   "way_ids": [
+    675670588
+   ],
+   "dist_m": 1331
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/21 Lạc Long Quân",
+   "way_ids": [
+    675670591
+   ],
+   "dist_m": 1342
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/32 Lạc Long Quân",
+   "way_ids": [
+    675670582
+   ],
+   "dist_m": 1272
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/60/2 Lạc Long Quân",
+   "way_ids": [
+    675670578
+   ],
+   "dist_m": 1276
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 687/60/9 Lạc Long Quân",
+   "way_ids": [
+    675670574
+   ],
+   "dist_m": 1266
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 703/13 Lạc Long Quân",
+   "way_ids": [
+    675670587
+   ],
+   "dist_m": 1295
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 737/1 Lạc Long Quân",
+   "way_ids": [
+    610064822
+   ],
+   "dist_m": 1209
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 737/1/6 Lạc Long Quân",
+   "way_ids": [
+    675670555
+   ],
+   "dist_m": 1207
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 737/33 Lạc Long Quân",
+   "way_ids": [
+    610064805
+   ],
+   "dist_m": 1183
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 737/72/1 Lạc Long Quân",
+   "way_ids": [
+    675670567
+   ],
+   "dist_m": 1172
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 737/48 Lạc Long Quân",
+   "way_ids": [
+    675670560
+   ],
+   "dist_m": 1138
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 781/13 Lạc Long Quân",
+   "way_ids": [
+    675670551
+   ],
+   "dist_m": 1129
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 13 Gò Cẩ m Đệm",
+   "way_ids": [
+    522949982
+   ],
+   "dist_m": 1727
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 73 Gò Cẩ m Đệm",
+   "way_ids": [
+    675661933
+   ],
+   "dist_m": 1498
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 6 Trần Văn Quang",
+   "way_ids": [
+    675661929,
+    675661930
+   ],
+   "dist_m": 1454
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 136 Trần Văn Quan g",
+   "way_ids": [
+    609383374,
+    1187744803,
+    1187744804
+   ],
+   "dist_m": 1371
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 168 Trần Văn Quan g",
+   "way_ids": [
+    675661886
+   ],
+   "dist_m": 1494
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 7 Trần Văn Quang",
+   "way_ids": [
+    675661931
+   ],
+   "dist_m": 1511
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 75 Trần V ăn Quang",
+   "way_ids": [
+    675661906,
+    1380649058
+   ],
+   "dist_m": 1478
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 159 Trần Văn Quan g",
+   "way_ids": [
+    675640322,
+    675640323
+   ],
+   "dist_m": 1534
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 98 Ni Sư Huỳnh Liên",
+   "way_ids": [
+    675670633
+   ],
+   "dist_m": 1003
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 150 Ni Sư Huỳnh Liên",
+   "way_ids": [
+    675670630
+   ],
+   "dist_m": 982
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 12 Đặng Minh Trứ",
+   "way_ids": [
+    675670631
+   ],
+   "dist_m": 938
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 28 Đặng Minh Trứ",
+   "way_ids": [
+    1244526857
+   ],
+   "dist_m": 877
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 74 Đặng Minh Trứ",
+   "way_ids": [
+    610064807
+   ],
+   "dist_m": 788
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 49 Đặng Minh Trứ",
+   "way_ids": [
+    675670619
+   ],
+   "dist_m": 775
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 61 Đặng Minh Trứ",
+   "way_ids": [
+    675670620,
+    675670621
+   ],
+   "dist_m": 743
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 69 Đặng Minh Trứ",
+   "way_ids": [
+    675670623
+   ],
+   "dist_m": 753
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 12/1 Đặn g Minh Trứ",
+   "way_ids": [
+    675670632
+   ],
+   "dist_m": 911
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 23 Đặng Minh Trứ",
+   "way_ids": [
+    675670618
+   ],
+   "dist_m": 915
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 18 Bùi Thế Mỹ",
+   "way_ids": [
+    610064818
+   ],
+   "dist_m": 914
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 90 Bùi Thế Mỹ",
+   "way_ids": [
+    675661954
+   ],
+   "dist_m": 754
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1 Bùi Thế Mỹ",
+   "way_ids": [
+    675670636
+   ],
+   "dist_m": 998
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 15 Bùi Thế Mỹ",
+   "way_ids": [
+    523162195
+   ],
+   "dist_m": 978
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1 Hồng Lạc",
+   "way_ids": [
+    609428948,
+    1118504731
+   ],
+   "dist_m": 944
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 59 Hồn g L ạc",
+   "way_ids": [
+    675661955
+   ],
+   "dist_m": 785
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 97 Hồn g L ạc",
+   "way_ids": [
+    610064816
+   ],
+   "dist_m": 754
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 131 Hồ ng L ạc",
+   "way_ids": [
+    523162189
+   ],
+   "dist_m": 698
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 201 Hồ ng L ạc",
+   "way_ids": [
+    675661948
+   ],
+   "dist_m": 629
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 213 Hồ ng L ạc",
+   "way_ids": [
+    675661950
+   ],
+   "dist_m": 644
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 253 Hồ ng L ạc",
+   "way_ids": [
+    609065252
+   ],
+   "dist_m": 687
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 315 Hồ ng L ạc",
+   "way_ids": [
+    523162111
+   ],
+   "dist_m": 1023
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 17 đường số 4",
+   "way_ids": [
+    675661947
+   ],
+   "dist_m": 795
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 3 Nguyễn Bá Tòng",
+   "way_ids": [
+    675753619
+   ],
+   "dist_m": 426
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 83 Năm Châu",
+   "way_ids": [
+    242003110
+   ],
+   "dist_m": 344
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 83/30 Nă m Châu",
+   "way_ids": [
+    642606137
+   ],
+   "dist_m": 277
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 83/40 Nă m Châu",
+   "way_ids": [
+    642606138
+   ],
+   "dist_m": 301
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 83/78 Nă m Châu",
+   "way_ids": [
+    642606142
+   ],
+   "dist_m": 338
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 84 Năm Châu",
+   "way_ids": [
+    675753616
+   ],
+   "dist_m": 179
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 91 Năm Châu",
+   "way_ids": [
+    523162179
+   ],
+   "dist_m": 282
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 97 Năm Châu",
+   "way_ids": [
+    523162178
+   ],
+   "dist_m": 262
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 113 Năm Châ u",
+   "way_ids": [
+    241999170
+   ],
+   "dist_m": 131
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 139 Năm Châ u",
+   "way_ids": [
+    675753622
+   ],
+   "dist_m": 64
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 80 Võ Th ành Trang",
+   "way_ids": [
+    675753618
+   ],
+   "dist_m": 248
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 96 Võ Th ành Trang",
+   "way_ids": [
+    373721578
+   ],
+   "dist_m": 214
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 225 Võ Thành Tran g",
+   "way_ids": [
+    675758896
+   ],
+   "dist_m": 362
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 225/13 V õ Thành Tra ng",
+   "way_ids": [
+    675758897
+   ],
+   "dist_m": 359
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 230 Võ Thành Tran g",
+   "way_ids": [
+    675753611
+   ],
+   "dist_m": 313
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 281 Võ Thành Tran g",
+   "way_ids": [
+    675753612
+   ],
+   "dist_m": 493
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 40 Tái Thiết",
+   "way_ids": [
+    675758913
+   ],
+   "dist_m": 337
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 42 Tái Thiết",
+   "way_ids": [
+    675758912
+   ],
+   "dist_m": 345
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 88 Tái Thiết",
+   "way_ids": [
+    525107068
+   ],
+   "dist_m": 289
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 98 Tái Thiết",
+   "way_ids": [
+    675758905
+   ],
+   "dist_m": 289
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 27 Phan Sào Nam",
+   "way_ids": [
+    523162173
+   ],
+   "dist_m": 468
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 32/53 Pha n Sào Nam",
+   "way_ids": [
+    675758902
+   ],
+   "dist_m": 577
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 65 Phan Sào Nam",
+   "way_ids": [
+    523162177,
+    675753600
+   ],
+   "dist_m": 595
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 88/1 Phan Sào Nam",
+   "way_ids": [
+    675753608
+   ],
+   "dist_m": 727
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 911/1 Lạc Long Quân",
+   "way_ids": [
+    675753591
+   ],
+   "dist_m": 887
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 911/15/2 Lạc Long Quân",
+   "way_ids": [
+    675753593
+   ],
+   "dist_m": 835
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 911/22 Lạc Long Quân",
+   "way_ids": [
+    675753586,
+    675753588
+   ],
+   "dist_m": 794
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 911/25 Lạc Long Quân",
+   "way_ids": [
+    675753590
+   ],
+   "dist_m": 848
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 947/63 Lạc Long Quân",
+   "way_ids": [
+    675753589
+   ],
+   "dist_m": 762
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 985/8 Lạc Long Quân",
+   "way_ids": [
+    523162186
+   ],
+   "dist_m": 669
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 985/88 Lạc Long Quân",
+   "way_ids": [
+    675753581
+   ],
+   "dist_m": 642
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1007/11 Lạc Long Quân",
+   "way_ids": [
+    242003196
+   ],
+   "dist_m": 649
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1007/41 Lạc Long Quân",
+   "way_ids": [
+    675753584
+   ],
+   "dist_m": 639
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1007/59 Lạc Long Quân",
+   "way_ids": [
+    675753583
+   ],
+   "dist_m": 646
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1007/77 Lạc Long Quân",
+   "way_ids": [
+    675753582
+   ],
+   "dist_m": 641
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1007/85 Lạc Long Quân",
+   "way_ids": [
+    675753579
+   ],
+   "dist_m": 631
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 1017 Lạc Long Quân",
+   "way_ids": [
+    1038509196,
+    1154171393,
+    1272948415
+   ],
+   "dist_m": 536
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 250/21 Bà u Cát",
+   "way_ids": [
+    675753609
+   ],
+   "dist_m": 528
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 28 Bàu Cá t 8",
+   "way_ids": [
+    675753602
+   ],
+   "dist_m": 792
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 41 Trường Chinh",
+   "way_ids": [
+    675753620
+   ],
+   "dist_m": 385
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 90 Hồn g L ạc",
+   "way_ids": [
+    610064819
+   ],
+   "dist_m": 734
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 100 Hồ ng L ạc",
+   "way_ids": [
+    523162197
+   ],
+   "dist_m": 737
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 108 Hồ ng L ạc",
+   "way_ids": [
+    675753594
+   ],
+   "dist_m": 694
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 130 Hồ ng L ạc",
+   "way_ids": [
+    304967642,
+    675753580
+   ],
+   "dist_m": 644
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 160 Hồ ng L ạc",
+   "way_ids": [
+    609065248,
+    675753597
+   ],
+   "dist_m": 602
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 180 Hồ ng L ạc",
+   "way_ids": [
+    675753596
+   ],
+   "dist_m": 586
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 192 Hồ ng L ạc",
+   "way_ids": [
+    609065246,
+    675753598
+   ],
+   "dist_m": 590
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 244 Hồ ng L ạc",
+   "way_ids": [
+    675753599
+   ],
+   "dist_m": 590
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 101 Phạm Phú Th ứ",
+   "way_ids": [
+    523162175
+   ],
+   "dist_m": 452
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 107 Phạm Phú Th ứ",
+   "way_ids": [
+    373721589
+   ],
+   "dist_m": 448
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 159 Phạm Phú Th ứ",
+   "way_ids": [
+    675758901
+   ],
+   "dist_m": 513
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 114 Năm Châ u",
+   "way_ids": [
+    910699881
+   ],
+   "dist_m": 162
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 126 Năm Châ u",
+   "way_ids": [
+    952556439
+   ],
+   "dist_m": 180
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 62 Trần Mai Nin h",
+   "way_ids": [
+    373726363
+   ],
+   "dist_m": 208
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 82 Trần Mai Nin h",
+   "way_ids": [
+    373726361
+   ],
+   "dist_m": 120
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 7 Trần Mai Ninh",
+   "way_ids": [
+    608560668
+   ],
+   "dist_m": 182
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 9 Trần Mai Ninh",
+   "way_ids": [
+    608560667
+   ],
+   "dist_m": 141
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 13 Trần Mai Nin h",
+   "way_ids": [
+    373721579
+   ],
+   "dist_m": 122
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 21 Đồn g Đen",
+   "way_ids": [
+    373726351
+   ],
+   "dist_m": 454
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 67 Đồn g Đen",
+   "way_ids": [
+    675939326
+   ],
+   "dist_m": 401
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 10 Lê Lai",
+   "way_ids": [
+    1032655180
+   ],
+   "dist_m": 398
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 32 Lê Lai",
+   "way_ids": [
+    1032823052
+   ],
+   "dist_m": 407
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86 Trường Chinh",
+   "way_ids": [
+    197982831,
+    1353289691
+   ],
+   "dist_m": 410
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86/97 Trường Chinh",
+   "way_ids": [
+    197982859
+   ],
+   "dist_m": 624
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86/71 Trường Chinh",
+   "way_ids": [
+    197982845
+   ],
+   "dist_m": 521
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86/57 Trường Chinh",
+   "way_ids": [
+    197982847
+   ],
+   "dist_m": 470
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86/27 Trường Chinh",
+   "way_ids": [
+    197982855
+   ],
+   "dist_m": 375
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 120 Trường Chinh",
+   "way_ids": [
+    744597615
+   ],
+   "dist_m": 375
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 86/71/9 Trườn g Chinh",
+   "way_ids": [
+    197982844
+   ],
+   "dist_m": 471
+  },
+  {
+   "ward": "Phường Bảy Hiền",
+   "name": "Hẻm 30 Hoàn g Hoa Thám",
+   "way_ids": [
+    197690859
+   ],
+   "dist_m": 570
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 102 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798540
+   ],
+   "dist_m": 1088
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 128 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    220972933
+   ],
+   "dist_m": 892
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 136 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798544
+   ],
+   "dist_m": 936
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 144 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798517
+   ],
+   "dist_m": 942
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 150 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798530,
+    205798548
+   ],
+   "dist_m": 878
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 156 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    220972650,
+    1046488829
+   ],
+   "dist_m": 794
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 218 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798525
+   ],
+   "dist_m": 773
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 270 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798438,
+    1046488830,
+    1214939610
+   ],
+   "dist_m": 694
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 308 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798487
+   ],
+   "dist_m": 568
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 314 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798485
+   ],
+   "dist_m": 472
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 344 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798518
+   ],
+   "dist_m": 392
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 350 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205373796,
+    205798508,
+    1329830009,
+    1329830010
+   ],
+   "dist_m": 477
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 402 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798478
+   ],
+   "dist_m": 481
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 434 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798449
+   ],
+   "dist_m": 516
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 440 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798443,
+    1329830013,
+    1329830553
+   ],
+   "dist_m": 488
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 498 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205957722
+   ],
+   "dist_m": 797
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 17 đường Huỳnh Tấn Phát",
+   "way_ids": [
+    205798499
+   ],
+   "dist_m": 1354
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 167 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    1024857348
+   ],
+   "dist_m": 1033
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 205 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205798549,
+    1046488831
+   ],
+   "dist_m": 945
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 283 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    1046488834
+   ],
+   "dist_m": 804
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 371 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    220818787
+   ],
+   "dist_m": 266
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 381 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    220818785
+   ],
+   "dist_m": 309
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 391 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205957860,
+    220705969,
+    220816581,
+    1296000173
+   ],
+   "dist_m": 168
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 433 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205958031
+   ],
+   "dist_m": 348
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 457 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205958079
+   ],
+   "dist_m": 383
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 585 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    205373825,
+    923597282
+   ],
+   "dist_m": 840
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 20 đường Nguyễn Thị Thập",
+   "way_ids": [
+    1046762938
+   ],
+   "dist_m": 1187
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 96 đường Nguyễn Thị Thập",
+   "way_ids": [
+    205521389,
+    610445831
+   ],
+   "dist_m": 1525
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 156 đườn g Ng uyễn Thị Thập",
+   "way_ids": [
+    205957791
+   ],
+   "dist_m": 1855
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 198 đườn g Ng uyễn Thị Thập",
+   "way_ids": [
+    205957781
+   ],
+   "dist_m": 2011
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 210 đườn g Ng uyễn Thị Thập",
+   "way_ids": [
+    221429160
+   ],
+   "dist_m": 2025
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 224 đườn g Ng uyễn Thị Thập",
+   "way_ids": [
+    610445820,
+    720222909
+   ],
+   "dist_m": 2062
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 239 đườn g L âm Văn Bền",
+   "way_ids": [
+    1341212164
+   ],
+   "dist_m": 1975
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 261 đườn g L âm Văn Bền",
+   "way_ids": [
+    722048944
+   ],
+   "dist_m": 1991
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 160 đườn g Ng uyễn Văn Linh",
+   "way_ids": [
+    205650585,
+    205650752,
+    205650786,
+    610343428,
+    1092001086,
+    1411090367
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 354 đườn g Ng uyễn Văn Linh",
+   "way_ids": [
+    221436240
+   ],
+   "dist_m": 1649
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 326 đườn g Ng uyễn Văn Linh",
+   "way_ids": [
+    221436236
+   ],
+   "dist_m": 1587
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 38 đường Tân Thu ận Tây",
+   "way_ids": [
+    205798543
+   ],
+   "dist_m": 597
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 60 đường Tân Thu ận Tây",
+   "way_ids": [
+    205798437,
+    610352010,
+    1348173973
+   ],
+   "dist_m": 650
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 64 đường Tân Mỹ",
+   "way_ids": [
+    1349135526
+   ],
+   "dist_m": 1418
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 76 đường Tân Mỹ",
+   "way_ids": [
+    221295282
+   ],
+   "dist_m": 1388
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 96 đường Tân Mỹ",
+   "way_ids": [
+    205650560
+   ],
+   "dist_m": 1417
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 99 đường Tân Mỹ",
+   "way_ids": [
+    221295034
+   ],
+   "dist_m": 1358
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 115 đườn g Tân Mỹ",
+   "way_ids": [
+    205650631
+   ],
+   "dist_m": 1301
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 125 đườn g Tân Mỹ",
+   "way_ids": [
+    205650572
+   ],
+   "dist_m": 1272
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 142 đườn g Tân Mỹ",
+   "way_ids": [
+    221295036
+   ],
+   "dist_m": 1381
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 156 đườn g Tân Mỹ",
+   "way_ids": [
+    205650744
+   ],
+   "dist_m": 1398
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 163 đườn g Tân Mỹ",
+   "way_ids": [
+    205650575
+   ],
+   "dist_m": 1366
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 54 đường Trần Xuâ n Soạn",
+   "way_ids": [
+    205798475
+   ],
+   "dist_m": 1375
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 65 đường Trần Xuâ n Soạn",
+   "way_ids": [
+    1165009857
+   ],
+   "dist_m": 1350
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 97 đường Trần Xuâ n Soạn",
+   "way_ids": [
+    1119503903
+   ],
+   "dist_m": 1360
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 181 đườn g Trần Xuân Soạn",
+   "way_ids": [
+    221296929
+   ],
+   "dist_m": 1452
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 189 đườn g Trần Xuân Soạn",
+   "way_ids": [
+    205650661
+   ],
+   "dist_m": 1489
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 199 đườn g Trần Xuân Soạn",
+   "way_ids": [
+    221296928
+   ],
+   "dist_m": 1530
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 209 đườn g Trần Xuân Soạn",
+   "way_ids": [
+    205650716,
+    205650742
+   ],
+   "dist_m": 1512
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 6 đường Trần Văn Khán h",
+   "way_ids": [
+    205798551,
+    1141331665
+   ],
+   "dist_m": 1080
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 22 đường Trần Văn Khánh",
+   "way_ids": [
+    1112442555
+   ],
+   "dist_m": 1259
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 66 đường Trần Văn Khánh",
+   "way_ids": [
+    205798447,
+    1112442557,
+    1411090368
+   ],
+   "dist_m": 1069
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 53 đường Lưu Trọng Lư",
+   "way_ids": [
+    1312043917
+   ],
+   "dist_m": 836
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 63 đường Lưu Trọng Lư",
+   "way_ids": [
+    205798446
+   ],
+   "dist_m": 977
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 64 đường Bùi Văn Ba",
+   "way_ids": [
+    205957799,
+    220697742
+   ],
+   "dist_m": 113
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 98 đường Bùi Văn Ba",
+   "way_ids": [
+    205373795
+   ],
+   "dist_m": 53
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 118 đườn g Bùi Văn Ba",
+   "way_ids": [
+    205373806,
+    1053893115
+   ],
+   "dist_m": 24
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 136 đườn g Bùi Văn Ba",
+   "way_ids": [
+    32577213
+   ],
+   "dist_m": 105
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 192 đườn g Bùi Văn Ba",
+   "way_ids": [
+    205957914
+   ],
+   "dist_m": 307
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 216 đườn g Bùi Văn Ba",
+   "way_ids": [
+    205957849
+   ],
+   "dist_m": 517
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 35 đường Nguyễn Văn Quỳ",
+   "way_ids": [
+    205373798,
+    1223368596,
+    1329567310
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 85 đường Nguyễn Văn Quỳ",
+   "way_ids": [
+    610396438
+   ],
+   "dist_m": 940
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 109 đườn g Ng uyễn Văn Quỳ",
+   "way_ids": [
+    610396449
+   ],
+   "dist_m": 996
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 123 đườn g Ng uyễn Văn Quỳ",
+   "way_ids": [
+    1049874318
+   ],
+   "dist_m": 1016
+  },
+  {
+   "ward": "Phường Tân Thuận",
+   "name": "Hẻm 155 đườn g Ng uyễn Văn Quỳ",
+   "way_ids": [
+    899871026
+   ],
+   "dist_m": 972
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 624 Kha Vạ n Cân",
+   "way_ids": [
+    606870033
+   ],
+   "dist_m": 1184
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 2 đường số 6",
+   "way_ids": [
+    609088257
+   ],
+   "dist_m": 985
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 1 Võ Văn Ngân",
+   "way_ids": [
+    507138416,
+    693089535,
+    693089536
+   ],
+   "dist_m": 333
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 25 Võ Vă n Ngân",
+   "way_ids": [
+    507138415
+   ],
+   "dist_m": 339
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 85 Võ Vă n Ngân",
+   "way_ids": [
+    1049621820
+   ],
+   "dist_m": 603
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 267 Võ Văn Ngân",
+   "way_ids": [
+    608169570
+   ],
+   "dist_m": 1391
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 14 Hoàn g Diệu 2",
+   "way_ids": [
+    898262997
+   ],
+   "dist_m": 1434
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 203 Đặn g Văn Bi",
+   "way_ids": [
+    899723272
+   ],
+   "dist_m": 753
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 123 Đặn g Văn Bi",
+   "way_ids": [
+    1346135955
+   ],
+   "dist_m": 1166
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 27 Đặng Văn Bi",
+   "way_ids": [
+    508042075
+   ],
+   "dist_m": 1786
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 21 Đặng Văn Bi",
+   "way_ids": [
+    1041072353
+   ],
+   "dist_m": 1831
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 51 Hồ Vă n Tư",
+   "way_ids": [
+    607632924
+   ],
+   "dist_m": 265
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 22 đường số 6",
+   "way_ids": [
+    606903843,
+    1079163331
+   ],
+   "dist_m": 923
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 3 đường số 8",
+   "way_ids": [
+    1158594487
+   ],
+   "dist_m": 919
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 33 Đặng Văn Bi",
+   "way_ids": [
+    508042065,
+    1449979239
+   ],
+   "dist_m": 1698
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 9 Đặng Văn Bi",
+   "way_ids": [
+    508042085
+   ],
+   "dist_m": 1844
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 465 Nguyễn Văn Bá",
+   "way_ids": [
+    1353354935,
+    1353354936
+   ],
+   "dist_m": 1877
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 24/2 Võ V ăn Ngân",
+   "way_ids": [
+    1173603853
+   ],
+   "dist_m": 320
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 32 Hồ Vă n Tư",
+   "way_ids": [
+    607632903
+   ],
+   "dist_m": 113
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 99 Hồ Vă n Tư",
+   "way_ids": [
+    607632920
+   ],
+   "dist_m": 306
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 1 đường số 5",
+   "way_ids": [
+    347962226
+   ],
+   "dist_m": 1085
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 32 đường số 8",
+   "way_ids": [
+    608169574
+   ],
+   "dist_m": 617
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 3 đường số 9",
+   "way_ids": [
+    1020895755
+   ],
+   "dist_m": 629
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 132 đườn g số 9",
+   "way_ids": [
+    1020592144
+   ],
+   "dist_m": 418
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 67 đường số 9",
+   "way_ids": [
+    899715462
+   ],
+   "dist_m": 487
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 17 đường số 10",
+   "way_ids": [
+    899712475
+   ],
+   "dist_m": 375
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 27 đường số 10",
+   "way_ids": [
+    608169427
+   ],
+   "dist_m": 369
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 41 đường số 11",
+   "way_ids": [
+    899356081,
+    1076278301
+   ],
+   "dist_m": 467
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 41/6 đườn g số 11",
+   "way_ids": [
+    1076278302
+   ],
+   "dist_m": 512
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 34 đường số 11",
+   "way_ids": [
+    899361221
+   ],
+   "dist_m": 446
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 59 đường số 11",
+   "way_ids": [
+    972314486
+   ],
+   "dist_m": 481
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 65 đường số 11",
+   "way_ids": [
+    606888193
+   ],
+   "dist_m": 549
+  },
+  {
+   "ward": "Phường Thủ Đức",
+   "name": "Hẻm 116 đườn g số 11",
+   "way_ids": [
+    606876421
+   ],
+   "dist_m": 982
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 113 đườn g Ng uyễn Trãi",
+   "way_ids": [
+    1207327411
+   ],
+   "dist_m": 547
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 36 đường Lê Thị Riêng",
+   "way_ids": [
+    35112879
+   ],
+   "dist_m": 312
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 60 đường Lê Thị Riêng",
+   "way_ids": [
+    1118505791
+   ],
+   "dist_m": 337
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 87 đường Bùi Thị Xuâ n",
+   "way_ids": [
+    1041081173
+   ],
+   "dist_m": 1015
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 92 đường Bùi Thị Xuâ n",
+   "way_ids": [
+    1304364128,
+    1304364129
+   ],
+   "dist_m": 579
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 134 đườn g Bùi Thị Xuân",
+   "way_ids": [
+    35113607
+   ],
+   "dist_m": 809
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 205 đườn g Bùi Viện",
+   "way_ids": [
+    464010154,
+    771846602
+   ],
+   "dist_m": 934
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 12 đường Bùi Viện",
+   "way_ids": [
+    608191709,
+    724069138
+   ],
+   "dist_m": 564
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 40 đường Bùi Viện",
+   "way_ids": [
+    35114869
+   ],
+   "dist_m": 596
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 353 đườn g Phạm Ng ũ Lão",
+   "way_ids": [
+    464032550,
+    724079717,
+    1018203952
+   ],
+   "dist_m": 848
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 160 đườn g Cống Quỳ nh",
+   "way_ids": [
+    35113417
+   ],
+   "dist_m": 942
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 102 đườn g Cống Quỳ nh",
+   "way_ids": [
+    464011878
+   ],
+   "dist_m": 967
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 136 đườn g L ê Thánh Tôn",
+   "way_ids": [
+    1184131942
+   ],
+   "dist_m": 447
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 120 đườn g L ê Lai",
+   "way_ids": [
+    724092375
+   ],
+   "dist_m": 494
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 65 đường Thủ Khoa H uân",
+   "way_ids": [
+    1267299439
+   ],
+   "dist_m": 247
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 100 đườn g Ng uyễn Công Trứ",
+   "way_ids": [
+    35115317
+   ],
+   "dist_m": 982
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 84 đường Nguyễn Thái Bình",
+   "way_ids": [
+    807138068
+   ],
+   "dist_m": 698
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 68 đường Nguyễn Thái Bình",
+   "way_ids": [
+    807138067
+   ],
+   "dist_m": 762
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 63 đường Phó Đức Ch ính",
+   "way_ids": [
+    608214850
+   ],
+   "dist_m": 843
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 30 đường Phó Đức Ch ính",
+   "way_ids": [
+    723870242
+   ],
+   "dist_m": 871
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 100 đườn g L ê Thị Hồng Gấm",
+   "way_ids": [
+    807138078
+   ],
+   "dist_m": 589
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 3 đường Phan Văn Trườn g",
+   "way_ids": [
+    807062694
+   ],
+   "dist_m": 921
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 39 đường Nguyễn Trãi",
+   "way_ids": [
+    35113995
+   ],
+   "dist_m": 356
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 71 đường Nguyễn Trãi",
+   "way_ids": [
+    35112713
+   ],
+   "dist_m": 460
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 89 đường Nguyễn Trãi",
+   "way_ids": [
+    35114462,
+    1195571951,
+    1205116255,
+    1343633567
+   ],
+   "dist_m": 496
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 95 đường Nguyễn Trãi",
+   "way_ids": [
+    1195571952,
+    1205116256,
+    1205116257,
+    1205116258
+   ],
+   "dist_m": 515
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 95 đường Nguyễn Trãi",
+   "way_ids": [
+    1195571952,
+    1205116256,
+    1205116257,
+    1205116258
+   ],
+   "dist_m": 515
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 121 đườn g Ng uyễn Trãi",
+   "way_ids": [
+    1463054092,
+    1463054093
+   ],
+   "dist_m": 2349
+  },
+  {
+   "ward": "Phường Bến Thành",
+   "name": "Hẻm 143 đườn g Ng uyễn Trãi",
+   "way_ids": [
+    1463053910,
+    1529279811
+   ],
+   "dist_m": 2441
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 49 đường Thạnh Lộc 4 1",
+   "way_ids": [
+    606928513
+   ],
+   "dist_m": 2962
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 105 đườn g Thạnh Lộc 37",
+   "way_ids": [
+    507707279
+   ],
+   "dist_m": 2316
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 141/58 đ ường Thạnh Lộc 19",
+   "way_ids": [
+    1431901363
+   ],
+   "dist_m": 1974
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 141/36 đ ường Thạnh Lộc 19",
+   "way_ids": [
+    834730513,
+    834730514
+   ],
+   "dist_m": 1894
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 55 đường Thạnh Lộc 1 9",
+   "way_ids": [
+    507707299
+   ],
+   "dist_m": 1932
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 62 đường Thạnh Lộc 2 9",
+   "way_ids": [
+    608481103
+   ],
+   "dist_m": 1552
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 116 đườn g Thạnh Lộc 17",
+   "way_ids": [
+    608478548
+   ],
+   "dist_m": 1585
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 105 đườn g Thạnh Lộc 16",
+   "way_ids": [
+    834350682
+   ],
+   "dist_m": 1548
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 53 đường Thạnh Lộc 2 6",
+   "way_ids": [
+    592571963
+   ],
+   "dist_m": 1660
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 42 đường Thạnh Lộc 1 7",
+   "way_ids": [
+    592571964
+   ],
+   "dist_m": 1655
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 30 đường Thạnh Lộc 1 7",
+   "way_ids": [
+    592571967,
+    1559984550
+   ],
+   "dist_m": 1617
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 30/15 đ ường Thạnh Lộc 17",
+   "way_ids": [
+    608824349
+   ],
+   "dist_m": 1632
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 17 đường Thạnh Lộc 1 6",
+   "way_ids": [
+    608824319
+   ],
+   "dist_m": 1595
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 103 đườn g Thạnh Lộc 08",
+   "way_ids": [
+    1307368740
+   ],
+   "dist_m": 2111
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 89 đường Thạnh Lộc 0 8",
+   "way_ids": [
+    609134385
+   ],
+   "dist_m": 2125
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 79 đường Thạnh Lộc 0 8",
+   "way_ids": [
+    609134375
+   ],
+   "dist_m": 2130
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 224 đườn g Hà Huy Giáp",
+   "way_ids": [
+    609145488,
+    898390772
+   ],
+   "dist_m": 1753
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 224/4 đ ường Hà Huy Giáp",
+   "way_ids": [
+    1352842395
+   ],
+   "dist_m": 1791
+  },
+  {
+   "ward": "Phường An Phú Đông",
+   "name": "Hẻm 208 đườn g Hà Huy Giáp",
+   "way_ids": [
+    1345353373
+   ],
+   "dist_m": 1796
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 1250/9 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    900631110
+   ],
+   "dist_m": 2956
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 710/16 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    1059451785
+   ],
+   "dist_m": 1456
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 972 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    834860004
+   ],
+   "dist_m": 2184
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 888 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    224828477
+   ],
+   "dist_m": 1888
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 588/39 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    1336357198
+   ],
+   "dist_m": 1244
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 630/27 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    205957640
+   ],
+   "dist_m": 1322
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 1234 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    900634287
+   ],
+   "dist_m": 2927
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 604 đườn g Huỳ nh Tấn Phát",
+   "way_ids": [
+    611412142
+   ],
+   "dist_m": 1350
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 710/8 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    205957772
+   ],
+   "dist_m": 1446
+  },
+  {
+   "ward": "Phường Tân Mỹ",
+   "name": "Hẻm 994/18 đ ường Huỳnh Tấn Phát",
+   "way_ids": [
+    1139501750
+   ],
+   "dist_m": 2165
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 5C đường Hòa Bình",
+   "way_ids": [
+    1432193394
+   ],
+   "dist_m": 367
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 5C đường Hòa Bình",
+   "way_ids": [
+    1432193394
+   ],
+   "dist_m": 367
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 3 đường Hòa Bình",
+   "way_ids": [
+    1145005653,
+    1145005654
+   ],
+   "dist_m": 356
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 15 đường Hòa Bình",
+   "way_ids": [
+    502729181
+   ],
+   "dist_m": 262
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 15/102 đ ường Hòa Bình",
+   "way_ids": [
+    610069704
+   ],
+   "dist_m": 389
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 15/70 đ ường Hòa Bình",
+   "way_ids": [
+    502729180
+   ],
+   "dist_m": 379
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 207 đườn g L ạc Long Quân",
+   "way_ids": [
+    502918126
+   ],
+   "dist_m": 212
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 161D/10 6 đường Lạc Long Quân",
+   "way_ids": [
+    570600157,
+    1115188211,
+    1286759523
+   ],
+   "dist_m": 221
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 161D/10 4 đường Lạc Long Quân",
+   "way_ids": [
+    460757144,
+    658958992,
+    1115188209,
+    1115188210,
+    1115188212
+   ],
+   "dist_m": 188
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 161E đườn g L ạc Long Quân",
+   "way_ids": [
+    721207528
+   ],
+   "dist_m": 75
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 152/64 đ ường Lạc L ong Quân",
+   "way_ids": [
+    570600156
+   ],
+   "dist_m": 418
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 180 đườn g L ạc Long Quân",
+   "way_ids": [
+    420287671,
+    502538489
+   ],
+   "dist_m": 397
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 180 đườn g L ạc Long Quân",
+   "way_ids": [
+    420287671,
+    502538489
+   ],
+   "dist_m": 397
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 194 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538485
+   ],
+   "dist_m": 388
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 206 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538491,
+    1187069110
+   ],
+   "dist_m": 294
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 230 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538482
+   ],
+   "dist_m": 344
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 121 đườn g L ò Siêu",
+   "way_ids": [
+    504918058
+   ],
+   "dist_m": 1233
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 115/9 đ ường L ò Siêu",
+   "way_ids": [
+    666568958
+   ],
+   "dist_m": 1209
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 28 đường Xóm Đất",
+   "way_ids": [
+    613190181,
+    613190182
+   ],
+   "dist_m": 1167
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 65 đường Xóm Đất",
+   "way_ids": [
+    666569015
+   ],
+   "dist_m": 1012
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 140 đườn g Xóm Đất",
+   "way_ids": [
+    666568966
+   ],
+   "dist_m": 848
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 120 đườn g Xóm Đất",
+   "way_ids": [
+    502903955
+   ],
+   "dist_m": 911
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 230 đườn g Xóm Đất",
+   "way_ids": [
+    666833984,
+    666833985,
+    666833986
+   ],
+   "dist_m": 527
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 174/42 đ ường Thái Phiên",
+   "way_ids": [
+    502903944,
+    1253208808
+   ],
+   "dist_m": 984
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 174/41 đ ường Thái Phiên",
+   "way_ids": [
+    502903947
+   ],
+   "dist_m": 940
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 283 đườn g Thái Phiên",
+   "way_ids": [
+    608676424
+   ],
+   "dist_m": 674
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 116 đườn g Hàn Hải Nguy ên",
+   "way_ids": [
+    666569014
+   ],
+   "dist_m": 1043
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 130 đườn g Hàn Hải Nguy ên",
+   "way_ids": [
+    666569013
+   ],
+   "dist_m": 1014
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 154 đườn g Hàn Hải Nguy ên",
+   "way_ids": [
+    666568971
+   ],
+   "dist_m": 940
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 190 đườn g Hàn Hải Nguy ên",
+   "way_ids": [
+    666568967,
+    666568968
+   ],
+   "dist_m": 890
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 327 đườn g L ãnh Binh Th ăng",
+   "way_ids": [
+    575066980,
+    666569005
+   ],
+   "dist_m": 740
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 591 đườn g Bình Thới",
+   "way_ids": [
+    502918122,
+    1287234586
+   ],
+   "dist_m": 344
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 591/8 đ ường Bình Thới",
+   "way_ids": [
+    502538488
+   ],
+   "dist_m": 447
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 177 đườn g Bình Thới",
+   "way_ids": [
+    502918118,
+    694161874
+   ],
+   "dist_m": 717
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 407 đườn g Minh Phụng",
+   "way_ids": [
+    502918123
+   ],
+   "dist_m": 559
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 385 đườn g Minh Phụng",
+   "way_ids": [
+    523650616
+   ],
+   "dist_m": 595
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 395 đườn g Minh Phụng",
+   "way_ids": [
+    516774798
+   ],
+   "dist_m": 559
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 427 đườn g Minh Phụng",
+   "way_ids": [
+    420287698
+   ],
+   "dist_m": 537
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 551 đườn g Minh Phụng",
+   "way_ids": [
+    516774801
+   ],
+   "dist_m": 486
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 180 đườn g L ạc Long Quân",
+   "way_ids": [
+    420287671,
+    502538489
+   ],
+   "dist_m": 397
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 194 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538485
+   ],
+   "dist_m": 388
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 206 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538491,
+    1187069110
+   ],
+   "dist_m": 294
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 230 đườn g L ạc Long Quân",
+   "way_ids": [
+    502538482
+   ],
+   "dist_m": 344
+  },
+  {
+   "ward": "Phường Bình Thới",
+   "name": "Hẻm 300 đườn g Đội Cung",
+   "way_ids": [
+    502434934
+   ],
+   "dist_m": 581
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 45 đường Đinh Tiên H oàng",
+   "way_ids": [
+    1023514811
+   ],
+   "dist_m": 1487
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 84 đường Đinh Tiên H oàng",
+   "way_ids": [
+    1347921272,
+    1347921273
+   ],
+   "dist_m": 874
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 76 đường Võ Thị Sáu",
+   "way_ids": [
+    1055775057
+   ],
+   "dist_m": 426
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 82 đường Võ Thị Sáu",
+   "way_ids": [
+    260406008
+   ],
+   "dist_m": 426
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 96 đường Võ Thị Sáu",
+   "way_ids": [
+    609358450
+   ],
+   "dist_m": 460
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 106 đườn g Võ Thị Sáu",
+   "way_ids": [
+    1126910177
+   ],
+   "dist_m": 499
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 27 đường Võ Thị Sáu",
+   "way_ids": [
+    609372150
+   ],
+   "dist_m": 540
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 12 đường Trần Qua ng Khải",
+   "way_ids": [
+    1207976718
+   ],
+   "dist_m": 544
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 54 đường Trần Qua ng Khải",
+   "way_ids": [
+    213308042
+   ],
+   "dist_m": 424
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 102 đườn g Trần Quang Khải",
+   "way_ids": [
+    949874293,
+    1118219561,
+    1118219562,
+    1118219563
+   ],
+   "dist_m": 242
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 148 đườn g Trần Quang Khải",
+   "way_ids": [
+    1339803704
+   ],
+   "dist_m": 86
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 154 đườn g Trần Quang Khải",
+   "way_ids": [
+    1176119274
+   ],
+   "dist_m": 72
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 186 đườn g Trần Quang Khải",
+   "way_ids": [
+    1164137853
+   ],
+   "dist_m": 105
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 49 đường Trần Qua ng Khải",
+   "way_ids": [
+    851374139
+   ],
+   "dist_m": 436
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 30 đường Trần Nguyên Đán",
+   "way_ids": [
+    1336412542
+   ],
+   "dist_m": 373
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 220 đườn g Hai Bà Trưng",
+   "way_ids": [
+    609372139
+   ],
+   "dist_m": 487
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 230 đườn g Hai Bà Trưng",
+   "way_ids": [
+    1382487784
+   ],
+   "dist_m": 437
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 250 đườn g Hai Bà Trưng",
+   "way_ids": [
+    1246241864,
+    1246241865
+   ],
+   "dist_m": 403
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 302 đườn g Hai Bà Trưng",
+   "way_ids": [
+    35115070
+   ],
+   "dist_m": 311
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 362 đườn g Hai Bà Trưng",
+   "way_ids": [
+    35115072,
+    898430378,
+    1175257805
+   ],
+   "dist_m": 169
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 378 đườn g Hai Bà Trưng",
+   "way_ids": [
+    1175257804
+   ],
+   "dist_m": 272
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 392 đườn g Hai Bà Trưng",
+   "way_ids": [
+    35112963
+   ],
+   "dist_m": 260
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 478 đườn g Hai Bà Trưng",
+   "way_ids": [
+    1491857988
+   ],
+   "dist_m": 404
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 32 đường Đặng Dung",
+   "way_ids": [
+    213392454,
+    1300686538
+   ],
+   "dist_m": 39
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 7 đường Đặng Dung",
+   "way_ids": [
+    1193454750
+   ],
+   "dist_m": 53
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 43 đường Đặng Dung",
+   "way_ids": [
+    213434366
+   ],
+   "dist_m": 10
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 53/86 đ ường Trần Khánh Dư",
+   "way_ids": [
+    35113841
+   ],
+   "dist_m": 228
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 53/86 đ ường Trần Khánh Dư",
+   "way_ids": [
+    35113841
+   ],
+   "dist_m": 228
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 53/70 đ ường Trần Khánh Dư",
+   "way_ids": [
+    213435622
+   ],
+   "dist_m": 210
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 27 đường Trần Nhậ t Duật",
+   "way_ids": [
+    213391966
+   ],
+   "dist_m": 94
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 214/19 đ ường Nguy ễn Văn Nguyễn",
+   "way_ids": [
+    213337071,
+    213439088,
+    1297691361
+   ],
+   "dist_m": 324
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 212/158 đường Nguy ễn Văn Nguyễn",
+   "way_ids": [
+    722850672
+   ],
+   "dist_m": 679
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 4 đường Trần Khắc Châ n",
+   "way_ids": [
+    1207364298,
+    1207364299,
+    1207364300,
+    1207364301
+   ],
+   "dist_m": 125
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 38 đường Trần Khắc Ch ân",
+   "way_ids": [
+    213435208,
+    1468822143
+   ],
+   "dist_m": 205
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 50 đường Trần Khắc Ch ân",
+   "way_ids": [
+    213435740
+   ],
+   "dist_m": 182
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 94 đường Trần Khắc Ch ân",
+   "way_ids": [
+    850149847
+   ],
+   "dist_m": 263
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 23 đường Trần Khắc Ch ân",
+   "way_ids": [
+    1181522535,
+    1181522537
+   ],
+   "dist_m": 1377
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 27 đường Trần Khắc Ch ân",
+   "way_ids": [
+    213392898
+   ],
+   "dist_m": 119
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 85 đường Trần Khắc Ch ân",
+   "way_ids": [
+    608487236
+   ],
+   "dist_m": 263
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 101 đườn g Trần Khắc Chân",
+   "way_ids": [
+    125246919
+   ],
+   "dist_m": 289
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 25 đường Nguyễn Phi Khanh",
+   "way_ids": [
+    1366499563
+   ],
+   "dist_m": 498
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 32 đường Nguyễn Hữu Cầu",
+   "way_ids": [
+    1527714713
+   ],
+   "dist_m": 144
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 52 đường Nguyễn Hữu Cầu",
+   "way_ids": [
+    1059529240,
+    1527714714
+   ],
+   "dist_m": 163
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 79 đường Nguyễn Hữu Cầu",
+   "way_ids": [
+    35113618
+   ],
+   "dist_m": 268
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 9 đường Lý Văn Phúc",
+   "way_ids": [
+    35114148,
+    1494698577
+   ],
+   "dist_m": 353
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 33 đường Lý Văn Phúc",
+   "way_ids": [
+    35112696
+   ],
+   "dist_m": 399
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 74 đường Thạch Th ị Thanh",
+   "way_ids": [
+    35113970
+   ],
+   "dist_m": 261
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 19 đường Thạch Th ị Thanh",
+   "way_ids": [
+    35112947
+   ],
+   "dist_m": 390
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 37 đường Đinh Côn g Tráng",
+   "way_ids": [
+    35115125
+   ],
+   "dist_m": 362
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 15 đường Bà Lê Chân",
+   "way_ids": [
+    1221899162
+   ],
+   "dist_m": 144
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 6 đường Nguy ễn Văn Th ủ",
+   "way_ids": [
+    604803385
+   ],
+   "dist_m": 1130
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 15 đường Nguyễn Văn Thủ",
+   "way_ids": [
+    1348169613
+   ],
+   "dist_m": 1179
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 29 đường Nguyễn Văn Thủ",
+   "way_ids": [
+    1039245842,
+    1348169612
+   ],
+   "dist_m": 1152
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 94 đường Nguyễn Văn Thủ",
+   "way_ids": [
+    213420910
+   ],
+   "dist_m": 949
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 28 đường Mai Thị Lựu",
+   "way_ids": [
+    1049805643
+   ],
+   "dist_m": 996
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 104 đườn g Mai Thị L ựu",
+   "way_ids": [
+    881901383,
+    1353077509
+   ],
+   "dist_m": 847
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 120 đườn g Mai Thị L ựu",
+   "way_ids": [
+    1128413441,
+    1276679343,
+    1351999113
+   ],
+   "dist_m": 792
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 26 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    35113521
+   ],
+   "dist_m": 1260
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 27 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    220686185
+   ],
+   "dist_m": 1425
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 29 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    220686533
+   ],
+   "dist_m": 1390
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 41 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    35113706
+   ],
+   "dist_m": 1198
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 61 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    610571699
+   ],
+   "dist_m": 2733
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 54 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    35113065
+   ],
+   "dist_m": 1093
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 59 đường Nguyễn Bỉnh Khiêm",
+   "way_ids": [
+    213317555
+   ],
+   "dist_m": 1134
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 109 đườn g Ng uyễn Bỉnh Khiêm",
+   "way_ids": [
+    35115085
+   ],
+   "dist_m": 1025
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 4 đường Phan Kế Bính",
+   "way_ids": [
+    1116256133
+   ],
+   "dist_m": 1065
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 6 đường Phan Kế Bính",
+   "way_ids": [
+    213316927
+   ],
+   "dist_m": 1043
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 12 đường Phan Kế Bính",
+   "way_ids": [
+    850153642
+   ],
+   "dist_m": 916
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 85 đường Phan Kế Bính",
+   "way_ids": [
+    35113206
+   ],
+   "dist_m": 911
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 8 đường Nguy ễn Đình Ch iểu",
+   "way_ids": [
+    676185539
+   ],
+   "dist_m": 1708
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 94 đường Nguyễn Đình Chiểu",
+   "way_ids": [
+    676185521,
+    676185522
+   ],
+   "dist_m": 1571
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 100 đườn g Ng uyễn Đình Chiểu",
+   "way_ids": [
+    213421619,
+    850165528
+   ],
+   "dist_m": 953
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 1 đường Điện Biên Phủ",
+   "way_ids": [
+    604803389
+   ],
+   "dist_m": 1124
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 62 đường Điện Biên Phủ",
+   "way_ids": [
+    313406607,
+    609731759
+   ],
+   "dist_m": 1386
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 119 đườn g Điện Biên Phủ",
+   "way_ids": [
+    35114166
+   ],
+   "dist_m": 767
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 127 đườn g Điện Biên Phủ",
+   "way_ids": [
+    35115215
+   ],
+   "dist_m": 786
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 159 đườn g Điện Biên Phủ",
+   "way_ids": [
+    213419036
+   ],
+   "dist_m": 762
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 187 đườn g Điện Biên Phủ",
+   "way_ids": [
+    1125370519
+   ],
+   "dist_m": 773
+  },
+  {
+   "ward": "Phường Tân Định",
+   "name": "Hẻm 52 đường Nguyễn Huy Tự",
+   "way_ids": [
+    213425881
+   ],
+   "dist_m": 649
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1036 Cá ch Mạng Tháng 8",
+   "way_ids": [
+    32583213
+   ],
+   "dist_m": 1678
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 40 Hiệp N hất",
+   "way_ids": [
+    277756235
+   ],
+   "dist_m": 1590
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 50 Hiệp N hất",
+   "way_ids": [
+    523650567
+   ],
+   "dist_m": 1580
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 60 Hiệp N hất",
+   "way_ids": [
+    523650575
+   ],
+   "dist_m": 1594
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 70 Hiệp N hất",
+   "way_ids": [
+    523650576
+   ],
+   "dist_m": 1597
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 94 Hiệp N hất",
+   "way_ids": [
+    523650569
+   ],
+   "dist_m": 1590
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 43 Hiệp N hất",
+   "way_ids": [
+    1346330640
+   ],
+   "dist_m": 1671
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 59 Hiệp N hất",
+   "way_ids": [
+    1346330639
+   ],
+   "dist_m": 1659
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 190 Ho àng Văn Thụ",
+   "way_ids": [
+    668267692
+   ],
+   "dist_m": 785
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 196 Ho àng Văn Thụ",
+   "way_ids": [
+    668267691
+   ],
+   "dist_m": 771
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 204 Ho àng Văn Thụ",
+   "way_ids": [
+    668267690
+   ],
+   "dist_m": 808
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 214 Ho àng Văn Thụ",
+   "way_ids": [
+    197982861
+   ],
+   "dist_m": 796
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 220 Ho àng Văn Thụ",
+   "way_ids": [
+    668267687
+   ],
+   "dist_m": 790
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 238 Ho àng Văn Thụ",
+   "way_ids": [
+    118894313
+   ],
+   "dist_m": 809
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 248 Ho àng Văn Thụ",
+   "way_ids": [
+    197982838,
+    197982848
+   ],
+   "dist_m": 847
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 286 Ho àng Văn Thụ",
+   "way_ids": [
+    668267693
+   ],
+   "dist_m": 901
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 308 Ho àng Văn Thụ",
+   "way_ids": [
+    668267694,
+    696413313
+   ],
+   "dist_m": 948
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 324 Ho àng Văn Thụ",
+   "way_ids": [
+    197982836
+   ],
+   "dist_m": 1017
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 340C Ho àng Văn Thụ",
+   "way_ids": [
+    219730465
+   ],
+   "dist_m": 1121
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 348 Ho àng Văn Thụ",
+   "way_ids": [
+    608553071
+   ],
+   "dist_m": 1104
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 437 Ho àng Văn Thụ",
+   "way_ids": [
+    373719801
+   ],
+   "dist_m": 1178
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 437/2 Ho àng Văn Thụ",
+   "way_ids": [
+    525107073
+   ],
+   "dist_m": 1200
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 437/2/17 Hoàng Văn Thụ",
+   "way_ids": [
+    373719800
+   ],
+   "dist_m": 1203
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Hoàng Việt",
+   "way_ids": [
+    197995290,
+    693366154
+   ],
+   "dist_m": 1067
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 19 Hoàn g Việt",
+   "way_ids": [
+    602329372
+   ],
+   "dist_m": 1203
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 21 Hoàn g Việt",
+   "way_ids": [
+    851373352
+   ],
+   "dist_m": 1240
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 23 Hoàn g Việt",
+   "way_ids": [
+    197995304
+   ],
+   "dist_m": 1311
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 25 Hoàn g Việt",
+   "way_ids": [
+    523650565
+   ],
+   "dist_m": 1321
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 31 Hoàn g Việt",
+   "way_ids": [
+    608553062,
+    637934076
+   ],
+   "dist_m": 1389
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 49 Hoàn g Việt",
+   "way_ids": [
+    373719804
+   ],
+   "dist_m": 1479
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 4 Hoàng Việt",
+   "way_ids": [
+    197995336
+   ],
+   "dist_m": 1134
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 4/1 Hoàn g Việt",
+   "way_ids": [
+    197995303,
+    668267739
+   ],
+   "dist_m": 1183
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 16 Hoàn g Việt",
+   "way_ids": [
+    197995291,
+    197995319
+   ],
+   "dist_m": 1228
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 116 Lê Bình",
+   "way_ids": [
+    523650579
+   ],
+   "dist_m": 1604
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Nguyễn Đình Khơi",
+   "way_ids": [
+    668267743,
+    693365611
+   ],
+   "dist_m": 1310
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 27 Nguyễn Đình Khơi",
+   "way_ids": [
+    1046128088
+   ],
+   "dist_m": 1331
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 31 Nguyễn Đình Khơi",
+   "way_ids": [
+    373719799
+   ],
+   "dist_m": 1359
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 8 Nguyễn Đình Khơi",
+   "way_ids": [
+    32579147,
+    373721569,
+    1351144030
+   ],
+   "dist_m": 1466
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 8/15 Nguyễn Đình Khơi",
+   "way_ids": [
+    373719807
+   ],
+   "dist_m": 1428
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 97 Nguyễn Thái Bình",
+   "way_ids": [
+    668267736
+   ],
+   "dist_m": 924
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 99 Nguyễn Thái Bình",
+   "way_ids": [
+    668267735,
+    668267737
+   ],
+   "dist_m": 922
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 247 Nguyễn Thái Bình",
+   "way_ids": [
+    668267730
+   ],
+   "dist_m": 1188
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 37 Nguyễn Thái Bình",
+   "way_ids": [
+    197982837
+   ],
+   "dist_m": 837
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 26 Tự Cường",
+   "way_ids": [
+    1139173075
+   ],
+   "dist_m": 1736
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 48 Trường Chinh",
+   "way_ids": [
+    668267719,
+    668267720
+   ],
+   "dist_m": 1641
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Út Tịch",
+   "way_ids": [
+    197982852
+   ],
+   "dist_m": 886
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 6 Út Tịch",
+   "way_ids": [
+    197982863
+   ],
+   "dist_m": 958
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 48 Út Tịch",
+   "way_ids": [
+    1245195468
+   ],
+   "dist_m": 1172
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 10 Xuân Diệu",
+   "way_ids": [
+    694654434
+   ],
+   "dist_m": 1329
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 64 Xuân Diệu",
+   "way_ids": [
+    668267725
+   ],
+   "dist_m": 1227
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 76 Xuân Diệu",
+   "way_ids": [
+    668267727
+   ],
+   "dist_m": 1215
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 76/9 Xuâ n Diệu",
+   "way_ids": [
+    668267728
+   ],
+   "dist_m": 1214
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 76/17 Xu ân Diệu",
+   "way_ids": [
+    668267729
+   ],
+   "dist_m": 1199
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 28 Ba Vì",
+   "way_ids": [
+    197690908
+   ],
+   "dist_m": 400
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 27 Cộng Hòa",
+   "way_ids": [
+    602329379,
+    694654435
+   ],
+   "dist_m": 788
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 43 Cộng Hòa",
+   "way_ids": [
+    694654442,
+    696841164,
+    1558926490
+   ],
+   "dist_m": 815
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 43/14 Cộ ng Hòa",
+   "way_ids": [
+    244009296,
+    244009297
+   ],
+   "dist_m": 829
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 99C Cộng Hòa",
+   "way_ids": [
+    608185758
+   ],
+   "dist_m": 838
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 108 Cộn g Hòa",
+   "way_ids": [
+    197803968,
+    197804046,
+    668267753
+   ],
+   "dist_m": 575
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 124 Cộn g Hòa",
+   "way_ids": [
+    197804093
+   ],
+   "dist_m": 640
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Đồ Sơn",
+   "way_ids": [
+    197690851
+   ],
+   "dist_m": 423
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 2 Đồ Sơn",
+   "way_ids": [
+    668267800
+   ],
+   "dist_m": 300
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 3 Đồ Sơn",
+   "way_ids": [
+    197690830
+   ],
+   "dist_m": 401
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 4 Đồ Sơn",
+   "way_ids": [
+    761952339
+   ],
+   "dist_m": 325
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 6 Đồ Sơn",
+   "way_ids": [
+    761952337
+   ],
+   "dist_m": 286
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 7 Đồ Sơn",
+   "way_ids": [
+    1041321464
+   ],
+   "dist_m": 337
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 72 Giải Phón g",
+   "way_ids": [
+    197803937
+   ],
+   "dist_m": 448
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 25 Giải Phón g",
+   "way_ids": [
+    668267780,
+    1041321468
+   ],
+   "dist_m": 541
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 21 Giải Phón g",
+   "way_ids": [
+    668267783
+   ],
+   "dist_m": 509
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 4 Hậu Gian g",
+   "way_ids": [
+    607274650
+   ],
+   "dist_m": 497
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 4 Nguyễn Cảnh Dị",
+   "way_ids": [
+    668267806,
+    1221519489
+   ],
+   "dist_m": 346
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 6 Nguyễn Cảnh Dị",
+   "way_ids": [
+    668267808
+   ],
+   "dist_m": 368
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 10 Nguyễn Cảnh Dị",
+   "way_ids": [
+    668267810
+   ],
+   "dist_m": 400
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 12 Nguyễn Cảnh Dị",
+   "way_ids": [
+    197557672
+   ],
+   "dist_m": 459
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Nguyễn Cảnh Dị",
+   "way_ids": [
+    197557661,
+    1201388335
+   ],
+   "dist_m": 317
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 7 Nguyễn Cảnh Dị",
+   "way_ids": [
+    197557708
+   ],
+   "dist_m": 373
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 11 Nguyễn Văn Mại",
+   "way_ids": [
+    197557718
+   ],
+   "dist_m": 470
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 5 Nguyễn Văn Vĩnh",
+   "way_ids": [
+    197557687
+   ],
+   "dist_m": 320
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1 Nguyễn Văn Vĩnh",
+   "way_ids": [
+    197557703
+   ],
+   "dist_m": 366
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 6 Phan Thú c Duyện",
+   "way_ids": [
+    668267804,
+    1237217839
+   ],
+   "dist_m": 386
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 25 Thăn g L ong",
+   "way_ids": [
+    197804066
+   ],
+   "dist_m": 583
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 47 Thăn g L ong",
+   "way_ids": [
+    197690864,
+    668267779
+   ],
+   "dist_m": 429
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 91 Trần Q uốc Hoàn",
+   "way_ids": [
+    197557704
+   ],
+   "dist_m": 579
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 33 Trường Sơn",
+   "way_ids": [
+    197557715,
+    1524246181
+   ],
+   "dist_m": 520
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1219 H oàng Sa",
+   "way_ids": [
+    1111749632
+   ],
+   "dist_m": 1925
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1237 H oàng Sa",
+   "way_ids": [
+    224446120
+   ],
+   "dist_m": 1889
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1355 H oàng Sa",
+   "way_ids": [
+    637934074
+   ],
+   "dist_m": 1660
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1357 H oàng Sa",
+   "way_ids": [
+    637934075
+   ],
+   "dist_m": 1670
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 9 Lưu Nhân Chú",
+   "way_ids": [
+    525107112
+   ],
+   "dist_m": 1788
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 23 Lưu Nhân Ch ú",
+   "way_ids": [
+    32586724
+   ],
+   "dist_m": 1815
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 33 Lưu Nhân Ch ú",
+   "way_ids": [
+    496687374
+   ],
+   "dist_m": 1832
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 61 Lưu Nhân Ch ú",
+   "way_ids": [
+    523162199,
+    1079192567
+   ],
+   "dist_m": 1847
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 202/15 Ph ạm Văn Hai",
+   "way_ids": [
+    668284506
+   ],
+   "dist_m": 1786
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 202/15/2 Phạm Văn Hai",
+   "way_ids": [
+    668284503,
+    668284505
+   ],
+   "dist_m": 1774
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 202/31 Ph ạm Văn Hai",
+   "way_ids": [
+    668284504
+   ],
+   "dist_m": 1789
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 202/47 Ph ạm Văn Hai",
+   "way_ids": [
+    668284509
+   ],
+   "dist_m": 1743
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 202/47/1 8 Phạm Văn Hai",
+   "way_ids": [
+    668284511
+   ],
+   "dist_m": 1744
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 224 Phạm Văn Hai",
+   "way_ids": [
+    668284500
+   ],
+   "dist_m": 1808
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 242 Phạm Văn Hai",
+   "way_ids": [
+    523650562
+   ],
+   "dist_m": 1820
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 256 Phạm Văn Hai",
+   "way_ids": [
+    523650558
+   ],
+   "dist_m": 1860
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 264 Phạm Văn Hai",
+   "way_ids": [
+    523650559
+   ],
+   "dist_m": 1876
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 145 Phạm Văn Hai",
+   "way_ids": [
+    497397741
+   ],
+   "dist_m": 1847
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 159 Phạm Văn Hai",
+   "way_ids": [
+    362906100,
+    668284494
+   ],
+   "dist_m": 1835
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 169 Phạm Văn Hai",
+   "way_ids": [
+    498469383
+   ],
+   "dist_m": 1868
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 207/25 Ph ạm Văn Hai",
+   "way_ids": [
+    668284495
+   ],
+   "dist_m": 1917
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 207/43 Ph ạm Văn Hai",
+   "way_ids": [
+    499039467
+   ],
+   "dist_m": 1957
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 181 Phạm Văn Hai",
+   "way_ids": [
+    498997223
+   ],
+   "dist_m": 1902
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 45 Bành Văn Trân",
+   "way_ids": [
+    1348155893,
+    1348155894
+   ],
+   "dist_m": 2111
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 77 Bành Văn Trân",
+   "way_ids": [
+    668901256
+   ],
+   "dist_m": 2106
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 87 Bành Văn Trân",
+   "way_ids": [
+    495698480
+   ],
+   "dist_m": 2161
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 87/1 Bàn h Văn Trân",
+   "way_ids": [
+    668901257
+   ],
+   "dist_m": 2126
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 87/23 Bà nh Văn Trân",
+   "way_ids": [
+    668901259
+   ],
+   "dist_m": 2165
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 87/36 Bà nh Văn Trân",
+   "way_ids": [
+    668901262
+   ],
+   "dist_m": 2209
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 125 Bàn h Văn Trân",
+   "way_ids": [
+    668901253
+   ],
+   "dist_m": 2134
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 149 Bàn h Văn Trân",
+   "way_ids": [
+    609077434
+   ],
+   "dist_m": 1958
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 149/33 Bà nh Văn Trâ n",
+   "way_ids": [
+    668901280
+   ],
+   "dist_m": 2051
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 149/43 Bà nh Văn Trâ n",
+   "way_ids": [
+    642606146
+   ],
+   "dist_m": 2023
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 54 Bành Văn Trân",
+   "way_ids": [
+    548114651
+   ],
+   "dist_m": 2060
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 72 Bành Văn Trân",
+   "way_ids": [
+    642606161,
+    642606162
+   ],
+   "dist_m": 2046
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 78 Bành Văn Trân",
+   "way_ids": [
+    642606163
+   ],
+   "dist_m": 2055
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 96 Bành Văn Trân",
+   "way_ids": [
+    609081635
+   ],
+   "dist_m": 2031
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 112 Bàn h Văn Trân",
+   "way_ids": [
+    609081636
+   ],
+   "dist_m": 2020
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 128 Bàn h Văn Trân",
+   "way_ids": [
+    547931021
+   ],
+   "dist_m": 1964
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 851 Các h Mạng Tháng 8",
+   "way_ids": [
+    525107088
+   ],
+   "dist_m": 2080
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 881 Các h Mạng Tháng 8",
+   "way_ids": [
+    547931028
+   ],
+   "dist_m": 2040
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 927 Các h Mạng Tháng 8",
+   "way_ids": [
+    609081631,
+    668901238
+   ],
+   "dist_m": 1967
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 947 Các h Mạng Tháng 8",
+   "way_ids": [
+    523162198,
+    609081633
+   ],
+   "dist_m": 1978
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 981 Các h Mạng Tháng 8",
+   "way_ids": [
+    547931018,
+    1413602161
+   ],
+   "dist_m": 1880
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1111 Cá ch Mạng Tháng 8",
+   "way_ids": [
+    525107075,
+    1110045312,
+    1218440318
+   ],
+   "dist_m": 1754
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1123 Cá ch Mạng Tháng 8",
+   "way_ids": [
+    1207080373
+   ],
+   "dist_m": 1734
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 130 Nghĩa Phát",
+   "way_ids": [
+    547931039,
+    668901252,
+    1347235130
+   ],
+   "dist_m": 2266
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 138 Nghĩa Phát",
+   "way_ids": [
+    547931041,
+    668901249,
+    668901250,
+    668901251
+   ],
+   "dist_m": 2290
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 196 Nghĩa Phát",
+   "way_ids": [
+    547931042
+   ],
+   "dist_m": 2448
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 266 Ho àng Văn Thụ",
+   "way_ids": [
+    197982857
+   ],
+   "dist_m": 854
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 25 Hậu G iang",
+   "way_ids": [
+    197557721
+   ],
+   "dist_m": 416
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 87/22 Bà nh Văn Trân",
+   "way_ids": [
+    495698479,
+    668901241,
+    668901263,
+    668901264
+   ],
+   "dist_m": 2211
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 20 Chử Đồ ng Tử",
+   "way_ids": [
+    609081639
+   ],
+   "dist_m": 2224
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 538 Lý Thường Kiệt",
+   "way_ids": [
+    277756802
+   ],
+   "dist_m": 2124
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 544 Lý Thường Kiệt",
+   "way_ids": [
+    220860891
+   ],
+   "dist_m": 2017
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 1054 Cá ch Mạng Tháng 8",
+   "way_ids": [
+    277756260,
+    523650580
+   ],
+   "dist_m": 1734
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 18 Tân Khai",
+   "way_ids": [
+    523650581
+   ],
+   "dist_m": 1768
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 2 Thăng Long",
+   "way_ids": [
+    197804080
+   ],
+   "dist_m": 701
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 207 Phạm Văn Hai",
+   "way_ids": [
+    499039466
+   ],
+   "dist_m": 1975
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 65 Bành Văn Trân",
+   "way_ids": [
+    525107087
+   ],
+   "dist_m": 2090
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 107 Bàn h Văn Trân",
+   "way_ids": [
+    554290640
+   ],
+   "dist_m": 2169
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 149/61 Bà nh Văn Trâ n",
+   "way_ids": [
+    642606150
+   ],
+   "dist_m": 2009
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 116 Bàn h Văn Trân",
+   "way_ids": [
+    547931029
+   ],
+   "dist_m": 1984
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 149/20 Bà nh Văn Trâ n",
+   "way_ids": [
+    642606145
+   ],
+   "dist_m": 1954
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 9 Chử Đồn g Tử",
+   "way_ids": [
+    668901243
+   ],
+   "dist_m": 2216
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 19 Chử Đồ ng Tử",
+   "way_ids": [
+    668901265
+   ],
+   "dist_m": 2210
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 23 Chử Đồ ng Tử",
+   "way_ids": [
+    668901246
+   ],
+   "dist_m": 2235
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 31 Chử Đồ ng Tử",
+   "way_ids": [
+    668901247
+   ],
+   "dist_m": 2255
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 36 Chử Đồ ng Tử",
+   "way_ids": [
+    548204280
+   ],
+   "dist_m": 2255
+  },
+  {
+   "ward": "Phường Tân Sơn Nhất",
+   "name": "Hẻm 42 Nghĩa Phát",
+   "way_ids": [
+    548422804
+   ],
+   "dist_m": 2155
+  }
+ ],
+ "parsed": 6742,
+ "unmatched": 5718
+}

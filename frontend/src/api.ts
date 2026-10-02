@@ -69,12 +69,12 @@ export interface Plan {
   live_crawl: boolean
 }
 export interface NewsItem { street: string; title: string; summary: string; url: string; source: string; date: string; kind: 'flood' | 'works' | 'ban'; depth_cm: number | null }
-export interface AreaData { key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[] }
+export interface AreaData { key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[]; parcels?: { way_id: number; width_m: number; samples: number[] }[] }
 export type StepState = 'pending' | 'running' | 'done' | 'skipped'
 export interface AreaBuild {
   key: string; state: 'running' | 'done' | 'error' | 'off'; error?: string | null
   started_at?: string; finished_at?: string
-  steps?: Record<'map' | 'listings' | 'match' | 'news' | 'photos', { state: StepState; detail: string }>
+  steps?: Record<'map' | 'parcels' | 'listings' | 'match' | 'news' | 'photos', { state: StepState; detail: string }>
   counts?: { fetched: number; unique: number; in_area: number; matched: number; alleys: number; photos_total: number; photos_read: number }
 }
 export interface ListingPhoto {

@@ -70,7 +70,7 @@ const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 
 /* ---------- live area build ---------- */
 
-const STEP_VI = { map: 'Bản đồ hẻm', listings: 'Tin rao Chợ Tốt, Alonhadat', match: 'Khớp tin rao với hẻm', news: 'Tin tức về các tuyến quanh đây', photos: 'AI đọc ảnh tin rao' } as const
+const STEP_VI = { map: 'Bản đồ hẻm', parcels: 'Bề rộng theo thửa đất', listings: 'Tin rao Chợ Tốt, Alonhadat', match: 'Khớp tin rao với hẻm', news: 'Tin tức về các tuyến quanh đây', photos: 'AI đọc ảnh tin rao' } as const
 
 export function LiveStrip({ build }: { build: AreaBuild }) {
   if (build.state === 'off' || !build.steps) return null

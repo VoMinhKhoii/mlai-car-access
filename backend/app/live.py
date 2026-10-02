@@ -23,7 +23,7 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from . import ai, alonhadat, flags, news
+from . import ai, alonhadat, flags, news, parcels
 from .config import CACHE, ROOT
 from .evidence import STORE_EVIDENCE
 from .osm import area_key, build_graph, haversine, strip_accents
@@ -232,7 +232,7 @@ def apply(area: dict | None, lat: float, lon: float) -> str:
     """Load a build result the browser sent back, so any server instance can plan with it."""
     key = area_key(lat, lon)
     if area and area.get("key") == key:
-        STORE_EVIDENCE.set_live(key, area.get("listings") or [], area.get("photos") or [])
+        STORE_EVIDENCE.set_live(key, area.get("listings") or [], area.get("photos") or [], area.get("parcels") or [])
     return key
 
 
@@ -249,6 +249,21 @@ def _run(job: dict, lat: float, lon: float) -> None:
         g = build_graph(lat, lon)
         origin = {"demo-cache": "bản tải sẵn", "cache": "cache"}.get(g.source.split(":")[0], "Overpass trực tiếp")
         _step(job, "map", "done", f"{len(g.ways)} đoạn đường OSM ({origin})")
+
+        if flags.enabled("parcel_widths"):
+            _step(job, "parcels", "running")
+            cache_path = DIR / "parcels.json"
+            cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+            try:
+                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine)
+                detail = f"{len(job['parcels'])} hẻm gần điểm đến có bề rộng theo thửa đất"
+            except parcels.Blocked:
+                detail = "Cổng quy hoạch tạm chặn truy vấn; thử lại sau"
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            cache_path.write_text(json.dumps(cache))
+            _step(job, "parcels", "done", detail)
+        else:
+            _step(job, "parcels", "skipped", "Đã tắt")
 
         _step(job, "listings", "running")
         ds = nearest_districts(lat, lon)
@@ -293,7 +308,7 @@ def _run(job: dict, lat: float, lon: float) -> None:
 
 
 def _status(job: dict) -> dict:
-    return {k: v for k, v in job.items() if k not in ("listings", "photos", "news")}
+    return {k: v for k, v in job.items() if k not in ("listings", "photos", "news", "parcels")}
 
 
 def _streets_near(g, lat: float, lon: float, n: int = 4) -> list[str]:
@@ -323,10 +338,10 @@ def build(lat: float, lon: float):
     """
     key = area_key(lat, lon)
     job = {"key": key, "state": "running", "started_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
-           "steps": {s: {"state": "pending", "detail": ""} for s in ("map", "listings", "match", "news", "photos")},
+           "steps": {s: {"state": "pending", "detail": ""} for s in ("map", "parcels", "listings", "match", "news", "photos")},
            "counts": {"fetched": 0, "unique": 0, "in_area": 0, "matched": 0, "alleys": 0,
                       "photos_total": 0, "photos_read": 0},
-           "listings": [], "photos": [], "news": [], "error": None}
+           "listings": [], "photos": [], "news": [], "parcels": [], "error": None}
     if not flags.enabled("live_crawl"):
         yield json.dumps({"status": {"key": key, "state": "off"}}) + "\n"
         return
@@ -339,5 +354,5 @@ def build(lat: float, lon: float):
             yield snap + "\n"
             last = snap
         t.join(0.7)
-    area = {"key": key, "listings": job["listings"], "photos": job["photos"], "news": job["news"]}
+    area = {"key": key, "listings": job["listings"], "photos": job["photos"], "news": job["news"], "parcels": job["parcels"]}
     yield json.dumps({"status": _status(job), "area": area}, ensure_ascii=False) + "\n"

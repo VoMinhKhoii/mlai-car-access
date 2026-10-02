@@ -16,6 +16,11 @@ AI_FEATURES = {
         "detail": "Khi lập kế hoạch, tải bản đồ OSM và tin rao Chợ Tốt quanh điểm đến ngay lúc đó (cache 12 giờ), thay cho bộ dữ liệu soạn sẵn.",
         "default": True,
     },
+    "parcel_widths": {
+        "label": "Bề rộng hẻm theo thửa đất (cổng quy hoạch TP.HCM)",
+        "detail": "Khi lập kế hoạch, đo khoảng cách giữa hai thửa đất đối diện cho tối đa 12 hẻm gần điểm đến: bằng chứng mức Số liệu chính thức.",
+        "default": True,
+    },
     "building_gaps": {
         "label": "Bề rộng từ khoảng cách giữa hai dãy nhà",
         "detail": "Thử nghiệm, tắt mặc định: khoảng cách giữa footprint nhà hai bên hẻm (Overture). Kiểm chứng cho thấy chưa phân biệt được hẻm hẹp và hẻm rộng (lệch ~2–4 m).",

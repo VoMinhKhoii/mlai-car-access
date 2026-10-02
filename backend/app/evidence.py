@@ -25,6 +25,8 @@ LISTINGS_FILE = DATA / "processed" / "listings_evidence_binhthanh.json"
 FIELD_FILE = DATA / "field" / "measurements.csv"
 PARCEL_FILE = DATA / "official" / "parcel_gaps.csv"
 GAPS_FILE = DATA / "processed" / "building_gaps_hcmc.json"
+FIRE_FILE = DATA / "official" / "fire_access_4582.json"
+FIRE_TRUCK_MIN = 3.5  # QCVN 06:2022/BXD clear width for a fire-truck road
 # The building-to-building gap overstates Clear Width (steps, awnings, motorbikes): the upper bound adds the
 # footprint error, the lower bound removes a typical encroachment from the narrower quarter of the samples.
 GAP_FOOTPRINT_ERR = 0.8
@@ -182,6 +184,7 @@ class EvidenceStore:
         self._load_listings()
         self._load_live()
         self._load_gaps()
+        self._load_fire_list()
         self._load_csv(FIELD_FILE, "Measured", "Nhóm đo bằng thước", pad=0.1)
         self._load_csv(PARCEL_FILE, "Official", "Khoảng cách thửa đất (cổng quy hoạch TP.HCM)", pad=None)
         self._load_confirmations()
@@ -193,8 +196,8 @@ class EvidenceStore:
         for it in json.loads(LISTINGS_FILE.read_text(encoding="utf-8")):
             self._add_listing(it, "Tin rao Chợ Tốt (trích xuất)")
 
-    def set_live(self, key: str, listings: list[dict], photos: list[dict]) -> None:
-        area = {"listings": listings, "photos": photos}
+    def set_live(self, key: str, listings: list[dict], photos: list[dict], parcels: list[dict] | None = None) -> None:
+        area = {"listings": listings, "photos": photos, "parcels": parcels or []}
         if self.live.get(key) == area:
             return  # unchanged: keep the cached width ranges
         self.live[key] = area
@@ -206,6 +209,12 @@ class EvidenceStore:
                 self._add_listing(it, it.get("source") or "Tin rao Chợ Tốt (thu thập trực tiếp)")
             for ph in area["photos"]:
                 self._add_photo(ph)
+            for pc in area.get("parcels", []):
+                lo, hi = max(0.5, min(pc["samples"]) - 0.6), max(pc["samples"]) + 0.3
+                cuts = " và ".join(f"{x:.1f}".replace(".", ",") for x in pc["samples"])
+                self._add(Bound(lo, hi, "Official", "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                                f"Khoảng cách giữa hai thửa đất đối diện: {cuts} m (lộ giới thực tế; nhà lấn ra làm hẹp hơn)",
+                                url="https://thongtinquyhoach.hochiminhcity.gov.vn/", feature="parcel_widths"), pc["way_id"])
 
     def _add_photo(self, ph: dict) -> None:
         w = _num(ph.get("width_m"))
@@ -252,6 +261,19 @@ class EvidenceStore:
         if it.get("through") in ("thong", "cut"):
             d = "“hẻm thông”" if it["through"] == "thong" else "“hẻm cụt”"
             self.way_out_by_way.setdefault(int(way_id), []).append(Bound(0, OPEN_HI, detail=d, **common))
+
+    def _load_fire_list(self) -> None:
+        """QĐ 4582: alleys fire trucks cannot enter. Usually narrower than 3.5 m, but long dead ends, bends and low
+        wires also put an alley on the list, so it is a Declared bound (a conflict with a listing asks for review)."""
+        if not FIRE_FILE.exists():
+            return
+        doc = json.loads(FIRE_FILE.read_text(encoding="utf-8"))
+        for it in doc["items"]:
+            b = Bound(0.5, FIRE_TRUCK_MIN, "Declared", "QĐ 4582/QĐ-UBND TP.HCM (24/7/2026)",
+                      f"Xe chữa cháy không vào được ({it['ward']}): thường do hẻm hẹp hơn 3,5 m",
+                      observed_on="2026-07-24", url=doc["url"])
+            for wid in it["way_ids"]:
+                self._add(b, wid)
 
     def _load_gaps(self) -> None:
         if not GAPS_FILE.exists():
