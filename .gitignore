@@ -13,3 +13,4 @@ backend/cache/live/photos/
 backend/cache/osm/area_*
 .DS_Store
 *.log
+backend/cache/live/alonhadat/

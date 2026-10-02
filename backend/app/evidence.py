@@ -24,6 +24,11 @@ OPEN_HI = 40.0
 LISTINGS_FILE = DATA / "processed" / "listings_evidence_binhthanh.json"
 FIELD_FILE = DATA / "field" / "measurements.csv"
 PARCEL_FILE = DATA / "official" / "parcel_gaps.csv"
+GAPS_FILE = DATA / "processed" / "building_gaps_hcmc.json"
+# The building-to-building gap overstates Clear Width (steps, awnings, motorbikes): the upper bound adds the
+# footprint error, the lower bound removes a typical encroachment from the narrower quarter of the samples.
+GAP_FOOTPRINT_ERR = 0.8
+GAP_ENCROACH = 1.2
 CONFIRM_FILE = STORE / "confirmations.jsonl"
 BLOCKAGE_FILE = STORE / "blockages.jsonl"
 
@@ -176,6 +181,7 @@ class EvidenceStore:
         self.by_way.clear(), self.by_name.clear(), self.way_out_by_way.clear()
         self._load_listings()
         self._load_live()
+        self._load_gaps()
         self._load_csv(FIELD_FILE, "Measured", "Nhóm đo bằng thước", pad=0.1)
         self._load_csv(PARCEL_FILE, "Official", "Khoảng cách thửa đất (cổng quy hoạch TP.HCM)", pad=None)
         self._load_confirmations()
@@ -197,7 +203,7 @@ class EvidenceStore:
     def _load_live(self) -> None:
         for area in self.live.values():
             for it in area["listings"]:
-                self._add_listing(it, "Tin rao Chợ Tốt (thu thập trực tiếp)")
+                self._add_listing(it, it.get("source") or "Tin rao Chợ Tốt (thu thập trực tiếp)")
             for ph in area["photos"]:
                 self._add_photo(ph)
 
@@ -246,6 +252,17 @@ class EvidenceStore:
         if it.get("through") in ("thong", "cut"):
             d = "“hẻm thông”" if it["through"] == "thong" else "“hẻm cụt”"
             self.way_out_by_way.setdefault(int(way_id), []).append(Bound(0, OPEN_HI, detail=d, **common))
+
+    def _load_gaps(self) -> None:
+        if not GAPS_FILE.exists():
+            return
+        for wid, g in json.loads(GAPS_FILE.read_text()).items():
+            if g["walled"] < 0.4:  # mostly open on one side: the gap says little
+                continue
+            lo, hi = max(0.5, g["p25"] - GAP_ENCROACH), g["median"] + GAP_FOOTPRINT_ERR
+            self._add(Bound(lo, max(lo, hi), "Inferred", "Khoảng cách giữa hai dãy nhà (ảnh vệ tinh)",
+                            f"Nhà hai bên cách nhau ≈{g['median']:.1f} m (đo {g['n']} điểm; footprint Microsoft/Google/OSM qua Overture)",
+                            observed_on="2026-09", url="https://overturemaps.org", feature="building_gaps"), int(wid))
 
     def _load_csv(self, path, tier: str, source: str, pad: float | None) -> None:
         if not path.exists():

@@ -62,5 +62,14 @@ TWO_LANE_MIN_M = 5.5
 MOVING_WATER_BLOCK_M = 0.30
 # D19: walking through water deeper than this is labelled "lội nước".
 WALK_WADE_M = 0.15
+# Service area (D30): Ho Chi Minh City only. Tide, flood history and listings all describe HCMC.
+HCMC_BBOX = (10.35, 106.30, 11.20, 107.10)  # s, w, n, e
+
+
+def in_hcmc(lat: float, lon: float) -> bool:
+    s, w, n, e = HCMC_BBOX
+    return s <= lat <= n and w <= lon <= e
+
+
 # Area graph radius around a destination.
 AREA_RADIUS_M = 1200.0

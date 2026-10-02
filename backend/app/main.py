@@ -12,10 +12,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from . import ai, budget, flags, google_lookup, live, plan, vehicles
-from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE
+from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
-from .osm import build_graph, haversine, strip_accents
+from .osm import build_graph, cached_graph, haversine, strip_accents
 
 VN_TZ = timezone(timedelta(hours=7))
 FALLBACK_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
@@ -93,34 +93,44 @@ def list_vehicles():
 
 
 @app.get("/api/search")
-def search(q: str):
+def search(q: str, lat: float | None = None, lon: float | None = None):
+    """Goong place search (all of Vietnam) ranked around the given point, plus alley names from the street
+    graph of that area when it is already loaded (Goong often does not know small alleys by name)."""
+    near = (lat, lon) if lat is not None and lon is not None else DEMO_CENTER
     q_norm = strip_accents(q)
-    out = []
-    g = build_graph(*DEMO_CENTER)
-    for w in g.ways.values():
-        if w.name and q_norm and q_norm in strip_accents(w.name) and w.kind in ("alley", "residential", "main"):
-            la, lo = g.nodes[w.nodes[len(w.nodes) // 2]]
-            out.append({"label": f"{w.name}, Bình Thạnh", "lat": la, "lon": lo, "source": "OSM"})
-            if len(out) >= 6:
-                break
+    goong, alleys = [], []
     try:
         if GOONG_API_KEY:
             r = httpx.get("https://rsapi.goong.io/v2/place/autocomplete",
-                          params={"api_key": GOONG_API_KEY, "input": q, "location": f"{DEMO_CENTER[0]},{DEMO_CENTER[1]}",
-                                  "limit": 6}, timeout=10)
+                          params={"api_key": GOONG_API_KEY, "input": q, "location": f"{near[0]},{near[1]}",
+                                  "limit": 7}, timeout=10)
             for p in r.json().get("predictions", []):
-                out.append({"label": p.get("description"), "place_id": p.get("place_id"), "source": "Goong"})
+                desc = p.get("description") or ""
+                if strip_accents("Hồ Chí Minh") not in strip_accents(desc):
+                    continue  # HCMC only (D30)
+                goong.append({"label": desc, "place_id": p.get("place_id"), "source": "Goong"})
         else:
             r = httpx.get("https://nominatim.openstreetmap.org/search",
-                          params={"q": q, "format": "jsonv2", "limit": 6, "countrycodes": "vn",
-                                  "viewbox": "106.60,10.86,106.80,10.70", "bounded": 1},
-                          headers={"User-Agent": "VaoDuoc-hackathon/0.1"}, timeout=10)
+                          params={"q": q, "format": "jsonv2", "limit": 7, "countrycodes": "vn",
+                                  "viewbox": "106.30,11.20,107.10,10.35", "bounded": 1},
+                          headers={"User-Agent": "VaoDuoc-hackathon/0.3"}, timeout=10)
             for p in r.json():
-                out.append({"label": p["display_name"], "lat": float(p["lat"]), "lon": float(p["lon"]),
-                            "source": "Nominatim (tạm thay Goong)"})
+                goong.append({"label": p["display_name"], "lat": float(p["lat"]), "lon": float(p["lon"]),
+                              "source": "Nominatim"})
     except Exception:
         pass
-    return {"results": out[:10]}
+    g = cached_graph(*near)
+    if g and len(q_norm) >= 3:
+        seen = set()
+        for w in g.ways.values():
+            if w.name and w.is_alley and q_norm in strip_accents(w.name) and w.name not in seen:
+                seen.add(w.name)
+                la, lo = g.nodes[w.nodes[len(w.nodes) // 2]]
+                alleys.append({"label": w.name, "lat": la, "lon": lo, "source": "Tên hẻm (OSM)"})
+                if len(alleys) >= 3:
+                    break
+    # Goong first; alley names fill in what Goong does not know.
+    return {"results": (goong[:7] + alleys)[:10]}
 
 
 @app.get("/api/place/{place_id}")
@@ -150,6 +160,8 @@ class PlanRequest(BaseModel):
 def make_plan(req: PlanRequest):
     if req.intent not in ("park", "pickup"):
         raise HTTPException(400, "intent must be park or pickup")
+    if not in_hcmc(req.lat, req.lon):
+        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
@@ -210,6 +222,8 @@ class Point(BaseModel):
 
 @app.post("/api/area/build")
 def area_build(req: Point):
+    if not in_hcmc(req.lat, req.lon):
+        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
     """Streams the Live Area Build as NDJSON; the last line carries the area evidence."""
     return StreamingResponse(live.build(req.lat, req.lon), media_type="application/x-ndjson",
                              headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})

@@ -238,6 +238,16 @@ def _load_elements(lat: float, lon: float, key: str) -> tuple[list[dict], str]:
 _GRAPHS: dict[str, AreaGraph] = {}
 
 
+def cached_graph(lat: float, lon: float) -> AreaGraph | None:
+    """The area graph only if it is already on disk or in memory (never downloads; used while typing)."""
+    key = area_key(lat, lon)
+    if key in _GRAPHS:
+        return _GRAPHS[key]
+    if key == "demo" or (CACHE / "osm" / f"area_{key}.json").exists():
+        return build_graph(lat, lon)
+    return None
+
+
 def build_graph(lat: float, lon: float) -> AreaGraph:
     key = area_key(lat, lon)
     if key in _GRAPHS:

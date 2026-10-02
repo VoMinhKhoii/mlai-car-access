@@ -68,12 +68,13 @@ export interface Plan {
   area_key: string
   live_crawl: boolean
 }
-export interface AreaData { key: string; listings: unknown[]; photos: ListingPhoto[] }
+export interface NewsItem { street: string; title: string; summary: string; url: string; source: string; date: string; kind: 'flood' | 'works' | 'ban'; depth_cm: number | null }
+export interface AreaData { key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[] }
 export type StepState = 'pending' | 'running' | 'done' | 'skipped'
 export interface AreaBuild {
   key: string; state: 'running' | 'done' | 'error' | 'off'; error?: string | null
   started_at?: string; finished_at?: string
-  steps?: Record<'map' | 'listings' | 'match' | 'photos', { state: StepState; detail: string }>
+  steps?: Record<'map' | 'listings' | 'match' | 'news' | 'photos', { state: StepState; detail: string }>
   counts?: { fetched: number; unique: number; in_area: number; matched: number; alleys: number; photos_total: number; photos_read: number }
 }
 export interface ListingPhoto {
@@ -103,7 +104,7 @@ const post = (url: string, body: unknown) =>
 export const api = {
   config: () => fetch('/api/config').then(j<Config>),
   vehicles: () => fetch('/api/vehicles').then(j<{ classes: Vehicle[]; models: Vehicle[] }>),
-  search: (q: string) => fetch(`/api/search?q=${encodeURIComponent(q)}`).then(j<{ results: SearchResult[] }>),
+  search: (q: string, near?: { lat: number; lon: number } | null) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`).then(j<{ results: SearchResult[] }>),
   reverse: (lat: number, lon: number) => fetch(`/api/reverse?lat=${lat}&lon=${lon}`).then(j<{ label: string; source: string }>),
   place: (id: string) => fetch(`/api/place/${encodeURIComponent(id)}`).then(j<{ lat: number; lon: number; label: string }>),
   plan: (body: unknown) => post('/api/plan', body).then(j<Plan>),

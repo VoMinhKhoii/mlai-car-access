@@ -265,3 +265,15 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - **Reversing:** reversing beyond 2× the Reverse Limit (60 m) is not a Way Out at all (previously it only downgraded the stop). Between 30 and 60 m it still counts as a tight exit.
 - **One Stop Point per way:** the three suggestions come from three different ways.
 - **Overpass:** all mirrors are queried in parallel and the first valid answer wins. Without the `Accept: application/json` header, overpass-api.de answers in ~1–3 s instead of 406. A new area went from ~35 s to ~3.5 s.
+
+## D30: HCMC only (user decision, 2026-10-01)
+
+- Plans and live builds outside Ho Chi Minh City are refused with "Vào Được hiện chỉ hỗ trợ điểm đến trong TP.HCM" (HCMC bbox 10.35–11.20 N, 106.30–107.10 E). Search returns HCMC results only and is ranked around the trip, not around Bình Thạnh. Chợ Tốt is pulled from the 2 nearest HCMC districts. The Bình Thạnh files remain the offline demo and fallback only.
+
+## D31: More sources for width and the area around a destination (2026-10-01)
+
+- **Building gaps (citywide, offline):** 1.08 M Overture building footprints (Microsoft ML, Google Open Buildings, OSM) for urban HCMC. For each small road, rays every 6 m measure the building-to-building gap. Per way: median, 25th percentile, sample count, share of samples walled on both sides. Evidence tier Inferred, bound [p25 − 1.2 m, median + 0.8 m], ways ≥ 40 % walled. Pipelines: `overture_buildings.py`, `building_gaps.py`.
+  - **Validation failed, so the flag `building_gaps` is OFF by default.** 33,620 ways measured (19,008 ≥ 40 % walled). The gap overstates width (+4.2 m vs 26 OSM `width=` tags, +2.0 m vs 9 listing widths) and does not separate alleys tagged `motorcar=no` (median 8.2 m) from `motorcar=yes` (8.1 m). Points on no-car alleys are not inside merged footprints either (0.4 % vs 0.6 %). ML footprints from satellite imagery do not resolve HCMC alleys (roof overhangs, merged rows). Revisit with street-level imagery or field data for calibration.
+- **Alonhadat listings (live):** structured "Đường trước nhà" (road in front) and "Loại BDS: Nhà trong hẻm" (house in alley) fields, 5 pages per nearest district, cached 12 h, robots.txt-allowed pages only. Declared tier, same alley-chain matching as Chợ Tốt. Yield is low because house numbers are hidden.
+- **News (live):** Google News RSS search (no key) for flooding, roadworks, barriers and car bans on the named streets within 450 m, last 12 months. Gemini keeps items about that street in HCMC (keyword filter when no model). Shown with source and date; not Width Evidence.
+- **Not used:** Gemini grounding with Google Search (free keys have zero quota), batdongsan.com.vn (403), Google Maps content (D26).

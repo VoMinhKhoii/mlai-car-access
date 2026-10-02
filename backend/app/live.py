@@ -2,7 +2,7 @@
 
 Steps (streamed to the UI as they run, see build()):
   1. map       OSM street graph around the destination (Overpass, cached per area)
-  2. listings  Chợ Tốt alley-house listings (sale + rent) of the 2 nearest districts, cached 12 h
+  2. listings  Chợ Tốt alley-house listings (sale + rent) of the 2 nearest HCMC districts, cached 12 h
   3. match     regex-v1 extraction, then alley-chain name matching to the OSM ways of this area
   4. photos    (flag ai_photo_evidence) Gemini reads listing photos of matched alleys; every reading
                waits in a review queue, and only a human approval makes it Observed evidence
@@ -13,6 +13,7 @@ street of this area. Coordinates are shifted ~90 m, so they are never used for m
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import sys
 import threading
@@ -22,10 +23,10 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from . import ai, flags
+from . import ai, alonhadat, flags, news
 from .config import CACHE, ROOT
 from .evidence import STORE_EVIDENCE
-from .osm import area_key, build_graph, haversine
+from .osm import area_key, build_graph, haversine, strip_accents
 
 sys.path.insert(0, str(ROOT / "pipelines"))
 from common import norm_name  # noqa: E402
@@ -47,14 +48,21 @@ PHOTOS_PER_LISTING = 2
 # ---------- districts ----------
 
 def _districts() -> list[dict]:
-    path = DIR / "chotot_hcmc_districts.json"
+    """Every Chợ Tốt district of Ho Chi Minh City (region 13000) with its centroid."""
+    path = DIR / "chotot_hcmc_districts_v2.json"
     if path.exists():
         return json.loads(path.read_text())
     regions = httpx.get(REGIONS, headers=HEADERS, timeout=20).json()["regionFollowId"]["entities"]["regions"]
     out = []
-    for aid, a in regions["13000"]["area"].items():
-        lat, lon = (float(x) for x in a["geo"].split(","))
-        out.append({"id": int(aid), "name": a["name"], "lat": lat, "lon": lon})
+    for rid, region in regions.items():
+        if rid != "13000":
+            continue
+        for aid, a in region.get("area", {}).items():
+            try:
+                lat, lon = (float(x) for x in a["geo"].split(","))
+            except (KeyError, ValueError):
+                continue
+            out.append({"id": int(aid), "region": int(rid), "name": a["name"], "province": region["name"], "lat": lat, "lon": lon})
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, ensure_ascii=False))
     return out
@@ -66,7 +74,7 @@ def nearest_districts(lat: float, lon: float, n: int = DISTRICTS) -> list[dict]:
 
 # ---------- listings ----------
 
-def _pull(area: int, st: str, job: dict) -> list[dict]:
+def _pull(region: int, area: int, st: str, job: dict) -> list[dict]:
     stamp = datetime.now(VN_TZ)
     path = DIR / "chotot" / f"{area}_{st}.json"
     if path.exists():
@@ -76,7 +84,7 @@ def _pull(area: int, st: str, job: dict) -> list[dict]:
             return cached["ads"]
     ads = []
     for page in range(PAGES):
-        params = {"region_v2": 13000, "area_v2": area, "cg": 1020, "house_type": 3, "st": st,
+        params = {"region_v2": region, "area_v2": area, "cg": 1020, "house_type": 3, "st": st,
                   "limit": PAGE, "o": page * PAGE}
         r = httpx.get(API, params=params, headers=HEADERS, timeout=30)
         r.raise_for_status()
@@ -104,7 +112,10 @@ def _dedupe(ads: list[dict]) -> list[dict]:
 def _match(g, by_name: dict[str, list], chain: list[str], lat, lon):
     """Deepest alley level of the chain that exists in this area, nearest same-named way."""
     for depth, level in enumerate(reversed(chain)):
-        cands = by_name.get(norm_name(level), [])
+        key = norm_name(level)
+        # The chain is written "Hẻm …"; Hà Nội names alleys "Ngõ/Ngách", Huế and Đà Nẵng "Kiệt".
+        cands = next((by_name[k] for k in (key, *(re.sub(r"^hem\b", alt, key) for alt in ("ngo", "ngach", "kiet")))
+                      if k in by_name), [])
         if not cands:
             continue
         def dist(w):
@@ -141,13 +152,18 @@ def _listings(g, ads: list[dict], job: dict) -> list[dict]:
         way, method = _match(g, by_name, chain, a.get("latitude"), a.get("longitude"))
         if not way:
             continue
+        aln = a.get("source") == "alonhadat"
+        width, at_mouth = ex["width_m"], ex["width_at_mouth"]
+        if aln and a.get("road_front_m"):  # structured "Đường trước nhà": the alley in front of this house
+            width, at_mouth = a["road_front_m"], False
         out.append({
-            "listing_id": a["ad_id"], "url": f"https://www.nhatot.com/{a['list_id']}.htm",
-            "posted_at": datetime.fromtimestamp(a["list_time"] / 1000, VN_TZ).isoformat(timespec="seconds")
-            if a.get("list_time") else "",
+            "listing_id": a["ad_id"], "url": a["url"] if aln else f"https://www.nhatot.com/{a['list_id']}.htm",
+            "posted_at": a.get("posted_at", "") if aln else
+            (datetime.fromtimestamp(a["list_time"] / 1000, VN_TZ).isoformat(timespec="seconds") if a.get("list_time") else ""),
+            "source": "Tin rao Alonhadat (trường “Đường trước nhà”)" if aln else "Tin rao Chợ Tốt (thu thập trực tiếp)",
             "title": a.get("subject", ""), "street": street, "alley_chain": chain,
             "osm_way_id": way.id, "osm_name": way.name, "match_method": method,
-            "width_m": ex["width_m"], "width_at_mouth": ex["width_at_mouth"], "width_text": ex["width_text"],
+            "width_m": width, "width_at_mouth": at_mouth, "width_text": ex["width_text"],
             "access_claim": access, "through": ex["through"],
             "images": (a.get("images") or [])[:PHOTOS_PER_LISTING],
         })
@@ -239,16 +255,29 @@ def _run(job: dict, lat: float, lon: float) -> None:
         ads = []
         for d in ds:
             for st in ("s", "u"):
-                ads += _pull(d["id"], st, job)
+                ads += _pull(d["region"], d["id"], st, job)
+        n_chotot = len(ads)
+        aln_counts: dict = {}
+        for d in ds:
+            try:
+                ads += alonhadat.pull_district(d["name"], DIR, aln_counts)
+            except Exception:  # a second source failing must not stop the build
+                pass
+        n_aln = len(ads) - n_chotot
         ads = _dedupe(ads)
         job["counts"]["unique"] = len(ads)
-        _step(job, "listings", "done", f"{len(ads)} tin ở {', '.join(d['name'] for d in ds)}")
+        _step(job, "listings", "done", f"{n_chotot} tin Chợ Tốt + {n_aln} tin Alonhadat ở {', '.join(d['name'] for d in ds)}")
 
         _step(job, "match", "running")
         rows = _listings(g, ads, job)
         job["listings"] = rows
         c = job["counts"]
         _step(job, "match", "done", f"{c['in_area']} tin trong khu vực → {c['matched']} tin khớp {c['alleys']} hẻm")
+
+        _step(job, "news", "running")
+        streets = _streets_near(g, lat, lon)
+        job["news"] = news.news_for(streets)
+        _step(job, "news", "done", f"{len(job['news'])} tin về {', '.join(streets[:3])}" if streets else "không có tên đường gần")
 
         if flags.enabled("ai_photo_evidence") and ai.provider():
             _step(job, "photos", "running")
@@ -264,7 +293,26 @@ def _run(job: dict, lat: float, lon: float) -> None:
 
 
 def _status(job: dict) -> dict:
-    return {k: v for k, v in job.items() if k not in ("listings", "photos")}
+    return {k: v for k, v in job.items() if k not in ("listings", "photos", "news")}
+
+
+def _streets_near(g, lat: float, lon: float, n: int = 4) -> list[str]:
+    """Named streets (and named alleys) closest to the destination, nearest first."""
+    best: dict[str, tuple[float, str]] = {}
+    for w in g.ways.values():
+        if not w.name or not w.drivable:
+            continue
+        d = min(haversine(lat, lon, *g.nodes[x]) for x in w.nodes[:: max(1, len(w.nodes) // 6)])
+        if d < 450:
+            # Papers name streets, not alleys: "Hẻm 356 Xô Viết Nghệ Tĩnh" → "Xô Viết Nghệ Tĩnh".
+            name = re.sub(r"^(hẻm|kiệt|ngõ|ngách)\s+[\w/]+\s+", "", w.name, flags=re.I)
+            name = re.sub(r"^(Đường|đường)\s+", "", name).strip()
+            if len(name) < 5 or re.match(r"^(số|đường số|nội bộ|nhánh)\b", name, re.I) or re.search(r"\d|nội bộ", name, re.I):
+                continue
+            key = strip_accents(name)
+            if key not in best or d < best[key][0]:
+                best[key] = (d, name)
+    return [v[1] for v in sorted(best.values())][:n]
 
 
 def build(lat: float, lon: float):
@@ -275,10 +323,10 @@ def build(lat: float, lon: float):
     """
     key = area_key(lat, lon)
     job = {"key": key, "state": "running", "started_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
-           "steps": {s: {"state": "pending", "detail": ""} for s in ("map", "listings", "match", "photos")},
+           "steps": {s: {"state": "pending", "detail": ""} for s in ("map", "listings", "match", "news", "photos")},
            "counts": {"fetched": 0, "unique": 0, "in_area": 0, "matched": 0, "alleys": 0,
                       "photos_total": 0, "photos_read": 0},
-           "listings": [], "photos": [], "error": None}
+           "listings": [], "photos": [], "news": [], "error": None}
     if not flags.enabled("live_crawl"):
         yield json.dumps({"status": {"key": key, "state": "off"}}) + "\n"
         return
@@ -291,5 +339,5 @@ def build(lat: float, lon: float):
             yield snap + "\n"
             last = snap
         t.join(0.7)
-    area = {"key": key, "listings": job["listings"], "photos": job["photos"]}
+    area = {"key": key, "listings": job["listings"], "photos": job["photos"], "news": job["news"]}
     yield json.dumps({"status": _status(job), "area": area}, ensure_ascii=False) + "\n"

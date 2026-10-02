@@ -166,7 +166,7 @@ class Gazetteer:
 
 
 _PATH = re.compile(
-    r"(?P<kw>\b(?:hem|hxh|kiet|so|nha|dc|dia\s*chi|sn)\s*(?:so\s*)?)?(?<![\d/.,])"
+    r"(?P<kw>\b(?:hem|hxh|kiet|ngo|ngach|so|nha|dc|dia\s*chi|sn)\s*(?:so\s*)?)?(?<![\d/.,])"
     r"(?P<path>\d{1,4}[a-ln-z]?(?:/\d{1,4}[a-ln-z]?){0,4})(?![\d/.,]|\s*(?:m\b|met|ty|trieu|tr\b|m2|pn|wc|tang|lau|cho))"
     r"\s*,?\s*(?:duong\s+|d\.\s*|pho\s+)?"
 )
@@ -181,7 +181,7 @@ def _alley_chain(f: str, listing_street: str | None, gaz: Gazetteer | None):
     listing_key = norm_name(listing_street or "")
     best = None   # (score, chain)
     for m in _PATH.finditer(f):
-        path, has_kw = m.group("path"), bool(re.search(r"hem|hxh|kiet", m.group("kw") or ""))
+        path, has_kw = m.group("path"), bool(re.search(r"hem|hxh|kiet|ngo|ngach", m.group("kw") or ""))
         if "/" not in path and not has_kw:
             continue                                  # "45 XVNT" is a frontage number, not an alley
         tail = f[m.end():m.end() + 60]

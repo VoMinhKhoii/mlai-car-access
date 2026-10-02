@@ -4,7 +4,7 @@ import { api, type AreaBuild, type AreaData, type Config, type Flag, type Intent
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
-import { GoongContrast, LiveStrip, StopRow, Verdict } from './components/Result'
+import { GoongContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
 import { EvidencePanel } from './components/Evidence'
 import { TideTimeline } from './components/TideTimeline'
 import { Segmented, useOutside, vnt } from './ds/ui'
@@ -88,7 +88,7 @@ export default function App() {
       setFloodMoment(r.timing ? 'depart' : 'arrive')
       if (r.live_crawl && areaRef.current?.key !== r.area_key && buildingKey.current !== r.area_key) startBuild(dest, r.area_key)
     } catch (e) {
-      if (id === reqId.current) setError(e instanceof Error ? e.message : String(e))
+      if (id === reqId.current) { setError(e instanceof Error ? e.message : String(e)); setPlan(null) }
     } finally {
       if (id === reqId.current) setBusy(false)
     }
@@ -241,6 +241,7 @@ export default function App() {
                 {story && <p className="story">{story}</p>}
                 <Verdict plan={plan} onLeaveBefore={leaveBefore} stale={busy} />
                 {build && <LiveStrip build={build} />}
+                {areaRef.current?.key === plan.area_key && <NewsList items={areaRef.current.news ?? []} />}
                 <h3 className="section-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý</h3>
                 <div className="stops">
                   {plan.stop_points.map((s, i) => (

@@ -7,8 +7,9 @@ export interface Place { lat: number; lon: number; label: string }
 export type VehicleMode = 'class' | 'model' | 'vetc'
 
 /** One place input with Goong/OSM autocomplete. */
-function PlaceField({ kind, value, onPick, placeholder, extra }: {
+function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
   kind: 'origin' | 'dest'; value: Place | null; onPick: (p: Place | null) => void; placeholder: string; extra?: React.ReactNode
+  near?: { lat: number; lon: number } | null
 }) {
   const [q, setQ] = useState<string | null>(null)
   const [results, setResults] = useState<SearchResult[]>([])
@@ -19,7 +20,7 @@ function PlaceField({ kind, value, onPick, placeholder, extra }: {
     setQ(v)
     window.clearTimeout(timer.current)
     if (v.trim().length < 2) return setResults([])
-    timer.current = window.setTimeout(() => api.search(v).then((r) => setResults(r.results)).catch(() => setResults([])), 250)
+    timer.current = window.setTimeout(() => api.search(v, near).then((r) => setResults(r.results)).catch(() => setResults([])), 250)
   }
   async function pick(r: SearchResult) {
     setResults([])
@@ -69,10 +70,10 @@ export function Directions(p: {
   return (
     <div className="directions">
       <div className="places">
-        <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} placeholder="Điểm đi: vị trí của bạn"
+        <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} near={p.dest ?? p.origin} placeholder="Điểm đi: vị trí của bạn"
           extra={<button type="button" className="icon-btn sm" aria-label="Dùng vị trí hiện tại" title="Dùng vị trí hiện tại" onClick={p.onLocate}>
             <Crosshair size={16} className={p.locating ? 'spin' : ''} /></button>} />
-        <PlaceField kind="dest" value={p.dest} onPick={p.setDest} placeholder="Đến địa chỉ, hẻm…" />
+        <PlaceField kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Đến địa chỉ, hẻm…" />
         <span className="places-rail" aria-hidden />
         <button type="button" className="icon-btn swap" aria-label="Đổi điểm đi và điểm đến" onClick={() => { const o = p.origin; p.setOrigin(p.dest); p.setDest(o) }}>
           <ArrowUpDown size={16} />

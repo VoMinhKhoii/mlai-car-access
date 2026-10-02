@@ -1,5 +1,5 @@
-import { ArrowRightLeft, Ban, CarFront, ChevronDown, CircleCheck, CircleHelp, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, TriangleAlert } from 'lucide-react'
-import type { AreaBuild, Plan, StopPoint } from '../api'
+import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, CircleHelp, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, TriangleAlert } from 'lucide-react'
+import type { AreaBuild, NewsItem, Plan, StopPoint } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
 
@@ -70,7 +70,7 @@ const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 
 /* ---------- live area build ---------- */
 
-const STEP_VI = { map: 'Bản đồ hẻm', listings: 'Tin rao Chợ Tốt', match: 'Khớp tin rao với hẻm', photos: 'AI đọc ảnh tin rao' } as const
+const STEP_VI = { map: 'Bản đồ hẻm', listings: 'Tin rao Chợ Tốt, Alonhadat', match: 'Khớp tin rao với hẻm', news: 'Tin tức về các tuyến quanh đây', photos: 'AI đọc ảnh tin rao' } as const
 
 export function LiveStrip({ build }: { build: AreaBuild }) {
   if (build.state === 'off' || !build.steps) return null
@@ -88,13 +88,36 @@ export function LiveStrip({ build }: { build: AreaBuild }) {
         <span><b>{build.state === 'running' ? 'Đang thu thập dữ liệu khu vực' : 'Dữ liệu khu vực'}</b> · {summary}</span>
         <ChevronDown size={15} className="chev" />
       </summary>
-      {build.state === 'running' && <div className="bar"><i style={{ width: `${(done / 4) * 100}%` }} /></div>}
+      {build.state === 'running' && <div className="bar"><i style={{ width: `${(done / steps.length) * 100}%` }} /></div>}
       <ol>
         {steps.map(([k, s]) => (
           <li key={k} className={`st-${s.state}`}><span>{STEP_VI[k]}</span><small>{s.detail || (s.state === 'pending' ? 'chờ' : '')}</small></li>
         ))}
       </ol>
       {build.error && <p className="note">{build.error}</p>}
+    </details>
+  )
+}
+
+/* ---------- recent news ---------- */
+
+const NEWS_KIND = { flood: { tone: 'water', label: 'Ngập' }, works: { tone: 'warn', label: 'Thi công' }, ban: { tone: 'bad', label: 'Cấm xe' } } as const
+
+export function NewsList({ items }: { items: NewsItem[] }) {
+  if (!items.length) return null
+  return (
+    <details className="news" open={items.some((n) => n.kind !== 'works')}>
+      <summary><Newspaper size={15} /><span><b>Tin gần đây quanh đây</b> · {items.length} tin trong 12 tháng</span><ChevronDown size={15} className="chev" /></summary>
+      <ul>
+        {items.slice(0, 6).map((n) => (
+          <li key={n.url}>
+            <Tag tone={NEWS_KIND[n.kind].tone}>{NEWS_KIND[n.kind].label}</Tag>
+            <a href={n.url} target="_blank" rel="noreferrer">{n.summary}</a>
+            <small>{n.street} · {n.source} · {n.date.split('-').reverse().join('/')}</small>
+          </li>
+        ))}
+      </ul>
+      <p className="faint">Tìm qua Google News, Gemini lọc tin đúng tuyến ở TP.HCM. Chỉ để tham khảo, chưa dùng làm bằng chứng.</p>
     </details>
   )
 }

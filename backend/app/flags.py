@@ -16,6 +16,11 @@ AI_FEATURES = {
         "detail": "Khi lập kế hoạch, tải bản đồ OSM và tin rao Chợ Tốt quanh điểm đến ngay lúc đó (cache 12 giờ), thay cho bộ dữ liệu soạn sẵn.",
         "default": True,
     },
+    "building_gaps": {
+        "label": "Bề rộng từ khoảng cách giữa hai dãy nhà",
+        "detail": "Thử nghiệm, tắt mặc định: khoảng cách giữa footprint nhà hai bên hẻm (Overture). Kiểm chứng cho thấy chưa phân biệt được hẻm hẹp và hẻm rộng (lệch ~2–4 m).",
+        "default": False,
+    },
     "ai_listings": {
         "label": "AI đọc tin rao nhà đất",
         "detail": "Trích bề rộng hẻm, 'hẻm xe hơi', 'hẻm thông/cụt' từ tin rao Chợ Tốt → bằng chứng mức Tự khai.",
