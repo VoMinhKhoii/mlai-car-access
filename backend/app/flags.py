@@ -43,8 +43,8 @@ AI_FEATURES = {
     },
     "ai_camera_flood": {
         "label": "AI đọc camera giao thông",
-        "detail": "Ảnh camera công khai của TP.HCM gần điểm ngập → bằng chứng ngập hiện tại.",
-        "default": False,
+        "detail": "~800 camera công khai của TP.HCM, hai khung hình cách 13 giây → ngập và kẹt xe lúc này; chọn tuyến đường lớn từ A đến B.",
+        "default": True,
     },
     "google_lookup": {
         "label": "Tra cứu Google (Street View, quán trong hẻm)",
