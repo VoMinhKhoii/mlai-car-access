@@ -148,6 +148,32 @@ class OfficialRegistry(unittest.TestCase):
         self.assertEqual(cameras._table(rows[0]["Location"])[0]["Shape"], "POINT(106.7 10.8)")
 
 
+class ModelFallback(unittest.TestCase):
+    def test_next_model_reads_when_the_first_is_out_of_quota(self):
+        import httpx
+        from datetime import datetime
+        calls = []
+
+        def fake_call(prompt, parts, model=None):
+            calls.append(model)
+            if model == "first":
+                raise httpx.HTTPStatusError("quota", request=httpx.Request("POST", "http://x"),
+                                            response=httpx.Response(429))
+            return {"cameras": [{"camera": 1, "traffic": "dong", "usable": True, "confidence": 0.9}]}
+
+        stored = []
+        with mock.patch.object(cameras, "CAMERA_MODELS", ["first", "second"]), \
+                mock.patch.object(cameras, "_resting", {}), \
+                mock.patch.object(cameras.ai, "_call", fake_call), \
+                mock.patch.object(cameras, "by_id", lambda: {"x": CAM_X}), \
+                mock.patch.object(cameras, "_log", lambda cam, rec: None), \
+                mock.patch.object(cameras, "_store", stored.append):
+            cameras._ask(["x"], {"x": b"a"}, {"x": b"b"}, datetime.now(VN))
+            cameras._ask(["x"], {"x": b"a"}, {"x": b"b"}, datetime.now(VN))
+        self.assertEqual(calls, ["first", "second", "second"])  # the spent model rests instead of being retried
+        self.assertTrue(stored[0]["model"].endswith("second") or stored[0]["model"] == "second")
+
+
 class CameraNames(unittest.TestCase):
     def test_street_names(self):
         self.assertEqual(cameras.street_names({"name": "Cầu Sài Gòn 2 (dạ cầu)"}), ["cau sai gon"])

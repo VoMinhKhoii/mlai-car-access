@@ -39,7 +39,12 @@ PLACEHOLDER_MD5 = "27bc56b5710fe8ddb7e6665dfd735f1e"  # "IMAGE NOT AVAILABLE", 2
 REFRESH_S = 13
 SNAP_TTL_S = 10
 BATCH = 6  # cameras per model call: the free tier allows ~5 calls per minute per key
-CAMERA_MODEL = os.environ.get("CAMERA_MODEL", "gemini-3.5-flash")
+# Each model has its own free daily quota (only 20 requests per key for gemini-3.5-flash): when one answers 429
+# on every key it rests REST_S and the next one reads. Quality order, from the model check in D34.
+CAMERA_MODELS = [m.strip() for m in os.environ.get(
+    "CAMERA_MODELS", "gemini-3.5-flash,gemini-3.1-flash-lite").split(",") if m.strip()]
+REST_S = 600
+_resting: dict[str, float] = {}
 
 DEPTH_CM = {"kho": 0, "uot": 0, "duoi_15cm": 10, "15_30cm": 25, "30_50cm": 40, "tren_50cm": 60}
 TRAFFIC = ("thong_thoang", "dong", "un_u", "ket_cung")
@@ -62,9 +67,7 @@ bằng vật tham chiếu (bánh xe máy cao ~60 cm, lề đường ~15 cm, nư�
 Giao thông trên lòng đường camera nhìn rõ nhất: thong_thoang = xe chạy tự do, nhiều khoảng trống;
 dong = nhiều xe nhưng vẫn chạy đều; un_u = xe chen kín, nhích chậm; ket_cung = xe kín lòng đường và gần như
 không di chuyển giữa hai ảnh. Đường vắng ban đêm là thong_thoang.
-Hàng xe đứng chờ ở vạch dừng khi đèn đỏ là bình thường: tính là dong, không phải un_u/ket_cung, trừ khi hàng xe
-kéo dài hết tầm nhìn VÀ xe ở hướng/phần đường đang có đèn xanh cũng không chạy được. Một chiều kẹt mà chiều kia trống
-thì nói rõ chiều nào trong evidence."""
+Nếu hai chiều đường khác nhau, đánh giá theo chiều kẹt hơn và nói rõ chiều nào trong evidence."""
 
 
 class FeatureOff(Exception):
@@ -257,30 +260,43 @@ def _ask(group: list[str], first: dict, second: dict, now: datetime) -> None:
         fs = [first[c]] + ([second[c]] if second.get(c) and second[c] != first[c] else [])
         frames[c] = len(fs)
         parts += [f"Camera {i}: {by_id()[c]['name']} ({len(fs)} ảnh)"] + fs
-    try:
-        out = ai._call(PROMPT.replace("{n}", str(len(group))), parts, model=CAMERA_MODEL)
-    except ai.NoModel:
-        for c in group:
-            _store({"id": c, **_where(c), "at": now.isoformat(timespec="seconds"), "state": "no_model"})
-        return
-    except Exception as exc:  # rate limit or bad JSON: not cached, so the next request retries
-        code = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else type(exc).__name__
-        print(f"camera batch failed: {code}")
+    out, model = None, None
+    for model in CAMERA_MODELS:
+        if _resting.get(model, 0) > time.time():
+            continue
+        try:
+            out = ai._call(PROMPT.replace("{n}", str(len(group))), parts, model=model)
+            break
+        except ai.NoModel:
+            for c in group:
+                _store({"id": c, **_where(c), "at": now.isoformat(timespec="seconds"), "state": "no_model"})
+            return
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code in (429, 503):  # quota spent on every key, or overloaded: next model
+                _resting[model] = time.time() + (REST_S if exc.response.status_code == 429 else 60)
+                continue
+            print(f"camera batch failed: {model} {exc.response.status_code}")
+            return
+        except Exception as exc:  # bad JSON, timeout: not cached, so the next request retries
+            print(f"camera batch failed: {model} {type(exc).__name__}")
+            return
+    if out is None:
+        print("camera batch failed: every camera model is out of quota")
         return
     answers = {int(a.get("camera", 0)): a for a in out.get("cameras", []) if isinstance(a, dict)}
     for i, c in enumerate(group, 1):
         a = answers.get(i)
         if a:
-            _store(_record(by_id()[c], a, frames[c], now))
+            _store(_record(by_id()[c], a, frames[c], now, model))
 
 
-def _record(cam: dict, out: dict, frames: int, now: datetime) -> dict:
+def _record(cam: dict, out: dict, frames: int, now: datetime, model: str) -> dict:
     rec = {"id": cam["id"], "name": cam["name"], "lat": cam["lat"], "lon": cam["lon"],
            "at": now.isoformat(timespec="seconds"), "frames": frames, "image_time": out.get("image_time"),
            "usable": bool(out.get("usable", True)), "flooded": bool(out.get("flooded")),
            "depth_class": out.get("depth_class"), "traffic": out.get("traffic"),
            "evidence": out.get("evidence"), "confidence": float(out.get("confidence") or 0),
-           "model": f"gemini/{CAMERA_MODEL}" if (ai.provider() or ("",))[0] == "gemini" else "/".join(ai.provider())}
+           "model": f"gemini/{model}" if (ai.provider() or ("",))[0] == "gemini" else "/".join(ai.provider())}
     rec["depth_cm"] = DEPTH_CM.get(rec["depth_class"]) if rec["flooded"] else 0
     rec["stale"] = _stale(rec["image_time"], now)
     rec["state"] = "ok" if rec["usable"] and not rec["stale"] else "stale" if rec["stale"] else "unusable"
