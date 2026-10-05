@@ -335,7 +335,7 @@ export default function App() {
       {plan && (
         <div className="timeline-dock">
           <TideTimeline arrive={fromLocal(arriveLocal)} depart={plan.window.depart} leaveBefore={plan.timing?.leave_before} orAfter={plan.timing?.or_after}
-            exitFloods={!!plan.timing} station={cfg.tide.station}
+            exitFloods={!!plan.timing} station={cfg.tide.station} rain={plan.window.rain}
             onChange={(iso) => { setArriveNow(false); setArrive(toLocal(iso)) }} />
         </div>
       )}
@@ -488,7 +488,7 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
             {cfg.presets.map((p) => <li key={p.id}><button type="button" onClick={() => loadPreset(p)}><MapPin size={14} /><span><b>{p.title}</b><small>{p.label}</small></span></button></li>)}
           </ul>
           <h4>Giả lập</h4>
-          <label className="layer-row"><input type="checkbox" checked={rainOn} onChange={(e) => setRainOn(e.target.checked)} /><CloudRain size={15} /><span>Mưa {rainOn && `${rainMm} mm/h`}</span></label>
+          <label className="layer-row"><input type="checkbox" checked={rainOn} onChange={(e) => setRainOn(e.target.checked)} /><CloudRain size={15} /><span>Mưa giả định {rainOn ? `${rainMm} mm/h` : '(tắt: dùng mưa đo)'}</span></label>
           {rainOn && <input type="range" min={10} max={90} step={5} value={rainMm} onChange={(e) => setRainMm(Number(e.target.value))} aria-label="Lượng mưa" />}
           <button type="button" className="btn btn-outline btn-sm" disabled={!canArrive} onClick={onArrive}><Navigation size={14} />Giả lập đã tới nơi</button>
           <h4><Sparkles size={13} /> Nguồn dữ liệu và AI</h4>

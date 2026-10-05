@@ -224,6 +224,11 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .tl-mark { position: absolute; bottom: 4px; transform: translateX(-50%); font-size: 10.5px; font-weight: 700; color: #0f6b41; white-space: nowrap; pointer-events: none; }
 .tl-mark i { display: block; width: 2px; height: 56px; margin: 0 auto 2px; background: var(--fit-fits); border-radius: 1px; opacity: .8; }
 .tl-axis { position: relative; height: 16px; font-size: 10.5px; color: var(--text-3); }
+.tl-live { margin: -2px 0 6px; font-size: var(--fs-11); color: var(--text-3); }
+.tl-live b { color: var(--text-2); }
+.tl-rain { fill: var(--route); fill-opacity: .16; }
+.tl-rain.measured { fill-opacity: .45; }
+.tl-reading { position: absolute; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--flood-risky); box-shadow: 0 0 0 1.5px var(--surface); pointer-events: auto; }
 .tl-axis span { position: absolute; transform: translateX(-50%); top: 2px; }
 
 /* ================= evidence panel ================= */

@@ -11,7 +11,7 @@ from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ai, budget, cameras, corridor, flags, google_lookup, live, plan, vehicles
+from . import ai, budget, cameras, corridor, flags, google_lookup, hydro, live, plan, vehicles
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
@@ -194,8 +194,11 @@ def reverse(lat: float, lon: float):
 @app.get("/api/tide")
 def tide(start: str | None = None, hours: int = 48):
     t0 = datetime.fromisoformat(start) if start else datetime.now(VN_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
+    live = hydro.tide_status() if flags.enabled("live_hydro") else None
     return {"series": tide_series(t0, hours), "alarm_levels_m": tide_meta()["alarm_levels_m"],
-            "station": tide_meta()["station"], "source_url": tide_meta()["source_url"]}
+            "station": tide_meta()["station"], "source_url": (live or {}).get("source_url") or tide_meta()["source_url"],
+            "readings": (live or {}).get("readings", []), "last_reading": (live or {}).get("last_reading"),
+            "model_err_m": (live or {}).get("model_err_m")}
 
 
 class WayQuery(BaseModel):

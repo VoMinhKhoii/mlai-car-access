@@ -10,7 +10,7 @@ export interface Preset {
   arrive_at: string; dwell_min: number; story: string; lat: number; lon: number
   rain?: RainSpell[]
 }
-export interface RainSpell { start: string; end: string; mm_per_h: number }
+export interface RainSpell { start: string; end: string; mm_per_h: number; source?: string; measured?: boolean }
 export interface Config {
   map_style: string
   goong: { tiles: boolean; api: boolean }
@@ -133,7 +133,8 @@ export const api = {
   place: (id: string) => fetch(`/api/place/${encodeURIComponent(id)}`).then(j<{ lat: number; lon: number; label: string }>),
   plan: (body: unknown) => post('/api/plan', body).then(j<Plan>),
   tide: (start: string, hours = 36) =>
-    fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string }>),
+    fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
+      readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
   wayEvidence: (id: number, lat: number, lon: number, area: AreaData | null) => post(`/api/evidence/way/${id}`, { lat, lon, area }).then(j<WayEvidence>),
   confirm: (body: unknown) => post('/api/confirm', body).then(j<{ ok: boolean }>),
   blockage: (body: unknown) => post('/api/blockage', body).then(j<{ ok: boolean }>),
