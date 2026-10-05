@@ -373,7 +373,7 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .corr-cams small { color: var(--text-2); flex: none; }
 .cam-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--outline); background: var(--fit-unknown); }
 .cam-dot.cam-thong_thoang { background: var(--fit-fits); }
-.cam-dot.cam-dong { background: var(--fit-tight-tint); }
+.cam-dot.cam-dong { background: var(--traffic-busy); }
 .cam-dot.cam-un_u { background: var(--fit-tight); }
 .cam-dot.cam-ket_cung { background: var(--fit-no); }
 .cam-dot.cam-water { background: var(--flood-risky); }

@@ -61,7 +61,10 @@ Ngập: chỉ khi thấy nước đọng phủ mặt đường. Mặt đường 
 bằng vật tham chiếu (bánh xe máy cao ~60 cm, lề đường ~15 cm, nước tóe quanh bánh xe).
 Giao thông trên lòng đường camera nhìn rõ nhất: thong_thoang = xe chạy tự do, nhiều khoảng trống;
 dong = nhiều xe nhưng vẫn chạy đều; un_u = xe chen kín, nhích chậm; ket_cung = xe kín lòng đường và gần như
-không di chuyển giữa hai ảnh. Đường vắng ban đêm là thong_thoang."""
+không di chuyển giữa hai ảnh. Đường vắng ban đêm là thong_thoang.
+Hàng xe đứng chờ ở vạch dừng khi đèn đỏ là bình thường: tính là dong, không phải un_u/ket_cung, trừ khi hàng xe
+kéo dài hết tầm nhìn VÀ xe ở hướng/phần đường đang có đèn xanh cũng không chạy được. Một chiều kẹt mà chiều kia trống
+thì nói rõ chiều nào trong evidence."""
 
 
 class FeatureOff(Exception):

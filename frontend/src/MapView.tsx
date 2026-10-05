@@ -88,7 +88,7 @@ export function MapView(p: Props) {
       const cam = { ok: css('--fit-fits'), un: css('--fit-tight'), jam: css('--fit-no'), water: css('--flood-risky'), none: css('--fit-unknown') }
       m.addLayer({ id: 'cams', type: 'circle', source: 'cams', minzoom: 10.5,
         paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, ['case', ['get', 'read'], 4, 2.5], 16, ['case', ['get', 'read'], 8, 5]],
-          'circle-color': ['match', ['get', 'cls'], 'cam-water', cam.water, 'cam-ket_cung', cam.jam, 'cam-un_u', cam.un, 'cam-dong', css('--fit-tight-tint'), 'cam-thong_thoang', cam.ok, cam.none],
+          'circle-color': ['match', ['get', 'cls'], 'cam-water', cam.water, 'cam-ket_cung', cam.jam, 'cam-un_u', cam.un, 'cam-dong', css('--traffic-busy'), 'cam-thong_thoang', cam.ok, cam.none],
           'circle-stroke-color': '#ffffff', 'circle-stroke-width': ['case', ['get', 'read'], 2, 1] } })
       ready.current = true
       sync()

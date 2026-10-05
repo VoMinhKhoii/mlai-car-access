@@ -453,7 +453,7 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
           {toggles.flood && <Segmented label="Thời điểm ngập" value={floodMoment} onChange={setFloodMoment} options={[{ value: 'arrive', label: 'Lúc đến' }, { value: 'depart', label: 'Lúc về' }]} />}
           {row('goong', 'Tuyến Goong thông thường', <span className="sw-goong" />)}
           {row('cams', 'Camera giao thông (AI đọc kẹt xe, ngập)', <span className="sw-cam" />)}
-          {toggles.cams && <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Thông thoáng</span><span><i style={{ background: 'var(--fit-tight)' }} />Ùn ứ</span><span><i style={{ background: 'var(--fit-no)' }} />Kẹt cứng</span><span><i style={{ background: 'var(--flood-risky)' }} />Ngập</span><span><i style={{ background: 'var(--fit-unknown)' }} />Chưa đọc</span></div>}
+          {toggles.cams && <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Thông thoáng</span><span><i style={{ background: 'var(--traffic-busy)' }} />Đông</span><span><i style={{ background: 'var(--fit-tight)' }} />Ùn ứ</span><span><i style={{ background: 'var(--fit-no)' }} />Kẹt cứng</span><span><i style={{ background: 'var(--flood-risky)' }} />Ngập</span><span><i style={{ background: 'var(--fit-unknown)' }} />Chưa đọc</span></div>}
           <div className="line-key"><span><i className="ln-route" />Đường đi</span><span><i className="ln-walk" />Đi bộ</span><span><i className="ln-out" />Đường ra</span></div>
         </div>
       )}

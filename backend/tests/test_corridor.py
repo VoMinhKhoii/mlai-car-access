@@ -121,6 +121,22 @@ class Corridor(unittest.TestCase):
         self.assertFalse(best["is_goong"])
 
 
+class GroupNaming(unittest.TestCase):
+    def group(self, *levels):
+        cams = [{**CAM_X, "id": f"c{i}", "name": f"Đường A - Đường {i}", "along_m": 1000 + i} for i in range(len(levels))]
+        readings = {c["id"]: reading(c, lv) for c, lv in zip(cams, levels)}
+        return corridor._observe([cams], readings, corridor.get_profile("toyota-vios"))[0]
+
+    def test_one_camera_catching_a_queue_does_not_rate_the_junction(self):
+        h = self.group("thong_thoang", "un_u", "dong")
+        self.assertEqual(h["traffic"], "dong")
+
+    def test_a_jam_most_cameras_see_counts(self):
+        h = self.group("ket_cung", "ket_cung", "dong")
+        self.assertEqual((h["traffic"], h["cameras"][0]["traffic"]), ("ket_cung", "ket_cung"))
+        self.assertEqual(h["name"], h["cameras"][0]["name"])
+
+
 class OfficialRegistry(unittest.TestCase):
     def test_ajaxpro_datatables(self):
         # Shape of the portal's answer: nested DataTable literals, and ")" inside names.

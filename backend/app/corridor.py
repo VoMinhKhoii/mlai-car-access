@@ -261,18 +261,21 @@ def _observe(cls, readings, p) -> list[dict]:
     for cl in cls:
         reads = [readings[c["id"]] for c in cl if c["id"] in readings]
         good = [x for x in reads if x.get("state") == "ok" and x.get("confidence", 0) >= 0.5]
-        level = max((cameras.TRAFFIC.index(x["traffic"]) for x in good if x.get("traffic") in cameras.TRAFFIC),
-                    default=None)
-        traffic = cameras.TRAFFIC[level] if level is not None else None
+        # Traffic: the lower median of the group, so one camera catching a passing queue does not rate a junction
+        # that its neighbours see moving; a real jam shows on most of them. Water: the deepest (safety).
+        levels = sorted(cameras.TRAFFIC.index(x["traffic"]) for x in good if x.get("traffic") in cameras.TRAFFIC)
+        traffic = cameras.TRAFFIC[levels[(len(levels) - 1) // 2]] if levels else None
         depth = max((x["depth_cm"] for x in good if x.get("depth_cm")), default=0)
         fstat = flood_status(DepthRange(max(0.0, depth / 100 - 0.05), depth / 100 + 0.05, [], False, False),
                              p.safe_water_depth) if depth else None
-        shown = good[0] if good else (reads[0] if reads else None)
+        # Name the group after the camera that set its rating (deepest water, else one at the group's level).
+        reads.sort(key=lambda x: (x in good, x.get("depth_cm") or 0, x.get("traffic") == traffic), reverse=True)
+        shown = reads[0] if reads else None
         out.append({"cameras": [cameras.public(x) for x in reads] or
                     [{"id": c["id"], "name": c["name"], "lat": c["lat"], "lon": c["lon"],
                       "image_url": f"/api/cameras/{c['id']}.jpg", "state": "not_read"} for c in cl],
-                    "name": cl[0]["name"], "lat": cl[0]["lat"], "lon": cl[0]["lon"], "along_m": cl[0]["along_m"],
-                    "traffic": traffic, "traffic_vi": cameras.TRAFFIC_VI.get(traffic), "delay_min": 0,
+                    "name": (shown or cl[0])["name"], "lat": (shown or cl[0])["lat"], "lon": (shown or cl[0])["lon"],
+                    "along_m": cl[0]["along_m"], "traffic": traffic, "traffic_vi": cameras.TRAFFIC_VI.get(traffic), "delay_min": 0,
                     "depth_cm": depth or None, "flood_status": fstat,
                     "at": shown and (shown.get("image_time") or shown.get("at") or "")[11:16]})
     return out

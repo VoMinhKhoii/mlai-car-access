@@ -48,6 +48,9 @@
   --fit-no-tint: #fbe6e6;
   --fit-unknown-tint: #eef1f1;
 
+  /* semantic: traffic a camera sees (busy but moving sits between fits and tight) */
+  --traffic-busy: #e9c46a;
+
   /* semantic: water relative to this car's safe wading depth */
   --flood-low: #9cc7ff;
   --flood-risky: #3b6df0;
