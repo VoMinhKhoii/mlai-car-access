@@ -21,6 +21,11 @@ AI_FEATURES = {
         "detail": "Khi lập kế hoạch, đo khoảng cách giữa hai thửa đất đối diện cho tối đa 12 hẻm gần điểm đến: bằng chứng mức Số liệu chính thức.",
         "default": True,
     },
+    "parcel_deep_scan": {
+        "label": "Quét sâu đường vào điểm đến (mỗi 5 m)",
+        "detail": "Đo bề rộng theo thửa đất mỗi 5 m dọc đường từ đường lớn vào tận cửa (tối đa 300 m) để tìm chỗ hẹp nhất. Chậm: thêm 1–2 phút cho điểm đến mới; tắt thì đường vào chỉ đo 2 mặt cắt như các hẻm khác.",
+        "default": True,
+    },
     "building_gaps": {
         "label": "Bề rộng từ khoảng cách giữa hai dãy nhà",
         "detail": "Thử nghiệm, tắt mặc định: khoảng cách giữa footprint nhà hai bên hẻm (Overture). Kiểm chứng cho thấy chưa phân biệt được hẻm hẹp và hẻm rộng (lệch ~2–4 m).",

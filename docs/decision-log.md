@@ -292,6 +292,7 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - **Deep scan:** the shortest drivable path from the nearest main road to the door point gets a cut every 5 m (up to 60 cuts = 300 m). The 6 nearest other roads get 2 cuts each. About 1–2 minutes for a new destination, cached.
 - **Evidence (Official):** [20th percentile of usable cuts, 80th percentile + 0.3 m] when there are ≥ 5 cuts, else [min, max + 0.3 m], so one bad cut cannot sink or inflate an alley. The narrowest cut is shown in the evidence text.
 - **Effect:** widths decide fit, which decides the way out, the Stop Points and the walk. Demo: with parcels, a Fortuner's exit through Hẻm 246 (parcels 1.9 m apart) is ruled out, so it parks at Hẻm 294/22 (53 m walk) instead of the door. City-wide check: `pipelines/eval_city.py` → `docs/eval/city-eval.md`.
+- **Toggle (2026-10-05):** the deep scan is its own switch, `parcel_deep_scan` ("Quét sâu đường vào điểm đến", on by default). Off, the path into the destination gets the same 2 cuts as the other nearby roads, so a new area builds in about half the time. Flipping either parcel switch re-runs the area build in the open page; a build that started before the flip is discarded.
 
 ## D34: Large-road route choice from live traffic cameras (user request, 2026-10-05)
 

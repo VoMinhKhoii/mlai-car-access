@@ -58,6 +58,7 @@ export default function App() {
   const corridorReq = useRef(0)
   const areaRef = useRef<AreaData | null>(null)
   const buildingKey = useRef('')
+  const buildGen = useRef(0)  // bumped by parcel switches: a build started before the switch is stale
   const reqId = useRef(0)
 
   useEffect(() => {
@@ -146,13 +147,15 @@ export default function App() {
 
   async function startBuild(d: Place, key: string) {
     buildingKey.current = key
+    const gen = buildGen.current
     try {
       const a = await api.areaBuild(d.lat, d.lon, setBuild)
-      if (a) { areaRef.current = a; runRef.current() }
+      if (a && gen === buildGen.current) { areaRef.current = a; runRef.current() }
     } catch (e) {
       setBuild({ key, state: 'error', error: e instanceof Error ? e.message : String(e) })
     } finally {
       buildingKey.current = ''
+      if (gen !== buildGen.current) runRef.current()  // the settings changed mid-build: plan again, which rebuilds
     }
   }
 
@@ -229,6 +232,8 @@ export default function App() {
   async function setFlag(f: Flag, on: boolean) {
     const r = await api.setFlag(f.name, on)
     setCfg((c) => (c ? { ...c, flags: r.flags } : c))
+    // Parcel widths are measured in the area build: re-run it so the switch takes effect here, not only in new areas.
+    if (f.name === 'parcel_widths' || f.name === 'parcel_deep_scan') { buildGen.current++; areaRef.current = null; setBuild(null) }
     runRef.current()
   }
 

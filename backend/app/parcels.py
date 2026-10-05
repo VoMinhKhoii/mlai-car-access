@@ -163,12 +163,12 @@ def path_into(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple
     return pieces
 
 
-def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine) -> list[dict]:
-    """Deep scan of the path into the destination (a cut every 5 m), plus 2 cuts on the nearest other roads.
-    cache: key → result or None (keys "deep:<lat>,<lon>:<way>" and "<way>")."""
+def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True) -> list[dict]:
+    """Deep scan of the path into the destination (a cut every 5 m; flag parcel_deep_scan), plus 2 cuts on the
+    nearest other roads. cache: key → result or None (keys "deep:<lat>,<lon>:<way>" and "<way>")."""
     out: dict[int, dict] = {}
     budget = DEEP_MAX_CUTS
-    for wid, coords in path_into(g, dest_lat, dest_lon):
+    for wid, coords in (path_into(g, dest_lat, dest_lon) if deep else []):
         key = f"deep:{dest_lat:.5f},{dest_lon:.5f}:{wid}"
         if key not in cache and budget > 0:
             res = measure(coords, step=DEEP_STEP, max_cuts=budget)
