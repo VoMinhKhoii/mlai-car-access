@@ -210,10 +210,16 @@ class EvidenceStore:
             for ph in area["photos"]:
                 self._add_photo(ph)
             for pc in area.get("parcels", []):
-                lo, hi = max(0.5, min(pc["samples"]) - 0.6), max(pc["samples"]) + 0.3
-                cuts = " và ".join(f"{x:.1f}".replace(".", ",") for x in pc["samples"])
-                self._add(Bound(lo, hi, "Official", "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
-                                f"Khoảng cách giữa hai thửa đất đối diện: {cuts} m (lộ giới thực tế; nhà lấn ra làm hẹp hơn)",
+                # usable width = parcel gap − 1 m (parcels.USABLE_MARGIN); the range spans the cuts on this way
+                ws = sorted(pc["samples"])
+                # robust ends: one bad cut must not sink or inflate an alley (20th / 80th percentile with ≥ 5 cuts)
+                lo = ws[len(ws) // 5] if len(ws) >= 5 else ws[0]
+                hi = (ws[(len(ws) * 4) // 5] if len(ws) >= 5 else ws[-1]) + 0.3
+                narrow = min(pc["cuts"], key=lambda c: c["width_m"])
+                how = (f"đo {len(ws)} mặt cắt, cách nhau 5 m" if pc.get("deep") else f"đo {len(ws)} mặt cắt")
+                detail = (f"Khoảng cách hai thửa đất đối diện trừ 1 m ({how}): hẹp nhất "
+                          f"{narrow['width_m']:.1f} m (thửa cách nhau {narrow['gap_m']:.1f} m)").replace(".", ",")
+                self._add(Bound(lo, hi, "Official", "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)", detail,
                                 url="https://thongtinquyhoach.hochiminhcity.gov.vn/", feature="parcel_widths"), pc["way_id"])
 
     def _add_photo(self, ph: dict) -> None:

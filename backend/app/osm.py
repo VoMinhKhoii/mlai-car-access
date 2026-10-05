@@ -9,6 +9,7 @@ import json
 import math
 import re
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import unicodedata
 from dataclasses import dataclass, field
@@ -191,16 +192,18 @@ out skel qt;"""
         return data
 
     errors = []
-    pool = ThreadPoolExecutor(len(OVERPASS_ENDPOINTS))
-    futures = [pool.submit(ask, ep) for ep in OVERPASS_ENDPOINTS]
-    try:
-        for fut in as_completed(futures):
-            try:
-                return fut.result()
-            except Exception as exc:  # wait for the next mirror
-                errors.append(str(exc)[:120])
-    finally:
-        pool.shutdown(wait=False, cancel_futures=True)
+    for attempt in range(3):  # all mirrors at once; if every one fails (504s are common), wait and try again
+        pool = ThreadPoolExecutor(len(OVERPASS_ENDPOINTS))
+        futures = [pool.submit(ask, ep) for ep in OVERPASS_ENDPOINTS]
+        try:
+            for fut in as_completed(futures):
+                try:
+                    return fut.result()
+                except Exception as exc:  # wait for the next mirror
+                    errors.append(str(exc)[:120])
+        finally:
+            pool.shutdown(wait=False, cancel_futures=True)
+        time.sleep(8 * (attempt + 1))
     raise RuntimeError(f"Overpass unavailable: {errors}")
 
 

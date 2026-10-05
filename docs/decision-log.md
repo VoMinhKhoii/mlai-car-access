@@ -285,6 +285,14 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - **Cadastral parcel gaps (live, per destination):** the HCMC planning portal returns the land parcel at a point. For up to 12 non-main roads within 400 m of the destination: two cross-sections each, a query 3 m (then 5 m) to each side, and the gap between the two parcels along the cross-section. About 20 s per area, cached per way, stops when the portal says "blocked". Official tier [narrowest cut − 0.6 m, widest cut + 0.3 m]: legal width, narrowed by ~0.3 m of steps or stalls per side. Flag `parcel_widths` (on). Module `backend/app/parcels.py`.
   - **Validation:** consistent with listings on the same alleys ("xe hơi" claims 2.7–5.6 m, "ba gác" 2.6–3.4 m; listing "8 m" vs parcel 5.0–5.6 m). Demo: the Hẻm 220/9 door goes from "tight" to "fits" for the Vios.
 
+## D33: Parcel widths: usable = gap − 1 m, a cut every 5 m into the destination (user request, 2026-10-02)
+
+- **How a cut works:** the portal returns parcel boundary polygons, not only areas. Draw the line across the alley, query 1.5 m (then 3 m, 5 m) to each side, and measure from the centreline to each parcel boundary; left + right = parcel gap. A cut is rejected if one side is under 0.3 m (the map line sits on a parcel edge) or both queries return the same parcel.
+- **Usable width = parcel gap − 1.0 m** (steps, ramps, stalls, parked motorbikes).
+- **Deep scan:** the shortest drivable path from the nearest main road to the door point gets a cut every 5 m (up to 60 cuts = 300 m). The 6 nearest other roads get 2 cuts each. About 1–2 minutes for a new destination, cached.
+- **Evidence (Official):** [20th percentile of usable cuts, 80th percentile + 0.3 m] when there are ≥ 5 cuts, else [min, max + 0.3 m], so one bad cut cannot sink or inflate an alley. The narrowest cut is shown in the evidence text.
+- **Effect:** widths decide fit, which decides the way out, the Stop Points and the walk. Demo: with parcels, a Fortuner's exit through Hẻm 246 (parcels 1.9 m apart) is ruled out, so it parks at Hẻm 294/22 (53 m walk) instead of the door. City-wide check: `pipelines/eval_city.py` → `docs/eval/city-eval.md`.
+
 ## D34: Large-road route choice from live traffic cameras (user request, 2026-10-05)
 
 - **Why:** the arrival plan only judged the last stretch. A driver going home from Quận 1 at 17:30 also needs to know which large road to take, e.g. Phạm Văn Đồng instead of a Hàng Xanh / Cầu Sài Gòn that has not moved for an hour, and whether standing water on the way is deeper than the car can wade.
