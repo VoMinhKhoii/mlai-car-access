@@ -1,6 +1,6 @@
 /* Vào Được design tokens.
    Map-led and light. The base map and the semantic fit/flood colours carry the meaning; chrome stays quiet.
-   Type: Bricolage Grotesque for decisions and numbers, Be Vietnam Pro for everything else (both ship Vietnamese). */
+   Type: Be Vietnam Pro everywhere; decisions and numbers use its heavier weights. */
 :root {
   /* neutrals (warm-cool slate, tuned to sit on Goong's pale base map) */
   --n-0: #ffffff;
@@ -59,7 +59,7 @@
 
   /* type */
   --font-ui: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Bricolage Grotesque", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --fs-11: 11.5px;
   --fs-12: 12.5px;
   --fs-14: 14px;
