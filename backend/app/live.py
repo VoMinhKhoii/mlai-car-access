@@ -255,8 +255,10 @@ def _run(job: dict, lat: float, lon: float) -> None:
             cache_path = DIR / "parcels.json"
             cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
             try:
-                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine)
-                detail = f"{len(job['parcels'])} hẻm gần điểm đến có bề rộng theo thửa đất"
+                deep = flags.enabled("parcel_deep_scan")
+                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep)
+                detail = (f"{len(job['parcels'])} hẻm gần điểm đến có bề rộng theo thửa đất"
+                          + ("; đường vào đo mỗi 5 m" if deep else ""))
             except parcels.Blocked:
                 detail = "Cổng quy hoạch tạm chặn truy vấn; thử lại sau"
             cache_path.parent.mkdir(parents=True, exist_ok=True)

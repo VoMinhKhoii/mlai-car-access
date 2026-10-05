@@ -46,7 +46,7 @@ Toggle them in the UI footer ("Tính năng AI") or with `FLAG_<NAME>=1|0` env va
 | `ai_flood_prior` | Per-street flood susceptibility from IRD history (percentile depths, alleys inherit from their flooded street) | on |
 | `ai_text_rules` | Ordinance or news text → Stop Rules and flood reports, through the ACCEPT / REVIEW / INSUFFICIENT_INFORMATION gate | off |
 | `ai_photo_evidence` | Driver photo → sign, alley width or flood depth | off |
-| `ai_camera_flood` | Public HCMC traffic-camera still → flood-now evidence | off |
+| `ai_camera_flood` | ~800 public HCMC traffic cameras, two frames 13 s apart → traffic and flood now; picks the large-road route from A to B (D34) | on |
 
 When a flag is off, the engine behaves as if that source didn't exist.
 
@@ -58,10 +58,12 @@ When a flag is off, the engine behaves as if that source didn't exist.
 4. **Flood over the Dwell Window**: tide forecast (Đài KTTV Nam Bộ bulletin) and rain scenario against each street's IRD history, compared with the car's Safe Water Depth. Route in at arrival, the Stop Point across the stay, the Way Out at departure (`flood.py`).
 5. **Stop Legality** from Law 36/2024 Art. 18, signs and local lists, always with the citation (`legality.py`).
 6. **Filter, then rank** Stop Points by walk time; unverified ones rank last and show grey (`plan.py`).
+7. **Large-road route** from the start point: Goong's route and camera-via alternatives, scored by what each route's cameras see now (traffic, standing water) and the flood forecast along it (`corridor.py`, `cameras.py`).
 
 ## Data you can add
 
 - `data/field/measurements.csv`: tape-measured alleys from the field trip (tier Measured). See `data/field/README.md`.
 - `data/official/parcel_gaps.csv`: legal widths from the HCMC planning portal (tier Official).
 - `data/flood/tide_forecast.json`: update from each daily bulletin.
+- `data/cameras/hcmc_cameras.json`: camera registry; refresh with `python3 pipelines/camera_registry.py`.
 - `pipelines/`: VETC lots and Chợ Tốt listing extraction (see `pipelines/README.md`).

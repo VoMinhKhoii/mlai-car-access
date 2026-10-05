@@ -87,6 +87,30 @@ export interface WayEvidence {
   photos: ListingPhoto[]
   flood_history: { records: { street: string; year: number; date: string; cause: string; depth_max_cm: number | null; precision: string; url: string }[]; inferred_from: string }
 }
+export type Traffic = 'thong_thoang' | 'dong' | 'un_u' | 'ket_cung'
+export interface CameraReading {
+  id: string; name: string; lat: number; lon: number; image_url: string
+  state: 'ok' | 'offline' | 'stale' | 'unusable' | 'no_model' | 'error' | 'not_read'
+  at?: string; image_time?: string | null; frames?: number; traffic?: Traffic | 'khong_ro' | null; traffic_vi?: string
+  flooded?: boolean; depth_cm?: number | null; depth_class?: string; evidence?: string; confidence?: number; model?: string
+}
+export interface CameraInfo { id: string; name: string; lat: number; lon: number; code: string; type: string; reading: CameraReading | null }
+export interface Hotspot {
+  name: string; lat: number; lon: number; along_m: number; traffic: Traffic | null; traffic_vi: string | null
+  delay_min: number; depth_cm: number | null; flood_status: FloodStatus | null; at: string | null; cameras: CameraReading[]
+}
+export interface CorridorRoute {
+  id: number; label: string; via: { name: string; lat: number; lon: number } | null; is_goong: boolean
+  geometry: number[][]; distance_m: number; base_min: number; delay_min: number; eta_min: number
+  status: 'ok' | 'risky' | 'blocked'; hotspots: Hotspot[]; alleys: string[]; reasons: string[]; top_reason: string | null
+  flood_forecast: { street: string; at: string; status: FloodStatus; depth: Depth }[]
+  cameras_on_route: number; chosen: boolean
+}
+export interface Corridor {
+  available: boolean; reason?: string; depart_at: string; checked_at: string; live: boolean; live_note: string | null
+  routes: CorridorRoute[]; summary: string; cameras_read: number; cameras_offline: number; typical_factor: number
+  source: { cameras: string; routes: string }
+}
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
 async function j<T>(res: Response): Promise<T> {
@@ -138,5 +162,9 @@ export const api = {
       if (done) return area
     }
   },
+  corridor: (body: { origin: number[]; destination: number[]; vehicle_id: string; depart_at: string | null; rain: RainSpell[] }) =>
+    post('/api/corridor', body).then(j<Corridor>),
+  cameras: () => fetch('/api/cameras').then(j<{ source: string; portal: string; reading: boolean; cameras: CameraInfo[] }>),
+  readCamera: (id: string) => post(`/api/cameras/${id}/read`, {}).then(j<CameraReading>),
   aiText: (text: string, source: string) => post('/api/ai/text', { text, source }).then(j<{ items: Record<string, unknown>[] }>),
 }

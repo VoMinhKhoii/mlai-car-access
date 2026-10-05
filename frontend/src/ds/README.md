@@ -13,7 +13,7 @@ Based on Google Maps / Material 3 patterns drivers already know (directions card
 | Route | `--route` (blue), `--route-goong` (dark dotted) | our drive vs Goong's ordinary route |
 | Fit for this car | `--fit-fits/tight/no/unknown/blocked` + `-tint` | alley lines, tags, check icons; always paired with text or a dash pattern |
 | Water vs this car | `--flood-low/risky/over`, `--flood-tint` | flood layer, tide timeline, flood verdicts |
-| Type | `--font-display` Bricolage Grotesque (decisions, numbers), `--font-ui` Be Vietnam Pro (everything else); sizes `--fs-11 … --fs-36` | both ship full Vietnamese; tabular numerals on |
+| Type | Be Vietnam Pro for everything: `--font-ui` (body) and `--font-display` (decisions, numbers, heavier weights); sizes `--fs-11 … --fs-36` | full Vietnamese; tabular numerals on |
 | Space / shape / depth | `--s-1…8` (4 pt), `--r-xs…pill`, `--e-1…3` | hairline + soft ambient shadows only |
 
 ## Components

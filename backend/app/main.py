@@ -11,7 +11,7 @@ from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ai, budget, flags, google_lookup, live, plan, vehicles
+from . import ai, budget, cameras, corridor, flags, google_lookup, live, plan, vehicles
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
@@ -327,16 +327,55 @@ async def ai_photo(file: UploadFile = File(...), lat: float | None = Form(None),
     return _ai_guard(ai.read_photo, data, file.content_type or "image/jpeg", lat, lon, way_id)
 
 
-class CameraIn(BaseModel):
-    camera_id: str
-    street: str
-    lat: float
-    lon: float
+@app.get("/api/cameras")
+def list_cameras():
+    """Every public HCMC traffic camera, with its latest reading when one is cached."""
+    reg = cameras.registry()
+    return {"source": reg["source"], "portal": cameras.PORTAL_URL, "reading": flags.enabled("ai_camera_flood"),
+            "cameras": [{**c, "reading": (r := cameras.latest(c["id"])) and cameras.public(r)} for c in reg["cameras"]]}
 
 
-@app.post("/api/ai/camera")
-def ai_camera(c: CameraIn):
-    return _ai_guard(ai.read_camera, c.camera_id, c.street, c.lat, c.lon)
+@app.get("/api/cameras/{cam_id}.jpg")
+def camera_image(cam_id: str):
+    if cam_id not in cameras.by_id():
+        raise HTTPException(404, "unknown camera")
+    img = cameras.snapshot(cam_id)
+    if img is None:
+        raise HTTPException(404, "Camera đang mất tín hiệu")
+    return Response(img, media_type="image/jpeg", headers={"Cache-Control": "no-store"})
+
+
+@app.post("/api/cameras/{cam_id}/read")
+def camera_read(cam_id: str):
+    if cam_id not in cameras.by_id():
+        raise HTTPException(404, "unknown camera")
+    try:
+        return cameras.read_many([cam_id])[cam_id]
+    except cameras.FeatureOff as exc:
+        raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
+
+
+class CorridorRequest(BaseModel):
+    origin: list[float]
+    destination: list[float]
+    vehicle_id: str
+    depart_at: str | None = None
+    rain: list[dict] = []
+
+
+@app.post("/api/corridor")
+def route_corridor(req: CorridorRequest):
+    """Large-road route choice from A to B with live cameras (traffic, water) and the flood forecast."""
+    if len(req.origin) != 2 or len(req.destination) != 2:
+        raise HTTPException(400, "origin and destination are [lat, lon]")
+    if not (in_hcmc(*req.origin) and in_hcmc(*req.destination)):
+        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+    try:
+        vehicles.get_profile(req.vehicle_id)
+    except KeyError:
+        raise HTTPException(404, f"unknown vehicle {req.vehicle_id}")
+    depart = datetime.fromisoformat(req.depart_at) if req.depart_at else None
+    return corridor.corridor(tuple(req.origin), tuple(req.destination), req.vehicle_id, depart, req.rain)
 
 
 @app.get("/api/ai/review")

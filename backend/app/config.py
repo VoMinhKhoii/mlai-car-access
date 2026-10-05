@@ -73,3 +73,12 @@ def in_hcmc(lat: float, lon: float) -> bool:
 
 # Area graph radius around a destination.
 AREA_RADIUS_M = 1200.0
+
+# D34: live traffic cameras. A reading is reused for this long; a frame whose clock is further off is stale.
+CAMERA_READ_TTL_S = 180
+CAMERA_STALE_MIN = 10
+# D34: travel-time factor on the stretch a camera watches, per traffic level, plus a queue a still cannot
+# measure. Stretches no camera watches take the typical factor of all cameras read (placeholders; tune from
+# store/camera_readings.jsonl).
+TRAFFIC_FACTOR = {"thong_thoang": 1.0, "dong": 1.3, "un_u": 2.0, "ket_cung": 4.0}
+TRAFFIC_QUEUE_MIN = {"un_u": 3, "ket_cung": 10}

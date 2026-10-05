@@ -1,11 +1,12 @@
 import { CloudRain, FlaskConical, Layers, MapPin, Navigation, Sparkles, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { api, type AreaBuild, type AreaData, type Config, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
+import { api, type AreaBuild, type AreaData, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
 import { GoongContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
 import { EvidencePanel } from './components/Evidence'
+import { CameraPanel, CorridorCard } from './components/Corridor'
 import { TideTimeline } from './components/TideTimeline'
 import { Segmented, useOutside, vnt } from './ds/ui'
 
@@ -35,7 +36,7 @@ export default function App() {
   const [selected, setSelected] = useState(0)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, goong: false })
+  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, goong: false, cams: true })
   const [floodMoment, setFloodMoment] = useState<FloodMoment>('arrive')
   const [way, setWay] = useState<WayEvidence | null>(null)
   const [wayAt, setWayAt] = useState<[number, number]>([0, 0])
@@ -49,13 +50,21 @@ export default function App() {
   const [locating, setLocating] = useState(false)
   const [frame, setFrame] = useState<'arrival' | 'trip'>('arrival')
   const [now, setNow] = useState(() => Date.now())
+  const [corridor, setCorridor] = useState<Corridor | null>(null)
+  const [corridorBusy, setCorridorBusy] = useState(false)
+  const [routeSel, setRouteSel] = useState(0)
+  const [cams, setCams] = useState<CameraInfo[]>([])
+  const [cam, setCam] = useState<CameraReading | null>(null)
+  const corridorReq = useRef(0)
   const areaRef = useRef<AreaData | null>(null)
   const buildingKey = useRef('')
+  const buildGen = useRef(0)  // bumped by parcel switches: a build started before the switch is stale
   const reqId = useRef(0)
 
   useEffect(() => {
     api.config().then(setCfg).catch((e) => setError(String(e)))
     api.vehicles().then(setFleet)
+    api.cameras().then((r) => setCams(r.cameras)).catch(() => { /* the camera layer is optional */ })
     const t = window.setInterval(() => setNow(Date.now()), 60e3)
     return () => window.clearInterval(t)
   }, [])
@@ -102,15 +111,51 @@ export default function App() {
     return () => window.clearTimeout(t)
   }, [run])
 
+  // Large-road route choice (cameras + flood forecast), separate from the plan because reading cameras takes ~30 s.
+  useEffect(() => {
+    if (!origin || !dest || !vehicleId) { setCorridor(null); return }
+    const id = ++corridorReq.current
+    const t = window.setTimeout(async () => {
+      setCorridorBusy(true)
+      try {
+        const c = await api.corridor({ origin: [origin.lat, origin.lon], destination: [dest.lat, dest.lon], vehicle_id: vehicleId,
+          depart_at: arriveNow ? null : fromLocal(arriveLocal), rain })
+        if (id !== corridorReq.current) return
+        setCorridor(c)
+        setRouteSel(c.routes?.find((r) => r.chosen)?.id ?? 0)
+        const seen = new Map(c.routes?.flatMap((r) => r.hotspots.flatMap((h) => h.cameras)).filter((x) => x.state !== 'not_read').map((x) => [x.id, x]))
+        if (seen.size) setCams((cs) => cs.map((x) => (seen.has(x.id) ? { ...x, reading: seen.get(x.id)! } : x)))
+      } catch {
+        if (id === corridorReq.current) setCorridor(null)
+      } finally {
+        if (id === corridorReq.current) setCorridorBusy(false)
+      }
+    }, 400)
+    return () => window.clearTimeout(t)
+  }, [origin, dest, vehicleId, arriveNow, arriveLocal, rain])
+
+  function openCamera(id: string) {
+    const c = cams.find((x) => x.id === id)
+    if (c) setCam(c.reading ?? { id: c.id, name: c.name, lat: c.lat, lon: c.lon, image_url: `/api/cameras/${c.id}.jpg`, state: 'not_read' })
+  }
+
+  async function readCamera(id: string) {
+    const r = await api.readCamera(id)
+    setCam(r)
+    setCams((cs) => cs.map((x) => (x.id === id ? { ...x, reading: r } : x)))
+  }
+
   async function startBuild(d: Place, key: string) {
     buildingKey.current = key
+    const gen = buildGen.current
     try {
       const a = await api.areaBuild(d.lat, d.lon, setBuild)
-      if (a) { areaRef.current = a; runRef.current() }
+      if (a && gen === buildGen.current) { areaRef.current = a; runRef.current() }
     } catch (e) {
       setBuild({ key, state: 'error', error: e instanceof Error ? e.message : String(e) })
     } finally {
       buildingKey.current = ''
+      if (gen !== buildGen.current) runRef.current()  // the settings changed mid-build: plan again, which rebuilds
     }
   }
 
@@ -170,6 +215,7 @@ export default function App() {
   }
 
   async function openEvidence(id: number, lat: number, lon: number) {
+    setCam(null)
     setWayAt([lat, lon])
     try { setWay(await api.wayEvidence(id, lat, lon, areaRef.current)) } catch { setWay(null) }
   }
@@ -186,6 +232,8 @@ export default function App() {
   async function setFlag(f: Flag, on: boolean) {
     const r = await api.setFlag(f.name, on)
     setCfg((c) => (c ? { ...c, flags: r.flags } : c))
+    // Parcel widths are measured in the area build: re-run it so the switch takes effect here, not only in new areas.
+    if (f.name === 'parcel_widths' || f.name === 'parcel_deep_scan') { buildGen.current++; areaRef.current = null; setBuild(null) }
     runRef.current()
   }
 
@@ -203,10 +251,12 @@ export default function App() {
 
   const goongOn = cfg.goong.tiles
   return (
-    <div className={`app ${way ? 'has-evidence' : ''}`}>
+    <div className={`app ${way || cam ? 'has-evidence' : ''}`}>
       <ErrorBoundary label="Bản đồ">
         <MapView styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} origin={origin} destination={dest}
           toggles={toggles} floodMoment={floodMoment} padding={padding} frame={frame}
+          corridor={corridor?.available ? corridor : null} routeSel={routeSel} cams={cams}
+          onCameraClick={(id) => { setWay(null); openCamera(id) }}
           onPick={(lat, lon, x, y) => setPick({ lat, lon, x, y })}
           onWayClick={openEvidence}
           onStopClick={(i) => { setSelected(i); setSheet((s) => (s === 'peek' ? 'half' : s)) }} />
@@ -240,6 +290,8 @@ export default function App() {
               <>
                 {story && <p className="story">{story}</p>}
                 <Verdict plan={plan} onLeaveBefore={leaveBefore} stale={busy} />
+                {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
+                  onSelect={(i) => { setRouteSel(i); setFrame('trip') }} onCamera={(c) => { setWay(null); setCam(c) }} />}
                 {build && <LiveStrip build={build} />}
                 {areaRef.current?.key === plan.area_key && <NewsList items={areaRef.current.news ?? []} />}
                 <h3 className="section-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý</h3>
@@ -257,14 +309,14 @@ export default function App() {
                   </details>
                 )}
                 {vehicle && <GoongContrast plan={plan} vehicleLabel={vehicle.label} show={toggles.goong} onToggle={() => setToggles((t) => ({ ...t, goong: !t.goong }))} />}
-                <p className="sources faint">Nguồn: {goongOn ? 'Goong (bản đồ, tìm kiếm, tuyến xe)' : 'bản đồ nền tạm'}, OpenStreetMap, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt.</p>
+                <p className="sources faint">Nguồn: {goongOn ? 'Goong (bản đồ, tìm kiếm, tuyến xe)' : 'bản đồ nền tạm'}, OpenStreetMap, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt, camera giao thông TP.HCM.</p>
               </>
             )}
           </div>
         </section>
       </div>
 
-      {plan?.origin && plan.stop_points[selected]?.approach && (
+      {plan && ((plan.origin && plan.stop_points[selected]?.approach) || corridor?.available) && (
         <div className="frame-toggle">
           <Segmented label="Khung bản đồ" value={frame} onChange={setFrame}
             options={[{ value: 'arrival', label: 'Đoạn cuối' }, { value: 'trip', label: 'Cả tuyến' }]} />
@@ -281,6 +333,11 @@ export default function App() {
             exitFloods={!!plan.timing} station={cfg.tide.station}
             onChange={(iso) => { setArriveNow(false); setArrive(toLocal(iso)) }} />
         </div>
+      )}
+
+      {cam && !way && (
+        <CameraPanel key={cam.id} cam={cam} canRead={cfg.flags.some((f) => f.name === 'ai_camera_flood' && f.enabled)}
+          onClose={() => setCam(null)} onRead={readCamera} />
       )}
 
       {way && (
@@ -400,6 +457,8 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
           {row('flood', 'Ngập so với xe của bạn', <span className="sw-flood" />)}
           {toggles.flood && <Segmented label="Thời điểm ngập" value={floodMoment} onChange={setFloodMoment} options={[{ value: 'arrive', label: 'Lúc đến' }, { value: 'depart', label: 'Lúc về' }]} />}
           {row('goong', 'Tuyến Goong thông thường', <span className="sw-goong" />)}
+          {row('cams', 'Camera giao thông (AI đọc kẹt xe, ngập)', <span className="sw-cam" />)}
+          {toggles.cams && <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Thông thoáng</span><span><i style={{ background: 'var(--traffic-busy)' }} />Đông</span><span><i style={{ background: 'var(--fit-tight)' }} />Ùn ứ</span><span><i style={{ background: 'var(--fit-no)' }} />Kẹt cứng</span><span><i style={{ background: 'var(--flood-risky)' }} />Ngập</span><span><i style={{ background: 'var(--fit-unknown)' }} />Chưa đọc</span></div>}
           <div className="line-key"><span><i className="ln-route" />Đường đi</span><span><i className="ln-walk" />Đi bộ</span><span><i className="ln-out" />Đường ra</span></div>
         </div>
       )}

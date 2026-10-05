@@ -1,0 +1,1673 @@
+[
+ {
+  "name": "Hẻm 361 Bến Bình Đông",
+  "lat": 10.7345258,
+  "lon": 106.6369781,
+  "way_id": 516941826,
+  "cell": [
+   0,
+   0
+  ],
+  "vehicle_id": "toyota-vios",
+  "intent": "park",
+  "build_s": 116,
+  "build": {
+   "map": "1382 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "5 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "562 tin Chợ Tốt + 0 tin Alonhadat ở Quận 8, Quận 6",
+   "match": "162 tin trong khu vực → 14 tin khớp 13 hẻm",
+   "news": "1 tin về Bến Bình Đông, Bình Đông, Võ Văn Kiệt",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Bình Đông, đi bộ 55 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Bình Đông",
+     "kind": "street",
+     "walk_m": 55,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 361A Bến Bình Đông",
+     "kind": "street",
+     "walk_m": 115,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 52.2
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Bình Đông, đi bộ 55 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Bình Đông",
+     "kind": "street",
+     "walk_m": 55,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 361A Bến Bình Đông",
+     "kind": "street",
+     "walk_m": 115,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 52.2
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Bình Đông, đi bộ 55 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không đủ chỗ mở cửa xe (cần 2.63 m)"
+   ],
+   "stops": [
+    {
+     "name": "Bình Đông",
+     "kind": "street",
+     "walk_m": 55,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 361A/11 Bến Bình Đông",
+     "kind": "street",
+     "walk_m": 151,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Nhánh cạnh Bình Đông",
+     "kind": "street",
+     "walk_m": 137,
+     "fit": "unknown",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 51.8
+  },
+  "parcels": {
+   "ways": 5,
+   "cuts": 13,
+   "deep_cuts": 7,
+   "narrowest_usable_m": 1.17
+  }
+ },
+ {
+  "name": "Hẻm 1414 Phạm Thế Hiển",
+  "lat": 10.7419348,
+  "lon": 106.6599257,
+  "way_id": 608268888,
+  "cell": [
+   0,
+   1
+  ],
+  "vehicle_id": "toyota-fortuner",
+  "intent": "park",
+  "build_s": 3671,
+  "build": {
+   "map": "1613 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "3 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "442 tin Chợ Tốt + 12 tin Alonhadat ở Quận 5, Quận 11",
+   "match": "21 tin trong khu vực → 1 tin khớp 1 hẻm",
+   "news": "0 tin về Phạm Thế Hiển, Nguyễn Duy, Bông Sao",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Bông Sao, đi bộ 169 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Bông Sao",
+     "kind": "street",
+     "walk_m": 169,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Bùi Minh Trực",
+     "kind": "street",
+     "walk_m": 353,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 31,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 36.3
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Bông Sao, đi bộ 169 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Bông Sao",
+     "kind": "street",
+     "walk_m": 169,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Bùi Minh Trực",
+     "kind": "street",
+     "walk_m": 353,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 31,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 36.3
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Bông Sao, đi bộ 169 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Bông Sao",
+     "kind": "street",
+     "walk_m": 169,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Bùi Minh Trực",
+     "kind": "street",
+     "walk_m": 353,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 31,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 36.7
+  },
+  "parcels": {
+   "ways": 3,
+   "cuts": 5,
+   "deep_cuts": 0,
+   "narrowest_usable_m": 0.61
+  }
+ },
+ {
+  "name": "Hẻm 1250/9 Huỳnh Tấn Phát",
+  "lat": 10.7172669,
+  "lon": 106.7357384,
+  "way_id": 900631110,
+  "cell": [
+   0,
+   2
+  ],
+  "vehicle_id": "vinfast-vf-5",
+  "intent": "pickup",
+  "build_s": 212,
+  "build": {
+   "map": "838 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "4 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "701 tin Chợ Tốt + 0 tin Alonhadat ở Quận 7, Huyện Nhà Bè",
+   "match": "298 tin trong khu vực → 15 tin khớp 9 hẻm",
+   "news": "0 tin về Huỳnh Tấn Phát, Lê Thị Chợ, Hoàng Quốc Việt",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Nhánh cạnh Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 104,
+     "fit": "unknown",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 150,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "B_live": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Nhánh cạnh Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 104,
+     "fit": "unknown",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 150,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "C_parcels": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "no",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)"
+   ],
+   "stops": [
+    {
+     "name": "Nhánh cạnh Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 104,
+     "fit": "unknown",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 1248 Huỳnh Tấn Phát",
+     "kind": "street",
+     "walk_m": 150,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "parcels": {
+   "ways": 4,
+   "cuts": 31,
+   "deep_cuts": 27,
+   "narrowest_usable_m": 0.71
+  }
+ },
+ {
+  "name": "Hẻm 737/59 Lạc Long Quân",
+  "lat": 10.782069,
+  "lon": 106.6484537,
+  "way_id": 675670562,
+  "cell": [
+   1,
+   0
+  ],
+  "vehicle_id": "toyota-vios",
+  "intent": "park",
+  "build_s": 2888,
+  "build": {
+   "map": "1906 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "3 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "694 tin Chợ Tốt + 0 tin Alonhadat ở Quận 11, Quận Tân Bình",
+   "match": "261 tin trong khu vực → 28 tin khớp 25 hẻm",
+   "news": "0 tin về Lạc Long Quân, Ni sư Huỳnh Liên, Trần Văn Quang",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Ni Sư Huỳnh Liên, đi bộ 173 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)"
+   ],
+   "stops": [
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 173,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 369,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 73 Ni sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 107,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 44.1
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Ni Sư Huỳnh Liên, đi bộ 173 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)"
+   ],
+   "stops": [
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 173,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 369,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 73 Ni sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 107,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 44.5
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Ni Sư Huỳnh Liên, đi bộ 173 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)"
+   ],
+   "stops": [
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 173,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Ni Sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 369,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 73 Ni sư Huỳnh Liên",
+     "kind": "street",
+     "walk_m": 107,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 44.6
+  },
+  "parcels": {
+   "ways": 3,
+   "cuts": 3,
+   "deep_cuts": 0,
+   "narrowest_usable_m": 2.5
+  }
+ },
+ {
+  "name": "Hẻm 1255 Đường 3/2",
+  "lat": 10.7591902,
+  "lon": 106.6518219,
+  "way_id": 665768505,
+  "cell": [
+   1,
+   1
+  ],
+  "vehicle_id": "toyota-fortuner",
+  "intent": "park",
+  "build_s": 78,
+  "build": {
+   "map": "2357 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "5 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "442 tin Chợ Tốt + 0 tin Alonhadat ở Quận 11, Quận 5",
+   "match": "292 tin trong khu vực → 16 tin khớp 16 hẻm",
+   "news": "0 tin về Hà Tôn Quyền, Nguyễn Thị Nhỏ, Lò Siêu",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Đường Hà Tôn Quyền, đi bộ 139 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Hà Tôn Quyền",
+     "kind": "street",
+     "walk_m": 139,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Hàn Hải Nguyên",
+     "kind": "street",
+     "walk_m": 219,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Tôn Thất Hiệp",
+     "kind": "street",
+     "walk_m": 266,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 39.1
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Đường Hà Tôn Quyền, đi bộ 139 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Hà Tôn Quyền",
+     "kind": "street",
+     "walk_m": 139,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Hàn Hải Nguyên",
+     "kind": "street",
+     "walk_m": 219,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Tôn Thất Hiệp",
+     "kind": "street",
+     "walk_m": 266,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 39.1
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Đường Hà Tôn Quyền, đi bộ 139 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Hà Tôn Quyền",
+     "kind": "street",
+     "walk_m": 139,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Hàn Hải Nguyên",
+     "kind": "street",
+     "walk_m": 219,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Tôn Thất Hiệp",
+     "kind": "street",
+     "walk_m": 266,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 39.2
+  },
+  "parcels": {
+   "ways": 5,
+   "cuts": 8,
+   "deep_cuts": 0,
+   "narrowest_usable_m": 0.96
+  }
+ },
+ {
+  "name": "Hẻm 30/7/23 Lâm Văn Bền",
+  "lat": 10.7494175,
+  "lon": 106.7146148,
+  "way_id": 205650625,
+  "cell": [
+   1,
+   2
+  ],
+  "vehicle_id": "vinfast-vf-5",
+  "intent": "pickup",
+  "build_s": 201,
+  "build": {
+   "map": "1176 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "6 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "638 tin Chợ Tốt + 0 tin Alonhadat ở Quận 4, Quận 7",
+   "match": "408 tin trong khu vực → 25 tin khớp 19 hẻm",
+   "news": "10 tin về Lâm Văn Bền, Trần Xuân Soạn, Bế Văn Cấm",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 56.0
+  },
+  "B_live": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 56.4
+  },
+  "C_parcels": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 56.4
+  },
+  "parcels": {
+   "ways": 6,
+   "cuts": 12,
+   "deep_cuts": 5,
+   "narrowest_usable_m": 0.5
+  }
+ },
+ {
+  "name": "Hẻm 32 Đường 42",
+  "lat": 10.7831387,
+  "lon": 106.7708565,
+  "way_id": 899906792,
+  "cell": [
+   1,
+   3
+  ],
+  "vehicle_id": "toyota-vios",
+  "intent": "park",
+  "build_s": 190,
+  "build": {
+   "map": "772 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "0 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 54 tin Alonhadat ở Thành phố Thủ Đức, Quận Bình Thạnh",
+   "match": "149 tin trong khu vực → 0 tin khớp 0 hẻm",
+   "news": "0 tin về Bình Trưng, Nguyễn Đôn Tiết, Nguyễn Trung Nguyệt",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Đường số 42, đi bộ 77 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường số 42",
+     "kind": "street",
+     "walk_m": 77,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Lê Văn Thịnh",
+     "kind": "street",
+     "walk_m": 259,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Số 39",
+     "kind": "street",
+     "walk_m": 298,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 70.2
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Đường số 42, đi bộ 77 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường số 42",
+     "kind": "street",
+     "walk_m": 77,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Lê Văn Thịnh",
+     "kind": "street",
+     "walk_m": 259,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Số 39",
+     "kind": "street",
+     "walk_m": 298,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 70.2
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Đường số 42, đi bộ 77 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường số 42",
+     "kind": "street",
+     "walk_m": 77,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Lê Văn Thịnh",
+     "kind": "street",
+     "walk_m": 259,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường Số 39",
+     "kind": "street",
+     "walk_m": 298,
+     "fit": "fits",
+     "verified": true
+    }
+   ],
+   "alley_fit_known_pct": 70.2
+  },
+  "parcels": {
+   "ways": 0,
+   "cuts": 0,
+   "deep_cuts": 0,
+   "narrowest_usable_m": null
+  }
+ },
+ {
+  "name": "Hẻm 105 Nguyễn Tư Giản",
+  "lat": 10.8331714,
+  "lon": 106.6396716,
+  "way_id": 32576497,
+  "cell": [
+   2,
+   0
+  ],
+  "vehicle_id": "toyota-fortuner",
+  "intent": "park",
+  "build_s": 477,
+  "build": {
+   "map": "1290 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "7 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 0 tin Alonhadat ở Quận Gò Vấp, Quận 12",
+   "match": "115 tin trong khu vực → 10 tin khớp 10 hẻm",
+   "news": "10 tin về Nguyễn Tư Giản, Bùi Quang Là, Phan Huy Ích",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Nguyễn Tư Giản",
+     "kind": "street",
+     "walk_m": 127,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Bùi Quang Là",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 8.1
+  },
+  "B_live": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Nguyễn Tư Giản",
+     "kind": "street",
+     "walk_m": 127,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Bùi Quang Là",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 8.1
+  },
+  "C_parcels": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không đủ chỗ mở cửa xe (cần 2.75 m)"
+   ],
+   "stops": [
+    {
+     "name": "Bùi Quang Là",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 203 Huỳnh Văn Nghệ",
+     "kind": "street",
+     "walk_m": 313,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 8.7
+  },
+  "parcels": {
+   "ways": 7,
+   "cuts": 64,
+   "deep_cuts": 59,
+   "narrowest_usable_m": 0.84
+  }
+ },
+ {
+  "name": "Hẻm 82 Lý Chính Thắng",
+  "lat": 10.7908868,
+  "lon": 106.6837467,
+  "way_id": 35114176,
+  "cell": [
+   2,
+   1
+  ],
+  "vehicle_id": "vinfast-vf-5",
+  "intent": "pickup",
+  "build_s": 141,
+  "build": {
+   "map": "2304 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "4 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "783 tin Chợ Tốt + 0 tin Alonhadat ở Quận 3, Quận Phú Nhuận",
+   "match": "491 tin trong khu vực → 76 tin khớp 53 hẻm",
+   "news": "12 tin về Lý Chính Thắng, Nam Kỳ Khởi Nghĩa, Cầu Công Lý",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Dừng đón/trả tại Nam Kỳ Khởi Nghĩa, đi bộ 79 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 79,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 146,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 380 Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 11,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 45.6
+  },
+  "B_live": {
+   "verdict": "Dừng đón/trả tại Nam Kỳ Khởi Nghĩa, đi bộ 79 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 79,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 146,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 380 Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 11,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 45.7
+  },
+  "C_parcels": {
+   "verdict": "Dừng đón/trả tại Nam Kỳ Khởi Nghĩa, đi bộ 79 m (~1 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 79,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 146,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 380 Nam Kỳ Khởi Nghĩa",
+     "kind": "street",
+     "walk_m": 11,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 45.9
+  },
+  "parcels": {
+   "ways": 4,
+   "cuts": 19,
+   "deep_cuts": 13,
+   "narrowest_usable_m": 1.41
+  }
+ },
+ {
+  "name": "Hẻm 193 Ung Văn Khiêm",
+  "lat": 10.8060005,
+  "lon": 106.7209677,
+  "way_id": 610082061,
+  "cell": [
+   2,
+   2
+  ],
+  "vehicle_id": "toyota-vios",
+  "intent": "park",
+  "build_s": 3975,
+  "build": {
+   "map": "4845 đoạn đường OSM (bản tải sẵn)",
+   "parcels": "1 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "680 tin Chợ Tốt + 54 tin Alonhadat ở Quận Bình Thạnh, Quận 1",
+   "match": "474 tin trong khu vực → 68 tin khớp 57 hẻm",
+   "news": "0 tin về Ung Văn Khiêm, Nguyễn Văn Thương, Võ Oanh",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Đường Nguyễn Văn Thương, đi bộ 306 m (~4 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Nguyễn Văn Thương",
+     "kind": "street",
+     "walk_m": 306,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường D5",
+     "kind": "street",
+     "walk_m": 388,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 70.6
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Đường Nguyễn Văn Thương, đi bộ 306 m (~4 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Nguyễn Văn Thương",
+     "kind": "street",
+     "walk_m": 306,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường D5",
+     "kind": "street",
+     "walk_m": 388,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 70.6
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Đường Nguyễn Văn Thương, đi bộ 306 m (~4 phút)",
+   "code": "nearby",
+   "door_fit": "fits",
+   "door_ok": true,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường Nguyễn Văn Thương",
+     "kind": "street",
+     "walk_m": 306,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Đường D5",
+     "kind": "street",
+     "walk_m": 388,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Trước cửa nhà",
+     "kind": "door",
+     "walk_m": 0,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 70.6
+  },
+  "parcels": {
+   "ways": 1,
+   "cuts": 4,
+   "deep_cuts": 4,
+   "narrowest_usable_m": 3.96
+  }
+ },
+ {
+  "name": "Hẻm 35 Đường 297",
+  "lat": 10.8249749,
+  "lon": 106.7730038,
+  "way_id": 306214183,
+  "cell": [
+   2,
+   3
+  ],
+  "vehicle_id": "toyota-fortuner",
+  "intent": "park",
+  "build_s": 80,
+  "build": {
+   "map": "910 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "0 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 54 tin Alonhadat ở Thành phố Thủ Đức, Quận Bình Thạnh",
+   "match": "123 tin trong khu vực → 1 tin khớp 1 hẻm",
+   "news": "0 tin về Đỗ Xuân Hợp, Tăng Nhơn Phú, Trần Đức Thảo",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Số 297",
+     "kind": "street",
+     "walk_m": 101,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 174,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 58.4
+  },
+  "B_live": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Số 297",
+     "kind": "street",
+     "walk_m": 101,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 174,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 58.4
+  },
+  "C_parcels": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Số 297",
+     "kind": "street",
+     "walk_m": 101,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 174,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Đường số 297",
+     "kind": "street",
+     "walk_m": 275,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 58.4
+  },
+  "parcels": {
+   "ways": 0,
+   "cuts": 0,
+   "deep_cuts": 0,
+   "narrowest_usable_m": null
+  }
+ },
+ {
+  "name": "Hẻm 448/65 Phan Huy Ích",
+  "lat": 10.8409595,
+  "lon": 106.6409951,
+  "way_id": 226513119,
+  "cell": [
+   3,
+   0
+  ],
+  "vehicle_id": "vinfast-vf-5",
+  "intent": "pickup",
+  "build_s": 288,
+  "build": {
+   "map": "1449 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "8 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 0 tin Alonhadat ở Quận Gò Vấp, Quận 12",
+   "match": "191 tin trong khu vực → 13 tin khớp 13 hẻm",
+   "news": "11 tin về Phan Huy Ích, Nguyễn Duy Cung, Nguyễn Trần Cung",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Chỉ có điểm dừng hạn chế theo luật",
+   "code": "unverified",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Hẻm 448 Phan Huy Ích",
+     "kind": "street",
+     "walk_m": 139,
+     "fit": "unknown",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 16.0
+  },
+  "B_live": {
+   "verdict": "Chỉ có điểm dừng hạn chế theo luật",
+   "code": "unverified",
+   "door_fit": "unknown",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Hẻm 448 Phan Huy Ích",
+     "kind": "street",
+     "walk_m": 139,
+     "fit": "unknown",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 16.5
+  },
+  "C_parcels": {
+   "verdict": "Chỉ có điểm dừng hạn chế theo luật",
+   "code": "unverified",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Hẻm 362/25 Phan Huy Ích",
+     "kind": "street",
+     "walk_m": 144,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 17.1
+  },
+  "parcels": {
+   "ways": 8,
+   "cuts": 44,
+   "deep_cuts": 34,
+   "narrowest_usable_m": 0.51
+  }
+ },
+ {
+  "name": "Hẻm 1124/2 Lê Đức Thọ",
+  "lat": 10.8519983,
+  "lon": 106.6626241,
+  "way_id": 624225997,
+  "cell": [
+   3,
+   1
+  ],
+  "vehicle_id": "toyota-vios",
+  "intent": "park",
+  "build_s": 177,
+  "build": {
+   "map": "1508 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "8 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 0 tin Alonhadat ở Quận Gò Vấp, Quận 12",
+   "match": "155 tin trong khu vực → 9 tin khớp 8 hẻm",
+   "news": "3 tin về Lê Đức Thọ, Trương Minh Ký, Phạm Văn Chiêu",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": null,
+   "door_ok": null,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 84,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Đường số 2",
+     "kind": "street",
+     "walk_m": 127,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 1144 Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 136,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "B_live": {
+   "verdict": "Chưa đủ bằng chứng để khẳng định",
+   "code": "unverified",
+   "door_fit": null,
+   "door_ok": null,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 84,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Đường số 2",
+     "kind": "street",
+     "walk_m": 127,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Hẻm 1144 Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 136,
+     "fit": "tight",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Đường số 2, đi bộ 127 m (~2 phút)",
+   "code": "nearby",
+   "door_fit": null,
+   "door_ok": null,
+   "door_fail": [],
+   "stops": [
+    {
+     "name": "Đường số 2",
+     "kind": "street",
+     "walk_m": 127,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 84,
+     "fit": "fits",
+     "verified": false
+    },
+    {
+     "name": "Lê Đức Thọ",
+     "kind": "street",
+     "walk_m": 176,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 55.1
+  },
+  "parcels": {
+   "ways": 8,
+   "cuts": 15,
+   "deep_cuts": 8,
+   "narrowest_usable_m": 0.89
+  }
+ },
+ {
+  "name": "Hẻm 841 Quốc lộ 13",
+  "lat": 10.8674407,
+  "lon": 106.7203492,
+  "way_id": 315635795,
+  "cell": [
+   3,
+   2
+  ],
+  "vehicle_id": "toyota-fortuner",
+  "intent": "park",
+  "build_s": 74,
+  "build": {
+   "map": "759 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "0 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 54 tin Alonhadat ở Thành phố Thủ Đức, Quận Bình Thạnh",
+   "match": "143 tin trong khu vực → 0 tin khớp 0 hẻm",
+   "news": "0 tin về Cầu vượt Ngã tư Bình Phước, Đỗ Mười, Vòng xoay Ngã tư Bình Phước",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Đỗ tại Đường Quốc lộ 13 cũ, đi bộ 192 m (~3 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 192,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 841 Quốc lộ 13",
+     "kind": "street",
+     "walk_m": 31,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Nhánh cạnh Hèm 176 Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 110,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 65.1
+  },
+  "B_live": {
+   "verdict": "Đỗ tại Đường Quốc lộ 13 cũ, đi bộ 192 m (~3 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 192,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 841 Quốc lộ 13",
+     "kind": "street",
+     "walk_m": 31,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Nhánh cạnh Hèm 176 Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 110,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 65.1
+  },
+  "C_parcels": {
+   "verdict": "Đỗ tại Đường Quốc lộ 13 cũ, đi bộ 192 m (~3 phút)",
+   "code": "nearby",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [
+    {
+     "name": "Đường Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 192,
+     "fit": "fits",
+     "verified": true
+    },
+    {
+     "name": "Hẻm 841 Quốc lộ 13",
+     "kind": "street",
+     "walk_m": 31,
+     "fit": "tight",
+     "verified": false
+    },
+    {
+     "name": "Nhánh cạnh Hèm 176 Quốc lộ 13 cũ",
+     "kind": "street",
+     "walk_m": 110,
+     "fit": "fits",
+     "verified": false
+    }
+   ],
+   "alley_fit_known_pct": 65.1
+  },
+  "parcels": {
+   "ways": 0,
+   "cuts": 0,
+   "deep_cuts": 0,
+   "narrowest_usable_m": null
+  }
+ },
+ {
+  "name": "Hẻm 22 Đường Số 6",
+  "lat": 10.8442519,
+  "lon": 106.7604962,
+  "way_id": 606903843,
+  "cell": [
+   3,
+   3
+  ],
+  "vehicle_id": "vinfast-vf-5",
+  "intent": "pickup",
+  "build_s": 205,
+  "build": {
+   "map": "1069 đoạn đường OSM (Overpass trực tiếp)",
+   "parcels": "0 hẻm gần điểm đến có bề rộng theo thửa đất",
+   "listings": "800 tin Chợ Tốt + 54 tin Alonhadat ở Thành phố Thủ Đức, Quận Bình Thạnh",
+   "match": "134 tin trong khu vực → 1 tin khớp 1 hẻm",
+   "news": "3 tin về Đặng Văn Bi, Dân Chủ, Hồng Đức",
+   "photos": "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao"
+  },
+  "build_error": null,
+  "A_static": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 66.8
+  },
+  "B_live": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 66.8
+  },
+  "C_parcels": {
+   "verdict": "Không có điểm dừng phù hợp trong 150 m đi bộ",
+   "code": "none",
+   "door_fit": "tight",
+   "door_ok": false,
+   "door_fail": [
+    "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+   ],
+   "stops": [],
+   "alley_fit_known_pct": 66.8
+  },
+  "parcels": {
+   "ways": 0,
+   "cuts": 0,
+   "deep_cuts": 0,
+   "narrowest_usable_m": null
+  }
+ }
+]

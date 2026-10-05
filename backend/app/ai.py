@@ -2,7 +2,7 @@
 
 - ai_text_rules:     text (ordinance, news, social post) → Stop Rules / flood reports, through the review gate
 - ai_photo_evidence: driver photo → sign / alley width / flood depth
-- ai_camera_flood:   public HCMC traffic-camera still → flood-now evidence
+- ai_camera_flood:   public HCMC traffic cameras → flood-now and traffic-now evidence (see cameras.py)
 
 Everything goes through one LLM adapter. Set one of GEMINI_API_KEY, OPENAI_API_KEY or
 ANTHROPIC_API_KEY in .env.local (optionally AI_MODEL). Output always passes the
@@ -24,7 +24,6 @@ from .config import STORE
 VN_TZ = timezone(timedelta(hours=7))
 REVIEW_FILE = STORE / "review_queue.jsonl"
 LIVE_FLOOD_FILE = STORE / "live_flood_reports.jsonl"
-CAMERA_URL = "https://giaothong.hochiminhcity.gov.vn/render/ImageHandler.ashx?id={cam}&t={ms}"
 
 
 class FeatureOff(Exception):
@@ -63,14 +62,18 @@ def provider() -> tuple[str, str] | None:
     return None
 
 
-def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> dict:
+def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str = "image/jpeg",
+          model: str | None = None) -> dict:
+    """One model call. `image` may be a list mixing images (bytes) and text labels (str), in order."""
     prov = provider()
     if not prov:
         raise NoModel("Cần GEMINI_API_KEY, OPENAI_API_KEY hoặc ANTHROPIC_API_KEY trong .env.local")
-    name, model = prov
-    b64 = base64.b64encode(image).decode() if image else None
+    name, model = prov[0], (model if prov[0] == "gemini" and model else prov[1])
+    items = image if isinstance(image, list) else [image] if image else []
+    b64s = [x if isinstance(x, str) else ("b64", base64.b64encode(x).decode()) for x in items]
     if name == "gemini":
-        parts = [{"text": prompt}] + ([{"inline_data": {"mime_type": mime, "data": b64}}] if b64 else [])
+        parts = [{"text": prompt}] + [{"text": x} if isinstance(x, str) else
+                                      {"inline_data": {"mime_type": mime, "data": x[1]}} for x in b64s]
         body = {"contents": [{"parts": parts}],
                 "generationConfig": {"responseMimeType": "application/json", "temperature": 0}}
         r = None
@@ -84,8 +87,8 @@ def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> 
         text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
     elif name == "openai":
         content = [{"type": "text", "text": prompt}]
-        if b64:
-            content.append({"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}})
+        content += [{"type": "text", "text": x} if isinstance(x, str) else
+                    {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{x[1]}"}} for x in b64s]
         r = httpx.post("https://api.openai.com/v1/chat/completions",
                        headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
                        json={"model": model, "temperature": 0, "response_format": {"type": "json_object"},
@@ -93,7 +96,8 @@ def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> 
         r.raise_for_status()
         text = r.json()["choices"][0]["message"]["content"]
     else:
-        content = ([{"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}}] if b64 else []) \
+        content = [{"type": "text", "text": x} if isinstance(x, str) else
+                   {"type": "image", "source": {"type": "base64", "media_type": mime, "data": x[1]}} for x in b64s] \
             + [{"type": "text", "text": prompt + "\nRespond with JSON only."}]
         r = httpx.post("https://api.anthropic.com/v1/messages",
                        headers={"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01"},
@@ -187,28 +191,6 @@ def read_listing_photo(image: bytes, mime: str = "image/jpeg") -> dict:
     out["gate"] = _gate(out, ["alley_width_m", "reference"])
     out["model"] = "/".join(provider() or ())
     return out
-
-
-CAMERA_PROMPT = """Ảnh camera giao thông TP.HCM. Mặt đường có ngập nước không? Trả về JSON:
-{"flooded":true|false,"depth_class":"kho|duoi_15cm|15_30cm|30_50cm|tren_50cm|khong_ro",
- "evidence":"dựa vào đâu (bánh xe, lề đường, sóng nước...)","confidence":0-1}"""
-
-
-def read_camera(camera_id: str, street: str, lat: float, lon: float) -> dict:
-    _require("ai_camera_flood")
-    ms = int(datetime.now().timestamp() * 1000)
-    img = httpx.get(CAMERA_URL.format(cam=camera_id, ms=ms), timeout=20,
-                    headers={"User-Agent": "VaoDuoc-hackathon/0.1"}).content
-    out = _call(CAMERA_PROMPT, img, "image/jpeg")
-    depth = {"duoi_15cm": 10, "15_30cm": 25, "30_50cm": 40, "tren_50cm": 60}.get(out.get("depth_class"))
-    rec = {"kind": "flood_report", "street": street, "lat": lat, "lon": lon, "camera_id": camera_id,
-           "depth_cm": depth if out.get("flooded") else 0, "observed_at": datetime.now(VN_TZ).isoformat(),
-           "confidence": out.get("confidence"), "evidence": out.get("evidence"), "source": "camera"}
-    rec["gate"] = _gate(rec, ["street", "depth_cm", "observed_at"])
-    _append(REVIEW_FILE, rec)
-    if rec["gate"] == "ACCEPT":
-        _append(LIVE_FLOOD_FILE, rec)
-    return rec
 
 
 def review_queue(limit: int = 50) -> list[dict]:

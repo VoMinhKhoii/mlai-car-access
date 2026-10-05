@@ -2,9 +2,9 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef } from 'react'
-import type { Plan } from './api'
+import type { CameraInfo, Corridor, Plan } from './api'
 
-export interface LayerToggles { fit: boolean; flood: boolean; goong: boolean }
+export interface LayerToggles { fit: boolean; flood: boolean; goong: boolean; cams: boolean }
 export type FloodMoment = 'arrive' | 'depart'
 type LL = { lat: number; lon: number }
 
@@ -19,6 +19,10 @@ interface Props {
   floodMoment: FloodMoment
   padding: { top: number; left: number; right: number; bottom: number }
   frame: 'arrival' | 'trip'
+  corridor: Corridor | null
+  routeSel: number
+  cams: CameraInfo[]
+  onCameraClick: (id: string) => void
   onPick: (lat: number, lon: number, x: number, y: number) => void
   onWayClick: (wayId: number, lat: number, lon: number) => void
   onStopClick: (index: number) => void
@@ -52,7 +56,10 @@ export function MapView(p: Props) {
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
       const fit = { fits: css('--fit-fits'), tight: css('--fit-tight'), no: css('--fit-no'), unknown: css('--fit-unknown'), blocked: css('--fit-blocked') }
-      ;['flood', 'fit', 'goong', 'approach', 'route', 'wayout', 'walk'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
+      ;['corridor', 'flood', 'fit', 'goong', 'approach', 'route', 'wayout', 'walk', 'cams'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
+      // Large-road alternatives under everything else; the chosen one is drawn like the route itself.
+      m.addLayer({ id: 'corridor-alt', type: 'line', source: 'corridor', filter: ['!', ['get', 'sel']], layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': css('--n-500'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 6], 'line-opacity': 0.45 } })
       m.addLayer({ id: 'flood', type: 'line', source: 'flood', layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--flood-risky'), 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 2, 17, 9], 'line-opacity': 0.28 } })
       const notMain: maplibregl.FilterSpecification = ['!=', ['get', 'kind'], 'main']
@@ -62,6 +69,10 @@ export function MapView(p: Props) {
       m.addLayer({ id: 'fit-unknown', type: 'line', source: 'fit', filter: ['all', notMain, ['==', ['get', 'fit'], 'unknown']],
         paint: { 'line-color': fit.unknown, 'line-dasharray': [1.4, 1.4], 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 1, 17, 3],
           'line-opacity': ['interpolate', ['linear'], ['zoom'], 13.5, 0, 14.5, 0.8] } })
+      m.addLayer({ id: 'corridor-casing', type: 'line', source: 'corridor', filter: ['get', 'sel'], layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 6, 17, 12] } })
+      m.addLayer({ id: 'corridor-sel', type: 'line', source: 'corridor', filter: ['get', 'sel'], layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': css('--route'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3.5, 17, 7], 'line-opacity': 0.85 } })
       m.addLayer({ id: 'goong', type: 'line', source: 'goong', layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--route-goong'), 'line-width': 3, 'line-dasharray': [0.1, 1.8], 'line-opacity': 0.85 } })
       for (const id of ['approach', 'route']) {
@@ -74,10 +85,17 @@ export function MapView(p: Props) {
         paint: { 'line-color': css('--route'), 'line-width': 3, 'line-dasharray': [0.1, 1.6], 'line-opacity': 0.9 } })
       m.addLayer({ id: 'walk', type: 'line', source: 'walk', layout: { 'line-cap': 'round' },
         paint: { 'line-color': css('--signal'), 'line-width': 4, 'line-dasharray': [0.1, 1.5] } })
+      const cam = { ok: css('--fit-fits'), un: css('--fit-tight'), jam: css('--fit-no'), water: css('--flood-risky'), none: css('--fit-unknown') }
+      m.addLayer({ id: 'cams', type: 'circle', source: 'cams', minzoom: 10.5,
+        paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, ['case', ['get', 'read'], 4, 2.5], 16, ['case', ['get', 'read'], 8, 5]],
+          'circle-color': ['match', ['get', 'cls'], 'cam-water', cam.water, 'cam-ket_cung', cam.jam, 'cam-un_u', cam.un, 'cam-dong', css('--traffic-busy'), 'cam-thong_thoang', cam.ok, cam.none],
+          'circle-stroke-color': '#ffffff', 'circle-stroke-width': ['case', ['get', 'read'], 2, 1] } })
       ready.current = true
       sync()
     })
     m.on('click', (e) => {
+      const cam = m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: ['cams'] })
+      if (cam.length) return cb.current.onCameraClick(String(cam[0].properties?.id))
       const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
     })
@@ -88,7 +106,7 @@ export function MapView(p: Props) {
       press = window.setTimeout(() => cb.current.onPick(e.lngLat.lat, e.lngLat.lng, e.point.x, e.point.y), 550)
     })
     for (const ev of ['touchend', 'touchmove', 'dragstart'] as const) m.on(ev, () => window.clearTimeout(press))
-    for (const id of ['fit', 'fit-unknown']) {
+    for (const id of ['fit', 'fit-unknown', 'cams']) {
       m.on('mouseenter', id, () => { m.getCanvas().style.cursor = 'pointer' })
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
@@ -99,13 +117,22 @@ export function MapView(p: Props) {
   const sync = () => {
     const m = map.current
     if (!m || !ready.current) return
-    const { plan, selected, toggles, floodMoment, destination, origin } = cb.current
+    const { plan, selected, toggles, floodMoment, destination, origin, corridor, routeSel, cams } = cb.current
     const set = (id: string, data: GeoJSON.FeatureCollection) => (m.getSource(id) as GeoJSONSource | undefined)?.setData(data)
     const sp = plan?.stop_points[selected]
     set('fit', plan && toggles.fit ? plan.layers.fit : EMPTY)
     set('flood', plan && toggles.flood ? plan.layers.flood : EMPTY)
     set('goong', line(toggles.goong ? plan?.standard_route?.geometry : undefined))
-    set('approach', line(sp?.approach?.geometry))
+    // With a corridor, its chosen large-road route replaces the stop's own Goong approach.
+    set('approach', line(corridor ? undefined : sp?.approach?.geometry))
+    set('corridor', corridor ? { type: 'FeatureCollection', features: corridor.routes.map((r) => ({
+      type: 'Feature', properties: { id: r.id, sel: r.id === routeSel }, geometry: { type: 'LineString', coordinates: r.geometry } })) } : EMPTY)
+    set('cams', toggles.cams ? { type: 'FeatureCollection', features: cams.map((c) => {
+      const r = c.reading
+      const read = !!r && r.state === 'ok'
+      const cls = !read ? 'cam-none' : r.depth_cm ? 'cam-water' : `cam-${r.traffic ?? 'none'}`
+      return { type: 'Feature', properties: { id: c.id, read, cls }, geometry: { type: 'Point', coordinates: [c.lon, c.lat] } }
+    }) } : EMPTY)
     set('route', line(sp?.route_in?.geometry))
     set('wayout', line(sp?.way_out?.geometry))
     set('walk', line(sp?.walk?.geometry))
@@ -136,7 +163,7 @@ export function MapView(p: Props) {
 
     // Frame the whole trip once per new plan (origin → stop → destination).
     const { frame } = cb.current
-    const sig = plan ? `${plan.destination.lat},${plan.destination.lon},${plan.origin?.lat},${frame}` : ''
+    const sig = plan ? `${plan.destination.lat},${plan.destination.lon},${plan.origin?.lat},${frame},${frame === 'trip' ? `${corridor?.checked_at}${routeSel}` : ''}` : ''
     if (plan && sig !== framed.current) {
       framed.current = sig
       // Arrival frame: the last stretch is the product. Trip frame: origin to destination, like any map.
@@ -145,14 +172,16 @@ export function MapView(p: Props) {
       if (sp?.route_in) pts.push(...sp.route_in.geometry)
       if (frame === 'trip') {
         if (origin) pts.push([origin.lon, origin.lat])
-        if (sp?.approach) pts.push(...sp.approach.geometry)
+        if (sp?.approach && !corridor) pts.push(...sp.approach.geometry)
+        const cr = corridor?.routes.find((r) => r.id === routeSel)
+        if (cr) pts.push(...cr.geometry)
       }
       const b = pts.reduce((bb, c) => bb.extend(c as [number, number]), new maplibregl.LngLatBounds(pts[0] as [number, number], pts[0] as [number, number]))
       m.fitBounds(b, { padding: cb.current.padding, maxZoom: frame === 'trip' ? 16 : 17, duration: 900 })
     }
   }
 
-  useEffect(sync, [p.plan, p.selected, p.toggles, p.floodMoment, p.destination, p.origin, p.frame])
+  useEffect(sync, [p.plan, p.selected, p.toggles, p.floodMoment, p.destination, p.origin, p.frame, p.corridor, p.routeSel, p.cams])
 
   useEffect(() => {
     const m = map.current
