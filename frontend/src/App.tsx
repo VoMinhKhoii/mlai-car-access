@@ -259,7 +259,12 @@ export default function App() {
           onCameraClick={(id) => { setWay(null); openCamera(id) }}
           onPick={(lat, lon, x, y) => setPick({ lat, lon, x, y })}
           onWayClick={openEvidence}
-          onStopClick={(i) => { setSelected(i); setSheet((s) => (s === 'peek' ? 'half' : s)) }} />
+          onStopClick={(i) => {
+            setSelected(i)
+            setSheet((s) => (s === 'peek' ? 'half' : s))
+            // A pin can select a stop that is scrolled out of the list: bring its card (header, evidence link) into view.
+            requestAnimationFrame(() => document.querySelectorAll('.stop')[i]?.scrollIntoView({ block: 'start', behavior: 'smooth' }))
+          }} />
       </ErrorBoundary>
 
       <div className="side">
