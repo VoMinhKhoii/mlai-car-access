@@ -121,6 +121,17 @@ class Corridor(unittest.TestCase):
         self.assertFalse(best["is_goong"])
 
 
+class OfficialRegistry(unittest.TestCase):
+    def test_ajaxpro_datatables(self):
+        # Shape of the portal's answer: nested DataTable literals, and ")" inside names.
+        raw = ('{"value":[{},[[],new Ajax.Web.DataTable([["CamId","System.Object"],["DisplayName","System.Object"],'
+               '["Location","System.Object"]],[["abc","PVĐ (hướng đi Sân bay)",new Ajax.Web.DataTable('
+               '[["Shape","System.Object"]],[["POINT(106.7 10.8)"]])]])],1]}')
+        rows = cameras._table(cameras._ajaxpro_json(raw)["value"][1][1])
+        self.assertEqual(rows[0]["DisplayName"], "PVĐ (hướng đi Sân bay)")
+        self.assertEqual(cameras._table(rows[0]["Location"])[0]["Shape"], "POINT(106.7 10.8)")
+
+
 class CameraNames(unittest.TestCase):
     def test_street_names(self):
         self.assertEqual(cameras.street_names({"name": "Cầu Sài Gòn 2 (dạ cầu)"}), ["cau sai gon"])

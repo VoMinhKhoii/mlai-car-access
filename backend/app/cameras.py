@@ -1,7 +1,8 @@
 """Public HCMC traffic cameras → flood-now and traffic-now evidence (D34), flag `ai_camera_flood`.
 
-Registry: data/cameras/hcmc_cameras.json (pipelines/camera_registry.py), ~800 cameras of
-Cổng thông tin giao thông TP.HCM. A still refreshes about every 12 s, so a reading takes two
+Registry: the camera layer of Cổng thông tin giao thông TP.HCM, ~800 cameras with the portal's own
+status (UP / NOT_IMAGE), fetched from the portal hourly the way its public map page does; the shipped
+data/cameras/hcmc_cameras.json (pipelines/camera_registry.py) is the fallback. A still refreshes about every 12 s, so a reading takes two
 frames a refresh apart and the vision model reads them together: queued traffic that has not
 moved is seen, not guessed from one frame. Offline cameras answer a fixed placeholder image and
 are never sent to the model. Every reading is logged to store/camera_readings.jsonl.
@@ -16,7 +17,6 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
-from functools import lru_cache
 
 import httpx
 
@@ -29,6 +29,12 @@ REGISTRY = DATA / "cameras" / "hcmc_cameras.json"
 READINGS_FILE = STORE / "camera_readings.jsonl"
 SNAPSHOT_URL = "https://giaothong.hochiminhcity.gov.vn/render/ImageHandler.ashx?id={cam}&t={ms}"
 PORTAL_URL = "https://giaothong.hochiminhcity.gov.vn/Map.aspx"
+LAYER_URL = "https://giaothong.hochiminhcity.gov.vn/ajaxpro/VDMS.Web.Library.AJAX.FolderAjax,VDMS.Web.Library.ashx"
+# The request the portal's map page sends when its "Camera" layer is switched on.
+LAYER_QUERY = {"path": "/root/vdms/tangthu/data/layerdata/camera", "isInTree": False, "searchKey": "",
+               "layer": ["CAMERA"], "detail": True, "page": 0, "limit": -1, "filterQuery": ["Publish:true"],
+               "sortby": None, "returnFields": ["CamId", "Code", "Location", "CamType", "CamStatus"]}
+REGISTRY_TTL_S = 3600
 PLACEHOLDER_MD5 = "27bc56b5710fe8ddb7e6665dfd735f1e"  # "IMAGE NOT AVAILABLE", 2,638 bytes
 REFRESH_S = 13
 SNAP_TTL_S = 10
@@ -62,14 +68,93 @@ class FeatureOff(Exception):
     pass
 
 
-@lru_cache(maxsize=1)
+_reg: dict = {"t": 0.0, "data": None, "by_id": {}}
+_reg_lock = threading.Lock()
+
+
 def registry() -> dict:
-    return json.loads(REGISTRY.read_text(encoding="utf-8"))
+    """Cameras with the portal's current status; refreshed hourly, the shipped file if the portal is down."""
+    with _reg_lock:
+        if time.time() - _reg["t"] > REGISTRY_TTL_S:
+            _reg["t"] = time.time()  # a portal outage is retried next hour, not on every request
+            try:
+                _set_registry({"source": "Cổng thông tin giao thông TP.HCM (camera layer, live)",
+                               "fetched_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
+                               "cameras": fetch_official()})
+            except Exception as exc:
+                print(f"camera registry: portal unavailable ({type(exc).__name__}), using shipped file")
+                if _reg["data"] is None:
+                    _set_registry(json.loads(REGISTRY.read_text(encoding="utf-8")))
+        return _reg["data"]
 
 
-@lru_cache(maxsize=1)
+def _set_registry(data: dict) -> None:
+    _reg["data"], _reg["by_id"] = data, {c["id"]: c for c in data["cameras"]}
+
+
 def by_id() -> dict[str, dict]:
-    return {c["id"]: c for c in registry()["cameras"]}
+    registry()
+    return _reg["by_id"]
+
+
+def fetch_official() -> list[dict]:
+    """The portal's camera layer, asked for exactly as its public map page asks (anonymous visitor session)."""
+    with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (VaoDuoc-hackathon)"}, timeout=60,
+                      follow_redirects=True) as c:
+        c.get(PORTAL_URL).raise_for_status()
+        r = c.post(LAYER_URL, content=json.dumps(LAYER_QUERY),
+                   headers={"Content-Type": "text/plain; charset=utf-8", "X-AjaxPro-Method": "SearchQuery"})
+        r.raise_for_status()
+    value = _ajaxpro_json(r.text)["value"]
+    rows = next(t for t in value[1] if isinstance(t, list) and t and isinstance(t[0], list)
+                and any(col[0] == "CamId" for col in t[0]))
+    cams = []
+    for row in _table(rows):
+        point = re.match(r"POINT\(([\d.]+) ([\d.]+)\)", (_table(row["Location"]) or [{}])[0].get("Shape") or "")
+        if not row.get("CamId") or not point:
+            continue
+        cams.append({"id": row["CamId"], "name": (row.get("DisplayName") or row.get("Title") or "").strip(),
+                     "lat": round(float(point.group(2)), 7), "lon": round(float(point.group(1)), 7),
+                     "code": row.get("Code") or "", "type": row.get("CamType") or "",
+                     "status": row.get("CamStatus") or ""})
+    if len(cams) < 100:
+        raise ValueError(f"only {len(cams)} cameras")
+    return cams
+
+
+_DATATABLE = "new Ajax.Web.DataTable("
+
+
+def _ajaxpro_json(text: str):
+    """AjaxPro answers JSON with `new Ajax.Web.DataTable(cols, rows)` literals; turn those into arrays."""
+    out, i, in_str, n = [], 0, False, len(text)
+    while i < n:
+        ch = text[i]
+        if in_str:
+            out.append(ch)
+            if ch == "\\":
+                out.append(text[i + 1])
+                i += 2
+                continue
+            in_str = ch != '"'
+        elif ch == '"':
+            in_str = True
+            out.append(ch)
+        elif text.startswith(_DATATABLE, i):
+            out.append("[")
+            i += len(_DATATABLE)
+            continue
+        else:
+            out.append("]" if ch == ")" else ch)
+        i += 1
+    return json.loads("".join(out))
+
+
+def _table(dt) -> list[dict]:
+    if not dt:
+        return []
+    names = [c[0] for c in dt[0]]
+    return [dict(zip(names, r)) for r in dt[1]]
 
 
 def near(lat: float, lon: float, radius_m: float) -> list[dict]:
@@ -97,6 +182,8 @@ def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S) -> bytes | None:
     hit = _snaps.get(cam_id)
     if hit and time.time() - hit[0] < max_age_s:
         return hit[1]
+    if by_id().get(cam_id, {}).get("status") == "NOT_IMAGE":  # the portal itself says it has no picture
+        return None
     img = None
     try:
         r = httpx.get(SNAPSHOT_URL.format(cam=cam_id, ms=int(time.time() * 1000)), timeout=12,
