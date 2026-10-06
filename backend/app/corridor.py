@@ -16,7 +16,7 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from . import cameras, flags
+from . import cameras, flags, hydro
 from .config import GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
 from .flood import (DepthRange, FloodProfile, _street_key, depth_at, flood_status, load_records)
 from .osm import ALLEY_NAME, haversine, strip_accents
@@ -171,7 +171,11 @@ def _forecast_flood(pts, route, depart, rain, safe) -> list[dict]:
     for street, hits in groups.items():
         along = min(a for a, _ in hits)
         t = depart + timedelta(seconds=route["duration_s"] * along / total)
-        dr = depth_at(FloodProfile([r for _, r in hits]), t, rain, street)
+        if not rain and flags.enabled("live_hydro"):  # no what-if rain: measured near this street, then forecast
+            spells = hydro.rain_spells(hits[0][1].lat, hits[0][1].lon)
+        else:
+            spells = rain
+        dr = depth_at(FloodProfile([r for _, r in hits]), t, spells, street)
         if dr is None:
             continue
         out.append({"street": street, "at": _fmt(t), "along_m": round(along), "depth": dr.to_json(),

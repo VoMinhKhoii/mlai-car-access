@@ -47,7 +47,7 @@ class Corridor(unittest.TestCase):
             mock.patch.object(corridor, "load_records", lambda: self.records),
             mock.patch.object(cameras, "registry", lambda: {"cameras": [CAM_X, CAM_Y]}),
             mock.patch.object(cameras, "read_many", lambda ids: {i: self.readings[i] for i in ids if i in self.readings}),
-            mock.patch.object(corridor.flags, "enabled", lambda name: True),
+            mock.patch.object(corridor.flags, "enabled", lambda name: name != "live_hydro"),  # offline
         ]
         for p in patches:
             p.start()

@@ -61,6 +61,11 @@ AI_FEATURES = {
         "detail": "Gemini + Grounding with Google Maps tóm tắt đánh giá quanh hẻm; hiển thị kèm nguồn Google Maps, không lưu.",
         "default": False,
     },
+    "live_hydro": {
+        "label": "Triều và mưa đo trực tiếp",
+        "detail": "Mực nước đo tại trạm Phú An và lượng mưa từng giờ ở ~40 trạm đo mưa TP.HCM (vndms.gov.vn), rồi dự báo Open-Meteo cho các giờ tới. Tắt thì dùng bản tin triều soạn sẵn và chỉ mưa giả định.",
+        "default": True,
+    },
     "ai_flood_prior": {
         "label": "Mô hình ngập theo lịch sử",
         "detail": "Độ nhạy ngập từng đoạn đường học từ dữ liệu IRD 2002–2026 theo mức triều và mưa.",

@@ -6,10 +6,10 @@ import math
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 
-from . import flags, parking_data
+from . import flags, hydro, parking_data
 from .config import GOONG_API_KEY, PICKUP_DWELL_MIN, REVERSE_LIMIT_M, WALK_CAP_M, WALK_WADE_M
 from .evidence import STORE_EVIDENCE, WidthRange, blocked_ways_today, width_ranges
-from .flood import (FloodProfile, FloodRecord, alarm_label, depth_at, flood_profiles, flood_status, tide_level,
+from .flood import (FloodProfile, FloodRecord, alarm_label, depth_at, flood_profiles, flood_status, tide_point,
                     worst_over)
 from .legality import ORDER as LEGAL_ORDER
 from .legality import legality_for_lot, legality_on_street
@@ -179,7 +179,8 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     dwell = dwell_min if dwell_min else (PICKUP_DWELL_MIN if intent == "pickup" else 120)
     depart = arrive + timedelta(minutes=dwell)
     stay_times = [arrive + timedelta(minutes=m) for m in range(0, dwell + 1, 15)] + [depart]
-    rain = rain_scenario or []
+    # No what-if rain from the user: measured rain around the destination, then the forecast (D35).
+    rain = rain_scenario or (hydro.rain_spells(dest_lat, dest_lon) if flags.enabled("live_hydro") else [])
     cap = WALK_CAP_M[intent]
 
     g, wrs, fps = area(dest_lat, dest_lon)
@@ -339,8 +340,9 @@ def _flood_timing(p: VehicleProfile, arrive, depart, rain) -> dict | None:
 
 
 def _tide_json(t):
-    lvl = tide_level(t)
-    return {"level_m": None if lvl is None else round(lvl, 2), "alarm": alarm_label(lvl)}
+    tp = tide_point(t)
+    lvl = tp[0] if tp else None
+    return {"level_m": None if lvl is None else round(lvl, 2), "alarm": alarm_label(lvl), "kind": tp[1] if tp else None}
 
 
 def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, stay_times, rain,

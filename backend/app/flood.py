@@ -1,7 +1,7 @@
 """Flood evidence → Depth Range per way over a Dwell Window (Q12, Q13, D14).
 
 History (IRD 2002–2026) says *which* streets flood when the tide or rain reaches a
-level; the tide forecast and rain scenario say *whether* that happens during the stay.
+level; the tide and rain (measured, then forecast: hydro.py, D35) say *whether* that happens during the stay.
 """
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from functools import lru_cache
 
-from . import flags
+from . import flags, hydro
 from .config import DATA, MOVING_WATER_BLOCK_M
 from .config import STORE as ROOT_STORE
 from .osm import AreaGraph, haversine, strip_accents
@@ -135,7 +135,22 @@ def _extremes() -> list[tuple[datetime, float]]:
     return out
 
 
+def tide_point(t: datetime) -> tuple[float, str] | None:
+    """Phú An level at t and how it is known: "measured", "model" (D35) or "bulletin" (the shipped file)."""
+    if flags.enabled("live_hydro"):
+        live = hydro.tide_point(t)
+        if live:
+            return live
+    lvl = _bulletin_level(t)
+    return None if lvl is None else (lvl, "bulletin")
+
+
 def tide_level(t: datetime) -> float | None:
+    tp = tide_point(t)
+    return tp[0] if tp else None
+
+
+def _bulletin_level(t: datetime) -> float | None:
     ex = _extremes()
     if t.tzinfo is None:
         t = t.replace(tzinfo=ex[0][0].tzinfo)
@@ -149,9 +164,9 @@ def tide_level(t: datetime) -> float | None:
 def tide_series(start: datetime, hours: int = 48, step_min: int = 15) -> list[dict]:
     out, t = [], start
     while t <= start + timedelta(hours=hours):
-        lvl = tide_level(t)
-        if lvl is not None:
-            out.append({"t": t.isoformat(), "level_m": round(lvl, 3)})
+        tp = tide_point(t)
+        if tp is not None:
+            out.append({"t": t.isoformat(), "level_m": round(tp[0], 3), "kind": tp[1]})
         t += timedelta(minutes=step_min)
     return out
 
@@ -185,13 +200,25 @@ class DepthRange:
 
 
 def rain_rate(t: datetime, scenario: list[dict]) -> float:
+    rate = 0.0  # spells overlap once measured hours drain: the wettest one counts
     for s in scenario or []:
         a, b = datetime.fromisoformat(s["start"]), datetime.fromisoformat(s["end"])
         if a.tzinfo is None and t.tzinfo is not None:
             a, b = a.replace(tzinfo=t.tzinfo), b.replace(tzinfo=t.tzinfo)
         if a <= t <= b:
-            return float(s["mm_per_h"])
-    return 0.0
+            rate = max(rate, float(s["mm_per_h"]))
+    return rate
+
+
+def _tide_depth(level: float, p: FloodProfile) -> tuple[float, float] | None:
+    a = tide_meta()["alarm_levels_m"]
+    if level >= a["BD3"]:
+        return 0.15, max(0.30, p.depth_pct(0.75, "tide", "combined") or 0)
+    if level >= a["BD2"]:
+        return 0.05, 0.20
+    if level >= a["BD1"]:
+        return 0.0, 0.10
+    return None
 
 
 LIVE_FILE = ROOT_STORE / "live_flood_reports.jsonl"
@@ -231,7 +258,7 @@ def _live_bound(name: str, t: datetime):
 
 
 def depth_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], name: str = "") -> DepthRange | None:
-    level = tide_level(t)
+    tp = tide_point(t)
     rain = rain_rate(t, rain_scenario)
     lo = hi = 0.0
     drivers: list[str] = []
@@ -241,16 +268,14 @@ def depth_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], nam
         d, r = live
         lo, hi = max(lo, max(0.0, d - 0.05)), max(hi, d + 0.05)
         drivers.append(f"Báo ngập {d * 100:.0f} cm lúc {r['observed_at'][11:16]} ({r.get('source', 'văn bản')})")
-    if p and p.count("tide", "combined") and level is not None and level >= tide_meta()["alarm_levels_m"]["BD1"]:
-        a = tide_meta()["alarm_levels_m"]
-        if level >= a["BD3"]:
-            tlo, thi = 0.15, max(0.30, p.depth_pct(0.75, "tide", "combined") or 0)
-        elif level >= a["BD2"]:
-            tlo, thi = 0.05, 0.20
-        else:
-            tlo, thi = 0.0, 0.10
-        lo, hi = max(lo, tlo), max(hi, thi)
-        drivers.append(f"Triều {level:.2f} m ({alarm_label(level)})")
+    if p and p.count("tide", "combined") and tp is not None:
+        level, kind = tp
+        err = hydro.TIDE_MODEL_ERR_M if kind == "model" else 0.0  # a model hour may be this far off
+        high, low = _tide_depth(level + err, p), _tide_depth(level - err, p)
+        if high:
+            lo, hi = max(lo, low[0] if low else 0.0), max(hi, high[1])
+            how = {"measured": "đo", "model": f"mô hình ±{err * 100:.0f} cm", "bulletin": "bản tin"}[kind]
+            drivers.append(f"Triều {level:.2f} m ({alarm_label(level) or 'dưới BĐ1'}, {how})")
     if rain >= 10:
         if p and p.count("rain", "combined"):
             if rain >= 60:
