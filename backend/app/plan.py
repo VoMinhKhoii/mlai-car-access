@@ -660,7 +660,7 @@ def goong_standard_route(g, origin, dest, fit, wrs, key: str) -> dict | None:
             wr = wrs[wid]
             bad.append({"way_id": wid, "name": g.display_name(wid), "label": wr.label, "fit": fit[wid],
                         "lo": round(wr.lo, 2), "hi": None if wr.hi >= 40 else round(wr.hi, 2)})
-    return {"geometry": coords, "unfit_ways": bad, "source": "Goong Direction v2 (car)",
+    return {"geometry": coords, "unfit_ways": bad, "source": "goong",
             "distance_m": leg["distance_m"], "duration_s": leg["duration_s"],
             "note": "Tuyến ô tô của Goong: không tính bề rộng hẻm và ngập"}
 
@@ -704,7 +704,7 @@ def _standard_route(g, de, doff, fit, wrs):
             wr = wrs[wid]
             bad.append({"way_id": wid, "name": g.display_name(wid), "label": wr.label, "fit": fit[wid],
                         "lo": round(wr.lo, 2), "hi": None if wr.hi >= 40 else round(wr.hi, 2)})
-    return {"geometry": _coords(g, nodes), "unfit_ways": bad,
+    return {"geometry": _coords(g, nodes), "unfit_ways": bad, "source": "osm",
             "note": "Tuyến bản đồ thông thường: đường ngắn nhất cho ô tô, không tính bề rộng hẻm và ngập"}
 
 

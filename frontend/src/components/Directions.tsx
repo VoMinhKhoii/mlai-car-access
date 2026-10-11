@@ -1,7 +1,8 @@
 import { ArrowUpDown, Car, Clock, Crosshair, MapPin, ParkingSquare, Search, UserRound, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { api, type Intent, type SearchResult, type Vehicle } from '../api'
 import { ChipMenu, Segmented, metres, minutes, vn } from '../ds/ui'
+import { fromLocal } from '../datetime'
 
 export interface Place { lat: number; lon: number; label: string }
 export type VehicleMode = 'class' | 'model' | 'vetc'
@@ -13,44 +14,124 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
 }) {
   const [q, setQ] = useState<string | null>(null)
   const [results, setResults] = useState<SearchResult[]>([])
+  const [active, setActive] = useState(-1)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'empty' | 'error'>('idle')
+  const [message, setMessage] = useState('')
   const timer = useRef<number | undefined>(undefined)
+  const generation = useRef(0)
+  const controller = useRef<AbortController | null>(null)
+  const input = useRef<HTMLInputElement>(null)
+  const id = useId()
   const text = q ?? value?.label ?? ''
+  const expanded = results.length > 0
+
+  const cancel = useCallback(() => {
+    generation.current++
+    window.clearTimeout(timer.current)
+    controller.current?.abort()
+    controller.current = null
+  }, [])
+  const dismiss = useCallback(() => {
+    cancel()
+    setResults([])
+    setActive(-1)
+    setStatus('idle')
+    setQ(null)
+  }, [cancel])
+  useEffect(() => () => cancel(), [cancel])
+  useEffect(() => { dismiss() }, [value, dismiss]) // external place changes also invalidate pending detail
+  useEffect(() => {
+    if (active >= 0) document.getElementById(`${id}-${active}`)?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+  }, [active, id])
 
   function type(v: string) {
+    cancel()
     setQ(v)
-    window.clearTimeout(timer.current)
-    if (v.trim().length < 2) return setResults([])
-    timer.current = window.setTimeout(() => api.search(v, near).then((r) => setResults(r.results)).catch(() => setResults([])), 250)
+    setResults([])
+    setActive(-1)
+    setStatus('idle')
+    if (v.trim().length < 2) return
+    const gen = generation.current
+    const request = new AbortController()
+    controller.current = request
+    setStatus('loading')
+    setMessage('Đang tìm địa chỉ…')
+    timer.current = window.setTimeout(async () => {
+      try {
+        const r = await api.search(v, near, request.signal)
+        if (gen !== generation.current || request.signal.aborted) return
+        setResults(r.results.slice(0, 6))
+        setStatus(r.results.length ? 'idle' : 'empty')
+        setMessage('Không tìm thấy địa chỉ. Thử tên đường hoặc địa chỉ khác.')
+      } catch {
+        if (gen !== generation.current || request.signal.aborted) return
+        setStatus('error')
+        setMessage('Không tìm được địa chỉ do lỗi kết nối. Hãy nhập lại để thử.')
+      }
+    }, 250)
   }
   async function pick(r: SearchResult) {
+    cancel()
+    const gen = generation.current
+    const request = new AbortController()
+    controller.current = request
     setResults([])
-    setQ(null)
-    let d: Place | null = r.lat != null ? { lat: r.lat, lon: r.lon!, label: r.label } : null
-    if (!d && r.place_id) d = await api.place(r.place_id)
-    if (d) onPick(d)
+    setActive(-1)
+    setQ(r.label)
+    setStatus('loading')
+    setMessage('Đang lấy vị trí địa chỉ…')
+    input.current?.focus()
+    try {
+      let place: Place | null = r.lat != null && r.lon != null ? { lat: r.lat, lon: r.lon, label: r.label } : null
+      if (!place && r.place_id) place = await api.place(r.place_id, request.signal)
+      if (gen !== generation.current || request.signal.aborted) return
+      if (!place) throw new Error('Không có vị trí')
+      setStatus('idle')
+      setQ(null)
+      onPick(place)
+    } catch {
+      if (gen !== generation.current || request.signal.aborted) return
+      setStatus('error')
+      setMessage('Không lấy được vị trí địa chỉ. Hãy tìm và chọn lại; điểm đã chọn chưa thay đổi.')
+    }
+  }
+  function key(e: React.KeyboardEvent<HTMLInputElement>) {
+    if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && results.length) {
+      e.preventDefault()
+      setActive((a) => e.key === 'ArrowDown' ? (a + 1) % results.length : (a < 0 ? results.length - 1 : (a - 1 + results.length) % results.length))
+    } else if (e.key === 'Enter' && active >= 0 && expanded) {
+      e.preventDefault()
+      void pick(results[active])
+    } else if (e.key === 'Escape') {
+      e.preventDefault()
+      dismiss()
+    }
   }
 
   return (
     <div className="place">
       <span className={`place-mark ${kind}`} aria-hidden>{kind === 'dest' ? <MapPin size={16} strokeWidth={2.4} /> : <i />}</span>
       <div className="field">
-        <input value={text} placeholder={placeholder} aria-label={kind === 'origin' ? 'Điểm đi' : 'Điểm đến'}
+        <input ref={input} value={text} placeholder={placeholder} aria-label={kind === 'origin' ? 'Điểm đi' : 'Điểm đến'}
+          role="combobox" aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-list`}
+          aria-activedescendant={expanded && active >= 0 ? `${id}-${active}` : undefined} aria-describedby={`${id}-status`} aria-busy={status === 'loading'}
           onChange={(e) => type(e.target.value)} onFocus={(e) => e.target.select()}
-          onBlur={() => window.setTimeout(() => { setResults([]); setQ(null) }, 150)} />
-        {text && <button type="button" className="icon-btn sm" aria-label="Xoá" onClick={() => { setQ(''); onPick(null) }}><X size={15} /></button>}
+          onKeyDown={key} onBlur={dismiss} />
+        {text && <button type="button" className="icon-btn sm" aria-label="Xoá" onPointerDown={(e) => e.preventDefault()}
+          onClick={() => { dismiss(); setQ(''); onPick(null); input.current?.focus() }}><X size={15} /></button>}
         {extra}
       </div>
-      {results.length > 0 && (
-        <ul className="results card" role="listbox">
-          {results.slice(0, 6).map((r, i) => (
-            <li key={i}>
-              <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => pick(r)}>
-                <Search size={15} /><span>{r.label}<small>{r.source}</small></span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul id={`${id}-list`} className="results card" role="listbox" aria-label={kind === 'origin' ? 'Gợi ý điểm đi' : 'Gợi ý điểm đến'} hidden={!expanded}>
+        {results.map((r, i) => (
+          <li key={r.place_id ?? `${r.label}-${i}`} id={`${id}-${i}`} role="option" aria-selected={active === i}
+            onPointerDown={(e) => e.preventDefault()} onClick={() => void pick(r)} onPointerMove={() => setActive(i)}>
+            <Search size={15} /><span>{r.label}<small>{r.source}</small></span>
+          </li>
+        ))}
+      </ul>
+      <div id={`${id}-status`} aria-live="polite" className={status === 'idle' ? 'sr-only' : `results card search-status ${status === 'error' ? 'error-line' : 'note'}`}>
+        {status !== 'idle' ? message : expanded ? `${results.length} địa chỉ gợi ý. Dùng phím lên, xuống và Enter để chọn.` : ''}
+      </div>
     </div>
   )
 }
@@ -114,7 +195,7 @@ export function Directions(p: {
         </ChipMenu>
 
         <ChipMenu icon={p.intent === 'park' ? <ParkingSquare size={15} /> : <UserRound size={15} />}
-          label={p.intent === 'park' ? `Đỗ xe · ${minutes(p.dwell)}` : 'Dừng đón/trả · 15 phút'}>
+          label={p.intent === 'park' ? `Đỗ xe · ${minutes(p.dwell)}` : 'Dừng đón/trả · kiểm tra 15 phút'}>
           {() => (
             <div className="menu">
               <Segmented label="Bạn sẽ" value={p.intent} onChange={p.setIntent}
@@ -122,27 +203,55 @@ export function Directions(p: {
               {p.intent === 'park' ? (
                 <label className="menu-row">Ở lại
                   <select className="select" value={p.dwell} onChange={(e) => p.setDwell(Number(e.target.value))}>
-                    {[30, 60, 120, 180, 240].map((d) => <option key={d} value={d}>{minutes(d)}</option>)}
+                    {[...new Set([30, 60, 120, 180, 240, p.dwell])].sort((a, b) => a - b).map((d) => <option key={d} value={d}>{minutes(d)}</option>)}
                   </select>
                 </label>
-              ) : <p className="note">Dừng tối đa 15 phút. Lề đường chỉ có 1 làn xe: luật cho dừng ngắn, cấm đỗ (Luật 36/2024, Điều 18).</p>}
+              ) : <p className="note">Thời gian kiểm tra dự kiến: 15 phút. Đây không phải thời gian được luật cho phép dừng; cần kiểm tra biển báo và quy định tại điểm dừng.</p>}
             </div>
           )}
         </ChipMenu>
 
         <ChipMenu icon={<Clock size={15} />} label={timeLabel} align="right">
-          {(close) => (
-            <div className="menu">
-              <Segmented label="Thời gian" value={p.arriveNow ? 'now' : 'at'} onChange={(x) => p.setArriveNow(x === 'now')}
-                options={[{ value: 'now', label: 'Đi ngay' }, { value: 'at', label: 'Đặt giờ đến' }]} />
-              {!p.arriveNow && (
-                <input className="input" type="datetime-local" value={p.arrive} onChange={(e) => p.setArrive(e.target.value)} aria-label="Giờ đến" />
-              )}
-              <button type="button" className="btn btn-primary btn-sm" onClick={close}>Xong</button>
-            </div>
-          )}
+          {(close) => <TimeMenu arrive={p.arrive} arriveNow={p.arriveNow} close={close}
+            onCommit={(value, now) => { p.setArrive(value); p.setArriveNow(now) }} />}
         </ChipMenu>
       </div>
+    </div>
+  )
+}
+
+function TimeMenu({ arrive, arriveNow, close, onCommit }: {
+  arrive: string; arriveNow: boolean; close: () => void; onCommit: (value: string, now: boolean) => void
+}) {
+  const [draft, setDraft] = useState(arrive)
+  const [now, setNow] = useState(arriveNow)
+  const [error, setError] = useState('')
+  const input = useRef<HTMLInputElement>(null)
+  const id = useId()
+  function validate() {
+    const valid = now || (!!fromLocal(draft) && !!input.current?.validity.valid)
+    setError(valid ? '' : 'Nhập đầy đủ ngày và giờ đến hợp lệ (giờ Việt Nam, UTC+07:00). Chuyến đi chưa cập nhật; vẫn giữ giờ đã chọn trước đó.')
+    return valid
+  }
+  function commit() {
+    if (!validate()) {
+      input.current?.focus()
+      return
+    }
+    onCommit(now ? arrive : draft, now)
+    close()
+  }
+  return (
+    <div className="menu">
+      <Segmented label="Thời gian" value={now ? 'now' : 'at'} onChange={(x) => { setNow(x === 'now'); setError('') }}
+        options={[{ value: 'now', label: 'Đi ngay' }, { value: 'at', label: 'Đặt giờ đến' }]} />
+      {!now && <>
+        <label htmlFor={`${id}-arrival`} className="note">Giờ đến tại Việt Nam (UTC+07:00)</label>
+        <input ref={input} id={`${id}-arrival`} className="input" type="datetime-local" required value={draft}
+          onChange={(e) => setDraft(e.target.value)} onBlur={validate} aria-invalid={!!error} aria-describedby={`${id}-error`} />
+      </>}
+      <p id={`${id}-error`} className="error-line" aria-live="polite">{error}</p>
+      <button type="button" className="btn btn-primary btn-sm" onClick={commit}>Xong</button>
     </div>
   )
 }

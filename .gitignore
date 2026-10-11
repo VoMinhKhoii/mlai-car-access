@@ -15,3 +15,5 @@ backend/cache/osm/area_*
 *.log
 backend/cache/live/alonhadat/
 .gstack/
+key.txt
+.venv/

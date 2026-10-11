@@ -5,20 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
-CACHE = ROOT / "backend" / "cache"
-STORE = ROOT / "backend" / "store"
-FLAG_FILE = ROOT / "backend" / "flags.json"
 FRONTEND_DIST = ROOT / "frontend" / "dist"
-
-# On Vercel the bundle is read-only: copy the shipped caches and state to /tmp once per instance and write there.
-if os.environ.get("VERCEL"):
-    _tmp = Path("/tmp/vaoduoc")
-    for src, name in ((CACHE, "cache"), (STORE, "store")):
-        if not (_tmp / name).exists() and src.exists():
-            shutil.copytree(src, _tmp / name)
-    if FLAG_FILE.exists() and not (_tmp / "flags.json").exists():
-        shutil.copy(FLAG_FILE, _tmp / "flags.json")
-    CACHE, STORE, FLAG_FILE = _tmp / "cache", _tmp / "store", _tmp / "flags.json"
 
 
 def _load_env_file(path: Path) -> None:
@@ -33,7 +20,30 @@ def _load_env_file(path: Path) -> None:
         os.environ.setdefault(key.strip(), value)
 
 
+def _path_override(name: str, default: Path) -> Path:
+    value = os.environ.get(name)
+    return Path(value).expanduser().resolve() if value else default
+
+
 _load_env_file(ROOT / ".env.local")
+
+_cache_default = ROOT / "backend" / "cache"
+_store_default = ROOT / "backend" / "store"
+_flags_default = ROOT / "backend" / "flags.json"
+
+# On Vercel the bundle is read-only: copy the shipped caches and state to /tmp once per instance and write there.
+if os.environ.get("VERCEL"):
+    _tmp = Path("/tmp/vaoduoc")
+    for src, name in ((_cache_default, "cache"), (_store_default, "store")):
+        if not (_tmp / name).exists() and src.exists():
+            shutil.copytree(src, _tmp / name)
+    if _flags_default.exists() and not (_tmp / "flags.json").exists():
+        shutil.copy(_flags_default, _tmp / "flags.json")
+    _cache_default, _store_default, _flags_default = _tmp / "cache", _tmp / "store", _tmp / "flags.json"
+
+CACHE = _path_override("VAODUOC_CACHE", _cache_default)
+STORE = _path_override("VAODUOC_STORE", _store_default)
+FLAG_FILE = _path_override("VAODUOC_FLAGS", _flags_default)
 
 GOONG_API_KEY = os.environ.get("GOONG_API_KEY", "")
 GOONG_MAPTILES_KEY = os.environ.get("GOONG_MAPTILES_KEY", "")

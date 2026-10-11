@@ -165,6 +165,7 @@ class ModelFallback(unittest.TestCase):
         with mock.patch.object(cameras, "CAMERA_MODELS", ["first", "second"]), \
                 mock.patch.object(cameras, "_resting", {}), \
                 mock.patch.object(cameras.ai, "_call", fake_call), \
+                mock.patch.object(cameras.ai, "provider", lambda: ("gemini", "test-model")), \
                 mock.patch.object(cameras, "by_id", lambda: {"x": CAM_X}), \
                 mock.patch.object(cameras, "_log", lambda cam, rec: None), \
                 mock.patch.object(cameras, "_store", stored.append):

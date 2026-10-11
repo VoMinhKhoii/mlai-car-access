@@ -2,9 +2,9 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef } from 'react'
-import type { CameraInfo, Corridor, Plan } from './api'
+import { routeSourceLabel, type CameraInfo, type Corridor, type Plan } from './api'
 
-export interface LayerToggles { fit: boolean; flood: boolean; goong: boolean; cams: boolean }
+export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean }
 export type FloodMoment = 'arrive' | 'depart'
 type LL = { lat: number; lon: number }
 
@@ -56,7 +56,7 @@ export function MapView(p: Props) {
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
       const fit = { fits: css('--fit-fits'), tight: css('--fit-tight'), no: css('--fit-no'), unknown: css('--fit-unknown'), blocked: css('--fit-blocked') }
-      ;['corridor', 'flood', 'fit', 'goong', 'approach', 'route', 'wayout', 'walk', 'cams'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
+      ;['corridor', 'flood', 'fit', 'standard', 'approach', 'route', 'wayout', 'walk', 'cams'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
       // Large-road alternatives under everything else; the chosen one is drawn like the route itself.
       m.addLayer({ id: 'corridor-alt', type: 'line', source: 'corridor', filter: ['!', ['get', 'sel']], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--n-500'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 6], 'line-opacity': 0.45 } })
@@ -73,8 +73,8 @@ export function MapView(p: Props) {
         paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 6, 17, 12] } })
       m.addLayer({ id: 'corridor-sel', type: 'line', source: 'corridor', filter: ['get', 'sel'], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--route'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3.5, 17, 7], 'line-opacity': 0.85 } })
-      m.addLayer({ id: 'goong', type: 'line', source: 'goong', layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': css('--route-goong'), 'line-width': 3, 'line-dasharray': [0.1, 1.8], 'line-opacity': 0.85 } })
+      m.addLayer({ id: 'standard', type: 'line', source: 'standard', layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': css('--route-standard'), 'line-width': 3, 'line-dasharray': [0.1, 1.8], 'line-opacity': 0.85 } })
       for (const id of ['approach', 'route']) {
         m.addLayer({ id: `${id}-casing`, type: 'line', source: id, layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 7, 17, 12] } })
@@ -122,8 +122,8 @@ export function MapView(p: Props) {
     const sp = plan?.stop_points[selected]
     set('fit', plan && toggles.fit ? plan.layers.fit : EMPTY)
     set('flood', plan && toggles.flood ? plan.layers.flood : EMPTY)
-    set('goong', line(toggles.goong ? plan?.standard_route?.geometry : undefined))
-    // With a corridor, its chosen large-road route replaces the stop's own Goong approach.
+    set('standard', line(toggles.standard ? plan?.standard_route?.geometry : undefined))
+    // With a corridor, its chosen large-road route replaces the stop's own approach.
     set('approach', line(corridor ? undefined : sp?.approach?.geometry))
     set('corridor', corridor ? { type: 'FeatureCollection', features: corridor.routes.map((r) => ({
       type: 'Feature', properties: { id: r.id, sel: r.id === routeSel }, geometry: { type: 'LineString', coordinates: r.geometry } })) } : EMPTY)
@@ -190,5 +190,5 @@ export function MapView(p: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.destination])
 
-  return <div ref={box} className="map" />
+  return <div ref={box} className="map" role="region" aria-label={`Bản đồ chuyến đi${p.toggles.standard && p.plan?.standard_route ? `, tuyến tham chiếu ${routeSourceLabel(p.plan.standard_route.source)}` : ''}`} />
 }

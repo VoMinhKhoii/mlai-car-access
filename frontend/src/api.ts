@@ -3,6 +3,8 @@ export type Intent = 'park' | 'pickup'
 export type FitClass = 'fits' | 'tight' | 'no' | 'unknown' | 'blocked' | 'lot'
 export type FloodStatus = 'passable' | 'risky' | 'blocked'
 export type Legal = 'Permitted' | 'Restricted' | 'Prohibited' | 'Unverified'
+export type RouteSource = 'osm' | 'goong'
+export const routeSourceLabel = (source: RouteSource) => source === 'osm' ? 'OSM' : 'Goong'
 
 export interface Flag { name: string; label: string; detail: string; enabled: boolean }
 export interface Preset {
@@ -61,7 +63,7 @@ export interface Plan {
   timing: { leave_before: string | null; or_after: string | null; if_leave_before?: { headline: string; code: string } } | null
   stop_points: StopPoint[]
   door: StopPoint | null
-  standard_route: { geometry: number[][]; unfit_ways: { way_id: number; name: string; label: string; fit: string; lo: number; hi: number | null }[]; note: string; source?: string; distance_m?: number; duration_s?: number } | null
+  standard_route: { geometry: number[][]; unfit_ways: { way_id: number; name: string; label: string; fit: string; lo: number; hi: number | null }[]; note: string; source: RouteSource; distance_m?: number; duration_s?: number } | null
   layers: { fit: GeoJSON.FeatureCollection; flood: GeoJSON.FeatureCollection }
   counts: { candidates: number; passed: number; rejected: number }
   origin: { lat: number; lon: number } | null
@@ -113,11 +115,39 @@ export interface Corridor {
 }
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
+export interface PlanRequest {
+  lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
+  /** Complete ISO timestamp with an explicit timezone, or null for now. */
+  arrive_at: string | null
+  dwell_min: number; rain: RainSpell[]; origin: [number, number] | null; area: AreaData | null
+}
+export interface ValidationIssue { loc: (string | number)[]; msg: string; type: string }
+export class ApiError extends Error {
+  status: number
+  issues: ValidationIssue[]
+  constructor(message: string, status: number, issues: ValidationIssue[] = []) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.issues = issues
+  }
+}
+
 async function j<T>(res: Response): Promise<T> {
   if (!res.ok) {
-    let msg = res.statusText
-    try { msg = (await res.json()).detail ?? msg } catch { /* not JSON */ }
-    throw new Error(msg)
+    let msg = res.statusText || `HTTP ${res.status}`
+    let issues: ValidationIssue[] = []
+    try {
+      const { detail } = await res.json() as { detail?: unknown }
+      if (typeof detail === 'string') msg = detail
+      else if (Array.isArray(detail)) {
+        issues = detail.filter((x): x is ValidationIssue => x != null && typeof x === 'object'
+          && Array.isArray(x.loc) && x.loc.every((part: unknown) => typeof part === 'string' || typeof part === 'number')
+          && typeof x.msg === 'string' && typeof x.type === 'string')
+        if (issues.length) msg = issues.map((x) => `${x.loc.filter((part) => part !== 'body').join('.')}: ${x.msg}`).join('; ')
+      }
+    } catch { /* not JSON */ }
+    throw new ApiError(msg, res.status, issues)
   }
   return res.json() as Promise<T>
 }
@@ -128,10 +158,10 @@ const post = (url: string, body: unknown) =>
 export const api = {
   config: () => fetch('/api/config').then(j<Config>),
   vehicles: () => fetch('/api/vehicles').then(j<{ classes: Vehicle[]; models: Vehicle[] }>),
-  search: (q: string, near?: { lat: number; lon: number } | null) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`).then(j<{ results: SearchResult[] }>),
+  search: (q: string, near?: { lat: number; lon: number } | null, signal?: AbortSignal) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`, { signal }).then(j<{ results: SearchResult[] }>),
   reverse: (lat: number, lon: number) => fetch(`/api/reverse?lat=${lat}&lon=${lon}`).then(j<{ label: string; source: string }>),
-  place: (id: string) => fetch(`/api/place/${encodeURIComponent(id)}`).then(j<{ lat: number; lon: number; label: string }>),
-  plan: (body: unknown) => post('/api/plan', body).then(j<Plan>),
+  place: (id: string, signal?: AbortSignal) => fetch(`/api/place/${encodeURIComponent(id)}`, { signal }).then(j<{ lat: number; lon: number; label: string }>),
+  plan: (body: PlanRequest) => post('/api/plan', body).then(j<Plan>),
   tide: (start: string, hours = 36) =>
     fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),

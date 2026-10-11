@@ -3,16 +3,18 @@ from __future__ import annotations
 
 import json
 from datetime import date, datetime, timedelta, timezone
+from typing import Annotated
 
 import httpx
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import AwareDatetime, BaseModel, Field, field_validator
 
-from . import ai, budget, cameras, corridor, flags, google_lookup, hydro, live, plan, vehicles
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
+from . import ai, budget, cameras, corridor, flags, google_lookup, hydro, live, plan, vehicles
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
 from .osm import build_graph, cached_graph, haversine, strip_accents
@@ -24,6 +26,15 @@ DEMO_CENTER = (10.8, 106.71)
 
 app = FastAPI(title="Vào Được API")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+
+@app.exception_handler(RequestValidationError)
+def validation_error(_request, exc: RequestValidationError):
+    # Rejected inputs can contain non-finite floats; never echo them in JSON errors.
+    return JSONResponse(status_code=422, content={"detail": [
+        {"loc": error["loc"], "msg": error["msg"], "type": error["type"]}
+        for error in exc.errors()
+    ]})
 
 
 def _way_mid(way_id: int):
@@ -143,17 +154,31 @@ def place(place_id: str):
     return {"lat": loc["lat"], "lon": loc["lng"], "label": r["result"].get("formatted_address") or r["result"].get("name")}
 
 
+DurationMinutes = Annotated[int, Field(strict=True, gt=0)]
+
+
+def _require_iso_datetime_string(value: object) -> object:
+    if value is not None and not isinstance(value, str):
+        raise ValueError("must be an ISO 8601 string with a timezone")
+    return value
+
+
 class PlanRequest(BaseModel):
     lat: float
     lon: float
     label: str = ""
     vehicle_id: str
     intent: str = "park"
-    arrive_at: str | None = None
-    dwell_min: int | None = None
+    arrive_at: AwareDatetime | None = None
+    dwell_min: DurationMinutes | None = None
     rain: list[dict] = []
     origin: list[float] | None = None  # [lat, lon] for the Goong Standard Route
     area: dict | None = None  # result of /api/area/build, sent back by the browser
+
+    @field_validator("arrive_at", mode="before")
+    @classmethod
+    def arrive_at_must_be_string(cls, value: object) -> object:
+        return _require_iso_datetime_string(value)
 
 
 @app.post("/api/plan")
@@ -166,7 +191,7 @@ def make_plan(req: PlanRequest):
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {req.vehicle_id}")
-    arrive = datetime.fromisoformat(req.arrive_at) if req.arrive_at else None
+    arrive = req.arrive_at
     key = live.apply(req.area, req.lat, req.lon)
     origin = tuple(req.origin) if req.origin and len(req.origin) == 2 else None
     result = plan.plan(req.lat, req.lon, req.vehicle_id, req.intent, arrive, req.dwell_min, req.rain, req.label,
@@ -362,8 +387,13 @@ class CorridorRequest(BaseModel):
     origin: list[float]
     destination: list[float]
     vehicle_id: str
-    depart_at: str | None = None
+    depart_at: AwareDatetime | None = None
     rain: list[dict] = []
+
+    @field_validator("depart_at", mode="before")
+    @classmethod
+    def depart_at_must_be_string(cls, value: object) -> object:
+        return _require_iso_datetime_string(value)
 
 
 @app.post("/api/corridor")
@@ -377,7 +407,7 @@ def route_corridor(req: CorridorRequest):
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {req.vehicle_id}")
-    depart = datetime.fromisoformat(req.depart_at) if req.depart_at else None
+    depart = req.depart_at
     return corridor.corridor(tuple(req.origin), tuple(req.destination), req.vehicle_id, depart, req.rain)
 
 

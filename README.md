@@ -36,6 +36,12 @@ GEMINI_API_KEY=...       # or OPENAI_API_KEY / ANTHROPIC_API_KEY, for the AI tex
 AI_MODEL=...             # optional model override
 ```
 
+### Request provenance and isolated startup
+
+- Arrival and departure request times are intentionally `string | null`: `null` means “now”, while a string must be a complete ISO 8601 timestamp with an explicit timezone. `dwell_min` is a strictly positive integer. This prevents partial browser-local dates from being guessed or silently shifted; the executable owners are `PlanRequest`, `CorridorRequest`, and `DurationMinutes` in [`backend/app/main.py`](backend/app/main.py), with the browser boundary in [`frontend/src/api.ts`](frontend/src/api.ts).
+- The standard reference route carries a closed `osm | goong` source value so an OSM fallback is not presented as Goong. The owners are `_standard_route` in [`backend/app/plan.py`](backend/app/plan.py), `RouteSource` in [`frontend/src/api.ts`](frontend/src/api.ts), and the labels in `StandardRouteContrast` and `LayersMenu` in [`frontend/src/components/Result.tsx`](frontend/src/components/Result.tsx) and [`frontend/src/App.tsx`](frontend/src/App.tsx).
+- Isolated backend startup can redirect the writable store directory, cache directory, and flags file with `VAODUOC_STORE`, `VAODUOC_CACHE`, and `VAODUOC_FLAGS`, respectively. Set them before importing the backend so derived paths share the same isolated root and do not touch normal local state; [`backend/app/config.py`](backend/app/config.py) owns these overrides.
+
 ### AI features: one flag each
 
 Toggle them in the UI footer ("Tính năng AI") or with `FLAG_<NAME>=1|0` env vars; state persists in `backend/flags.json`.

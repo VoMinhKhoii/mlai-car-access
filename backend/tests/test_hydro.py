@@ -79,8 +79,15 @@ class Rain(unittest.TestCase):
     def spells(self, lat=10.775, lon=106.685):
         hours = lambda g: [(self.NOW.replace(hour=h), v) for h, v in self.HOURS[g["id"]].items()]
         forecast = [(self.NOW + timedelta(hours=h), mm) for h, mm in ((-1, 50.0), (1, 0.0), (2, 12.0))]
+
+        class FixtureClock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return self.NOW.astimezone(tz) if tz else self.NOW.replace(tzinfo=None)
+
         with mock.patch.object(hydro, "rain_gauges", lambda: self.GAUGES), \
                 mock.patch.object(hydro, "gauge_hours", hours), \
+                mock.patch.object(hydro, "datetime", FixtureClock), \
                 mock.patch.object(hydro, "_forecast_hours", lambda la, lo: forecast):
             return hydro.rain_spells(lat, lon)
 

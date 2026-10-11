@@ -1,9 +1,10 @@
 import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, CircleHelp, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, TriangleAlert } from 'lucide-react'
-import type { AreaBuild, NewsItem, Plan, StopPoint } from '../api'
+import { routeSourceLabel, type AreaBuild, type NewsItem, type Plan, type StopPoint } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
+import { toLocal } from '../datetime'
 
-const hhmm = (iso: string) => new Date(new Date(iso).getTime() + 7 * 3600e3).toISOString().slice(11, 16)
+const hhmm = (iso: string) => toLocal(iso)?.slice(11, 16) ?? 'giờ chưa xác định'
 
 /* ---------- verdict: say what to do, then why ---------- */
 
@@ -22,19 +23,22 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
     head = `Lúc ${hhmm(plan.window.depart)} đường ra sẽ ngập`
     sub = [plan.timing.leave_before && `Rời trước ${plan.timing.leave_before}`, plan.timing.or_after && `hoặc ở lại tới sau ${plan.timing.or_after}`]
       .filter(Boolean).join(' ') + '.'
+    if (plan.verdict.code === 'unverified' || (best && !best.verified)) {
+      sub += ' Chỗ dừng gợi ý chưa xác minh; giờ rời không xác nhận xe vào và ra được.'
+    }
+  } else if (plan.verdict.code === 'unverified' || (best && !best.verified)) {
+    tone = 'muted'
+    icon = <CircleHelp size={18} />
+    head = 'Gợi ý chưa xác minh'
+    sub = best ? `Chưa đủ dữ liệu xác nhận: ${verb.toLowerCase()} ở ${best.name}, đi bộ ${minutes(best.walk.minutes)}.` : sub
   } else if (plan.verdict.code === 'door') {
     head = plan.intent === 'park' ? 'Vào tận cửa được' : 'Dừng đón ngay trước cửa được'
     sub = best ? vnt(best.way_out.text) : sub
   } else if (plan.verdict.code === 'nearby' && best) {
     tone = 'brand'
     icon = <ArrowRightLeft size={18} />
-    head = `${verb} ở ${best.name}, đi bộ ${minutes(best.walk.minutes || 1)}`
+    head = `${verb} ở ${best.name}, đi bộ ${minutes(best.walk.minutes)}`
     sub = doorWhy ? `Không nên vào tận cửa: ${lower(vnt(doorWhy))}` : null
-  } else if (plan.verdict.code === 'unverified') {
-    tone = 'muted'
-    icon = <CircleHelp size={18} />
-    head = 'Chưa chắc xe vào được tận cửa'
-    sub = best ? `Chắc nhất: ${verb.toLowerCase()} ở ${best.name}, đi bộ ${minutes(best.walk.minutes || 1)}.` : sub
   } else if (plan.verdict.code === 'none') {
     tone = 'bad'
     icon = <Ban size={18} />
@@ -64,8 +68,8 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
     </section>
   )
 }
-const KICKER: Record<Tone, string> = { ok: 'Vào được', brand: 'Dừng gần đó', warn: 'Cẩn thận giờ về', muted: 'Thiếu dữ liệu bề rộng', bad: 'Không có chỗ phù hợp', water: '' }
-const THEN: Record<string, string> = { door: 'vào và ra tận cửa được', nearby: 'đỗ gần đó, ra được', unverified: 'ra được, nhưng chưa chắc vào tận cửa', none: 'vẫn chưa có chỗ phù hợp' }
+const KICKER: Record<Tone, string> = { ok: 'Vào được', brand: 'Dừng gần đó', warn: 'Cẩn thận giờ về', muted: 'Chưa đủ dữ liệu xác minh', bad: 'Không có chỗ phù hợp', water: '' }
+const THEN: Record<string, string> = { door: 'vào và ra tận cửa được', nearby: 'đỗ gần đó, ra được', unverified: 'gợi ý vẫn chưa xác minh', none: 'vẫn chưa có chỗ phù hợp' }
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 
 /* ---------- live area build ---------- */
@@ -160,7 +164,7 @@ export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
           <span className="stop-name">{title}</span>
           <span className="stop-meta">{kindLabel(s)} · đi bộ {s.walk.meters} m</span>
         </span>
-        <span className="stop-time display num">{s.trip ? minutes(s.trip.total_min) : `${s.walk.minutes || 1}′`}</span>
+        <span className="stop-time display num">{s.trip ? minutes(s.trip.total_min) : `${s.walk.minutes}′`}</span>
       </button>
       <div className="stop-tags">
         <Tag tone={fit.tone} icon={<CarFront size={13} />}>{fit.label}</Tag>
@@ -200,7 +204,7 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
         </ul>
       </Check>
       <Check icon={<Footprints size={16} />} title="Đi bộ" tone={s.walk.wade ? 'warn' : 'ok'}>
-        {s.walk.meters} m, khoảng {minutes(s.walk.minutes || 1)}
+        {s.walk.meters} m, khoảng {minutes(s.walk.minutes)}
         {s.walk.wade && `; lội nước ${Math.round(s.walk.wade.lo * 100)}–${Math.round(s.walk.wade.hi * 100)} cm`}
         {plan.intent === 'pickup' && '. Khách đi bộ quãng này tới xe.'}
       </Check>
@@ -215,19 +219,20 @@ function Check({ icon, title, tone, children }: { icon: React.ReactNode; title: 
   return (
     <div className={`check t-${tone}`}>
       <span className="check-ico">{icon}</span>
-      <div><b>{title}</b><p>{children}</p></div>
+      <div><b>{title}</b><div className="check-detail">{children}</div></div>
     </div>
   )
 }
 
-export function GoongContrast({ plan, vehicleLabel, show, onToggle }: { plan: Plan; vehicleLabel: string; show: boolean; onToggle: () => void }) {
+export function StandardRouteContrast({ plan, vehicleLabel, show, onToggle }: { plan: Plan; vehicleLabel: string; show: boolean; onToggle: () => void }) {
   const std = plan.standard_route
   if (!std || !std.unfit_ways.length) return null
   const names = std.unfit_ways.slice(0, 2).map((w) => w.name).join(', ')
+  const source = routeSourceLabel(std.source)
   return (
     <div className="contrast">
-      <p><b>Tuyến Goong thông thường</b> đi qua {names}{std.unfit_ways.length > 2 ? ` và ${std.unfit_ways.length - 2} hẻm khác` : ''}: {std.unfit_ways.some((w) => w.fit === 'no') ? 'không vừa' : 'chưa rõ có vừa'} {vehicleLabel}.</p>
-      <button type="button" className="btn btn-ghost btn-sm" onClick={onToggle}>{show ? 'Ẩn tuyến Goong' : 'Hiện tuyến Goong'}</button>
+      <p><b>Tuyến tham chiếu {source}</b> đi qua {names}{std.unfit_ways.length > 2 ? ` và ${std.unfit_ways.length - 2} hẻm khác` : ''}: {std.unfit_ways.some((w) => w.fit === 'no') ? 'không vừa' : 'chưa rõ có vừa'} {vehicleLabel}.</p>
+      <button type="button" className="btn btn-ghost btn-sm" onClick={onToggle}>{show ? `Ẩn tuyến ${source}` : `Hiện tuyến ${source}`}</button>
     </div>
   )
 }

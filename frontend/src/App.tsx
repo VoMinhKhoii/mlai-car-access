@@ -1,18 +1,16 @@
 import { CloudRain, FlaskConical, Layers, MapPin, Navigation, Sparkles, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { api, type AreaBuild, type AreaData, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
+import { ApiError, api, routeSourceLabel, type AreaBuild, type AreaData, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type Plan, type Preset, type RainSpell, type RouteSource, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
-import { GoongContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
+import { StandardRouteContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
 import { EvidencePanel } from './components/Evidence'
 import { CameraPanel, CorridorCard } from './components/Corridor'
 import { TideTimeline } from './components/TideTimeline'
 import { Segmented, useOutside, vnt } from './ds/ui'
 
-const VN = 7 * 3600e3
-const toLocal = (iso: string) => new Date(new Date(iso).getTime() + VN).toISOString().slice(0, 16)
-const fromLocal = (v: string) => `${v}:00+07:00`
+import { fromLocal, timestamp, toLocal } from './datetime'
 const DEMO_ORIGIN: Place = { lat: 10.7725, lon: 106.698, label: 'Chợ Bến Thành, Quận 1' }
 const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
@@ -29,14 +27,14 @@ export default function App() {
   const [intent, setIntent] = useState<Intent>('park')
   const [dwell, setDwell] = useState(120)
   const [arriveNow, setArriveNow] = useState(true)
-  const [arrive, setArrive] = useState(() => toLocal(new Date().toISOString()))
+  const [arrive, setArrive] = useState(() => toLocal(new Date().toISOString())!)
   const [rainOn, setRainOn] = useState(false)
   const [rainMm, setRainMm] = useState(45)
   const [plan, setPlan] = useState<Plan | null>(null)
   const [selected, setSelected] = useState(0)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, goong: false, cams: true })
+  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, standard: false, cams: true })
   const [floodMoment, setFloodMoment] = useState<FloodMoment>('arrive')
   const [way, setWay] = useState<WayEvidence | null>(null)
   const [wayAt, setWayAt] = useState<[number, number]>([0, 0])
@@ -72,23 +70,30 @@ export default function App() {
   const vehicleId = vMode === 'class' ? classId : vMode === 'model' ? modelId : vetcLinked ? 'toyota-fortuner' : ''
   const vehicle = useMemo(() => [...fleet.classes, ...fleet.models].find((v) => v.id === vehicleId), [fleet, vehicleId])
   // "Đi ngay" = the next 5-minute mark, so the plan only refreshes when that mark moves.
-  const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString()) : arrive
+  const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString())! : arrive
+  const arriveISO = fromLocal(arriveLocal)
   const rain: RainSpell[] = useMemo(() => {
-    if (!rainOn) return []
-    const start = new Date(new Date(fromLocal(arriveLocal)).getTime() + 30 * 60e3)
+    if (!rainOn || !arriveISO) return []
+    const at = timestamp(arriveISO)
+    if (at == null) return []
+    const start = new Date(at + 30 * 60e3)
     return [{ start: start.toISOString(), end: new Date(start.getTime() + 3600e3).toISOString(), mm_per_h: rainMm }]
-  }, [rainOn, rainMm, arriveLocal])
+  }, [rainOn, rainMm, arriveISO])
 
   // One plan per committed input; newer requests always win.
   const run = useCallback(async () => {
     if (!dest || !vehicleId) return
+    if (!arriveISO) {
+      setError('Giờ đến không hợp lệ. Chuyến đi chưa cập nhật; hãy chọn lại giờ đến.')
+      return
+    }
     const id = ++reqId.current
     setBusy(true)
     setError('')
     try {
       const r = await api.plan({
         lat: dest.lat, lon: dest.lon, label: dest.label, vehicle_id: vehicleId, intent,
-        arrive_at: fromLocal(arriveLocal), dwell_min: intent === 'pickup' ? 15 : dwell, rain,
+        arrive_at: arriveISO, dwell_min: intent === 'pickup' ? 15 : dwell, rain,
         origin: origin ? [origin.lat, origin.lon] : null, area: areaRef.current,
       })
       if (id !== reqId.current) return
@@ -97,12 +102,16 @@ export default function App() {
       setFloodMoment(r.timing ? 'depart' : 'arrive')
       if (r.live_crawl && areaRef.current?.key !== r.area_key && buildingKey.current !== r.area_key) startBuild(dest, r.area_key)
     } catch (e) {
-      if (id === reqId.current) { setError(e instanceof Error ? e.message : String(e)); setPlan(null) }
+      if (id === reqId.current) {
+        const message = e instanceof Error ? e.message : String(e)
+        if (e instanceof ApiError && e.status === 422) setError(`Chuyến đi chưa cập nhật: ${message}`)
+        else { setError(message); setPlan(null) }
+      }
     } finally {
       if (id === reqId.current) setBusy(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dest, origin, vehicleId, intent, dwell, arriveLocal, rain])
+  }, [dest, origin, vehicleId, intent, dwell, arriveISO, rain])
   const runRef = useRef(run)
   runRef.current = run
 
@@ -113,13 +122,13 @@ export default function App() {
 
   // Large-road route choice (cameras + flood forecast), separate from the plan because reading cameras takes ~30 s.
   useEffect(() => {
-    if (!origin || !dest || !vehicleId) { setCorridor(null); return }
+    if (!origin || !dest || !vehicleId || !arriveISO) { setCorridor(null); return }
     const id = ++corridorReq.current
     const t = window.setTimeout(async () => {
       setCorridorBusy(true)
       try {
         const c = await api.corridor({ origin: [origin.lat, origin.lon], destination: [dest.lat, dest.lon], vehicle_id: vehicleId,
-          depart_at: arriveNow ? null : fromLocal(arriveLocal), rain })
+          depart_at: arriveNow ? null : arriveISO, rain })
         if (id !== corridorReq.current) return
         setCorridor(c)
         setRouteSel(c.routes?.find((r) => r.chosen)?.id ?? 0)
@@ -132,7 +141,7 @@ export default function App() {
       }
     }, 400)
     return () => window.clearTimeout(t)
-  }, [origin, dest, vehicleId, arriveNow, arriveLocal, rain])
+  }, [origin, dest, vehicleId, arriveNow, arriveISO, rain])
 
   function openCamera(id: string) {
     const c = cams.find((x) => x.id === id)
@@ -188,6 +197,11 @@ export default function App() {
   }
 
   function loadPreset(p: Preset) {
+    const local = toLocal(p.arrive_at)
+    if (!local) {
+      setError('Giờ đến trong kịch bản không hợp lệ. Chuyến đi chưa cập nhật.')
+      return
+    }
     const isClass = p.vehicle_id.startsWith('class-')
     setVMode(isClass ? 'class' : 'model')
     if (isClass) setClassId(p.vehicle_id)
@@ -195,7 +209,7 @@ export default function App() {
     setIntent(p.intent)
     setDwell(p.dwell_min)
     setArriveNow(false)
-    setArrive(toLocal(p.arrive_at))
+    setArrive(local)
     setRainOn((p.rain ?? []).length > 0)
     if (p.rain?.[0]) setRainMm(p.rain[0].mm_per_h)
     setOrigin((o) => o ?? DEMO_ORIGIN)
@@ -206,9 +220,11 @@ export default function App() {
   }
 
   function leaveBefore(hm: string) {
-    const a = new Date(fromLocal(arriveLocal)).getTime()
-    const [h, m] = hm.split(':').map(Number)
-    let t = new Date(fromLocal(arriveLocal.slice(0, 11) + `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`)).getTime()
+    const a = arriveISO ? timestamp(arriveISO) : null
+    if (a == null || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hm)) return
+    const departure = fromLocal(`${arriveLocal.slice(0, 11)}${hm}`)
+    let t = departure ? timestamp(departure) : null
+    if (t == null) return
     if (t <= a) t += 24 * 3600e3
     setDwell(Math.max(15, Math.floor((t - a) / 60e3 / 15) * 15))
     setIntent('park')
@@ -293,6 +309,7 @@ export default function App() {
             {dest && !plan && busy && <SkeletonResult />}
             {plan && (
               <>
+                <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Kết quả chuyến đi">
                 {story && <p className="story">{story}</p>}
                 <Verdict plan={plan} onLeaveBefore={leaveBefore} stale={busy} />
                 {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
@@ -313,8 +330,9 @@ export default function App() {
                     <ul>{plan.door.fail_reasons.map((r, i) => <li key={i}>{vnt(r)}</li>)}</ul>
                   </details>
                 )}
-                {vehicle && <GoongContrast plan={plan} vehicleLabel={vehicle.label} show={toggles.goong} onToggle={() => setToggles((t) => ({ ...t, goong: !t.goong }))} />}
-                <p className="sources faint">Nguồn: {goongOn ? 'Goong (bản đồ, tìm kiếm, tuyến xe)' : 'bản đồ nền tạm'}, OpenStreetMap, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt, camera giao thông TP.HCM.</p>
+                {vehicle && <StandardRouteContrast plan={plan} vehicleLabel={vehicle.label} show={toggles.standard} onToggle={() => setToggles((t) => ({ ...t, standard: !t.standard }))} />}
+                <p className="sources faint">Nguồn: {goongOn ? 'Goong (bản đồ nền)' : 'bản đồ nền tạm'}, OpenStreetMap{plan.standard_route ? `, tuyến tham chiếu ${routeSourceLabel(plan.standard_route.source)}` : ''}, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt, camera giao thông TP.HCM.</p>
+                </ErrorBoundary>
               </>
             )}
           </div>
@@ -329,14 +347,16 @@ export default function App() {
       )}
       <div className="map-tools">
         <LayersMenu open={menu === 'layers'} onOpen={(o) => setMenu(o ? 'layers' : null)} toggles={toggles} setToggles={setToggles}
-          floodMoment={floodMoment} setFloodMoment={setFloodMoment} />
+          floodMoment={floodMoment} setFloodMoment={setFloodMoment} standardSource={plan?.standard_route?.source ?? null} />
       </div>
 
       {plan && (
         <div className="timeline-dock">
-          <TideTimeline arrive={fromLocal(arriveLocal)} depart={plan.window.depart} leaveBefore={plan.timing?.leave_before} orAfter={plan.timing?.or_after}
-            exitFloods={!!plan.timing} station={cfg.tide.station} rain={plan.window.rain}
-            onChange={(iso) => { setArriveNow(false); setArrive(toLocal(iso)) }} />
+          <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Biểu đồ triều">
+            <TideTimeline arrive={plan.window.arrive} depart={plan.window.depart} leaveBefore={plan.timing?.leave_before} orAfter={plan.timing?.or_after}
+              exitFloods={!!plan.timing} station={cfg.tide.station} rain={plan.window.rain}
+              onChange={(iso) => { const local = toLocal(iso); if (local) { setArriveNow(false); setArrive(local) } }} />
+          </ErrorBoundary>
         </div>
       )}
 
@@ -442,9 +462,9 @@ function PickMenu({ pick, onClose, onPick }: { pick: { x: number; y: number }; o
   )
 }
 
-function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMoment }: {
+function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMoment, standardSource }: {
   open: boolean; onOpen: (o: boolean) => void; toggles: LayerToggles; setToggles: (t: LayerToggles) => void
-  floodMoment: FloodMoment; setFloodMoment: (m: FloodMoment) => void
+  floodMoment: FloodMoment; setFloodMoment: (m: FloodMoment) => void; standardSource: RouteSource | null
 }) {
   const ref = useRef<HTMLDivElement>(null)
   useOutside(ref, open, () => onOpen(false))
@@ -461,7 +481,7 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
           <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Vừa</span><span><i style={{ background: 'var(--fit-tight)' }} />Chật</span><span><i style={{ background: 'var(--fit-no)' }} />Không vừa</span><span><i className="dash" />Chưa rõ</span><span><i style={{ background: 'var(--fit-blocked)' }} />Bị chặn</span></div>
           {row('flood', 'Ngập so với xe của bạn', <span className="sw-flood" />)}
           {toggles.flood && <Segmented label="Thời điểm ngập" value={floodMoment} onChange={setFloodMoment} options={[{ value: 'arrive', label: 'Lúc đến' }, { value: 'depart', label: 'Lúc về' }]} />}
-          {row('goong', 'Tuyến Goong thông thường', <span className="sw-goong" />)}
+          {row('standard', standardSource ? `Tuyến tham chiếu ${routeSourceLabel(standardSource)}` : 'Tuyến tham chiếu (chưa có dữ liệu)', <span className="sw-standard" />)}
           {row('cams', 'Camera giao thông (AI đọc kẹt xe, ngập)', <span className="sw-cam" />)}
           {toggles.cams && <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Thông thoáng</span><span><i style={{ background: 'var(--traffic-busy)' }} />Đông</span><span><i style={{ background: 'var(--fit-tight)' }} />Ùn ứ</span><span><i style={{ background: 'var(--fit-no)' }} />Kẹt cứng</span><span><i style={{ background: 'var(--flood-risky)' }} />Ngập</span><span><i style={{ background: 'var(--fit-unknown)' }} />Chưa đọc</span></div>}
           <div className="line-key"><span><i className="ln-route" />Đường đi</span><span><i className="ln-walk" />Đi bộ</span><span><i className="ln-out" />Đường ra</span></div>
