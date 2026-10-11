@@ -17,3 +17,4 @@ backend/cache/live/alonhadat/
 .gstack/
 key.txt
 .venv/
+.coverage

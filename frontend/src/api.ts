@@ -39,17 +39,45 @@ export interface WidthRange {
   evidence: Bound[]; overruled: Bound[]; way_out_claims: Bound[]
 }
 export interface Depth { lo: number; hi: number; drivers: string[]; rain_driven: boolean; inferred: boolean }
+export type FloodKnowledge = 'known' | 'missing_tide' | 'missing_history' | 'stale_positive_observation'
+export interface FloodFreshness { observed_at?: string; valid_until?: string; source?: string }
+export interface FloodCheck {
+  status: FloodStatus; depth: Depth | null; knowledge: FloodKnowledge; reason: string | null
+  freshness: FloodFreshness | null; at: string | null; source?: string | null
+}
+export interface FloodLeg extends FloodCheck { way_id: number | null; name: string; source: string | null }
+export interface LegFloodCheck extends FloodCheck {
+  legs: FloodLeg[]
+  interval: { start: string; end: string; approximate: boolean } | null
+}
+export interface FloodLayerProperties {
+  name: string; way_id: number
+  arrive: Depth | null; depart: Depth | null
+  status_arrive: FloodStatus; status_depart: FloodStatus
+  knowledge_arrive: FloodKnowledge; knowledge_depart: FloodKnowledge
+  reason_arrive: string | null; reason_depart: string | null
+  freshness_arrive: FloodFreshness | null; freshness_depart: FloodFreshness | null
+}
+export const floodKnowledgeLabel = (knowledge: FloodKnowledge | undefined): string => {
+  switch (knowledge) {
+    case 'known': return 'Có dữ liệu cho thời điểm kiểm tra'
+    case 'missing_tide': return 'Thiếu dữ liệu triều cho thời điểm kiểm tra'
+    case 'missing_history': return 'Thiếu lịch sử ngập để ước lượng'
+    case 'stale_positive_observation': return 'Ghi nhận ngập đã cũ; chưa có quan sát mới xác nhận nước rút'
+    default: return 'Chưa đủ dữ liệu ngập'
+  }
+}
 export interface Rule { code: string; status: Legal; text: string; citation: string }
 export interface StopPoint {
   rank?: number; ok: boolean; kind: 'door' | 'street' | 'lot'; name: string; lat: number; lon: number
   way_id: number | null; tier: number; verified: boolean; badges: string[]
   walk: { meters: number; minutes: number; geometry?: number[][]; wade?: { lo: number; hi: number; street: string } | null }
-  route_in: { meters: number; geometry: number[][] } | null
+  route_in: { available: boolean; meters: number | null; geometry: number[][]; flood: LegFloodCheck | null } | null
   fit: { class: FitClass; width_range?: WidthRange; note?: string | null; needed?: { fits_min: number; tight_min: number; door_min: number } }
-  way_out: { mode: string; text: string; reverse_m?: number; tight_exit?: boolean; geometry?: number[][] }
-  flood: { stay: { status: FloodStatus; depth: Depth | null; at: string | null } }
+  way_out: { available: boolean; mode: string; text: string; reverse_m?: number; tight_exit?: boolean; geometry?: number[][]; flood: LegFloodCheck | null }
+  flood: { stay: LegFloodCheck }
   legality: { status: Legal; rules: Rule[] }
-  fail_reasons: string[]; unverified_reasons: string[]
+  fail_reasons: string[]; unverified_reasons: string[]; failure_codes: string[]
   lot: { name: string; source: string; source_label: string; address?: string } | null
   approach?: { geometry: number[][]; source: string }
   trip?: { drive_m: number; drive_min: number; walk_m: number; walk_min: number; total_min: number }
@@ -58,14 +86,18 @@ export interface Plan {
   destination: { lat: number; lon: number; label: string }
   vehicle: Vehicle
   intent: Intent
-  window: { arrive: string; depart: string; dwell_min: number; tide_arrive: { level_m: number | null; alarm: string | null }; tide_depart: { level_m: number | null; alarm: string | null }; rain: RainSpell[] }
-  verdict: { code: string; headline: string; detail: string; timing?: string }
-  timing: { leave_before: string | null; or_after: string | null; if_leave_before?: { headline: string; code: string } } | null
+  window: { arrive: string; depart: string; dwell_min: number; tide_arrive: { level_m: number | null; alarm: string | null; kind: string | null }; tide_depart: { level_m: number | null; alarm: string | null; kind: string | null }; rain: RainSpell[] }
+  verdict: { code: string; headline: string; detail: string }
+  timing: {
+    leave_before_at: string | null; or_after_at: string | null
+    reason: string | null; approximate: boolean; failure_codes: string[]
+    if_leave_before?: { headline: string; code: string }
+  } | null
   stop_points: StopPoint[]
   door: StopPoint | null
   standard_route: { geometry: number[][]; unfit_ways: { way_id: number; name: string; label: string; fit: string; lo: number; hi: number | null }[]; note: string; source: RouteSource; distance_m?: number; duration_s?: number } | null
   layers: { fit: GeoJSON.FeatureCollection; flood: GeoJSON.FeatureCollection }
-  counts: { candidates: number; passed: number; rejected: number }
+  counts: { candidates: number; passed: number; rejected: number; dijkstra: number }
   origin: { lat: number; lon: number } | null
   area_key: string
   live_crawl: boolean
@@ -105,7 +137,7 @@ export interface CorridorRoute {
   id: number; label: string; via: { name: string; lat: number; lon: number } | null; is_goong: boolean
   geometry: number[][]; distance_m: number; base_min: number; delay_min: number; eta_min: number
   status: 'ok' | 'risky' | 'blocked'; hotspots: Hotspot[]; alleys: string[]; reasons: string[]; top_reason: string | null
-  flood_forecast: { street: string; at: string; status: FloodStatus; depth: Depth }[]
+  flood_forecast: (FloodCheck & { street: string })[]
   cameras_on_route: number; chosen: boolean
 }
 export interface Corridor {

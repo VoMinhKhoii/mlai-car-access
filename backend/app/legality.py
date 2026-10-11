@@ -5,7 +5,7 @@ We show the law, never advice: every Stop Rule carries its citation.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from .config import TWO_LANE_MIN_M
 from .evidence import WidthRange
@@ -34,8 +34,10 @@ def _sign_rules(g: AreaGraph, w: Way, lat: float, lon: float, intent: str, when:
         sign = tags.get("traffic_sign", "")
         if not sign or nid not in g.nodes:
             continue
+        if w.id not in g.node_ways.get(nid, {w.id}):
+            continue
         la, lo = g.nodes[nid]
-        if haversine(lat, lon, la, lo) > 40 or w.id not in g.node_ways.get(nid, {w.id}):
+        if haversine(lat, lon, la, lo) > 40:
             continue
         s = sign.upper().replace(" ", "")
         if "P.130" in s or "P130" in s:
@@ -108,6 +110,31 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
     if status == "Permitted" and not rules:
         rules.append(StopRule("no-rule", "Permitted", "Không có quy định cấm dừng/đỗ được biết tại vị trí này", LAW))
     return status, rules
+
+
+def legality_over_window(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: float,
+                         dist_to_junction: float, intent: str, arrive: datetime, depart: datetime,
+                         paid_street: dict | None = None) -> tuple[str, list[StopRule]]:
+    """Evaluate the full Dwell Window, including every midnight where parity signs change."""
+    times = {arrive, depart}
+    cursor = arrive.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    while cursor < depart:
+        times.add(cursor)
+        cursor += timedelta(days=1)
+    by_key: dict[tuple[str, str, str], StopRule] = {}
+    status = "Permitted"
+    multi_day = (depart.date() > arrive.date())
+    for when in sorted(times):
+        current, rules = legality_on_street(g, w, wr, lat, lon, dist_to_junction, intent, when, paid_street)
+        if ORDER[current] > ORDER[status]:
+            status = current
+        for rule in rules:
+            # For parity rules (P.131b/c) across multiple days, suffix the day
+            if multi_day and rule.code in ("sign-P131b", "sign-P131c"):
+                day_label = f" (ngày {when.strftime('%a %d/%m')})"
+                rule = StopRule(rule.code, rule.status, rule.text + day_label, rule.citation)
+            by_key[(rule.code, rule.status, rule.text)] = rule
+    return status, list(by_key.values())
 
 
 def legality_for_lot(lot: dict, intent: str) -> tuple[str, list[StopRule]]:

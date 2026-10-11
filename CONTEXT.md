@@ -111,11 +111,11 @@ _Avoid_: low risk, safe, unknown risk
 ### Flood
 
 **Dwell Window**:
-The time from arrival until the vehicle leaves a Stop Point; the flood check covers the route in, the Stop Point and the Way Out across it.
+The time from arrival until the vehicle leaves a Stop Point. Three flood checks span this window: (1) the route in is checked at the vehicle's arrival time, (2) the Stop Point is checked across the entire stay, and (3) the Way Out is checked at departure time. The per-leg assessment is owned by `backend/app/plan.py`.
 _Avoid_: trip time, parking duration
 
 **Depth Range**:
-The expected minimum and maximum water depth on a segment during a Dwell Window, from tide, rain and that street's flood history.
+The estimated minimum and maximum water depth on a segment during a Dwell Window, from tide, rain and that street's flood history. A missing numeric Depth Range is not a verdict: it may mean no depth was estimated, or that required evidence is missing. Read the separate Flood Knowledge before interpreting it.
 _Avoid_: flood level, predicted depth
 
 **Safe Water Depth**:
@@ -123,8 +123,16 @@ The deepest still water a specific vehicle should drive through, part of its Veh
 _Avoid_: wading depth (the manufacturer's figure is only one input), ground clearance
 
 **Flood Status**:
-A segment's verdict for one vehicle and Dwell Window: passable, risky (treated as Unverified), or blocked.
+A segment's verdict for one vehicle and Dwell Window: passable (known evidence supports staying within the vehicle limit), risky (the range straddles the limit, or knowledge is incomplete), or blocked (known positive evidence reaches the limit). The assessment is owned by `backend/app/flood.py`.
 _Avoid_: flood risk, flood score
+
+**Flood Knowledge**:
+Whether the flood assessment rests on complete evidence or has a known gap: known (sound), missing_history (no past observations), missing_tide (tide required but unavailable), or stale_positive_observation (expired flood report with no newer valid dry observation). Implemented by `FloodAssessment` and `FloodSnapshot` in `backend/app/flood.py`.
+_Avoid_: confidence, risk level
+
+**Observation Validity**:
+An observation (flood or dry report) that is within `FLOOD_REPORT_VALID_H` from its recorded time. An expired positive observation persists until a newer, still-valid dry observation arrives; absence of record is not evidence of dryness. Observation validity is owned by `FloodSnapshot` in `backend/app/flood.py`.
+_Avoid_: stale data, outdated evidence
 
 ### Community
 

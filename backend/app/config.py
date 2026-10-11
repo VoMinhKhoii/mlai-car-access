@@ -61,6 +61,12 @@ REVERSE_LIMIT_M = 30.0
 WALK_CAP_M = {"park": 400.0, "pickup": 150.0}
 # Q12: Dwell Window default for Pickup/Drop-off.
 PICKUP_DWELL_MIN = 15
+# R-04: conservative traversal windows cover a return-speed allowance plus this fixed uncertainty margin.
+ALLEY_SPEED_MPS = 15 / 3.6
+FLOOD_TRAVERSAL_MARGIN_MIN = 5
+FLOOD_TIMING_STEP_MIN = 15
+FLOOD_TIMING_HORIZON_H = 12
+FLOOD_REPORT_VALID_H = 2
 # D15: Alley Fit margins (metres).
 SIDE_CLEARANCE_M = 0.3
 PARKED_MOTORBIKE_ROW_M = 0.7

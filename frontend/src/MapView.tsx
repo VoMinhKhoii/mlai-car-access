@@ -2,7 +2,8 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef } from 'react'
-import { routeSourceLabel, type CameraInfo, type Corridor, type Plan } from './api'
+import { floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type Plan } from './api'
+import { floodPresentation, floodTimeLabel } from './components/Result'
 
 export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean }
 export type FloodMoment = 'arrive' | 'depart'
@@ -41,6 +42,7 @@ export function MapView(p: Props) {
   const map = useRef<MLMap | null>(null)
   const ready = useRef(false)
   const markers = useRef<maplibregl.Marker[]>([])
+  const floodPopup = useRef<maplibregl.Popup | null>(null)
   const framed = useRef('')
   const cb = useRef(p)
   cb.current = p
@@ -96,6 +98,53 @@ export function MapView(p: Props) {
     m.on('click', (e) => {
       const cam = m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: ['cams'] })
       if (cam.length) return cb.current.onCameraClick(String(cam[0].properties?.id))
+      if (cb.current.toggles.flood && cb.current.plan) {
+        const waterHit = m.queryRenderedFeatures(e.point, { layers: ['flood'] })[0]
+        const feature = waterHit && cb.current.plan.layers.flood.features.find((f) => f.properties?.way_id === Number(waterHit.properties?.way_id))
+        if (feature?.properties) {
+          const props = feature.properties as unknown as FloodLayerProperties
+          const moment = cb.current.floodMoment
+          const depth = props[moment]
+          const knowledge = moment === 'arrive' ? props.knowledge_arrive : props.knowledge_depart
+          const reason = moment === 'arrive' ? props.reason_arrive : props.reason_depart
+          const freshness = moment === 'arrive' ? props.freshness_arrive : props.freshness_depart
+          const at = moment === 'arrive' ? cb.current.plan.window.arrive : cb.current.plan.window.depart
+          const status = moment === 'arrive' ? props.status_arrive : props.status_depart
+          const content = document.createElement('div')
+          content.className = 'flood-popup'
+          const title = document.createElement('b')
+          title.textContent = props.name || `Đoạn đường ${props.way_id}`
+          content.append(title)
+          const messages = [
+            `${moment === 'arrive' ? 'Lúc đến' : 'Lúc rời'}: ${floodTimeLabel(at)}.`,
+            floodPresentation({ status, depth, knowledge, reason, freshness, at }).label,
+            depth != null && Number.isFinite(depth.lo) && Number.isFinite(depth.hi)
+              ? `Ước lượng nước ${Math.round(depth.lo * 100)}–${Math.round(depth.hi * 100)} cm.`
+              : 'Chưa xác định độ sâu nước; không thể kết luận trong ngưỡng xe.',
+            floodKnowledgeLabel(knowledge),
+            reason,
+            freshness?.source && `Nguồn: ${freshness.source}.`,
+            freshness?.observed_at && `Ghi nhận: ${floodTimeLabel(freshness.observed_at)}.`,
+            freshness?.valid_until && `Hiệu lực tới: ${floodTimeLabel(freshness.valid_until)}.`,
+            depth?.drivers.length ? `Căn cứ: ${depth.drivers.join('; ')}.` : null,
+          ]
+          for (const message of messages) {
+            if (!message) continue
+            const paragraph = document.createElement('p')
+            paragraph.textContent = message
+            content.append(paragraph)
+          }
+          const evidence = document.createElement('button')
+          evidence.type = 'button'
+          evidence.className = 'btn btn-outline btn-sm'
+          evidence.textContent = 'Xem bằng chứng'
+          evidence.addEventListener('click', () => cb.current.onWayClick(props.way_id, e.lngLat.lat, e.lngLat.lng))
+          content.append(evidence)
+          floodPopup.current?.remove()
+          floodPopup.current = new maplibregl.Popup({ maxWidth: '320px' }).setLngLat(e.lngLat).setDOMContent(content).addTo(m)
+          return
+        }
+      }
       const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
     })
@@ -106,17 +155,18 @@ export function MapView(p: Props) {
       press = window.setTimeout(() => cb.current.onPick(e.lngLat.lat, e.lngLat.lng, e.point.x, e.point.y), 550)
     })
     for (const ev of ['touchend', 'touchmove', 'dragstart'] as const) m.on(ev, () => window.clearTimeout(press))
-    for (const id of ['fit', 'fit-unknown', 'cams']) {
+    for (const id of ['fit', 'fit-unknown', 'flood', 'cams']) {
       m.on('mouseenter', id, () => { m.getCanvas().style.cursor = 'pointer' })
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
-    return () => { m.remove(); map.current = null; ready.current = false }
+    return () => { floodPopup.current?.remove(); m.remove(); map.current = null; ready.current = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.styleUrl])
 
   const sync = () => {
     const m = map.current
     if (!m || !ready.current) return
+    floodPopup.current?.remove()
     const { plan, selected, toggles, floodMoment, destination, origin, corridor, routeSel, cams } = cb.current
     const set = (id: string, data: GeoJSON.FeatureCollection) => (m.getSource(id) as GeoJSONSource | undefined)?.setData(data)
     const sp = plan?.stop_points[selected]
@@ -130,14 +180,15 @@ export function MapView(p: Props) {
     set('cams', toggles.cams ? { type: 'FeatureCollection', features: cams.map((c) => {
       const r = c.reading
       const read = !!r && r.state === 'ok'
-      const cls = !read ? 'cam-none' : r.depth_cm ? 'cam-water' : `cam-${r.traffic ?? 'none'}`
+      const cls = !read ? 'cam-none' : r.flooded === true || (r.depth_cm != null && r.depth_cm > 0) ? 'cam-water' : `cam-${r.traffic ?? 'none'}`
       return { type: 'Feature', properties: { id: c.id, read, cls }, geometry: { type: 'Point', coordinates: [c.lon, c.lat] } }
     }) } : EMPTY)
     set('route', line(sp?.route_in?.geometry))
     set('wayout', line(sp?.way_out?.geometry))
     set('walk', line(sp?.walk?.geometry))
     const key = floodMoment === 'arrive' ? 'status_arrive' : 'status_depart'
-    m.setFilter('flood', ['in', ['get', key], ['literal', ['risky', 'blocked']]])
+    const knowledgeKey = floodMoment === 'arrive' ? 'knowledge_arrive' : 'knowledge_depart'
+    m.setFilter('flood', ['any', ['in', ['get', key], ['literal', ['risky', 'blocked']]], ['!=', ['get', knowledgeKey], 'known']])
     m.setPaintProperty('flood', 'line-color', ['match', ['get', key], 'blocked', css('--flood-over'), css('--flood-risky')])
 
     markers.current.forEach((mk) => mk.remove())

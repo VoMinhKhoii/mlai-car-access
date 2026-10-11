@@ -18,7 +18,7 @@ import httpx
 
 from . import cameras, flags, hydro
 from .config import GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
-from .flood import (DepthRange, FloodProfile, _street_key, depth_at, flood_status, load_records)
+from .flood import DepthRange, flood_status, FloodProfile, FloodSnapshot, load_records, _street_key
 from .osm import ALLEY_NAME, haversine, strip_accents
 from .plan import _decode_polyline, _densify
 from .vehicles import get_profile
@@ -151,35 +151,32 @@ def _route_cams(pts) -> list[list[dict]]:
             for cl in clusters]
 
 
-def _forecast_flood(pts, route, depart, rain, safe) -> list[dict]:
+def _forecast_flood(pts, route, depart, rain, safe, snapshot: FloodSnapshot) -> list[dict]:
     """Flood forecast along the route from IRD history, tide and rain (same model as for alleys)."""
     lats, lons = [p[0] for p in pts], [p[1] for p in pts]
     s, n, w, e = min(lats) - 0.007, max(lats) + 0.007, min(lons) - 0.007, max(lons) + 0.007
     groups: dict[str, list] = {}
-    for r in load_records():
-        if not (s <= r.lat <= n and w <= r.lon <= e):
+    for record in load_records():
+        if not (s <= record.lat <= n and w <= record.lon <= e):
             continue
-        d, p = _nearest_far(pts, r.lat, r.lon)
-        if p is None:
+        distance, point = _nearest_far(pts, record.lat, record.lon)
+        if point is None:
             continue
-        same = _street_key(r.street) and _street_key(r.street) == _street_key(p[3])
-        if (r.precision == "high" and d <= 50) or (r.precision == "medium" and d <= 120 and (same or d <= 40)) \
-                or (same and d <= 700):
-            groups.setdefault(p[3] or r.street, []).append((p[2], r))
+        same = _street_key(record.street) and _street_key(record.street) == _street_key(point[3])
+        if (record.precision == "high" and distance <= 50) or \
+                (record.precision == "medium" and distance <= 120 and (same or distance <= 40)) or \
+                (same and distance <= 700):
+            groups.setdefault(point[3] or record.street, []).append((point[2], record))
     out = []
     total = max(1.0, pts[-1][2])
     for street, hits in groups.items():
         along = min(a for a, _ in hits)
         t = depart + timedelta(seconds=route["duration_s"] * along / total)
-        if not rain and flags.enabled("live_hydro"):  # no what-if rain: measured near this street, then forecast
-            spells = hydro.rain_spells(hits[0][1].lat, hits[0][1].lon)
-        else:
-            spells = rain
-        dr = depth_at(FloodProfile([r for _, r in hits]), t, spells, street)
-        if dr is None:
-            continue
-        out.append({"street": street, "at": _fmt(t), "along_m": round(along), "depth": dr.to_json(),
-                    "status": flood_status(dr, safe), "records": len(hits)})
+        assessment = snapshot.assess(FloodProfile([record for _, record in hits]), t, safe, street)
+        item = assessment.to_json()
+        item.update({"street": street, "at": t.isoformat(), "along_m": round(along),
+                     "records": len(hits)})
+        out.append(item)
     return sorted(out, key=lambda x: x["along_m"])
 
 
@@ -238,7 +235,9 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
     seen = [_observe(cls, readings, p) for cls in clusters]
     factors = {h["name"]: TRAFFIC_FACTOR[h["traffic"]] for hs in seen for h in hs if h["traffic"]}
     typical = statistics.median(factors.values()) if factors else 1.0
-    out = [_score(i, r, pts, hs, typical, p, depart, rain or [])
+    request_rain = rain if rain is not None else []
+    flood_snapshot = FloodSnapshot(request_rain)
+    out = [_score(i, r, pts, hs, typical, p, depart, request_rain, flood_snapshot)
            for i, ((r, pts), hs) in enumerate(zip(routes, seen))]
     ok = [x for x in out if x["status"] != "blocked"] or out
     best = min(ok, key=lambda x: (x["status"] == "blocked", x["eta_min"], x["distance_m"]))
@@ -285,7 +284,7 @@ def _observe(cls, readings, p) -> list[dict]:
     return out
 
 
-def _score(i, r, pts, hotspots, typical, p, depart, rain) -> dict:
+def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapshot) -> dict:
     reasons: list[tuple[float, str]] = []  # (weight in minutes, text), in route order
     risky, blocked = 0, False
     length, base_min = max(1.0, pts[-1][2]), r["duration_s"] / 60
@@ -313,16 +312,21 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain) -> dict:
         elif h["flood_status"] == "risky":
             risky += 1
             reasons.append((RISKY_FLOOD_MIN, f"Camera {h['name']} lúc {h['at']}: ngập ~{h['depth_cm']} cm"))
-    forecast = _forecast_flood(pts, r, depart, rain, p.safe_water_depth)
+    forecast = _forecast_flood(pts, r, depart, rain, p.safe_water_depth, snapshot)
     for f in forecast:
-        lo, hi = f["depth"]["lo"] * 100, f["depth"]["hi"] * 100
+        depth = f["depth"]
         if f["status"] == "blocked":
             blocked = True
-            reasons.append((999, f"Dự báo ngập {lo:.0f}–{hi:.0f} cm ở {f['street']} lúc {f['at']}: "
+            detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
+                      if depth else "không rõ độ sâu")
+            reasons.append((999, f"Dự báo ngập {detail} ở {f['street']} lúc {_fmt(datetime.fromisoformat(f['at']))}: "
                                  "quá mức an toàn của xe"))
         elif f["status"] == "risky":
             risky += 1
-            reasons.append((RISKY_FLOOD_MIN, f"Dự báo có thể ngập {lo:.0f}–{hi:.0f} cm ở {f['street']} lúc {f['at']}"))
+            detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
+                      if depth else f"chưa đủ dữ liệu ({f['reason']})")
+            reasons.append((RISKY_FLOOD_MIN, f"Dự báo {detail} ở {f['street']} lúc "
+                                             f"{_fmt(datetime.fromisoformat(f['at']))}"))
     alleys, at = [], 0.0
     for s in r["steps"]:  # alleys at either end are the arrival plan's (or the start's) business
         if s["name"] and ALLEY_NAME.match(s["name"]) and END_M < at < r["distance_m"] - END_M and s["name"] not in alleys:

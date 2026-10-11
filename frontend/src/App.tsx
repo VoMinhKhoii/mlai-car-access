@@ -4,7 +4,7 @@ import { ApiError, api, routeSourceLabel, type AreaBuild, type AreaData, type Ca
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
-import { StandardRouteContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
+import { StandardRouteContrast, LiveStrip, NewsList, StopRow, Verdict, exitFloodFailure } from './components/Result'
 import { EvidencePanel } from './components/Evidence'
 import { CameraPanel, CorridorCard } from './components/Corridor'
 import { TideTimeline } from './components/TideTimeline'
@@ -31,6 +31,7 @@ export default function App() {
   const [rainOn, setRainOn] = useState(false)
   const [rainMm, setRainMm] = useState(45)
   const [plan, setPlan] = useState<Plan | null>(null)
+  const [planTripKey, setPlanTripKey] = useState('')
   const [selected, setSelected] = useState(0)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -79,6 +80,7 @@ export default function App() {
     const start = new Date(at + 30 * 60e3)
     return [{ start: start.toISOString(), end: new Date(start.getTime() + 3600e3).toISOString(), mm_per_h: rainMm }]
   }, [rainOn, rainMm, arriveISO])
+  const tripKey = JSON.stringify([dest, origin, vehicleId, intent, arriveISO, intent === 'pickup' ? 15 : dwell, rain])
 
   // One plan per committed input; newer requests always win.
   const run = useCallback(async () => {
@@ -98,8 +100,9 @@ export default function App() {
       })
       if (id !== reqId.current) return
       setPlan(r)
+      setPlanTripKey(tripKey)
       setSelected((s) => (s < r.stop_points.length ? s : 0))
-      setFloodMoment(r.timing ? 'depart' : 'arrive')
+      setFloodMoment(exitFloodFailure(r) ? 'depart' : 'arrive')
       if (r.live_crawl && areaRef.current?.key !== r.area_key && buildingKey.current !== r.area_key) startBuild(dest, r.area_key)
     } catch (e) {
       if (id === reqId.current) {
@@ -111,7 +114,7 @@ export default function App() {
       if (id === reqId.current) setBusy(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dest, origin, vehicleId, intent, dwell, arriveISO, rain])
+  }, [dest, origin, vehicleId, intent, dwell, arriveISO, rain, tripKey])
   const runRef = useRef(run)
   runRef.current = run
 
@@ -219,15 +222,22 @@ export default function App() {
     setSheet('half')
   }
 
-  function leaveBefore(hm: string) {
-    const a = arriveISO ? timestamp(arriveISO) : null
-    if (a == null || !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(hm)) return
-    const departure = fromLocal(`${arriveLocal.slice(0, 11)}${hm}`)
-    let t = departure ? timestamp(departure) : null
-    if (t == null) return
-    if (t <= a) t += 24 * 3600e3
-    setDwell(Math.max(15, Math.floor((t - a) / 60e3 / 15) * 15))
-    setIntent('park')
+  function setDepartureAt(iso: string) {
+    if (!plan || busy || planTripKey !== tripKey || plan.intent !== 'park' || intent !== 'park') return
+    if (iso !== plan.timing?.leave_before_at && iso !== plan.timing?.or_after_at) return
+    const a = timestamp(plan.window.arrive)
+    const t = timestamp(iso)
+    const local = toLocal(plan.window.arrive)
+    if (a == null || t == null || !local || t <= a) return
+    const duration = (t - a) / 60e3
+    if (!Number.isInteger(duration)) {
+      setError('Giờ rời không khớp thời lượng theo phút. Chuyến đi chưa cập nhật.')
+      return
+    }
+    // Pin "now" to the evaluated arrival before changing dwell, including departures on another day.
+    setArriveNow(false)
+    setArrive(local)
+    setDwell(duration)
   }
 
   async function openEvidence(id: number, lat: number, lon: number) {
@@ -311,7 +321,7 @@ export default function App() {
               <>
                 <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Kết quả chuyến đi">
                 {story && <p className="story">{story}</p>}
-                <Verdict plan={plan} onLeaveBefore={leaveBefore} stale={busy} />
+                <Verdict plan={plan} onDeparture={setDepartureAt} stale={busy || planTripKey !== tripKey} />
                 {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
                   onSelect={(i) => { setRouteSel(i); setFrame('trip') }} onCamera={(c) => { setWay(null); setCam(c) }} />}
                 {build && <LiveStrip build={build} />}
@@ -353,8 +363,8 @@ export default function App() {
       {plan && (
         <div className="timeline-dock">
           <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Biểu đồ triều">
-            <TideTimeline arrive={plan.window.arrive} depart={plan.window.depart} leaveBefore={plan.timing?.leave_before} orAfter={plan.timing?.or_after}
-              exitFloods={!!plan.timing} station={cfg.tide.station} rain={plan.window.rain}
+            <TideTimeline arrive={plan.window.arrive} depart={plan.window.depart} leaveBeforeAt={plan.timing?.leave_before_at} orAfterAt={plan.intent === 'park' ? plan.timing?.or_after_at : null}
+              timingReason={plan.timing?.reason} timingApproximate={plan.timing?.approximate} exitFloods={exitFloodFailure(plan)} station={cfg.tide.station} rain={plan.window.rain}
               onChange={(iso) => { const local = toLocal(iso); if (local) { setArriveNow(false); setArrive(local) } }} />
           </ErrorBoundary>
         </div>

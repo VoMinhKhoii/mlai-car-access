@@ -65,5 +65,5 @@ S1–S3/S5: expiry không chứng minh nước rút; publish tick cần known de
 
 ## Execution Checklist
 
-- [ ] R-03: knowledge/nullable depth và all-consumer cutover.
-- [ ] R-04: real leg provenance + full-check timing + regressions.
+- [x] R-03: knowledge/nullable depth và all-consumer cutover.
+- [x] R-04: real leg provenance + full-check timing + regressions.

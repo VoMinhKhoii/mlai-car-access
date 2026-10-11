@@ -100,20 +100,27 @@ Chosen: **B + C + D** (not A, a bare yes/no verdict).
 ## Q12: Flood time window (2026-09-28)
 
 - **The Dwell Window.** Park asks how long the driver stays (default 2 h); Pickup/Drop-off uses ~15 min.
-- **What's checked:** the route in, the Stop Point and the Way Out, across the whole window.
+- **Three flood-check windows (D25 refinement).**
+  1. **Route in:** `[..., arrive]`, using a conservative traversal duration of `2 × route length / ALLEY_SPEED_MPS + FLOOD_TRAVERSAL_MARGIN_MIN`; durations are rounded up to the `FLOOD_TIMING_STEP_MIN` sampling bucket.
+  2. **Stop Point:** the exact requested Dwell Window `[arrive, depart]`.
+  3. **Way Out:** `[depart, ...]`, with the same conservative traversal-duration rule.
+- Route-in and Way-Out windows are approximate; the checks include sampled interval boundaries and known tide, rain, and report boundaries, but do not prove continuous real-world conditions. `backend/app/plan.py` owns the windows and `backend/app/flood.py` owns evidence assessment.
 - **Drivers:** the tide forecast (daily bulletin, peak hours) and rain now plus the next few hours (gauges, radar).
 - **History as a prior:** it says *which* streets flood at a given tide or rain level. The window says *whether* that happens during the stay.
 
+## Q13: Flood depth vs vehicle, and observation validity (2026-09-28)
 
-
-
-
-## Q13: Flood depth vs vehicle (2026-09-28)
-
-- **Depth Range vs Safe Water Depth.** Each segment gets a Depth Range for the Dwell Window, from tide level, rain intensity and street history. Compared with the car's Safe Water Depth:
-  - passable: the whole range is below the limit
-  - risky: the range straddles the limit; treated as Unverified
-  - blocked: the whole range is above the limit
+- **Depth Range vs Safe Water Depth.** A Depth Range is the expected minimum and maximum water depth for a street and Dwell Window. A missing numeric range is not a verdict by itself; interpret it together with Flood Knowledge and the status.
+  - **passable:** valid evidence supports staying within the limit; no Depth Range may mean no flood depth was estimated, not missing evidence.
+  - **risky:** the range straddles the limit, or required knowledge is incomplete (missing history, tide, or a stale positive observation); treated as Unverified.
+  - **blocked:** known evidence puts even the lower bound at or above the vehicle limit.
+- **Knowledge dimension (R-03/R-04).** A Flood Status is only "known" when all required evidence is valid:
+  - **known:** assessment is sound, all required sources present and valid
+  - **missing_history:** no past flood records exist for this street
+  - **missing_tide:** tide is required for this street but unavailable at the required time
+  - **stale_positive_observation:** the latest positive flood observation has expired, and no newer, still-valid dry observation has arrived; expiry or a dry report that has itself expired does not prove the water receded.
+- When knowledge is not "known" and status would be "passable", status is elevated to "risky". See `FloodAssessment` / `FloodSnapshot` in `backend/app/flood.py`.
+- **Observation validity and persistence (R-03/R-04).** A flood or dry report is valid within `FLOOD_REPORT_VALID_H` from observation. The latest expired positive persists as stale evidence until a newer, still-valid dry observation clears it. This is not "no record = no risk"; it is "knowledge incomplete until proven dry". `FloodSnapshot` in `backend/app/flood.py` owns report validity and stale-positive handling.
 
 ---
 

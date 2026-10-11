@@ -76,9 +76,10 @@ Active worktree pointer qua ak plan use; session hook không persist (adapter mi
 
 ## Execution Evidence — 2026-10-11
 
-- Phase1 R-01/R-02: checklist checked qua `ak plan check`; `ak plan status` reports 1/5 phases, 2/13 tasks (15%). Overall remains in-progress.
-- [Phase1 verification](./reports/phase1-verification.md): targeted10/10, full Python28/28, frontend build pass/lint0errors11warnings; real non-finite duration request422; native desktop/mobile datetime and source/zero/keyboard/cancellation smoke. Live Goong search/detail/plan200.
-- Independent re-review approved with no phase1 blockers. User approved two baseline test-only repairs: camera fixture provider identity and hydro frozen clock; production camera/hydro unchanged.
-- User requested phase1 commit/push before phase2. Secrets, root .venv and pre-existing parcel cache must not enter the commit. No deployment or PR requested.
-- CLI limitation: `check` updates checkboxes and `status` derives completion, but does not rewrite the legacy phase frontmatter or Phases table. Those pending labels above are the planning snapshot; checked phase files plus this evidence record carry current execution progress. No unsupported hand-edited status mutation.
-- Remaining risks belong to later phases: typed rain/coordinate boundaries and bounded dwell/runtime; field collection and live-release acceptance remain open.
+- Phase1 R-01/R-02 and Phase2 R-03/R-04 checklists are checked via `ak plan check`; `ak plan status` reports 2/5 phases, 4/13 tasks (30%). Overall remains in-progress.
+- [Phase1 verification](./reports/phase1-verification.md) and [phase2 verification](./reports/phase2-verification.md) record acceptance evidence. Phase2: backend 53/53; frontend build passed, lint 0 errors/14 warnings; isolated API stale-positive, pickup, and Vios checks passed with zero external HTTP calls.
+- Phase2 performance: warm Vios API 0.95 s against the <3 s warm-path target. Cold graph initialization measured 7.09 s; this remains a cold-start risk. Browser proof used desktop and iPhone-14 viewport emulation, not a physical device.
+- Independent reviewer found no remaining code blockers but requested three documentation corrections; those docs are corrected. Post-correction reviewer retries failed due provider rate limits. User explicitly approved phase2 closure/commit despite no final post-correction reviewer response.
+- User previously requested phase1 commit/push before phase2; commit `b4d2da7` is on `origin/fix/access-safety-hardening`. User now requests phase2 commit/push before phase3. Never stage user cache or secrets; no deployment or PR requested.
+- CLI limitation: `check` updates checkboxes and `status` derives completion, but does not rewrite the legacy phase frontmatter or Phases table. Pending labels above are the planning snapshot; checked phase files and this evidence record carry execution progress. No unsupported hand-edited status mutation.
+- R-11/R-12 remain open: no validated real field dataset, held-out split, or release proof yet. Phase3–5 checklists remain unchecked.

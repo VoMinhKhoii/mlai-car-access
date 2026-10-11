@@ -1,14 +1,18 @@
 import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, CircleHelp, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, TriangleAlert } from 'lucide-react'
-import { routeSourceLabel, type AreaBuild, type NewsItem, type Plan, type StopPoint } from '../api'
+import { floodKnowledgeLabel, routeSourceLabel, type AreaBuild, type FloodCheck, type LegFloodCheck, type NewsItem, type Plan, type StopPoint } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
-import { toLocal } from '../datetime'
+import { timestamp, toLocal } from '../datetime'
 
-const hhmm = (iso: string) => toLocal(iso)?.slice(11, 16) ?? 'giờ chưa xác định'
+export const floodTimeLabel = (iso: string | null | undefined) => {
+  const local = iso ? toLocal(iso) : null
+  return local ? `${local.slice(11, 16)} ${local.slice(0, 10).split('-').reverse().join('/')} (UTC+7)` : 'thời điểm chưa xác định'
+}
+export const exitFloodFailure = (plan: Plan) => plan.timing?.failure_codes.includes('flood_exit') ?? false
 
 /* ---------- verdict: say what to do, then why ---------- */
 
-export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBefore: (hhmm: string) => void; stale: boolean }) {
+export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture: (iso: string) => void; stale: boolean }) {
   const best = plan.stop_points[0]
   const verb = plan.intent === 'park' ? 'Đỗ' : 'Dừng đón'
   const doorWhy = plan.door && !plan.door.ok ? plan.door.fail_reasons[0] : null
@@ -17,12 +21,15 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
   let head = plan.verdict.headline
   let sub: string | null = plan.verdict.detail || null
 
-  if (plan.timing?.leave_before || plan.timing?.or_after) {
+  // A non-null timing result means the backend authorized a flood-specific sweep.
+  const timing = plan.timing
+  const floodHazard = timing?.failure_codes.some((code) => code === 'flood_exit' || code === 'flood_arrival' || code === 'flood_stay') ?? false
+  if (timing && (floodHazard || timing.reason || timing.leave_before_at || timing.or_after_at)) {
     tone = 'warn'
-    icon = <Droplets size={18} />
-    head = `Lúc ${hhmm(plan.window.depart)} đường ra sẽ ngập`
-    sub = [plan.timing.leave_before && `Rời trước ${plan.timing.leave_before}`, plan.timing.or_after && `hoặc ở lại tới sau ${plan.timing.or_after}`]
-      .filter(Boolean).join(' ') + '.'
+    icon = floodHazard ? <Droplets size={18} /> : <TriangleAlert size={18} />
+    head = timing.failure_codes.includes('flood_exit') ? 'Cần kiểm tra ngập trên đường ra' : floodHazard ? 'Cần kiểm tra ngập cho chuyến đi' : 'Chưa xác định được giờ rời phù hợp'
+    sub = [timing.reason, timing.leave_before_at && `Giờ rời sớm hơn: ${floodTimeLabel(timing.leave_before_at)}`,
+      plan.intent === 'park' && timing.or_after_at && `Giờ rời muộn hơn: ${floodTimeLabel(timing.or_after_at)}`].filter(Boolean).join('. ')
     if (plan.verdict.code === 'unverified' || (best && !best.verified)) {
       sub += ' Chỗ dừng gợi ý chưa xác minh; giờ rời không xác nhận xe vào và ra được.'
     }
@@ -50,14 +57,21 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
       <div className="verdict-kicker">{icon}<span>{KICKER[tone]}</span>{stale && <LoaderCircle size={14} className="spin" aria-label="Đang cập nhật" />}</div>
       <h2 className="display">{head}</h2>
       {sub && <p className="verdict-sub">{sub}</p>}
-      {plan.timing?.leave_before && (
+      {timing?.approximate && <p className="faint">Kiểm tra giờ rời theo khoảng di chuyển ước lượng; không bảo đảm điều kiện thực tế liên tục.</p>}
+      {plan.intent === 'park' && (timing?.leave_before_at || timing?.or_after_at) && (
         <div className="verdict-actions">
-          <button type="button" className="btn btn-tonal btn-sm" onClick={() => onLeaveBefore(plan.timing!.leave_before!)}>
-            Đặt giờ rời {plan.timing.leave_before}
-          </button>
-          {plan.timing.if_leave_before && <span className="faint">Khi đó: {THEN[plan.timing.if_leave_before.code] ?? lower(plan.timing.if_leave_before.headline)}</span>}
+          {([['leave_before_at', 'Đặt giờ rời sớm'], ['or_after_at', 'Đặt giờ rời muộn']] as const).map(([key, label]) => {
+            const iso = timing?.[key]
+            return iso && timestamp(iso) != null ? (
+              <button key={key} type="button" className="btn btn-tonal btn-sm" disabled={stale} onClick={() => onDeparture(iso)}>
+                {label} {floodTimeLabel(iso)}
+              </button>
+            ) : null
+          })}
+          {timing?.if_leave_before && <span className="faint">Khi đó: {THEN[timing.if_leave_before.code] ?? lower(timing.if_leave_before.headline)}</span>}
         </div>
       )}
+      {plan.intent === 'pickup' && timing && <p className="faint">Dừng đón giữ {plan.window.dwell_min} phút. Muốn ở lại lâu hơn, hãy chọn mục đích đỗ xe và tính lại.</p>}
       {trip && (
         <div className="trip">
           <span className="trip-big display num">{minutes(trip.total_min)}</span>
@@ -135,6 +149,46 @@ const FIT = {
 const LEGAL = { Permitted: { tone: 'ok', label: 'Được phép' }, Restricted: { tone: 'warn', label: 'Hạn chế' }, Prohibited: { tone: 'bad', label: 'Cấm' }, Unverified: { tone: 'muted', label: 'Chưa rõ luật' } } as const
 const FLOOD = { passable: { tone: 'ok', label: 'Trong ngưỡng xe' }, risky: { tone: 'warn', label: 'Có thể ngập' }, blocked: { tone: 'bad', label: 'Quá ngưỡng xe' } } as const
 
+export function floodPresentation(check: FloodCheck | null | undefined): { tone: Tone; label: string } {
+  if (check?.status === 'blocked') return FLOOD.blocked
+  if (!check || check.knowledge !== 'known') return { tone: 'muted', label: 'Chưa đủ dữ liệu ngập' }
+  return FLOOD[check.status]
+}
+
+export function FloodEvidenceDetail({ check }: { check: FloodCheck | null | undefined }) {
+  const d = check?.depth
+  const validDepth = d != null && Number.isFinite(d.lo) && Number.isFinite(d.hi)
+  const source = check?.source ?? check?.freshness?.source
+  return (
+    <div className="flood-evidence">
+      <p>{validDepth ? `Ước lượng nước ${Math.round(d.lo * 100)}–${Math.round(d.hi * 100)} cm.` : check?.knowledge === 'known' && check.status === 'passable' ? 'Không có mực nước ngập được dự báo trong khoảng kiểm tra.' : 'Chưa xác định độ sâu nước; không thể kết luận trong ngưỡng xe.'}</p>
+      <p>{floodKnowledgeLabel(check?.knowledge)}{check?.at && ` · kiểm tra ${floodTimeLabel(check.at)}`}.</p>
+      {check?.reason && <p>{vnt(check.reason)}</p>}
+      {source && <p>Nguồn: {vnt(source)}.</p>}
+      {check?.freshness?.observed_at && <p>Ghi nhận: {floodTimeLabel(check.freshness.observed_at)}.</p>}
+      {check?.freshness?.valid_until && <p>Hiệu lực tới: {floodTimeLabel(check.freshness.valid_until)}.</p>}
+      {d?.drivers.length ? <p>Căn cứ: {vnt(d.drivers.join('; '))}.</p> : null}
+      {d?.inferred && <p>Suy từ đường ngập liền kề.</p>}
+    </div>
+  )
+}
+
+function LegFloodEvidence({ check }: { check: LegFloodCheck | null | undefined }) {
+  return (
+    <>
+      <FloodEvidenceDetail check={check} />
+      {check?.interval && <p>{check.interval.approximate ? 'Khoảng di chuyển ước lượng' : 'Khoảng thời gian ở lại'}: {floodTimeLabel(check.interval.start)} tới {floodTimeLabel(check.interval.end)}.</p>}
+      {check?.legs.length ? <ul className="flood-legs">{check.legs.map((leg, i) => (
+        <li key={`${leg.way_id}-${i}`}>
+          <b>{leg.name || (leg.way_id != null ? `Đoạn đường ${leg.way_id}` : 'Đoạn đường chưa xác định tên')}</b>
+          <Tag tone={floodPresentation(leg).tone}>{floodPresentation(leg).label}</Tag>
+          <FloodEvidenceDetail check={leg} />
+        </li>
+      ))}</ul> : <p>Chưa có bằng chứng theo từng đoạn đường.</p>}
+    </>
+  )
+}
+
 function kindLabel(s: StopPoint) {
   if (s.kind === 'door') return 'Trước cửa'
   if (s.kind === 'lot') return s.lot?.source === 'VETC' ? 'Bãi đỗ · thanh toán VETC' : 'Bãi đỗ'
@@ -154,7 +208,7 @@ export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
 }) {
   const fit = FIT[s.fit.class] ?? FIT.unknown
   const legal = LEGAL[s.legality.status]
-  const flood = FLOOD[s.flood.stay.status]
+  const flood = floodPresentation(s.flood.stay)
   const title = s.kind === 'door' ? 'Trước cửa nhà' : s.kind === 'lot' ? s.lot?.name ?? s.name : s.name
   return (
     <article className={`stop ${selected ? 'is-open' : ''}`}>
@@ -180,23 +234,29 @@ export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
 function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvidence: (wayId: number) => void }) {
   const wr = s.fit.width_range
   const need = s.fit.needed
-  const d = s.flood.stay.depth
   return (
     <div className="checks">
       <Check icon={<CarFront size={16} />} title="Đường vào" tone={(FIT[s.fit.class] ?? FIT.unknown).tone}>
         {wr ? <>
           {wr.hi == null ? `Rộng ít nhất ${metres(wr.lo)}` : `Rộng ${fmtWidth(wr.lo, wr.hi)}`}
           {wr.top_tier ? '' : ' (chưa đo)'}{need && `, xe cần ${metres(need.tight_min, 2)}`}.
-          {s.route_in && <> Đoạn trong hẻm {s.route_in.meters} m.</>}
+          {s.route_in && (s.route_in.available
+            ? s.route_in.meters != null && <> Đoạn trong hẻm {s.route_in.meters} m.</>
+            : <> Chưa có đường vào phù hợp với xe.</>)}
           {wr.review && <> <b>Bằng chứng mâu thuẫn, cần duyệt.</b></>}
         </> : s.kind === 'lot' ? 'Bãi đỗ: vào bằng cổng chính.' : vnt(s.fit.note ?? 'Chưa có dữ liệu bề rộng.')}
         {s.way_id && <button type="button" className="link-btn" onClick={() => onEvidence(s.way_id!)}>Xem bằng chứng</button>}
       </Check>
       <Check icon={<Navigation size={16} />} title="Đường ra" tone={exitTone(s)}>{vnt(s.way_out.text)}</Check>
-      <Check icon={<Droplets size={16} />} title="Ngập lúc ở lại" tone={FLOOD[s.flood.stay.status].tone}>
-        {d ? `Nước ${Math.round(d.lo * 100)}–${Math.round(d.hi * 100)} cm${s.flood.stay.at ? ` lúc ${s.flood.stay.at}` : ''}` : 'Chưa ghi nhận ngập ở đây'}
-        {`; xe chịu được ${Math.round(plan.vehicle.safe_water_depth * 100)} cm.`}
-        {d?.inferred && ' Suy từ đường ngập liền kề.'}
+      <Check icon={<Droplets size={16} />} title="Ngập trên đường vào" tone={floodPresentation(s.route_in?.flood).tone}>
+        <LegFloodEvidence check={s.route_in?.flood} />
+      </Check>
+      <Check icon={<Droplets size={16} />} title="Ngập lúc ở lại" tone={floodPresentation(s.flood.stay).tone}>
+        <LegFloodEvidence check={s.flood.stay} />
+        <p>Ngưỡng nước của xe: {Math.round(plan.vehicle.safe_water_depth * 100)} cm.</p>
+      </Check>
+      <Check icon={<Droplets size={16} />} title="Ngập trên đường ra" tone={floodPresentation(s.way_out.flood).tone}>
+        <LegFloodEvidence check={s.way_out.flood} />
       </Check>
       <Check icon={<Landmark size={16} />} title={plan.intent === 'park' ? 'Luật đỗ xe' : 'Luật dừng xe'} tone={LEGAL[s.legality.status].tone}>
         <ul className="rules">

@@ -151,6 +151,15 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .check.t-water .check-ico, .check.t-brand .check-ico { background: var(--flood-tint); color: #1e3a9a; }
 .check b { font-size: var(--fs-12); }
 .check-detail { font-size: var(--fs-14); color: var(--text); text-wrap: pretty; }
+.check > div { min-width: 0; }
+.flood-evidence { display: flex; flex-direction: column; gap: var(--s-1); overflow-wrap: anywhere; }
+.flood-evidence p { margin: 0; }
+.flood-legs, .corr-forecast { list-style: none; margin: var(--s-2) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+.flood-legs li, .corr-forecast li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-1); min-width: 0; }
+.flood-popup { font-family: var(--font-ui); font-size: var(--fs-14); line-height: 1.5; color: var(--text); overflow-wrap: anywhere; max-height: 50dvh; overflow-y: auto; max-width: calc(100vw - var(--s-8)); }
+.flood-popup p { margin: var(--s-2) 0; }
+.maplibregl-popup:has(.flood-popup) .maplibregl-popup-close-button { min-width: var(--tap); min-height: var(--tap); color: var(--text); }
+.maplibregl-popup:has(.flood-popup) .maplibregl-popup-content { padding: var(--s-3); padding-top: var(--tap); }
 .rules { margin: 0; padding-left: 16px; }
 .rules cite { display: block; font-style: normal; font-size: var(--fs-11); color: var(--text-3); }
 .link-btn { display: inline; border: 0; background: none; padding: 0; margin-left: 6px; color: var(--route); font-weight: 600; font-size: var(--fs-12); }
@@ -332,7 +341,7 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .chips::-webkit-scrollbar { display: none; }
 .chip-wrap { flex: none; }
 .chips:has(.popover) { overflow: visible; }
-.timeline header { white-space: nowrap; overflow: hidden; }
+.timeline header { white-space: normal; flex-wrap: wrap; }
 .tl-marks span.before { transform: translateX(calc(-100% - 4px)); }
 .tl-marks span.after { transform: translateX(4px); }
 @media (max-width: 1280px) { .tl-hint { display: none; } }
@@ -368,6 +377,7 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .corr-name { font-size: var(--fs-14); font-weight: 600; }
 .corr-best { color: var(--route); }
 .corr-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.corr-tags .tag, .flood-legs .tag, .corr-forecast .tag { max-width: 100%; white-space: normal; }
 .corr-time { display: flex; flex-direction: column; align-items: flex-end; flex: none; }
 .corr-time .display { font-size: var(--fs-17); font-weight: 700; }
 .corr-time small { color: var(--text-3); white-space: nowrap; }

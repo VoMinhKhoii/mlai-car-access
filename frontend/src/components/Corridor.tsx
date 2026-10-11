@@ -2,11 +2,11 @@ import { Cctv, ChevronDown, Droplets, ExternalLink, LoaderCircle, RefreshCw, Rou
 import { useEffect, useState } from 'react'
 import type { CameraReading, Corridor, CorridorRoute, Hotspot, Traffic } from '../api'
 import { Tag, distance, minutes, type Tone } from '../ds/ui'
+import { FloodEvidenceDetail, floodPresentation, floodTimeLabel } from './Result'
 
 const PORTAL = 'https://giaothong.hochiminhcity.gov.vn/Map.aspx'
 const TRAFFIC_TONE: Record<Traffic, Tone> = { thong_thoang: 'ok', dong: 'muted', un_u: 'warn', ket_cung: 'bad' }
-const STATUS = { ok: { tone: 'ok', label: 'Không ngập' }, risky: { tone: 'warn', label: 'Có thể ngập' }, blocked: { tone: 'bad', label: 'Ngập quá ngưỡng xe' } } as const
-const hhmm = (iso: string) => iso.slice(11, 16)
+const STATUS = { ok: { tone: 'ok', label: 'Trong ngưỡng tại các điểm có dữ liệu' }, risky: { tone: 'warn', label: 'Có thể ngập' }, blocked: { tone: 'bad', label: 'Ngập quá ngưỡng xe' } } as const
 
 /* ---------- which large road to take ---------- */
 
@@ -25,7 +25,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
     <section className={`corridor ${busy ? 'is-stale' : ''}`} aria-live="polite">
       <header>
         {busy ? <LoaderCircle size={15} className="spin" /> : <Route size={15} />}
-        <span><b>Tuyến đường lớn</b> · {corridor.live ? `camera lúc ${hhmm(corridor.checked_at)}` : 'theo dự báo'}</span>
+        <span><b>Tuyến đường lớn</b> · {corridor.live ? `camera ${floodTimeLabel(corridor.checked_at)}` : 'theo dự báo'}</span>
       </header>
       <p className="corridor-sum">{corridor.summary}</p>
       {corridor.live_note && <p className="faint corridor-note">{corridor.live_note}</p>}
@@ -47,7 +47,8 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
 
 function RouteRow({ r, open, onSelect }: { r: CorridorRoute; open: boolean; onSelect: () => void }) {
   const jam = r.hotspots.filter((h) => h.traffic === 'ket_cung' || h.traffic === 'un_u').length
-  const st = STATUS[r.status]
+  const unknownCoverage = !r.flood_forecast.length || r.flood_forecast.some((f) => f.knowledge !== 'known')
+  const st = r.status === 'blocked' ? STATUS.blocked : unknownCoverage ? { tone: 'muted' as const, label: 'Chưa đủ dữ liệu ngập trên tuyến' } : STATUS[r.status]
   return (
     <button type="button" className={`corr-row ${open ? 'is-open' : ''} ${r.chosen ? 'is-best' : ''}`} onClick={onSelect} aria-expanded={open}>
       <span className="corr-main">
@@ -69,12 +70,19 @@ function RouteRow({ r, open, onSelect }: { r: CorridorRoute; open: boolean; onSe
 }
 
 function RouteDetail({ r, live, onCamera }: { r: CorridorRoute; live: boolean; onCamera: (c: CameraReading) => void }) {
-  const notable = (h: Hotspot) => h.traffic === 'un_u' || h.traffic === 'ket_cung' || h.depth_cm
+  const notable = (h: Hotspot) => h.traffic === 'un_u' || h.traffic === 'ket_cung' || (h.depth_cm != null && h.depth_cm > 0) || h.flood_status === 'blocked'
   const calm = r.hotspots.filter((h) => !notable(h) && h.traffic)
   return (
     <div className="corr-detail">
       <p className="faint">Goong {minutes(r.base_min)} khi đường trống{r.delay_min > 0 ? `, +${r.delay_min} phút theo camera` : ''}.</p>
       {r.reasons.length > 0 && <ul className="corr-reasons">{r.reasons.map((x, i) => <li key={i}><TriangleAlert size={13} />{x}</li>)}</ul>}
+      <p className="faint">Dự báo theo thời điểm đi qua từng đường, không xác nhận toàn tuyến hoặc lối vào và ra hẻm.</p>
+      {r.flood_forecast.length ? <ul className="corr-forecast">{r.flood_forecast.map((f, i) => (
+        <li key={`${f.street}-${f.at}-${i}`}>
+          <b>{f.street}</b> <Tag tone={floodPresentation(f).tone}>{floodPresentation(f).label}</Tag>
+          <FloodEvidenceDetail check={f} />
+        </li>
+      ))}</ul> : <p className="faint">Chưa có dữ liệu dự báo ngập cho các đoạn của tuyến; không thể kết luận trong ngưỡng xe.</p>}
       {live && (
         <ul className="corr-cams">
           {r.hotspots.map((h) => {
@@ -136,7 +144,7 @@ export function CameraPanel({ cam, canRead, onClose, onRead }: {
           <div className="cam-read">
             <div className="stop-tags flat">
               {r.traffic && r.traffic in TRAFFIC_TONE && <Tag tone={TRAFFIC_TONE[r.traffic as Traffic]} icon={<Cctv size={13} />}>{r.traffic_vi}</Tag>}
-              <Tag tone={r.depth_cm ? 'water' : 'ok'} icon={<Droplets size={13} />}>{r.depth_cm ? `Ngập ~${r.depth_cm} cm` : r.depth_class === 'uot' ? 'Đường ướt, không ngập' : 'Không ngập'}</Tag>
+              <Tag tone={r.depth_cm ? 'water' : 'ok'} icon={<Droplets size={13} />}>{r.depth_cm ? `Ngập ~${r.depth_cm} cm` : r.depth_class === 'uot' ? 'Đường ướt, không ngập' : 'Chưa thấy ngập trong ảnh'}</Tag>
             </div>
             <p>{r.evidence}</p>
             <p className="faint">AI đọc lúc {(r.image_time ?? r.at ?? '').slice(11, 16)} từ {r.frames ?? 1} khung hình · độ tin cậy {Math.round((r.confidence ?? 0) * 100)}%</p>

@@ -60,14 +60,17 @@ class Tide(unittest.TestCase):
         t = T0 + timedelta(days=3)
         with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
                 mock.patch.object(hydro, "tide_point", lambda _: (1.45, "model")):
-            d = flood.depth_at(prof, t, [])
+            assessment = flood.depth_at(prof, t, [])
+        d = assessment.depth
+        self.assertIsNotNone(d)
         self.assertEqual((d.lo, d.hi), (0.0, 0.20))  # 1.45 ± 0.15 spans below BĐ1 to above BĐ2
         self.assertIn("mô hình", d.drivers[0])
         with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
                 mock.patch.object(hydro, "tide_point", lambda _: (1.45, "measured")):
-            d = flood.depth_at(prof, t, [])
+            assessment = flood.depth_at(prof, t, [])
+        d = assessment.depth
+        self.assertIsNotNone(d)
         self.assertEqual((d.lo, d.hi), (0.0, 0.10))
-
 
 class Rain(unittest.TestCase):
     NOW = datetime(2026, 10, 5, 22, tzinfo=VN)
