@@ -57,8 +57,8 @@ function WidthRangeMetadata({ basis, coverage, decisive }: {
 }
 
 
-export function EvidencePanel({ way, at, google, grounding, onClose, onReview, onBlockage }: {
-  way: WayEvidence; at: [number, number]; google: boolean; grounding: boolean
+export function EvidencePanel({ way, at, google, grounding, canReview, onClose, onReview, onBlockage }: {
+  way: WayEvidence; at: [number, number]; google: boolean; grounding: boolean; canReview: boolean
   onClose: () => void; onReview: (id: string, approve: boolean) => void; onBlockage: () => void
 }) {
   const [tab, setTab] = useState<TabId>('width')
@@ -116,12 +116,14 @@ export function EvidencePanel({ way, at, google, grounding, onClose, onReview, o
                   <b>{ph.width_m ? `AI ước lượng ≈ ${metres(ph.width_m)}` : 'AI không ước lượng được'}</b>
                   <small>{ph.reference ? `Theo ${ph.reference}` : ph.notes}{ph.confidence != null && ` · tin cậy ${Math.round(ph.confidence * 100)}%`}</small>
                   <small><a href={ph.listing_url} target="_blank" rel="noreferrer">Tin rao gốc <ExternalLink size={11} /></a>{ph.posted_at && ` · ${ph.posted_at.slice(0, 10)}`}</small>
-                  {ph.status === 'pending' && ph.width_m ? (
+                  {ph.status === 'pending' && ph.width_m && canReview ? (
                     <div className="ph-actions">
                       <button type="button" className="btn btn-tonal btn-sm" onClick={() => onReview(ph.id, true)}><Check size={14} /> Đúng</button>
                       <button type="button" className="btn btn-ghost btn-sm" onClick={() => onReview(ph.id, false)}>Sai, bỏ</button>
                     </div>
-                  ) : ph.status !== 'pending' && <small className={`ph-status ${ph.status}`}>{ph.status === 'approved' ? 'Đã duyệt: dùng làm bằng chứng “Đã quan sát”' : 'Đã bỏ'}</small>}
+                  ) : ph.status === 'pending'
+                    ? <small className="ph-status">Chờ người điều hành duyệt; chưa dùng làm bằng chứng đã quan sát</small>
+                    : <small className={`ph-status ${ph.status}`}>{ph.status === 'approved' ? 'Đã duyệt: dùng làm bằng chứng “Đã quan sát”' : 'Đã bỏ'}</small>}
                 </div>
               </li>
             ))}
@@ -145,7 +147,7 @@ export function EvidencePanel({ way, at, google, grounding, onClose, onReview, o
       </div>
       <footer>
         <a href={way.osm_url} target="_blank" rel="noreferrer">OpenStreetMap <ExternalLink size={12} /></a>
-        <button type="button" className="btn btn-ghost btn-sm" onClick={onBlockage}><Flag size={14} /> Báo hẻm đang bị chặn</button>
+        <button type="button" className="btn btn-ghost btn-sm" onClick={onBlockage}><Flag size={14} /> Báo hẻm đang bị chặn (chờ duyệt)</button>
       </footer>
     </aside>
   )

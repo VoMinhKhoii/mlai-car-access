@@ -22,6 +22,8 @@ export interface Config {
   demo_center: [number, number]
   presets: Preset[]
   personas: { id: string; label: string; enabled: boolean; note?: string }[]
+  /** Booleans only: the backend never sends the secret or a session id. */
+  operator: { available: boolean; signed_in: boolean }
 }
 export interface Vehicle {
   id: string; label: string; kind: 'model' | 'class'; size_class: string; powertrain: string
@@ -123,21 +125,22 @@ export interface Plan {
   counts: { candidates: number; passed: number; rejected: number; dijkstra: number }
   origin: { lat: number; lon: number } | null
   area_key: string
+  /** Server-owned live area evidence: why a plan may lack it (missing, stale, partial). */
+  area: AreaStatus
+  /** Display-only copy of the area build (news, listing photos); never sent back to the server. */
+  area_data: AreaData | null
   live_crawl: boolean
 }
-export interface NewsItem { street: string; title: string; summary: string; url: string; source: string; date: string; kind: 'flood' | 'works' | 'ban'; depth_cm: number | null }
-export interface AreaData {
-  key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[]
-  parcels?: {
-    way_id: number; samples: number[]
-    cuts?: { lat?: number; lon?: number; at_m?: number; gap_m?: number; width_m?: number }[]
-    segment_length_m?: number; max_spacing_m?: number; truncated?: boolean; deep?: boolean
-  }[]
+export interface AreaStatus {
+  key: string; state: 'fresh' | 'partial' | 'stale' | 'missing'; revision: number | null
+  collected_at: string | null; expires_at: string | null; building: boolean; reason: string | null
 }
-export type StepState = 'pending' | 'running' | 'done' | 'skipped'
+export interface NewsItem { street: string; title: string; summary: string; url: string; source: string; date: string; kind: 'flood' | 'works' | 'ban'; depth_cm: number | null }
+export interface AreaData { key: string; revision: string; news: NewsItem[]; photos: ListingPhoto[] }
+export type StepState = 'pending' | 'running' | 'done' | 'skipped' | 'error'
 export interface AreaBuild {
-  key: string; state: 'running' | 'done' | 'error' | 'off'; error?: string | null
-  started_at?: string; finished_at?: string
+  key: string; state: 'queued' | 'running' | 'done' | 'error'; error?: string | null
+  queued_at?: string; started_at?: string | null; finished_at?: string | null; revision?: number | null
   steps?: Record<'map' | 'parcels' | 'listings' | 'match' | 'news' | 'photos', { state: StepState; detail: string }>
   counts?: { fetched: number; unique: number; in_area: number; matched: number; alleys: number; photos_total: number; photos_read: number }
 }
@@ -162,6 +165,18 @@ export interface CameraInfo { id: string; name: string; lat: number; lon: number
 export interface Hotspot {
   name: string; lat: number; lon: number; along_m: number; traffic: Traffic | null; traffic_vi: string | null
   delay_min: number; depth_cm: number | null; flood_status: FloodStatus | null; at: string | null; cameras: CameraReading[]
+  /** read: a fresh camera reading; scheduled: in the running job; unknown: not read this time (not "clear"). */
+  coverage: 'read' | 'scheduled' | 'unknown'
+}
+export interface CameraJob {
+  id: string; state: 'queued' | 'running' | 'ready' | 'error' | 'expired' | 'interrupted'
+  cameras: string[]; created_at: string; expires_at: string; finished_at: string | null; error: string | null
+  readings: CameraReading[]; unread: string[]
+}
+export interface CorridorCameraJob {
+  id: string | null; state: 'queued' | 'running' | 'busy' | 'not_scheduled'
+  cameras_requested: number; cameras_scheduled: number; reason?: string | null; retry_after?: number
+  dropped: { id: string; name: string; reason: string }[]
 }
 export interface CorridorRoute {
   id: number; label: string; via: { name: string; lat: number; lon: number } | null; is_goong: boolean
@@ -173,6 +188,7 @@ export interface CorridorRoute {
 export interface Corridor {
   available: boolean; reason?: string; depart_at: string; checked_at: string; live: boolean; live_note: string | null
   routes: CorridorRoute[]; summary: string; cameras_read: number; cameras_offline: number; typical_factor: number
+  camera_job: CorridorCameraJob | null
   source: { cameras: string; routes: string }
 }
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
@@ -181,7 +197,7 @@ export interface PlanRequest {
   lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
   /** Complete ISO timestamp with an explicit timezone, or null for now. */
   arrive_at: string | null
-  dwell_min: number; rain: RainSpell[]; origin: [number, number] | null; area: AreaData | null
+  dwell_min: number; rain: RainSpell[]; origin: [number, number] | null
 }
 export interface ValidationIssue { loc: (string | number)[]; msg: string; type: string }
 export class ApiError extends Error {
@@ -214,8 +230,14 @@ async function j<T>(res: Response): Promise<T> {
   return res.json() as Promise<T>
 }
 
-const post = (url: string, body: unknown) =>
-  fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+const post = (url: string, body: unknown, signal?: AbortSignal) =>
+  fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal })
+
+export function delay(ms: number): Promise<void> {
+  const { promise, resolve } = Promise.withResolvers<void>()
+  window.setTimeout(resolve, ms)
+  return promise
+}
 
 export const api = {
   config: () => fetch('/api/config').then(j<Config>),
@@ -223,41 +245,53 @@ export const api = {
   search: (q: string, near?: { lat: number; lon: number } | null, signal?: AbortSignal) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`, { signal }).then(j<{ results: SearchResult[] }>),
   reverse: (lat: number, lon: number) => fetch(`/api/reverse?lat=${lat}&lon=${lon}`).then(j<{ label: string; source: string }>),
   place: (id: string, signal?: AbortSignal) => fetch(`/api/place/${encodeURIComponent(id)}`, { signal }).then(j<{ lat: number; lon: number; label: string }>),
-  plan: (body: PlanRequest) => post('/api/plan', body).then(j<Plan>),
+  plan: (body: PlanRequest, signal?: AbortSignal) => post('/api/plan', body, signal).then(j<Plan>),
   tide: (start: string, hours = 36) =>
     fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
-  wayEvidence: (id: number, lat: number, lon: number, area: AreaData | null) => post(`/api/evidence/way/${id}`, { lat, lon, area }).then(j<WayEvidence>),
-  confirm: (body: unknown) => post('/api/confirm', body).then(j<{ ok: boolean }>),
-  blockage: (body: unknown) => post('/api/blockage', body).then(j<{ ok: boolean }>),
+  wayEvidence: (id: number, lat: number, lon: number, signal?: AbortSignal) => post(`/api/evidence/way/${id}`, { lat, lon }, signal).then(j<WayEvidence>),
+  confirm: (body: { lat: number; lon: number; vehicle_id: string; result: 'in' | 'tight' | 'no'; way_ids: number[] }) =>
+    post('/api/confirm', body).then(j<{ status: 'pending'; report_id: string }>),
+  blockage: (body: { lat: number; lon: number; way_id: number; reason: string }) =>
+    post('/api/blockage', body).then(j<{ status: 'pending'; report_id: string }>),
   setFlag: (name: string, enabled: boolean) => post('/api/flags', { name, enabled }).then(j<{ flags: Flag[] }>),
-  reviewPhoto: (key: string, id: string, approve: boolean) => post(`/api/photo/${id}/review`, { key, approve }).then(j<{ ok: boolean }>),
-  /** Live Area Build: streamed NDJSON status lines; resolves with the area evidence from the last line. */
-  async areaBuild(lat: number, lon: number, onStatus: (s: AreaBuild) => void): Promise<AreaData | null> {
-    const res = await post('/api/area/build', { lat, lon })
-    if (!res.ok || !res.body) throw new Error(res.statusText)
-    const reader = res.body.getReader()
-    const dec = new TextDecoder()
-    let buf = ''
-    let area: AreaData | null = null
-    for (;;) {
-      const { done, value } = await reader.read()
-      if (value) buf += dec.decode(value, { stream: true })
-      let nl
-      while ((nl = buf.indexOf('\n')) >= 0) {
-        const line = buf.slice(0, nl).trim()
-        buf = buf.slice(nl + 1)
-        if (!line) continue
-        const msg = JSON.parse(line) as { status: AreaBuild; area?: AreaData }
-        onStatus(msg.status)
-        if (msg.area) area = msg.area
-      }
-      if (done) return area
-    }
-  },
-  corridor: (body: { origin: number[]; destination: number[]; vehicle_id: string; depart_at: string | null; rain: RainSpell[] }) =>
-    post('/api/corridor', body).then(j<Corridor>),
+  reviewPhoto: (id: string, approve: boolean) => post(`/api/photo/${id}/review`, { approve }).then(j<{ status: string }>),
+  operatorLogin: (secret: string) => post('/api/operator/login', { secret }).then(j<{ operator: boolean }>),
+  operatorLogout: () => post('/api/operator/logout', {}).then(j<{ operator: boolean }>),
+  reports: (status: Report['status'] | null, cursor: string | null) =>
+    fetch(`/api/reports?limit=50${status ? `&status=${status}` : ''}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`)
+      .then(j<{ items: Report[]; next_cursor: string | null; remaining: number }>),
+  decideReport: (id: string, approve: boolean, revision: number) => post(`/api/reports/${id}`, { approve, revision }).then(j<Report>),
+  /** Live Area Build (operator): queues a server-side build; poll `areaJob` for its progress. */
+  areaBuild: (lat: number, lon: number) => post('/api/area/build', { lat, lon }).then(j<AreaBuild>),
+  areaJob: (key: string, signal?: AbortSignal) => fetch(`/api/area/build/${encodeURIComponent(key)}`, { signal }).then(j<AreaBuild>),
+  corridor: (body: { origin: number[]; destination: number[]; vehicle_id: string; depart_at: string | null; rain: RainSpell[] }, signal?: AbortSignal) =>
+    post('/api/corridor', body, signal).then(j<Corridor>),
   cameras: () => fetch('/api/cameras').then(j<{ source: string; portal: string; reading: boolean; cameras: CameraInfo[] }>),
-  readCamera: (id: string) => post(`/api/cameras/${id}/read`, {}).then(j<CameraReading>),
-  aiText: (text: string, source: string) => post('/api/ai/text', { text, source }).then(j<{ items: Record<string, unknown>[] }>),
+  readCamera: (id: string) => post(`/api/cameras/${id}/read`, {}).then(j<{ state: string; reading: CameraReading | null; job: CameraJob | null }>),
+  cameraJob: (id: string, signal?: AbortSignal) => fetch(`/api/camera-jobs/${id}`, { signal }).then(j<CameraJob>),
+}
+
+export interface Report {
+  report_id: string; type: 'confirmation' | 'blockage' | 'flood_report' | 'stop_rule' | 'photo_reading'
+  payload: Record<string, unknown>; source: string; status: 'pending' | 'approved' | 'rejected' | 'expired'
+  created_at: string; expires_at: string; reviewer: string | null; reviewed_at: string | null; revision: number
+  legacy: boolean; publish_target: string | null
+}
+
+/** Poll `fetchOnce` every `everyMs` until `done` says stop, the signal aborts, the tab is hidden, or `timeoutMs`
+ * passes. An abort or timeout only stops watching: it does not cancel the server job. */
+export async function poll<T>(fetchOnce: (signal: AbortSignal) => Promise<T>, done: (t: T) => boolean,
+  signal: AbortSignal, onUpdate: (t: T) => void, everyMs = 2000, timeoutMs = 120_000): Promise<T | null> {
+  const until = Date.now() + timeoutMs
+  while (!signal.aborted && Date.now() < until) {
+    if (document.visibilityState === 'visible') {
+      const t = await fetchOnce(signal)
+      if (signal.aborted) return null
+      onUpdate(t)
+      if (done(t)) return t
+    }
+    await new Promise((r) => window.setTimeout(r, everyMs))
+  }
+  return null
 }

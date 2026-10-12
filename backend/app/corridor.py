@@ -203,7 +203,12 @@ def _label(route) -> str:
 # ---- scoring --------------------------------------------------------------------
 
 def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id: str,
-             depart_at: datetime | None = None, rain: list[dict] | None = None) -> dict:
+             depart_at: datetime | None = None, rain: list[dict] | None = None,
+             schedule_cameras: bool = False) -> dict:
+    """Route choice from the flood forecast and whatever camera readings are cached now; never waits on cameras.
+
+    With schedule_cameras (operator only), the unread cameras most relevant to the routes are queued as one bounded
+    background job (`camera_job`); the client polls it and asks again once it is ready."""
     if not GOONG_API_KEY:
         return {"available": False, "reason": "Cần GOONG_API_KEY để tìm tuyến đường lớn"}
     p = get_profile(vehicle_id)
@@ -230,9 +235,26 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
 
     clusters = [_route_cams(pts) for _, pts in routes]
     cam_ids = [c["id"] for cls in clusters for cl in cls for c in cl]
-    readings = cameras.read_many(cam_ids) if use_cams and cam_ids else {}
+    readings = cameras.cached(cam_ids) if use_cams else {}
+    camera_job = None
+    if use_cams and cam_ids:
+        chosen, dropped = _camera_subset(clusters, readings)
+        if chosen and schedule_cameras:
+            try:
+                job = cameras.schedule(chosen)
+                camera_job = {"id": job["id"], "state": job["state"], "dropped": dropped}
+            except cameras.Busy as exc:
+                camera_job = {"id": None, "state": "busy", "retry_after": exc.retry_after, "dropped": dropped,
+                              "reason": "Hàng đợi đọc camera đang đầy"}
+        camera_job = camera_job or {"id": None, "state": "not_scheduled", "dropped": dropped,
+                                    "reason": None if not chosen else "Cần đăng nhập điều hành để đọc camera mới"}
+        camera_job.update(cameras_requested=len(set(cam_ids) - set(readings)),
+                          cameras_scheduled=len(chosen) if camera_job["id"] else 0)
+        scheduled = set(chosen) if camera_job["id"] else set()
+    else:
+        scheduled = set()
 
-    seen = [_observe(cls, readings, p) for cls in clusters]
+    seen = [_observe(cls, readings, p, scheduled) for cls in clusters]
     factors = {h["name"]: TRAFFIC_FACTOR[h["traffic"]] for hs in seen for h in hs if h["traffic"]}
     typical = statistics.median(factors.values()) if factors else 1.0
     request_rain = rain if rain is not None else []
@@ -248,7 +270,32 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
             "routes": out, "summary": _summary(best, out[0], out), "typical_factor": round(typical, 2),
             "cameras_read": sum(1 for x in readings.values() if x.get("state") == "ok"),
             "cameras_offline": sum(1 for x in readings.values() if x.get("state") == "offline"),
+            "camera_job": camera_job,
             "source": {"cameras": cameras.PORTAL_URL, "routes": "Goong Direction v2 (car)"}}
+
+
+def _camera_subset(clusters, readings) -> tuple[list[str], list[dict]]:
+    """At most MAX_JOB_CAMERAS unread cameras: first the Goong route's clusters, one camera each (the nearest that
+    the portal does not mark as offline), then the alternatives'. Every other unread camera is dropped, with why."""
+    chosen: list[str] = []
+    for cls in clusters:
+        for cl in cls:
+            if any(c["id"] in readings for c in cl):
+                continue  # this stretch already has a fresh reading
+            usable = [c for c in cl if c.get("status") != "NOT_IMAGE" and c["id"] not in chosen]
+            if usable and len(chosen) < cameras.MAX_JOB_CAMERAS:
+                chosen.append(usable[0]["id"])
+    dropped = []
+    for cls in clusters:
+        for cl in cls:
+            for c in cl:
+                if c["id"] in readings or c["id"] in chosen or c["id"] in {d["id"] for d in dropped}:
+                    continue
+                why = ("camera báo mất tín hiệu" if c.get("status") == "NOT_IMAGE"
+                       else "đoạn này đã có camera khác trong lượt đọc" if any(x["id"] in chosen for x in cl)
+                       else f"vượt giới hạn {cameras.MAX_JOB_CAMERAS} camera mỗi lượt")
+                dropped.append({"id": c["id"], "name": c["name"], "reason": why})
+    return chosen, dropped
 
 
 def _why_not_live(lead: float) -> str:
@@ -258,7 +305,7 @@ def _why_not_live(lead: float) -> str:
     return f"Giờ đi {when}: camera chỉ cho biết lúc này, nên tuyến được chọn theo dự báo ngập (triều, mưa, lịch sử)."
 
 
-def _observe(cls, readings, p) -> list[dict]:
+def _observe(cls, readings, p, scheduled: set[str] = frozenset()) -> list[dict]:
     """What the cameras of each cluster see: worst confident traffic level and deepest water."""
     out = []
     for cl in cls:
@@ -280,6 +327,8 @@ def _observe(cls, readings, p) -> list[dict]:
                     "name": (shown or cl[0])["name"], "lat": (shown or cl[0])["lat"], "lon": (shown or cl[0])["lon"],
                     "along_m": cl[0]["along_m"], "traffic": traffic, "traffic_vi": cameras.TRAFFIC_VI.get(traffic), "delay_min": 0,
                     "depth_cm": depth or None, "flood_status": fstat,
+                    # read: a fresh reading exists; scheduled: in the running job; unknown: not read this time.
+                    "coverage": "read" if reads else "scheduled" if any(c["id"] in scheduled for c in cl) else "unknown",
                     "at": shown and (shown.get("image_time") or shown.get("at") or "")[11:16]})
     return out
 

@@ -43,7 +43,7 @@ httpx.get = no_network
 httpx.post = no_network
 
 from fastapi.testclient import TestClient
-from app import ai, budget, cameras, config, evidence, flood, live, osm, plan as route_plan, vehicles
+from app import ai, budget, cameras, config, evidence, flood, live, osm, plan as route_plan, reports, vehicles
 from app.main import app
 
 Path.read_text = original_read_text
@@ -67,7 +67,6 @@ base = {
     "dwell_min": 15,
     "rain": [],
     "origin": None,
-    "area": None,
 }
 corridor_base = {
     "origin": [10.80, 106.70],
@@ -133,9 +132,14 @@ paths = {
     "ai_review": ai.REVIEW_FILE,
     "ai_live_flood": ai.LIVE_FLOOD_FILE,
     "budget_usage": budget.USAGE_FILE,
+    "budget_ai_usage": budget.AI_USAGE_FILE,
     "camera_readings": cameras.READINGS_FILE,
+    "camera_jobs": cameras.JOBS_FILE,
     "evidence_confirmations": evidence.CONFIRM_FILE,
     "evidence_blockages": evidence.BLOCKAGE_FILE,
+    "pending_reports": reports.PENDING_FILE,
+    "photo_reviews": live.PHOTO_REVIEWS,
+    "live_areas": live.AREAS_DIR,
     "flood_live": flood.LIVE_FILE,
     "live_cache": live.DIR,
     "osm_demo": osm.DEMO_FILE,

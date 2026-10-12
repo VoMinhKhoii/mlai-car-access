@@ -91,12 +91,13 @@ const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 const STEP_VI = { map: 'Bản đồ hẻm', parcels: 'Bề rộng theo thửa đất', listings: 'Tin rao Chợ Tốt, Alonhadat', match: 'Khớp tin rao với hẻm', news: 'Tin tức về các tuyến quanh đây', photos: 'AI đọc ảnh tin rao' } as const
 
 export function LiveStrip({ build }: { build: AreaBuild }) {
-  if (build.state === 'off' || !build.steps) return null
+  if (!build.steps) return null
   const steps = Object.entries(build.steps) as [keyof typeof STEP_VI, { state: string; detail: string }][]
   const done = steps.filter(([, s]) => s.state === 'done' || s.state === 'skipped').length
   const current = steps.find(([, s]) => s.state === 'running')
   const c = build.counts
-  const summary = build.state === 'running'
+  const summary = build.state === 'queued' ? 'Đang chờ đến lượt trên máy chủ'
+    : build.state === 'running'
     ? `${STEP_VI[current?.[0] ?? 'map']}${current?.[0] === 'listings' && c ? ` · ${c.fetched} tin` : ''}${current?.[0] === 'photos' && c ? ` · ${c.photos_read}/${c.photos_total} ảnh` : ''}`
     : build.state === 'error' ? 'Lỗi khi thu thập dữ liệu' : `${c?.matched ?? 0} tin rao khớp ${c?.alleys ?? 0} hẻm quanh đây`
   return (

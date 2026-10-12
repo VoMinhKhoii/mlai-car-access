@@ -15,7 +15,8 @@ from .flood import (KNOWLEDGE_ORDER, STATUS_ORDER, FloodAssessment, FloodSnapsho
                     alarm_label, evidence_generation, flood_profiles, worst_over)
 from .legality import ORDER as LEGAL_ORDER
 from .legality import StopRule, legality_for_lot, legality_over_window
-from .osm import AreaGraph, build_graph, haversine
+from .osm import AreaGraph, area_key, build_graph, haversine
+from .storage import LRU
 from .vehicles import VehicleProfile, get_profile, three_point_width, turn_in_width
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -24,25 +25,33 @@ WALK_CONNECTION_CAP_M = 35.0
 WALK_SNAP_M = 5.0  # connector shorter than this is projection noise, not an unmapped gap
 INF = float("inf")
 
-_WR: dict = {}
-_FP: dict = {}
+# Bounded caches keyed by everything their content depends on: graph identity (area key + source), AI flags, the
+# published evidence generation and the area build revision. An area overlay never leaks into another key.
+_WR = LRU(32)
+_FP = LRU(32)
 
 
-def area(lat: float, lon: float, generations: tuple[str, str] | None = None):
+def area(lat: float, lon: float, generations: tuple[str, str] | None = None, live_area: dict | None = None):
     g = build_graph(lat, lon)
-    key = (g.source, tuple(f["enabled"] for f in flags.describe()))
-    wkey = key + (STORE_EVIDENCE.version,)
-    if wkey not in _WR:
-        _WR[wkey] = width_ranges(g)
+    key = (area_key(lat, lon), g.source, tuple(f["enabled"] for f in flags.describe()))
+    view = STORE_EVIDENCE.view(live_area)
+    wkey = key + (STORE_EVIDENCE.version, (live_area or {}).get("key"), (live_area or {}).get("revision"))
+    wrs = _WR.get(wkey)
+    if wrs is None:
+        wrs = width_ranges(g, view)
+        _WR.put(wkey, wrs)
     evidence_generations = generations or evidence_generation()
     fkey = key + evidence_generations[:1]
-    if fkey not in _FP:
-        _FP[fkey] = flood_profiles(g)
-    return g, _WR[wkey], _FP[fkey]
+    fps = _FP.get(fkey)
+    if fps is None:
+        fps = flood_profiles(g)
+        _FP.put(fkey, fps)
+    return g, wrs, fps
 
 
 def invalidate_evidence() -> None:
     _WR.clear()
+
 
 # ---- per-vehicle fit ----------------------------------------------------------
 
@@ -139,12 +148,13 @@ def _interp(g: AreaGraph, u: int, v: int, s: float, length: float):
     return la + (lb - la) * f, lo + (lob - lo) * f
 
 
-def _project(g: AreaGraph, lat: float, lon: float, predicate):
-    """Nearest point on an edge whose way satisfies predicate → (edge, offset from u, distance)."""
+def _project(g: AreaGraph, lat: float, lon: float, predicate, edges=None):
+    """Nearest point on an edge whose way satisfies predicate → (edge, offset from u, distance).
+    `edges` limits the search to a precomputed subset (default: the whole graph)."""
     best = (None, 0.0, INF)
     kx = math.cos(math.radians(lat)) * 111320
     ky = 110540
-    for e in g.edges:
+    for e in g.edges if edges is None else edges:
         if not predicate(g.ways[e.way_id]):
             continue
         (la, lo), (lb, lob) = g.nodes[e.u], g.nodes[e.v]
@@ -198,7 +208,7 @@ class PlanContext:
 
 def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_at: datetime | None,
          dwell_min: int | None, rain_scenario: list[dict] | None = None, dest_label: str = "",
-         origin: tuple[float, float] | None = None) -> dict:
+         origin: tuple[float, float] | None = None, live_area: dict | None = None) -> dict:
     # FloodSnapshot captures file generations, metadata, reports, and rain once for this request.
     vehicle = get_profile(vehicle_id)
     arrive = (arrive_at or datetime.now(VN_TZ)).astimezone(VN_TZ)
@@ -209,7 +219,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     flood_snapshot = FloodSnapshot(rain)
     cap = WALK_CAP_M[intent]
 
-    g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations)
+    g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations, live_area)
     fit, fit_notes = compute_fit(g, wrs, vehicle)
     paid = parking_data.paid_street_ways(g)
     main_nodes = {n for way in g.ways.values() if way.kind == "main" and way.drivable for n in way.nodes}
@@ -227,6 +237,8 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         wdist, wpred = dijkstra(g.walk_adj, walk_src, lambda edge: True,
                                 lambda edge: g.edges[edge].length, limit=cap + 60)
     de, doff, ddist = _project(g, dest_lat, dest_lon, lambda way: way.drivable)
+    # Only walk edges the walking search reached can give a finite walking distance: project onto those alone.
+    reached_walk_edges = [e for e in g.edges if g.ways[e.way_id].walkable and (e.u in wdist or e.v in wdist)]
 
     def walk_access(lat: float, lon: float, road_edge=None, road_offset: float | None = None):
         if walk_connection_missing:
@@ -234,7 +246,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         if road_edge is not None and g.ways[road_edge.way_id].walkable:
             walk_edge, walk_offset, connector = road_edge, road_offset, 0.0
         else:
-            walk_edge, walk_offset, connector = _project(g, lat, lon, lambda way: way.walkable)
+            walk_edge, walk_offset, connector = _project(g, lat, lon, lambda way: True, reached_walk_edges)
         if walk_edge is None or connector > WALK_CONNECTION_CAP_M:
             return None
         network_distance = min(
@@ -261,6 +273,11 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     for edge in g.edges:
         way = g.ways[edge.way_id]
         if not way.drivable:
+            continue
+        # Walking is never shorter than the straight line: an edge whose nearer end is farther than the walk cap
+        # plus the edge's own length cannot hold a stop within the cap. This bound is exact, not a heuristic.
+        near_end = min(haversine(dest_lat, dest_lon, *g.nodes[edge.u]), haversine(dest_lat, dest_lon, *g.nodes[edge.v]))
+        if near_end - edge.length > cap:
             continue
         offsets = [edge.length / 2] if edge.length < 16 else [8.0, edge.length / 2, edge.length - 8.0]
         for offset in offsets:
@@ -1326,8 +1343,8 @@ def _layers(g: AreaGraph, wrs, fit, fit_notes, fps, lat, lon, arrive, depart, ra
             "flood": {"type": "FeatureCollection", "features": flood_feats}}
 
 
-def way_evidence(lat: float, lon: float, way_id: int) -> dict:
-    g, wrs, fps = area(lat, lon)
+def way_evidence(lat: float, lon: float, way_id: int, live_area: dict | None = None) -> dict:
+    g, wrs, fps = area(lat, lon, live_area=live_area)
     w = g.ways[way_id]
     prof = fps.get(way_id)
     return {"way_id": way_id, "name": g.display_name(way_id), "tags": w.tags, "osm_url": f"https://www.openstreetmap.org/way/{way_id}",

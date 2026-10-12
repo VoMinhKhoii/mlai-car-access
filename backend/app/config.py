@@ -1,11 +1,9 @@
 """Paths, environment and the tunable numbers from docs/decision-log.md."""
 import os
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
-FRONTEND_DIST = ROOT / "frontend" / "dist"
 
 
 def _load_env_file(path: Path) -> None:
@@ -27,23 +25,15 @@ def _path_override(name: str, default: Path) -> Path:
 
 _load_env_file(ROOT / ".env.local")
 
-_cache_default = ROOT / "backend" / "cache"
-_store_default = ROOT / "backend" / "store"
-_flags_default = ROOT / "backend" / "flags.json"
-
-# On Vercel the bundle is read-only: copy the shipped caches and state to /tmp once per instance and write there.
+# One continuously running process owns operator sessions, review state, quotas and background jobs. A serverless
+# platform gives each instance its own throwaway copy of that state, so it is refused rather than silently wrong.
 if os.environ.get("VERCEL"):
-    _tmp = Path("/tmp/vaoduoc")
-    for src, name in ((_cache_default, "cache"), (_store_default, "store")):
-        if not (_tmp / name).exists() and src.exists():
-            shutil.copytree(src, _tmp / name)
-    if _flags_default.exists() and not (_tmp / "flags.json").exists():
-        shutil.copy(_flags_default, _tmp / "flags.json")
-    _cache_default, _store_default, _flags_default = _tmp / "cache", _tmp / "store", _tmp / "flags.json"
+    raise RuntimeError("Vào Được backend needs one persistent process; run it with uvicorn --workers 1, not serverless")
 
-CACHE = _path_override("VAODUOC_CACHE", _cache_default)
-STORE = _path_override("VAODUOC_STORE", _store_default)
-FLAG_FILE = _path_override("VAODUOC_FLAGS", _flags_default)
+CACHE = _path_override("VAODUOC_CACHE", ROOT / "backend" / "cache")
+STORE = _path_override("VAODUOC_STORE", ROOT / "backend" / "store")
+FLAG_FILE = _path_override("VAODUOC_FLAGS", ROOT / "backend" / "flags.json")
+FRONTEND_DIST = _path_override("VAODUOC_DIST", ROOT / "frontend" / "dist")
 
 GOONG_API_KEY = os.environ.get("GOONG_API_KEY", "")
 GOONG_MAPTILES_KEY = os.environ.get("GOONG_MAPTILES_KEY", "")

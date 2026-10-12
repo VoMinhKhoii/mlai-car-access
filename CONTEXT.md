@@ -149,12 +149,24 @@ _Avoid_: stale data, outdated evidence
 ### Community
 
 **Arrival Confirmation**:
-A driver's one-tap report after arriving (got in / tight / couldn't get in), recorded as Observed Evidence for their Vehicle Profile.
+A driver's one-tap report after arriving (got in / tight / couldn't get in); once an Operator approves it, it becomes Observed Evidence for their Vehicle Profile.
 _Avoid_: feedback, rating, review
 
 **Temporary Blockage**:
-A same-day obstruction in an alley, such as a wedding or funeral tent, a market or parked motorbikes, reported by drivers; it expires at the end of the day.
+A same-day obstruction in an alley, such as a wedding or funeral tent, a market or parked motorbikes, reported by drivers and approved by an Operator; it expires at the end of the day.
 _Avoid_: incident, closure
+
+**Pending Report**:
+A guest or AI submission (confirmation, blockage, flood report, stop rule, photo reading) waiting for an Operator's decision; it is not Evidence until approved, and an expired one never becomes Evidence.
+_Avoid_: submission, ticket
+
+**Operator**:
+A signed-in person allowed to change flags, schedule Live Area Builds and camera reads, spend AI quota and approve or reject Pending Reports.
+_Avoid_: admin, moderator
+
+**Live Area Build**:
+The server-run collection of listings, cadastral cuts, news and listing photos around a destination, published as a versioned area record that expires after 12 hours; plans read it from the server, never from the browser.
+_Avoid_: crawl result, area data
 
 **Standard Route**:
 The route an ordinary car map would give, shown next to the Arrival Plan for contrast.

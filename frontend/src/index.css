@@ -191,6 +191,13 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .demo-menu { width: 340px; max-height: min(70vh, 640px); overflow: auto; display: flex; flex-direction: column; gap: 8px; }
 .demo-menu .flags { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .demo-menu .flags b { font-size: var(--fs-12); }
+.operator-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--fs-14); }
+.operator-row input { flex: 1 1 140px; min-width: 0; padding: 6px 8px; border: 1px solid var(--n-300, #ccc); border-radius: 8px; font: inherit; }
+.report-queue { display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-14); }
+.report-queue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.report-queue li { display: flex; flex-direction: column; gap: 2px; }
+.report-queue li small { display: block; color: var(--n-500, #666); font-size: var(--fs-12); }
+.area-status { margin: 4px 0 8px; }
 .brand .tool .popover { top: calc(100% + 8px); }
 
 .mk-origin { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid var(--route); box-shadow: 0 1px 4px rgb(0 0 0 / .35); }

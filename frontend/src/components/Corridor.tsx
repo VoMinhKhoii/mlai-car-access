@@ -16,7 +16,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
   if (!corridor) {
     return busy ? (
       <section className="corridor">
-        <header><LoaderCircle size={15} className="spin" /><span><b>Tuyến đường lớn</b> · đang đọc camera trên các tuyến (~30 giây)…</span></header>
+        <header><LoaderCircle size={15} className="spin" /><span><b>Tuyến đường lớn</b> · đang tính theo dự báo ngập…</span></header>
       </section>
     ) : null
   }
@@ -37,11 +37,25 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
           </li>
         ))}
       </ol>
+      <CameraJobNote job={corridor.camera_job} busy={busy} />
       <p className="faint corridor-src">
         {corridor.live ? `${corridor.cameras_read} camera đọc được, ${corridor.cameras_offline} mất tín hiệu. ` : ''}
         Nguồn: camera <a href={PORTAL} target="_blank" rel="noreferrer">Cổng thông tin giao thông TP.HCM</a>, Gemini đọc 2 khung hình cách 13 giây; tuyến Goong; ngập theo triều, mưa và lịch sử IRD.
       </p>
     </section>
+  )
+}
+
+function CameraJobNote({ job, busy }: { job: Corridor['camera_job']; busy: boolean }) {
+  if (!job || !job.cameras_requested) return null
+  const reading = job.id && busy
+  return (
+    <p className="faint corridor-note">
+      {reading ? <><LoaderCircle size={12} className="spin" /> Đang đọc {job.cameras_scheduled} camera; tuyến sẽ được tính lại khi xong. </> : null}
+      {job.state === 'not_scheduled' && `${job.cameras_requested} camera chưa đọc. ${job.reason ?? ''} `}
+      {job.state === 'busy' && `${job.reason}, thử lại sau ${job.retry_after ?? 30} giây. `}
+      {job.dropped.length > 0 && `${job.dropped.length} camera không đọc lượt này; các đoạn đó là “chưa rõ”, không phải đường thông.`}
+    </p>
   )
 }
 
@@ -92,7 +106,7 @@ function RouteDetail({ r, live, onCamera }: { r: CorridorRoute; live: boolean; o
                 <button type="button" onClick={() => cam && onCamera(cam)}>
                   <i className={`cam-dot ${camClass(cam)}`} />
                   <span>{h.name}</span>
-                  <small>{h.depth_cm ? `ngập ~${h.depth_cm} cm` : h.traffic_vi ?? STATE_VI[cam?.state ?? 'not_read']}</small>
+                  <small>{h.depth_cm ? `ngập ~${h.depth_cm} cm` : h.traffic_vi ?? (h.coverage === 'scheduled' ? 'đang đọc' : h.coverage === 'unknown' && cam?.state === 'not_read' ? 'chưa rõ' : STATE_VI[cam?.state ?? 'not_read'])}</small>
                 </button>
               </li>
             )
@@ -150,7 +164,7 @@ export function CameraPanel({ cam, canRead, onClose, onRead }: {
             <p className="faint">AI đọc lúc {(r.image_time ?? r.at ?? '').slice(11, 16)} từ {r.frames ?? 1} khung hình · độ tin cậy {Math.round((r.confidence ?? 0) * 100)}%</p>
           </div>
         ) : (
-          <p className="faint">{cam.state === 'not_read' || cam.state === 'error' ? 'Chưa có kết quả AI cho camera này.' : `Không dùng được: ${STATE_VI[cam.state]}.`}</p>
+          <p className="faint">{cam.state === 'not_read' || cam.state === 'error' ? `Chưa có kết quả AI cho camera này${canRead ? '' : ' (cần người điều hành để đọc mới)'}; đoạn này là “chưa rõ”, không phải đường thông.` : `Không dùng được: ${STATE_VI[cam.state]}.`}</p>
         )}
       </div>
       <footer>

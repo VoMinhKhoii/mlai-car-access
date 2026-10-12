@@ -18,6 +18,8 @@ from concurrent.futures import ThreadPoolExecutor
 import httpx
 from shapely.geometry import LineString, Point, Polygon, shape
 
+from .deadline import timeout
+
 URL = "https://sqhkt-qlqh.tphcm.gov.vn/computing/930/api/v3.1/a-z/all"
 HEADERS = {"User-Agent": "Mozilla/5.0 VaoDuoc-hackathon/0.3", "Referer": "https://thongtinquyhoach.hochiminhcity.gov.vn/"}
 MAX_ALLEYS = 6
@@ -33,10 +35,16 @@ class Blocked(Exception):
     pass
 
 
-def _parcel(lat: float, lon: float) -> dict | None:
+class DeadlineExceeded(Blocked):
+    """The area build ran out of its server deadline; stop issuing portal requests."""
+
+
+
+def _parcel(lat: float, lon: float, deadline: float | None = None) -> dict | None:
     for attempt in range(2):  # the portal is slow at times: one retry, then give up on this point
         try:
-            r = httpx.post(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"}, headers=HEADERS, timeout=20)
+            r = httpx.post(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"}, headers=HEADERS,
+                           timeout=timeout(deadline, 20, DeadlineExceeded))
             r.raise_for_status()
             break
         except httpx.HTTPError:
@@ -58,14 +66,14 @@ def _local(lon: float, lat: float, lat0: float, lon0: float) -> tuple[float, flo
     return ((lon - lon0) * KX, (lat - lat0) * KY)
 
 
-def _cross_section(p_ll, n_xy, lat0, lon0) -> float | None:
+def _cross_section(p_ll, n_xy, lat0, lon0, deadline: float | None = None) -> float | None:
     """Width of one cross-section: query each side, then measure from the alley point to both parcels."""
     px, py = _local(p_ll[1], p_ll[0], lat0, lon0)
     for off in OFFSETS:
         sides = []
         for sgn in (1, -1):
             qx, qy = px + sgn * n_xy[0] * off, py + sgn * n_xy[1] * off
-            sides.append(_parcel(lat0 + qy / KY, lon0 + qx / KX))
+            sides.append(_parcel(lat0 + qy / KY, lon0 + qx / KX, deadline))
         if not all(sides) or sides[0]["id"] == sides[1]["id"]:
             continue
         polys = [Polygon([_local(x, y, lat0, lon0) for x, y in (g.exterior.coords)]) if g.geom_type == "Polygon"
@@ -86,13 +94,13 @@ def _cross_section(p_ll, n_xy, lat0, lon0) -> float | None:
     return None
 
 
-def _cut_at(line: LineString, d: float, lat0: float, lon0: float) -> dict | None:
+def _cut_at(line: LineString, d: float, lat0: float, lon0: float, deadline: float | None = None) -> dict | None:
     p, a, b = line.interpolate(d), line.interpolate(max(0.0, d - 1)), line.interpolate(min(line.length, d + 1))
     dx, dy = b.x - a.x, b.y - a.y
     norm = math.hypot(dx, dy) or 1.0
     lat, lon = lat0 + p.y / KY, lon0 + p.x / KX
     try:
-        gap = _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0)
+        gap = _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0, deadline)
     except Blocked:
         raise
     except Exception:  # one bad cut must not lose the others
@@ -103,7 +111,8 @@ def _cut_at(line: LineString, d: float, lat0: float, lon0: float) -> dict | None
             "width_m": round(max(0.5, gap - USABLE_MARGIN), 2)}
 
 
-def measure(way_coords: list[tuple[float, float]], step: float | None = None, max_cuts: int = 2) -> dict | None:
+def measure(way_coords: list[tuple[float, float]], step: float | None = None, max_cuts: int = 2,
+            deadline: float | None = None) -> dict | None:
     """Return sampled usable-width estimates plus segment coverage diagnostics."""
     if len(way_coords) < 2 or max_cuts <= 0:
         return None
@@ -126,7 +135,8 @@ def measure(way_coords: list[tuple[float, float]], step: float | None = None, ma
         targets = [line.length / 3, 2 * line.length / 3]
         truncated = False
     with ThreadPoolExecutor(min(3, len(targets))) as pool:
-        cuts = [cut for cut in pool.map(lambda distance: _cut_at(line, distance, lat0, lon0), targets) if cut]
+        cuts = [cut for cut in pool.map(lambda distance: _cut_at(line, distance, lat0, lon0, deadline), targets)
+                if cut]
     if not cuts:
         return None
     positions = sorted(cut["at_m"] for cut in cuts)
@@ -210,48 +220,58 @@ def path_out(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple[
     return pieces
 
 
-def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True) -> list[dict]:
-    """Scan full ways on legal ingress and egress paths, then shallow-scan nearby roads."""
+def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True,
+                 deadline: float | None = None) -> list[dict]:
+    """Scan full ways on legal ingress and egress paths, then shallow-scan nearby roads.
+
+    If `deadline` passes, DeadlineExceeded is raised with `.partial` set to the ways already measured (each one is a
+    complete per-way result with its own coverage); ways not reached are simply absent, i.e. unknown."""
     out: dict[int, dict] = {}
-    budget = DEEP_MAX_CUTS
-    paths = path_into(g, dest_lat, dest_lon) + path_out(g, dest_lat, dest_lon) if deep else []
-    route_way_ids = list(dict.fromkeys(way_id for way_id, _ in paths))
-    for way_id in route_way_ids:
-        key = f"deep-v2:{dest_lat:.5f},{dest_lon:.5f}:{way_id}"
-        if key not in cache and budget > 0:
-            way = g.ways[way_id]
-            coords = [g.nodes[node] for node in way.nodes]
-            cache[key] = measure(coords, step=DEEP_STEP, max_cuts=budget)
-        result = cache.get(key)
-        if result:
-            budget = max(0, budget - len(result.get("cuts", [])))
-            out[way_id] = {"way_id": way_id, **result, "deep": True}
-
     near = []
-    for way in g.ways.values():
-        if way.kind == "main" or not way.drivable or way.id in out:
-            continue
-        distance = min(haversine(dest_lat, dest_lon, *g.nodes[node]) for node in way.nodes)
-        if distance <= 400:
-            near.append((distance, way))
-    near.sort(key=lambda item: item[0])
-    todo = [way for _, way in near if f"width-v2:{way.id}" not in cache][:MAX_ALLEYS]
+    stopped = None
+    try:
+        budget = DEEP_MAX_CUTS
+        paths = path_into(g, dest_lat, dest_lon) + path_out(g, dest_lat, dest_lon) if deep else []
+        for way_id in dict.fromkeys(way_id for way_id, _ in paths):
+            key = f"deep-v2:{dest_lat:.5f},{dest_lon:.5f}:{way_id}"
+            if key not in cache and budget > 0:
+                way = g.ways[way_id]
+                cache[key] = measure([g.nodes[node] for node in way.nodes], step=DEEP_STEP, max_cuts=budget,
+                                     deadline=deadline)
+            result = cache.get(key)
+            if result:
+                budget = max(0, budget - len(result.get("cuts", [])))
+                out[way_id] = {"way_id": way_id, **result, "deep": True}
 
-    def one(way):
-        try:
-            return way.id, measure([g.nodes[node] for node in way.nodes])
-        except Blocked:
-            raise
-        except Exception:
-            return way.id, None
+        for way in g.ways.values():
+            if way.kind == "main" or not way.drivable or way.id in out:
+                continue
+            distance = min(haversine(dest_lat, dest_lon, *g.nodes[node]) for node in way.nodes)
+            if distance <= 400:
+                near.append((distance, way))
+        near.sort(key=lambda item: item[0])
+        todo = [way for _, way in near if f"width-v2:{way.id}" not in cache][:MAX_ALLEYS]
 
-    with ThreadPoolExecutor(3) as pool:
-        for way_id, result in pool.map(one, todo):
-            cache[f"width-v2:{way_id}"] = result
+        def one(way):
+            try:
+                return way.id, measure([g.nodes[node] for node in way.nodes], deadline=deadline)
+            except Blocked:
+                raise
+            except Exception:
+                return way.id, None
+
+        with ThreadPoolExecutor(3) as pool:
+            for way_id, result in pool.map(one, todo):
+                cache[f"width-v2:{way_id}"] = result
+    except DeadlineExceeded as exc:
+        stopped = exc
     for _, way in near:
         result = cache.get(f"width-v2:{way.id}")
         if result and "cuts" in result:
             out[way.id] = {"way_id": way.id, **result, "deep": False}
+    if stopped is not None:
+        stopped.partial = list(out.values())
+        raise stopped
     return list(out.values())
 
 

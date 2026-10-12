@@ -22,6 +22,7 @@ import httpx
 
 from . import ai, flags
 from .config import CAMERA_READ_TTL_S, CAMERA_STALE_MIN, DATA, STORE
+from .storage import CorruptState, read_json, write_json
 from .osm import haversine, strip_accents
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -203,10 +204,62 @@ def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S) -> bytes | None:
     return img
 
 
-# ---- readings -------------------------------------------------------------------
+# ---- readings and jobs ------------------------------------------------------------
+#
+# A reading needs two stills ~13 s apart plus a model call, so it never runs inside a request. Requests read the
+# cache (`latest`); an operator schedules a job of at most MAX_JOB_CAMERAS cameras. MAX_ACTIVE_JOBS run at once,
+# at most MAX_QUEUED_CAMERAS wait. A camera already being read by another job is not read twice: the job waits for
+# that reading (per-camera coalescing). Locks guard only the in-memory state, never a sleep or a model call.
+
+MAX_JOB_CAMERAS = 12
+MAX_ACTIVE_JOBS = 2
+MAX_QUEUED_CAMERAS = 24
+JOB_TTL_S = 300
+JOBS_FILE = STORE / "camera_jobs.json"
 
 _reads: dict[str, dict] = {}
-_busy = threading.Lock()  # one batch at a time per instance, so parallel requests share readings
+_state = threading.Lock()
+_inflight: dict[str, threading.Event] = {}
+_jobs: dict[str, dict] = {}
+_job_pool = ThreadPoolExecutor(MAX_ACTIVE_JOBS, thread_name_prefix="camera-job")
+_restored = False
+
+
+class Busy(Exception):
+    def __init__(self, retry_after: int) -> None:
+        super().__init__(f"retry after {retry_after}s")
+        self.retry_after = retry_after
+
+
+def _restore() -> None:
+    """After a restart: recent readings come back from the log; jobs that were running are interrupted."""
+    global _restored
+    if _restored:
+        return
+    _restored = True
+    if READINGS_FILE.exists():
+        now = datetime.now(VN_TZ)
+        for line in READINGS_FILE.read_text(encoding="utf-8").splitlines()[-500:]:
+            try:
+                rec = json.loads(line)
+                age = (now - datetime.fromisoformat(rec["at"])).total_seconds()
+            except (ValueError, KeyError, TypeError):
+                continue
+            if 0 <= age < CAMERA_READ_TTL_S and rec.get("id"):
+                rec["_t"] = time.time() - age
+                _reads[rec["id"]] = rec
+    try:
+        saved = read_json(JOBS_FILE, {})
+    except CorruptState:
+        saved = {}
+    for jid, job in saved.items():
+        if job.get("state") in ("queued", "running"):
+            job.update(state="interrupted", error="Máy chủ khởi động lại khi đang đọc camera")
+        _jobs[jid] = job
+
+
+def _persist() -> None:
+    write_json(JOBS_FILE, {jid: {k: v for k, v in j.items() if not k.startswith("_")} for jid, j in _jobs.items()})
 
 
 def latest(cam_id: str) -> dict | None:
@@ -214,19 +267,87 @@ def latest(cam_id: str) -> dict | None:
     return r if r and time.time() - r["_t"] < CAMERA_READ_TTL_S else None
 
 
-def read_many(cam_ids: list[str]) -> dict[str, dict]:
-    """Read cameras: first frames now, second frames one refresh later, then BATCH cameras per model call.
+def cached(cam_ids: list[str]) -> dict[str, dict]:
+    """Readings that are still fresh, for the cameras that have one."""
+    return {c: public(r) for c in dict.fromkeys(cam_ids) if (r := latest(c))}
 
-    Readings are cached for CAMERA_READ_TTL_S; failed model calls are not cached, so the next request retries.
-    """
+
+def schedule(cam_ids: list[str]) -> dict:
+    """Queue one reading job for up to MAX_JOB_CAMERAS cameras. Raises FeatureOff or Busy."""
     if not flags.enabled("ai_camera_flood"):
         raise FeatureOff("ai_camera_flood")
-    ids = list(dict.fromkeys(c for c in cam_ids if c in by_id()))
-    with _busy:
-        todo = [c for c in ids if not latest(c)]
-        if todo:
-            _read_batch(todo)
-    return {c: public(_reads.get(c) or {"id": c, **_where(c), "state": "error"}) for c in ids}
+    ids = [c for c in dict.fromkeys(cam_ids) if c in by_id()][:MAX_JOB_CAMERAS]
+    now = datetime.now(VN_TZ)
+    with _state:
+        _expire(now)
+        waiting = sum(len(j["cameras"]) for j in _jobs.values() if j["state"] == "queued")
+        if waiting + len(ids) > MAX_QUEUED_CAMERAS:
+            raise Busy(retry_after=30)
+        jid = hashlib.sha1(f"{now.isoformat()}:{','.join(ids)}:{os.urandom(4).hex()}".encode()).hexdigest()[:12]
+        job = {"id": jid, "state": "queued", "cameras": ids, "created_at": now.isoformat(timespec="seconds"),
+               "expires_at": (now + timedelta(seconds=JOB_TTL_S)).isoformat(timespec="seconds"),
+               "finished_at": None, "error": None}
+        _jobs[jid] = job
+        _persist()
+    _job_pool.submit(_run_job, jid)
+    return job_view(jid)
+
+
+def _expire(now: datetime) -> None:
+    for jid in list(_jobs):
+        job = _jobs[jid]
+        if datetime.fromisoformat(job["expires_at"]) <= now:
+            if job["state"] in ("ready", "error", "interrupted", "expired"):
+                if (now - datetime.fromisoformat(job["expires_at"])).total_seconds() > JOB_TTL_S:
+                    del _jobs[jid]  # forgotten one TTL after expiry
+                else:
+                    job["state"] = "expired" if job["state"] == "ready" else job["state"]
+
+
+def _run_job(jid: str) -> None:
+    with _state:
+        job = _jobs[jid]
+        job["state"] = "running"
+        mine, theirs = [], []
+        for c in job["cameras"]:
+            if latest(c):
+                continue
+            if c in _inflight:
+                theirs.append(_inflight[c])
+            else:
+                _inflight[c] = threading.Event()
+                mine.append(c)
+        _persist()
+    try:
+        if mine:
+            _read_batch(mine)
+    except Exception as exc:  # the job fails; the cameras stay unread (unknown), never "clear"
+        job["error"] = f"{type(exc).__name__}"
+    finally:
+        with _state:
+            for c in mine:
+                _inflight.pop(c).set()
+    for ev in theirs:
+        ev.wait(timeout=90)
+    with _state:
+        read = [c for c in job["cameras"] if latest(c)]
+        job["state"] = "ready" if read else "error"
+        job["error"] = job["error"] or (None if read else "Không đọc được camera nào (mất tín hiệu, hết hạn mức AI)")
+        job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
+        _persist()
+
+
+def job_view(jid: str) -> dict | None:
+    with _state:
+        _expire(datetime.now(VN_TZ))
+        job = _jobs.get(jid)
+        if job is None:
+            return None
+        out = {k: v for k, v in job.items() if not k.startswith("_")}
+    reads = cached(out["cameras"])
+    out["readings"] = list(reads.values()) if out["state"] in ("ready", "error") else []
+    out["unread"] = [c for c in out["cameras"] if c not in reads]
+    return out
 
 
 def _where(cam_id: str) -> dict:
@@ -332,6 +453,8 @@ def _log(cam: dict, rec: dict) -> None:
                  "source": "camera", "streets": names}
         flood["gate"] = ai._gate(flood, ["street", "depth_cm", "observed_at"])
         ai._append(ai.REVIEW_FILE, flood)
+        # Published without operator review on purpose: the image comes from the city's own camera portal, not from
+        # a user, and holding a positive flood sighting back could let a plan call a flooded street dry.
         if flood["gate"] == "ACCEPT":
             ai._append(ai.LIVE_FLOOD_FILE, flood)
 
@@ -342,3 +465,6 @@ def public(rec: dict) -> dict:
     if out.get("traffic") in TRAFFIC_VI:
         out["traffic_vi"] = TRAFFIC_VI[out["traffic"]]
     return out
+
+
+_restore()

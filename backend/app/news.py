@@ -16,6 +16,7 @@ from urllib.parse import quote
 import httpx
 
 from . import ai
+from .deadline import timeout
 from .osm import strip_accents
 
 RSS = "https://news.google.com/rss/search?q={q}+when:365d&hl=vi&gl=VN&ceid=VN:vi"
@@ -29,9 +30,10 @@ PROMPT = """Dưới đây là các tiêu đề báo (đánh số). Với mỗi t
 """
 
 
-def _search(street: str) -> list[dict]:
+def _search(street: str, deadline: float | None = None) -> list[dict]:
     q = quote(f'"{street}" {TOPICS}')
-    r = httpx.get(RSS.format(q=q), timeout=20, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
+    r = httpx.get(RSS.format(q=q), timeout=timeout(deadline, 20), follow_redirects=True,
+                  headers={"User-Agent": "Mozilla/5.0"})
     out = []
     for it in re.findall(r"<item>(.*?)</item>", r.text, re.S)[:12]:
         title = html.unescape(re.search(r"<title>(.*?)</title>", it, re.S).group(1))
@@ -56,10 +58,10 @@ def _keyword(item: dict) -> dict | None:
     return {**item, "kind": kind, "depth_cm": None, "summary": item["title"]} if kind else None
 
 
-def news_for(streets: list[str]) -> list[dict]:
+def news_for(streets: list[str], deadline: float | None = None) -> list[dict]:
     items, seen = [], set()
     with ThreadPoolExecutor(4) as pool:
-        for batch in pool.map(lambda s: _safe(_search, s), streets):
+        for batch in pool.map(lambda s: _safe(_search, s, deadline), streets):
             for it in batch or []:
                 if it["url"] not in seen:
                     seen.add(it["url"])
@@ -69,6 +71,7 @@ def news_for(streets: list[str]) -> list[dict]:
     kept = []
     if ai.provider():
         try:
+            timeout(deadline, 60)  # never start a model call the deadline cannot cover
             listing = "\n".join(f"{i}. [{it['street']}] {it['title']} ({it['source']}, {it['date']})" for i, it in enumerate(items))
             out = ai._call(PROMPT + listing)
             for x in out.get("items", []):

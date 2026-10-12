@@ -30,7 +30,7 @@ class EvidenceSafetyTests(unittest.TestCase):
             field.write_text(HEADER, encoding="utf-8")
             store = self._store(field)
             widths = [1.5, 4.0, 4.0, 4.0, 4.0]
-            store.live["fixture"] = {
+            area = {
                 "listings": [], "photos": [],
                 "parcels": [
                     {
@@ -57,14 +57,14 @@ class EvidenceSafetyTests(unittest.TestCase):
                     },
                 ],
             }
-            store.reload()
+            view = store.view(area)  # the build is an overlay: the shared snapshot is never mutated
             graph = AreaGraph(center=(10.0, 106.0), ways={
                 910001: Way(910001, {"highway": "residential", "name": "Hẻm kiểm thử"}, [1, 2]),
                 910002: Way(910002, {"highway": "residential", "name": "Hẻm chỉ giữa"}, [3, 4]),
             })
 
             with patch("app.evidence.flags.enabled", return_value=True):
-                ranges = width_ranges(graph, store)
+                ranges = width_ranges(graph, view)
             width = ranges[910001]
             parcel_bound = next(bound for bound in width.evidence if bound.width_basis == "parcel_gap_estimate")
             self.assertEqual(parcel_bound.lo, 1.5)
@@ -97,7 +97,7 @@ class EvidenceSafetyTests(unittest.TestCase):
                 910010: Way(910010, {"highway": "residential", "name": "Hẻm đo đủ"}, [1, 2]),
                 910011: Way(910011, {"highway": "residential", "name": "Hẻm đo thưa"}, [3, 4]),
             })
-            ranges = width_ranges(graph, store)
+            ranges = width_ranges(graph, store.view())
             vehicle = get_profile("toyota-vios")
             fit, _ = compute_fit(graph, ranges, vehicle)
 
@@ -136,7 +136,7 @@ class EvidenceSafetyTests(unittest.TestCase):
 
     def test_deep_measurement_includes_both_endpoints_and_marks_cut_cap(self):
         coordinates = [(10.0, 106.0), (10.00018, 106.0)]
-        fake_cut = lambda _line, distance, _lat, _lon: {
+        fake_cut = lambda _line, distance, _lat, _lon, _deadline=None: {
             "at_m": round(distance, 1), "gap_m": 3.0, "width_m": 2.0,
         }
         with patch("app.parcels._cut_at", side_effect=fake_cut):

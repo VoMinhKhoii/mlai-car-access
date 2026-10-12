@@ -37,8 +37,7 @@ FIRE_TRUCK_MIN = 3.5  # QCVN 06:2022/BXD clear width for a fire-truck road
 # footprint error, the lower bound removes a typical encroachment from the narrower quarter of the samples.
 GAP_FOOTPRINT_ERR = 0.8
 GAP_ENCROACH = 1.2
-CONFIRM_FILE = STORE / "confirmations.jsonl"
-BLOCKAGE_FILE = STORE / "blockages.jsonl"
+from .reports import BLOCKAGE_FILE, CONFIRM_FILE  # noqa: E402  approved projections of reviewed reports
 
 
 def _empty_coverage(reason: str | None = None) -> dict:
@@ -242,30 +241,16 @@ def _norm_alley(name: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-class EvidenceStore:
-    """External evidence keyed by OSM way id or by normalised alley name."""
+class EvidenceIndex:
+    """Evidence bounds keyed by OSM way id or by normalised alley name. Built once, then only read."""
 
-    def __init__(self, *, _exclude_measured_way_ids=frozenset(),
-                 _exclude_measured_names=frozenset(), _field_file: Path = FIELD_FILE) -> None:
+    def __init__(self, exclude_measured_way_ids=frozenset(), exclude_measured_names=frozenset()) -> None:
         self.by_way: dict[int, list[Bound]] = {}
         self.by_name: dict[str, list[Bound]] = {}
         self.way_out_by_way: dict[int, list[Bound]] = {}
         self.review_by_way: set[int] = set()
-        self.live: dict[str, dict] = {}
-        self.version = 0
-        self._exclude_measured_way_ids = frozenset(int(value) for value in _exclude_measured_way_ids)
-        self._exclude_measured_names = frozenset(
-            normalized for value in _exclude_measured_names if (normalized := _norm_alley(value))
-        )
-        self._field_file = _field_file
-        self.reload()
-
-    @classmethod
-    def evaluation_snapshot(cls, *, exclude_measured_way_ids=(), exclude_normalized_names=(),
-                            field_file: Path = FIELD_FILE) -> EvidenceStore:
-        """Create an isolated evidence index with held-out measured rows removed before indexing."""
-        return cls(_exclude_measured_way_ids=exclude_measured_way_ids,
-                   _exclude_measured_names=exclude_normalized_names, _field_file=field_file)
+        self._exclude_measured_way_ids = exclude_measured_way_ids
+        self._exclude_measured_names = exclude_measured_names
 
     def _add(self, bound: Bound, way_id=None, name=None) -> None:
         if bound.width_basis not in WIDTH_BASES:
@@ -275,15 +260,11 @@ class EvidenceStore:
         elif name:
             self.by_name.setdefault(_norm_alley(name), []).append(bound)
 
-    def reload(self) -> None:
-        self.version += 1
-        self.by_way.clear(), self.by_name.clear(), self.way_out_by_way.clear()
-        self.review_by_way.clear()
+    def load_static(self, field_file: Path) -> None:
         self._load_listings()
-        self._load_live()
         self._load_gaps()
         self._load_fire_list()
-        self._load_csv(self._field_file, "Measured", "Nhóm đo bằng thước", pad=0.1)
+        self._load_csv(field_file, "Measured", "Nhóm đo bằng thước", pad=0.1)
         self._load_csv(PARCEL_FILE, "Inferred", "Khoảng cách thửa đất (cổng Thông tin quy hoạch TP.HCM)",
                        pad=None, width_basis="parcel_gap_estimate")
         self._load_confirmations()
@@ -296,15 +277,9 @@ class EvidenceStore:
         for it in json.loads(LISTINGS_FILE.read_text(encoding="utf-8")):
             self._add_listing(it, "Tin rao Chợ Tốt (trích xuất)")
 
-    def set_live(self, key: str, listings: list[dict], photos: list[dict], parcels: list[dict] | None = None) -> None:
-        area = {"listings": listings, "photos": photos, "parcels": parcels or []}
-        if self.live.get(key) == area:
-            return  # unchanged: keep the cached width ranges
-        self.live[key] = area
-        self.reload()
-
-    def _load_live(self) -> None:
-        for area in self.live.values():
+    def add_areas(self, areas: list[dict]) -> None:
+        """Evidence from server-built Live Area Builds (listings, listing photos, cadastral cuts)."""
+        for area in areas:
             for it in area["listings"]:
                 self._add_listing(it, it.get("source") or "Tin rao Chợ Tốt (thu thập trực tiếp)")
             for ph in area["photos"]:
@@ -507,17 +482,21 @@ class EvidenceStore:
         for line in CONFIRM_FILE.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
-            c = json.loads(line)
-            body, mirror = c["body_width"], c["mirror_width"]
-            if c["result"] == "in":
-                lo, hi, d = body + 0.2, OPEN_HI, f"Tài xế {c['vehicle_label']} xác nhận vào được"
-            elif c["result"] == "tight":
-                lo, hi, d = body + 0.1, mirror + 0.8, f"Tài xế {c['vehicle_label']} xác nhận vào được nhưng chật"
+            try:
+                c = json.loads(line)
+                body, mirror, label = float(c["body_width"]), float(c["mirror_width"]), c["vehicle_label"]
+                result, way_ids, observed = c["result"], [int(w) for w in c["way_ids"]], c["date"]
+            except (ValueError, KeyError, TypeError):
+                continue  # one malformed line must not stop every plan
+            if result == "in":
+                lo, hi, d = body + 0.2, OPEN_HI, f"Tài xế {label} xác nhận vào được"
+            elif result == "tight":
+                lo, hi, d = body + 0.1, mirror + 0.8, f"Tài xế {label} xác nhận vào được nhưng chật"
             else:
-                lo, hi, d = 0.5, mirror + 0.2, f"Tài xế {c['vehicle_label']} không vào được"
-            for way_id in c["way_ids"]:
+                lo, hi, d = 0.5, mirror + 0.2, f"Tài xế {label} không vào được"
+            for way_id in way_ids:
                 self._add(Bound(lo, hi, "Observed", "Xác nhận sau khi đến", d,
-                                observed_on=c["date"], width_basis="unknown"), way_id)
+                                observed_on=observed, width_basis="unknown"), way_id)
 
     def bounds_for(self, w: Way) -> list[Bound]:
         out = list(self.by_way.get(w.id, []))
@@ -529,33 +508,103 @@ class EvidenceStore:
         return [b for b in self.way_out_by_way.get(way_id, []) if not b.feature or flags.enabled(b.feature)]
 
 
+class EvidenceView:
+    """What one request reasons from: the base snapshot plus, optionally, one area's build overlay."""
+
+    def __init__(self, base: EvidenceIndex, overlay: EvidenceIndex | None = None) -> None:
+        self.base, self.overlay = base, overlay
+        self.review_by_way = base.review_by_way | (overlay.review_by_way if overlay else set())
+
+    def bounds_for(self, w: Way) -> list[Bound]:
+        return self.base.bounds_for(w) + (self.overlay.bounds_for(w) if self.overlay else [])
+
+    def way_out_for(self, way_id: int) -> list[Bound]:
+        return self.base.way_out_for(way_id) + (self.overlay.way_out_for(way_id) if self.overlay else [])
+
+
+class EvidenceStore:
+    """Owner of the static evidence snapshot.
+
+    reload() builds a complete new index off to the side and then publishes it with one reference swap, so a
+    request that already holds `snapshot` keeps reasoning from a consistent index and never sees a half-cleared
+    one. Area builds never mutate the snapshot; they become a per-request overlay (see `view`).
+    """
+
+    def __init__(self, *, _exclude_measured_way_ids=frozenset(),
+                 _exclude_measured_names=frozenset(), _field_file: Path = FIELD_FILE) -> None:
+        self._exclude_measured_way_ids = frozenset(int(value) for value in _exclude_measured_way_ids)
+        self._exclude_measured_names = frozenset(
+            normalized for value in _exclude_measured_names if (normalized := _norm_alley(value))
+        )
+        self._field_file = _field_file
+        self.version = 0
+        self.snapshot = EvidenceIndex()
+        self.reload()
+
+    @classmethod
+    def evaluation_snapshot(cls, *, exclude_measured_way_ids=(), exclude_normalized_names=(),
+                            field_file: Path = FIELD_FILE) -> EvidenceStore:
+        """Create an isolated evidence index with held-out measured rows removed before indexing."""
+        return cls(_exclude_measured_way_ids=exclude_measured_way_ids,
+                   _exclude_measured_names=exclude_normalized_names, _field_file=field_file)
+
+    def reload(self) -> None:
+        index = EvidenceIndex(self._exclude_measured_way_ids, self._exclude_measured_names)
+        index.load_static(self._field_file)
+        self.snapshot = index
+        self.version += 1
+
+    @property
+    def by_way(self) -> dict[int, list[Bound]]:
+        return self.snapshot.by_way
+
+    @property
+    def by_name(self) -> dict[str, list[Bound]]:
+        return self.snapshot.by_name
+
+    def view(self, area: dict | None = None) -> EvidenceView:
+        overlay = None
+        if area:
+            overlay = EvidenceIndex()
+            overlay.add_areas([area])
+        return EvidenceView(self.snapshot, overlay)
+
+
 STORE_EVIDENCE = EvidenceStore()
 
 
-def width_ranges(g: AreaGraph, store: EvidenceStore | None = None) -> dict[int, WidthRange]:
-    store = store or STORE_EVIDENCE
+def width_ranges(g: AreaGraph, evidence: EvidenceView | None = None) -> dict[int, WidthRange]:
+    evidence = evidence or STORE_EVIDENCE.view()
     out = {}
     for way in g.ways.values():
-        bounds = _osm_bounds(way) + store.bounds_for(way)
+        bounds = _osm_bounds(way) + evidence.bounds_for(way)
         lo, hi, top, review, overruled, active = _combine(bounds)
-        review = review or way.id in store.review_by_way
+        review = review or way.id in evidence.review_by_way
         basis, coverage, decisive = _width_metadata(active, review)
         out[way.id] = WidthRange(
-            lo, hi, top, bounds, review, overruled, store.way_out_for(way.id),
+            lo, hi, top, bounds, review, overruled, evidence.way_out_for(way.id),
             basis, coverage, decisive,
         )
     return out
 
 
+# A read-only demo fixture (a funeral tent in one Bình Thạnh alley), kept out of the community store so it is never
+# written there, never duplicated on restart, and always labelled as simulated.
+DEMO_BLOCKAGE = {"way_id": 192512291, "reason": "Rạp đám tang chiếm hết lòng hẻm",
+                 "source": "Mô phỏng (dữ liệu demo, không phải báo cáo thật)", "date": "demo"}
+
+
 def blocked_ways_today() -> dict[int, dict]:
-    """Temporary Blockages reported today (D17); they expire at the end of the day."""
+    """Temporary Blockages approved for today (D17), plus the simulated demo fixture."""
+    out = {DEMO_BLOCKAGE["way_id"]: DEMO_BLOCKAGE}
     if not BLOCKAGE_FILE.exists():
-        return {}
+        return out
     today = date.today().isoformat()
-    out = {}
     for line in BLOCKAGE_FILE.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            b = json.loads(line)
-            if b.get("date") in (today, "demo"):
+        try:
+            b = json.loads(line) if line.strip() else None
+            if b and b.get("date") == today:
                 out[int(b["way_id"])] = b
+        except (ValueError, KeyError, TypeError):
+            continue  # one malformed line must not stop every plan
     return out

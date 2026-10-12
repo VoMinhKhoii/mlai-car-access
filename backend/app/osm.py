@@ -18,6 +18,7 @@ from functools import lru_cache
 import httpx
 
 from .config import AREA_RADIUS_M, CACHE, OVERPASS_ENDPOINTS
+from .storage import LRU
 
 DEMO_FILE = CACHE / "osm" / "demo_binhthanh.json"
 DEMO_BBOX = (10.785, 106.690, 10.815, 106.727)  # s, w, n, e
@@ -251,14 +252,14 @@ def _load_elements(lat: float, lon: float, key: str) -> tuple[list[dict], str]:
     return data["elements"], f"overpass:{key}"
 
 
-_GRAPHS: dict[str, AreaGraph] = {}
+_GRAPHS = LRU(32)  # bounded: a long-running backend sees many areas
 
 
 def cached_graph(lat: float, lon: float) -> AreaGraph | None:
     """The area graph only if it is already on disk or in memory (never downloads; used while typing)."""
     key = area_key(lat, lon)
     if key in _GRAPHS:
-        return _GRAPHS[key]
+        return _GRAPHS.get(key)
     if key == "demo" or (CACHE / "osm" / f"area_{key}.json").exists():
         return build_graph(lat, lon)
     return None
@@ -267,7 +268,7 @@ def cached_graph(lat: float, lon: float) -> AreaGraph | None:
 def build_graph(lat: float, lon: float) -> AreaGraph:
     key = area_key(lat, lon)
     if key in _GRAPHS:
-        return _GRAPHS[key]
+        return _GRAPHS.get(key)
     elements, source = load_elements(lat, lon)
     g = AreaGraph(center=(lat, lon), source=source)
     raw_ways = []
@@ -314,5 +315,5 @@ def build_graph(lat: float, lon: float) -> AreaGraph:
             if w.walkable:
                 g.walk_adj.setdefault(a, []).append((e.idx, b))
                 g.walk_adj.setdefault(b, []).append((e.idx, a))
-    _GRAPHS[key] = g
+    _GRAPHS.put(key, g)
     return g

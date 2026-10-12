@@ -74,7 +74,9 @@ T1–T5, D1/D3/D4: operator-only builds/all-AI attempt budgets; paginated keyed 
 
 ## Execution Checklist
 
-- [ ] R-07: server-owned area, immutable snapshot, all callers cutover.
-- [ ] R-08: operator auth, pending/review lifecycle, validation, quota.
-- [ ] R-09: bounded background camera jobs + immediate corridor.
-- [ ] R-10: cancellation/retry/caches và real runtime smoke.
+- [x] R-07: server-owned area, immutable snapshot, all callers cutover.
+- [x] R-08: operator auth, pending/review lifecycle, validation, quota.
+- [x] R-09: bounded background camera jobs + immediate corridor (browser path not exercised: no Goong key).
+- [x] R-10: cancellation/retry/caches và real runtime smoke.
+
+Evidence: `reports/phase-04-05-verification.md`. Independent code review unavailable (provider limits); live AI/Goong upstreams not exercised (no keys).

@@ -1,20 +1,26 @@
-"""Live Area Build: evidence for the area around a destination is collected when it is planned.
+"""Live Area Build: server-owned evidence for the area around a destination.
 
-Steps (streamed to the UI as they run, see build()):
+An operator schedules a build; the backend runs it in a bounded background pool and publishes the result as a
+versioned area record. Plans read that record from the server: the browser never sends evidence back.
+
+Steps of a build:
   1. map       OSM street graph around the destination (Overpass, cached per area)
-  2. listings  Chợ Tốt alley-house listings (sale + rent) of the 2 nearest HCMC districts, cached 12 h
-  3. match     regex-v1 extraction, then alley-chain name matching to the OSM ways of this area
-  4. photos    (flag ai_photo_evidence) Gemini reads listing photos of matched alleys; every reading
-               waits in a review queue, and only a human approval makes it Observed evidence
+  2. parcels   (flag parcel_widths) cadastral parcel-gap estimates, deep scan on the legal ingress/egress paths
+  3. listings  Chợ Tốt + Alonhadat alley-house listings of the 2 nearest districts, cached 12 h
+  4. match     regex-v1 extraction, then alley-chain name matching to the OSM ways of this area
+  5. news      street news (reference only, not Width Evidence)
+  6. photos    (flag ai_photo_evidence) the model reads listing photos; only an operator approval makes a reading
+               Observed evidence
 
-Chợ Tốt has no geo search, so listings are pulled by district and kept only if they name a
-street of this area. Coordinates are shifted ~90 m, so they are never used for matching.
+Limits: one build per area at a time, MAX_RUNNING builds in parallel, MAX_QUEUED waiting, BUILD_DEADLINE_S per
+build. Only a build that finished every step is published; a failed or timed-out build leaves the previous record.
+Chợ Tốt has no geo search, so listings are pulled by district and kept only if they name a street of this area.
 """
 from __future__ import annotations
 
 import hashlib
-import re
 import json
+import re
 import sys
 import threading
 import time
@@ -24,9 +30,10 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import ai, alonhadat, flags, news, parcels
-from .config import CACHE, ROOT
-from .evidence import STORE_EVIDENCE
+from .config import CACHE, ROOT, STORE
+from .deadline import Expired, timeout
 from .osm import area_key, build_graph, haversine, strip_accents
+from .storage import LRU, CorruptState, read_json, write_json
 
 sys.path.insert(0, str(ROOT / "pipelines"))
 from common import norm_name  # noqa: E402
@@ -37,22 +44,42 @@ API = "https://gateway.chotot.com/v1/public/ad-listing"
 REGIONS = "https://gateway.chotot.com/v1/public/web-proxy-api/loadRegions"
 HEADERS = {"User-Agent": "VaoDuoc-hackathon/0.2 (MLAI Hackathon 2026)"}
 DIR = CACHE / "live"
-TTL = timedelta(hours=12)
+AREAS_DIR = DIR / "areas"
+PHOTO_REVIEWS = STORE / "photo_reviews.json"
+TTL = timedelta(hours=12)    # listing cache and area record lifetime
+SCHEMA_VERSION = 1
 PAGE, PAGES = 50, 4          # per district and listing type
 DISTRICTS = 2
 CHAIN_MAX_M = 1000.0
 HXH_FLAG = 2                 # pty_characteristics code for "Hẻm xe hơi"
-MAX_PHOTOS = 12
+MAX_PHOTOS = 12              # model calls per build
 PHOTOS_PER_LISTING = 2
+MAX_RUNNING, MAX_QUEUED = 2, 4
+BUILD_DEADLINE_S = 300.0
+PARCEL_BUDGET_S = 150.0      # the parcel step's share; the rest of the build still has time after a slow portal
+JOB_KEEP_S = 600             # a finished job stays visible to pollers this long
+KEY_RE = re.compile(r"^(demo|\d{1,2}\.\d{3}_\d{3}\.\d{3})$")
+
+
+class Busy(Exception):
+    def __init__(self, retry_after: int) -> None:
+        super().__init__(f"retry after {retry_after}s")
+        self.retry_after = retry_after
+
+
+def _left(job: dict, limit: float) -> float:
+    """HTTP timeout for the next call of this build; Expired once the build deadline has passed."""
+    return timeout(job["deadline"], limit)
+
 
 # ---------- districts ----------
 
-def _districts() -> list[dict]:
+def _districts(deadline: float | None = None) -> list[dict]:
     """Every Chợ Tốt district of Ho Chi Minh City (region 13000) with its centroid."""
     path = DIR / "chotot_hcmc_districts_v2.json"
     if path.exists():
         return json.loads(path.read_text())
-    regions = httpx.get(REGIONS, headers=HEADERS, timeout=20).json()["regionFollowId"]["entities"]["regions"]
+    regions = httpx.get(REGIONS, headers=HEADERS, timeout=timeout(deadline, 20)).json()["regionFollowId"]["entities"]["regions"]
     out = []
     for rid, region in regions.items():
         if rid != "13000":
@@ -68,8 +95,8 @@ def _districts() -> list[dict]:
     return out
 
 
-def nearest_districts(lat: float, lon: float, n: int = DISTRICTS) -> list[dict]:
-    return sorted(_districts(), key=lambda d: haversine(lat, lon, d["lat"], d["lon"]))[:n]
+def nearest_districts(lat: float, lon: float, n: int = DISTRICTS, deadline: float | None = None) -> list[dict]:
+    return sorted(_districts(deadline), key=lambda d: haversine(lat, lon, d["lat"], d["lon"]))[:n]
 
 
 # ---------- listings ----------
@@ -86,7 +113,7 @@ def _pull(region: int, area: int, st: str, job: dict) -> list[dict]:
     for page in range(PAGES):
         params = {"region_v2": region, "area_v2": area, "cg": 1020, "house_type": 3, "st": st,
                   "limit": PAGE, "o": page * PAGE}
-        r = httpx.get(API, params=params, headers=HEADERS, timeout=30)
+        r = httpx.get(API, params=params, headers=HEADERS, timeout=_left(job, 30))
         r.raise_for_status()
         batch = r.json().get("ads", [])
         ads += batch
@@ -94,8 +121,7 @@ def _pull(region: int, area: int, st: str, job: dict) -> list[dict]:
         if len(batch) < PAGE:
             break
         time.sleep(0.8)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps({"fetched_at": stamp.isoformat(), "ads": ads}, ensure_ascii=False))
+    write_json(path, {"fetched_at": stamp.isoformat(), "ads": ads})
     return ads
 
 
@@ -179,8 +205,9 @@ def _photo_path(key: str):
 
 
 def _photos(key: str, rows: list[dict], job: dict) -> list[dict]:
+    """Model readings of listing photos (raw, cached). Review status lives in PHOTO_REVIEWS, not here."""
     path = _photo_path(key)
-    done = {p["image_url"]: p for p in json.loads(path.read_text())} if path.exists() else {}
+    done = {p["image_url"]: p for p in read_json(path, [])}
     done = {u: p for u, p in done.items() if p.get("gate") != "ERROR"}  # failed readings are retried
     todo = []
     for r in rows:
@@ -194,14 +221,17 @@ def _photos(key: str, rows: list[dict], job: dict) -> list[dict]:
     def read(item):
         r, url = item
         rec = {"id": hashlib.sha1(url.encode()).hexdigest()[:12], "image_url": url, "way_id": r["osm_way_id"],
-               "alley": r["osm_name"], "listing_url": r["url"], "posted_at": r["posted_at"], "status": "pending"}
+               "alley": r["osm_name"], "listing_url": r["url"], "posted_at": r["posted_at"]}
         try:
-            resp = httpx.get(url, headers=HEADERS, timeout=20)
+            resp = httpx.get(url, headers=HEADERS, timeout=_left(job, 20))
             mime = resp.headers.get("content-type", "image/jpeg").split(";")[0]
+            _left(job, 60)  # do not start a model call the deadline cannot cover
             out = ai.read_listing_photo(resp.content, mime if mime.startswith("image/") else "image/jpeg")
             rec.update({k: out.get(k) for k in ("shows_alley", "view", "alley_width_m", "reference",
                                                  "cars_visible", "confidence", "notes", "gate", "model")})
             rec["width_m"] = out.get("alley_width_m")
+        except Expired:
+            rec.update({"gate": "ERROR", "notes": "hết thời hạn thu thập"})
         except Exception as exc:  # one bad photo must not stop the build
             rec.update({"gate": "ERROR", "notes": str(exc)[:200]})
         job["counts"]["photos_read"] += 1
@@ -210,33 +240,117 @@ def _photos(key: str, rows: list[dict], job: dict) -> list[dict]:
     with ThreadPoolExecutor(4) as pool:
         for rec in pool.map(read, todo):
             done[rec["image_url"]] = rec
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(list(done.values()), ensure_ascii=False, indent=1))
+    write_json(path, list(done.values()), indent=1)
     return list(done.values())
 
 
-def review_photo(key: str, photo_id: str, approve: bool) -> None:
-    """Remember a reviewer's decision in the area's photo cache (best effort; the browser also keeps it)."""
-    path = _photo_path(key)
-    if not path.exists():
-        return
-    photos = json.loads(path.read_text())
-    for p in photos:
-        if p["id"] == photo_id:
-            p["status"] = "approved" if approve else "rejected"
-            p["reviewed_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
-    path.write_text(json.dumps(photos, ensure_ascii=False, indent=1))
+_review_lock = threading.Lock()
 
 
-def apply(area: dict | None, lat: float, lon: float) -> str:
-    """Load a build result the browser sent back, so any server instance can plan with it."""
+def _photo_reviews() -> dict:
+    try:
+        return read_json(PHOTO_REVIEWS, {})
+    except CorruptState:
+        return {}  # unreadable reviews: every photo stays pending, never auto-approved
+
+
+def review_photo(photo_id: str, approve: bool, reviewer: str) -> dict:
+    """An operator's decision on one listing-photo reading. Idempotent; the newest decision wins."""
+    with _review_lock:
+        reviews = read_json(PHOTO_REVIEWS, {})
+        rec = {"status": "approved" if approve else "rejected", "reviewer": reviewer,
+               "reviewed_at": datetime.now(VN_TZ).isoformat(timespec="seconds")}
+        reviews[photo_id] = rec
+        write_json(PHOTO_REVIEWS, reviews, indent=1)
+    _plan_cache.clear()
+    return rec
+
+
+# ---------- area records (server-owned) ----------
+
+_areas = LRU(32)
+_area_lock = threading.Lock()
+_plan_cache = LRU(32)  # area record merged with the current photo reviews, per area revision
+
+
+def _area_path(key: str):
+    if not KEY_RE.match(key):
+        raise ValueError(f"invalid area key {key!r}")
+    return AREAS_DIR / f"{key}.json"
+
+
+def _load_area(key: str) -> dict | None:
+    rec = _areas.get(key)
+    if rec is not None:
+        return rec
+    try:
+        rec = read_json(_area_path(key), None)
+    except CorruptState:
+        return None
+    if rec and rec.get("schema_version") == SCHEMA_VERSION and rec.get("key") == key:
+        _areas.put(key, rec)
+        return rec
+    return None
+
+
+def _publish(job: dict) -> dict:
+    key = job["key"]
+    with _area_lock:
+        prev = _load_area(key)
+        now = datetime.now(VN_TZ)
+        rec = {"schema_version": SCHEMA_VERSION, "key": key, "revision": (prev or {}).get("revision", 0) + 1,
+               "collected_at": now.isoformat(timespec="seconds"), "expires_at": (now + TTL).isoformat(timespec="seconds"),
+               "complete": job["complete"], "steps": job["steps"], "counts": job["counts"],
+               "listings": job["listings"], "photos": job["photos"], "news": job["news"], "parcels": job["parcels"]}
+        write_json(_area_path(key), rec)
+        _areas.put(key, rec)
+    return rec
+
+
+def area_status(lat: float, lon: float) -> tuple[dict | None, dict]:
+    """The usable area record for a destination (or None) and a public status: fresh, partial, stale, missing."""
     key = area_key(lat, lon)
-    if area and area.get("key") == key:
-        STORE_EVIDENCE.set_live(key, area.get("listings") or [], area.get("photos") or [], area.get("parcels") or [])
-    return key
+    rec = _load_area(key)
+    job = _jobs.get(key)
+    building = bool(job and job["state"] in ("queued", "running"))
+    if not rec:
+        return None, {"key": key, "state": "missing", "revision": None, "collected_at": None, "expires_at": None,
+                      "building": building, "reason": "Chưa thu thập dữ liệu trực tiếp cho khu vực này"}
+    status = {"key": key, "revision": rec["revision"], "collected_at": rec["collected_at"],
+              "expires_at": rec["expires_at"], "building": building}
+    if datetime.fromisoformat(rec["expires_at"]) <= datetime.now(VN_TZ):
+        return None, {**status, "state": "stale", "reason": "Dữ liệu khu vực đã quá hạn 12 giờ nên không được dùng"}
+    if not rec.get("complete"):
+        status.update(state="partial", reason="Lần thu thập gần nhất thiếu một bước (xem chi tiết bước)")
+    else:
+        status.update(state="fresh", reason=None)
+    reviews = _photo_reviews()
+    rkey = (key, rec["revision"], json.dumps(reviews, sort_keys=True))
+    merged = _plan_cache.get(rkey)
+    if merged is None:
+        photos = [{**p, "status": reviews.get(p["id"], {}).get("status", "pending")} for p in rec["photos"]]
+        merged = {**rec, "photos": photos, "revision": f"{rec['revision']}:{hashlib.sha1(rkey[2].encode()).hexdigest()[:8]}"}
+        _plan_cache.put(rkey, merged)
+    return merged, status
 
 
-# ---------- build (streamed) ----------
+def public_area(rec: dict | None) -> dict | None:
+    """What the browser may see of an area record (for display only; it is never sent back)."""
+    if not rec:
+        return None
+    return {"key": rec["key"], "revision": rec["revision"], "news": rec.get("news", []),
+            "photos": [{k: p.get(k) for k in ("id", "image_url", "way_id", "alley", "listing_url", "posted_at",
+                                              "status", "view", "width_m", "reference", "confidence", "notes",
+                                              "gate", "shows_alley")} for p in rec.get("photos", [])]}
+
+
+# ---------- build jobs ----------
+
+STEPS = ("map", "parcels", "listings", "match", "news", "photos")
+_jobs: dict[str, dict] = {}
+_jobs_lock = threading.Lock()
+_pool = ThreadPoolExecutor(MAX_RUNNING, thread_name_prefix="area-build")
+
 
 def _step(job: dict, name: str, state: str, detail: str = "") -> None:
     job["steps"][name] = {"state": state, "detail": detail}
@@ -244,6 +358,9 @@ def _step(job: dict, name: str, state: str, detail: str = "") -> None:
 
 def _run(job: dict, lat: float, lon: float) -> None:
     key = job["key"]
+    job["state"] = "running"
+    job["started_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
+    job["deadline"] = time.monotonic() + BUILD_DEADLINE_S
     try:
         _step(job, "map", "running")
         g = build_graph(lat, lon)
@@ -253,22 +370,37 @@ def _run(job: dict, lat: float, lon: float) -> None:
         if flags.enabled("parcel_widths"):
             _step(job, "parcels", "running")
             cache_path = DIR / "parcels.json"
-            cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+            try:
+                cache = read_json(cache_path, {})
+            except CorruptState:
+                cache = {}
+            # The planning portal can be very slow: parcels get their own share of the deadline, so a slow portal
+            # leaves a partial record (unmeasured ways stay unknown) instead of losing listings and news too.
+            parcel_deadline = min(job["deadline"], time.monotonic() + PARCEL_BUDGET_S)
             try:
                 deep = flags.enabled("parcel_deep_scan")
-                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep)
-                detail = (f"{len(job['parcels'])} đường có ước tính khoảng trống từ hình học thửa đất"
-                          + ("; lối vào/ra lấy mẫu sâu mỗi 5 m trong giới hạn" if deep else ""))
+                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep,
+                                                      deadline=parcel_deadline)
+                _step(job, "parcels", "done",
+                      f"{len(job['parcels'])} đường có ước tính khoảng trống từ hình học thửa đất"
+                      + ("; lối vào/ra lấy mẫu sâu mỗi 5 m trong giới hạn" if deep else ""))
+            except parcels.DeadlineExceeded as exc:
+                write_json(cache_path, cache)
+                if time.monotonic() >= job["deadline"] - 0.5:
+                    raise Expired("hết thời hạn 300 giây khi đo thửa đất")
+                job["parcels"], job["complete"] = getattr(exc, "partial", []), False
+                _step(job, "parcels", "error",
+                      f"Cổng quy hoạch chậm: dừng đo sau {PARCEL_BUDGET_S:.0f} giây, đã đo {len(job['parcels'])} "
+                      "đường; các đường chưa đo vẫn là chưa rõ")
             except parcels.Blocked:
-                detail = "Cổng quy hoạch tạm chặn truy vấn; thử lại sau"
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            cache_path.write_text(json.dumps(cache))
-            _step(job, "parcels", "done", detail)
+                job["complete"] = False
+                _step(job, "parcels", "error", "Cổng quy hoạch tạm chặn truy vấn; thử lại sau")
+            write_json(cache_path, cache)
         else:
             _step(job, "parcels", "skipped", "Đã tắt")
 
         _step(job, "listings", "running")
-        ds = nearest_districts(lat, lon)
+        ds = nearest_districts(lat, lon, deadline=job["deadline"])
         ads = []
         for d in ds:
             for st in ("s", "u"):
@@ -276,8 +408,9 @@ def _run(job: dict, lat: float, lon: float) -> None:
         n_chotot = len(ads)
         aln_counts: dict = {}
         for d in ds:
+            _left(job, 1)
             try:
-                ads += alonhadat.pull_district(d["name"], DIR, aln_counts)
+                ads += alonhadat.pull_district(d["name"], DIR, aln_counts, job["deadline"])
             except Exception:  # a second source failing must not stop the build
                 pass
         n_aln = len(ads) - n_chotot
@@ -291,9 +424,10 @@ def _run(job: dict, lat: float, lon: float) -> None:
         c = job["counts"]
         _step(job, "match", "done", f"{c['in_area']} tin trong khu vực → {c['matched']} tin khớp {c['alleys']} hẻm")
 
+        _left(job, 1)
         _step(job, "news", "running")
         streets = _streets_near(g, lat, lon)
-        job["news"] = news.news_for(streets)
+        job["news"] = news.news_for(streets, job["deadline"])
         _step(job, "news", "done", f"{len(job['news'])} tin về {', '.join(streets[:3])}" if streets else "không có tên đường gần")
 
         if flags.enabled("ai_photo_evidence") and ai.provider():
@@ -303,14 +437,68 @@ def _run(job: dict, lat: float, lon: float) -> None:
             _step(job, "photos", "done", f"{len(job['photos'])} ảnh đã đọc, {len(useful)} ảnh có bề rộng (chờ duyệt)")
         else:
             _step(job, "photos", "skipped", "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao")
-        job["state"] = "done"
+        _left(job, 1)
+        rec = _publish(job)
+        job["state"], job["revision"] = "done", rec["revision"]
+    except Expired as exc:
+        job["state"], job["error"] = "error", f"hết thời hạn {BUILD_DEADLINE_S:.0f} giây ({exc})"
     except Exception as exc:
         job["state"], job["error"] = "error", str(exc)[:300]
     job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
+    job["_finished"] = time.monotonic()
+    for step in job["steps"].values():  # steps a failed build never reached are not "pending" forever
+        if job["state"] == "error" and step["state"] in ("pending", "running"):
+            step["state"] = "skipped"
 
 
-def _status(job: dict) -> dict:
-    return {k: v for k, v in job.items() if k not in ("listings", "photos", "news", "parcels")}
+def _prune() -> None:
+    now = time.monotonic()
+    for k in [k for k, j in _jobs.items() if j.get("_finished") and now - j["_finished"] > JOB_KEEP_S]:
+        del _jobs[k]
+
+
+def schedule(lat: float, lon: float) -> dict:
+    """Start (or join) the build for this area. Raises Busy when the bounded pool is full."""
+    key = area_key(lat, lon)
+    with _jobs_lock:
+        _prune()
+        job = _jobs.get(key)
+        if job and job["state"] in ("queued", "running"):
+            return public_job(job)  # single flight: a second request joins the running build
+        active = [j for j in _jobs.values() if j["state"] in ("queued", "running")]
+        if len(active) >= MAX_RUNNING + MAX_QUEUED:
+            raise Busy(retry_after=30)
+        job = {"key": key, "state": "queued", "queued_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
+               "started_at": None, "finished_at": None, "error": None, "revision": None, "complete": True,
+               "steps": {s: {"state": "pending", "detail": ""} for s in STEPS},
+               "counts": {"fetched": 0, "unique": 0, "in_area": 0, "matched": 0, "alleys": 0,
+                          "photos_total": 0, "photos_read": 0},
+               "listings": [], "photos": [], "news": [], "parcels": []}
+        _jobs[key] = job
+        _pool.submit(_run, job, lat, lon)
+        return public_job(job)
+
+
+def job_status(key: str) -> dict | None:
+    job = _jobs.get(key)
+    return public_job(job) if job else None
+
+
+def public_job(job: dict) -> dict:
+    return {k: v for k, v in job.items()
+            if k not in ("listings", "photos", "news", "parcels", "deadline") and not k.startswith("_")}
+
+
+def run_sync(lat: float, lon: float) -> dict | None:
+    """Build an area in the calling thread and return the published record (offline pipelines only)."""
+    key = area_key(lat, lon)
+    job = {"key": key, "state": "queued", "error": None, "revision": None, "complete": True,
+           "steps": {s: {"state": "pending", "detail": ""} for s in STEPS},
+           "counts": {"fetched": 0, "unique": 0, "in_area": 0, "matched": 0, "alleys": 0,
+                      "photos_total": 0, "photos_read": 0},
+           "listings": [], "photos": [], "news": [], "parcels": []}
+    _run(job, lat, lon)
+    return _load_area(key) if job["state"] == "done" else None
 
 
 def _streets_near(g, lat: float, lon: float, n: int = 4) -> list[str]:
@@ -330,31 +518,3 @@ def _streets_near(g, lat: float, lon: float, n: int = 4) -> list[str]:
             if key not in best or d < best[key][0]:
                 best[key] = (d, name)
     return [v[1] for v in sorted(best.values())][:n]
-
-
-def build(lat: float, lon: float):
-    """Run one area build inside the request and yield its status as it changes (NDJSON lines).
-
-    The last line carries the result ({"area": {key, listings, photos}}); the browser keeps it and
-    sends it back with each plan, so this works on stateless serverless instances.
-    """
-    key = area_key(lat, lon)
-    job = {"key": key, "state": "running", "started_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
-           "steps": {s: {"state": "pending", "detail": ""} for s in ("map", "parcels", "listings", "match", "news", "photos")},
-           "counts": {"fetched": 0, "unique": 0, "in_area": 0, "matched": 0, "alleys": 0,
-                      "photos_total": 0, "photos_read": 0},
-           "listings": [], "photos": [], "news": [], "parcels": [], "error": None}
-    if not flags.enabled("live_crawl"):
-        yield json.dumps({"status": {"key": key, "state": "off"}}) + "\n"
-        return
-    t = threading.Thread(target=_run, args=(job, lat, lon), daemon=True)
-    t.start()
-    last = None
-    while t.is_alive():
-        snap = json.dumps({"status": _status(job)}, ensure_ascii=False)
-        if snap != last:
-            yield snap + "\n"
-            last = snap
-        t.join(0.7)
-    area = {"key": key, "listings": job["listings"], "photos": job["photos"], "news": job["news"], "parcels": job["parcels"]}
-    yield json.dumps({"status": _status(job), "area": area}, ensure_ascii=False) + "\n"

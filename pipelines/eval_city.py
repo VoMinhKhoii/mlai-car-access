@@ -23,7 +23,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 
 from app import flags, live, plan  # noqa: E402
-from app.evidence import STORE_EVIDENCE  # noqa: E402
 
 ROADS = ROOT / "data" / "raw" / "overture" / "hcmc_small_roads.json"
 OUT_MD = ROOT / "docs" / "eval" / "city-eval.md"
@@ -75,20 +74,16 @@ def summary(r: dict) -> dict:
 def run_case(c: dict) -> dict:
     args = (c["lat"], c["lon"], c["vehicle_id"], c["intent"], ARRIVE, 15 if c["intent"] == "pickup" else 120)
     t0 = time.time()
-    STORE_EVIDENCE.live.clear()
-    STORE_EVIDENCE.reload()
     a = summary(plan.plan(*args, dest_label=c["name"]))
-    area, last = None, None
-    for line in live.build(c["lat"], c["lon"]):
-        m = json.loads(line)
-        last, area = m["status"], m.get("area") or area
-    out = {**c, "build_s": round(time.time() - t0), "build": {k: v["detail"] for k, v in (last or {}).get("steps", {}).items()},
-           "build_error": (last or {}).get("error"), "A_static": a}
+    area = live.run_sync(c["lat"], c["lon"])
+    out = {**c, "build_s": round(time.time() - t0),
+           "build": {k: v["detail"] for k, v in (area or {}).get("steps", {}).items()},
+           "build_error": None if area else "build failed", "A_static": a}
     if area:
-        live.apply({**area, "parcels": []}, c["lat"], c["lon"])
-        out["B_live"] = summary(plan.plan(*args, dest_label=c["name"]))
-        live.apply(area, c["lat"], c["lon"])
-        out["C_parcels"] = summary(plan.plan(*args, dest_label=c["name"]))
+        # Each variant is its own overlay with its own revision, so the width cache never mixes them.
+        no_parcels = {**area, "parcels": [], "revision": f"{area['revision']}-no-parcels"}
+        out["B_live"] = summary(plan.plan(*args, dest_label=c["name"], live_area=no_parcels))
+        out["C_parcels"] = summary(plan.plan(*args, dest_label=c["name"], live_area=area))
         cuts = [x for p in area.get("parcels", []) for x in p["cuts"]]
         out["parcels"] = {"ways": len(area.get("parcels", [])), "cuts": len(cuts),
                           "deep_cuts": sum(len(p["cuts"]) for p in area.get("parcels", []) if p.get("deep")),

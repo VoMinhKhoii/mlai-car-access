@@ -5,10 +5,10 @@ When a flag is off, the engine behaves exactly as if that AI source did not exis
 """
 from __future__ import annotations
 
-import json
 import os
 
 from .config import FLAG_FILE
+from .storage import CorruptState, read_json, write_json
 
 AI_FEATURES = {
     "live_crawl": {
@@ -77,7 +77,10 @@ _state: dict[str, bool] = {}
 
 
 def _load() -> None:
-    saved = json.loads(FLAG_FILE.read_text()) if FLAG_FILE.exists() else {}
+    try:
+        saved = read_json(FLAG_FILE, {})
+    except CorruptState:
+        saved = {}  # an unreadable flags file falls back to the shipped defaults
     for name, meta in AI_FEATURES.items():
         value = saved.get(name, meta["default"])
         env = os.environ.get(f"FLAG_{name.upper()}")
@@ -98,7 +101,7 @@ def set_flag(name: str, value: bool) -> None:
     if not _state:
         _load()
     _state[name] = value
-    FLAG_FILE.write_text(json.dumps(_state, indent=1))
+    write_json(FLAG_FILE, _state, indent=1)
 
 
 def describe() -> list[dict]:
