@@ -63,6 +63,8 @@ D2/D4/D5: require field ID/uncertainty/bottleneck and structured egress; group-b
 
 ## Execution Checklist
 
-- [ ] R-11: >=20 real measurements + frozen split + field/model evaluation.
-- [ ] R-12: full suite/build/lint + bsk dev/production + live/limit evidence.
-- [ ] R-12: docs/hosting cutover và rollback/state migration proof.
+- [ ] R-11: >=20 real measurements + frozen split + field/model evaluation. **Blocked on the field team**: intake schema, `egress.csv` and `pipelines/eval_field.py` are ready; `measurements.csv` is still header-only and the script refuses < 20 rows.
+- [ ] R-12: full suite/build/lint + bsk dev/production + live/limit evidence. Local part done (100 tests, build, lint, production-bundle desktop/mobile smoke); live Goong/AI upstreams not exercised (no keys), so this stays open.
+- [x] R-12: docs/hosting cutover và rollback/state migration proof. Serverless removed, single-worker deploy + backup/quarantine documented (README, D36); restart smoke kept review state and did not reseed demo data.
+
+Evidence: `reports/phase-04-05-verification.md`.
