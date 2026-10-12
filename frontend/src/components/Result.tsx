@@ -194,12 +194,20 @@ function kindLabel(s: StopPoint) {
   if (s.kind === 'lot') return s.lot?.source === 'VETC' ? 'Bãi đỗ · thanh toán VETC' : 'Bãi đỗ'
   return 'Lề đường'
 }
-function exitTone(s: StopPoint): Tone { return s.way_out.mode === 'none' ? 'bad' : s.way_out.tight_exit ? 'warn' : 'ok' }
+function exitTone(s: StopPoint): Tone {
+  if (s.way_out.mode === 'none' || !s.way_out.available) return 'bad'
+  if (s.way_out.route_verified === false || s.way_out.turn_verified === false || s.kind === 'lot') return 'muted'
+  return s.way_out.tight_exit ? 'warn' : 'ok'
+}
 function exitShort(s: StopPoint) {
-  if (s.kind === 'lot') return 'Ra theo cổng bãi'
-  if (s.way_out.mode === 'reverse') return `Lùi ${s.way_out.reverse_m ?? ''} m`.replace('  ', ' ')
-  if (s.way_out.mode === 'turn_here') return 'Quay đầu tại chỗ'
-  if (s.way_out.mode === 'through') return 'Đi thẳng ra'
+  if (!s.way_out.available) {
+    if (s.way_out.flood?.status === 'blocked') return 'Đường ra bị ngập'
+    return s.way_out.mode === 'none' ? 'Khó ra' : 'Đường ra chưa xác minh'
+  }
+  if (s.kind === 'lot') return 'Lối ra bãi chưa xác minh'
+  if (s.way_out.mode === 'reverse') return `Lùi ${s.way_out.reverse_m ?? ''} m; quay đầu chưa xác minh`.replace('  ', ' ')
+  if (s.way_out.mode === 'turn_here') return 'Quay đầu chưa xác minh'
+  if (s.way_out.mode === 'through') return s.way_out.route_verified === false ? 'Lối ra chưa xác minh' : 'Đi thẳng ra'
   return s.way_out.mode === 'none' ? 'Khó ra' : 'Ra được'
 }
 
@@ -244,7 +252,7 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
             ? s.route_in.meters != null && <> Đoạn trong hẻm {s.route_in.meters} m.</>
             : <> Chưa có đường vào phù hợp với xe.</>)}
           {wr.review && <> <b>Bằng chứng mâu thuẫn, cần duyệt.</b></>}
-        </> : s.kind === 'lot' ? 'Bãi đỗ: vào bằng cổng chính.' : vnt(s.fit.note ?? 'Chưa có dữ liệu bề rộng.')}
+        </> : s.kind === 'lot' ? 'Bãi đỗ gần đây; chưa có hình học xác minh cổng vào.' : vnt(s.fit.note ?? 'Chưa có dữ liệu bề rộng.')}
         {s.way_id && <button type="button" className="link-btn" onClick={() => onEvidence(s.way_id!)}>Xem bằng chứng</button>}
       </Check>
       <Check icon={<Navigation size={16} />} title="Đường ra" tone={exitTone(s)}>{vnt(s.way_out.text)}</Check>
@@ -266,6 +274,11 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
       <Check icon={<Footprints size={16} />} title="Đi bộ" tone={s.walk.wade ? 'warn' : 'ok'}>
         {s.walk.meters} m, khoảng {minutes(s.walk.minutes)}
         {s.walk.wade && `; lội nước ${Math.round(s.walk.wade.lo * 100)}–${Math.round(s.walk.wade.hi * 100)} cm`}
+        {s.walk.connection && !s.walk.connection.mapped && (
+          <p className="unverified">
+            {s.walk.connection.reason} (điểm dừng {s.walk.connection.stop_to_walk_m} m; địa chỉ {s.walk.connection.destination_to_walk_m} m).
+          </p>
+        )}
         {plan.intent === 'pickup' && '. Khách đi bộ quãng này tới xe.'}
       </Check>
       {s.unverified_reasons.length > 0 && (

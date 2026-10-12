@@ -257,8 +257,8 @@ def _run(job: dict, lat: float, lon: float) -> None:
             try:
                 deep = flags.enabled("parcel_deep_scan")
                 job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep)
-                detail = (f"{len(job['parcels'])} hẻm gần điểm đến có bề rộng theo thửa đất"
-                          + ("; đường vào đo mỗi 5 m" if deep else ""))
+                detail = (f"{len(job['parcels'])} đường có ước tính khoảng trống từ hình học thửa đất"
+                          + ("; lối vào/ra lấy mẫu sâu mỗi 5 m trong giới hạn" if deep else ""))
             except parcels.Blocked:
                 detail = "Cổng quy hoạch tạm chặn truy vấn; thử lại sau"
             cache_path.parent.mkdir(parents=True, exist_ok=True)

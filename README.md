@@ -59,8 +59,8 @@ When a flag is off, the engine behaves as if that source didn't exist.
 ## How an answer is made
 
 1. **Street graph** around the destination from OSM (the Bình Thạnh demo strip is cached offline; other HCMC addresses are fetched on demand).
-2. **Width Range per alley** from Evidence tiers: Measured > Official > Observed > Declared > Inferred (`backend/app/evidence.py`).
-3. **Alley Fit for this vehicle** (fits / tight / doesn't fit / unknown) against width including mirrors and margins, plus the turn-in check at alley mouths (`vehicles.py`, `geometry.py`).
+2. **Width evidence per alley** keeps source tier separate from width basis and longitudinal coverage (`backend/app/evidence.py`).
+3. **Alley Fit** uses decisive physical clear-width evidence for strict routing; parcel-gap or sparse evidence remains unverified (`backend/app/plan.py`, `backend/app/evidence.py`).
 4. **Flood over the Dwell Window**: depth evidence from tide, rain and IRD history is evaluated with a separate knowledge status. Missing tide/history and expired positive observations are not treated as dry. The route in is checked over an approximate traversal interval before arrival, the Stop Point over the exact stay, and the Way Out over an approximate traversal interval after departure (`backend/app/plan.py`, `backend/app/flood.py`).
 5. **Stop Legality** from Law 36/2024 Art. 18, signs and local lists, always with the citation (`legality.py`).
 6. **Filter, then rank** Stop Points by walk time; unverified ones rank last and show grey (`plan.py`).
@@ -68,8 +68,8 @@ When a flag is off, the engine behaves as if that source didn't exist.
 
 ## Data you can add
 
-- `data/field/measurements.csv`: tape-measured alleys from the field trip (tier Measured). See `data/field/README.md`.
-- `data/official/parcel_gaps.csv`: legal widths from the HCMC planning portal (tier Official).
+- `data/field/measurements.csv`: physical clear-width observations. Strict-fit evidence also needs finite uncertainty and complete endpoint coverage; see `data/field/README.md`.
+- `data/official/parcel_gaps.csv`: parcel-gap estimates from the HCMC planning portal (Inferred usable-width basis; official source provenance, not a clear-width measurement).
 - `data/flood/tide_forecast.json`: update from each daily bulletin.
 - `data/cameras/hcmc_cameras.json`: camera registry; refresh with `python3 pipelines/camera_registry.py`.
 - `pipelines/`: VETC lots and Chợ Tốt listing extraction (see `pipelines/README.md`).

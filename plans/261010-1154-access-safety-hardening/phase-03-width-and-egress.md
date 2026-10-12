@@ -59,5 +59,7 @@ Decisive width: `plan.py:44-51,54-75,80-86,364-379,480-507`, `vehicles.py:199-21
 
 ## Execution Checklist
 
-- [ ] R-05: segment bottleneck + derived-width provenance + regressions.
-- [ ] R-06: directed egress, junction/turn/walk boundaries + UI proof.
+- [x] R-05: segment bottleneck + derived-width provenance + regressions.
+- [x] R-06: directed egress, junction/turn/walk boundaries + UI proof.
+
+Verified 2026-10-12: backend suite 68/68 OK; frontend `tsc` + build OK, lint warnings only; API smoke (demo address → unverified stops, far point → `missing_walk_connection`); desktop and mobile UI checked. Independent code review unavailable (provider limits). Not field-calibrated.

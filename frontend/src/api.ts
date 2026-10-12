@@ -30,13 +30,32 @@ export interface Vehicle {
   safe_water_depth: number; safe_water_basis: string; members: string[]
   fits_min: number; tight_min: number; three_point_width: number; source_url: string
 }
+export type WidthBasis =
+  | 'measured_clear_width'
+  | 'observed_clear_width'
+  | 'parcel_gap_estimate'
+  | 'road_width_estimate'
+  | 'declared_width'
+  | 'inferred'
+  | 'unknown'
+export interface WidthCoverage {
+  cut_count: number
+  start_covered: boolean
+  end_covered: boolean
+  max_spacing_m: number | null
+  truncated: boolean
+  complete: boolean
+  reason: string | null
+}
 export interface Bound {
   lo: number; hi: number | null; tier: string; tier_vi: string; source: string
   detail: string; observed_on: string; url: string; ai_feature: string | null
+  width_basis: WidthBasis; uncertainty_m: number | null; coverage: WidthCoverage | null
 }
 export interface WidthRange {
   lo: number; hi: number | null; label: string; top_tier: string | null; review: boolean
   evidence: Bound[]; overruled: Bound[]; way_out_claims: Bound[]
+  width_basis: WidthBasis; coverage: WidthCoverage; decisive_clearance: boolean
 }
 export interface Depth { lo: number; hi: number; drivers: string[]; rain_driven: boolean; inferred: boolean }
 export type FloodKnowledge = 'known' | 'missing_tide' | 'missing_history' | 'stale_positive_observation'
@@ -71,10 +90,13 @@ export interface Rule { code: string; status: Legal; text: string; citation: str
 export interface StopPoint {
   rank?: number; ok: boolean; kind: 'door' | 'street' | 'lot'; name: string; lat: number; lon: number
   way_id: number | null; tier: number; verified: boolean; badges: string[]
-  walk: { meters: number; minutes: number; geometry?: number[][]; wade?: { lo: number; hi: number; street: string } | null }
+  walk: { meters: number; minutes: number; geometry?: number[][]
+    connection?: { stop_to_walk_m: number; destination_to_walk_m: number; mapped: boolean; reason: string | null }
+    wade?: { lo: number; hi: number; street: string } | null }
   route_in: { available: boolean; meters: number | null; geometry: number[][]; flood: LegFloodCheck | null } | null
   fit: { class: FitClass; width_range?: WidthRange; note?: string | null; needed?: { fits_min: number; tight_min: number; door_min: number } }
-  way_out: { available: boolean; mode: string; text: string; reverse_m?: number; tight_exit?: boolean; geometry?: number[][]; flood: LegFloodCheck | null }
+  way_out: { available: boolean; mode: string; text: string; turn_verified?: boolean; route_verified?: boolean
+    reverse_m?: number; tight_exit?: boolean; geometry?: number[][]; flood: LegFloodCheck | null }
   flood: { stay: LegFloodCheck }
   legality: { status: Legal; rules: Rule[] }
   fail_reasons: string[]; unverified_reasons: string[]; failure_codes: string[]
@@ -94,6 +116,7 @@ export interface Plan {
     if_leave_before?: { headline: string; code: string }
   } | null
   stop_points: StopPoint[]
+  no_stop_reason?: 'missing_walk_connection' | null
   door: StopPoint | null
   standard_route: { geometry: number[][]; unfit_ways: { way_id: number; name: string; label: string; fit: string; lo: number; hi: number | null }[]; note: string; source: RouteSource; distance_m?: number; duration_s?: number } | null
   layers: { fit: GeoJSON.FeatureCollection; flood: GeoJSON.FeatureCollection }
@@ -103,7 +126,14 @@ export interface Plan {
   live_crawl: boolean
 }
 export interface NewsItem { street: string; title: string; summary: string; url: string; source: string; date: string; kind: 'flood' | 'works' | 'ban'; depth_cm: number | null }
-export interface AreaData { key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[]; parcels?: { way_id: number; width_m: number; samples: number[] }[] }
+export interface AreaData {
+  key: string; listings: unknown[]; photos: ListingPhoto[]; news?: NewsItem[]
+  parcels?: {
+    way_id: number; samples: number[]
+    cuts?: { lat?: number; lon?: number; at_m?: number; gap_m?: number; width_m?: number }[]
+    segment_length_m?: number; max_spacing_m?: number; truncated?: boolean; deep?: boolean
+  }[]
+}
 export type StepState = 'pending' | 'running' | 'done' | 'skipped'
 export interface AreaBuild {
   key: string; state: 'running' | 'done' | 'error' | 'off'; error?: string | null

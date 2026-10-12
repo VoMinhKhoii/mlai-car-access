@@ -18,12 +18,12 @@ AI_FEATURES = {
     },
     "parcel_widths": {
         "label": "Bề rộng hẻm theo thửa đất (cổng quy hoạch TP.HCM)",
-        "detail": "Khi lập kế hoạch, đo khoảng cách giữa hai thửa đất đối diện cho tối đa 12 hẻm gần điểm đến: bằng chứng mức Số liệu chính thức.",
+        "detail": "Dùng hình học thửa đất để ước tính khoảng trống; nguồn gốc chính thức nhưng không phải clear width đo thực tế và không xác nhận strict fit.",
         "default": True,
     },
     "parcel_deep_scan": {
-        "label": "Quét sâu đường vào điểm đến (mỗi 5 m)",
-        "detail": "Đo bề rộng theo thửa đất mỗi 5 m dọc đường từ đường lớn vào tận cửa (tối đa 300 m) để tìm chỗ hẹp nhất. Chậm: thêm 1–2 phút cho điểm đến mới; tắt thì đường vào chỉ đo 2 mặt cắt như các hẻm khác.",
+        "label": "Quét sâu đường vào/ra điểm đến (mỗi 5 m)",
+        "detail": "Quét các ways trên lối vào/ra theo chiều hợp lệ, lấy mẫu đầu-cuối và xấp xỉ mỗi 5 m trong ngân sách 60 cuts. Quét thưa/cắt cụt chỉ để tham khảo; ngay cả phủ đủ cũng không chứng minh hết vật cản. Tắt thì chỉ có mẫu nông.",
         "default": True,
     },
     "building_gaps": {

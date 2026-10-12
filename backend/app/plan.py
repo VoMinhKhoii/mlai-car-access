@@ -20,6 +20,8 @@ from .vehicles import VehicleProfile, get_profile, three_point_width, turn_in_wi
 
 VN_TZ = timezone(timedelta(hours=7))
 WALK_SPEED = 1.2  # m/s
+WALK_CONNECTION_CAP_M = 35.0
+WALK_SNAP_M = 5.0  # connector shorter than this is projection noise, not an unmapped gap
 INF = float("inf")
 
 _WR: dict = {}
@@ -46,13 +48,14 @@ def invalidate_evidence() -> None:
 
 def fit_class(wr: WidthRange, p: VehicleProfile) -> str:
     if wr.lo >= p.fits_min:
-        return "fits"
-    if wr.lo >= p.tight_min:
-        return "tight"
-    if wr.hi < p.tight_min:
+        result = "fits"
+    elif wr.lo >= p.tight_min:
+        result = "tight"
+    elif wr.hi < p.tight_min:
         return "no"
-    return "unknown"
-
+    else:
+        return "unknown"
+    return result if wr.decisive_clearance else "unknown"
 
 def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
     fit, notes = {}, {}
@@ -64,7 +67,13 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
             continue
         for n in (w.nodes[0], w.nodes[-1]):
             for pid in g.node_ways.get(n, ()):
-                if pid == wid or not g.ways[pid].drivable or wrs[pid].lo <= wrs[wid].lo:
+                if pid == wid or not g.ways[pid].drivable:
+                    continue
+                if not wrs[pid].decisive_clearance:
+                    fit[wid] = "unknown"
+                    notes[wid] = "Chưa có đo clear width đầy đủ tại nút rẽ"
+                    break
+                if wrs[pid].lo <= wrs[wid].lo:
                     continue
                 street = min(round(wrs[pid].lo * 2) / 2, 12.0)
                 need = turn_in_width(p.id, street)
@@ -210,40 +219,77 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
             rev_adj.setdefault(other, []).append((edge_idx, node))
 
     we, woff, wd = _project(g, dest_lat, dest_lon, lambda way: way.walkable)
-    walk_src = {we.u: wd + woff, we.v: wd + (we.length - woff)}
-    wdist, wpred = dijkstra(g.walk_adj, walk_src, lambda edge: True,
-                            lambda edge: g.edges[edge].length, limit=cap + 60)
+    walk_connection_missing = we is None or wd > WALK_CONNECTION_CAP_M
+    if walk_connection_missing:
+        wdist, wpred = {}, {}
+    else:
+        walk_src = {we.u: wd + woff, we.v: wd + (we.length - woff)}
+        wdist, wpred = dijkstra(g.walk_adj, walk_src, lambda edge: True,
+                                lambda edge: g.edges[edge].length, limit=cap + 60)
     de, doff, ddist = _project(g, dest_lat, dest_lon, lambda way: way.drivable)
 
+    def walk_access(lat: float, lon: float, road_edge=None, road_offset: float | None = None):
+        if walk_connection_missing:
+            return None
+        if road_edge is not None and g.ways[road_edge.way_id].walkable:
+            walk_edge, walk_offset, connector = road_edge, road_offset, 0.0
+        else:
+            walk_edge, walk_offset, connector = _project(g, lat, lon, lambda way: way.walkable)
+        if walk_edge is None or connector > WALK_CONNECTION_CAP_M:
+            return None
+        network_distance = min(
+            wdist.get(walk_edge.u, INF) + walk_offset,
+            wdist.get(walk_edge.v, INF) + walk_edge.length - walk_offset,
+        )
+        if not math.isfinite(network_distance):
+            return None
+        return {"walk_edge_idx": walk_edge.idx, "walk_offset": walk_offset,
+                "walk_connector_m": connector, "walk_destination_connector_m": wd}, connector + network_distance
+
     candidates: list[Candidate] = []
-    if de is not None and ddist <= 35:
+    walk_connection_rejected = False
+    walk_candidate_count = 0
+    if not walk_connection_missing and de is not None and ddist <= WALK_CONNECTION_CAP_M:
         la, lo = _interp(g, de.u, de.v, doff, de.length)
-        candidates.append(Candidate("door", la, lo, "Trước cửa nhà", de.way_id, de.idx, doff,
-                                    walk_m=ddist))
+        access = walk_access(la, lo, de, doff)
+        if access is not None and access[1] <= cap:
+            candidates.append(Candidate("door", la, lo, "Trước cửa nhà", de.way_id, de.idx, doff,
+                                        walk_m=access[1], data=access[0]))
+            walk_candidate_count += 1
+        else:
+            walk_connection_rejected = True
     for edge in g.edges:
         way = g.ways[edge.way_id]
-        if not way.drivable or min(wdist.get(edge.u, INF), wdist.get(edge.v, INF)) > cap + 20:
+        if not way.drivable:
             continue
         offsets = [edge.length / 2] if edge.length < 16 else [8.0, edge.length / 2, edge.length - 8.0]
         for offset in offsets:
-            walk = min(wdist.get(edge.u, INF) + offset,
-                       wdist.get(edge.v, INF) + edge.length - offset)
+            la, lo = _interp(g, edge.u, edge.v, offset, edge.length)
+            access = walk_access(la, lo, edge if way.walkable else None,
+                                 offset if way.walkable else None)
+            if access is None:
+                walk_connection_rejected = True
+                continue
+            walk_data, walk = access
             if walk > cap:
                 continue
-            la, lo = _interp(g, edge.u, edge.v, offset, edge.length)
             candidates.append(Candidate("street", la, lo, g.display_name(way.id), way.id, edge.idx,
-                                        offset, walk_m=walk))
+                                        offset, walk_m=walk, data=walk_data))
+            walk_candidate_count += 1
     for lot in parking_data.lots_near(g, dest_lat, dest_lon, radius=cap + 150):
         entrance, entrance_d = g.nearest_node(lot["lat"], lot["lon"], lambda node: node in g.drive_adj)
-        walk_node, walk_tail = g.nearest_node(lot["lat"], lot["lon"], lambda node: node in wdist)
-        if entrance is None or entrance_d > 80 or walk_node is None:
+        access = walk_access(lot["lat"], lot["lon"])
+        if entrance is None or entrance_d > 80 or access is None:
+            walk_connection_rejected = True
             continue
-        walk = wdist[walk_node] + walk_tail
+        walk_data, walk = access
         if walk <= cap:
-            access = sorted(wid for wid in g.node_ways.get(entrance, ()) if g.ways[wid].drivable)
+            access_ways = sorted(wid for wid in g.node_ways.get(entrance, ()) if g.ways[wid].drivable)
             candidates.append(Candidate("lot", lot["lat"], lot["lon"], lot["name"], None, walk_m=walk,
                                         lot=lot, entrance=entrance,
-                                        data={"entrance_d": entrance_d, "access_way_ids": access}))
+                                        data={"entrance_d": entrance_d, "access_way_ids": access_ways,
+                                              **walk_data}))
+            walk_candidate_count += 1
 
     ctx = PlanContext(g, wrs, fps, fit, fit_notes, paid, vehicle, intent, rain, flood_snapshot, candidates)
     report_keys = {_street_key(report.get("street", "")) for report in flood_snapshot.reports}
@@ -483,13 +529,19 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         key=lambda idx: result_order.get(id(ctx.candidates[idx]), (2, INF, INF)))
     for rank, result in enumerate(chosen, 1):
         result["rank"] = rank
-        result["walk"]["geometry"] = _walk_geometry(g, result["_c"], wpred, dest_lat, dest_lon)
-        result["walk"]["wade"] = _walk_wade(g, fps, result["_c"], wpred, arrive, rain,
+        result["walk"]["geometry"] = _walk_geometry(
+            g, result["_c"], wpred, wdist, we, woff, dest_lat, dest_lon)
+        result["walk"]["wade"] = _walk_wade(g, fps, result["_c"], wpred, wdist, arrive, rain,
                                                flood_snapshot, vehicle.safe_water_depth)
 
     failure_codes = sorted({code for result in rejected for code in result["failure_codes"]})
 
+    no_stop_reason = ("missing_walk_connection"
+                      if not chosen and walk_candidate_count == 0
+                      and (walk_connection_missing or walk_connection_rejected) else None)
     verdict = _verdict(chosen, door_eval, intent, cap)
+    if no_stop_reason:
+        verdict["detail"] = "Không tìm thấy lối đi bộ được nối với điểm dừng trong phạm vi 35 m."
     timing = None
     flood_timing_needed = _needs_flood_timing(chosen, rejected)
     if flood_timing_needed:
@@ -525,6 +577,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
                    "tide_arrive": _tide_json(arrive, flood_snapshot),
                    "tide_depart": _tide_json(depart, flood_snapshot), "rain": rain},
         "verdict": verdict, "timing": timing, "stop_points": chosen, "door": door_eval,
+        "no_stop_reason": no_stop_reason,
         "standard_route": std,
         "layers": _layers(g, wrs, fit, fit_notes, fps, dest_lat, dest_lon, arrive, depart,
                           rain, vehicle, flood_snapshot),
@@ -681,8 +734,30 @@ def _candidate_legality(c: Candidate, ctx: PlanContext, arrive: datetime,
             legality = legality_for_lot(c.lot, ctx.intent)
         else:
             edge = ctx.g.edges[c.edge_idx]
-            dist_to_junction = min(c.offset if ctx.g.drive_degree(edge.u) >= 3 else INF,
-                                   edge.length - c.offset if ctx.g.drive_degree(edge.v) >= 3 else INF)
+            junction_distances = []
+            for node, center_distance in (
+                (edge.u, c.offset), (edge.v, edge.length - c.offset)
+            ):
+                if ctx.g.drive_degree(node) < 3:
+                    continue
+                crossing_ways = [
+                    way_id for way_id in ctx.g.node_ways.get(node, ())
+                    if way_id != c.way_id and ctx.g.ways[way_id].drivable
+                ]
+                if not crossing_ways or any(
+                    not ctx.wrs[way_id].decisive_clearance for way_id in crossing_ways
+                ):
+                    junction_distances.append(None)
+                else:
+                    boundary_buffer = max(ctx.wrs[way_id].hi for way_id in crossing_ways) / 2
+                    junction_distances.append(center_distance - boundary_buffer)
+            known_distances = [distance for distance in junction_distances if distance is not None]
+            if known_distances and min(known_distances) < 5.0:
+                dist_to_junction = min(known_distances)
+            elif any(distance is None for distance in junction_distances):
+                dist_to_junction = None
+            else:
+                dist_to_junction = min(known_distances, default=INF)
             legality = legality_over_window(
                 ctx.g, ctx.g.ways[c.way_id], ctx.wrs[c.way_id], c.lat, c.lon,
                 dist_to_junction, ctx.intent, arrive, depart, ctx.paid.get(c.way_id))
@@ -780,22 +855,25 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
                 failure_codes.append("flood_exit")
                 reasons_fail.append("Đường ra bị ngập trong khoảng xe rời điểm dừng")
                 fit_way_out["flood"] = _route_flood(ctx, fit_way_out, exit_times)
-                way_out_output = {"available": False, **_public_route(fit_way_out)}
+                way_out_output = {"available": False, **_public_route(fit_way_out),
+                                  "route_verified": fit_way_out["strict"]}
             else:
                 failure_codes.append("dead_end")
                 reasons_fail.append("Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)")
-                way_out_output = {"available": False, **_public_route(way_out), "flood": None}
+                way_out_output = {"available": False, **_public_route(way_out), "flood": None,
+                                  "route_verified": False}
         else:
             way_out["flood"] = _route_flood(ctx, way_out, exit_times)
-            way_out_output = {"available": True, **_public_route(way_out)}
+            way_out_output = {"available": True, **_public_route(way_out),
+                              "route_verified": way_out["strict"]}
             if not way_out["strict"]:
-                unverified.append("Đường ra chưa đủ bằng chứng")
+                unverified.append(way_out.get("text") or "Đường ra chưa đủ bằng chứng")
             if way_out.get("tight_exit"):
                 tier_bump = 1
     else:
         # Entry failed; don't evaluate exit
         way_out_output = {"available": False, "mode": "none", "text": way_out["text"], "meters": None,
-                          "geometry": [], "flood": None}
+                          "geometry": [], "flood": None, "route_verified": False}
     checks["way_out"] = way_out_output
 
     stop_way_ids = ([way_id] if way_id is not None else c.data.get("access_way_ids", []))
@@ -824,14 +902,27 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         unverified.append("Chưa đủ dữ liệu pháp lý: " +
                           "; ".join(rule.text for rule in rules if rule.status == "Unverified"))
 
+    stop_walk_connector = c.data.get("walk_connector_m", 0.0)
+    destination_walk_connector = c.data.get("walk_destination_connector_m", 0.0)
+    walk_connection_unverified = stop_walk_connector > WALK_SNAP_M or destination_walk_connector > WALK_SNAP_M
+    if walk_connection_unverified:
+        unverified.append("Đoạn nối gần nhất chưa có lối đi bộ OSM; bản đồ chỉ vẽ phần đường đi bộ đã lập bản đồ")
     tier = 2 if (legality_status == "Restricted" or unverified) else tier_bump
     ok = not reasons_fail
     walk_min = c.walk_m / WALK_SPEED / 60
+    walk_connection = {
+        "stop_to_walk_m": round(stop_walk_connector, 1),
+        "destination_to_walk_m": round(destination_walk_connector, 1),
+        "mapped": not walk_connection_unverified,
+        "reason": None if not walk_connection_unverified else
+        "Khoảng cách nối gần nhất chỉ là ước tính; đoạn chưa có lối đi bộ OSM không được vẽ",
+    }
     return {
         "ok": ok, "kind": c.kind, "name": c.name, "lat": c.lat, "lon": c.lon, "way_id": way_id,
         "tier": tier, "verified": ok and tier <= 1,
         "badges": _badges(checks, tier, legality_status),
-        "walk": {"meters": round(c.walk_m), "minutes": max(1, round(walk_min)) if c.walk_m > 20 else 0},
+        "walk": {"meters": round(c.walk_m), "minutes": max(1, round(walk_min)) if c.walk_m > 20 else 0,
+                 "connection": walk_connection},
         "route_in": route_output, "fit": checks["fit"], "way_out": way_out_output,
         "flood": flood, "legality": checks["legality"], "failure_codes": list(dict.fromkeys(failure_codes)),
         "fail_reasons": reasons_fail, "unverified_reasons": unverified, "lot": c.lot, "_c": c,
@@ -856,8 +947,8 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
                 edge_ids = _pred_edge_ids(pred, node)[::-1]
                 access_ways = list(c.data.get("access_way_ids", []))
                 way_ids = [g.edges[idx].way_id for idx in edge_ids] + access_ways
-                return {"strict": strict, "meters": round(dist[node] + c.data.get("entrance_d", 0)),
-                        "geometry": _coords(g, nodes) + [[c.lon, c.lat]], "flood": None,
+                return {"strict": False, "meters": round(dist[node] + c.data.get("entrance_d", 0)),
+                        "geometry": _coords(g, nodes), "flood": None,
                         "edge_ids": edge_ids, "way_ids": way_ids}
             continue
         edge = g.edges[c.edge_idx]
@@ -881,7 +972,7 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
 def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route) -> dict:
     if route is None:
         return {"mode": "none", "text": "Không vào được nên không xét đường ra", "strict": False,
-                "edge_ids": [], "way_ids": []}
+                "turn_verified": False, "edge_ids": [], "way_ids": []}
     for strict in (True, False):
         dist, pred = ext[strict]
         if c.kind == "lot":
@@ -890,9 +981,10 @@ def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route
                 edge_ids = _pred_edge_ids(pred, node)
                 access_ways = list(c.data.get("access_way_ids", []))
                 way_ids = access_ways + [g.edges[idx].way_id for idx in edge_ids]
-                return {"mode": "lot", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                        "text": "Quay đầu trong bãi rồi ra theo đường vào",
-                        "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, node)),
+                return {"mode": "lot", "strict": False, "turn_verified": False, "reverse_m": 0,
+                        "tight_exit": False,
+                        "text": "Lối vào, vùng quay đầu và lối ra của bãi chưa được xác minh bằng hình học",
+                        "geometry": _coords(g, _path_nodes(pred, node)),
                         "edge_ids": edge_ids, "way_ids": way_ids}
             continue
         edge = g.edges[c.edge_idx]
@@ -900,42 +992,59 @@ def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route
         a, b = (edge.u, edge.v) if route.get("side") == "u" else (edge.v, edge.u)
         s_a = c.offset if route.get("side") == "u" else edge.length - c.offset
         forward_ok = (way.oneway == 0) or (way.oneway == 1 and a == edge.u) or (way.oneway == -1 and a == edge.v)
-        if wrs[way.id].lo >= three_point_width(p.id) and a in dist:
-            edge_ids = [edge.idx] + _pred_edge_ids(pred, a)
-            return {"mode": "turn_here", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                    "text": f"Quay đầu tại chỗ (đường rộng ≥ {wrs[way.id].lo:.1f} m)",
-                    "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, a)),
-                    "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
         if forward_ok and b in dist and pred.get(b, (None,))[0] != edge.idx:
             edge_ids = [edge.idx] + _pred_edge_ids(pred, b)
-            return {"mode": "through", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                    "text": "Đi thẳng ra đường lớn, không phải lùi",
+            return {"mode": "through", "strict": strict,
+                    "reverse_m": 0, "tight_exit": False,
+                    "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
                     "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, b)),
                     "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
-        if a in dist:
-            path = _path_nodes(pred, a)
-            rev = s_a
-            turn_at = None
-            for i, node in enumerate(path):
-                usable = [wid for wid in g.node_ways.get(node, ()) if fit.get(wid) in ("fits", "tight")]
-                if len(usable) >= 3 or (usable and any(g.ways[x].kind == "main" for x in usable) and i > 0):
-                    turn_at = i
-                    break
-                if i + 1 < len(path):
-                    rev += g.edges[pred[node][0]].length
-            if turn_at is None:
-                turn_at = len(path) - 1
-            if rev > 2 * REVERSE_LIMIT_M:
-                continue
-            tight = rev > REVERSE_LIMIT_M
-            txt = (f"Lùi {rev:.0f} m rồi quay đầu tại ngã ba" if not tight
-                   else f"Phải lùi {rev:.0f} m (quá giới hạn {REVERSE_LIMIT_M:.0f} m) mới quay đầu được")
+        if (way.oneway == 0 and wrs[way.id].decisive_clearance
+                and wrs[way.id].lo >= three_point_width(p.id) and a in dist):
             edge_ids = [edge.idx] + _pred_edge_ids(pred, a)
-            return {"mode": "reverse", "strict": strict, "reverse_m": round(rev), "tight_exit": tight,
-                    "text": txt, "geometry": [[c.lon, c.lat]] + _coords(g, path),
+            return {"mode": "turn_here", "strict": False, "turn_verified": False,
+                    "reverse_m": 0, "tight_exit": False,
+                    "text": "Bề rộng gợi ý có thể quay đầu; chưa có bằng chứng vùng quét quay xe",
+                    "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, a)),
                     "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
-    return {"mode": "none", "strict": False,
-            "text": "Không có đường ra phù hợp (hẻm cụt hoặc quá giới hạn lùi)",
+        if way.oneway != 0 or a not in dist:
+            continue
+        path = _path_nodes(pred, a)
+        reverse_m = s_a
+        turn_at = None
+        reversible = True
+        for index, node in enumerate(path):
+            usable = [
+                (edge_idx, neighbor) for edge_idx, neighbor in g.drive_adj.get(node, ())
+                if fit.get(g.edges[edge_idx].way_id) in ("fits", "tight")
+            ]
+            neighbors = {neighbor for _, neighbor in usable}
+            has_main = any(g.ways[g.edges[edge_idx].way_id].kind == "main"
+                           for edge_idx, _ in usable)
+            if len(neighbors) >= 3 or (has_main and len(neighbors) >= 2 and index > 0):
+                turn_at = index
+                break
+            if index + 1 < len(path):
+                reverse_edge = g.edges[pred[node][0]]
+                if g.ways[reverse_edge.way_id].oneway != 0:
+                    reversible = False
+                    break
+                reverse_m += reverse_edge.length
+        if turn_at is None and reversible:
+            turn_at = len(path) - 1  # path ends at a main-network source node
+        if not reversible or turn_at is None or reverse_m > 2 * REVERSE_LIMIT_M:
+            continue
+        tight = reverse_m > REVERSE_LIMIT_M
+        text = (f"Lùi {reverse_m:.0f} m đến nút giao; vùng quay đầu chưa được xác minh"
+                if not tight else
+                f"Phải lùi {reverse_m:.0f} m (quá giới hạn {REVERSE_LIMIT_M:.0f} m); vùng quay đầu chưa được xác minh")
+        edge_ids = [edge.idx] + _pred_edge_ids(pred, a)
+        return {"mode": "reverse", "strict": False, "turn_verified": False,
+                "reverse_m": round(reverse_m), "tight_exit": tight,
+                "text": text, "geometry": [[c.lon, c.lat]] + _coords(g, path),
+                "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
+    return {"mode": "none", "strict": False, "turn_verified": False,
+            "text": "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
             "edge_ids": [], "way_ids": []}
 
 
@@ -944,42 +1053,83 @@ def _badges(checks, tier, lstatus) -> list[str]:
     fc = checks["fit"]["class"]
     out.append({"fits": "Vừa xe", "tight": "Chật", "unknown": "Chưa rõ bề rộng", "lot": "Bãi đỗ"}.get(fc, fc))
     wo = checks["way_out"]
-    out.append({"through": "Đi thẳng ra", "turn_here": "Quay đầu tại chỗ", "lot": "Quay đầu trong bãi",
-                "reverse": f"Lùi {wo.get('reverse_m', 0)} m"}.get(wo["mode"], "Không có đường ra"))
+    way_out_label = {
+        "through": "Đi thẳng ra",
+        "turn_here": "Quay đầu chưa xác minh",
+        "lot": "Lối ra bãi chưa xác minh",
+    }.get(wo["mode"])
+    if way_out_label is None:
+        way_out_label = (f"Lùi {wo.get('reverse_m', 0)} m; quay đầu chưa xác minh"
+                         if wo["mode"] == "reverse" else "Không có đường ra")
+    if wo["mode"] == "through" and not wo.get("route_verified", False):
+        way_out_label = "Lối ra chưa xác minh"
+    out.append(way_out_label)
     out.append({"passable": "Không ngập", "risky": "Có thể ngập", "blocked": "Ngập"}[checks["flood"]["stay"]["status"]])
     if lstatus == "Unverified":
-        codes = {r["code"] for r in checks["legality"]["rules"] if r["status"] == "Unverified"}
-        out.append("Chưa rõ đủ 2 làn xe" if "lane-unknown" in codes else "Chưa rõ biển báo")
+        codes = {rule["code"] for rule in checks["legality"]["rules"] if rule["status"] == "Unverified"}
+        labels = (
+            ("lane-unknown", "Chưa rõ số làn"),
+            ("junction-5m", "Chưa rõ mép nút giao"),
+            ("no-rule", "Chưa rõ biển báo"),
+            ("main-road-signs", "Chưa rõ biển báo"),
+        )
+        out.append(next((label for code, label in labels if code in codes), "Chưa xác minh luật"))
     else:
         out.append({"Permitted": "Được phép", "Restricted": "Hạn chế theo luật", "Prohibited": "Cấm"}[lstatus])
     return out
 
 
-def _walk_geometry(g, c: Candidate, wpred, dlat, dlon):
-    if c.kind == "door":
-        return [[c.lon, c.lat], [dlon, dlat]]
-    if c.kind == "lot":
-        n, _ = g.nearest_node(c.lat, c.lon, lambda x: x in wpred)
-        return [[c.lon, c.lat]] + (_coords(g, _path_nodes(wpred, n)) if n else []) + [[dlon, dlat]]
-    e = g.edges[c.edge_idx]
-    best = min((e.u, e.v), key=lambda n: (0 if n in wpred else 1, 0))
-    return [[c.lon, c.lat]] + _coords(g, _path_nodes(wpred, best)) + [[dlon, dlat]]
+def _walk_geometry(g, c: Candidate, wpred, wdist, dest_edge, dest_offset, dlat, dlon):
+    if dest_edge is None or "walk_edge_idx" not in c.data:
+        return []
+    start_edge = g.edges[c.data["walk_edge_idx"]]
+    start_offset = c.data["walk_offset"]
+    starts = [
+        (wdist[node] + distance, node)
+        for node, distance in (
+            (start_edge.u, start_offset),
+            (start_edge.v, start_edge.length - start_offset),
+        )
+        if node in wdist
+    ]
+    if not starts:
+        return []
+    _, node = min(starts)
+    path_nodes = _path_nodes(wpred, node)
+    start_point = _interp(g, start_edge.u, start_edge.v, start_offset, start_edge.length)
+    end_point = _interp(g, dest_edge.u, dest_edge.v, dest_offset, dest_edge.length)
+    coords = [[start_point[1], start_point[0]]]
+    coords.extend(_coords(g, path_nodes))
+    coords.append([end_point[1], end_point[0]])
+    if c.data.get("walk_connector_m", 0) <= WALK_SNAP_M:
+        coords[0] = [c.lon, c.lat]
+    if c.data.get("walk_destination_connector_m", 0) <= WALK_SNAP_M:
+        coords[-1] = [dlon, dlat]
+    return [point for index, point in enumerate(coords) if index == 0 or point != coords[index - 1]]
 
 
-def _walk_wade(g: AreaGraph, fps, c: Candidate, wpred, arrive: datetime, rain: list[dict],
+def _walk_wade(g: AreaGraph, fps, c: Candidate, wpred, wdist, arrive: datetime, rain: list[dict],
                snapshot: FloodSnapshot, safe_depth: float):
     worst = None
-    if c.kind == "door":
+    if c.kind == "door" or "walk_edge_idx" not in c.data:
         return None
-    start = g.nearest_node(c.lat, c.lon, lambda x: x in wpred)[0] if c.kind == "lot" else g.edges[c.edge_idx].u
-    node = start
+    edge = g.edges[c.data["walk_edge_idx"]]
+    offset = c.data["walk_offset"]
+    starts = [
+        (wdist[node] + distance, node)
+        for node, distance in ((edge.u, offset), (edge.v, edge.length - offset))
+        if node in wdist
+    ]
+    if not starts:
+        return None
+    node = min(starts)[1]
     while node in wpred:
-        eidx, node = wpred[node]
-        wid = g.edges[eidx].way_id
-        assessment = snapshot.assess(fps.get(wid), arrive, safe_depth, g.display_name(wid))
+        edge_idx, node = wpred[node]
+        way_id = g.edges[edge_idx].way_id
+        assessment = snapshot.assess(fps.get(way_id), arrive, safe_depth, g.display_name(way_id))
         depth = assessment.depth
         if depth and depth.hi > WALK_WADE_M and (worst is None or depth.hi > worst["hi"]):
-            worst = {"lo": round(depth.lo, 2), "hi": round(depth.hi, 2), "street": g.display_name(wid),
+            worst = {"lo": round(depth.lo, 2), "hi": round(depth.hi, 2), "street": g.display_name(way_id),
                      "label": "Lội nước"}
     return worst
 

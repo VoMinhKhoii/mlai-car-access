@@ -17,6 +17,15 @@ from app.vehicles import get_profile
 
 VN = timezone(timedelta(hours=7))
 T0 = datetime(2026, 10, 11, 8, 0, tzinfo=VN)
+COMPLETE_COVERAGE = {
+    "cut_count": 5, "start_covered": True, "end_covered": True,
+    "max_spacing_m": 5.0, "truncated": False, "complete": True, "reason": None,
+}
+
+
+def measured_width(lo, hi):
+    return WidthRange(lo, hi, "Measured", width_basis="measured_clear_width",
+                      coverage=COMPLETE_COVERAGE, decisive_clearance=True)
 
 
 def make_tiny_graph():
@@ -61,8 +70,8 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
         self.graph = make_tiny_graph()
         self.vehicle = get_profile("toyota-vios")
         self.wrs = {
-            1: WidthRange(10.0, 12.0, "measured"),
-            2: WidthRange(3.5, 4.0, "measured"),
+            1: measured_width(10.0, 12.0),
+            2: measured_width(3.5, 4.0),
         }
         self.fit = {1: "fits", 2: "fits"}
         self.fit_notes = {}
@@ -120,17 +129,20 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
 
     def test_live_timing_predicate_requires_known_route_stop_and_exit(self):
         reachable, _ = self._networks()
+        self.paid = {1: {"fee_note": "fixture"}}
         candidate = Candidate(
+            "street", 10.7705, 106.690, "Đường Lớn", 1, edge_idx=0, offset=50.0, walk_m=20)
+        lot = Candidate(
             "lot", 10.772, 106.690, "Bãi thử", None, walk_m=20, entrance=2,
             lot={"name": "Bãi thử", "source_label": "Fixture"},
             data={"entrance_d": 0.0, "access_way_ids": [2]},
         )
         fresh_dry = FloodSnapshot([], reports=[{
-            "street": "Hẻm Nhỏ", "observed_at": (T0 - timedelta(minutes=5)).isoformat(),
+            "street": "Đường Lớn", "observed_at": (T0 - timedelta(minutes=5)).isoformat(),
             "depth_cm": 0.0, "source": "camera",
         }])
         stale_positive = FloodSnapshot([], reports=[{
-            "street": "Hẻm Nhỏ", "observed_at": (T0 - timedelta(hours=3)).isoformat(),
+            "street": "Đường Lớn", "observed_at": (T0 - timedelta(hours=3)).isoformat(),
             "depth_cm": 40.0, "source": "camera",
         }])
         self.assertTrue(_candidate_timing_qualified(
@@ -138,6 +150,10 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
             [T0], reachable, reachable, [T0], [T0]))
         self.assertFalse(_candidate_timing_qualified(
             candidate, self._context(snapshot=stale_positive), T0, T0 + timedelta(minutes=15),
+            [T0], reachable, reachable, [T0], [T0]))
+        # A lot's entrance, turnaround and exit geometry is unproven, so it never qualifies a timing slot.
+        self.assertFalse(_candidate_timing_qualified(
+            lot, self._context(snapshot=fresh_dry), T0, T0 + timedelta(minutes=15),
             [T0], reachable, reachable, [T0], [T0]))
 
     def test_timing_gate_requires_no_chosen_stop_and_flood_failure_code(self):
@@ -240,7 +256,7 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
             after["or_after_at"], (requested_depart + timedelta(minutes=30)).isoformat())
 
     def test_evaluate_contract_classifies_exit_flood_and_populates_leg_floods(self):
-        self.wrs[2] = WidthRange(6.0, 7.0, "measured")
+        self.wrs[2] = measured_width(6.0, 7.0)
         reachable, unreachable = self._networks()
         candidate = Candidate(
             "street", 10.7715, 106.690, "Hẻm Nhỏ", 2, edge_idx=2, offset=55.0,
@@ -267,7 +283,7 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
         self.assertFalse(result["way_out"]["available"])
 
     def test_evaluate_reuses_legality_for_same_candidate_and_calendar_window(self):
-        self.wrs[2] = WidthRange(6.0, 7.0, "measured")
+        self.wrs[2] = measured_width(6.0, 7.0)
         reachable, _ = self._networks()
         candidate = Candidate(
             "street", 10.7715, 106.690, "Hẻm Nhỏ", 2, edge_idx=2, offset=55.0,
@@ -285,7 +301,7 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
         self.assertEqual(legality.call_count, 1)
 
     def test_evaluate_arrival_block_and_no_fit_do_not_fabricate_exit_flood(self):
-        self.wrs[2] = WidthRange(6.0, 7.0, "measured")
+        self.wrs[2] = measured_width(6.0, 7.0)
         reachable, unreachable = self._networks()
         candidate = Candidate(
             "street", 10.7715, 106.690, "Hẻm Nhỏ", 2, edge_idx=2, offset=55.0,

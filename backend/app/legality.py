@@ -61,10 +61,14 @@ def _osm_parking_tags(w: Way, intent: str) -> list[StopRule]:
     return out
 
 
-def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: float, dist_to_junction: float,
-                       intent: str, when: datetime, paid_street: dict | None = None) -> tuple[str, list[StopRule]]:
+def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: float,
+                       dist_to_junction: float | None, intent: str, when: datetime,
+                       paid_street: dict | None = None) -> tuple[str, list[StopRule]]:
     rules: list[StopRule] = []
-    if dist_to_junction < 5.0:
+    if dist_to_junction is None:
+        rules.append(StopRule("junction-5m", "Unverified",
+                              "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m", LAW))
+    elif dist_to_junction < 5.0:
         rules.append(StopRule("junction-5m", "Prohibited", "Trong phạm vi 5 m tính từ mép đường giao nhau", LAW))
     for nid, tags in g.node_tags.items():
         hw = tags.get("highway")
@@ -86,8 +90,11 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
         rules.append(StopRule("expressway", "Prohibited", "Đường trục chính tốc độ cao, không dừng đỗ tùy tiện", LAW))
     rules += _sign_rules(g, w, lat, lon, intent, when) + _osm_parking_tags(w, intent)
 
-    # Single-lane roadway (most hẻm): Park is strict, Pickup/Drop-off is Restricted (Q7).
-    if wr.hi < TWO_LANE_MIN_M:
+    # A measured, complete clear-width range is required to infer legal lane count.
+    if not wr.decisive_clearance:
+        rules.append(StopRule("lane-unknown", "Unverified",
+                              "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới", LAW))
+    elif wr.hi < TWO_LANE_MIN_M:
         if intent == "park":
             rules.append(StopRule("single-lane", "Prohibited",
                                   "Phần đường chỉ đủ một làn xe cơ giới: không được đỗ", LAW))
@@ -106,14 +113,16 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
         rules.append(StopRule("main-road-signs", "Unverified",
                               "Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này", "Dữ liệu biển báo chưa đầy đủ"))
 
-    status = max((r.status for r in rules), key=lambda s: ORDER[s], default="Permitted")
+    status = max((rule.status for rule in rules), key=lambda value: ORDER[value], default="Permitted")
     if status == "Permitted" and not rules:
-        rules.append(StopRule("no-rule", "Permitted", "Không có quy định cấm dừng/đỗ được biết tại vị trí này", LAW))
+        status = "Unverified"
+        rules.append(StopRule("no-rule", "Unverified",
+                              "Chưa có dữ liệu biển báo đầy đủ tại vị trí này", "Dữ liệu biển báo chưa đầy đủ"))
     return status, rules
 
 
 def legality_over_window(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: float,
-                         dist_to_junction: float, intent: str, arrive: datetime, depart: datetime,
+                         dist_to_junction: float | None, intent: str, arrive: datetime, depart: datetime,
                          paid_street: dict | None = None) -> tuple[str, list[StopRule]]:
     """Evaluate the full Dwell Window, including every midnight where parity signs change."""
     times = {arrive, depart}

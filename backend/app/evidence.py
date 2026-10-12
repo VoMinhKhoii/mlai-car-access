@@ -8,9 +8,11 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import re
 from dataclasses import dataclass, field
 from datetime import date
+from pathlib import Path
 
 from . import flags
 from .config import DATA, STORE
@@ -20,6 +22,10 @@ TIERS = ["Measured", "Official", "Observed", "Declared", "Inferred"]
 TIER_VI = {"Measured": "Đo thực tế", "Official": "Số liệu chính thức", "Observed": "Đã quan sát",
            "Declared": "Tin rao / tự khai", "Inferred": "Suy luận"}
 OPEN_HI = 40.0
+WIDTH_BASES = frozenset({
+    "measured_clear_width", "observed_clear_width", "parcel_gap_estimate",
+    "road_width_estimate", "declared_width", "inferred", "unknown",
+})
 
 LISTINGS_FILE = DATA / "processed" / "listings_evidence_binhthanh.json"
 FIELD_FILE = DATA / "field" / "measurements.csv"
@@ -35,6 +41,11 @@ CONFIRM_FILE = STORE / "confirmations.jsonl"
 BLOCKAGE_FILE = STORE / "blockages.jsonl"
 
 
+def _empty_coverage(reason: str | None = None) -> dict:
+    return {"cut_count": 0, "start_covered": False, "end_covered": False,
+            "max_spacing_m": None, "truncated": False, "complete": False, "reason": reason}
+
+
 @dataclass
 class Bound:
     lo: float
@@ -44,13 +55,27 @@ class Bound:
     detail: str
     observed_on: str = ""
     url: str = ""
-    feature: str = ""  # AI feature flag that produced this bound, if any
+    feature: str = ""
+    width_basis: str | None = None
+    uncertainty_m: float | None = None
+    coverage: dict | None = None
+
+    def __post_init__(self) -> None:
+        if self.width_basis is None:
+            self.width_basis = {
+                "Measured": "measured_clear_width",
+                "Official": "parcel_gap_estimate",
+                "Observed": "observed_clear_width",
+                "Declared": "declared_width",
+                "Inferred": "inferred",
+            }.get(self.tier, "unknown")
 
     def to_json(self) -> dict:
         return {"lo": round(self.lo, 2), "hi": None if self.hi >= OPEN_HI else round(self.hi, 2),
                 "tier": self.tier, "tier_vi": TIER_VI[self.tier], "source": self.source,
                 "detail": self.detail, "observed_on": self.observed_on, "url": self.url,
-                "ai_feature": self.feature or None}
+                "ai_feature": self.feature or None, "width_basis": self.width_basis,
+                "uncertainty_m": self.uncertainty_m, "coverage": self.coverage}
 
 
 @dataclass
@@ -62,6 +87,9 @@ class WidthRange:
     review: bool = False
     overruled: list[Bound] = field(default_factory=list)
     way_out_claims: list[Bound] = field(default_factory=list)
+    width_basis: str = "unknown"
+    coverage: dict = field(default_factory=_empty_coverage)
+    decisive_clearance: bool = False
 
     @property
     def label(self) -> str:
@@ -83,38 +111,87 @@ class WidthRange:
                 "label": self.label, "top_tier": self.top_tier, "review": self.review,
                 "evidence": [b.to_json() for b in self.evidence],
                 "overruled": [b.to_json() for b in self.overruled],
-                "way_out_claims": [b.to_json() for b in self.way_out_claims]}
+                "way_out_claims": [b.to_json() for b in self.way_out_claims],
+                "width_basis": self.width_basis, "coverage": self.coverage,
+                "decisive_clearance": self.decisive_clearance}
 
 
-def _combine(bounds: list[Bound]) -> tuple[float, float, str | None, bool, list[Bound]]:
+
+def _combine(bounds: list[Bound]) -> tuple[float, float, str | None, bool, list[Bound], list[Bound]]:
     if not bounds:
-        return 0.5, OPEN_HI, None, False, []
+        return 0.5, OPEN_HI, None, False, [], []
     review = False
     overruled: list[Bound] = []
     current: tuple[float, float] | None = None
     top = None
+    active: list[Bound] = []
     for tier in TIERS:
-        tb = [b for b in bounds if b.tier == tier]
+        tb = [bound for bound in bounds if bound.tier == tier]
         if not tb:
             continue
-        lo, hi = max(b.lo for b in tb), min(b.hi for b in tb)
+        lo, hi = max(bound.lo for bound in tb), min(bound.hi for bound in tb)
         if lo > hi:  # conflict inside one tier: flag it and keep the safe (wider) range
             review = True
-            lo, hi = min(b.lo for b in tb), max(b.hi for b in tb)
+            lo, hi = min(bound.lo for bound in tb), max(bound.hi for bound in tb)
         if current is None:
             current, top = (lo, hi), tier
+            active = list(tb)
             continue
         cand = (max(current[0], lo), min(current[1], hi))
         if cand[0] <= cand[1]:
-            current = cand
+            if cand != current:
+                current = cand
+                active.extend(tb)
         else:
+            review = True  # a lower tier conflicts with the range set by stronger evidence
             overruled.extend(tb)
-    return current[0], current[1], top, review, overruled
+    return current[0], current[1], top, review, overruled, active
+
+
+def _width_metadata(bounds: list[Bound], review: bool) -> tuple[str, dict, bool]:
+    if not bounds:
+        return "unknown", _empty_coverage("Không có bằng chứng bề rộng"), False
+    rank = {"measured_clear_width": 0, "observed_clear_width": 1, "parcel_gap_estimate": 2,
+            "road_width_estimate": 3, "declared_width": 4, "inferred": 5, "unknown": 6}
+    basis = max((bound.width_basis for bound in bounds), key=lambda value: rank.get(value, 6))
+    coverages = [bound.coverage for bound in bounds if bound.coverage]
+    missing_coverage = len(coverages) != len(bounds)
+    if not coverages:
+        coverage = _empty_coverage("Không có dữ liệu phủ theo chiều dài")
+    else:
+        complete = (not missing_coverage
+                    and all(item.get("complete", False) for item in coverages)
+                    and all((_num(item.get("cut_count")) or 0) > 0
+                            and item.get("start_covered", False) and item.get("end_covered", False)
+                            and not item.get("truncated", False)
+                            and (_num(item.get("max_spacing_m")) or float("inf")) <= 5.1
+                            for item in coverages))
+        coverage = {
+            "cut_count": sum(int(item.get("cut_count", 0)) for item in coverages),
+            "start_covered": not missing_coverage and all(item.get("start_covered", False) for item in coverages),
+            "end_covered": not missing_coverage and all(item.get("end_covered", False) for item in coverages),
+            "max_spacing_m": max((item.get("max_spacing_m") or 0.0 for item in coverages), default=0.0) or None,
+            "truncated": any(item.get("truncated", False) for item in coverages),
+            "complete": complete,
+            "reason": (next((item.get("reason") for item in coverages if item.get("reason")), None)
+                       or ("Bằng chứng thiếu metadata phủ theo chiều dài" if missing_coverage else None)),
+        }
+    decisive_basis = all(bound.width_basis in ("measured_clear_width", "observed_clear_width")
+                         for bound in bounds)
+    decisive_uncertainty = all(bound.uncertainty_m is not None
+                               and math.isfinite(bound.uncertainty_m)
+                               and bound.uncertainty_m >= 0 for bound in bounds)
+    decisive_clearance = (
+        not review and decisive_basis and decisive_uncertainty and coverage["complete"]
+        and coverage["start_covered"] and coverage["end_covered"] and not coverage["truncated"]
+    )
+    return basis, coverage, decisive_clearance
 
 
 def _num(v):
     try:
-        return float(str(v).replace(",", "."))
+        value = float(str(v).replace(",", "."))
+        return value if math.isfinite(value) else None
     except (TypeError, ValueError):
         return None
 
@@ -142,16 +219,20 @@ def _osm_bounds(w: Way) -> list[Bound]:
     # Observed: explicit car tags (mostly Grab's mapping team in HCMC) and width tags.
     car = t.get("motorcar") or t.get("motor_vehicle")
     if car in ("yes", "destination", "permissive", "designated"):
-        out.append(Bound(2.2, OPEN_HI, "Observed", "OSM: ô tô được vào", f"motorcar={car}", url=osm_url))
+        out.append(Bound(2.2, OPEN_HI, "Observed", "OSM: ô tô được vào", f"motorcar={car}",
+                         url=osm_url, width_basis="unknown"))
     elif car == "no":
-        out.append(Bound(0.5, 2.6, "Observed", "OSM: cấm/không vào được ô tô", "motorcar=no", url=osm_url))
+        out.append(Bound(0.5, 2.6, "Observed", "OSM: cấm/không vào được ô tô", "motorcar=no",
+                         url=osm_url, width_basis="unknown"))
     for key, pad in (("width", 0.3), ("est_width", 0.5)):
         v = _num(t.get(key))
-        if v:
-            out.append(Bound(max(0.5, v - pad), v + pad, "Observed", f"OSM {key}", f"{key}={t[key]}", url=osm_url))
+        if v and v > 0:
+            out.append(Bound(max(0.5, v - pad), v + pad, "Observed", f"OSM {key}", f"{key}={t[key]}",
+                             url=osm_url, width_basis="road_width_estimate", uncertainty_m=pad))
     mw = _num(t.get("maxwidth"))
-    if mw:
-        out.append(Bound(0.5, mw + 0.2, "Observed", "OSM biển hạn chế chiều rộng", f"maxwidth={t['maxwidth']}", url=osm_url))
+    if mw and mw > 0:
+        out.append(Bound(0.5, mw + 0.2, "Observed", "OSM biển hạn chế chiều rộng",
+                         f"maxwidth={t['maxwidth']}", url=osm_url, width_basis="declared_width"))
     return out
 
 
@@ -164,15 +245,31 @@ def _norm_alley(name: str) -> str:
 class EvidenceStore:
     """External evidence keyed by OSM way id or by normalised alley name."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, _exclude_measured_way_ids=frozenset(),
+                 _exclude_measured_names=frozenset(), _field_file: Path = FIELD_FILE) -> None:
         self.by_way: dict[int, list[Bound]] = {}
         self.by_name: dict[str, list[Bound]] = {}
         self.way_out_by_way: dict[int, list[Bound]] = {}
+        self.review_by_way: set[int] = set()
         self.live: dict[str, dict] = {}
         self.version = 0
+        self._exclude_measured_way_ids = frozenset(int(value) for value in _exclude_measured_way_ids)
+        self._exclude_measured_names = frozenset(
+            normalized for value in _exclude_measured_names if (normalized := _norm_alley(value))
+        )
+        self._field_file = _field_file
         self.reload()
 
+    @classmethod
+    def evaluation_snapshot(cls, *, exclude_measured_way_ids=(), exclude_normalized_names=(),
+                            field_file: Path = FIELD_FILE) -> EvidenceStore:
+        """Create an isolated evidence index with held-out measured rows removed before indexing."""
+        return cls(_exclude_measured_way_ids=exclude_measured_way_ids,
+                   _exclude_measured_names=exclude_normalized_names, _field_file=field_file)
+
     def _add(self, bound: Bound, way_id=None, name=None) -> None:
+        if bound.width_basis not in WIDTH_BASES:
+            bound.width_basis = "unknown"
         if way_id:
             self.by_way.setdefault(int(way_id), []).append(bound)
         elif name:
@@ -181,13 +278,16 @@ class EvidenceStore:
     def reload(self) -> None:
         self.version += 1
         self.by_way.clear(), self.by_name.clear(), self.way_out_by_way.clear()
+        self.review_by_way.clear()
         self._load_listings()
         self._load_live()
         self._load_gaps()
         self._load_fire_list()
-        self._load_csv(FIELD_FILE, "Measured", "Nhóm đo bằng thước", pad=0.1)
-        self._load_csv(PARCEL_FILE, "Official", "Khoảng cách thửa đất (cổng quy hoạch TP.HCM)", pad=None)
+        self._load_csv(self._field_file, "Measured", "Nhóm đo bằng thước", pad=0.1)
+        self._load_csv(PARCEL_FILE, "Inferred", "Khoảng cách thửa đất (cổng Thông tin quy hoạch TP.HCM)",
+                       pad=None, width_basis="parcel_gap_estimate")
         self._load_confirmations()
+
 
     def _load_listings(self) -> None:
         # With live crawling on, listings come only from the on-demand area builds (live.py).
@@ -210,31 +310,82 @@ class EvidenceStore:
             for ph in area["photos"]:
                 self._add_photo(ph)
             for pc in area.get("parcels", []):
-                # usable width = parcel gap − 1 m (parcels.USABLE_MARGIN); the range spans the cuts on this way
-                ws = sorted(pc["samples"])
-                # robust ends: one bad cut must not sink or inflate an alley (20th / 80th percentile with ≥ 5 cuts)
-                lo = ws[len(ws) // 5] if len(ws) >= 5 else ws[0]
-                hi = (ws[(len(ws) * 4) // 5] if len(ws) >= 5 else ws[-1]) + 0.3
-                narrow = min(pc["cuts"], key=lambda c: c["width_m"])
-                how = (f"đo {len(ws)} mặt cắt, cách nhau 5 m" if pc.get("deep") else f"đo {len(ws)} mặt cắt")
-                detail = (f"Khoảng cách hai thửa đất đối diện trừ 1 m ({how}): hẹp nhất "
-                          f"{narrow['width_m']:.1f} m (thửa cách nhau {narrow['gap_m']:.1f} m)").replace(".", ",")
-                self._add(Bound(lo, hi, "Official", "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)", detail,
-                                url="https://thongtinquyhoach.hochiminhcity.gov.vn/", feature="parcel_widths"), pc["way_id"])
+                if not isinstance(pc, dict):
+                    continue
+                way_id = pc.get("way_id")
+                if way_id is None:
+                    continue
+                try:
+                    way_id = int(way_id)
+                except (TypeError, ValueError):
+                    continue
+                raw_cuts, raw_samples = pc.get("cuts"), pc.get("samples")
+                invalid = not isinstance(raw_cuts, list) or not isinstance(raw_samples, list)
+                raw_cuts = raw_cuts if isinstance(raw_cuts, list) else []
+                raw_samples = raw_samples if isinstance(raw_samples, list) else []
+                invalid |= len(raw_samples) != len(raw_cuts)
+                length = _num(pc.get("segment_length_m"))
+                cuts = []
+                for cut in raw_cuts:
+                    if not isinstance(cut, dict):
+                        invalid = True
+                        continue
+                    width, gap = _num(cut.get("width_m")), _num(cut.get("gap_m"))
+                    at_m = _num(cut.get("at_m"))
+                    if at_m is None:
+                        invalid = True
+                    if (width is None or gap is None or width <= 0 or gap <= 0 or width > gap
+                            or (at_m is not None and (at_m < 0 or (length is not None and at_m > length + 0.5)))):
+                        invalid = True
+                        continue
+                    cuts.append((cut, width, at_m))
+                sample_values = [_num(value) for value in raw_samples]
+                if any(value is None for value in sample_values):
+                    invalid = True
+                elif len(sample_values) == len(cuts) and any(
+                        abs(value - item[1]) > 0.02 for value, item in zip(sample_values, cuts)):
+                    invalid = True
+                if not cuts:
+                    if invalid:
+                        self.review_by_way.add(way_id)
+                    continue
+                positions = sorted(item[2] for item in cuts if item[2] is not None)
+                start = bool(positions and positions[0] <= 0.5)
+                end = bool(length is not None and length > 0 and positions
+                           and length - positions[-1] <= 0.5)
+                spacing = max((b - a for a, b in zip(positions, positions[1:])), default=None)
+                truncated = str(pc.get("truncated", "")).lower() in ("1", "true", "yes")
+                complete = bool(length is not None and length > 0 and len(positions) == len(cuts)
+                                and start and end and spacing is not None and spacing <= 5.1 and not truncated)
+                coverage = {"cut_count": len(cuts), "start_covered": start, "end_covered": end,
+                            "max_spacing_m": round(spacing, 1) if spacing is not None else None,
+                            "truncated": truncated, "complete": complete,
+                            "reason": None if complete else "Các mặt cắt chưa phủ đủ hai đầu và toàn bộ đoạn đường"}
+                narrow, width = min(cuts, key=lambda item: item[1])[0], min(item[1] for item in cuts)
+                how = f"đo {len(cuts)} mặt cắt" + (" mỗi ≤5 m" if pc.get("deep") else "")
+                detail = (f"Khoảng trống thửa đất ước tính ({how}): hẹp nhất "
+                          f"{width:.1f} m (thửa cách nhau {narrow['gap_m']:.1f} m)").replace(".", ",")
+                self._add(Bound(width, width, "Inferred", "Khoảng trống hình học giữa hai thửa đất",
+                                detail, url="https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                                feature="parcel_widths", width_basis="parcel_gap_estimate", coverage=coverage),
+                          way_id)
+                if invalid:
+                    self.review_by_way.add(way_id)
 
     def _add_photo(self, ph: dict) -> None:
         w = _num(ph.get("width_m"))
-        if not w or not ph.get("way_id") or ph.get("status") == "rejected":
+        if w is None or w <= 0 or not ph.get("way_id") or ph.get("status") == "rejected":
             return
         common = dict(observed_on=ph.get("posted_at", "")[:10], url=ph.get("image_url", ""))
         ref = ph.get("reference") or "không rõ vật tham chiếu"
         if ph.get("status") == "approved":
             self._add(Bound(max(0.5, w - 0.3), w + 0.3, "Observed", "Ảnh tin rao (đã duyệt)",
-                            f"Người duyệt xác nhận ≈{w:g} m ({ref})", **common), ph["way_id"])
+                            f"Người duyệt xác nhận ≈{w:g} m ({ref})", width_basis="observed_clear_width",
+                            uncertainty_m=0.3, **common), ph["way_id"])
         elif ph.get("gate") == "ACCEPT":
             self._add(Bound(max(0.5, w * 0.8), w * 1.2, "Inferred", "AI đọc ảnh tin rao",
                             f"AI ước lượng ≈{w:g} m từ ảnh ({ref}), chưa duyệt", feature="ai_photo_evidence",
-                            **common), ph["way_id"])
+                            width_basis="inferred", **common), ph["way_id"])
 
     def _add_listing(self, it: dict, source: str) -> None:
         way_id = it.get("osm_way_id")
@@ -292,17 +443,63 @@ class EvidenceStore:
                             f"Nhà hai bên cách nhau ≈{g['median']:.1f} m (đo {g['n']} điểm; footprint Microsoft/Google/OSM qua Overture)",
                             observed_on="2026-09", url="https://overturemaps.org", feature="building_gaps"), int(wid))
 
-    def _load_csv(self, path, tier: str, source: str, pad: float | None) -> None:
+    def _load_csv(self, path, tier: str, source: str, pad: float | None,
+                  width_basis: str | None = None) -> None:
         if not path.exists():
             return
-        for row in csv.DictReader(open(path, encoding="utf-8")):
-            w = _num(row.get("width_m"))
-            if not w:
-                continue
-            lo, hi = (w - pad, w + pad) if pad is not None else (0.5, w)
-            b = Bound(max(0.5, lo), hi, tier, source, row.get("note") or f"{w:g} m",
-                      observed_on=row.get("date", ""), url=row.get("photo_url", ""))
-            self._add(b, row.get("osm_way_id") or None, row.get("alley_name") or None)
+        with open(path, encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                raw_way_id = row.get("osm_way_id") or None
+                try:
+                    way_id = int(raw_way_id) if raw_way_id else None
+                except (TypeError, ValueError):
+                    way_id = None
+                name = row.get("alley_name") or None
+                if tier == "Measured" and (
+                    way_id in self._exclude_measured_way_ids
+                    or (name is not None and _norm_alley(name) in self._exclude_measured_names)
+                ):
+                    continue
+                w = _num(row.get("width_m"))
+                if w is None or w <= 0:
+                    continue
+                uncertainty = _num(row.get("uncertainty_m"))
+                if uncertainty is None:
+                    lo, hi = (w - pad, w + pad) if pad is not None else (0.5, w)
+                elif uncertainty < 0:
+                    continue
+                else:
+                    lo, hi = w - uncertainty, w + uncertainty
+                lo, hi = max(0.5, lo), max(0.5, hi)
+                basis = row.get("width_basis") or width_basis or {
+                    "Measured": "measured_clear_width",
+                    "Official": "parcel_gap_estimate",
+                    "Observed": "observed_clear_width",
+                    "Declared": "declared_width",
+                    "Inferred": "inferred",
+                }.get(tier, "unknown")
+                if basis not in WIDTH_BASES:
+                    basis = "unknown"
+                coverage = None
+                coverage_keys = ("cut_count", "start_covered", "end_covered", "max_spacing_m", "truncated", "complete")
+                if any(row.get(key) not in (None, "") for key in coverage_keys):
+                    count_value = _num(row.get("cut_count"))
+                    cut_count = (int(count_value) if count_value is not None and count_value >= 0
+                                 and count_value.is_integer() else 0)
+                    max_spacing = _num(row.get("max_spacing_m"))
+                    start = str(row.get("start_covered", "")).lower() in ("1", "true", "yes")
+                    end = str(row.get("end_covered", "")).lower() in ("1", "true", "yes")
+                    truncated = str(row.get("truncated", "")).lower() in ("1", "true", "yes")
+                    complete = (str(row.get("complete", "")).lower() in ("1", "true", "yes")
+                                and cut_count > 0 and start and end and max_spacing is not None
+                                and max_spacing <= 5.1 and not truncated)
+                    coverage = {"cut_count": int(cut_count), "start_covered": start, "end_covered": end,
+                                "max_spacing_m": max_spacing, "truncated": truncated, "complete": complete,
+                                "reason": None if complete else "Thiếu phủ đầy đủ hai đầu hoặc có mặt cắt thưa"}
+                bound = Bound(lo, hi, tier, source, row.get("note") or f"{w:g} m",
+                              observed_on=row.get("date", ""), url=row.get("photo_url", ""),
+                              width_basis=basis, uncertainty_m=uncertainty, coverage=coverage)
+                self._add(bound, way_id, name)
 
     def _load_confirmations(self) -> None:
         if not CONFIRM_FILE.exists():
@@ -319,7 +516,8 @@ class EvidenceStore:
             else:
                 lo, hi, d = 0.5, mirror + 0.2, f"Tài xế {c['vehicle_label']} không vào được"
             for way_id in c["way_ids"]:
-                self._add(Bound(lo, hi, "Observed", "Xác nhận sau khi đến", d, observed_on=c["date"]), way_id)
+                self._add(Bound(lo, hi, "Observed", "Xác nhận sau khi đến", d,
+                                observed_on=c["date"], width_basis="unknown"), way_id)
 
     def bounds_for(self, w: Way) -> list[Bound]:
         out = list(self.by_way.get(w.id, []))
@@ -334,13 +532,18 @@ class EvidenceStore:
 STORE_EVIDENCE = EvidenceStore()
 
 
-def width_ranges(g: AreaGraph) -> dict[int, WidthRange]:
+def width_ranges(g: AreaGraph, store: EvidenceStore | None = None) -> dict[int, WidthRange]:
+    store = store or STORE_EVIDENCE
     out = {}
-    for w in g.ways.values():
-        bounds = _osm_bounds(w) + STORE_EVIDENCE.bounds_for(w)
-        lo, hi, top, review, overruled = _combine(bounds)
-        wr = WidthRange(lo, hi, top, bounds, review, overruled, STORE_EVIDENCE.way_out_for(w.id))
-        out[w.id] = wr
+    for way in g.ways.values():
+        bounds = _osm_bounds(way) + store.bounds_for(way)
+        lo, hi, top, review, overruled, active = _combine(bounds)
+        review = review or way.id in store.review_by_way
+        basis, coverage, decisive = _width_metadata(active, review)
+        out[way.id] = WidthRange(
+            lo, hi, top, bounds, review, overruled, store.way_out_for(way.id),
+            basis, coverage, decisive,
+        )
     return out
 
 

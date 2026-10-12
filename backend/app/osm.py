@@ -125,6 +125,7 @@ class AreaGraph:
     drive_adj: dict[int, list[tuple[int, int]]] = field(default_factory=dict)
     walk_adj: dict[int, list[tuple[int, int]]] = field(default_factory=dict)
     node_ways: dict[int, set[int]] = field(default_factory=dict)
+    drive_neighbors: dict[int, set[int]] = field(default_factory=dict)
     parking: list[dict] = field(default_factory=list)
     source: str = ""
 
@@ -132,7 +133,19 @@ class AreaGraph:
         return self.nodes[n]
 
     def drive_degree(self, n: int) -> int:
-        return len({w for w in self.node_ways.get(n, ()) if self.ways[w].drivable})
+        if n in self.drive_neighbors:
+            return len(self.drive_neighbors[n])
+        neighbors = set()
+        for way_id in self.node_ways.get(n, ()):
+            way = self.ways[way_id]
+            if not way.drivable:
+                continue
+            for a, b in zip(way.nodes, way.nodes[1:]):
+                if a == n:
+                    neighbors.add(b)
+                elif b == n:
+                    neighbors.add(a)
+        return len(neighbors)
 
     def edge_coords(self, e: Edge, forward: bool = True) -> list[list[float]]:
         a, b = (e.u, e.v) if forward else (e.v, e.u)
@@ -292,6 +305,8 @@ def build_graph(lat: float, lon: float) -> AreaGraph:
             g.node_ways.setdefault(a, set()).add(w.id)
             g.node_ways.setdefault(b, set()).add(w.id)
             if w.drivable:
+                g.drive_neighbors.setdefault(a, set()).add(b)
+                g.drive_neighbors.setdefault(b, set()).add(a)
                 if w.oneway >= 0:
                     g.drive_adj.setdefault(a, []).append((e.idx, b))
                 if w.oneway <= 0:

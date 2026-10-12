@@ -43,8 +43,20 @@ The narrowest width a vehicle can actually use along an alley segment, after fix
 _Avoid_: alley width, road width, lộ giới
 
 **Width Range**:
-The current estimate of a segment's Clear Width, as a minimum and a maximum in metres set by its Evidence.
-_Avoid_: width estimate, predicted width
+The evidence-based minimum and maximum estimates for one segment; a numeric range alone does not prove usable Clear Width.
+_Avoid_: width score, verified width
+
+**Width Basis**:
+What the width value represents: physical clear width, parcel-gap estimate, road-width estimate, declared width, or an inference.
+_Avoid_: source tier, confidence
+
+**Longitudinal Coverage**:
+Whether width evidence reaches both segment endpoints, its maximum sample spacing, and whether sampling was truncated.
+_Avoid_: sample count alone
+
+**Decisive Clearance**:
+Physical measured or observed Clear Width with stated uncertainty, complete endpoint coverage, and no evidence conflict.
+_Avoid_: inferred fit, parcel width
 
 **Alley Label**:
 The familiar Vietnamese name shown for a Width Range: hẻm xe máy, hẻm ba gác, hẻm xe hơi, or ô tô tránh.
@@ -55,7 +67,7 @@ One sourced, dated observation that sets a minimum or maximum on a Width Range o
 _Avoid_: data point, signal, label
 
 **Evidence Tier**:
-How much a source is trusted, strongest first: Measured, Official, Observed, Declared, Inferred. A higher tier sets the range; lower tiers may only narrow it.
+Trust classification for evidence source, strongest first: Measured, Official, Observed, Declared, Inferred. Consistent higher-tier evidence controls the range; lower tiers may narrow it. This is distinct from Width Basis: official source provenance does not make an inferred parcel gap a measured clear width.
 _Avoid_: confidence level, weight, priority
 
 ### Vehicles
@@ -77,16 +89,16 @@ A vehicle identified through the driver's VETC account rather than chosen by han
 _Avoid_: synced car, VETC car
 
 **Stop Point**:
-A place the vehicle can get into, stop at for its Stop Intent, and get back out of; the destination door is the best possible Stop Point.
-_Avoid_: parking spot, handoff point, drop point
+A candidate location evaluated for route-in, Stop Legality, Walk Leg, and Way Out; some checks may remain explicitly unverified.
+_Avoid_: guaranteed parking spot, handoff point, drop point
 
 **Stop Intent**:
 Whether the vehicle will be left there (Park, *đỗ xe*) or stop briefly with the driver aboard to let people or goods on or off (Pickup/Drop-off, *dừng xe*). The Vietnamese terms match the legal split between đỗ and dừng.
 _Avoid_: trip type, mode
 
 **Way Out**:
-How a vehicle leaves a Stop Point using only alleys it fits: drive through, turn around, or reverse to a turning space.
-_Avoid_: exit, egress
+How a vehicle may leave a Stop Point, with direction and confidence; turns or parking-lot gates without maneuver evidence remain unverified.
+_Avoid_: guaranteed exit
 
 **Reverse Limit**:
 The longest reversing distance that still counts as a normal Way Out; a Stop Point needing more has a tight exit.
@@ -97,15 +109,15 @@ The part of the road and alley network that one specific vehicle fits.
 _Avoid_: drivable graph, car network
 
 **Walk Leg**:
-The on-foot path between a Stop Point and the destination door.
+The mapped walking path and any separate, possibly unverified connection to the Stop Point or destination door.
 _Avoid_: last mile, remaining distance
 
 **Hard Check**:
-A pass/fail test every Stop Point must pass to be offered: route in on the Fit Network, a Way Out, flood within the wading limit, Stop Legality, and a Walk Leg under its cap.
+A safety or legality evaluation for each Stop Point: fit network, Way Out, flood, Stop Legality, and Walk Leg. A candidate with missing evidence remains unverified rather than being called safe.
 _Avoid_: constraint, filter
 
 **Unverified**:
-Said of an alley or Stop Point with no evidence either way on a check; it is kept, but ranked after every verified option.
+A check whose evidence is insufficient or conflicting to establish the result; it is not a safety or permission claim and ranks after verified options.
 _Avoid_: low risk, safe, unknown risk
 
 ### Flood
