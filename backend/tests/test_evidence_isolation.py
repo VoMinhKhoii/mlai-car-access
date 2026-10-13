@@ -162,7 +162,7 @@ class BuildDeadline(unittest.TestCase):
             mock.patch.object(live, "_areas", live.LRU(32)),
             mock.patch.object(live, "_plan_cache", live.LRU(32)),
             mock.patch.object(live, "DIR", root),
-            mock.patch.object(live, "build_graph", lambda lat, lon: graph()),
+            mock.patch.object(live, "build_graph", lambda lat, lon, deadline=None: graph()),
             mock.patch.object(live, "nearest_districts", lambda lat, lon, deadline=None: []),
             mock.patch.object(live.news, "news_for", lambda streets, deadline=None: []),
             mock.patch.object(live, "_streets_near", lambda g, lat, lon, n=4: []),  # the fake graph has no coordinates
@@ -173,13 +173,34 @@ class BuildDeadline(unittest.TestCase):
             self.addCleanup(p.stop)
 
     def test_build_past_its_deadline_errors_and_publishes_nothing(self):
+        map_deadlines = []
+
+        def map_graph(lat, lon, deadline=None):
+            map_deadlines.append(deadline)
+            return graph()
+
         with mock.patch.object(live, "BUILD_DEADLINE_S", 0.0), \
+                mock.patch.object(live, "build_graph", map_graph), \
                 mock.patch.object(live.flags, "enabled", lambda name: False), \
                 mock.patch.object(live.httpx, "get", lambda *a, **k: self.fail("no request after the deadline")):
             job = new_job()
             live._run(job, 10.70, 106.60)
+        self.assertEqual(map_deadlines, [job["deadline"]])
         self.assertEqual(job["state"], "error")
         self.assertIn("hết thời hạn", job["error"])
+        self.assertFalse(live.AREAS_DIR.exists())
+
+    def test_alonhadat_expiry_is_not_swallowed_as_a_source_failure(self):
+        district = [{"region": "test", "id": "1", "name": "Test district"}]
+        with mock.patch.object(live.flags, "enabled", lambda name: False), \
+                mock.patch.object(live, "nearest_districts", return_value=district), \
+                mock.patch.object(live, "_pull", return_value=[]), \
+                mock.patch.object(live.alonhadat, "pull_district", side_effect=live.Expired("deadline")):
+            job = new_job()
+            live._run(job, 10.70, 106.60)
+
+        self.assertEqual(job["state"], "error")
+        self.assertIn("deadline", job["error"])
         self.assertFalse(live.AREAS_DIR.exists())
 
     def test_slow_parcel_portal_leaves_a_partial_area_instead_of_losing_the_build(self):

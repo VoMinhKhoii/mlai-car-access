@@ -23,9 +23,11 @@ Open http://127.0.0.1:8787 (the backend serves `frontend/dist`) and pick a **K�
 
 ### Deploying
 
-The backend is a stateful process, not a serverless function: run one `uvicorn --workers 1` behind HTTPS with persistent `VAODUOC_STORE`, `VAODUOC_CACHE` and `VAODUOC_FLAGS` directories, and serve the frontend from it (same origin). It refuses to start when `VERCEL` is set. If the frontend is hosted elsewhere, proxy `/api/**` to the backend's HTTPS origin and list the frontend origin in `APP_ORIGINS`; the operator cookie is host-only, so the proxy must keep both on one site.
+The backend is a stateful process, not a serverless function: run one `uvicorn --workers 1` with persistent `VAODUOC_STORE`, `VAODUOC_CACHE` and `VAODUOC_FLAGS` directories, and serve the frontend from it (same origin). It refuses to start when `VERCEL` is set. Terminate TLS in Uvicorn or at a reverse proxy; if the proxy supplies `X-Forwarded-*`, configure Uvicorn's `--forwarded-allow-ips` with only that proxy's exact address(es) (the default trusts loopback). Never trust forwarded headers from arbitrary clients. The trusted scheme sets the operator cookie's `Secure` attribute; the trusted client address also isolates login/report rate limits. A misconfigured forwarded-proto trust means Uvicorn sees HTTP and silently omits `Secure`, allowing the operator cookie to be sent over a plaintext downgrade. Before exposing a proxied deployment, verify the HTTPS login response's `Set-Cookie` includes `Secure`; otherwise stop and correct the proxy/Uvicorn configuration. If the frontend is hosted elsewhere, proxy `/api/**` to the backend's HTTPS origin, list the browser origin in `APP_ORIGINS`, and keep both on one site because the operator cookie is host-only.
 
-Before upgrading a running deployment, back up `VAODUOC_STORE` (reviews, approved evidence, quotas). On the first start, unreviewed legacy community lines (driver confirmations, blockages, AI flood reports) are moved to `STORE/quarantine/` and queued for review; nothing is deleted.
+Before upgrading, stop the process and back up all three persistent directories plus the exact backend/frontend release version. Upgrade backend and `frontend/dist` together. For rollback, restore a backend and frontend bundle from the same release; never expose a pre-Phase-4 backend publicly because its state-changing routes lack operator authorization. Restarting clears process-local derived-width caches. If rolling back to code with the older percentile-based width logic, invalidate generated `VAODUOC_CACHE/live/areas/*.json` area snapshots and rebuild them from preserved raw parcel cuts; do not delete raw evidence or restore stale derived snapshots. Preserve the current store backup so approved reviews and quotas can be reconciled rather than silently discarded.
+
+On first start, unreviewed legacy community lines (driver confirmations, blockages, AI flood reports) are moved to `STORE/quarantine/` and queued for review; nothing is deleted.
 
 ### Operator access
 
@@ -62,9 +64,11 @@ Operators toggle them in the **Demo** menu, or set `FLAG_<NAME>=1|0` env vars; s
 | `ai_flood_prior` | Per-street flood susceptibility from IRD history (percentile depths, alleys inherit from their flooded street) | on |
 | `ai_text_rules` | Ordinance or news text → Stop Rules and flood reports, through the ACCEPT / REVIEW / INSUFFICIENT_INFORMATION gate | off |
 | `ai_photo_evidence` | Driver photo → sign, alley width or flood depth | off |
-| `ai_camera_flood` | ~800 public HCMC traffic cameras, two frames 13 s apart → traffic and flood now; picks the large-road route from A to B (D34) | on |
+| `ai_camera_flood` | ~800 public HCMC traffic cameras; reads up to two frames ~13 s apart. If the job deadline cannot fit a second frame, traffic is unknown (one still cannot show movement); flood observations still carry the frame count. | on |
 
 When a flag is off, the engine behaves as if that source didn't exist.
+
+If persisted flag state is unreadable or invalid when loaded, every feature fails closed. After recovery, only the flag explicitly written by the operator is enabled; re-enable any other desired flags individually.
 
 ## How an answer is made
 
@@ -78,7 +82,7 @@ When a flag is off, the engine behaves as if that source didn't exist.
 
 ## Data you can add
 
-- `data/field/measurements.csv` and `data/field/egress.csv`: physical clear-width and way-out observations from the field team. Strict-fit evidence needs finite uncertainty and complete endpoint coverage; `pipelines/eval_field.py` freezes a held-out split and scores the planner against them. See `data/field/README.md`.
+- `data/field/measurements.csv` and `data/field/egress.csv`: physical clear-width and dimensioned way-out observations from the field team. `pipelines/eval_field.py` validates a frozen held-out split and scores measured width plus OSM direction; turn-space/sign observations are reported as not comparable, not verified. See `data/field/README.md`.
 - `data/official/parcel_gaps.csv`: parcel-gap estimates from the HCMC planning portal (Inferred usable-width basis; official source provenance, not a clear-width measurement).
 - `data/flood/tide_forecast.json`: update from each daily bulletin.
 - `data/cameras/hcmc_cameras.json`: camera registry; refresh with `python3 pipelines/camera_registry.py`.

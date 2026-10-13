@@ -1,7 +1,7 @@
 """One flag per AI feature (D22), switchable at runtime.
 
-Defaults come from `backend/flags.json` if present, then env vars `FLAG_<NAME>=1|0`.
-When a flag is off, the engine behaves exactly as if that AI source did not exist.
+Defaults come from the persisted flags file, with `FLAG_<NAME>=1|0` environment overrides applied on load.
+An unreadable or invalid file loads every feature disabled; after an operator recovery write, only explicitly enabled flags are on.
 """
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ AI_FEATURES = {
     },
     "ai_camera_flood": {
         "label": "AI đọc camera giao thông",
-        "detail": "~800 camera công khai của TP.HCM, hai khung hình cách 13 giây → ngập và kẹt xe lúc này; chọn tuyến đường lớn từ A đến B.",
+        "detail": "~800 camera công khai của TP.HCM; đọc tối đa hai khung hình cách ~13 giây. Một khung hình chỉ cho thấy ngập, không kết luận giao thông. Tuyến đường lớn được chọn theo Goong.",
         "default": True,
     },
     "google_lookup": {
@@ -77,15 +77,22 @@ _state: dict[str, bool] = {}
 
 
 def _load() -> None:
+    corrupt = False
     try:
         saved = read_json(FLAG_FILE, {})
+        if not isinstance(saved, dict) or any(
+                name in saved and not isinstance(saved[name], bool) for name in AI_FEATURES):
+            corrupt = True
     except CorruptState:
-        saved = {}  # an unreadable flags file falls back to the shipped defaults
+        saved, corrupt = {}, True
     for name, meta in AI_FEATURES.items():
-        value = saved.get(name, meta["default"])
-        env = os.environ.get(f"FLAG_{name.upper()}")
-        if env is not None:
-            value = env.strip() in ("1", "true", "yes", "on")
+        if corrupt:
+            value = False
+        else:
+            value = saved.get(name, meta["default"])
+            env = os.environ.get(f"FLAG_{name.upper()}")
+            if env is not None:
+                value = env.strip() in ("1", "true", "yes", "on")
         _state[name] = bool(value)
 
 

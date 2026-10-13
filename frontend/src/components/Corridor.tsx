@@ -32,7 +32,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
       <ol className="corr-list">
         {corridor.routes.map((r) => (
           <li key={r.id}>
-            <RouteRow r={r} open={r.id === selected} onSelect={() => onSelect(r.id)} />
+            <RouteRow r={r} live={corridor.live} open={r.id === selected} onSelect={() => onSelect(r.id)} />
             {r.id === selected && <RouteDetail r={r} live={corridor.live} onCamera={onCamera} />}
           </li>
         ))}
@@ -40,7 +40,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
       <CameraJobNote job={corridor.camera_job} busy={busy} />
       <p className="faint corridor-src">
         {corridor.live ? `${corridor.cameras_read} camera đọc được, ${corridor.cameras_offline} mất tín hiệu. ` : ''}
-        Nguồn: camera <a href={PORTAL} target="_blank" rel="noreferrer">Cổng thông tin giao thông TP.HCM</a>, Gemini đọc 2 khung hình cách 13 giây; tuyến Goong; ngập theo triều, mưa và lịch sử IRD.
+        Nguồn: camera <a href={PORTAL} target="_blank" rel="noreferrer">Cổng thông tin giao thông TP.HCM</a>, Gemini đọc tối đa 2 khung hình cách ~13 giây; 1 khung hình chỉ dùng để quan sát ngập, không kết luận giao thông. Tuyến Goong; ngập theo triều, mưa và lịch sử IRD.
       </p>
     </section>
   )
@@ -59,7 +59,7 @@ function CameraJobNote({ job, busy }: { job: Corridor['camera_job']; busy: boole
   )
 }
 
-function RouteRow({ r, open, onSelect }: { r: CorridorRoute; open: boolean; onSelect: () => void }) {
+function RouteRow({ r, live, open, onSelect }: { r: CorridorRoute; live: boolean; open: boolean; onSelect: () => void }) {
   const jam = r.hotspots.filter((h) => h.traffic === 'ket_cung' || h.traffic === 'un_u').length
   const unknownCoverage = !r.flood_forecast.length || r.flood_forecast.some((f) => f.knowledge !== 'known')
   const st = r.status === 'blocked' ? STATUS.blocked : unknownCoverage ? { tone: 'muted' as const, label: 'Chưa đủ dữ liệu ngập trên tuyến' } : STATUS[r.status]
@@ -71,6 +71,7 @@ function RouteRow({ r, open, onSelect }: { r: CorridorRoute; open: boolean; onSe
           {r.is_goong && <Tag tone="muted">Goong gợi ý</Tag>}
           <Tag tone={st.tone} icon={<Droplets size={13} />}>{st.label}</Tag>
           {jam > 0 && <Tag tone="bad" icon={<Cctv size={13} />}>{jam} điểm kẹt</Tag>}
+          {live && r.traffic_unknown > 0 && <Tag tone="muted" icon={<Cctv size={13} />}>{r.traffic_unknown} đoạn giao thông chưa được xác nhận thông thoáng</Tag>}
           {r.alleys.length > 0 && <Tag tone="warn">Qua hẻm</Tag>}
         </span>
       </span>
@@ -106,7 +107,7 @@ function RouteDetail({ r, live, onCamera }: { r: CorridorRoute; live: boolean; o
                 <button type="button" onClick={() => cam && onCamera(cam)}>
                   <i className={`cam-dot ${camClass(cam)}`} />
                   <span>{h.name}</span>
-                  <small>{h.depth_cm ? `ngập ~${h.depth_cm} cm` : h.traffic_vi ?? (h.coverage === 'scheduled' ? 'đang đọc' : h.coverage === 'unknown' && cam?.state === 'not_read' ? 'chưa rõ' : STATE_VI[cam?.state ?? 'not_read'])}</small>
+                  <small>{h.depth_cm ? `ngập ~${h.depth_cm} cm` : h.traffic_vi ?? cam?.traffic_vi ?? (h.coverage === 'scheduled' ? 'đang đọc' : h.coverage === 'unknown' && cam?.state === 'not_read' ? 'chưa rõ' : STATE_VI[cam?.state ?? 'not_read'])}</small>
                 </button>
               </li>
             )
@@ -157,11 +158,13 @@ export function CameraPanel({ cam, canRead, onClose, onRead }: {
         {r ? (
           <div className="cam-read">
             <div className="stop-tags flat">
-              {r.traffic && r.traffic in TRAFFIC_TONE && <Tag tone={TRAFFIC_TONE[r.traffic as Traffic]} icon={<Cctv size={13} />}>{r.traffic_vi}</Tag>}
+              {r.traffic === 'khong_ro'
+                ? <Tag tone="muted" icon={<Cctv size={13} />}>Không rõ giao thông</Tag>
+                : r.traffic && r.traffic in TRAFFIC_TONE && <Tag tone={TRAFFIC_TONE[r.traffic as Traffic]} icon={<Cctv size={13} />}>{r.traffic_vi}</Tag>}
               <Tag tone={r.depth_cm ? 'water' : 'ok'} icon={<Droplets size={13} />}>{r.depth_cm ? `Ngập ~${r.depth_cm} cm` : r.depth_class === 'uot' ? 'Đường ướt, không ngập' : 'Chưa thấy ngập trong ảnh'}</Tag>
             </div>
             <p>{r.evidence}</p>
-            <p className="faint">AI đọc lúc {(r.image_time ?? r.at ?? '').slice(11, 16)} từ {r.frames ?? 1} khung hình · độ tin cậy {Math.round((r.confidence ?? 0) * 100)}%</p>
+            <p className="faint">AI đọc lúc {(r.image_time ?? r.at ?? '').slice(11, 16)} {r.frames == null ? '· số khung hình không được lưu' : `từ ${r.frames} khung hình`} · độ tin cậy {Math.round((r.confidence ?? 0) * 100)}%</p>
           </div>
         ) : (
           <p className="faint">{cam.state === 'not_read' || cam.state === 'error' ? `Chưa có kết quả AI cho camera này${canRead ? '' : ' (cần người điều hành để đọc mới)'}; đoạn này là “chưa rõ”, không phải đường thông.` : `Không dùng được: ${STATE_VI[cam.state]}.`}</p>

@@ -225,8 +225,8 @@ def _photos(key: str, rows: list[dict], job: dict) -> list[dict]:
         try:
             resp = httpx.get(url, headers=HEADERS, timeout=_left(job, 20))
             mime = resp.headers.get("content-type", "image/jpeg").split(";")[0]
-            _left(job, 60)  # do not start a model call the deadline cannot cover
-            out = ai.read_listing_photo(resp.content, mime if mime.startswith("image/") else "image/jpeg")
+            out = ai.read_listing_photo(resp.content, mime if mime.startswith("image/") else "image/jpeg",
+                                        deadline=job["deadline"])
             rec.update({k: out.get(k) for k in ("shows_alley", "view", "alley_width_m", "reference",
                                                  "cars_visible", "confidence", "notes", "gate", "model")})
             rec["width_m"] = out.get("alley_width_m")
@@ -363,7 +363,7 @@ def _run(job: dict, lat: float, lon: float) -> None:
     job["deadline"] = time.monotonic() + BUILD_DEADLINE_S
     try:
         _step(job, "map", "running")
-        g = build_graph(lat, lon)
+        g = build_graph(lat, lon, deadline=job["deadline"])
         origin = {"demo-cache": "bản tải sẵn", "cache": "cache"}.get(g.source.split(":")[0], "Overpass trực tiếp")
         _step(job, "map", "done", f"{len(g.ways)} đoạn đường OSM ({origin})")
 
@@ -411,6 +411,8 @@ def _run(job: dict, lat: float, lon: float) -> None:
             _left(job, 1)
             try:
                 ads += alonhadat.pull_district(d["name"], DIR, aln_counts, job["deadline"])
+            except Expired:
+                raise
             except Exception:  # a second source failing must not stop the build
                 pass
         n_aln = len(ads) - n_chotot

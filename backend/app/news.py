@@ -16,7 +16,7 @@ from urllib.parse import quote
 import httpx
 
 from . import ai
-from .deadline import timeout
+from .deadline import Expired, timeout
 from .osm import strip_accents
 
 RSS = "https://news.google.com/rss/search?q={q}+when:365d&hl=vi&gl=VN&ceid=VN:vi"
@@ -71,14 +71,16 @@ def news_for(streets: list[str], deadline: float | None = None) -> list[dict]:
     kept = []
     if ai.provider():
         try:
-            timeout(deadline, 60)  # never start a model call the deadline cannot cover
+            timeout(deadline, 60)  # fail before building a request after expiry
             listing = "\n".join(f"{i}. [{it['street']}] {it['title']} ({it['source']}, {it['date']})" for i, it in enumerate(items))
-            out = ai._call(PROMPT + listing)
+            out = ai._call(PROMPT + listing, deadline=deadline)
             for x in out.get("items", []):
                 i = x.get("i")
                 if isinstance(i, int) and 0 <= i < len(items) and x.get("relevant") and x.get("kind") in ("flood", "works", "ban"):
                     kept.append({**items[i], "kind": x["kind"], "depth_cm": x.get("depth_cm"),
                                  "summary": x.get("summary") or items[i]["title"], "filter": "gemini"})
+        except Expired:
+            raise
         except Exception:
             kept = []
     if not kept:
@@ -89,5 +91,7 @@ def news_for(streets: list[str], deadline: float | None = None) -> list[dict]:
 def _safe(fn, *a):
     try:
         return fn(*a)
+    except Expired:
+        raise
     except Exception:
         return []

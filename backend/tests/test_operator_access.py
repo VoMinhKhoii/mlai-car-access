@@ -32,7 +32,7 @@ httpx.get = no_network
 httpx.post = no_network
 
 from fastapi.testclient import TestClient
-from app import config, evidence, reports
+from app import config, evidence, flags, reports
 from app.main import app
 from app.osm import build_graph
 Path.read_text = original_read_text
@@ -53,6 +53,7 @@ out["legacy_pending"] = sorted(r["type"] for r in reports.list_reports("pending"
 
 guest = TestClient(app)
 cfg = guest.get("/api/config")
+out["initial_flag_values"] = {item["name"]: item["enabled"] for item in cfg.json()["flags"]}
 out["config_operator"] = cfg.json()["operator"]
 out["config_has_secret"] = os.environ["OPERATOR_SECRET_VALUE"] in cfg.text
 
@@ -74,11 +75,24 @@ op = TestClient(app)
 out["login_ok"] = packed(op.post("/api/operator/login", json={"secret": os.environ["OPERATOR_SECRET_VALUE"]}))
 cookie = op.cookies.get("vd_operator")
 out["op_status"] = op.get("/api/operator/status").json()
+
+# Corrupt persisted flags fail closed. An authenticated write repairs the file and enables only the chosen flag.
+flags_file = Path(os.environ["VAODUOC_FLAGS"])
+saved_flags_file = flags_file.read_bytes()
+flags_file.write_text("{broken")
+flags._state.clear()
+out["corrupt_flags"] = packed(guest.get("/api/flags"))
+out["recover_corrupt_flags"] = packed(op.post("/api/flags", json={"name": "live_crawl", "enabled": True}))
+out["flags_after_corrupt_recovery"] = json.loads(flags_file.read_text())
 out["op_flags"] = packed(op.post("/api/flags", json={"name": "google_lookup", "enabled": False}))
 out["op_cross_origin"] = packed(op.post("/api/flags", json={"name": "google_lookup", "enabled": False},
                                          headers={"Origin": "https://evil.example"}))
 out["op_allowed_origin"] = packed(op.post("/api/flags", json={"name": "google_lookup", "enabled": False},
                                            headers={"Origin": "https://app.example"}))
+flags_file.write_bytes(saved_flags_file)
+flags._state.clear()
+flags._load()
+out["flags_restored_after_corrupt_test"] = dict(flags._state)
 
 # Guest reports wait for review; the plan does not change until an operator approves.
 g = build_graph(10.8, 106.71)
@@ -233,6 +247,16 @@ class OperatorAccess(unittest.TestCase):
     def test_missing_secret_makes_operator_features_unavailable_not_open(self):
         self.assertEqual(self.r["no_secret_status"], {"available": False, "operator": False})
         self.assertEqual(self.status("no_secret_flags"), 503)
+
+    def test_corrupt_flags_fail_closed_and_operator_api_recovers(self):
+        corrupt = self.r["corrupt_flags"]
+        self.assertEqual(corrupt["status"], 200)
+        self.assertTrue(all(not flag["enabled"] for flag in corrupt["json"]["flags"]))
+        self.assertEqual(self.status("recover_corrupt_flags"), 200)
+        recovered = self.r["flags_after_corrupt_recovery"]
+        self.assertTrue(recovered["live_crawl"])
+        self.assertTrue(all(isinstance(value, bool) for value in recovered.values()))
+        self.assertEqual(self.r["flags_restored_after_corrupt_test"], self.r["initial_flag_values"])
 
     def test_guest_report_waits_for_review_and_projects_exactly_once(self):
         self.assertEqual(self.status("confirm_extra_field"), 422)

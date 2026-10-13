@@ -158,7 +158,7 @@ export type Traffic = 'thong_thoang' | 'dong' | 'un_u' | 'ket_cung'
 export interface CameraReading {
   id: string; name: string; lat: number; lon: number; image_url: string
   state: 'ok' | 'offline' | 'stale' | 'unusable' | 'no_model' | 'error' | 'not_read'
-  at?: string; image_time?: string | null; frames?: number; traffic?: Traffic | 'khong_ro' | null; traffic_vi?: string
+  at?: string; image_time?: string | null; frames?: number | null; traffic?: Traffic | 'khong_ro' | null; traffic_vi?: string
   flooded?: boolean; depth_cm?: number | null; depth_class?: string; evidence?: string; confidence?: number; model?: string
 }
 export interface CameraInfo { id: string; name: string; lat: number; lon: number; code: string; type: string; reading: CameraReading | null }
@@ -181,9 +181,9 @@ export interface CorridorCameraJob {
 export interface CorridorRoute {
   id: number; label: string; via: { name: string; lat: number; lon: number } | null; is_goong: boolean
   geometry: number[][]; distance_m: number; base_min: number; delay_min: number; eta_min: number
-  status: 'ok' | 'risky' | 'blocked'; hotspots: Hotspot[]; alleys: string[]; reasons: string[]; top_reason: string | null
-  flood_forecast: (FloodCheck & { street: string })[]
-  cameras_on_route: number; chosen: boolean
+  status: 'ok' | 'risky' | 'blocked'; hotspots: Hotspot[]; alleys: string[]; reasons: string[]
+  top_reason: string | null; flood_forecast: (FloodCheck & { street: string })[]
+  cameras_on_route: number; traffic_unknown: number; chosen: boolean
 }
 export interface Corridor {
   available: boolean; reason?: string; depart_at: string; checked_at: string; live: boolean; live_note: string | null

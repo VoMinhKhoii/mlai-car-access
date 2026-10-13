@@ -2,7 +2,7 @@
 
 Goong gives one car route and no traffic. Alternatives come from routing via traffic cameras that lie
 to either side of it (cameras sit on the arterials, so a camera is a good via point). Each route is
-scored with what its own cameras see now (traffic, standing water, two frames a refresh apart) and the
+scored with its own camera readings (up to two frames about 13 seconds apart; a one-frame read cannot establish traffic movement) and
 flood forecast along it (tide, rain and IRD history, as for alleys). The arrival plan still decides
 the last stretch into the alley.
 """
@@ -264,10 +264,14 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
     ok = [x for x in out if x["status"] != "blocked"] or out
     best = min(ok, key=lambda x: (x["status"] == "blocked", x["eta_min"], x["distance_m"]))
     best["chosen"] = True
+    summary = _summary(best, out[0], out)
+    if use_cams and best["status"] != "blocked" and best["traffic_unknown"] > 0:
+        count = best["traffic_unknown"]
+        summary += f" {count} đoạn giao thông chưa được camera xác nhận; ETA không thể loại trừ ùn tắc tại các đoạn đó."
     return {"available": True, "depart_at": depart.isoformat(timespec="minutes"), "checked_at": now.isoformat(timespec="seconds"),
             "live": use_cams, "live_note": None if use_cams else _why_not_live(lead),
             "vehicle": {"id": p.id, "label": p.label, "safe_water_depth": p.safe_water_depth},
-            "routes": out, "summary": _summary(best, out[0], out), "typical_factor": round(typical, 2),
+            "routes": out, "summary": summary, "typical_factor": round(typical, 2),
             "cameras_read": sum(1 for x in readings.values() if x.get("state") == "ok"),
             "cameras_offline": sum(1 for x in readings.values() if x.get("state") == "offline"),
             "camera_job": camera_job,
@@ -390,6 +394,7 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapsho
             "is_goong": i == 0, "geometry": r["geometry"], "distance_m": r["distance_m"],
             "base_min": round(base_min), "delay_min": round(delay), "eta_min": round(eta), "status": status,
             "hotspots": hotspots, "flood_forecast": forecast, "alleys": alleys,
+            "traffic_unknown": sum(1 for h in hotspots if h["traffic"] is None),
             "reasons": [t for _, t in reasons], "top_reason": max(reasons)[1] if reasons else None,
             "cameras_on_route": sum(len(h["cameras"]) for h in hotspots), "chosen": False}
 

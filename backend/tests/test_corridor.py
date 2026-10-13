@@ -88,6 +88,17 @@ class Corridor(unittest.TestCase):
         self.assertEqual(out["typical_factor"], corridor.TRAFFIC_FACTOR["dong"])
         self.assertGreater(out["routes"][1]["delay_min"], 0)
 
+    def test_one_frame_traffic_unknown_is_not_presented_as_free_flow(self):
+        self.readings = {"x": reading(CAM_X, "khong_ro"), "y": reading(CAM_Y, "khong_ro")}
+        out, _ = self.run_corridor()
+        self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
+        self.assertTrue(all(route["delay_min"] == 0 for route in out["routes"]))
+        self.assertIn("ETA không thể loại trừ ùn tắc", out["summary"])
+
+    def test_route_payload_counts_traffic_unknown_for_route_rows(self):
+        out, _ = self.run_corridor()
+        self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
+
     def test_water_deeper_than_the_car_can_wade_blocks_the_route(self):
         self.readings = {"x": reading(CAM_X, depth_cm=40), "y": reading(CAM_Y)}
         out, best = self.run_corridor()
@@ -204,7 +215,7 @@ class ModelFallback(unittest.TestCase):
         from datetime import datetime
         calls = []
 
-        def fake_call(prompt, parts, model=None):
+        def fake_call(prompt, parts, model=None, *, deadline=None):
             calls.append(model)
             if model == "first":
                 raise httpx.HTTPStatusError("quota", request=httpx.Request("POST", "http://x"),
@@ -216,7 +227,7 @@ class ModelFallback(unittest.TestCase):
                 mock.patch.object(cameras, "_resting", {}), \
                 mock.patch.object(cameras.ai, "_call", fake_call), \
                 mock.patch.object(cameras.ai, "provider", lambda: ("gemini", "test-model")), \
-                mock.patch.object(cameras, "by_id", lambda: {"x": CAM_X}), \
+                mock.patch.object(cameras, "by_id", lambda deadline=None: {"x": CAM_X}), \
                 mock.patch.object(cameras, "_log", lambda cam, rec: None), \
                 mock.patch.object(cameras, "_store", stored.append):
             cameras._ask(["x"], {"x": b"a"}, {"x": b"b"}, datetime.now(VN))

@@ -20,6 +20,7 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import budget, flags, reports
+from .deadline import timeout
 from .config import STORE
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -64,8 +65,8 @@ def provider() -> tuple[str, str] | None:
 
 
 def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str = "image/jpeg",
-          model: str | None = None) -> dict:
-    """One model call. `image` may be a list mixing images (bytes) and text labels (str), in order."""
+          model: str | None = None, *, deadline: float | None = None) -> dict:
+    """One model call, bounded by an optional absolute monotonic deadline."""
     prov = provider()
     if not prov:
         raise NoModel("Cần GEMINI_API_KEY, OPENAI_API_KEY hoặc ANTHROPIC_API_KEY trong .env.local")
@@ -79,13 +80,15 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
                 "generationConfig": {"responseMimeType": "application/json", "temperature": 0}}
         r, over = None, None
         for key in gemini_keys():  # rotate past rate limits, spent quota and keys that cannot serve this model
+            timeout(deadline, 60)  # do not reserve quota for an attempt that cannot start
             try:
                 budget.reserve_ai("gemini", model, key)
             except budget.OverBudget as exc:
                 over = exc
                 continue
+            call_timeout = timeout(deadline, 60)
             r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-                           params={"key": key}, json=body, timeout=60)
+                           params={"key": key}, json=body, timeout=call_timeout)
             bad_key = r.status_code == 400 and "API key" in r.text
             if r.status_code not in (429, 503, 403, 404) and not bad_key:
                 break
@@ -97,22 +100,26 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
         content = [{"type": "text", "text": prompt}]
         content += [{"type": "text", "text": x} if isinstance(x, str) else
                     {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{x[1]}"}} for x in b64s]
+        timeout(deadline, 60)
         budget.reserve_ai("openai", model, os.environ["OPENAI_API_KEY"])
+        call_timeout = timeout(deadline, 60)
         r = httpx.post("https://api.openai.com/v1/chat/completions",
                        headers={"Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"},
                        json={"model": model, "temperature": 0, "response_format": {"type": "json_object"},
-                             "messages": [{"role": "user", "content": content}]}, timeout=60)
+                             "messages": [{"role": "user", "content": content}]}, timeout=call_timeout)
         r.raise_for_status()
         text = r.json()["choices"][0]["message"]["content"]
     else:
         content = [{"type": "text", "text": x} if isinstance(x, str) else
                    {"type": "image", "source": {"type": "base64", "media_type": mime, "data": x[1]}} for x in b64s] \
             + [{"type": "text", "text": prompt + "\nRespond with JSON only."}]
+        timeout(deadline, 60)
         budget.reserve_ai("anthropic", model, os.environ["ANTHROPIC_API_KEY"])
+        call_timeout = timeout(deadline, 60)
         r = httpx.post("https://api.anthropic.com/v1/messages",
                        headers={"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01"},
                        json={"model": model, "max_tokens": 1500, "messages": [{"role": "user", "content": content}]},
-                       timeout=60)
+                       timeout=call_timeout)
         r.raise_for_status()
         text = r.json()["content"][0]["text"]
     m = re.search(r"\{.*\}", text, re.S)
@@ -198,9 +205,9 @@ alley_width_m là bề rộng thông thủy từ tường/mép nhà bên này sa
 Chỉ ước lượng khi ảnh chụp chính con hẻm và thấy rõ vật tham chiếu; nếu không thì để null."""
 
 
-def read_listing_photo(image: bytes, mime: str = "image/jpeg") -> dict:
+def read_listing_photo(image: bytes, mime: str = "image/jpeg", *, deadline: float | None = None) -> dict:
     _require("ai_photo_evidence")
-    out = _call(LISTING_PHOTO_PROMPT, image, mime)
+    out = _call(LISTING_PHOTO_PROMPT, image, mime, deadline=deadline)
     if not out.get("shows_alley"):
         out["alley_width_m"] = None
     out["gate"] = _gate(out, ["alley_width_m", "reference"])

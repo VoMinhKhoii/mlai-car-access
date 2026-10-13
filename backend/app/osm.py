@@ -18,6 +18,7 @@ from functools import lru_cache
 import httpx
 
 from .config import AREA_RADIUS_M, CACHE, OVERPASS_ENDPOINTS
+from .deadline import Expired, timeout
 from .storage import LRU
 
 DEMO_FILE = CACHE / "osm" / "demo_binhthanh.json"
@@ -182,7 +183,7 @@ def _inside(lat: float, lon: float, bbox, margin_deg: float = 0.0) -> bool:
     return s + margin_deg <= lat <= n - margin_deg and w + margin_deg <= lon <= e - margin_deg
 
 
-def _fetch_overpass(lat: float, lon: float, radius: float) -> dict:
+def _fetch_overpass(lat: float, lon: float, radius: float, deadline: float | None = None) -> dict:
     r = int(radius)
     q = f"""[out:json][timeout:120];
 (
@@ -198,7 +199,7 @@ out skel qt;"""
     headers = {"User-Agent": "VaoDuoc/0.3 (MLAI Hackathon 2026; minhkhoitdn@gmail.com)"}
 
     def ask(ep: str) -> dict:
-        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=150)
+        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=timeout(deadline, 150))
         resp.raise_for_status()
         data = resp.json()
         if not data.get("elements"):
@@ -213,11 +214,17 @@ out skel qt;"""
             for fut in as_completed(futures):
                 try:
                     return fut.result()
+                except Expired:
+                    raise
                 except Exception as exc:  # wait for the next mirror
                     errors.append(str(exc)[:120])
         finally:
             pool.shutdown(wait=False, cancel_futures=True)
-        time.sleep(8 * (attempt + 1))
+        if attempt < 2:
+            delay = 8 * (attempt + 1)
+            if deadline is not None and deadline - time.monotonic() <= delay + 0.5:
+                raise Expired("hết thời hạn tải bản đồ OSM")
+            time.sleep(delay)
     raise RuntimeError(f"Overpass unavailable: {errors}")
 
 
@@ -232,21 +239,29 @@ _fetch_locks: dict[str, threading.Lock] = {}
 _locks_guard = threading.Lock()
 
 
-def load_elements(lat: float, lon: float) -> tuple[list[dict], str]:
+def load_elements(lat: float, lon: float, deadline: float | None = None) -> tuple[list[dict], str]:
     key = area_key(lat, lon)
     with _locks_guard:
         lock = _fetch_locks.setdefault(key, threading.Lock())
-    with lock:  # the plan request and the live build must not download the same area twice
-        return _load_elements(lat, lon, key)
+    if deadline is None:
+        with lock:  # the plan request and the live build must not download the same area twice
+            return _load_elements(lat, lon, key)
+    wait = deadline - time.monotonic() - 0.5
+    if wait <= 0 or not lock.acquire(timeout=wait):
+        raise Expired("hết thời hạn chờ tải bản đồ OSM")
+    try:
+        return _load_elements(lat, lon, key, deadline)
+    finally:
+        lock.release()
 
 
-def _load_elements(lat: float, lon: float, key: str) -> tuple[list[dict], str]:
+def _load_elements(lat: float, lon: float, key: str, deadline: float | None = None) -> tuple[list[dict], str]:
     if key == "demo":
         return json.loads(DEMO_FILE.read_text())["elements"], "demo-cache"
     path = CACHE / "osm" / f"area_{key}.json"
     if path.exists():
         return json.loads(path.read_text())["elements"], f"cache:{key}"
-    data = _fetch_overpass(lat, lon, AREA_RADIUS_M)
+    data = _fetch_overpass(lat, lon, AREA_RADIUS_M, deadline)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data))
     return data["elements"], f"overpass:{key}"
@@ -265,11 +280,11 @@ def cached_graph(lat: float, lon: float) -> AreaGraph | None:
     return None
 
 
-def build_graph(lat: float, lon: float) -> AreaGraph:
+def build_graph(lat: float, lon: float, deadline: float | None = None) -> AreaGraph:
     key = area_key(lat, lon)
     if key in _GRAPHS:
         return _GRAPHS.get(key)
-    elements, source = load_elements(lat, lon)
+    elements, source = load_elements(lat, lon, deadline)
     g = AreaGraph(center=(lat, lon), source=source)
     raw_ways = []
     for el in elements:
