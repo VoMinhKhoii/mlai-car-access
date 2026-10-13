@@ -11,7 +11,7 @@
 - Phases 1–4 complete: R-01–R-10 checked, evidence linked.
 - Phase 5 in progress: 1/3 checklist items complete.
 - Full sweep: no checkbox correction needed. Phase frontmatter/table reconciled to checklist evidence.
-- Earlier implementation commits pushed: `a64c393`, `5516d12`. Review-driven runtime/evaluator/docs hardening is currently uncommitted; no new commit or push made.
+- Phase 4/5 follow-up commits pushed separately: `bca247b` (Phase 4 hardening), `640c388` (Phase 5 evaluator/evidence). The only remaining untracked path is user-owned `plans/journals/`.
 
 ### Latest local checks
 
@@ -38,14 +38,14 @@
 
 ### Docs impact
 
-- Local authority docs updated for HTTPS proxy-header trust, matched-version rollback/cache invalidation, camera one-frame uncertainty, dimensioned egress, append-only splits and evaluator exit codes.
-- Phase 5 hosting/restart documentation is complete; real production rollback and hosted-origin behavior remain unverified.
+- Updated authority docs: root README proxy/rollback/flag guidance; D34 camera single-frame limits; field intake/evaluation and evaluator exit-code docs.
+- Phase 5 hosting cutover and restart/state-migration smoke evidence exist; production rollback and hosted origin remain unverified.
 
 ### Next actions
 
 1. **Field team:** collect/validate R-11 dataset + egress audit. Done = evaluator accepts real >=20-row grouped split and emits nonempty field metrics.
 2. **Release/operator team:** supply live credentials/backend origin and execute remaining R-12 paths. Done = live Goong/AI + hosted production evidence recorded.
-3. **Main agent:** retain plan `in-progress`; ask whether to commit/push the uncommitted local remediation after the user reviews the status. Final code-review refresh could not run due provider limits.
+3. **Main agent:** keep the plan `in-progress`; no further local commit/push is pending. Continue only when field data, live credentials/backend origin, or hosted R-12 prerequisites are supplied.
 
 ### Unresolved questions
 
