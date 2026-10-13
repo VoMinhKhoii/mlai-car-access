@@ -52,3 +52,28 @@ guest view and the server reports `operator: false`; no console or page errors.
 run with fewer than 20 rows (checked: exit 2). Its mechanics (frozen group split, re-freeze refused, leak check,
 interval-aware false-fit scoring, gate) were exercised once on a throwaway synthetic file outside the repository;
 those numbers are not evidence and are not recorded as results.
+
+## Superseding local verification — 2026-10-13
+
+The 2026-10-12 results above describe commit `5516d12` only. The following fresh checks cover the current uncommitted
+working tree after review-driven fixes; they do not imply field, live-service, or hosted release acceptance.
+
+| Command | Result |
+|---|---|
+| `cd backend && ../.venv/bin/python -m unittest discover -s tests -v` | 129 tests passed, 0 failed, 0 skipped; ResourceWarning for an unclosed `vn_car_profiles.csv` in `vehicles.py:112`; two non-failing registry fallback logs |
+| `.venv/bin/python -m unittest pipelines.test_eval_field -v` | 26 tests passed, 0 failed (final split/atomic-write/CLI exit and BrokenPipe coverage) |
+| `cd frontend && npx tsc -b` | Passed; 0 errors |
+| `cd frontend && npm run build` | Passed; Vite 8.3.1, 1900 modules; 1,356.30 kB JS (376.17 kB gzip; >500 kB advisory threshold) |
+| `cd frontend && npm run lint` | Exit 0; 14 warnings, 0 errors (React fast-refresh, Date.now render purity, and set-state-in-effect) |
+| Header-only `eval_field.py` command using `data/field/measurements.csv`, `data/field/egress.csv`, split `eval-split-v1.json` | Expected exit 2: `need ≥20 measured segments, have 0`; no report created |
+
+Additional browser evidence: the production-bundle interaction capture in `reports/phase45-browser-capture.json` and its desktop/mobile screenshots predate the final runtime/corridor changes. A separate current-build desktop smoke at 2026-10-13T17:11+07:00 checked the updated one-frame camera disclosure in the Demo menu, with 0 page/console errors; no live corridor/footer rendered because Goong credentials are absent. These are partial local proofs, not a physical-device, field, live-upstream, or hosted release test.
+
+Review history: review of `a64c393`/`5516d12` found six Medium issues; subsequent review cycles drove fixes for deadline propagation, registry refresh, flags, field-evaluator integrity, corridor uncertainty copy, and atomic writes. The latest completed read-only review found no Critical/High blocker before the final minor fixes; a final review refresh after the last edits failed because the reviewer provider hit its usage limit. Treat the latest tiny UI/test/evaluator edits as test-verified but not independently re-reviewed.
+
+### Current external gates
+
+- **R-11 — open; owner field team:** both `measurements.csv` and the dimensioned `egress.csv` remain header-only. Intake now requires ≥20 valid ways and ≥20 independent groups; all three egress dimensions for held-out ways; field photos/provenance; a frozen split. No split or field report exists.
+- **R-12 live — open; owner release/operator:** no Goong/AI credentials; live corridor, camera/model calls, and provider quota behavior remain unexercised.
+- **R-12 hosted/rollback — open; owner release/operator:** no backend origin/deployment; forwarded-header `Secure` cookie behavior, hosted persistence, rollout/rollback and production-origin behavior remain unverified.
+- **R-12 breadth — open:** the browser capture covers a subset only; all presets/classes, malformed-date repair, all camera terminal states, stale-request races, and a physical mobile device were not exercised.

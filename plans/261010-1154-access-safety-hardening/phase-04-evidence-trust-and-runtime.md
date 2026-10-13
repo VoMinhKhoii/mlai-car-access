@@ -1,7 +1,7 @@
 ---
 phase: 4
 title: "Evidence trust và non-blocking runtime"
-status: pending
+status: completed
 priority: P1
 effort: ""
 dependencies: [3]

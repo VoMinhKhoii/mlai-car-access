@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "UI input và truthful copy"
-status: pending
+status: completed
 priority: P1
 effort: ""
 dependencies: []

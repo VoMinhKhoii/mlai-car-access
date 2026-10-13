@@ -19,7 +19,7 @@ Plan tạo trên nhánh `fix/access-safety-hardening` từ local `main`; impleme
 **Outcome:** câu trả lời đúng giới hạn bằng chứng, không báo an toàn khi thiếu dữ liệu, không sập UI và không để client sửa evidence của người khác.
 **Constraints:** giữ FastAPI, React/Vite, MapLibre, HCMC-only, vehicle-specific và 3 hard checks ngập theo thời gian; không bịa dữ liệu thực địa. User chọn một backend chạy liên tục, một process, storage bền vững; Vercel chỉ frontend nếu dùng.
 **Non-goals:** viết lại router, mở rộng địa bàn/persona, thêm doanh thu, thêm DB/queue phân tán, cam kết xe thật chắc chắn đi qua được. Không bỏ tính năng camera/live crawl/community hiện có.
-**Acceptance:** R-01–R-12 bên dưới, bsk desktop/mobile và tập đo thực địa thật. Phase1 đã đạt R-01/R-02 theo evidence dưới đây; phase2–5 chưa triển khai.
+**Acceptance:** R-01–R-10 đã hoàn tất theo evidence liên kết; R-11 và phần còn lại của R-12 vẫn mở. Plan chỉ hoàn tất sau dataset thực địa, egress audit, live Goong/AI và production-hosting proof.
 
 ## Requirements
 
@@ -42,11 +42,11 @@ Plan tạo trên nhánh `fix/access-safety-hardening` từ local `main`; impleme
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | [UI input và truthful copy](./phase-01-start.md) | Pending |
-| 2 | [Flood knowledge và safe departure](./phase-02-flood-safety.md) | Pending |
-| 3 | [Width bottlenecks và legal egress](./phase-03-width-and-egress.md) | Pending |
-| 4 | [Evidence trust và non-blocking runtime](./phase-04-evidence-trust-and-runtime.md) | Pending |
-| 5 | [Field validation và release proof](./phase-05-field-validation-and-release.md) | Pending |
+| 1 | [UI input và truthful copy](./phase-01-start.md) | Completed |
+| 2 | [Flood knowledge và safe departure](./phase-02-flood-safety.md) | Completed |
+| 3 | [Width bottlenecks và legal egress](./phase-03-width-and-egress.md) | Completed |
+| 4 | [Evidence trust và non-blocking runtime](./phase-04-evidence-trust-and-runtime.md) | Completed |
+| 5 | [Field validation và release proof](./phase-05-field-validation-and-release.md) | In progress |
 
 ## Dependencies & Execution
 
@@ -72,14 +72,15 @@ Field collection là phần việc thật của team, không thể hoàn thành 
 
 Red-team: 15 findings (5 Critical/7 High/3 Medium), user chấp thuận áp dụng; [adjudication](./reports/red-team-review.md). Đã bổ sung vào cả5 phases, không production code thay đổi.
 Whole-plan consistency sweep: reread plan.md + cả5 phase files; checked15 decision deltas; no unresolved cross-file contradiction. CLI format/index/status gate chạy sau sweep.
-Active worktree pointer qua ak plan use; session hook không persist (adapter missing module/CK_SESSION_ID absent), absolute paths được truyền rõ cho reviewers/next workflow.
+Independent reviews found and drove follow-up fixes to deadline propagation, camera registry nonblocking reads, field-evaluator gate semantics, open-ended width metrics, and truthful single-frame camera copy. The latest review's two Medium findings were corrected; one final targeted review of those last corrections remains pending.
 
-## Execution Evidence — 2026-10-11
+## Execution Evidence — 2026-10-13
 
-- Phase1 R-01/R-02 and Phase2 R-03/R-04 checklists are checked via `ak plan check`; `ak plan status` reports 2/5 phases, 4/13 tasks (30%). Overall remains in-progress.
-- [Phase1 verification](./reports/phase1-verification.md) and [phase2 verification](./reports/phase2-verification.md) record acceptance evidence. Phase2: backend 53/53; frontend build passed, lint 0 errors/14 warnings; isolated API stale-positive, pickup, and Vios checks passed with zero external HTTP calls.
-- Phase2 performance: warm Vios API 0.95 s against the <3 s warm-path target. Cold graph initialization measured 7.09 s; this remains a cold-start risk. Browser proof used desktop and iPhone-14 viewport emulation, not a physical device.
-- Independent reviewer found no remaining code blockers but requested three documentation corrections; those docs are corrected. Post-correction reviewer retries failed due provider rate limits. User explicitly approved phase2 closure/commit despite no final post-correction reviewer response.
-- User previously requested phase1 commit/push before phase2; commit `b4d2da7` is on `origin/fix/access-safety-hardening`. User now requests phase2 commit/push before phase3. Never stage user cache or secrets; no deployment or PR requested.
-- CLI limitation: `check` updates checkboxes and `status` derives completion, but does not rewrite the legacy phase frontmatter or Phases table. Pending labels above are the planning snapshot; checked phase files and this evidence record carry execution progress. No unsupported hand-edited status mutation.
-- R-11/R-12 remain open: no validated real field dataset, held-out split, or release proof yet. Phase3–5 checklists remain unchecked.
+- Current status: phases 1–4 complete; phase 5 in progress. `ak plan status` reports 4/5 phases and 11/13 checklist items (84%). The earlier `a64c393` and `5516d12` implementation commits are pushed; post-review hardening and evidence updates remain uncommitted.
+- R-01–R-10 checklists remain checked against phase evidence. Latest checks: backend 129/129, evaluator 26/26, TypeScript pass, production build pass, lint 0 errors/14 warnings. Full command/output and current caveats: [superseding Phase 4/5 verification](./reports/phase-04-05-verification.md#superseding-local-verification--2026-10-13).
+- Isolated production-bundle browser evidence: [primary interaction capture](./reports/phase45-browser-capture.json), [desktop screenshot](./reports/phase45-local-desktop.png), [390×844 mobile emulation](./reports/phase45-local-mobile.png). The primary capture verified timeline drag/committed `arrive_at`, guest report 202 pending, operator approve/reject, logout and zero console/page errors; it predates final runtime/corridor changes. A later current-build desktop smoke confirmed the Demo menu’s one-frame caveat, but live Goong corridor/footer and the full browser matrix remain unexercised. This is partial local proof, not physical-device or live/hosted result.
+- R-11 remains blocked, owner field team: measurement and dimensioned egress CSVs are headers only. Need ≥20 valid surveyed ways, ≥20 independent alley-chain groups, three explicit egress dimensions per held-out way, frozen grouped split and successful field evaluation. No survey values/split/report were fabricated.
+- R-12 remains open, owner release/operator team: live Goong/AI, hosted HTTPS origin/proxy/persistence/rollback, full interaction matrix and physical mobile proof are unavailable/unexercised. Local unit/build/browser evidence does not close those gates.
+- Phase 5 evaluator now rejects omission of egress dimensions, keeps turn/sign not-comparable, blocks unknown direction, preserves parent held-out splits with append-only children, and excludes open-ended predictions from interval coverage rates. Gate measures physical width + OSM direction only; it does not verify turning space or law.
+- Docs/hosting cutover and rollback/state-migration documentation are present; rollback and forwarded-header behavior have not been exercised in production. The browser artifact is valid JSON and declares the later code changes it does not cover.
+- Final review refresh was attempted but provider usage limits prevented completion. The latest successful review found no Critical/High code blocker and its remaining actionable findings were addressed; do not treat that as a clean review of the very latest diff. R-11/R-12 acceptance gates remain open irrespective of review status.

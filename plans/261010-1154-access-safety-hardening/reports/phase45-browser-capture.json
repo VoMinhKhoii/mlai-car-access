@@ -1,0 +1,69 @@
+{
+  "captured_at": "2026-10-13T13:24:23+07:00",
+  "application": {
+    "release_base": "5516d12",
+    "mode": "production frontend bundle served by isolated one-worker Uvicorn",
+    "dataset": "repository demo OSM graph copied into isolated temporary cache; no real field data",
+    "credentials": "no Goong or AI provider key; fake operator secret used only in isolated process and not recorded",
+    "state": "isolated temporary store/cache/flags; all synthetic guest reports were outside repository state",
+    "post_capture_changes": "This capture predates the final Overpass retry deadline, asynchronous camera registry, camera single-frame fallback, dimensioned field evaluator, and truthful one-frame corridor copy. Current API config copy was smoke-checked separately in a browser, but no live Goong corridor/footer was available. Those later behaviors are covered by automated tests, not this browser capture."
+  },
+  "viewports": {
+    "desktop": {
+      "viewport_css_px": "1280x800",
+      "screenshot": "phase45-local-desktop.png"
+    },
+    "mobile_emulation": {
+      "viewport_css_px": "390x844",
+      "screenshot": "phase45-local-mobile.png",
+      "physical_device": false
+    }
+  },
+  "observed": {
+    "production_bundle_served": true,
+    "demo_pickup_plan": "POST /api/plan returned 200; three stop suggestions rendered as unverified; width unknown and turn-around unverified remained explicit; OSM source shown.",
+    "timeline_drag": {
+      "method": "pointer drag on the rendered timeline slider",
+      "before": "10:15 2026-09-29 UTC+7",
+      "after": "11:00 2026-09-29 UTC+7",
+      "observed_request": {
+        "method": "POST",
+        "path": "/api/plan",
+        "status": 200,
+        "arrive_at": "2026-09-29T11:00:00+07:00",
+        "dwell_min": 15
+      }
+    },
+    "guest_report": {
+      "action": "clicked the guest blockage-report control in the evidence drawer",
+      "method": "POST",
+      "path": "/api/blockage",
+      "status": 202,
+      "state": "pending"
+    },
+    "operator_review": {
+      "login": "local fake credential accepted",
+      "approval": "pending report approved in UI; POST /api/reports/{id} returned 200 and queue entry disappeared",
+      "rejection": "isolated synthetic pending fixture rejected in UI; POST /api/reports/{id} returned 200 and queue entry disappeared",
+      "guest_permissions": "operator flag checkbox disabled after logout; login control returned"
+    },
+    "errors": {
+      "browser_page_errors": 0,
+      "browser_console_errors": 0
+    },
+  "later_ui_smoke": {
+    "captured_at": "2026-10-13T17:11:06+07:00",
+    "surface": "Production frontend bundle, desktop Chromium, Demo menu",
+    "observed": "Camera feature description visibly states that up to two frames are used and one frame can observe flooding but cannot conclude traffic flow; browser page/console errors: 0.",
+    "limits": "No Goong key, so the live corridor card and its route-level traffic-unknown tag/footer were not rendered in this smoke."
+  }
+  },
+  "not_exercised": [
+    "Live Goong corridor/camera scheduling and per-hotspot coverage: GOONG_API_KEY unavailable.",
+    "Live AI camera/listing/text/photo calls: provider keys unavailable.",
+    "Hosted production origin, trusted proxy headers, HTTPS cookie behavior and deployment rollback.",
+    "Real field measurements, held-out split and field acceptance scores.",
+    "Full remaining Phase 5 interaction matrix (including every preset, vehicle class, malformed-date repair, all camera terminal states and all stale-request races)."
+  ],
+  "limits": "Local production-bundle interaction evidence only; not a physical mobile device, live-service validation, field calibration or release acceptance. The synthetic reject fixture was stored only in the isolated temporary test store."
+}

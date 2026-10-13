@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Width bottlenecks và legal egress"
-status: pending
+status: completed
 priority: P1
 effort: ""
 dependencies: [2]

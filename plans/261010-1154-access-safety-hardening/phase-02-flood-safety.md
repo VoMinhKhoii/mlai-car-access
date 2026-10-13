@@ -1,7 +1,7 @@
 ---
 phase: 2
 title: "Flood knowledge và safe departure"
-status: pending
+status: completed
 priority: P1
 effort: ""
 dependencies: [1]
