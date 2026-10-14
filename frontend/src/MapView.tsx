@@ -1,14 +1,25 @@
 import maplibregl, { type GeoJSONSource, type Map as MLMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
-import { useEffect, useRef } from 'react'
-import { floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type Plan } from './api'
+import { useEffect, useRef, useState } from 'react'
+import { floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type ManeuverState, type Plan } from './api'
 import { floodPresentation, floodTimeLabel } from './components/Result'
 
 export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean }
 export type FloodMoment = 'arrive' | 'depart'
 type LL = { lat: number; lon: number }
-
+export interface ManeuverOverlay {
+  state: ManeuverState
+  stop: LL
+  widthLo: number | null
+  widthHi: number | null
+  decisive: boolean
+  mirrorWidth: number
+  vehicleLength: number
+  bodyCenterOffset: number
+  corridorWidth: number
+  axis: number[][]
+}
 interface Props {
   styleUrl: string
   center: [number, number]
@@ -23,6 +34,7 @@ interface Props {
   corridor: Corridor | null
   routeSel: number
   cams: CameraInfo[]
+  maneuver: ManeuverOverlay | null
   onCameraClick: (id: string) => void
   onPick: (lat: number, lon: number, x: number, y: number) => void
   onWayClick: (wayId: number, lat: number, lon: number) => void
@@ -35,6 +47,59 @@ const line = (coords?: number[][]): GeoJSON.FeatureCollection =>
     ? { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: coords } }] }
     : EMPTY
 
+function maneuverFeatures(overlay: ManeuverOverlay | null, pose: number[] | null): GeoJSON.FeatureCollection {
+  if (!overlay) return EMPTY
+  const { stop, widthLo, widthHi, mirrorWidth, vehicleLength, bodyCenterOffset, corridorWidth, decisive, axis } = overlay
+  const latScale = 110_540
+  const lonScale = 111_320 * Math.cos(stop.lat * Math.PI / 180)
+  const lastIndex = axis.length - 1
+  const angle = axis.length > 1
+    ? Math.atan2((axis[lastIndex][0] - axis[lastIndex - 1][0]) * lonScale, (axis[lastIndex][1] - axis[lastIndex - 1][1]) * latScale)
+    : 0
+  const point = (x: number, y: number): [number, number] => {
+    const east = x * Math.cos(angle) + y * Math.sin(angle)
+    const north = -x * Math.sin(angle) + y * Math.cos(angle)
+    return [stop.lon + east / lonScale, stop.lat + north / latScale]
+  }
+  const length = Number.isFinite(vehicleLength) && vehicleLength > 0 ? vehicleLength : 4.5
+  const low = widthLo != null && Number.isFinite(widthLo) && widthLo > 0 ? widthLo : null
+  const high = widthHi != null && Number.isFinite(widthHi) && widthHi > 0 ? Math.max(widthHi, low ?? widthHi) : low
+  const D = Number.isFinite(corridorWidth) && corridorWidth > 0 ? corridorWidth : 0
+  const poseX = pose && Number.isFinite(pose[0]) ? pose[0] : D / 2
+  const poseY = pose && Number.isFinite(pose[1]) ? pose[1] : 0
+  const psi = pose && Number.isFinite(pose[2]) ? pose[2] : Math.PI / 2
+  const offset = Number.isFinite(bodyCenterOffset) ? bodyCenterOffset : 0
+  const x0 = poseX - D / 2 + offset * Math.cos(psi)
+  const y0 = poseY + offset * Math.sin(psi)
+  const reliable = decisive && low != null && low >= mirrorWidth
+  const features: GeoJSON.Feature[] = []
+  const lane = (w: number, boundaryKind: 'certain' | 'uncertain') => {
+    const half = w / 2
+    const extent = Math.max(8, Math.abs(y0) + length)
+    const ring = [point(-half, -extent), point(half, -extent), point(half, extent), point(-half, extent), point(-half, -extent)]
+    features.push({ type: 'Feature', properties: { kind: 'lane-fill' }, geometry: { type: 'Polygon', coordinates: [ring] } })
+    for (const side of [-half, half]) {
+      features.push({ type: 'Feature', properties: { kind: boundaryKind },
+        geometry: { type: 'LineString', coordinates: [point(side, -extent), point(side, extent)] } })
+    }
+  }
+  if (high != null) lane(high, low != null && high > low || !reliable ? 'uncertain' : 'certain')
+  if (low != null && high != null && high > low) {
+    const half = low / 2
+    const extent = Math.max(8, Math.abs(y0) + length)
+    for (const side of [-half, half]) {
+      features.push({ type: 'Feature', properties: { kind: reliable ? 'certain' : 'uncertain' },
+        geometry: { type: 'LineString', coordinates: [point(side, -extent), point(side, extent)] } })
+    }
+  }
+  const corners = [[-length / 2, -mirrorWidth / 2], [length / 2, -mirrorWidth / 2],
+    [length / 2, mirrorWidth / 2], [-length / 2, mirrorWidth / 2]].map(([dx, dy]) =>
+    point(x0 + dx * Math.cos(psi) - dy * Math.sin(psi), y0 + dx * Math.sin(psi) + dy * Math.cos(psi)))
+  features.push({ type: 'Feature', properties: { kind: reliable ? 'body-certain' : 'body-uncertain' },
+    geometry: { type: 'Polygon', coordinates: [[...corners, corners[0]]] } })
+  return { type: 'FeatureCollection', features }
+}
+
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
 
 export function MapView(p: Props) {
@@ -44,6 +109,8 @@ export function MapView(p: Props) {
   const markers = useRef<maplibregl.Marker[]>([])
   const floodPopup = useRef<maplibregl.Popup | null>(null)
   const framed = useRef('')
+  const [mapReadyTick, setMapReadyTick] = useState(0)
+  const animationTimer = useRef<number | null>(null)
   const cb = useRef(p)
   cb.current = p
 
@@ -58,7 +125,7 @@ export function MapView(p: Props) {
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
       const fit = { fits: css('--fit-fits'), tight: css('--fit-tight'), no: css('--fit-no'), unknown: css('--fit-unknown'), blocked: css('--fit-blocked') }
-      ;['corridor', 'flood', 'fit', 'standard', 'approach', 'route', 'wayout', 'walk', 'cams'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
+      ;['corridor', 'flood', 'fit', 'standard', 'approach', 'route', 'wayout', 'walk', 'cams', 'maneuver'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
       // Large-road alternatives under everything else; the chosen one is drawn like the route itself.
       m.addLayer({ id: 'corridor-alt', type: 'line', source: 'corridor', filter: ['!', ['get', 'sel']], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--n-500'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 6], 'line-opacity': 0.45 } })
@@ -95,7 +162,20 @@ export function MapView(p: Props) {
         paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, ['case', ['get', 'read'], 4, 2.5], 16, ['case', ['get', 'read'], 8, 5]],
           'circle-color': ['match', ['get', 'cls'], 'cam-water', cam.water, 'cam-ket_cung', cam.jam, 'cam-un_u', cam.un, 'cam-dong', css('--traffic-busy'), 'cam-thong_thoang', cam.ok, cam.none],
           'circle-stroke-color': '#ffffff', 'circle-stroke-width': ['case', ['get', 'read'], 2, 1] } })
+      m.addLayer({ id: 'maneuver-lane-fill', type: 'fill', source: 'maneuver', filter: ['==', ['get', 'kind'], 'lane-fill'],
+        paint: { 'fill-color': css('--brand-tint'), 'fill-opacity': 0.42 } })
+      m.addLayer({ id: 'maneuver-lane-certain', type: 'line', source: 'maneuver', filter: ['==', ['get', 'kind'], 'certain'],
+        paint: { 'line-color': css('--brand'), 'line-width': 2.5 } })
+      m.addLayer({ id: 'maneuver-lane-uncertain', type: 'line', source: 'maneuver', filter: ['==', ['get', 'kind'], 'uncertain'],
+        paint: { 'line-color': css('--fit-unknown'), 'line-width': 2.5, 'line-dasharray': [2, 1.5] } })
+      m.addLayer({ id: 'maneuver-body-fill', type: 'fill', source: 'maneuver', filter: ['in', ['get', 'kind'], ['literal', ['body-certain', 'body-uncertain']]],
+        paint: { 'fill-color': css('--brand'), 'fill-opacity': 0.82 } })
+      m.addLayer({ id: 'maneuver-body-line', type: 'line', source: 'maneuver', filter: ['==', ['get', 'kind'], 'body-certain'],
+        paint: { 'line-color': css('--brand'), 'line-width': 2.5 } })
+      m.addLayer({ id: 'maneuver-body-dash', type: 'line', source: 'maneuver', filter: ['==', ['get', 'kind'], 'body-uncertain'],
+        paint: { 'line-color': css('--brand'), 'line-width': 2.5, 'line-dasharray': [2, 1.5] } })
       ready.current = true
+      setMapReadyTick((tick) => tick + 1)
       sync()
     })
     m.on('click', (e) => {
@@ -162,7 +242,14 @@ export function MapView(p: Props) {
       m.on('mouseenter', id, () => { m.getCanvas().style.cursor = 'pointer' })
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
-    return () => { floodPopup.current?.remove(); m.remove(); map.current = null; ready.current = false }
+    return () => {
+      if (animationTimer.current != null) window.clearInterval(animationTimer.current)
+      animationTimer.current = null
+      floodPopup.current?.remove()
+      m.remove()
+      map.current = null
+      ready.current = false
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.styleUrl])
 
@@ -170,7 +257,7 @@ export function MapView(p: Props) {
     const m = map.current
     if (!m || !ready.current) return
     floodPopup.current?.remove()
-    const { plan, selected, toggles, floodMoment, destination, origin, corridor, routeSel, cams } = cb.current
+    const { plan, selected, toggles, floodMoment, destination, origin, corridor, routeSel, cams, maneuver } = cb.current
     const set = (id: string, data: GeoJSON.FeatureCollection) => (m.getSource(id) as GeoJSONSource | undefined)?.setData(data)
     const sp = plan?.stop_points[selected]
     set('fit', plan && toggles.fit ? plan.layers.fit : EMPTY)
@@ -189,6 +276,9 @@ export function MapView(p: Props) {
     set('route', line(sp?.route_in?.geometry))
     set('wayout', line(sp?.way_out?.geometry))
     set('walk', line(sp?.walk?.geometry))
+    set('maneuver', maneuverFeatures(maneuver, maneuver?.state.status === 'ready'
+      ? maneuver.state.result.poses?.[0] ?? null
+      : null))
     const key = floodMoment === 'arrive' ? 'status_arrive' : 'status_depart'
     const knowledgeKey = floodMoment === 'arrive' ? 'knowledge_arrive' : 'knowledge_depart'
     m.setFilter('flood', ['any', ['in', ['get', key], ['literal', ['risky', 'blocked']]], ['!=', ['get', knowledgeKey], 'known']])
@@ -206,6 +296,7 @@ export function MapView(p: Props) {
       add(el, destination, 'bottom')
     }
     plan?.stop_points.forEach((s, i) => {
+      if (i === selected && maneuver?.state.status === 'ready') return
       const el = document.createElement('button')
       el.type = 'button'
       el.className = `mk-stop ${i === selected ? 'on' : ''} ${s.verified ? '' : 'unverified'}`
@@ -238,7 +329,37 @@ export function MapView(p: Props) {
     }
   }
 
-  useEffect(sync, [p.plan, p.selected, p.toggles, p.floodMoment, p.destination, p.origin, p.frame, p.corridor, p.routeSel, p.cams])
+  useEffect(sync, [p.plan, p.selected, p.toggles, p.floodMoment, p.destination, p.origin, p.frame, p.corridor, p.routeSel, p.cams, p.maneuver])
+  useEffect(() => {
+    const m = map.current
+    const overlay = p.maneuver
+    if (!m || !ready.current || !overlay || overlay.state.status !== 'ready') return
+    const { result, playback } = overlay.state
+    const poses = result.moves == null ? null : result.poses
+    if (!poses?.length || playback === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (animationTimer.current != null) window.clearInterval(animationTimer.current)
+    let index = 0
+    const timer = window.setInterval(() => {
+      index += 1
+      ;(m.getSource('maneuver') as GeoJSONSource | undefined)?.setData(maneuverFeatures(overlay, poses[Math.min(index, poses.length - 1)]))
+      if (index >= poses.length - 1) {
+        window.clearInterval(timer)
+        animationTimer.current = null
+      }
+    }, 140)
+    animationTimer.current = timer
+    return () => {
+      window.clearInterval(timer)
+      if (animationTimer.current === timer) animationTimer.current = null
+    }
+  }, [p.maneuver, mapReadyTick])
+  useEffect(() => {
+    const m = map.current
+    const overlay = p.maneuver
+    if (!m || !ready.current || !overlay) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    m.easeTo({ center: [overlay.stop.lon, overlay.stop.lat], zoom: Math.max(m.getZoom(), 19), padding: p.padding, duration: reduced ? 0 : 240 })
+  }, [p.maneuver?.state.key, mapReadyTick])
 
   useEffect(() => {
     const m = map.current

@@ -1,10 +1,10 @@
 """R-06 tests for directed entry, legal egress, and split-independent junction topology."""
 import unittest
 
-from app.evidence import WidthRange
+from app.evidence import Bound, WidthRange
 from app.osm import AreaGraph, Edge, Way
 from app.parcels import path_out
-from app.plan import Candidate, _route_in, _way_out
+from app.plan import Candidate, _public_way_out_claims, _route_in, _way_out
 from app.vehicles import get_profile
 
 
@@ -54,6 +54,33 @@ class DirectedEgressTests(unittest.TestCase):
                 wrong = _way_out(wrong_candidate, graph, wrs, fit, profile, networks,
                                  {"side": denied_side})
                 self.assertEqual(wrong["mode"], "none")
+
+
+    def test_driver_exit_claim_does_not_change_egress_decision(self):
+        graph = self._oneway_graph(1)
+        candidate, _ = self._candidate(graph, "u")
+        profile = get_profile("toyota-vios")
+        networks = {True: ({2: 0.0}, {2: (1, 3)}), False: ({2: 0.0}, {2: (1, 3)})}
+        fit = {1: "unknown", 2: "unknown"}
+        width = WidthRange(0.5, 2.0, "Inferred")
+        without_claim = _way_out(candidate, graph, {1: width}, fit, profile, networks, {"side": "u"})
+        with_claim = _way_out(
+            candidate, graph,
+            {1: WidthRange(0.5, 2.0, "Inferred", way_out_claims=[
+                Bound(0.0, 40.0, "Observed", "Xác nhận sau khi đến", "quay đầu")
+            ])},
+            fit, profile, networks, {"side": "u"},
+        )
+        self.assertEqual(with_claim, without_claim)
+        observed = _public_way_out_claims(
+            {"way_ids": [1]},
+            {1: WidthRange(0.5, 2.0, "Inferred", way_out_claims=[
+                Bound(0.0, 40.0, "Observed", "Xác nhận sau khi đến", "Tài xế xác nhận đã quay đầu ra",
+                      width_basis="unknown")
+            ])},
+        )
+        self.assertEqual(observed[0]["detail"], "Tài xế xác nhận đã quay đầu ra")
+        self.assertEqual(observed[0]["width_basis"], "unknown")
 
     def _reverse_graph(self, intermediate_oneway=0):
         graph = AreaGraph(center=(10.0, 106.0))

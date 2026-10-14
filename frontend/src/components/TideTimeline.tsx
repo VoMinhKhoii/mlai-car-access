@@ -137,15 +137,25 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
           {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · báo động 3: {vn(alarms.BD3, 1)} m</span>}</> : loadState === 'loading' ? 'Đang lấy dữ liệu triều' : 'Chưa có dữ liệu triều trong lúc ở'}</span>
       </header>
       <p className="tl-live num">Chuyến đi: {floodTimeLabel(arrive)} tới {floodTimeLabel(depart)}.</p>
-      <p className="tl-live num">
-        {lastRead ? <>Số đo trong khoảng biểu đồ: {floodTimeLabel(new Date(lastRead.t).toISOString())}, <b>{vn(lastRead.v, 2)} m</b>.</>
-          : <>Không có số đo trong khoảng biểu đồ.</>}
-        {lastRead && dayStart(lastRead.t) !== dayStart(a0) && <> Số đo khác ngày đến, không xác nhận triều cho ngày đến.</>}
-        {latestReading && (!lastRead || latestReading.t !== lastRead.t) && <> Số đo gần nhất tại {station}: {floodTimeLabel(new Date(latestReading.t).toISOString())}, {vn(latestReading.v, 2)} m; không xác nhận triều cho ngày chuyến đi.</>}
-        {model.length > 0 && <> Nét đứt: mô hình{err != null && Number.isFinite(err) ? `, sai số ±${Math.round(err * 100)} cm` : ''}.</>}
-        {loadState === 'error' && <> Không tải được dữ liệu triều; chưa thể đối chiếu với chuyến đi.</>}
-        {wet && <> · Mưa đo {hhmm(wet.s).slice(0, 2)}–{hhmm(wet.e).slice(0, 2)}h: <b>{vn(wet.mm, 1)} mm</b> ({wet.source.replace(/^đo tại /, '')})</>}
+      <p className="tl-live num" role="status">
+        {loadState === 'loading' ? 'Đang lấy dữ liệu triều.'
+          : loadState === 'error' ? 'Không tải được dữ liệu triều; chưa thể đối chiếu chuyến đi.'
+          : lastRead
+            ? <>Số đo trong khoảng: {floodTimeLabel(new Date(lastRead.t).toISOString())}, <b>{vn(lastRead.v, 2)} m</b>.</>
+            : 'Không có số đo triều xác nhận trong khoảng chuyến đi.'}
       </p>
+      <details className="why tl-details">
+        <summary>Chi tiết dữ liệu triều</summary>
+        <p className="tl-live num">
+          {lastRead && dayStart(lastRead.t) !== dayStart(a0) && <>Số đo khác ngày đến; không xác nhận triều cho ngày đến. </>}
+          {latestReading && (!lastRead || latestReading.t !== lastRead.t) && <>Số đo gần nhất tại {station}: {floodTimeLabel(new Date(latestReading.t).toISOString())}, {vn(latestReading.v, 2)} m; không xác nhận triều cho ngày chuyến đi. </>}
+          {model.length > 0 && <>Nét đứt: mô hình{err != null && Number.isFinite(err) ? `, sai số ±${Math.round(err * 100)} cm` : ''}. </>}
+          {wet && <>Mưa đo {hhmm(wet.s).slice(0, 2)}–{hhmm(wet.e).slice(0, 2)}h: <b>{vn(wet.mm, 1)} mm</b> ({wet.source.replace(/^đo tại /, '')}).</>}
+          {!lastRead && !latestReading && loadState === 'ready' && 'Không có số đo triều cho thời gian này.'}
+        </p>
+        {timingReason && <p className="tl-live">{timingReason}</p>}
+        {timingApproximate && <p className="tl-live">Khoảng di chuyển và giờ rời là ước lượng, không bảo đảm điều kiện thực tế liên tục.</p>}
+      </details>
       <div className="tl-track" ref={track} onClick={(e) => { if (e.target === e.currentTarget || (e.target as Element).tagName === 'svg' || (e.target as Element).tagName === 'path') change(snap(tAt(e.clientX))) }}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
           <defs>
@@ -184,8 +194,6 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
           {marks.map((mark) => <span key={mark.side} className={mark.side} style={{ left: `${pct(mark.t)}%` }} title={floodTimeLabel(new Date(mark.t).toISOString())}>{mark.label} {hhmm(mark.t)}</span>)}
         </div>
       )}
-      {timingApproximate && <p className="tl-live">Khoảng di chuyển và giờ rời là ước lượng, không bảo đảm điều kiện thực tế liên tục.</p>}
-      {timingReason && <p className="tl-live">{timingReason}</p>}
       <div className="tl-axis num" aria-hidden>
         {Array.from({ length: HOURS / 3 + 1 }, (_, i) => t0 + i * 3 * 3600e3).map((t) => (
           <span key={t} style={{ left: `${pct(t)}%` }}>{hhmm(t).slice(0, 2)}h{t > t0 && dayStart(t) === t && <> · {toLocal(new Date(t).toISOString())?.slice(5, 10).split('-').reverse().join('/')}</>}</span>

@@ -51,6 +51,11 @@ AI_FEATURES = {
         "detail": "~800 camera công khai của TP.HCM; đọc tối đa hai khung hình cách ~13 giây. Một khung hình chỉ cho thấy ngập, không kết luận giao thông. Tuyến đường lớn được chọn theo Goong.",
         "default": True,
     },
+    "ai_voice_report": {
+        "label": "Báo cáo bằng giọng nói",
+        "detail": "Nhận diện ý định xác nhận xe vào/ra hoặc báo vật cản; kết quả luôn cần người dùng xem lại và gửi.",
+        "default": False,
+    },
     "google_lookup": {
         "label": "Tra cứu Google (Street View, quán trong hẻm)",
         "detail": "Chỉ hiển thị trực tiếp, không lưu, không dùng làm bằng chứng. Có giới hạn chi phí cứng dưới mức miễn phí.",

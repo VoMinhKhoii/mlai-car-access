@@ -32,8 +32,9 @@ httpx.get = no_network
 httpx.post = no_network
 
 from fastapi.testclient import TestClient
-from app import config, evidence, flags, reports
+from app import config, evidence, flags, parcels, reports
 from app.main import app
+import app.main as main
 from app.osm import build_graph
 Path.read_text = original_read_text
 
@@ -97,15 +98,118 @@ out["flags_restored_after_corrupt_test"] = dict(flags._state)
 # Guest reports wait for review; the plan does not change until an operator approves.
 g = build_graph(10.8, 106.71)
 way_id = next(w.id for w in g.ways.values() if w.drivable)
-lat, lon = g.nodes[g.ways[way_id].nodes[0]]
+main_road_stop = next((
+    (w, g.nodes[node])
+    for w in g.ways.values() if w.drivable and w.kind == "main"
+    for node in w.nodes
+    if main.cached_graph(*g.nodes[node]) is not None and not parcels.path_into(g, *g.nodes[node])
+), None)
+if main_road_stop is None:
+    raise AssertionError("demo graph has no cached main-road stop")
+main_road, (lat, lon) = main_road_stop
+main_road_way_id = main_road.id
+alley_point = None
+for w in g.ways.values():
+    if not w.drivable or not w.is_alley:
+        continue
+    candidate_lat = (g.nodes[w.nodes[0]][0] + g.nodes[w.nodes[-1]][0]) / 2
+    candidate_lon = (g.nodes[w.nodes[0]][1] + g.nodes[w.nodes[-1]][1]) / 2
+    if parcels.path_into(g, candidate_lat, candidate_lon) and parcels.path_out(g, candidate_lat, candidate_lon):
+        alley_point = (w, candidate_lat, candidate_lon)
+        break
+if alley_point is None:
+    raise AssertionError("demo graph has no alley with a server-computed ingress and egress")
+alley, stop_lat, stop_lon = alley_point
 out["confirm_extra_field"] = packed(guest.post("/api/confirm", json={
-    "lat": lat, "lon": lon, "vehicle_id": "toyota-vios", "result": "in", "way_ids": [way_id], "status": "approved"}))
-out["confirm_unknown_way"] = packed(guest.post("/api/confirm", json={
-    "lat": lat, "lon": lon, "vehicle_id": "toyota-vios", "result": "in", "way_ids": [1]}))
-sub = guest.post("/api/confirm", json={"lat": lat, "lon": lon, "vehicle_id": "toyota-vios", "result": "in",
-                                      "way_ids": [way_id]})
+    "stop_lat": stop_lat, "stop_lon": stop_lon, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown", "way_ids": [way_id], "status": "approved"}))
+out["confirm_unknown_stop"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": 21.0, "stop_lon": 105.0, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown"}))
+out["confirm_bad_exit"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": stop_lat, "stop_lon": stop_lon, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "not-an-exit"}))
+pending_before_main_road = len(reports._load()["reports"])
+out["confirm_main_road"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": lat, "stop_lon": lon, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown"}))
+out["pending_count_before_main_road"] = pending_before_main_road
+out["pending_count_after_main_road"] = len(reports._load()["reports"])
+pending_before_non_alley = len(reports._load()["reports"])
+non_alley_stop = None
+for w in g.ways.values():
+    if not w.drivable or w.is_alley or w.kind == "main":
+        continue
+    candidate = ((g.nodes[w.nodes[0]][0] + g.nodes[w.nodes[-1]][0]) / 2,
+                 (g.nodes[w.nodes[0]][1] + g.nodes[w.nodes[-1]][1]) / 2)
+    ingress = parcels.path_into(g, *candidate)
+    if ingress and not g.ways[ingress[-1][0]].is_alley and main.cached_graph(*candidate) is not None:
+        non_alley_stop = candidate
+        break
+if non_alley_stop is None:
+    raise AssertionError("demo graph has no cached non-alley terminal stop")
+out["confirm_non_alley"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": non_alley_stop[0], "stop_lon": non_alley_stop[1], "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown"}))
+out["pending_before_non_alley"] = pending_before_non_alley
+out["pending_after_non_alley"] = len(reports._load()["reports"])
+
+off_way_stop = None
+for dlat, dlon in ((.0001, 0), (-.0001, 0), (0, .0001), (0, -.0001),
+                   (.0002, 0), (-.0002, 0), (0, .0002), (0, -.0002)):
+    candidate = (stop_lat + dlat, stop_lon + dlon)
+    if main.cached_graph(*candidate) is None:
+        continue
+    ingress = parcels.path_into(g, *candidate)
+    if ingress and g.ways[ingress[-1][0]].is_alley \
+       and main.haversine(*candidate, *ingress[-1][1][-1]) > 5.0:
+        off_way_stop = candidate
+        break
+if off_way_stop is None:
+    raise AssertionError("demo graph has no cached stop point more than 5 m from an alley projection")
+pending_before_off_way = len(reports._load()["reports"])
+out["confirm_off_way_stop"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": off_way_stop[0], "stop_lon": off_way_stop[1], "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown"}))
+out["pending_before_off_way"] = pending_before_off_way
+out["pending_after_off_way"] = len(reports._load()["reports"])
+original_allow_guest = reports.allow_guest
+original_cached_graph = main.cached_graph
+def deny_guest(_client, **kwargs):
+    raise reports.RateLimited()
+def fail_if_graph_is_loaded(*_args):
+    raise AssertionError("rate-limited confirmation must not load the graph")
+reports.allow_guest = deny_guest
+main.cached_graph = fail_if_graph_is_loaded
+out["confirm_rate_limited_before_graph"] = packed(guest.post("/api/confirm", json={
+    "stop_lat": stop_lat, "stop_lon": stop_lon, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "unknown"}))
+reports.allow_guest = original_allow_guest
+main.cached_graph = original_cached_graph
+original_allow_guest_2 = reports.allow_guest
+def deny_guest_blockage(_client, **kwargs):
+    raise reports.RateLimited()
+def fail_if_graph_is_loaded_blockage(*_args, **kwargs):
+    raise AssertionError("rate-limited blockage must not load the graph")
+reports.allow_guest = deny_guest_blockage
+main.cached_graph = fail_if_graph_is_loaded_blockage
+out["blockage_rate_limited_before_graph"] = packed(guest.post("/api/blockage", json={
+    "lat": lat, "lon": lon, "way_id": main_road_way_id, "reason": "test"}))
+reports.allow_guest = original_allow_guest_2
+main.cached_graph = original_cached_graph
+sub = guest.post("/api/confirm", json={
+    "stop_lat": stop_lat, "stop_lon": stop_lon, "vehicle_id": "toyota-vios",
+    "result": "in", "exit": "turned"})
 out["confirm_guest"] = packed(sub)
 rid = sub.json()["report_id"]
+confirm_payload = reports._load()["reports"][rid]["payload"]
+out["confirm_payload"] = confirm_payload
+confirm_ingress = [w for w, _ in parcels.path_into(g, stop_lat, stop_lon)]
+out["confirm_full_ingress_way_ids"] = confirm_ingress
+out["confirm_selected_alley_way_id"] = alley.id
+out["confirm_expected_stop_way_id"] = confirm_ingress[-1]
+out["confirm_expected_way_ids"] = [confirm_ingress[-1]]
+out["confirm_expected_way_out_ids"] = [w for w, _ in parcels.path_out(g, stop_lat, stop_lon)]
 confirm_file = store / "confirmations.jsonl"
 count = lambda: sum(1 for l in confirm_file.read_text().splitlines() if rid in l) if confirm_file.exists() else 0
 out["projected_before_approval"] = count()
@@ -119,7 +223,15 @@ confirm_file.write_text("".join(l + "\n" for l in confirm_file.read_text().split
 reports.reconcile(); reports.reconcile()
 out["projected_after_crash_reconcile"] = count()
 out["evidence_has_confirmation"] = any(
-    "Xác nhận sau khi đến" == b.source for b in evidence.STORE_EVIDENCE.snapshot.by_way.get(way_id, []))
+    "Xác nhận sau khi đến" == bound.source
+    for way_id in confirm_payload["way_ids"]
+    for bound in evidence.STORE_EVIDENCE.snapshot.by_way.get(way_id, [])
+)
+out["evidence_has_exit_claim"] = any(
+    "quay đầu ra" in bound.detail
+    for way_id in confirm_payload["way_out_ids"]
+    for bound in evidence.STORE_EVIDENCE.snapshot.way_out_by_way.get(way_id, [])
+)
 
 # Expired reports never promote.
 data = json.loads(reports.PENDING_FILE.read_text())
@@ -259,8 +371,23 @@ class OperatorAccess(unittest.TestCase):
         self.assertEqual(self.r["flags_restored_after_corrupt_test"], self.r["initial_flag_values"])
 
     def test_guest_report_waits_for_review_and_projects_exactly_once(self):
+        self.assertEqual(self.status("confirm_rate_limited_before_graph"), 429)
+        self.assertEqual(self.status("blockage_rate_limited_before_graph"), 429)
         self.assertEqual(self.status("confirm_extra_field"), 422)
-        self.assertEqual(self.status("confirm_unknown_way"), 422)
+        self.assertEqual(self.status("confirm_unknown_stop"), 422)
+        self.assertEqual(self.status("confirm_bad_exit"), 422)
+        self.assertEqual(
+            self.r["confirm_main_road"]["json"]["detail"],
+            "Xác nhận chỉ dành cho hẻm được máy chủ ánh xạ. Để báo cáo vật cản, vui lòng chọn loại báo cáo khác.",
+        )
+        self.assertEqual(self.r["pending_count_before_main_road"], self.r["pending_count_after_main_road"])
+        self.assertEqual(self.status("confirm_main_road"), 422)
+        self.assertEqual(self.status("confirm_non_alley"), 422)
+        self.assertIn("ánh xạ trực tiếp lên hẻm", self.r["confirm_non_alley"]["json"]["detail"])
+        self.assertEqual(self.r["pending_before_non_alley"], self.r["pending_after_non_alley"])
+        self.assertEqual(self.status("confirm_off_way_stop"), 422)
+        self.assertIn("ánh xạ trực tiếp lên hẻm", self.r["confirm_off_way_stop"]["json"]["detail"])
+        self.assertEqual(self.r["pending_before_off_way"], self.r["pending_after_off_way"])
         self.assertEqual(self.status("confirm_guest"), 202)
         self.assertEqual(self.r["confirm_guest"]["json"]["status"], "pending")
         self.assertEqual(self.r["projected_before_approval"], 0)
@@ -271,6 +398,12 @@ class OperatorAccess(unittest.TestCase):
         self.assertEqual(self.r["projected_after_repeat"], 1)
         self.assertEqual(self.r["projected_after_crash_reconcile"], 1)
         self.assertTrue(self.r["evidence_has_confirmation"])
+        payload = self.r["confirm_payload"]
+        self.assertEqual(self.r["confirm_selected_alley_way_id"], self.r["confirm_expected_stop_way_id"])
+        self.assertEqual(payload["way_ids"], self.r["confirm_expected_way_ids"])
+        self.assertEqual(payload["way_out_ids"], self.r["confirm_expected_way_out_ids"])
+        self.assertEqual(payload["exit"], "turned")
+        self.assertTrue(self.r["evidence_has_exit_claim"])
 
     def test_expired_reports_never_promote(self):
         self.assertEqual(self.status("approve_expired"), 409)

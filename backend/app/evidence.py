@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import flags
+from . import flags, vehicles
 from .config import DATA, STORE
 from .osm import AreaGraph, Way, strip_accents
 
@@ -484,8 +484,12 @@ class EvidenceIndex:
                 continue
             try:
                 c = json.loads(line)
-                body, mirror, label = float(c["body_width"]), float(c["mirror_width"]), c["vehicle_label"]
+                vehicle_id = c.get("vehicle_id")
+                body = vehicles.min_body_width(vehicle_id) if vehicle_id else float(c["body_width"])
+                mirror, label = float(c["mirror_width"]), c["vehicle_label"]
                 result, way_ids, observed = c["result"], [int(w) for w in c["way_ids"]], c["date"]
+                way_out_ids = [int(w) for w in c.get("way_out_ids", [])]
+                exit_action = c.get("exit", "unknown")
             except (ValueError, KeyError, TypeError):
                 continue  # one malformed line must not stop every plan
             if result == "in":
@@ -497,6 +501,18 @@ class EvidenceIndex:
             for way_id in way_ids:
                 self._add(Bound(lo, hi, "Observed", "Xác nhận sau khi đến", d,
                                 observed_on=observed, width_basis="unknown"), way_id)
+            exit_labels = {
+                "through": "đi thẳng ra",
+                "turned": "quay đầu ra",
+                "reversed": "lùi ra",
+            }
+            if result != "no" and exit_action in exit_labels:
+                detail = f"Tài xế {label} xác nhận đã {exit_labels[exit_action]}"
+                for way_id in way_out_ids:
+                    self.way_out_by_way.setdefault(way_id, []).append(
+                        Bound(0, OPEN_HI, "Observed", "Xác nhận sau khi đến", detail,
+                              observed_on=observed, width_basis="unknown")
+                    )
 
     def bounds_for(self, w: Way) -> list[Bound]:
         out = list(self.by_way.get(w.id, []))

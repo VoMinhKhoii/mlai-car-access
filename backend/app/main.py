@@ -12,6 +12,7 @@ from __future__ import annotations
 import math
 import re
 from datetime import date, datetime, timedelta, timezone
+from functools import lru_cache
 from typing import Annotated, Literal
 
 import httpx
@@ -23,11 +24,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator
 from starlette.concurrency import run_in_threadpool
 
-from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, in_hcmc
-from . import ai, auth, budget, cameras, corridor, flags, google_lookup, hydro, live, plan, reports, vehicles
+from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, SIDE_CLEARANCE_M, in_hcmc
+from . import ai, auth, budget, cameras, corridor, flags, geometry, google_lookup, hydro, live, parcels, plan, reports, vehicles
 from .evidence import STORE_EVIDENCE
 from .flood import tide_meta, tide_series
 from .osm import build_graph, cached_graph, haversine, strip_accents
+from .deadline import Expired
 from .storage import CorruptState
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -164,6 +166,42 @@ def list_vehicles():
     ps = vehicles.all_profiles()
     return {"classes": [p.to_json() for p in ps.values() if p.kind == "class"],
             "models": sorted([p.to_json() for p in ps.values() if p.kind == "model"], key=lambda x: x["label"])}
+
+
+@lru_cache(maxsize=256)
+def _maneuver_result(vehicle_id: str, width_cm: int) -> dict:
+    profile = vehicles.get_profile(vehicle_id)
+    if profile.kind == "class":
+        # The width requirement is based on the worst member; simulate that actual member rather than a
+        # synthetic profile assembled from several different cars.
+        profile = max(vehicles._members(vehicle_id), key=lambda member: vehicles.three_point_width(member.id))
+    width = width_cm / 100
+    moves, length, poses = geometry.k_turn_path(
+        profile.body_width, profile.length, profile.wheelbase, profile.turning_radius,
+        width, c=SIDE_CLEARANCE_M, T=profile.track,
+    )
+    return {
+        "vehicle_id": vehicle_id,
+        "simulated_vehicle_label": profile.label,
+        "width_m": width,
+        "vehicle_length_m": round(profile.length, 2),
+        "vehicle_mirror_width_m": round(profile.mirror_width, 2),
+        "body_center_offset_m": round(geometry.body_center_offset(profile.length, profile.wheelbase), 4),
+        "moves": moves,
+        "length_m": round(length, 2) if length is not None else None,
+        "poses": [[round(x, 4), round(y, 4), round(heading, 5)] for x, y, heading in poses]
+        if moves is not None else None,
+        "frame": "corridor",
+    }
+
+
+@app.get("/api/vehicles/{vehicle_id}/maneuver")
+def vehicle_maneuver(vehicle_id: Annotated[str, Field(max_length=80)],
+                     width: Annotated[float, Field(ge=1.5, le=15, allow_inf_nan=False)]):
+    try:
+        return _maneuver_result(vehicle_id, round(width * 100))
+    except KeyError:
+        raise HTTPException(404, f"unknown vehicle {vehicle_id}")
 
 
 @app.get("/api/search")
@@ -391,19 +429,19 @@ def _graph_with(lat: float, lon: float, way_ids: list[int]):
     return g
 
 
-def _guest_limit(request: Request) -> None:
+def _guest_limit(request: Request, bucket: str = "reports") -> None:
     try:
-        reports.allow_guest(request.client.host if request.client else "?")
+        reports.allow_guest(request.client.host if request.client else "?", bucket=bucket)
     except reports.RateLimited:
         raise HTTPException(429, "Bạn đã gửi quá nhiều báo cáo, thử lại sau", headers={"Retry-After": "600"})
 
 
 class Confirmation(Strict):
-    lat: Lat
-    lon: Lon
+    stop_lat: Lat
+    stop_lon: Lon
     vehicle_id: Annotated[str, Field(max_length=80)]
     result: Literal["in", "tight", "no"]
-    way_ids: Annotated[list[WayId], Field(min_length=1, max_length=20)]
+    exit: Literal["through", "turned", "reversed", "unknown"] = "unknown"
 
 
 @app.post("/api/confirm", status_code=202)
@@ -412,13 +450,46 @@ def confirm(c: Confirmation, request: Request):
         p = vehicles.get_profile(c.vehicle_id)
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {c.vehicle_id}")
-    _graph_with(c.lat, c.lon, c.way_ids)
+    if not in_hcmc(c.stop_lat, c.stop_lon):
+        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
     _guest_limit(request)
-    payload = {"date": date.today().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
-               "body_width": p.body_width, "mirror_width": p.mirror_width, "result": c.result,
-               "way_ids": c.way_ids, "lat": c.lat, "lon": c.lon}
+    g = cached_graph(c.stop_lat, c.stop_lon)
+    if g is None:
+        raise HTTPException(422, "Khu vực này chưa có bản đồ trên máy chủ")
+    ingress_path = parcels.path_into(g, c.stop_lat, c.stop_lon)
+    if not ingress_path:
+        raise HTTPException(422, "Xác nhận chỉ dành cho hẻm được máy chủ ánh xạ. Để báo cáo vật cản, vui lòng chọn loại báo cáo khác.")
+    stop_way_id = ingress_path[-1][0]
+    stop_projection = ingress_path[-1][1][-1]
+    if not g.ways[stop_way_id].is_alley or haversine(c.stop_lat, c.stop_lon, *stop_projection) > plan.WALK_SNAP_M:
+        raise HTTPException(422, "Chỉ xác nhận điểm dừng được ánh xạ trực tiếp lên hẻm (cách đường ≤ 5 m); bãi đỗ hoặc đường không phải hẻm không tạo bằng chứng.")
+    way_out_ids = list(dict.fromkeys(way_id for way_id, _ in parcels.path_out(g, c.stop_lat, c.stop_lon)))
+    way_ids = [stop_way_id]
+    payload = {
+        "date": date.today().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
+        "body_width": vehicles.min_body_width(p.id), "mirror_width": p.mirror_width,
+        "result": c.result, "exit": c.exit, "way_ids": way_ids, "way_out_ids": way_out_ids,
+        "stop_lat": c.stop_lat, "stop_lon": c.stop_lon,
+    }
     rec = reports.submit("confirmation", payload, "Tài xế xác nhận sau khi đến")
     return {"status": "pending", "report_id": rec["report_id"]}
+
+
+class VoiceParse(Strict):
+    text: Annotated[str, Field(min_length=1, max_length=300)]
+
+
+@app.post("/api/voice/parse")
+def parse_voice_report(body: VoiceParse, request: Request):
+    from time import monotonic
+    _guest_limit(request, bucket="voice_parse")
+    deadline = monotonic() + 10
+    try:
+        return ai.parse_voice_report(body.text, deadline=deadline)
+    except ai.FeatureOff as exc:
+        raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
+    except (ai.NoModel, budget.OverBudget, Expired, httpx.HTTPError, ValueError, TypeError, KeyError, IndexError, AttributeError):
+        return {"kind": "unclear", "question": "Không nhận diện được. Hãy chọn loại báo cáo thủ công."}
 
 
 class Blockage(Strict):
@@ -430,8 +501,8 @@ class Blockage(Strict):
 
 @app.post("/api/blockage", status_code=202)
 def blockage(b: Blockage, request: Request):
-    _graph_with(b.lat, b.lon, [b.way_id])
     _guest_limit(request)
+    _graph_with(b.lat, b.lon, [b.way_id])
     payload = {"way_id": b.way_id, "reason": b.reason, "source": "Tài xế báo", "date": date.today().isoformat()}
     rec = reports.submit("blockage", payload, "Tài xế báo vật cản")
     return {"status": "pending", "report_id": rec["report_id"]}

@@ -32,6 +32,23 @@ export interface Vehicle {
   safe_water_depth: number; safe_water_basis: string; members: string[]
   fits_min: number; tight_min: number; three_point_width: number; source_url: string
 }
+export interface Maneuver {
+  vehicle_id: string
+  simulated_vehicle_label: string
+  width_m: number
+  moves: number | null
+  length_m: number | null
+  vehicle_length_m: number
+  vehicle_mirror_width_m: number
+  body_center_offset_m: number
+  poses: number[][] | null
+  frame: 'corridor'
+}
+export type ManeuverState =
+  | { key: string; status: 'loading'; playback: number }
+  | { key: string; status: 'error'; playback: number; error: string }
+  | { key: string; status: 'unavailable'; playback: number; reason: 'missing-width' | 'out-of-range' }
+  | { key: string; status: 'ready'; playback: number; result: Maneuver }
 export type WidthBasis =
   | 'measured_clear_width'
   | 'observed_clear_width'
@@ -98,7 +115,7 @@ export interface StopPoint {
   route_in: { available: boolean; meters: number | null; geometry: number[][]; flood: LegFloodCheck | null } | null
   fit: { class: FitClass; width_range?: WidthRange; note?: string | null; needed?: { fits_min: number; tight_min: number; door_min: number } }
   way_out: { available: boolean; mode: string; text: string; turn_verified?: boolean; route_verified?: boolean
-    reverse_m?: number; tight_exit?: boolean; geometry?: number[][]; flood: LegFloodCheck | null }
+    reverse_m?: number; tight_exit?: boolean; geometry?: number[][]; flood: LegFloodCheck | null; observed?: Bound[] }
   flood: { stay: LegFloodCheck }
   legality: { status: Legal; rules: Rule[] }
   fail_reasons: string[]; unverified_reasons: string[]; failure_codes: string[]
@@ -193,6 +210,14 @@ export interface Corridor {
 }
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
+export interface VoiceParseResult {
+  kind: 'confirmation' | 'blockage' | 'unclear'
+  result?: 'in' | 'tight' | 'no'
+  exit?: 'through' | 'turned' | 'reversed' | 'unknown'
+  reason?: string
+  question?: string
+}
+
 export interface PlanRequest {
   lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
   /** Complete ISO timestamp with an explicit timezone, or null for now. */
@@ -245,13 +270,17 @@ export const api = {
   search: (q: string, near?: { lat: number; lon: number } | null, signal?: AbortSignal) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`, { signal }).then(j<{ results: SearchResult[] }>),
   reverse: (lat: number, lon: number) => fetch(`/api/reverse?lat=${lat}&lon=${lon}`).then(j<{ label: string; source: string }>),
   place: (id: string, signal?: AbortSignal) => fetch(`/api/place/${encodeURIComponent(id)}`, { signal }).then(j<{ lat: number; lon: number; label: string }>),
+  maneuver: (vehicleId: string, width: number, signal?: AbortSignal) =>
+    fetch(`/api/vehicles/${encodeURIComponent(vehicleId)}/maneuver?width=${encodeURIComponent(String(width))}`, { signal }).then(j<Maneuver>),
   plan: (body: PlanRequest, signal?: AbortSignal) => post('/api/plan', body, signal).then(j<Plan>),
+  wayEvidence: (wayId: number, lat: number, lon: number, signal?: AbortSignal) =>
+    post(`/api/evidence/way/${wayId}`, { lat, lon }, signal).then(j<WayEvidence>),
   tide: (start: string, hours = 36) =>
     fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
-  wayEvidence: (id: number, lat: number, lon: number, signal?: AbortSignal) => post(`/api/evidence/way/${id}`, { lat, lon }, signal).then(j<WayEvidence>),
-  confirm: (body: { lat: number; lon: number; vehicle_id: string; result: 'in' | 'tight' | 'no'; way_ids: number[] }) =>
+  confirm: (body: { stop_lat: number; stop_lon: number; vehicle_id: string; result: 'in' | 'tight' | 'no'; exit: 'through' | 'turned' | 'reversed' | 'unknown' }) =>
     post('/api/confirm', body).then(j<{ status: 'pending'; report_id: string }>),
+  parseVoice: (text: string) => post('/api/voice/parse', { text }).then(j<VoiceParseResult>),
   blockage: (body: { lat: number; lon: number; way_id: number; reason: string }) =>
     post('/api/blockage', body).then(j<{ status: 'pending'; report_id: string }>),
   setFlag: (name: string, enabled: boolean) => post('/api/flags', { name, enabled }).then(j<{ flags: Flag[] }>),

@@ -43,7 +43,7 @@ httpx.get = no_network
 httpx.post = no_network
 
 from fastapi.testclient import TestClient
-from app import ai, budget, cameras, config, evidence, flood, live, osm, plan as route_plan, reports, vehicles
+from app import ai, budget, cameras, config, evidence, flags, flood, live, osm, plan as route_plan, reports, vehicles, deadline
 from app.main import app
 
 Path.read_text = original_read_text
@@ -92,7 +92,56 @@ for name, value in {
 
 responses["plan_null"] = packed(client.post("/api/plan", json=base))
 responses["corridor_null"] = packed(client.post("/api/corridor", json=corridor_base))
+responses["maneuver"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 12}))
+responses["maneuver_unknown_vehicle"] = packed(client.get("/api/vehicles/unknown/maneuver", params={"width": 8}))
+responses["maneuver_low_width"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 1.49}))
+responses["maneuver_high_width"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 15.01}))
 responses["outside_hcmc"] = packed(client.post("/api/plan", json={**base, "lat": 21.0285, "lon": 105.8542}))
+original_voice_call = ai._call
+voice_deadlines = []
+flags.set_flag("ai_voice_report", True)
+def successful_voice_call(prompt, **kwargs):
+    voice_deadlines.append(kwargs.get("deadline"))
+    return {"kind": "confirmation", "result": "tight", "exit": "reversed", "confidence": 0.95}
+ai._call = successful_voice_call
+responses["voice_confirmation"] = packed(client.post("/api/voice/parse", json={"text": "Vào được nhưng phải gập gương, ra phải lùi"}))
+ai._call = lambda prompt, **kwargs: {"kind": "blockage", "reason": "Xe ba gác chắn đầu hẻm", "confidence": 0.9}
+responses["voice_blockage"] = packed(client.post("/api/voice/parse", json={"text": "Đầu hẻm có xe ba gác chắn"}))
+ai._call = lambda prompt, **kwargs: {"kind": "confirmation", "result": "in", "exit": "unknown", "confidence": 0.2}
+responses["voice_unclear"] = packed(client.post("/api/voice/parse", json={"text": "Hẻm này thế nào?"}))
+ai._call = lambda prompt, **kwargs: []
+responses["voice_non_object"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
+ai._call = lambda prompt, **kwargs: {"kind": "confirmation", "result": "in", "confidence": "cao"}
+responses["voice_bad_confidence"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
+def no_voice_model(prompt, **kwargs):
+    raise ai.NoModel("no test model")
+ai._call = no_voice_model
+responses["voice_no_model"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+for name, error_type in (
+    ("voice_empty_candidates", IndexError),
+    ("voice_invalid_provider_shape", AttributeError),
+    ("voice_deadline_expired", deadline.Expired),
+):
+    def fail_voice_parse(prompt, error=error_type(), **kwargs):
+        raise error
+    ai._call = fail_voice_parse
+    responses[name] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào hẻm"}))
+responses["voice_too_long"] = packed(client.post("/api/voice/parse", json={"text": "x" * 301}))
+import time
+reports._rate.clear()
+ai._call = successful_voice_call
+responses["voice_quota_calls"] = [
+    client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}).status_code for _ in range(20)
+]
+responses["voice_deadline_seconds"] = voice_deadlines[-1] - time.monotonic()
+responses["voice_quota_21st"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
+reports._rate.clear()
+reports.allow_guest("testclient")
+ai._call = original_voice_call
+flags.set_flag("ai_voice_report", False)
+responses["voice_flag_off"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+responses["maneuver"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 12}))
+
 responses["unknown_vehicle"] = packed(client.post("/api/plan", json={**base, "vehicle_id": "unknown-vehicle"}))
 for name, value in {
     "duration_zero": 0,
@@ -228,6 +277,53 @@ class ApiValidation(unittest.TestCase):
     def test_existing_endpoint_status_contracts_are_preserved(self) -> None:
         self.assert_status("outside_hcmc", 422)
         self.assert_status("unknown_vehicle", 404)
+
+    def test_maneuver_endpoint_returns_bounded_path_and_rejects_bad_inputs(self) -> None:
+        self.assert_status("maneuver", 200)
+        result = self.responses["maneuver"]["json"]
+        self.assertEqual(result["vehicle_id"], "toyota-fortuner")
+        self.assertTrue(result["simulated_vehicle_label"])
+        self.assertEqual(result["width_m"], 12)
+        self.assertIn("vehicle_length_m", result)
+        self.assertIn("vehicle_mirror_width_m", result)
+        self.assertIn("body_center_offset_m", result)
+        self.assertIsInstance(result["vehicle_length_m"], (int, float))
+        self.assertIsInstance(result["vehicle_mirror_width_m"], (int, float))
+        self.assertIsInstance(result["body_center_offset_m"], (int, float))
+        self.assertIsNotNone(result["moves"])
+        self.assertGreater(len(result["poses"]), 1)
+        self.assertLessEqual(len(result["poses"]), 120)
+        self.assert_status("maneuver_unknown_vehicle", 404)
+        for name in ("maneuver_low_width", "maneuver_high_width"):
+            with self.subTest(case=name):
+                self.assert_status(name, 422)
+
+    def test_voice_parse_normalizes_intents_and_falls_back_without_model(self) -> None:
+        self.assert_status("voice_confirmation", 200)
+        self.assertEqual(self.responses["voice_confirmation"]["json"], {
+            "kind": "confirmation", "result": "tight", "exit": "reversed",
+        })
+        self.assert_status("voice_blockage", 200)
+        self.assertEqual(self.responses["voice_blockage"]["json"], {
+            "kind": "blockage", "reason": "Xe ba gác chắn đầu hẻm",
+        })
+        for name in (
+            "voice_unclear", "voice_no_model", "voice_empty_candidates",
+            "voice_invalid_provider_shape", "voice_deadline_expired",
+        ):
+            with self.subTest(case=name):
+                self.assert_status(name, 200)
+                self.assertEqual(self.responses[name]["json"]["kind"], "unclear")
+        self.assert_status("voice_too_long", 422)
+        self.assertEqual(self.responses["voice_quota_calls"], [200] * 20)
+        self.assertEqual(self.responses["voice_quota_21st"]["status"], 429)
+        self.assertGreater(self.responses["voice_deadline_seconds"], 0)
+        self.assertLessEqual(self.responses["voice_deadline_seconds"], 10)
+        for name in ("voice_non_object", "voice_bad_confidence"):
+            with self.subTest(case=name):
+                self.assert_status(name, 200)
+                self.assertEqual(self.responses[name]["json"]["kind"], "unclear")
+        self.assert_status("voice_flag_off", 403)
 
     def test_duration_must_be_a_finite_positive_integer(self) -> None:
         for name in ("duration_zero", "duration_negative", "duration_fractional", "duration_non_finite"):

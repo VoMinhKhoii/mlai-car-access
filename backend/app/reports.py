@@ -38,7 +38,7 @@ PAGE_MAX = 100
 GUEST_REPORTS_PER_HOUR = 20
 
 _lock = threading.Lock()
-_rate: dict[str, list[float]] = {}
+_rate: dict[tuple[str, str], list[float]] = {}
 
 
 class Conflict(Exception):
@@ -83,14 +83,15 @@ def _effective(r: dict, now: datetime) -> dict:
     return r
 
 
-def allow_guest(client: str) -> None:
+def allow_guest(client: str, bucket: str = "reports") -> None:
     now = time.monotonic()
+    key = (bucket, client)
     with _lock:
-        recent = [t for t in _rate.get(client, []) if now - t < 3600]
+        recent = [t for t in _rate.get(key, []) if now - t < 3600]
         if len(recent) >= GUEST_REPORTS_PER_HOUR:
             raise RateLimited()
         recent.append(now)
-        _rate[client] = recent
+        _rate[key] = recent
         if len(_rate) > 4096:
             for k in list(_rate)[:1024]:
                 _rate.pop(k, None)

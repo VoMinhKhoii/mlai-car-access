@@ -741,6 +741,14 @@ def _public_route(route: dict) -> dict:
             if key not in ("strict", "edge_ids", "way_ids")}
 
 
+def _public_way_out_claims(route: dict, wrs: dict[int, WidthRange]) -> list[dict]:
+    return [
+        claim.to_json()
+        for way_id in dict.fromkeys(route.get("way_ids", ()))
+        for claim in wrs[way_id].way_out_claims
+    ]
+
+
 def _candidate_legality(c: Candidate, ctx: PlanContext, arrive: datetime,
                         depart: datetime) -> tuple[str, list[StopRule]]:
     # Cache by calendar window while sign rules are day-granular (P.131b/c parity).
@@ -873,16 +881,18 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
                 reasons_fail.append("Đường ra bị ngập trong khoảng xe rời điểm dừng")
                 fit_way_out["flood"] = _route_flood(ctx, fit_way_out, exit_times)
                 way_out_output = {"available": False, **_public_route(fit_way_out),
-                                  "route_verified": fit_way_out["strict"]}
+                                  "route_verified": fit_way_out["strict"],
+                                  "observed": _public_way_out_claims(fit_way_out, wrs)}
             else:
                 failure_codes.append("dead_end")
                 reasons_fail.append("Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)")
                 way_out_output = {"available": False, **_public_route(way_out), "flood": None,
-                                  "route_verified": False}
+                                  "route_verified": False, "observed": _public_way_out_claims(way_out, wrs)}
         else:
             way_out["flood"] = _route_flood(ctx, way_out, exit_times)
             way_out_output = {"available": True, **_public_route(way_out),
-                              "route_verified": way_out["strict"]}
+                              "route_verified": way_out["strict"],
+                              "observed": _public_way_out_claims(way_out, wrs)}
             if not way_out["strict"]:
                 unverified.append(way_out.get("text") or "Đường ra chưa đủ bằng chứng")
             if way_out.get("tight_exit"):
@@ -890,7 +900,7 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
     else:
         # Entry failed; don't evaluate exit
         way_out_output = {"available": False, "mode": "none", "text": way_out["text"], "meters": None,
-                          "geometry": [], "flood": None, "route_verified": False}
+                          "geometry": [], "flood": None, "route_verified": False, "observed": []}
     checks["way_out"] = way_out_output
 
     stop_way_ids = ([way_id] if way_id is not None else c.data.get("access_way_ids", []))

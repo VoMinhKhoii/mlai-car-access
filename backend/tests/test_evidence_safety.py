@@ -1,10 +1,12 @@
 """R-05 tests for width provenance, bottlenecks, coverage, and held-out isolation."""
+import json
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
-from app.evidence import Bound, EvidenceStore, _combine, _width_metadata, width_ranges
+from app.evidence import Bound, EvidenceIndex, EvidenceStore, _combine, _width_metadata, width_ranges
 from app.osm import AreaGraph, Way
 from app.parcels import measure
 from app.plan import _usable, compute_fit
@@ -108,6 +110,55 @@ class EvidenceSafetyTests(unittest.TestCase):
             self.assertFalse(ranges[910011].decisive_clearance)
             self.assertEqual(fit[910011], "unknown")
             self.assertFalse(_usable(fit[910011], "passable", strict=True))
+            claims = {
+                way_id: replace(
+                    width,
+                    way_out_claims=[Bound(0.0, 40.0, "Observed", "Xác nhận sau khi đến", "quay đầu")],
+                )
+                for way_id, width in ranges.items()
+            }
+            fit_with_exit_claims, _ = compute_fit(graph, claims, vehicle)
+            self.assertEqual(fit_with_exit_claims, fit)
+
+    def test_class_confirmation_uses_narrowest_member_body_width_and_exit_claim_is_not_width(self):
+        with TemporaryDirectory() as directory:
+            confirmations = Path(directory) / "confirmations.jsonl"
+            confirmations.write_text(
+                json.dumps({
+                    "date": "2026-10-14", "vehicle_id": "class-l", "vehicle_label": "L",
+                    "body_width": 2.065, "mirror_width": 2.315, "result": "in",
+                    "way_ids": [920001], "way_out_ids": [920002], "exit": "turned",
+                }) + "\n",
+                encoding="utf-8",
+            )
+            index = EvidenceIndex()
+            with patch("app.evidence.CONFIRM_FILE", confirmations):
+                index._load_confirmations()
+
+            width = index.by_way[920001][0]
+            self.assertAlmostEqual(width.lo, 1.94)
+            self.assertEqual(width.width_basis, "unknown")
+            exit_claim = index.way_out_by_way[920002][0]
+            self.assertEqual(exit_claim.tier, "Observed")
+            self.assertEqual(exit_claim.width_basis, "unknown")
+            self.assertIn("quay đầu ra", exit_claim.detail)
+
+    def test_legacy_confirmation_without_exit_fields_still_loads(self):
+        with TemporaryDirectory() as directory:
+            confirmations = Path(directory) / "confirmations.jsonl"
+            confirmations.write_text(
+                json.dumps({
+                    "date": "2026-10-14", "vehicle_id": "toyota-vios", "vehicle_label": "Vios",
+                    "body_width": 1.735, "mirror_width": 1.925, "result": "in", "way_ids": [920003],
+                }) + "\n",
+                encoding="utf-8",
+            )
+            index = EvidenceIndex()
+            with patch("app.evidence.CONFIRM_FILE", confirmations):
+                index._load_confirmations()
+
+            self.assertIn(920003, index.by_way)
+            self.assertNotIn(920003, index.way_out_by_way)
 
     def test_evaluation_snapshot_excludes_measured_rows_before_way_and_name_indexing(self):
         with TemporaryDirectory() as directory:
