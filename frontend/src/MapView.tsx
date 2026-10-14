@@ -75,8 +75,6 @@ export function MapView(p: Props) {
         paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 6, 17, 12] } })
       m.addLayer({ id: 'corridor-sel', type: 'line', source: 'corridor', filter: ['get', 'sel'], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--route'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3.5, 17, 7], 'line-opacity': 0.85 } })
-      m.addLayer({ id: 'standard', type: 'line', source: 'standard', layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': css('--route-standard'), 'line-width': 3, 'line-dasharray': [0.1, 1.8], 'line-opacity': 0.85 } })
       for (const id of ['approach', 'route']) {
         m.addLayer({ id: `${id}-casing`, type: 'line', source: id, layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 7, 17, 12] } })
@@ -87,6 +85,11 @@ export function MapView(p: Props) {
         paint: { 'line-color': css('--route'), 'line-width': 3, 'line-dasharray': [0.1, 1.6], 'line-opacity': 0.9 } })
       m.addLayer({ id: 'walk', type: 'line', source: 'walk', layout: { 'line-cap': 'round' },
         paint: { 'line-color': css('--signal'), 'line-width': 4, 'line-dasharray': [0.1, 1.5] } })
+      // The reference route mostly runs on the same streets as ours: draw it on top, cased, so where it leaves ours shows.
+      m.addLayer({ id: 'standard-casing', type: 'line', source: 'standard', layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 5, 17, 9], 'line-opacity': 0.9 } })
+      m.addLayer({ id: 'standard', type: 'line', source: 'standard', layout: { 'line-cap': 'butt', 'line-join': 'round' },
+        paint: { 'line-color': css('--route-standard'), 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 17, 5], 'line-dasharray': [2, 1.5] } })
       const cam = { ok: css('--fit-fits'), un: css('--fit-tight'), jam: css('--fit-no'), water: css('--flood-risky'), none: css('--fit-unknown') }
       m.addLayer({ id: 'cams', type: 'circle', source: 'cams', minzoom: 10.5,
         paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, ['case', ['get', 'read'], 4, 2.5], 16, ['case', ['get', 'read'], 8, 5]],
@@ -214,7 +217,8 @@ export function MapView(p: Props) {
 
     // Frame the whole trip once per new plan (origin → stop → destination).
     const { frame } = cb.current
-    const sig = plan ? `${plan.destination.lat},${plan.destination.lon},${plan.origin?.lat},${frame},${frame === 'trip' ? `${corridor?.checked_at}${routeSel}` : ''}` : ''
+    const std = toggles.standard ? plan?.standard_route?.geometry : undefined
+    const sig = plan ? `${plan.destination.lat},${plan.destination.lon},${plan.origin?.lat},${frame},${frame === 'trip' ? `${corridor?.checked_at}${routeSel}` : ''},${!!std}` : ''
     if (plan && sig !== framed.current) {
       framed.current = sig
       // Arrival frame: the last stretch is the product. Trip frame: origin to destination, like any map.
@@ -227,6 +231,8 @@ export function MapView(p: Props) {
         const cr = corridor?.routes.find((r) => r.id === routeSel)
         if (cr) pts.push(...cr.geometry)
       }
+      // Showing the reference route zooms to where it differs: its last stretch into the destination's alleys.
+      if (std) pts.push(...(frame === 'trip' ? std : std.filter(([lon, lat]) => Math.hypot(lon - plan.destination.lon, lat - plan.destination.lat) < 0.006)))
       const b = pts.reduce((bb, c) => bb.extend(c as [number, number]), new maplibregl.LngLatBounds(pts[0] as [number, number], pts[0] as [number, number]))
       m.fitBounds(b, { padding: cb.current.padding, maxZoom: frame === 'trip' ? 16 : 17, duration: 900 })
     }

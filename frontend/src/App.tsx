@@ -33,6 +33,7 @@ export default function App() {
   const [plan, setPlan] = useState<Plan | null>(null)
   const [planTripKey, setPlanTripKey] = useState('')
   const [selected, setSelected] = useState(0)
+  const [stopOpen, setStopOpen] = useState(true)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, standard: false, cams: true })
@@ -349,6 +350,7 @@ export default function App() {
           onWayClick={openEvidence}
           onStopClick={(i) => {
             setSelected(i)
+            setStopOpen(true)
             setSheet((s) => (s === 'peek' ? 'half' : s))
             // A pin can select a stop that is scrolled out of the list: bring its card (header, evidence link) into view.
             requestAnimationFrame(() => document.querySelectorAll('.stop')[i]?.scrollIntoView({ block: 'start', behavior: 'smooth' }))
@@ -394,8 +396,8 @@ export default function App() {
                 <h3 className="section-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý</h3>
                 <div className="stops">
                   {plan.stop_points.map((s, i) => (
-                    <StopRow key={`${s.lat},${s.lon}`} s={s} plan={plan} index={i} selected={i === selected}
-                      onSelect={() => setSelected(i)} onEvidence={(id) => openEvidence(id, s.lat, s.lon)} />
+                    <StopRow key={`${s.lat},${s.lon}`} s={s} plan={plan} index={i} selected={i === selected} open={i === selected && stopOpen}
+                      onSelect={() => { if (i === selected) setStopOpen((o) => !o); else { setSelected(i); setStopOpen(true) } }} onEvidence={(id) => openEvidence(id, s.lat, s.lon)} />
                   ))}
                   {!plan.stop_points.length && <p className="muted">{plan.verdict.detail}</p>}
                 </div>

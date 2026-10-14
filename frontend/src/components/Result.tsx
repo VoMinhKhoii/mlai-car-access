@@ -212,16 +212,16 @@ function exitShort(s: StopPoint) {
   return s.way_out.mode === 'none' ? 'Khó ra' : 'Ra được'
 }
 
-export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
-  s: StopPoint; plan: Plan; index: number; selected: boolean; onSelect: () => void; onEvidence: (wayId: number) => void
+export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence }: {
+  s: StopPoint; plan: Plan; index: number; selected: boolean; open: boolean; onSelect: () => void; onEvidence: (wayId: number) => void
 }) {
   const fit = FIT[s.fit.class] ?? FIT.unknown
   const legal = LEGAL[s.legality.status]
   const flood = floodPresentation(s.flood.stay)
   const title = s.kind === 'door' ? 'Trước cửa nhà' : s.kind === 'lot' ? s.lot?.name ?? s.name : s.name
   return (
-    <article className={`stop ${selected ? 'is-open' : ''}`}>
-      <button type="button" className="stop-head" onClick={onSelect} aria-expanded={selected}>
+    <article className={`stop ${selected ? 'is-selected' : ''}`}>
+      <button type="button" className="stop-head" onClick={onSelect} aria-expanded={open}>
         <span className={`stop-pin ${s.verified ? '' : 'unverified'}`}>{index + 1}</span>
         <span className="stop-main">
           <span className="stop-name">{title}</span>
@@ -235,7 +235,7 @@ export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
         <Tag tone={flood.tone === 'ok' ? 'water' : flood.tone} icon={<Droplets size={13} />}>{flood.label}</Tag>
         <Tag tone={legal.tone} icon={<Landmark size={13} />}>{legal.label}</Tag>
       </div>
-      {selected && <StopChecks s={s} plan={plan} onEvidence={onEvidence} />}
+      {open && <StopChecks s={s} plan={plan} onEvidence={onEvidence} />}
     </article>
   )
 }

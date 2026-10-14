@@ -403,9 +403,10 @@ def _summary(best: dict, goong: dict, routes: list[dict]) -> str:
     if best["status"] == "blocked":
         return "Mọi tuyến đều có đoạn ngập quá mức an toàn của xe. Cân nhắc đổi giờ đi."
     if best is goong:
-        worse = [x for x in routes if x is not best]
-        tail = f" Các tuyến khác chậm hơn {min(x['eta_min'] for x in worse) - best['eta_min']} phút trở lên." \
-            if worse else ""
+        others = [x for x in routes if x is not best]
+        gap = min((x["eta_min"] for x in others), default=best["eta_min"]) - best["eta_min"]
+        tail = f" Các tuyến khác chậm hơn {gap} phút trở lên." if gap > 0 else \
+            " Có tuyến khác nhanh tương đương." if others else ""
         return f"Đi tuyến Goong gợi ý ({best['label']}), khoảng {best['eta_min']} phút.{tail}"
     why = goong["top_reason"] or "tuyến này nhanh hơn"
     gain = goong["eta_min"] - best["eta_min"]

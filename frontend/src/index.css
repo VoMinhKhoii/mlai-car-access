@@ -129,7 +129,7 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .stops { display: flex; flex-direction: column; gap: 8px; }
 .stop { scroll-margin-top: 8px; border-radius: var(--r-md); box-shadow: inset 0 0 0 1px var(--outline); background: var(--surface); transition: box-shadow var(--t-fast); }
 .stop:hover { box-shadow: inset 0 0 0 1px var(--outline-strong); }
-.stop.is-open { box-shadow: inset 0 0 0 2px var(--route); }
+.stop.is-selected { box-shadow: inset 0 0 0 2px var(--route); }
 .stop-head { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: 0; background: none; padding: 12px 12px 6px; }
 .stop-pin {
   display: grid; place-items: center; width: 28px; height: 28px; flex: none; border-radius: 50%; background: var(--route); color: #fff;
@@ -183,7 +183,7 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .layer-row small { display: block; font-size: var(--fs-11); color: var(--text-3); }
 .sw-fit { width: 22px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--fit-fits) 0 33%, var(--fit-tight) 33% 66%, var(--fit-no) 66%); }
 .sw-flood { width: 22px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--flood-low), var(--flood-over)); }
-.sw-standard { width: 22px; height: 4px; background: repeating-linear-gradient(90deg, var(--route-standard) 0 3px, transparent 3px 7px); }
+.sw-standard { width: 22px; height: 4px; background: repeating-linear-gradient(90deg, var(--route-standard) 0 6px, transparent 6px 10px); }
 .fit-key { padding-left: 28px; font-size: var(--fs-11); }
 .line-key i { display: inline-block; width: 22px; height: 0; border-top: 4px solid var(--route); margin-right: 6px; vertical-align: middle; border-radius: 2px; }
 .line-key .ln-walk { border-top: 4px dotted var(--signal); }
@@ -380,21 +380,28 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .corridor-sum { padding: 0 12px; font-size: var(--fs-14); font-weight: 600; text-wrap: pretty; }
 .corridor-note { padding: 4px 12px 0; }
 .corridor-src { padding: 6px 12px 10px; font-size: var(--fs-11); }
+.corridor-src summary { cursor: pointer; width: fit-content; }
+.corridor-src p { margin-top: 4px; }
+.corr-more { margin: 4px 12px 0; font-size: var(--fs-12); }
+.corr-delta { font-size: var(--fs-14); font-weight: 600; color: var(--text-2); white-space: nowrap; }
+.corr-delta.slower { color: var(--text-3); font-weight: 500; }
+.corr-full { font-size: var(--fs-12); color: var(--text-2); }
+.corr-caveat { font-size: var(--fs-11); }
 .corridor-src a { color: inherit; text-decoration: underline; }
 .corr-list { list-style: none; margin: 8px 0 0; padding: 0 6px; display: flex; flex-direction: column; gap: 4px; }
 .corr-row { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; background: none; padding: 8px 6px; border-radius: var(--r-sm); }
 .corr-row:hover { background: var(--surface-sunk); }
-.corr-row.is-open { background: var(--surface-sunk); box-shadow: inset 0 0 0 2px var(--route); }
+.corr-row.is-selected { background: var(--surface-sunk); box-shadow: inset 0 0 0 2px var(--route); }
 .corr-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .corr-name { font-size: var(--fs-14); font-weight: 600; }
-.corr-best { color: var(--route); }
+.corr-best { color: var(--route); font-size: var(--fs-11); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 .corr-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .corr-tags .tag, .flood-legs .tag, .corr-forecast .tag { max-width: 100%; white-space: normal; }
 .corr-time { display: flex; flex-direction: column; align-items: flex-end; flex: none; }
 .corr-time .display { font-size: var(--fs-17); font-weight: 700; }
 .corr-time small { color: var(--text-3); white-space: nowrap; }
 .corr-row .chev { color: var(--text-3); flex: none; transition: transform var(--t-fast); }
-.corr-row.is-open .chev { transform: rotate(180deg); }
+.corr-row.is-expanded .chev { transform: rotate(180deg); }
 .corr-detail { padding: 6px 8px 10px; display: flex; flex-direction: column; gap: 6px; }
 .corr-reasons { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .corr-reasons li { display: flex; gap: 6px; align-items: flex-start; }
