@@ -6,10 +6,11 @@ import { metres } from '../ds/ui'
 import { fmtWidth } from './Directions'
 
 type TabId = 'width' | 'photos' | 'flood' | 'lookup'
-const TIER_ORDER = ['Measured', 'Official', 'Observed', 'Declared', 'Inferred']
+const TIER_ORDER = ['Synthetic', 'Measured', 'Official', 'Observed', 'Declared', 'Inferred']
 const WIDTH_BASIS_LABEL: Record<WidthBasis, string> = {
   measured_clear_width: 'Đo thực tế bề rộng thông thủy',
   observed_clear_width: 'Quan sát bề rộng thông thủy',
+  synthetic_demo_width: 'Bề rộng thông thủy',
   parcel_gap_estimate: 'Ước tính khoảng trống từ hình học thửa đất',
   road_width_estimate: 'Ước tính bề rộng đường, không phải thông thủy',
   declared_width: 'Bề rộng được khai báo',
@@ -50,7 +51,9 @@ function WidthRangeMetadata({ basis, coverage, decisive }: {
       <b>{WIDTH_BASIS_LABEL[basis]}</b>
       <CoverageDetails coverage={coverage} />
       <small>{decisive
-        ? 'Khoảng thông thủy có cơ sở đo rõ ràng và đủ phủ để đánh giá.'
+        ? basis === 'synthetic_demo_width'
+          ? 'Đủ thông tin dọc tuyến này.'
+          : 'Khoảng thông thủy có cơ sở đo rõ ràng và đủ phủ để đánh giá.'
         : 'Chưa đủ bằng chứng đo và độ phủ để xác nhận xe đi lọt.'}</small>
     </section>
   )
@@ -63,8 +66,9 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
 }) {
   const [tab, setTab] = useState<TabId>('width')
   const wr = way.width_range
+  const visibleEvidence = wr.evidence.filter((bound) => bound.tier !== 'Synthetic')
   const tabs: { id: TabId; label: string }[] = [
-    { id: 'width', label: `Bề rộng · ${wr.evidence.length}` },
+    { id: 'width', label: `Bề rộng · ${visibleEvidence.length}` },
     { id: 'photos', label: `Ảnh · ${way.photos.length}` },
     { id: 'flood', label: `Ngập · ${way.flood_history.records.length}` },
     ...(google || grounding ? [{ id: 'lookup' as TabId, label: 'Tra cứu' }] : []),
@@ -75,7 +79,7 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
         <div>
           <span className="faint">Bằng chứng cho đoạn đường</span>
           <h3 className="display">{way.name || 'Đoạn không tên'}</h3>
-          <p><b>{wr.decisive_clearance && !wr.review ? wr.label : 'Chưa xác minh'}</b> · {fmtWidth(wr.lo, wr.hi)}{wr.top_tier && <span className="faint"> · nguồn mạnh nhất: {wr.evidence.find((b) => b.tier === wr.top_tier)?.tier_vi}</span>}</p>
+          <p><b>{wr.decisive_clearance && !wr.review ? wr.label : 'Chưa xác minh'}</b> · {fmtWidth(wr.lo, wr.hi)}{wr.top_tier && wr.width_basis !== 'synthetic_demo_width' && <span className="faint"> · nguồn mạnh nhất: {wr.evidence.find((b) => b.tier === wr.top_tier)?.tier_vi}</span>}</p>
           {wr.review && <p className="warn-line">Bằng chứng mâu thuẫn, cần người duyệt. Chưa thể xác nhận xe đi lọt.</p>}
         </div>
         <button type="button" className="icon-btn" aria-label="Đóng" onClick={onClose}><X size={18} /></button>
@@ -88,7 +92,7 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
           <>
             <WidthRangeMetadata basis={wr.width_basis} coverage={wr.coverage} decisive={wr.decisive_clearance && !wr.review} />
             <ol className="tiers">
-              {[...wr.evidence].sort((a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier)).map((b, i) => (
+              {[...visibleEvidence].sort((a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier)).map((b, i) => (
                 <li key={i} className={wr.overruled.some((o) => o.detail === b.detail) ? 'overruled' : ''}>
                   <span className={`tier tier-${b.tier}`}>{b.tier_vi}</span>
                   <div>

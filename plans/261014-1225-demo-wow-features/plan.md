@@ -30,42 +30,46 @@ Nguồn quyết định: `plans/reports/advise-261014-1925-top3-demo-features.md
 | 4 | Nhập xác nhận/vật cản bằng giọng nói | P2 |
 | 5 | Kịch bản demo 3 × 90 s + smoke 2 thiết bị | P1 |
 | 6 | Kết quả dễ quét: quyết định trước, chi tiết bằng chứng theo yêu cầu | P1 |
+| 7 | Map-first polish + one complete physical-access path with width/entry/exit evidence; parking law remains evidence-driven | P1 |
 
 ## Phases
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | [Phase 1: Bóng xe + mô phỏng quay đầu](./phase-01-car-footprint-maneuver.md) | Pending |
-| 2 | [Phase 2: Cảnh báo giờ về](./phase-02-departure-watch.md) | Pending |
-| 3 | [Phase 3: Xác nhận có cấu trúc](./phase-03-structured-confirmation.md) | Pending |
-| 4 | [Phase 4: Báo bằng giọng nói](./phase-04-voice-report.md) | Pending |
-| 5 | [Phase 5: Kịch bản demo + smoke](./phase-05-demo-script-and-smoke.md) | Pending |
+| 1 | [Phase 1: Bóng xe + mô phỏng quay đầu](./phase-01-car-footprint-maneuver.md) | In progress (5/6) |
+| 2 | [Phase 2: Cảnh báo giờ về](./phase-02-departure-watch.md) | In progress (4/5) |
+| 3 | [Phase 3: Xác nhận có cấu trúc](./phase-03-structured-confirmation.md) | Completed (6/6) |
+| 4 | [Phase 4: Báo bằng giọng nói](./phase-04-voice-report.md) | Completed (6/6) |
+| 5 | [Phase 5: Kịch bản demo + smoke](./phase-05-demo-script-and-smoke.md) | In progress (1/3) |
+| 6 | [Phase 6: UI polish and synthetic demo data](./phase-06-ui-polish-and-synthetic-demo-data.md) | In progress (3/4) |
 
 ```mermaid
 flowchart LR
     P1 --> P5
     P2 --> P5
     P3 --> P4 --> P5
+    P5 --> P6
 ```
 P1, P2, P3 song song; `Result.tsx` và `App.tsx` có một người tích hợp.
 
 ## Success Criteria
 - [ ] `PYTHONPATH=backend .venv/bin/python -m unittest discover -s backend/tests -p 'test_*.py'` xanh; test mới: claim xác nhận/exit không đổi `compute_fit`, `_way_out.strict`, `turn_verified`.
-- [ ] Xác nhận "in" với `class-l` → bound `lo = 1.94` (không còn 2.265).
+- [x] Xác nhận "in" với `class-l` → bound `lo = 1.94` (không còn 2.265).
 - [ ] Bóng xe hiện ≤ 1 s sau khi chọn điểm dừng; mô phỏng quay đầu ≤ 300 ms khi cache nóng.
 - [ ] Bật mưa giả lập sau khi theo dõi preset khô → banner ≤ 60 s; nếu người dùng cấp Notification permission, notification hệ thống cũng tới ≤ 60 s.
-- [ ] Trạng thái watch xấu đi, hồi phục, rồi xấu lại → gửi cảnh báo mới một lần; trạng thái không đổi không spam.
-- [ ] Câu nói "vào được nhưng phải gập gương, ra phải lùi" → report `confirmation` pending với `result=tight`, `exit=reversed`.
-- [ ] Footprint uses the dimensions and body-centre offset of the specific simulated profile/member.
-- [ ] Voice parser has an independent 20 requests/client/hour quota and 10 s total model deadline; timeout/provider-shape failure returns `unclear`.
-- [ ] Main-road stop confirmation returns a clear 422 and creates no pending report; confirmations are only for server-mapped alley stops.
-- [ ] Kết quả mặc định gọn: verdict, điểm dừng, 4 trạng thái và cảnh báo thiết yếu; chi tiết bề rộng/ngập/pháp lý/nguồn mở được, không bị bỏ.
+- [x] Trạng thái watch xấu đi, hồi phục, rồi xấu lại → gửi cảnh báo mới một lần; trạng thái không đổi không spam.
+- [x] Câu nói "vào được nhưng phải gập gương, ra phải lùi" → report `confirmation` pending với `result=tight`, `exit=reversed`.
+- [x] Footprint uses the dimensions and body-centre offset of the specific simulated profile/member.
+- [x] Voice parser has an independent 20 requests/client/hour quota and 10 s total model deadline; timeout/provider-shape failure returns `unclear`.
+- [x] Main-road stop confirmation returns a clear 422 and creates no pending report; confirmations are only for server-mapped alley stops.
+- [x] Kết quả mặc định gọn: verdict, điểm dừng, 4 trạng thái và cảnh báo thiết yếu; chi tiết bề rộng/ngập/pháp lý/nguồn mở được, không bị bỏ.
 
 ## Implementation Status (2026-10-15)
-- Code for phases 1–5 written; docs/demo-script.md exists. Checkboxes intentionally left unticked: they are acceptance items, not all proven.
-- Verified: 137/137 backend unittest + `npm run build` (before the last edit batch); BSK desktop smoke (compact result, maneuver panel, watch alert/recovery/recurrence, voice manual fallback, report 202).
-- NOT verified after last batch (pose recentering `x - D/2`, 5 m/`is_alley` confirm gate + its 2 new fixtures, operator summary, lot-stop gating, unavailable reasons, `simulated_vehicle_label`): rerun unittest + build first.
-- NOT verified at all: physical Android Chrome, OS-level Notification delivery, trajectory overlay alignment on a stop that yields a real path, 3×90 s demo runs, Gemini-blocked rerun.
-- Known residual (documented, unfixed by decision): class maneuver cold-cache CPU/non-atomic `three_point.json` write; `vehicles.py:112` ResourceWarning; 1.38 MB bundle.
+- **Progress:** 25/30 phase acceptance items complete (83%). Phases 3–4 complete; phases 1–2 and 5–6 remain in progress.
+- **Verified evidence:** earlier full backend run passed 138 tests plus 161 subtests; earlier production build passed. After the final legality predicate, targeted `test_synthetic_fixture_never_enters_the_measured_tier` passed. Browser evidence covers compact results, maneuver rendering, watch alert/recovery/recurrence, manual voice fallback, report 202, H160 dry/rain, and H220/H328/H91 isolation.
+- **Final gates pending:** production build after the last `Result.tsx` unverified-branch correction; FinalTrustReview recheck of that correction and refreshed screenshots. Do not mark the plan complete until both close.
+- **Still unverified acceptance:** physical Android Chrome + OS Notification delivery, timed 3 × 90 s runs repeated three times, Gemini-blocked rerun, and measured ≤1 s/≤300 ms maneuver timing.
+- **Scope change:** Phase 6 added map-first polish and loopback-only synthetic physical-access evidence. Parking-law permission remains unsynthesized and visibly unverified.
+- **Open residual risks:** class maneuver cold-cache CPU/non-atomic `three_point.json` write; `vehicles.py:112` ResourceWarning; ~1.39 MB JavaScript bundle.
 
 ## Validation Log
 

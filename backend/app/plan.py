@@ -5,6 +5,7 @@ import heapq
 import math
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 
 from . import flags, hydro, parking_data
 from .config import (ALLEY_SPEED_MPS, FLOOD_TIMING_HORIZON_H, FLOOD_TIMING_STEP_MIN,
@@ -14,7 +15,7 @@ from .evidence import STORE_EVIDENCE, WidthRange, blocked_ways_today, width_rang
 from .flood import (KNOWLEDGE_ORDER, STATUS_ORDER, FloodAssessment, FloodSnapshot, _street_key,
                     alarm_label, evidence_generation, flood_profiles, worst_over)
 from .legality import ORDER as LEGAL_ORDER
-from .legality import StopRule, legality_for_lot, legality_over_window
+from .legality import StopRule, legality_for_lot, legality_over_window, supports_legal_lane_count
 from .osm import AreaGraph, area_key, build_graph, haversine
 from .storage import LRU
 from .vehicles import VehicleProfile, get_profile, three_point_width, turn_in_width
@@ -31,10 +32,12 @@ _WR = LRU(32)
 _FP = LRU(32)
 
 
-def area(lat: float, lon: float, generations: tuple[str, str] | None = None, live_area: dict | None = None):
+def area(lat: float, lon: float, generations: tuple[str, str] | None = None, live_area: dict | None = None,
+         synthetic_demo_file: Path | None = None):
     g = build_graph(lat, lon)
-    key = (area_key(lat, lon), g.source, tuple(f["enabled"] for f in flags.describe()))
-    view = STORE_EVIDENCE.view(live_area)
+    key = (area_key(lat, lon), g.source, tuple(f["enabled"] for f in flags.describe()),
+           synthetic_demo_file)
+    view = STORE_EVIDENCE.view(live_area, synthetic_demo_file=synthetic_demo_file)
     wkey = key + (STORE_EVIDENCE.version, (live_area or {}).get("key"), (live_area or {}).get("revision"))
     wrs = _WR.get(wkey)
     if wrs is None:
@@ -208,7 +211,8 @@ class PlanContext:
 
 def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_at: datetime | None,
          dwell_min: int | None, rain_scenario: list[dict] | None = None, dest_label: str = "",
-         origin: tuple[float, float] | None = None, live_area: dict | None = None) -> dict:
+         origin: tuple[float, float] | None = None, live_area: dict | None = None,
+         synthetic_demo_scenario: str | None = None, synthetic_demo_file: Path | None = None) -> dict:
     # FloodSnapshot captures file generations, metadata, reports, and rain once for this request.
     vehicle = get_profile(vehicle_id)
     arrive = (arrive_at or datetime.now(VN_TZ)).astimezone(VN_TZ)
@@ -219,7 +223,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     flood_snapshot = FloodSnapshot(rain)
     cap = WALK_CAP_M[intent]
 
-    g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations, live_area)
+    g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations, live_area, synthetic_demo_file)
     fit, fit_notes = compute_fit(g, wrs, vehicle)
     paid = parking_data.paid_street_ways(g)
     main_nodes = {n for way in g.ways.values() if way.kind == "main" and way.drivable for n in way.nodes}
@@ -586,6 +590,8 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
             std = goong
     if origin and GOONG_API_KEY:
         _add_trips(chosen, origin)
+    synthetic_demo_data = synthetic_demo_file is not None
+    displayed_demo_scenario = synthetic_demo_scenario if synthetic_demo_data else None
 
     return {
         "destination": {"lat": dest_lat, "lon": dest_lon, "label": dest_label},
@@ -594,6 +600,8 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
                    "tide_arrive": _tide_json(arrive, flood_snapshot),
                    "tide_depart": _tide_json(depart, flood_snapshot), "rain": rain},
         "verdict": verdict, "timing": timing, "stop_points": chosen, "door": door_eval,
+        "synthetic_demo_data": synthetic_demo_data,
+        "synthetic_demo_scenario": displayed_demo_scenario,
         "no_stop_reason": no_stop_reason,
         "standard_route": std,
         "layers": _layers(g, wrs, fit, fit_notes, fps, dest_lat, dest_lon, arrive, depart,
@@ -770,7 +778,7 @@ def _candidate_legality(c: Candidate, ctx: PlanContext, arrive: datetime,
                     if way_id != c.way_id and ctx.g.ways[way_id].drivable
                 ]
                 if not crossing_ways or any(
-                    not ctx.wrs[way_id].decisive_clearance for way_id in crossing_ways
+                    not supports_legal_lane_count(ctx.wrs[way_id]) for way_id in crossing_ways
                 ):
                     junction_distances.append(None)
                 else:
@@ -1353,8 +1361,9 @@ def _layers(g: AreaGraph, wrs, fit, fit_notes, fps, lat, lon, arrive, depart, ra
             "flood": {"type": "FeatureCollection", "features": flood_feats}}
 
 
-def way_evidence(lat: float, lon: float, way_id: int, live_area: dict | None = None) -> dict:
-    g, wrs, fps = area(lat, lon, live_area=live_area)
+def way_evidence(lat: float, lon: float, way_id: int, live_area: dict | None = None,
+                 synthetic_demo_file: Path | None = None) -> dict:
+    g, wrs, fps = area(lat, lon, live_area=live_area, synthetic_demo_file=synthetic_demo_file)
     w = g.ways[way_id]
     prof = fps.get(way_id)
     return {"way_id": way_id, "name": g.display_name(way_id), "tags": w.tags, "osm_url": f"https://www.openstreetmap.org/way/{way_id}",

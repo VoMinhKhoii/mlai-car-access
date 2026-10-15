@@ -18,12 +18,14 @@ from . import flags, vehicles
 from .config import DATA, STORE
 from .osm import AreaGraph, Way, strip_accents
 
-TIERS = ["Measured", "Official", "Observed", "Declared", "Inferred"]
-TIER_VI = {"Measured": "Đo thực tế", "Official": "Số liệu chính thức", "Observed": "Đã quan sát",
-           "Declared": "Tin rao / tự khai", "Inferred": "Suy luận"}
+SYNTHETIC_DEMO_TIER = "Synthetic"
+SYNTHETIC_DEMO_WIDTH_BASIS = "synthetic_demo_width"
+TIERS = ["Measured", SYNTHETIC_DEMO_TIER, "Official", "Observed", "Declared", "Inferred"]
+TIER_VI = {"Synthetic": "Mock · giả lập", "Measured": "Đo thực tế", "Official": "Số liệu chính thức",
+           "Observed": "Đã quan sát", "Declared": "Tin rao / tự khai", "Inferred": "Suy luận"}
 OPEN_HI = 40.0
 WIDTH_BASES = frozenset({
-    "measured_clear_width", "observed_clear_width", "parcel_gap_estimate",
+    SYNTHETIC_DEMO_WIDTH_BASIS, "measured_clear_width", "observed_clear_width", "parcel_gap_estimate",
     "road_width_estimate", "declared_width", "inferred", "unknown",
 })
 
@@ -119,8 +121,12 @@ class WidthRange:
 def _combine(bounds: list[Bound]) -> tuple[float, float, str | None, bool, list[Bound], list[Bound]]:
     if not bounds:
         return 0.5, OPEN_HI, None, False, [], []
+    suppressed = [bound for bound in bounds if bound.tier == SYNTHETIC_DEMO_TIER] \
+        if any(bound.tier == "Measured" for bound in bounds) else []
+    if suppressed:
+        bounds = [bound for bound in bounds if bound.tier != SYNTHETIC_DEMO_TIER]
     review = False
-    overruled: list[Bound] = []
+    overruled = list(suppressed)
     current: tuple[float, float] | None = None
     top = None
     active: list[Bound] = []
@@ -144,15 +150,19 @@ def _combine(bounds: list[Bound]) -> tuple[float, float, str | None, bool, list[
         else:
             review = True  # a lower tier conflicts with the range set by stronger evidence
             overruled.extend(tb)
+    assert current is not None
     return current[0], current[1], top, review, overruled, active
 
 
 def _width_metadata(bounds: list[Bound], review: bool) -> tuple[str, dict, bool]:
     if not bounds:
         return "unknown", _empty_coverage("Không có bằng chứng bề rộng"), False
-    rank = {"measured_clear_width": 0, "observed_clear_width": 1, "parcel_gap_estimate": 2,
-            "road_width_estimate": 3, "declared_width": 4, "inferred": 5, "unknown": 6}
-    basis = max((bound.width_basis for bound in bounds), key=lambda value: rank.get(value, 6))
+    if any(bound.tier == SYNTHETIC_DEMO_TIER for bound in bounds):
+        basis = SYNTHETIC_DEMO_WIDTH_BASIS
+    else:
+        rank = {"measured_clear_width": 0, "observed_clear_width": 1, "parcel_gap_estimate": 2,
+                "road_width_estimate": 3, "declared_width": 4, "inferred": 5, "unknown": 6}
+        basis = max((bound.width_basis for bound in bounds), key=lambda value: rank.get(value, 6))
     coverages = [bound.coverage for bound in bounds if bound.coverage]
     missing_coverage = len(coverages) != len(bounds)
     if not coverages:
@@ -175,8 +185,11 @@ def _width_metadata(bounds: list[Bound], review: bool) -> tuple[str, dict, bool]
             "reason": (next((item.get("reason") for item in coverages if item.get("reason")), None)
                        or ("Bằng chứng thiếu metadata phủ theo chiều dài" if missing_coverage else None)),
         }
-    decisive_basis = all(bound.width_basis in ("measured_clear_width", "observed_clear_width")
-                         for bound in bounds)
+    decisive_basis = all(
+        bound.width_basis in ("measured_clear_width", "observed_clear_width")
+        or (bound.tier == SYNTHETIC_DEMO_TIER and bound.width_basis == SYNTHETIC_DEMO_WIDTH_BASIS)
+        for bound in bounds
+    )
     decisive_uncertainty = all(bound.uncertainty_m is not None
                                and math.isfinite(bound.uncertainty_m)
                                and bound.uncertainty_m >= 0 for bound in bounds)
@@ -455,6 +468,8 @@ class EvidenceIndex:
                 }.get(tier, "unknown")
                 if basis not in WIDTH_BASES:
                     basis = "unknown"
+                if (basis == SYNTHETIC_DEMO_WIDTH_BASIS) != (tier == SYNTHETIC_DEMO_TIER):
+                    continue
                 coverage = None
                 coverage_keys = ("cut_count", "start_covered", "end_covered", "max_spacing_m", "truncated", "complete")
                 if any(row.get(key) not in (None, "") for key in coverage_keys):
@@ -578,11 +593,18 @@ class EvidenceStore:
     def by_name(self) -> dict[str, list[Bound]]:
         return self.snapshot.by_name
 
-    def view(self, area: dict | None = None) -> EvidenceView:
+    def view(self, area: dict | None = None, *,
+             synthetic_demo_file: Path | None = None) -> EvidenceView:
         overlay = None
-        if area:
+        if area or synthetic_demo_file:
             overlay = EvidenceIndex()
-            overlay.add_areas([area])
+            if area:
+                overlay.add_areas([area])
+            if synthetic_demo_file:
+                overlay._load_csv(
+                    synthetic_demo_file, SYNTHETIC_DEMO_TIER, "Synthetic demo fixture",
+                    pad=0.1, width_basis=SYNTHETIC_DEMO_WIDTH_BASIS,
+                )
         return EvidenceView(self.snapshot, overlay)
 
 
@@ -604,15 +626,9 @@ def width_ranges(g: AreaGraph, evidence: EvidenceView | None = None) -> dict[int
     return out
 
 
-# A read-only demo fixture (a funeral tent in one Bình Thạnh alley), kept out of the community store so it is never
-# written there, never duplicated on restart, and always labelled as simulated.
-DEMO_BLOCKAGE = {"way_id": 192512291, "reason": "Rạp đám tang chiếm hết lòng hẻm",
-                 "source": "Mô phỏng (dữ liệu demo, không phải báo cáo thật)", "date": "demo"}
-
-
 def blocked_ways_today() -> dict[int, dict]:
-    """Temporary Blockages approved for today (D17), plus the simulated demo fixture."""
-    out = {DEMO_BLOCKAGE["way_id"]: DEMO_BLOCKAGE}
+    """Temporary blockages approved for today (D17)."""
+    out = {}
     if not BLOCKAGE_FILE.exists():
         return out
     today = date.today().isoformat()

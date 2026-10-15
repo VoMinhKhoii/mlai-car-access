@@ -1,7 +1,7 @@
 ---
 phase: 5
 title: "Kịch bản demo + smoke"
-status: pending
+status: in-progress
 priority: P1
 effort: "1-2d"
 dependencies: [1, 2, 4]
@@ -31,7 +31,7 @@ Chốt kịch bản 3 × 90 s trên khu demo, chạy thử trên laptop + điệ
 
 ## Success Criteria
 - [ ] 3 kịch bản mỗi cái ≤ 90 s, chạy 3 lần liên tiếp không lỗi.
-- [ ] Ảnh/clip smoke lưu trong reports của plan.
+- [x] Ảnh/clip smoke lưu trong reports của plan.
 - [ ] `pytest` xanh, `npm run build` xanh.
 
 ## Risk Assessment

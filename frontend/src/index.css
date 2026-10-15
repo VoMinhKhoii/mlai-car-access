@@ -97,7 +97,9 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .verdict.is-stale { opacity: .6; }
 .verdict-kicker { display: flex; align-items: center; gap: 6px; font-size: var(--fs-12); font-weight: 700; }
 .verdict h2 { font-size: var(--fs-22); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; text-wrap: balance; }
+.verdict-sub, .verdict-recommendation { margin: 0; }
 .verdict-sub { color: var(--text-2); font-size: var(--fs-14); text-wrap: pretty; }
+.verdict-recommendation { color: var(--text); font-size: var(--fs-14); font-weight: 600; text-wrap: pretty; }
 .verdict-actions { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; margin-top: 4px; font-size: var(--fs-12); }
 .verdict.tone-ok { background: var(--fit-fits-tint); } .verdict.tone-ok .verdict-kicker { color: #0f6b41; }
 .verdict.tone-brand { background: var(--brand-tint); } .verdict.tone-brand .verdict-kicker { color: var(--brand); }
@@ -352,8 +354,10 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .tl-marks span { position: absolute; transform: translateX(-50%); top: 2px; white-space: nowrap; }
 .tl-peak .over { color: var(--fit-no); font-weight: 700; }
 .chips .chip { font-size: 12.5px; }
+.chip-compact { display: none; }
 .sheet { flex: 0 1 auto; }
 @media (max-width: 760px) { .frame-toggle { top: auto; bottom: calc(52vh + 12px); left: 12px !important; transform: none; } .sheet { flex: none; } }
+@media (max-width: 760px) { .chip-full { display: none; } .chip-compact { display: inline; } }
 .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -4px; padding: 2px 4px; }
 .chips::-webkit-scrollbar { display: none; }
 .chip-wrap { flex: none; }

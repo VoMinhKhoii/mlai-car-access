@@ -44,6 +44,7 @@ export default function App() {
   const [wayAt, setWayAt] = useState<[number, number]>([0, 0])
   const [build, setBuild] = useState<AreaBuild | null>(null)
   const [story, setStory] = useState('')
+  const [demoScenarioId, setDemoScenarioId] = useState<string | null>(null)
   const [pick, setPick] = useState<{ lat: number; lon: number; x: number; y: number } | null>(null)
   const [menu, setMenu] = useState<'demo' | 'layers' | null>(null)
   const [arrived, setArrived] = useState(false)
@@ -91,8 +92,9 @@ export default function App() {
     lat: dest.lat, lon: dest.lon, label: dest.label, vehicle_id: vehicleId, intent,
     arrive_at: arriveISO, dwell_min: intent === 'pickup' ? 15 : dwell, rain,
     origin: origin ? [origin.lat, origin.lon] as [number, number] : null,
-  }) : null, [dest, vehicleId, intent, arriveISO, dwell, rain, origin])
-  const tripKey = JSON.stringify([dest, origin, vehicleId, intent, arriveISO, intent === 'pickup' ? 15 : dwell, rain])
+    demo_scenario: cfg?.synthetic_demo_data ? demoScenarioId : null,
+  }) : null, [dest, vehicleId, intent, arriveISO, dwell, rain, origin, demoScenarioId, cfg?.synthetic_demo_data])
+  const tripKey = JSON.stringify([dest, origin, vehicleId, intent, arriveISO, intent === 'pickup' ? 15 : dwell, rain, demoScenarioId])
   const activeManeuverKey = `${tripKey}:${selected}:${vehicleId}`
   useEffect(() => {
     if (maneuver?.key === activeManeuverKey) return
@@ -311,6 +313,7 @@ export default function App() {
   function chooseDest(p: Place | null) {
     buildCtl.current?.abort()
     setDest(p)
+    setDemoScenarioId(null)
     setStory('')
     setWay(null)
     setBuild(null)
@@ -355,6 +358,7 @@ export default function App() {
     if (p.rain?.[0]) setRainMm(p.rain[0].mm_per_h)
     setOrigin((o) => o ?? DEMO_ORIGIN)
     setDest({ lat: p.lat, lon: p.lon, label: p.label })
+    setDemoScenarioId(p.id)
     setStory(p.story)
     setMenu(null)
     setSheet('half')
@@ -381,13 +385,13 @@ export default function App() {
   async function openEvidence(id: number, lat: number, lon: number) {
     setCam(null)
     setWayAt([lat, lon])
-    try { setWay(await api.wayEvidence(id, lat, lon)) } catch { setWay(null) }
+    try { setWay(await api.wayEvidence(id, lat, lon, cfg?.synthetic_demo_data ? demoScenarioId : null)) } catch { setWay(null) }
   }
 
   async function reviewPhoto(id: string, approve: boolean) {
     try {
       await api.reviewPhoto(id, approve)
-      if (way) setWay(await api.wayEvidence(way.way_id, wayAt[0], wayAt[1]))
+      if (way) setWay(await api.wayEvidence(way.way_id, wayAt[0], wayAt[1], cfg?.synthetic_demo_data ? demoScenarioId : null))
       runRef.current()
     } catch (e) {
       setNotice(e instanceof Error ? e.message : String(e))
@@ -728,7 +732,9 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
   const op = cfg.operator.signed_in
   return (
     <div className="tool demo" ref={ref}>
-      <button type="button" className={`btn btn-ghost btn-sm ${open ? 'on' : ''}`} aria-expanded={open} onClick={() => onOpen(!open)}><FlaskConical size={15} />Demo</button>
+      <button type="button" className={`btn btn-ghost btn-sm ${open ? 'on' : ''}`} aria-expanded={open} onClick={() => onOpen(!open)}>
+        <FlaskConical size={15} />Demo
+      </button>
       {open && (
         <div className="popover pop-right demo-menu" role="dialog" aria-label="Công cụ demo">
           <h4>Kịch bản</h4>
@@ -738,7 +744,7 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
           <h4>Giả lập</h4>
           <label className="layer-row"><input type="checkbox" checked={rainOn} onChange={(e) => setRainOn(e.target.checked)} /><CloudRain size={15} /><span>Mưa giả định {rainOn ? `${rainMm} mm/h` : '(tắt: dùng mưa đo)'}</span></label>
           {rainOn && <input type="range" min={10} max={90} step={5} value={rainMm} onChange={(e) => setRainMm(Number(e.target.value))} aria-label="Lượng mưa" />}
-          <button type="button" className="btn btn-outline btn-sm" disabled={!canArrive} onClick={onArrive}><Navigation size={14} />Giả lập đã tới nơi</button>
+          <button type="button" className="btn btn-outline btn-sm" disabled={!canArrive} onClick={onArrive}><Navigation size={14} />Đã tới nơi</button>
           <h4>Điều hành</h4>
           {!cfg.operator.available ? (
             <p className="faint">Chức năng điều hành chưa bật trên máy chủ này.</p>

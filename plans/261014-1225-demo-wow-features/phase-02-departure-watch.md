@@ -1,7 +1,7 @@
 ---
 phase: 2
 title: "Cảnh báo giờ về"
-status: pending
+status: in-progress
 priority: P1
 effort: "2d"
 dependencies: []
@@ -42,10 +42,10 @@ Người dùng bấm "Tôi đã đỗ ở đây" trên một điểm dừng; app
 
 ## Success Criteria
 - [ ] Trên Android Chrome: bật theo dõi với preset khô, bật mưa giả lập → banner ≤ 60 s; nếu permission Notification được cấp thì notification hệ thống cũng tới ≤ 60 s.
-- [ ] Từ chối quyền thông báo → banner vẫn hiện.
-- [ ] `/api/plan` lỗi → không báo sai, hiện thời điểm kiểm tra cuối.
-- [ ] Không có thông báo lặp khi trạng thái không đổi.
-- [ ] Khi điều kiện xấu hồi phục rồi tái diễn → thông báo lại đúng một lần; trạng thái xấu liên tục không spam.
+- [x] Từ chối quyền thông báo → banner vẫn hiện.
+- [x] `/api/plan` lỗi → không báo sai, hiện thời điểm kiểm tra cuối.
+- [x] Không có thông báo lặp khi trạng thái không đổi.
+- [x] Khi điều kiện xấu hồi phục rồi tái diễn → thông báo lại đúng một lần; trạng thái xấu liên tục không spam.
 ## Risk Assessment
 - Thiết bị demo đã chốt: Android + Chrome (Validation Session 1). iOS ngoài phạm vi demo; nếu ai mở trên iOS thì chỉ có banner.
 - Tab nền bị trình duyệt hãm timer → chấp nhận; kiểm tra lại khi `visibilitychange`. Nếu user cần báo khi đóng app → replan với Web Push (ngoài phạm vi).

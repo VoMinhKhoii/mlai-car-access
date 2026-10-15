@@ -148,6 +148,8 @@ export function Directions(p: {
   const v = p.vehicle
   const today = new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10)
   const timeLabel = p.arriveNow ? 'Đi ngay' : `Đến ${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
+  const shortTimeLabel = p.arriveNow ? 'Ngay' : `${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
+  const shortDwell = p.dwell % 60 === 0 ? `${p.dwell / 60}h` : `${p.dwell}′`
   return (
     <div className="directions">
       <div className="places">
@@ -195,7 +197,9 @@ export function Directions(p: {
         </ChipMenu>
 
         <ChipMenu icon={p.intent === 'park' ? <ParkingSquare size={15} /> : <UserRound size={15} />}
-          label={p.intent === 'park' ? `Đỗ xe · ${minutes(p.dwell)}` : 'Dừng đón/trả · kiểm tra 15 phút'}>
+          label={p.intent === 'park'
+            ? <><span className="chip-full">Đỗ xe · {minutes(p.dwell)}</span><span className="chip-compact">Đỗ · {shortDwell}</span></>
+            : <><span className="chip-full">Dừng đón/trả · kiểm tra 15 phút</span><span className="chip-compact">Đón · 15′</span></>}>
           {() => (
             <div className="menu">
               <Segmented label="Bạn sẽ" value={p.intent} onChange={p.setIntent}
@@ -211,7 +215,7 @@ export function Directions(p: {
           )}
         </ChipMenu>
 
-        <ChipMenu icon={<Clock size={15} />} label={timeLabel} align="right">
+        <ChipMenu icon={<Clock size={15} />} label={<><span className="chip-full">{timeLabel}</span><span className="chip-compact">{shortTimeLabel}</span></>} align="right">
           {(close) => <TimeMenu arrive={p.arrive} arriveNow={p.arriveNow} close={close}
             onCommit={(value, now) => { p.setArrive(value); p.setArriveNow(now) }} />}
         </ChipMenu>

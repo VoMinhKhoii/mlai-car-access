@@ -6,7 +6,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
-from app.evidence import Bound, EvidenceIndex, EvidenceStore, _combine, _width_metadata, width_ranges
+from app.evidence import (SYNTHETIC_DEMO_TIER, SYNTHETIC_DEMO_WIDTH_BASIS, Bound, EvidenceIndex, EvidenceStore,
+                          _combine, _width_metadata, width_ranges)
+from app.legality import supports_legal_lane_count
 from app.osm import AreaGraph, Way
 from app.parcels import measure
 from app.plan import _usable, compute_fit
@@ -119,6 +121,90 @@ class EvidenceSafetyTests(unittest.TestCase):
             }
             fit_with_exit_claims, _ = compute_fit(graph, claims, vehicle)
             self.assertEqual(fit_with_exit_claims, fit)
+
+    def test_synthetic_fixture_never_enters_the_measured_tier(self):
+        fixture = Path(__file__).parent / "fixtures" / "synthetic_demo_measurements.csv"
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            sources = {
+                "LISTINGS_FILE": root / "listings.json",
+                "GAPS_FILE": root / "gaps.json",
+                "FIRE_FILE": root / "fire.json",
+                "PARCEL_FILE": root / "parcels.csv",
+                "CONFIRM_FILE": root / "confirmations.jsonl",
+                "BLOCKAGE_FILE": root / "blockages.jsonl",
+            }
+            with patch.multiple("app.evidence", **sources):
+                normal = EvidenceStore(_field_file=fixture)
+                self.assertNotIn(544982029, normal.by_way)
+
+                graph = AreaGraph(center=(10.0, 106.0), ways={
+                    544982029: Way(544982029, {"highway": "residential", "name": "Hẻm demo"}, [1, 2]),
+                })
+                demo = EvidenceStore(_field_file=root / "empty.csv")
+                ranges = width_ranges(graph, demo.view(synthetic_demo_file=fixture))
+                synthetic_bound = next(
+                    bound for bound in ranges[544982029].evidence
+                    if bound.width_basis == SYNTHETIC_DEMO_WIDTH_BASIS
+                )
+                self.assertEqual(synthetic_bound.tier, SYNTHETIC_DEMO_TIER)
+                self.assertEqual(synthetic_bound.source, "Synthetic demo fixture")
+                self.assertEqual(synthetic_bound.to_json()["tier_vi"], "Mock · giả lập")
+                self.assertIn("SYNTHETIC DEMO ONLY", synthetic_bound.detail)
+                self.assertTrue(ranges[544982029].decisive_clearance)
+                self.assertFalse(supports_legal_lane_count(ranges[544982029]))
+                self.assertTrue(
+                    supports_legal_lane_count(replace(ranges[544982029], width_basis="measured_clear_width"))
+                )
+                fit, _ = compute_fit(graph, ranges, get_profile("toyota-vios"))
+                self.assertEqual(fit[544982029], "fits")
+
+    def test_measured_width_is_not_narrowed_by_synthetic_fixture(self):
+        measured = Bound(5.8, 6.4, "Measured", "Field survey", "Measured clear width")
+        synthetic = Bound(
+            6.1, 6.3, SYNTHETIC_DEMO_TIER, "Synthetic demo fixture", "Demo coverage",
+            width_basis=SYNTHETIC_DEMO_WIDTH_BASIS,
+        )
+        lo, hi, top, review, overruled, active = _combine([synthetic, measured])
+        self.assertEqual((lo, hi, top, review), (5.8, 6.4, "Measured", False))
+        self.assertEqual(overruled, [synthetic])
+        self.assertEqual(active, [measured])
+
+    def test_synthetic_demo_scenario_is_bound_to_target_location_and_way(self):
+        from types import SimpleNamespace
+        from app.main import _synthetic_demo_input
+
+        with TemporaryDirectory() as directory:
+            fixture = Path(directory) / "fixture.csv"
+            fixture.write_text("fixture")
+            scenario = "cafe-ngo-tat-to"
+            target = {
+                "lat": 10.7896558,
+                "lon": 106.7155889,
+                "max_distance_m": 200.0,
+                "way_ids": frozenset({544982029, 609967096, 165400090}),
+            }
+            request = SimpleNamespace(app=SimpleNamespace(state=SimpleNamespace(
+                synthetic_demo_data=True,
+                synthetic_demo_scenarios={scenario: target},
+                synthetic_demo_fixture_file=str(fixture),
+            )))
+            self.assertEqual(
+                _synthetic_demo_input(request, scenario, target["lat"], target["lon"], 544982029),
+                (scenario, fixture),
+            )
+            self.assertEqual(
+                _synthetic_demo_input(request, scenario, target["lat"] + 0.00135, target["lon"], 165400090),
+                (scenario, fixture),
+            )
+            self.assertEqual(
+                _synthetic_demo_input(request, scenario, 10.7931975, 106.7169399, 544982029),
+                (None, None),
+            )
+            self.assertEqual(
+                _synthetic_demo_input(request, scenario, target["lat"], target["lon"], 193085696),
+                (None, None),
+            )
 
     def test_class_confirmation_uses_narrowest_member_body_width_and_exit_claim_is_not_width(self):
         with TemporaryDirectory() as directory:

@@ -77,6 +77,7 @@ corridor_base = {
 }
 
 responses = {}
+responses["synthetic_demo_data"] = preset_response.json().get("synthetic_demo_data")
 for name, value in {
     "plan_malformed": "not-a-date",
     "plan_naive": "2026-10-11T09:30:00",
@@ -336,6 +337,10 @@ class ApiValidation(unittest.TestCase):
         self.assertEqual(self.responses["plan_goong_fallback"]["json"]["standard_route"]["source"], "osm")
         self.assert_status("plan_goong", 200)
         self.assertEqual(self.responses["plan_goong"]["json"]["standard_route"]["source"], "goong")
+
+    def test_synthetic_demo_data_is_disabled_by_default(self) -> None:
+        self.assertIs(self.responses["synthetic_demo_data"], False)
+        self.assertIs(self.responses["plan_null"]["json"]["synthetic_demo_data"], False)
 
     def test_all_derived_runtime_paths_use_the_temporary_root(self) -> None:
         expected = {

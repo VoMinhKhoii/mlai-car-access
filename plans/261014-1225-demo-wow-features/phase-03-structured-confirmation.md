@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Xác nhận có cấu trúc (vào/ra) + thân hẹp nhất của nhóm"
-status: pending
+status: completed
 priority: P1
 effort: "2d"
 dependencies: []
@@ -45,12 +45,12 @@ Lưu ý: `path_out` là đường ngắn nhất hợp lệ, có thể khác tuy�
 6. Tests.
 
 ## Success Criteria
-- [ ] Test: confirmation `class-l` result `in` → bound `lo == 1.94`.
-- [ ] Test: thêm confirmation `exit=turned` cho way trên đường ra → `_way_out` trả cùng `mode`, `strict`, `turn_verified` như không có claim; `observed` có 1 phần tử.
-- [ ] Test: `exit` lạ → 422; field `way_ids` từ client → 422 (extra forbid); điểm dừng ngoài area → 422.
-- [ ] Main road, way không phải `is_alley`, hoặc stop cách projection >5 m → 422 rõ nghĩa, không tạo pending report.
-- [ ] Test: report chứa đúng đoạn cuối `path_into` trong `way_ids` và toàn bộ `path_out` trong `way_out_ids`; client không gửi các ID này.
-- [ ] Dòng jsonl cũ không có `exit` vẫn nạp được.
+- [x] Test: confirmation `class-l` result `in` → bound `lo == 1.94`.
+- [x] Test: thêm confirmation `exit=turned` cho way trên đường ra → `_way_out` trả cùng `mode`, `strict`, `turn_verified` như không có claim; `observed` có 1 phần tử.
+- [x] Test: `exit` lạ → 422; field `way_ids` từ client → 422 (extra forbid); điểm dừng ngoài area → 422.
+- [x] Main road, way không phải `is_alley`, hoặc stop cách projection >5 m → 422 rõ nghĩa, không tạo pending report.
+- [x] Test: report chứa đúng đoạn cuối `path_into` trong `way_ids` và toàn bộ `path_out` trong `way_out_ids`; client không gửi các ID này.
+- [x] Dòng jsonl cũ không có `exit` vẫn nạp được.
 
 ## Risk Assessment
 - Cận trên cho "no"/"tight" dùng `mirror_width` của profile (với class là gương **rộng nhất**) → cận trên lỏng hơn cho xe nhỏ trong nhóm, tức là hướng an toàn (claim yếu hơn). Giữ nguyên.

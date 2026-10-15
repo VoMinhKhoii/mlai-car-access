@@ -28,6 +28,11 @@ class StopRule:
 ORDER = {"Permitted": 0, "Unverified": 1, "Restricted": 2, "Prohibited": 3}
 
 
+def supports_legal_lane_count(wr: WidthRange) -> bool:
+    """Only real clear-width evidence may establish a legal lane count."""
+    return wr.decisive_clearance and wr.width_basis in ("measured_clear_width", "observed_clear_width")
+
+
 def _sign_rules(g: AreaGraph, w: Way, lat: float, lon: float, intent: str, when: datetime) -> list[StopRule]:
     out = []
     for nid, tags in g.node_tags.items():
@@ -91,7 +96,7 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
     rules += _sign_rules(g, w, lat, lon, intent, when) + _osm_parking_tags(w, intent)
 
     # A measured, complete clear-width range is required to infer legal lane count.
-    if not wr.decisive_clearance:
+    if not supports_legal_lane_count(wr):
         rules.append(StopRule("lane-unknown", "Unverified",
                               "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới", LAW))
     elif wr.hi < TWO_LANE_MIN_M:

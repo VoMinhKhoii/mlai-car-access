@@ -1,7 +1,7 @@
 ---
 phase: 4
 title: "Báo bằng giọng nói"
-status: pending
+status: completed
 priority: P2
 effort: "2d"
 dependencies: [3]
@@ -38,12 +38,12 @@ Nút micro trên màn hình kết quả: người dùng nói tự nhiên ("vào 
 5. Tests (mock `ai._call`).
 
 ## Success Criteria
-- [ ] Câu "vào được nhưng phải gập gương, ra phải lùi" → thẻ xem lại `tight` + `reversed`; gửi → report pending.
-- [ ] Câu "đầu hẻm có xe ba gác chắn" → `blockage` với reason chuẩn hoá.
-- [ ] Flag tắt, Gemini lỗi hoặc provider trả danh sách candidate rỗng/sai cấu trúc → chip thủ công, không lỗi 500.
-- [ ] 20 lần parse không tiêu quota gửi report; parse thứ 21 trong một giờ bị 429.
-- [ ] Deadline model tổng ≤ 10 s; deadline hết hạn vẫn trả `unclear`, không HTTP 500.
-- [ ] Không request nào gửi report khi người dùng chưa bấm "Gửi".
+- [x] Câu "vào được nhưng phải gập gương, ra phải lùi" → thẻ xem lại `tight` + `reversed`; gửi → report pending.
+- [x] Câu "đầu hẻm có xe ba gác chắn" → `blockage` với reason chuẩn hoá.
+- [x] Flag tắt, Gemini lỗi hoặc provider trả danh sách candidate rỗng/sai cấu trúc → chip thủ công, không lỗi 500.
+- [x] 20 lần parse không tiêu quota gửi report; parse thứ 21 trong một giờ bị 429.
+- [x] Deadline model tổng ≤ 10 s; deadline hết hạn vẫn trả `unclear`, không HTTP 500.
+- [x] Không request nào gửi report khi người dùng chưa bấm "Gửi".
 
 ## Risk Assessment
 - Thiết bị demo đã chốt: Android + Chrome (Validation Session 1). Trình duyệt không có `SpeechRecognition` → ô gõ chữ.

@@ -10,11 +10,30 @@ export const floodTimeLabel = (iso: string | null | undefined) => {
 }
 export const exitFloodFailure = (plan: Plan) => plan.timing?.failure_codes.includes('flood_exit') ?? false
 
+function knownPassable(check: LegFloodCheck | null | undefined): boolean {
+  return !!check && check.status === 'passable' && check.knowledge === 'known' && check.legs.length > 0
+    && check.legs.every((leg) => leg.status === 'passable' && leg.knowledge === 'known')
+}
+
+
 /* ---------- verdict: say what to do, then why ---------- */
 
 export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture: (iso: string) => void; stale: boolean }) {
   const best = plan.stop_points[0]
   const verb = plan.intent === 'park' ? 'Đỗ' : 'Dừng đón'
+  const door = plan.door
+  const accessSuccess = !!door && door.kind === 'door' && door.ok && door.fit.class === 'fits'
+    && door.route_in !== null && door.route_in.available
+    && door.way_out.available && door.way_out.mode !== 'none'
+    && door.way_out.route_verified !== false
+    && door.way_out.turn_verified !== false && door.way_out.tight_exit !== true
+    && door.legality.status === 'Unverified' && door.unverified_reasons.length > 0
+    && door.unverified_reasons.every((reason) => reason.startsWith('Chưa đủ dữ liệu pháp lý:'))
+    && knownPassable(door.route_in.flood) && knownPassable(door.flood.stay) && knownPassable(door.way_out.flood)
+  const isUnverified = plan.verdict.code === 'unverified' || !!(best && !best.verified)
+  const recommendation = isUnverified && best && !accessSuccess
+    ? `Gợi ý: ${verb} ở ${best.name} · đi bộ ${minutes(best.walk.minutes)}`
+    : null
   const doorWhy = plan.door && !plan.door.ok ? plan.door.fail_reasons[0] : null
   let tone: Tone = 'ok'
   let icon = <CircleCheck size={18} />
@@ -33,10 +52,18 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
     if (plan.verdict.code === 'unverified' || (best && !best.verified)) {
       sub += ' Chỗ dừng gợi ý chưa xác minh; giờ rời không xác nhận xe vào và ra được.'
     }
+  } else if (accessSuccess) {
+    tone = 'ok'
+    icon = <CarFront size={18} />
+    head = 'Xe vào và ra được'
+    sub = plan.intent === 'park'
+      ? 'Ngập trong ngưỡng xe ở cả ba khoảng kiểm tra. Luật đỗ xe chưa xác minh.'
+      : 'Ngập trong ngưỡng xe ở cả ba khoảng kiểm tra. Luật dừng xe chưa xác minh.'
   } else if (plan.verdict.code === 'unverified' || (best && !best.verified)) {
     tone = 'muted'
     head = plan.verdict.headline
     sub = best ? null : sub
+
   } else if (plan.verdict.code === 'door') {
     head = plan.intent === 'park' ? 'Vào tận cửa được' : 'Dừng đón ngay trước cửa được'
     sub = best ? vnt(best.way_out.text) : sub
@@ -56,6 +83,7 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
       {(KICKER[tone] || stale) && <div className="verdict-kicker">{KICKER[tone] && <>{icon}<span>{KICKER[tone]}</span> </>}{stale && <LoaderCircle size={14} className="spin" aria-label="Đang cập nhật" />}</div>}
       <h2 className="display">{head}</h2>
       {sub && <p className="verdict-sub">{sub}</p>}
+      {recommendation && <p className="verdict-recommendation">{recommendation}</p>}
       {timing?.approximate && <p className="faint">Kiểm tra giờ rời theo khoảng di chuyển ước lượng; không bảo đảm điều kiện thực tế liên tục.</p>}
       {plan.intent === 'park' && (timing?.leave_before_at || timing?.or_after_at) && (
         <div className="verdict-actions">
@@ -305,7 +333,7 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
       <Check icon={<CarFront size={16} />} title="Đường vào" tone={(FIT[s.fit.class] ?? FIT.unknown).tone}>
         {wr ? <>
           {wr.hi == null ? `Rộng ít nhất ${metres(wr.lo)}` : `Rộng ${fmtWidth(wr.lo, wr.hi)}`}
-          {wr.top_tier ? '' : ' (chưa đo)'}{need && `, xe cần ${metres(need.tight_min, 2)}`}.
+          {wr.width_basis === 'synthetic_demo_width' || !wr.top_tier ? ' (chưa đo)' : ''}{need && `, xe cần ${metres(need.tight_min, 2)}`}.
           {s.route_in && (s.route_in.available
             ? s.route_in.meters != null && <> Đoạn trong hẻm {s.route_in.meters} m.</>
             : <> Chưa có đường vào phù hợp với xe.</>)}

@@ -12,6 +12,7 @@ from __future__ import annotations
 import math
 import re
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 from functools import lru_cache
 from typing import Annotated, Literal
 
@@ -150,6 +151,7 @@ def config(request: Request):
         "flags": flags.describe(),
         "tide": {k: tide_meta()[k] for k in ("station", "bulletin", "issued_at", "source_url", "alarm_levels_m", "note")},
         "demo_center": DEMO_CENTER,
+        "synthetic_demo_data": bool(getattr(app.state, "synthetic_demo_data", False)),
         "presets": [{**p, "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
         "personas": [
             {"id": "park", "label": "Tự lái, cần chỗ đỗ", "enabled": True},
@@ -290,11 +292,28 @@ class PlanRequest(Strict):
     dwell_min: DurationMinutes | None = None
     rain: Rain = []
     origin: Annotated[list[Annotated[float, Field(allow_inf_nan=False)]], Field(min_length=2, max_length=2)] | None = None
+    demo_scenario: Annotated[str, Field(max_length=80)] | None = None
 
     @field_validator("arrive_at", mode="before")
     @classmethod
     def arrive_at_must_be_string(cls, value: object) -> object:
         return _require_iso_datetime_string(value)
+
+
+def _synthetic_demo_input(request: Request, scenario: str | None, lat: float, lon: float,
+                         way_id: int | None = None) -> tuple[str | None, Path | None]:
+    state = request.app.state
+    scenarios = getattr(state, "synthetic_demo_scenarios", {})
+    target = scenarios.get(scenario) if getattr(state, "synthetic_demo_data", False) else None
+    if not target or haversine(lat, lon, target["lat"], target["lon"]) > target["max_distance_m"]:
+        return None, None
+    if way_id is not None and way_id not in target["way_ids"]:
+        return None, None
+    fixture = getattr(state, "synthetic_demo_fixture_file", None)
+    path = Path(fixture) if fixture else None
+    if path is None or not path.is_file():
+        raise HTTPException(503, "The local demo scenario fixture is unavailable.")
+    return scenario, path
 
 
 @app.post("/api/plan")
@@ -309,8 +328,12 @@ def make_plan(req: PlanRequest, request: Request):
     if origin and not in_hcmc(*origin):
         raise HTTPException(422, "Điểm đi phải ở TP.HCM.")
     live_area, area = live.area_status(req.lat, req.lon)
+    synthetic_demo_scenario, synthetic_demo_file = _synthetic_demo_input(
+        request, req.demo_scenario, req.lat, req.lon,
+    )
     result = plan.plan(req.lat, req.lon, req.vehicle_id, req.intent, req.arrive_at, req.dwell_min,
-                       [r.as_dict() for r in req.rain], req.label, origin=origin, live_area=live_area)
+                       [r.as_dict() for r in req.rain], req.label, origin=origin, live_area=live_area,
+                       synthetic_demo_scenario=synthetic_demo_scenario, synthetic_demo_file=synthetic_demo_file)
     result["origin"] = {"lat": origin[0], "lon": origin[1]} if origin else None
     result["area_key"] = area["key"]
     result["area"] = area
@@ -349,15 +372,19 @@ def tide(start: str | None = None, hours: Annotated[int, Field(gt=0, le=168)] = 
 class WayQuery(Strict):
     lat: Lat
     lon: Lon
+    demo_scenario: Annotated[str, Field(max_length=80)] | None = None
 
 
 @app.post("/api/evidence/way/{way_id}")
-def evidence_for_way(way_id: WayId, req: WayQuery):
+def evidence_for_way(way_id: WayId, req: WayQuery, request: Request):
     if not in_hcmc(req.lat, req.lon):
         raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
     live_area, _ = live.area_status(req.lat, req.lon)
+    _, demo_file = _synthetic_demo_input(
+        request, req.demo_scenario, req.lat, req.lon, way_id=way_id,
+    )
     try:
-        out = plan.way_evidence(req.lat, req.lon, way_id, live_area)
+        out = plan.way_evidence(req.lat, req.lon, way_id, live_area, synthetic_demo_file=demo_file)
     except KeyError:
         raise HTTPException(404, "way not in area")
     photos = (live.public_area(live_area) or {}).get("photos", [])

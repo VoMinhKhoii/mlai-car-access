@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "Bóng xe + mô phỏng quay đầu"
-status: pending
+status: in-progress
 priority: P1
 effort: "3d"
 dependencies: []
@@ -45,12 +45,12 @@ Khi chọn một điểm dừng, map vẽ thân xe đúng tỉ lệ đặt trong
 5. Nhãn trung thực (tier, nét đứt, "mô phỏng").
 
 ## Success Criteria
-- [ ] `min_width_for_moves`/`three_point_width` cho kết quả y hệt trước refactor (so trên toàn catalogue).
-- [ ] `/api/vehicles/toyota-fortuner/maneuver?width=1.5` trả `moves: null`; width 12 trả pose ≤120. Không suy ra bất khả thi chỉ từ so sánh với `three_point_width`.
+- [x] `min_width_for_moves`/`three_point_width` cho kết quả y hệt trước refactor (so trên toàn catalogue).
+- [x] `/api/vehicles/toyota-fortuner/maneuver?width=1.5` trả `moves: null`; width 12 trả pose ≤120. Không suy ra bất khả thi chỉ từ so sánh với `three_point_width`.
 - [ ] Trên khu demo: chọn điểm dừng → bóng xe ≤ 1 s; hoạt ảnh chạy; nét đứt khi không decisive.
-- [ ] Thân xe overlay dùng đúng kích thước/offset của profile mô phỏng; pose wall-origin phải chuyển về tâm corridor (`x - width/2`) trước khi vẽ. Test pose xác nhận `0 ≤ x ≤ D`.
-- [ ] Kết quả mặc định gọn, thẻ stop thu gọn sau mỗi plan/đổi lựa chọn; mở thẻ vẫn thấy đủ nội dung hiện có.
-- [ ] `/api/plan` không đổi các kết luận access/fit/flood/legality do maneuver overlay; `/api/plan` có thể mở rộng additive bằng `way_out.observed` theo Phase 3, chỉ hiển thị claim đã duyệt.
+- [x] Thân xe overlay dùng đúng kích thước/offset của profile mô phỏng; pose wall-origin phải chuyển về tâm corridor (`x - width/2`) trước khi vẽ. Test pose xác nhận `0 ≤ x ≤ D`.
+- [x] Kết quả mặc định gọn, thẻ stop thu gọn sau mỗi plan/đổi lựa chọn; mở thẻ vẫn thấy đủ nội dung hiện có.
+- [x] `/api/plan` không đổi các kết luận access/fit/flood/legality do maneuver overlay; `/api/plan` có thể mở rộng additive bằng `way_out.observed` theo Phase 3, chỉ hiển thị claim đã duyệt.
 
 ## Risk Assessment
 - Hẻm cong/nút giao: mô phỏng hành lang thẳng sai hình học → luôn nhãn "mô phỏng hành lang thẳng", chỉ đặt ở đoạn thẳng gần nhất. Tín hiệu hỏng: polygon cắt qua nhà trên nền map → giảm về chỉ vẽ dải + thân xe, bỏ hoạt ảnh.

@@ -22,6 +22,7 @@ export interface Config {
   demo_center: [number, number]
   presets: Preset[]
   personas: { id: string; label: string; enabled: boolean; note?: string }[]
+  synthetic_demo_data: boolean
   /** Booleans only: the backend never sends the secret or a session id. */
   operator: { available: boolean; signed_in: boolean }
 }
@@ -52,6 +53,7 @@ export type ManeuverState =
 export type WidthBasis =
   | 'measured_clear_width'
   | 'observed_clear_width'
+  | 'synthetic_demo_width'
   | 'parcel_gap_estimate'
   | 'road_width_estimate'
   | 'declared_width'
@@ -128,6 +130,8 @@ export interface Plan {
   vehicle: Vehicle
   intent: Intent
   window: { arrive: string; depart: string; dwell_min: number; tide_arrive: { level_m: number | null; alarm: string | null; kind: string | null }; tide_depart: { level_m: number | null; alarm: string | null; kind: string | null }; rain: RainSpell[] }
+  synthetic_demo_data: boolean
+  synthetic_demo_scenario: string | null
   verdict: { code: string; headline: string; detail: string }
   timing: {
     leave_before_at: string | null; or_after_at: string | null
@@ -223,6 +227,7 @@ export interface PlanRequest {
   /** Complete ISO timestamp with an explicit timezone, or null for now. */
   arrive_at: string | null
   dwell_min: number; rain: RainSpell[]; origin: [number, number] | null
+  demo_scenario?: string | null
 }
 export interface ValidationIssue { loc: (string | number)[]; msg: string; type: string }
 export class ApiError extends Error {
@@ -273,8 +278,8 @@ export const api = {
   maneuver: (vehicleId: string, width: number, signal?: AbortSignal) =>
     fetch(`/api/vehicles/${encodeURIComponent(vehicleId)}/maneuver?width=${encodeURIComponent(String(width))}`, { signal }).then(j<Maneuver>),
   plan: (body: PlanRequest, signal?: AbortSignal) => post('/api/plan', body, signal).then(j<Plan>),
-  wayEvidence: (wayId: number, lat: number, lon: number, signal?: AbortSignal) =>
-    post(`/api/evidence/way/${wayId}`, { lat, lon }, signal).then(j<WayEvidence>),
+  wayEvidence: (wayId: number, lat: number, lon: number, demoScenario?: string | null, signal?: AbortSignal) =>
+    post(`/api/evidence/way/${wayId}`, { lat, lon, demo_scenario: demoScenario ?? null }, signal).then(j<WayEvidence>),
   tide: (start: string, hours = 36) =>
     fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
