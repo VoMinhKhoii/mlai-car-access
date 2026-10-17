@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Ngõ Ngách tells you whether your car fits down a Ho Chi Minh City alley, and gets back out, for your exact vehicle, with the evidence behind every width." />
+  <meta name="theme-color" content="#a6b3bc" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@300&family=Stack+Sans+Text:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Ngõ Ngách</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main">
+
+    <!-- Hero: the printed card beside the alley -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <div class="walls-band" aria-hidden="true">
+          <span style="--w:7"></span><span style="--w:3"></span><span style="--w:11"></span><span style="--w:5"></span><span style="--w:9"></span><span style="--w:4"></span><span style="--w:13"></span><span style="--w:6"></span><span style="--w:8"></span>
+        </div>
+        <nav class="hero-nav" aria-label="Primary">
+          <a class="wordmark" href="/welcome">Ngõ Ngách</a>
+          <div class="hero-links">
+            <a href="#map">Map</a>
+            <a href="#evidence">Evidence</a>
+            <a href="#agents">For agents</a>
+          </div>
+        </nav>
+        <div class="hero-copy">
+          <h1 id="hero-title" class="display">Will your car fit, and get back out?</h1>
+          <p class="lead">Per-vehicle answers for <span data-live="ways">15,013</span> Ho Chi Minh City alleys, each width backed by a source you can open.</p>
+          <a class="btn" href="/?ui=v2">Check an alley</a>
+        </div>
+
+        <!-- The live thing: the car between the walls, to scale -->
+        <figure class="fit" id="fit" data-ui aria-labelledby="fit-answer">
+          <div class="fit-controls">
+            <div class="seg" role="radiogroup" aria-label="Vehicle">
+              <button type="button" role="radio" aria-checked="true" data-vehicle="toyota-fortuner">Toyota Fortuner</button>
+              <button type="button" role="radio" aria-checked="false" data-vehicle="vinfast-vf-3">VinFast VF 3</button>
+            </div>
+            <label class="alley-pick">
+              <span class="visually-hidden">Alley</span>
+              <select id="alley-select">
+                <option value="356">Hẻm 356 Xô Viết Nghệ Tĩnh, 2.20 m</option>
+                <option value="160">Hẻm 160 Ngô Tất Tố, 2.50 m</option>
+                <option value="220">Hẻm 220/9 Xô Viết Nghệ Tĩnh, 5.49 m</option>
+              </select>
+            </label>
+          </div>
+          <div class="fit-read">
+            <p class="fit-answer" id="fit-answer" aria-live="polite"><span id="fit-word">Won't fit</span></p>
+            <p class="fit-numbers" id="fit-numbers">2.20 m clear, mirrors 2.11 m, 4.8 cm spare each side</p>
+          </div>
+          <svg class="fit-svg" viewBox="0 0 600 300" role="img" aria-labelledby="fit-desc" preserveAspectRatio="xMidYMax meet">
+            <desc id="fit-desc">Cross-section of the alley seen from behind the car, drawn to scale.</desc>
+            <rect class="ground" x="-600" y="282" width="1800" height="18" />
+            <g id="wall-l"><rect class="wall" x="-600" y="0" width="900" height="282" /></g>
+            <g id="wall-r"><rect class="wall" x="300" y="0" width="900" height="282" /></g>
+            <text id="gap-label" class="gap-label" x="300" y="34" text-anchor="middle">2.20 m</text>
+            <g id="car" transform="translate(300 282) scale(100)">
+              <g id="car-body">
+                <rect class="car-ink" x="-0.5" y="-1.55" width="1" height="1.3" rx="0.12" />
+                <rect class="car-glass" x="-0.4" y="-1.45" width="0.8" height="0.42" rx="0.06" />
+                <rect class="car-lamp" x="-0.47" y="-0.82" width="0.16" height="0.1" />
+                <rect class="car-lamp" x="0.31" y="-0.82" width="0.16" height="0.1" />
+                <rect class="car-ink" x="-0.44" y="-0.3" width="0.2" height="0.3" rx="0.04" />
+                <rect class="car-ink" x="0.24" y="-0.3" width="0.2" height="0.3" rx="0.04" />
+              </g>
+              <rect id="mirror-l" class="car-ink" x="0" y="-1.1" width="1" height="0.11" />
+              <rect id="mirror-r" class="car-ink" x="0" y="-1.1" width="1" height="0.11" />
+            </g>
+          </svg>
+        </figure>
+      </div>
+
+      <div class="hero-photo" aria-label="Alleys of Ho Chi Minh City">
+        <img class="xfade is-on" src="/welcome/alley-in-district-3-hcmc-38447694045.jpg" width="1400" height="933" alt="A narrow alley in District 3, a cyclo cart parked by a green gate and a vendor sorting greens on the ground." fetchpriority="high" />
+        <img class="xfade" src="/welcome/irejo-al-la-hotelo-little-saigon-ho.jpg" width="1050" height="1400" alt="The mouth of an alley off Lê Lợi, shop signs stacked on both walls and plastic stools by the entrance." loading="lazy" />
+        <img class="xfade" src="/welcome/alley-40-bui-vien-saigon-27305914518.jpg" width="1400" height="933" alt="Alley 40 Bùi Viện at night, motorbikes parked in a row along one wall." loading="lazy" />
+        <img class="xfade" src="/welcome/rundown-alley-in-chinatown-2328222631.jpg" width="1400" height="787" alt="A worn street corner in Chợ Lớn with motorbikes passing old shophouses." loading="lazy" />
+      </div>
+    </section>
+
+    <!-- Intro statement -->
+    <section class="intro" aria-label="Why">
+      <p class="statement reveal">Saigon lives down its hẻm<span class="slot"><img src="/welcome/alley-in-district-3-hcmc-38447694045.jpg" alt="" width="1400" height="933" loading="lazy" /></span>. Maps call them roads, so cars turn in, meet motorbikes<span class="slot"><img src="/welcome/alley-40-bui-vien-saigon-27305914518.jpg" alt="" width="1400" height="933" loading="lazy" /></span> or water<span class="slot"><img src="/welcome/street-flood-in-saigon-10721187326.jpg" alt="" width="1400" height="929" loading="lazy" /></span> and reverse out.</p>
+    </section>
+
+    <!-- Showcase: the live Goong map -->
+    <section class="showcase" id="map" aria-labelledby="map-title">
+      <div class="plate">
+        <div id="goong-map" class="map" role="region" aria-label="Live map of the selected alley, Goong tiles"></div>
+        <noscript><p class="map-fallback">The live map needs JavaScript. Open the app to see it.</p></noscript>
+      </div>
+      <div class="plate-text">
+        <div class="tabs" role="tablist" aria-label="Alleys">
+          <button type="button" role="tab" aria-selected="true" data-alley="356">Hẻm 356</button>
+          <button type="button" role="tab" aria-selected="false" data-alley="160">Hẻm 160</button>
+          <button type="button" role="tab" aria-selected="false" data-alley="220">Hẻm 220/9</button>
+        </div>
+        <div class="plate-body reveal">
+          <h2 id="map-title" class="head">The map, alley by alley</h2>
+          <p class="body" id="map-desc">Every drivable hẻm around the destination, drawn on Goong's map against your car. Green has room, amber is tight, red is narrower than your mirrors need. Tap a street for its width and its source.</p>
+          <dl class="facts" id="map-facts">
+            <div><dt>Narrowest cut</dt><dd id="mf-width">2.20 m</dd></div>
+            <div><dt>Evidence</dt><dd id="mf-tier">Observed</dd></div>
+            <div><dt>Alleys on screen</dt><dd id="mf-count">623</dd></div>
+          </dl>
+        </div>
+        <div class="cells">
+          <a class="cell cell-ink" id="map-open" href="/?ui=v2">Open in the app</a>
+          <a class="cell cell-tone" href="/field.html">Measure this alley</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="walls-band walls-band-wide" aria-hidden="true">
+      <span style="--w:9"></span><span style="--w:4"></span><span style="--w:14"></span><span style="--w:6"></span><span style="--w:10"></span><span style="--w:3"></span><span style="--w:12"></span><span style="--w:5"></span><span style="--w:8"></span><span style="--w:7"></span><span style="--w:11"></span>
+    </div>
+
+    <!-- How it works: the evidence tiers -->
+    <section class="tiers" id="evidence" aria-labelledby="tiers-title">
+      <div class="tiers-intro">
+        <h2 id="tiers-title" class="head reveal">Five kinds of proof</h2>
+        <p class="body reveal">Every width carries its source, and the strongest one decides. A tape measure beats the city cadastre, the cadastre beats a listing photo, and a guess never overrules anything.</p>
+      </div>
+      <div class="accordion" role="tablist" aria-label="Evidence tiers, strongest first">
+        <section class="tier is-open" style="--t:var(--tier-1);--ti:var(--accent-ink)">
+          <button type="button" class="tier-name" aria-expanded="true">Measured</button>
+          <div class="tier-body">
+            <p>A clear width taken on the ground with a tape or a phone, at the alley's narrowest point, by someone standing in it. It overrules every other source.</p>
+            <p class="tier-fact">Collected with the field kit, reviewed before it counts.</p>
+          </div>
+        </section>
+        <section class="tier" style="--t:var(--tier-2);--ti:var(--accent-ink)">
+          <button type="button" class="tier-name" aria-expanded="false">Official</button>
+          <div class="tier-body">
+            <p>The gap between land parcels in the city's cadastral map, sampled at cuts along the alley. Legal boundaries, not obstacles, so a parked row of motorbikes still counts against it.</p>
+            <p class="tier-fact"><span data-live="cadastral">216</span> alleys with city cadastral widths.</p>
+          </div>
+        </section>
+        <section class="tier" style="--t:var(--tier-3);--ti:var(--ink)">
+          <button type="button" class="tier-name" aria-expanded="false">Observed</button>
+          <div class="tier-body">
+            <p>A width read from a dated photograph of the alley itself, such as a property listing or a street camera, against a known object in the frame.</p>
+            <p class="tier-fact"><span data-live="observed">13,018</span> ways with an observed width.</p>
+          </div>
+        </section>
+        <section class="tier" style="--t:var(--tier-4);--ti:var(--ink)">
+          <button type="button" class="tier-name" aria-expanded="false">Declared</button>
+          <div class="tier-body">
+            <p>What a listing says about its own street: "hẻm xe hơi", "hẻm 3 m". Useful, often generous, never decisive on its own.</p>
+            <p class="tier-fact"><span data-live="declared">1,789</span> ways where a declaration is the strongest source.</p>
+          </div>
+        </section>
+        <section class="tier" style="--t:var(--tier-5);--ti:var(--ink)">
+          <button type="button" class="tier-name" aria-expanded="false">Inferred</button>
+          <div class="tier-body">
+            <p>An estimate from the geometry of buildings and parcels around the street. Shown with its range, and the answer stays unverified until something stronger arrives.</p>
+            <p class="tier-fact"><span data-live="inferred">207</span> ways where only an inference exists.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Features: specimens on colour tiles -->
+    <section class="specimens" aria-labelledby="spec-title">
+      <div class="spec-intro">
+        <h2 id="spec-title" class="head reveal">Over your whole stay</h2>
+        <p class="body reveal">Getting in is half of it. The answer holds from the moment you arrive to the moment you leave.</p>
+      </div>
+      <ul class="tiles" role="list">
+        <li class="tile-item reveal">
+          <div class="tile tile-f2 tile-photo"><img src="/welcome/alley-40-bui-vien-saigon-27305914518.jpg" alt="Motorbikes parked along one wall of Alley 40 Bùi Viện." width="1400" height="933" loading="lazy" /></div>
+          <h3 class="tile-name">The way back out</h3>
+          <p class="tile-fact">Through to the next street, a turn, or a reverse. Over 30 m backwards and the exit fails.</p>
+        </li>
+        <li class="tile-item tile-wide reveal">
+          <div class="tile tile-f1" data-ui>
+            <div class="tide" id="tide">
+              <p class="tide-head"><span>Tide at <span id="tide-station">Phú An, Saigon River</span></span><span id="tide-now">next 36 h</span></p>
+              <svg id="tide-svg" viewBox="0 0 400 160" preserveAspectRatio="none" role="img" aria-label="Forecast tide level over the next 36 hours against the city's first alarm level.">
+                <rect class="tide-alarm" x="0" y="0" width="400" height="40" />
+                <path id="tide-path" class="tide-line" d="M0 120 C 60 40, 120 40, 180 110 S 300 150, 400 60" />
+              </svg>
+              <p class="tide-foot"><span>Alarm level 1 at <span id="tide-bd1">1.4</span> m</span><span id="tide-peak">peak 1.3 m</span></p>
+            </div>
+          </div>
+          <h3 class="tile-name">Tide over your stay</h3>
+          <p class="tile-fact">From the official Southern Hydro-Met bulletin, checked at arrival and again at departure.</p>
+        </li>
+        <li class="tile-item reveal">
+          <div class="tile tile-f3 tile-photo"><img src="/welcome/street-flood-in-saigon-10728739135.jpg" alt="A man standing in shin-deep water on a flooded Saigon street." width="1400" height="910" loading="lazy" /></div>
+          <h3 class="tile-name">Rain on the way</h3>
+          <p class="tile-fact">Add a rain spell and every leg's depth estimate is run again against your car's safe water depth.</p>
+        </li>
+        <li class="tile-item reveal">
+          <div class="tile tile-f2" data-ui>
+            <div class="law">
+              <p class="law-status">Restricted</p>
+              <p class="law-text">No stopping within 5 m of a junction.</p>
+              <p class="law-cite">Law 36/2024/QH15 on Road Traffic Order and Safety, Article 18, clause 4</p>
+            </div>
+          </div>
+          <h3 class="tile-name">The stopping law</h3>
+          <p class="tile-fact">We show the rule and its citation, never advice. Unclear means unverified.</p>
+        </li>
+        <li class="tile-item reveal">
+          <div class="tile tile-f3" data-ui>
+            <div class="spec" id="spec">
+              <p class="spec-name" id="spec-name">VinFast VF 3</p>
+              <dl>
+                <div><dt>Body</dt><dd id="spec-body">1.68 m</dd></div>
+                <div><dt>Mirrors</dt><dd id="spec-mirror">1.75 m</dd></div>
+                <div><dt>Needs to fit</dt><dd id="spec-fits">3.05 m</dd></div>
+              </dl>
+            </div>
+          </div>
+          <h3 class="tile-name">Your exact car</h3>
+          <p class="tile-fact"><span data-live="models">34</span> models and <span data-live="classes">5</span> size classes, measured to the mirrors.</p>
+        </li>
+        <li class="tile-item reveal">
+          <div class="tile tile-f1 tile-photo"><img src="/welcome/rundown-alley-in-chinatown-2328222631.jpg" alt="Old shophouses on a corner in Chợ Lớn." width="1400" height="787" loading="lazy" /></div>
+          <h3 class="tile-name">A walk to the door</h3>
+          <p class="tile-fact">When the car stops short, the legal stop nearest the door and the walk from it.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- List: agents and MCP -->
+    <section class="agents" id="agents" aria-labelledby="agents-title">
+      <h2 id="agents-title" class="display-2 reveal">Any agent can ask the alley</h2>
+      <div class="agents-grid">
+        <figure class="agents-photo reveal">
+          <img src="/welcome/su-van-hanh-st.jpg" alt="A teal electric taxi among motorbikes on Sư Vạn Hạnh street at night." width="1400" height="933" loading="lazy" />
+        </figure>
+        <div class="agents-copy">
+          <p class="body reveal">AlleyAI answers in the app in plain language. The same six tools are open over MCP, so T-Maps voice guidance or a Xanh SM dispatcher can ask before the car turns in.</p>
+          <p class="table-word">Tools</p>
+          <table class="tools">
+            <caption class="visually-hidden">The six MCP tools</caption>
+            <tbody>
+              <tr><th scope="row">Find</th><td>A place, an alley or a house number</td><td><code>tim_dia_diem</code></td></tr>
+              <tr><th scope="row">Plan</th><td>Arrival, exit, flood window, legal stops</td><td><code>lap_ke_hoach</code></td></tr>
+              <tr><th scope="row">Fit</th><td>One alley, one vehicle, every source</td><td><code>kiem_tra_xe_vao_hem</code></td></tr>
+              <tr class="group"><th scope="row">Stop</th><td>Legal places to park or pick up nearby</td><td><code>tim_cho_do_gan</code></td></tr>
+              <tr><th scope="row">Vehicles</th><td>Models, classes and their limits</td><td><code>danh_sach_xe</code></td></tr>
+              <tr><th scope="row">Tide</th><td>Bulletin extremes for the forecast window</td><td><code>muc_trieu</code></td></tr>
+            </tbody>
+          </table>
+          <p class="mcp-url">Streamable HTTP at <code>/mcp</code>, or stdio for Claude Desktop and Claude Code.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA: the field kit, already open -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="cta-copy">
+        <h2 id="cta-title" class="display-2">Measure your alley</h2>
+        <p class="body">Thirty seconds at the narrowest point. Your width goes to review, then it outranks every other source for everyone who drives there.</p>
+      </div>
+      <form class="dialog" data-ui action="/field.html" method="get" id="measure">
+        <p class="dialog-title">Measure an alley</p>
+        <label class="field">
+          <span>Alley</span>
+          <input name="alley" value="Hẻm 356 Xô Viết Nghệ Tĩnh" autocomplete="off" />
+        </label>
+        <fieldset class="field">
+          <legend>Measure with</legend>
+          <div class="seg seg-dialog">
+            <label><input type="radio" name="method" value="tape" checked /><span>Tape</span></label>
+            <label><input type="radio" name="method" value="phone" /><span>Phone camera</span></label>
+          </div>
+        </fieldset>
+        <button class="btn btn-full" type="submit">Start measuring</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="blocks" aria-label="Ngõ Ngách" role="img">
+      <span style="--h:100%">N</span><span style="--h:78%">G</span><span style="--h:92%">Õ</span><span class="gap"></span><span style="--h:70%">N</span><span style="--h:96%">G</span><span style="--h:84%">Á</span><span style="--h:74%">C</span><span style="--h:100%">H</span>
+    </div>
+    <div class="foot-grid">
+      <ul class="foot-links" role="list">
+        <li><a href="/?ui=v2">The app</a></li>
+        <li><a href="/field.html">Field kit</a></li>
+        <li><a href="#evidence">Evidence tiers</a></li>
+        <li><a href="#agents">MCP tools</a></li>
+      </ul>
+      <p class="foot-note">A layer for T-Maps, on Goong's map of Ho Chi Minh City. Built at HUTECH, October 2026.</p>
+      <p class="credits">Photographs: "Alley in District 3, HCMC" by Vinnie Cartabiano, CC BY 2.0; "Irejo al la hotelo Little Saigon" by RG72, CC BY-SA 4.0; "Alley 40 Bui Vien, Saigon" by Kevin Decherf, CC BY-SA 2.0; "Rundown Alley in Chinatown" by Christopher from Shanghai, CC BY 2.0; "Street flood in Saigon" by Bem photography, CC BY 2.0; "Su Van Hanh St" by Blueconcorde, CC0. All via Wikimedia Commons. Map data © Goong, © OpenStreetMap contributors.</p>
+    </div>
+  </footer>
+  <script type="module" src="/src/welcome/main.ts"></script>
+</body>
+</html>
