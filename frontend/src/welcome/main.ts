@@ -79,7 +79,7 @@ const FIT_COLOURS = { room: '#2f6b3a', tight: '#a86a00', no: '#a3271f', unknown:
 
 function fitExpression(c: Car): maplibregl.ExpressionSpecification {
   return ['case',
-    ['!', ['has', 'lo']], FIT_COLOURS.unknown,
+    ['any', ['!', ['has', 'lo']], ['==', ['get', 'top_tier'], 'Inferred'], ['==', ['get', 'top_tier'], null]], FIT_COLOURS.unknown,
     ['>=', ['coalesce', ['get', 'lo'], 0], c.fits_min], FIT_COLOURS.room,
     ['>=', ['coalesce', ['get', 'lo'], 0], c.tight_min], FIT_COLOURS.tight,
     FIT_COLOURS.no]
@@ -168,7 +168,7 @@ async function boot() {
       map!.addLayer({ id: 'sel-casing', type: 'line', source: 'sel', layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': '#1c1c1c', 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 8, 18, 18] } })
       map!.addLayer({ id: 'fit', type: 'line', source: 'fit', layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': fitExpression(cars[carId]), 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 2.5, 18, 9] } })
+        paint: { 'line-color': fitExpression(cars[carId]), 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 2, 18, 7], 'line-opacity': 0.9 } })
       map!.on('mouseenter', 'fit', () => { map!.getCanvas().style.cursor = 'pointer' })
       map!.on('mouseleave', 'fit', () => { map!.getCanvas().style.cursor = '' })
       map!.on('click', 'fit', (e) => {
