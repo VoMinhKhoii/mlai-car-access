@@ -49,6 +49,9 @@ class Bound:
     coverage_m: float | None = None
     measurement_schema: str = ""
     estimate_m: float | None = None  # sampled bottleneck, never a whole-way lower guarantee
+    sample_count: int | None = None
+    sample_cuts: list[dict] = field(default_factory=list, repr=False)
+    sample_quality: dict = field(default_factory=dict)
 
     def to_json(self) -> dict:
         return {"lo": round(self.lo, 2), "hi": None if self.hi >= OPEN_HI else round(self.hi, 2),
@@ -56,7 +59,8 @@ class Bound:
                 "detail": self.detail, "observed_on": self.observed_on, "url": self.url,
                 "ai_feature": self.feature or None, "coverage_complete": self.coverage_complete,
                 "coverage_m": self.coverage_m, "measurement_schema": self.measurement_schema,
-                "estimate_m": self.estimate_m}
+                "estimate_m": self.estimate_m, "sample_count": self.sample_count,
+                "sample_quality": self.sample_quality}
 
 
 @dataclass
@@ -86,12 +90,18 @@ class WidthRange:
         return "Ô tô tránh"
 
     def to_json(self) -> dict:
+        samples = [b.estimate_m for b in self.evidence if b.tier == self.top_tier and
+                   b.estimate_m is not None and b not in self.overruled]
+        sampled = min(samples) if samples and not self.review else None
         return {"lo": round(self.lo, 2), "hi": None if self.hi >= OPEN_HI else round(self.hi, 2),
                 "label": self.label, "top_tier": self.top_tier, "review": self.review,
                 "evidence": [b.to_json() for b in self.evidence],
                 "overruled": [b.to_json() for b in self.overruled],
                 "way_out_claims": [b.to_json() for b in self.way_out_claims],
-                "official_width_records": self.official_width_records}  # END official bulk metadata hook
+                "official_width_records": self.official_width_records,
+                "sampled_range": None if sampled is None else {
+                    "lo": round(max(0, sampled-.3), 2), "hi": round(sampled+.3, 2),
+                    "scope": "Mẫu hẹp nhất đã đo; không bảo đảm toàn đoạn"}}  # END official bulk metadata hook
 
 
 def _combine(bounds: list[Bound]) -> tuple[float, float, str | None, bool, list[Bound]]:
@@ -271,7 +281,8 @@ class EvidenceStore:
                                 observed_on=str(pc.get("queried_at", ""))[:10],
                                 url="https://thongtinquyhoach.hochiminhcity.gov.vn/", feature="parcel_widths",
                                 coverage_complete=complete, coverage_m=coverage.get("length_m"),
-                                measurement_schema="parcel-usable-v2", estimate_m=ws[0]), pc["way_id"])
+                                measurement_schema="parcel-usable-v2", estimate_m=ws[0],
+                                sample_count=len(ws), sample_cuts=cuts), pc["way_id"])
 
     def _add_photo(self, ph: dict) -> None:
         w = _num(ph.get("width_m"))
@@ -432,11 +443,32 @@ class EvidenceStore:
 STORE_EVIDENCE = EvidenceStore()
 
 
+def _validate_parcel_bound(g, w, b):
+    if b.feature != 'parcel_widths' or not b.sample_cuts:
+        return b
+    from .width_samples import assess
+    cuts, quality = assess(g, w, b.sample_cuts)
+    if not cuts:
+        return replace(b, lo=0, hi=OPEN_HI, estimate_m=None, coverage_complete=False,
+                       measurement_schema='parcel-survey-unresolved-v2', sample_count=0,
+                       sample_quality=quality,
+                       detail='Mặt cắt cache không hợp lệ về hình học; chưa xác minh bề rộng toàn đoạn')
+    narrow = min(c['width_m'] for c in cuts)
+    complete = b.coverage_complete and not quality['rejected_cuts']
+    return replace(b, lo=max(0, narrow-.3) if complete else 0, hi=narrow+.3,
+                   estimate_m=narrow, coverage_complete=complete, sample_count=len(cuts),
+                   sample_quality=quality,
+                   detail=(f"Mẫu hợp lệ hẹp nhất {narrow:.2f} m; giữ {len(cuts)}/{len(b.sample_cuts)} mặt cắt; "
+                           f"{quality['bottleneck_support']} mẫu xác nhận nút thắt. "
+                           'Khoảng thửa trừ 1 m, bất định ±0,3 m; chưa bảo đảm toàn đoạn.').replace('.', ','))
+
+
 def width_ranges(g: AreaGraph) -> dict[int, WidthRange]:
     STORE_EVIDENCE.refresh_footprints()
     out = {}
     for w in g.ways.values():
-        bounds = _osm_bounds(w) + STORE_EVIDENCE.bounds_for(w)
+        bounds = [_validate_parcel_bound(g, w, b) for b in
+                  _osm_bounds(w) + STORE_EVIDENCE.bounds_for(w)]
         footprint_bounds = [b for b in bounds if b.feature == "footprint_widths"]
         ignored = []
         active, city_ignored, city_review = declared_index.prepare(w.id, bounds)
@@ -450,14 +482,17 @@ def width_ranges(g: AreaGraph) -> dict[int, WidthRange]:
                 active = [b for b in active if not (b.tier == "Inferred" and
                           b.source in ("OSM phân loại đường", "OSM số làn xe"))]
         # Even a complete destination-prefix scan is not a complete OSM way survey.
-        scoped = []
+        scoped, replacements = [], {}
         for b in active:
+            original = b
             if b.feature == "parcel_widths" and b.coverage_complete:
                 length = sum(haversine(*g.nodes[a], *g.nodes[z]) for a, z in zip(w.nodes, w.nodes[1:]))
                 if b.coverage_m is None or b.coverage_m + 1 < length:
                     b = replace(b, lo=0.0, coverage_complete=False)
             scoped.append(b)
+            replacements[id(original)] = b
         active = scoped
+        bounds = [replacements.get(id(b), b) for b in bounds]
         lo, hi, top, review, overruled = _combine(active)
         overruled += ignored + city_ignored  # END city-wide Declared index hook
         review = review or city_review

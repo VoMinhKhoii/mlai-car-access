@@ -12,11 +12,11 @@ from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import agent, agent_budget, ai, budget, coverage, evidence_routes, flags, google_lookup, live, plan, tide_refresh, vehicles
+from . import agent, agent_budget, ai, budget, coverage, evidence_routes, flags, geocoding, google_lookup, live, plan, tide_refresh, vehicles
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
-from .osm import build_graph, cached_graph, haversine, strip_accents
+from .osm import build_graph, haversine
 
 VN_TZ = timezone(timedelta(hours=7))
 FALLBACK_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
@@ -25,6 +25,8 @@ DEMO_CENTER = (10.8, 106.71)
 
 @asynccontextmanager
 async def lifespan(app):
+    geocoding.initialize_name_index()
+    geocoding.configure_curated(PRESETS, agent.DEMO_PLACES)
     stop, thread = tide_refresh.start_refresher()
     try:
         yield
@@ -108,53 +110,21 @@ def list_vehicles():
 
 @app.get("/api/search")
 def search(q: str, lat: float | None = None, lon: float | None = None):
-    """Goong place search (all of Vietnam) ranked around the given point, plus alley names from the street
-    graph of that area when it is already loaded (Goong often does not know small alleys by name)."""
     near = (lat, lon) if lat is not None and lon is not None else DEMO_CENTER
-    q_norm = strip_accents(q)
-    goong, alleys = [], []
-    try:
-        if GOONG_API_KEY:
-            r = httpx.get("https://rsapi.goong.io/v2/place/autocomplete",
-                          params={"api_key": GOONG_API_KEY, "input": q, "location": f"{near[0]},{near[1]}",
-                                  "limit": 7}, timeout=10)
-            for p in r.json().get("predictions", []):
-                desc = p.get("description") or ""
-                if strip_accents("Hồ Chí Minh") not in strip_accents(desc):
-                    continue  # HCMC only (D30)
-                goong.append({"label": desc, "place_id": p.get("place_id"), "source": "Goong"})
-        else:
-            r = httpx.get("https://nominatim.openstreetmap.org/search",
-                          params={"q": q, "format": "jsonv2", "limit": 7, "countrycodes": "vn",
-                                  "viewbox": "106.30,11.20,107.10,10.35", "bounded": 1},
-                          headers={"User-Agent": "VaoDuoc-hackathon/0.3"}, timeout=10)
-            for p in r.json():
-                goong.append({"label": p["display_name"], "lat": float(p["lat"]), "lon": float(p["lon"]),
-                              "source": "Nominatim"})
-    except Exception:
-        pass
-    g = cached_graph(*near)
-    if g and len(q_norm) >= 3:
-        seen = set()
-        for w in g.ways.values():
-            if w.name and w.is_alley and q_norm in strip_accents(w.name) and w.name not in seen:
-                seen.add(w.name)
-                la, lo = g.nodes[w.nodes[len(w.nodes) // 2]]
-                alleys.append({"label": w.name, "lat": la, "lon": lo, "source": "Tên hẻm (OSM)"})
-                if len(alleys) >= 3:
-                    break
-    # Goong first; alley names fill in what Goong does not know.
-    return {"results": (goong[:7] + alleys)[:10]}
+    if len(q.strip()) < 3:
+        return {"results": []}
+    return geocoding.resolve_place(q, near, limit=10, select_nearest=False)
 
 
 @app.get("/api/place/{place_id}")
 def place(place_id: str):
-    if not GOONG_API_KEY:
-        raise HTTPException(424, "Chưa có GOONG_API_KEY")
-    r = httpx.get("https://rsapi.goong.io/v2/place/detail", params={"api_key": GOONG_API_KEY, "place_id": place_id},
-                  timeout=10).json()
-    loc = r["result"]["geometry"]["location"]
-    return {"lat": loc["lat"], "lon": loc["lng"], "label": r["result"].get("formatted_address") or r["result"].get("name")}
+    try:
+        result = geocoding.resolve_id(place_id)
+    except (httpx.HTTPError, ValueError):
+        result = None
+    if result:
+        return result
+    raise HTTPException(424, "Nguồn địa điểm tạm gián đoạn. Hãy tìm lại để dùng kết quả có tọa độ.")
 
 
 class PlanRequest(BaseModel):
@@ -193,16 +163,7 @@ def make_plan(req: PlanRequest):
 
 @app.get("/api/reverse")
 def reverse(lat: float, lon: float):
-    """Address for a point (Goong reverse geocoding), used for "Vị trí của tôi" and map clicks."""
-    if GOONG_API_KEY:
-        try:
-            r = httpx.get("https://rsapi.goong.io/Geocode", params={"latlng": f"{lat},{lon}", "api_key": GOONG_API_KEY},
-                          timeout=10).json()
-            if r.get("results"):
-                return {"label": r["results"][0]["formatted_address"], "source": "Goong"}
-        except Exception:
-            pass
-    return {"label": f"{lat:.5f}, {lon:.5f}", "source": "toạ độ"}
+    return geocoding.reverse(lat, lon)
 
 
 @app.get("/api/tide")

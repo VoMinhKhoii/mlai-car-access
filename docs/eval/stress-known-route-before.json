@@ -1,0 +1,254 @@
+[
+  {
+    "way_id": 1185234990,
+    "name": "Đường Nguyễn Thành Ý",
+    "tags": {
+      "highway": "residential",
+      "name": "Đường Nguyễn Thành Ý",
+      "name:zh": "Nguyen Thanh Y Street",
+      "surface": "asphalt"
+    },
+    "estimate_m": 1.5,
+    "range": {
+      "lo": 0.0,
+      "hi": 15.0,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 3.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/1185234990",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": "",
+          "estimate_m": null
+        },
+        {
+          "lo": 0.0,
+          "hi": null,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Khảo sát thửa đất chưa có mặt cắt hợp lệ",
+          "detail": "Không có mặt cắt đối diện hợp lệ; chưa xác minh bề rộng toàn đoạn",
+          "observed_on": "",
+          "url": "",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": null,
+          "measurement_schema": "parcel-survey-unresolved-v2",
+          "estimate_m": null
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": [],
+      "official_width_records": []
+    }
+  },
+  {
+    "way_id": 35113132,
+    "name": "Đường Cây Điệp",
+    "tags": {
+      "highway": "residential",
+      "name": "Đường Cây Điệp",
+      "oneway:conditional": "yes @ (06:00-08:30,16:00-18:30)"
+    },
+    "estimate_m": 3.58,
+    "range": {
+      "lo": 0.0,
+      "hi": 3.88,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 3.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/35113132",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": "",
+          "estimate_m": null
+        },
+        {
+          "lo": 0.0,
+          "hi": 3.88,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 10 mặt cắt, cách nhau 5 m): hẹp nhất 3,6 m (thửa cách nhau 4,6 m); p20 3,7 m, p80 3,9 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "observed_on": "",
+          "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": 76.03,
+          "measurement_schema": "parcel-usable-v2",
+          "estimate_m": 3.58
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": [],
+      "official_width_records": []
+    }
+  },
+  {
+    "way_id": 35115025,
+    "name": "Đường Trần Doãn Khanh",
+    "tags": {
+      "highway": "residential",
+      "lane_markings": "no",
+      "name": "Đường Trần Doãn Khanh",
+      "surface": "asphalt"
+    },
+    "estimate_m": 5.56,
+    "range": {
+      "lo": 0.0,
+      "hi": 5.86,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 3.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/35115025",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": "",
+          "estimate_m": null
+        },
+        {
+          "lo": 0.0,
+          "hi": 5.86,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 5 mặt cắt, cách nhau 5 m): hẹp nhất 5,6 m (thửa cách nhau 6,6 m); p20 5,6 m, p80 5,7 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "observed_on": "",
+          "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": 32.08,
+          "measurement_schema": "parcel-usable-v2",
+          "estimate_m": 5.56
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": [],
+      "official_width_records": []
+    }
+  },
+  {
+    "way_id": 1349944007,
+    "name": "Nguyễn Văn Thủ",
+    "tags": {
+      "highway": "residential",
+      "lane_markings": "yes",
+      "lanes": "2",
+      "name": "Nguyễn Văn Thủ",
+      "name:zh": "阮文守街",
+      "surface": "asphalt"
+    },
+    "estimate_m": 4.06,
+    "range": {
+      "lo": 0.0,
+      "hi": 4.36,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 3.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/1349944007",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": "",
+          "estimate_m": null
+        },
+        {
+          "lo": 0.0,
+          "hi": 4.36,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt): hẹp nhất 4,1 m (thửa cách nhau 5,1 m); p20 4,1 m, p80 4,1 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "observed_on": "",
+          "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": 51.42,
+          "measurement_schema": "parcel-usable-v2",
+          "estimate_m": 4.06
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": [],
+      "official_width_records": []
+    }
+  },
+  {
+    "way_id": 1173852318,
+    "name": "Nguyễn Văn Thủ",
+    "tags": {
+      "highway": "residential",
+      "lanes": "2",
+      "name": "Nguyễn Văn Thủ",
+      "name:zh": "阮文守街",
+      "surface": "asphalt"
+    },
+    "estimate_m": 5.0,
+    "range": {
+      "lo": 3.5,
+      "hi": 15.0,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Inferred",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 3.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/1173852318",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": "",
+          "estimate_m": null
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": [],
+      "official_width_records": []
+    }
+  }
+]

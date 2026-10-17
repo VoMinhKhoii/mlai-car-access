@@ -1,4 +1,5 @@
 import type * as GeoJSON from 'geojson'
+import type { MapContext } from './mapSearch'
 export type Intent = 'park' | 'pickup'
 export type FitClass = 'fits' | 'tight' | 'no' | 'unknown' | 'blocked' | 'lot'
 export type FloodStatus = 'passable' | 'risky' | 'blocked' | 'unknown'
@@ -157,7 +158,7 @@ export const api = {
     }
   },
   cancelAgent: (requestId: string) => post(`/api/agent/cancel/${encodeURIComponent(requestId)}`, {}).then(j<{ cancelled: boolean }>),
-  async agent(body: { contents: Record<string, unknown>[]; message: string; origin: [number, number] | null; tools: boolean; request_id?: string }, onEvent: (e: AgentEvent) => void, signal?: AbortSignal) {
+  async agent(body: { contents: Record<string, unknown>[]; message: string; origin: [number, number] | null; tools: boolean; request_id?: string; map_context?: MapContext }, onEvent: (e: AgentEvent) => void, signal?: AbortSignal) {
     const res = await fetch('/api/agent', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal })
     if (!res.ok) { await j(res); return }
     if (!res.body) throw new Error('Không đọc được câu trả lời.')

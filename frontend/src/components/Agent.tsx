@@ -2,6 +2,7 @@ import { Check, LoaderCircle, MapPin, MessageCircle, Mic, Send, Waves, X, Route 
 import { useEffect, useRef, useState } from 'react'
 import { api, type AgentEvent, type AgentPlan, type AgentEvidence, type WayEvidence, type Estimate } from '../api'
 import type { Place } from './Directions'
+import { matchMapPlaces, type MapContext } from '../mapSearch'
 import { EvidencePanel } from './Evidence'
 import './Agent.css'
 
@@ -43,7 +44,7 @@ function recentHistory(history: Record<string, unknown>[]) {
   return first >= 0 ? history.slice(first) : []
 }
 
-export function Agent({ origin, onPlan, open, setOpen }: { origin: Place | null; onPlan: (p: AgentPlan) => void; open: boolean; setOpen: (open: boolean) => void }) {
+export function Agent({ origin, onPlan, open, setOpen, mapContext }: { origin: Place | null; onPlan: (p: AgentPlan) => void; open: boolean; setOpen: (open: boolean) => void; mapContext: MapContext | null }) {
   const [saved] = useState(restore)
   const [evidence, setEvidence] = useState<{ way: WayEvidence; at: [number, number] } | null>(null)
   const [evidenceError, setEvidenceError] = useState('')
@@ -120,13 +121,14 @@ export function Agent({ origin, onPlan, open, setOpen }: { origin: Place | null;
     setTurns((ts) => [...ts, { question, steps: [{ name: 'understand', args: {} }], answer: '', blind: '' }])
     const update = (fn: (t: Turn) => Turn) => setTurns((ts) => ts.map((t, i) => i === index ? fn(t) : t))
     const near: [number, number] | null = origin ? [origin.lat, origin.lon] : null
+    const map_context = mapContext ? { ...mapContext, candidates: matchMapPlaces(question, mapContext.candidates, mapContext.center, 20, true) } : undefined
     // Keep the baseline's own history; it never receives tool evidence from Ngõ Ngách.
     const blindBody = { contents: blindContents.current, message: question, origin: near, tools: false }
     async function run(blind: boolean) {
       const requestId = crypto.randomUUID()
       requestIds.current.push(requestId)
       try {
-        const payload = { ...(blind ? blindBody : { contents: contents.current, message: question, origin: near, tools: true }), request_id: requestId }
+        const payload = { ...(blind ? blindBody : { contents: contents.current, message: question, origin: near, tools: true }), request_id: requestId, map_context }
         await api.agent(payload, (e: AgentEvent) => {
           if (e.type === 'done') { if (blind) blindContents.current = recentHistory(e.contents); else { contents.current = recentHistory(e.contents); setHasHistory(true) } }
           if (e.type === 'ui' && !blind) onPlan(e.plan)

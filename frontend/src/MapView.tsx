@@ -3,6 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef } from 'react'
 import type { Plan } from './api'
+import { featurePlace, type MapContext, type MapPlace } from './mapSearch'
 
 export interface LayerToggles { fit: boolean; flood: boolean; goong: boolean }
 export type FloodMoment = 'arrive' | 'depart'
@@ -22,6 +23,8 @@ interface Props {
   onPick: (lat: number, lon: number, x: number, y: number) => void
   onWayClick: (wayId: number, lat: number, lon: number) => void
   onStopClick: (index: number) => void
+  onFeatures: (context: MapContext) => void
+  onPlaceClick: (place: MapPlace) => void
 }
 
 const EMPTY: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] }
@@ -45,9 +48,30 @@ export function MapView(p: Props) {
     if (!box.current) return
     const m = new maplibregl.Map({
       container: box.current, style: p.styleUrl, center: [p.center[1], p.center[0]], zoom: 14.6,
-      attributionControl: { compact: true },
+      attributionControl: { compact: true }, hash: true,
     })
     map.current = m
+    let featureTimer: number | undefined
+    const labelLayers = () => (m.getStyle().layers ?? []).filter((l) => l.type === 'symbol' && l.layout?.['text-field'] && 'source-layer' in l && typeof l.source === 'string' && m.getStyle().sources[l.source]?.type === 'vector')
+    const publishFeatures = () => {
+      const c = m.getCenter(), center = { lat: c.lat, lon: c.lng }, bounds = m.getBounds()
+      const candidates: MapPlace[] = []
+      const seen = new Set<string>()
+      for (const l of labelLayers()) {
+        if (!('source' in l) || typeof l.source !== 'string' || !('source-layer' in l) || !l['source-layer']) continue
+        const key = `${l.source}/${l['source-layer']}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        for (const f of m.querySourceFeatures(l.source, { sourceLayer: l['source-layer'] })) {
+          const place = featurePlace(f, l['source-layer'], center)
+          if (place && bounds.contains([place.lon, place.lat])) candidates.push(place)
+        }
+      }
+      cb.current.onFeatures({ center, zoom: m.getZoom(), candidates })
+    }
+    const scheduleFeatures = () => { window.clearTimeout(featureTimer); featureTimer = window.setTimeout(publishFeatures, 150) }
+    m.on('idle', scheduleFeatures)
+    m.on('moveend', scheduleFeatures)
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
@@ -78,6 +102,12 @@ export function MapView(p: Props) {
       sync()
     })
     m.on('click', (e) => {
+      const labels = labelLayers().map((l) => l.id)
+      const features = labels.length ? m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: labels }) : []
+      for (const f of features) {
+        const place = featurePlace(f, f.sourceLayer ?? f.layer.id, { lat: e.lngLat.lat, lon: e.lngLat.lng })
+        if (place) { cb.current.onPlaceClick(place); return }
+      }
       const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
     })
@@ -92,7 +122,7 @@ export function MapView(p: Props) {
       m.on('mouseenter', id, () => { m.getCanvas().style.cursor = 'pointer' })
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
-    return () => { m.remove(); map.current = null; ready.current = false }
+    return () => { window.clearTimeout(featureTimer); window.clearTimeout(press); m.remove(); map.current = null; ready.current = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.styleUrl])
 

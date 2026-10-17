@@ -1,26 +1,40 @@
 import { ArrowUpDown, Car, Clock, Crosshair, MapPin, ParkingSquare, Search, UserRound, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api, type Intent, type SearchResult, type Vehicle } from '../api'
+import { matchMapPlaces, type MapContext } from '../mapSearch'
 import { ChipMenu, Segmented, metres, minutes, vn } from '../ds/ui'
 
 export interface Place { lat: number; lon: number; label: string }
 export type VehicleMode = 'class' | 'model' | 'vetc'
 
 /** One place input with Goong/OSM autocomplete. */
-function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
+function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext }: {
   kind: 'origin' | 'dest'; value: Place | null; onPick: (p: Place | null) => void; placeholder: string; extra?: React.ReactNode
   near?: { lat: number; lon: number } | null
+  mapContext?: MapContext | null
 }) {
   const [q, setQ] = useState<string | null>(null)
   const [results, setResults] = useState<SearchResult[]>([])
-  const timer = useRef<number | undefined>(undefined)
+  const [debounced, setDebounced] = useState('')
+  const [focused, setFocused] = useState(false)
   const text = q ?? value?.label ?? ''
+  const local = mapContext && focused && q !== null && debounced === q ? matchMapPlaces(debounced, mapContext.candidates, mapContext.center, 6).map((p) => ({ label: p.name, lat: p.lat, lon: p.lon, source: 'Trên bản đồ' })) : []
+  const shown = [...local, ...results.filter((r) => !local.some((p) => p.label === r.label))]
+
+  useEffect(() => {
+    setResults([])
+    setDebounced('')
+    if (!focused || q === null || q.trim().length < 2) return
+    let active = true
+    const timer = window.setTimeout(() => {
+      setDebounced(q)
+      api.search(q, near).then((r) => { if (active) setResults(r.results) }).catch(() => {})
+    }, 250)
+    return () => { active = false; window.clearTimeout(timer) }
+  }, [q, focused, near?.lat, near?.lon])
 
   function type(v: string) {
     setQ(v)
-    window.clearTimeout(timer.current)
-    if (v.trim().length < 2) return setResults([])
-    timer.current = window.setTimeout(() => api.search(v, near).then((r) => setResults(r.results)).catch(() => setResults([])), 250)
   }
   async function pick(r: SearchResult) {
     setResults([])
@@ -35,14 +49,14 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
       <span className={`place-mark ${kind}`} aria-hidden>{kind === 'dest' ? <MapPin size={16} strokeWidth={2.4} /> : <i />}</span>
       <div className="field">
         <input value={text} placeholder={placeholder} aria-label={kind === 'origin' ? 'Điểm đi' : 'Điểm đến'}
-          onChange={(e) => type(e.target.value)} onFocus={(e) => e.target.select()}
-          onBlur={() => window.setTimeout(() => { setResults([]); setQ(null) }, 150)} />
+          onChange={(e) => type(e.target.value)} onFocus={(e) => { setFocused(true); e.target.select() }}
+          onBlur={() => window.setTimeout(() => { setFocused(false); setResults([]); setQ(null) }, 150)} />
         {text && <button type="button" className="icon-btn sm" aria-label="Xoá" onClick={() => { setQ(''); onPick(null) }}><X size={15} /></button>}
         {extra}
       </div>
-      {results.length > 0 && (
+      {shown.length > 0 && focused && (
         <ul className="results card" role="listbox">
-          {results.slice(0, 6).map((r, i) => (
+          {shown.slice(0, 6).map((r, i) => (
             <li key={i}>
               <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => pick(r)}>
                 <Search size={15} /><span>{r.label}<small>{r.source}</small></span>
@@ -58,6 +72,7 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
 export function Directions(p: {
   origin: Place | null; dest: Place | null; setOrigin: (x: Place | null) => void; setDest: (x: Place | null) => void
   locating: boolean; onLocate: () => void
+  mapContext: MapContext | null
   vehicle?: Vehicle; fleet: { classes: Vehicle[]; models: Vehicle[] }
   vMode: VehicleMode; setVMode: (m: VehicleMode) => void; classId: string; setClassId: (s: string) => void
   modelId: string; setModelId: (s: string) => void; vetcLinked: boolean; openVetc: () => void; unlinkVetc: () => void
@@ -73,7 +88,7 @@ export function Directions(p: {
         <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} near={p.dest ?? p.origin} placeholder="Điểm đi: vị trí của bạn"
           extra={<button type="button" className="icon-btn sm" aria-label="Dùng vị trí hiện tại" title="Dùng vị trí hiện tại" onClick={p.onLocate}>
             <Crosshair size={16} className={p.locating ? 'spin' : ''} /></button>} />
-        <PlaceField kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Đến địa chỉ, hẻm…" />
+        <PlaceField kind="dest" value={p.dest} onPick={p.setDest} near={p.mapContext?.center ?? p.origin ?? p.dest} mapContext={p.mapContext} placeholder="Đến địa chỉ, hẻm…" />
         <span className="places-rail" aria-hidden />
         <button type="button" className="icon-btn swap" aria-label="Đổi điểm đi và điểm đến" onClick={() => { const o = p.origin; p.setOrigin(p.dest); p.setDest(o) }}>
           <ArrowUpDown size={16} />

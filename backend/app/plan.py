@@ -719,21 +719,49 @@ def _tide_json(t):
 CONFIDENCE_VI = {"high": "cao", "medium": "trung bình", "low": "thấp"}
 
 
-def _width_estimate(wr):
-    """A point hypothesis inside the fused range, never a certified lower bound."""
+def _width_hypothesis(wr):
+    """Keep the point's actual source separate from whole-way verification.
+
+    A failed Official survey is missing evidence, not a zero-width observation.
+    Its fused interval may have a finite, weaker cap; taking that interval's
+    midpoint invents a narrow Official measurement (D48).
+    """
     if wr.review or wr.top_tier is None:
         return None
-    samples = [b.estimate_m for b in wr.evidence if b.tier == wr.top_tier and b.estimate_m is not None and b not in wr.overruled]
-    if samples:
-        return max(wr.lo, min(wr.hi, min(samples)))
-    if wr.lo == 0 and wr.hi >= 40:
-        # An unresolved survey can retain a weak prior for estimation only.
-        priors = [b for b in wr.evidence if b.lo > 0 and b not in wr.overruled]
-        if not priors:
-            return None
-        b = priors[0]
-        return (b.lo + min(b.hi, b.lo + 3)) / 2
-    return (wr.lo + min(wr.hi, wr.lo + 3)) / 2
+    from .evidence import TIERS
+    active = [b for b in wr.evidence if b not in wr.overruled and
+              b.measurement_schema != 'parcel-survey-unresolved-v2']
+    for tier in TIERS[TIERS.index(wr.top_tier):]:
+        bounds = [b for b in active if b.tier == tier and (b.estimate_m is not None or b.lo > 0)]
+        if not bounds:
+            continue
+        samples = [b for b in bounds if b.estimate_m is not None]
+        if samples:
+            b = min(samples, key=lambda b: b.estimate_m)
+            value = b.estimate_m  # never relabel a weaker cap as this sample
+        else:
+            lo, hi = max(b.lo for b in bounds), min(b.hi for b in bounds)
+            if lo > hi:
+                return None
+            b = min(bounds, key=lambda b: b.hi)
+            value = (lo + min(hi, lo+3)) / 2
+        return {'value_m': value, 'tier': tier, 'source': b.source,
+                'sampled': bool(samples), 'sample_count': b.sample_count,
+                'bottleneck_support': b.sample_quality.get('bottleneck_support'),
+                'isolated_low_outlier': b.sample_quality.get('isolated_low_outlier', False),
+                'fallback_from_unresolved': tier != wr.top_tier}
+    # Diagnostic callers can supply an interval without individual bounds.
+    if not wr.evidence and wr.lo > 0:
+        return {'value_m': (wr.lo+min(wr.hi,wr.lo+3))/2, 'tier': wr.top_tier,
+                'source': 'Khoảng bề rộng', 'sampled': False, 'sample_count': None,
+                'bottleneck_support': None, 'isolated_low_outlier': False,
+                'fallback_from_unresolved': False}
+    return None
+
+
+def _width_estimate(wr):
+    hypothesis = _width_hypothesis(wr)
+    return hypothesis['value_m'] if hypothesis else None
 
 
 def _estimate(c, g, wrs, p, checks, failures):
@@ -746,12 +774,13 @@ def _estimate(c, g, wrs, p, checks, failures):
         segments.setdefault(c.edge_idx, .01)
     total = sum(segments.values())
     widths = [wrs[g.edges[ei].way_id] for ei in segments]
-    values = [_width_estimate(wr) for wr in widths]
+    hypotheses = [_width_hypothesis(wr) for wr in widths]
+    values = [h['value_m'] if h else None for h in hypotheses]
     strong_m = quantitative_m = 0.0
     measured = 0
     for (ei, length), wr in zip(segments.items(), widths):
         numeric = [b for b in wr.evidence if b.tier in ('Measured', 'Official', 'Observed')
-                   and (b.estimate_m is not None or (b.hi < 40 and b.hi > 0 and
+                   and b not in wr.overruled and (b.estimate_m is not None or (b.hi < 40 and b.hi > 0 and
                         b.measurement_schema != 'parcel-survey-unresolved-v2'))]
         if numeric:
             measured += 1
@@ -789,24 +818,38 @@ def _estimate(c, g, wrs, p, checks, failures):
         confidence = 'low'
     hard_legal = legal['status'] in ('Prohibited', 'Restricted')
     hard_width = any(not wr.review and any(
-        b.tier in ('Measured', 'Official') and b not in wr.overruled and
+        b.tier in ('Measured', 'Official') and b.tier == wr.top_tier and b not in wr.overruled and
+        (b.feature != 'parcel_widths' or b.sample_quality.get('bottleneck_support', b.sample_count or 0) >= 2) and
         b.hi < (p.door_min if g.edges[ei].way_id == c.way_id else p.tight_min)
         for b in wr.evidence) for ei, wr in zip(segments, widths))
     if hard_legal or hard_width or flood == 'blocked':
         answer, confidence = 'no', 'high'
     elif not route or failures:
         confidence = 'low'
+        if (not route or wo['mode'] == 'none') and checks.get('fit', {}).get('class') not in ('no', 'blocked'):
+            # A missing directed path in this cached graph does not measure a
+            # narrow street. Keep the failed Hard Check, but say what is unknown.
+            answer = 'unknown'
     if c.kind == 'lot' and not failures:
         answer = 'unknown'  # no measured entrance / internal manoeuvre envelope
     tier_names = {'Measured':'đo thực tế', 'Official':'địa chính / chính thức', 'Observed':'quan sát',
                   'Declared':'tin rao / tự khai', 'Inferred':'suy luận'}
-    finite = [(v, wr) for v, wr in zip(values, widths) if v is not None]
+    finite = [(v, wr, ei, h) for v, wr, ei, h in zip(values, widths, segments, hypotheses) if v is not None]
+    limiting_json = None
     if finite:
-        value, limiting = min(finite, key=lambda x: x[0])
-        tier = limiting.top_tier
-        if limiting.lo == 0 and limiting.hi >= 40 and not any(b.estimate_m is not None for b in limiting.evidence):
-            tier = next((b.tier for b in limiting.evidence if b.lo > 0 and b not in limiting.overruled), tier)
-        basis = [f"{tier_names.get(tier, 'thiếu nguồn')} ≈{value:.1f} m".replace('.', ',')]
+        value, limiting, ei, hypothesis = min(finite, key=lambda x: x[0])
+        way = g.ways[g.edges[ei].way_id]
+        limiting_json = {**hypothesis, 'way_id': way.id, 'way_name': g.display_name(way.id),
+                         'osm_url': f'https://www.openstreetmap.org/way/{way.id}'}
+        basis = [f"{tier_names.get(hypothesis['tier'], 'thiếu nguồn')} ≈{value:.2f} m".replace('.', ',')
+                 + f" ({g.display_name(way.id)}; OSM {way.id})"]
+        if hypothesis['fallback_from_unresolved']:
+            basis.append('khảo sát chưa có mẫu hợp lệ; dùng nguồn yếu hơn để ước tính')
+        if (answer == 'no' and not (hard_legal or hard_width or flood == 'blocked') and
+                (hypothesis['fallback_from_unresolved'] or hypothesis['isolated_low_outlier'] or
+                 (hypothesis['sample_count'] is not None and (hypothesis['bottleneck_support'] or 0) < 2))):
+            confidence = 'low'
+            basis.append('nút thắt chưa có hai mặt cắt nhất quán')
     else:
         basis = ['chưa có bề rộng đủ để ước lượng']
     basis.append(f"{measured}/{len(segments)} đoạn có mẫu đo ({coverage['sample_supported_fraction']:.0%} chiều dài có mẫu)")
@@ -823,7 +866,8 @@ def _estimate(c, g, wrs, p, checks, failures):
                      if r['status'] in ('Prohibited', 'Restricted'))
     elif failures:
         basis.append(failures[0])
-    return {'answer': answer, 'confidence': confidence, 'basis': ' · '.join(basis), 'coverage': coverage}
+    return {'answer': answer, 'confidence': confidence, 'basis': ' · '.join(basis), 'coverage': coverage,
+            'limiting_width': limiting_json}
 
 
 def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, stay_times, rain,

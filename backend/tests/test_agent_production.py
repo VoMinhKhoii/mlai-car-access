@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
-from app import agent, agent_budget, main
+from app import agent, agent_budget, geocoding, main
 
 
 class AgentProductionTests(unittest.TestCase):
@@ -52,15 +52,13 @@ class AgentProductionTests(unittest.TestCase):
 
     def test_goong_failure_falls_through_osm_then_nominatim(self):
         import httpx
-        from app import osm
-        with patch.object(agent.httpx,'get',side_effect=httpx.ConnectError('redacted')),patch.object(osm,'cached_graph',return_value=None),patch.object(agent,'_nominatim',return_value=[{'label':'42 Võ Văn Ngân, Thủ Đức','lat':10.85,'lon':106.76,'source':'Nominatim'}]) as nom:
+        with patch.object(agent.httpx,'get',side_effect=httpx.ConnectError('redacted')),patch.object(geocoding,'local_search',return_value=[]),patch.object(agent,'_nominatim',return_value=[{'label':'42 Võ Văn Ngân, Thủ Đức','lat':10.85,'lon':106.76,'source':'Nominatim'}]) as nom:
             r=agent.resolve_place('42 Võ Văn Ngân, Thủ Đức')
         self.assertEqual(r['results'][0]['source'],'Nominatim');nom.assert_called_once()
 
     def test_ambiguity_nearest_origin_and_exact_house(self):
-        from app import osm
         places=[{'label':'Highlands A','lat':10.8,'lon':106.7,'source':'fixture'}, {'label':'Highlands B','lat':10.9,'lon':106.7,'source':'fixture'}]
-        with patch('app.config.GOONG_API_KEY',''),patch.object(osm,'cached_graph',return_value=None),patch.object(agent,'_nominatim',return_value=places):
+        with patch('app.config.GOONG_API_KEY',''),patch.object(geocoding,'local_search',return_value=[]),patch.object(agent,'_nominatim',return_value=places):
             r=agent.resolve_place('Highlands test disambiguation')
             self.assertTrue(r['requires_clarification'])
             r=agent.resolve_place('Highlands test disambiguation',(10.89,106.7))

@@ -9,7 +9,8 @@ from app import agent, flood, main, plan, vehicles
 
 class AgentRoundTwoTests(unittest.TestCase):
     def test_curated_house_end_wins_without_search(self):
-        with patch.object(main, 'search') as search, patch.object(main, '_way_mid') as midpoint:
+        with patch.object(main, 'search') as search, patch.object(main, '_way_mid') as midpoint, \
+                patch.object(agent.httpx, 'get', side_effect=AssertionError('Curated places must stay offline')):
             found, _ = agent.execute('tim_dia_diem', {'query': 'Hem 113/4 Vo Duy Ninh, Binh Thanh'})
         self.assertEqual(found['results'][0]['lat'], 10.792106)
         self.assertEqual(found['results'][0]['lon'], 106.716661)

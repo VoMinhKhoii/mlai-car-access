@@ -59,12 +59,34 @@ TOOLS.extend([
 ])
 
 
+class MapCandidate(BaseModel):
+    name: str = Field(min_length=1, max_length=500)
+    lat: float = Field(ge=-90, le=90, allow_inf_nan=False)
+    lon: float = Field(ge=-180, le=180, allow_inf_nan=False)
+    layer: str = Field(max_length=200)
+
+
+class MapCenter(BaseModel):
+    lat: float = Field(ge=-90, le=90, allow_inf_nan=False)
+    lon: float = Field(ge=-180, le=180, allow_inf_nan=False)
+
+
+class MapContext(BaseModel):
+    center: MapCenter
+    zoom: float = Field(ge=0, le=24, allow_inf_nan=False)
+    candidates: list[MapCandidate] = Field(default_factory=list, max_length=20)
+
+
+TAP_PLACE = 'Bạn chạm vào địa điểm trên bản đồ nhé.'
+
+
 class AgentRequest(BaseModel):
     contents: list[dict] = Field(default_factory=list, max_length=100)
     message: str = Field(min_length=1, max_length=8000)
     origin: tuple[float, float] | None = None
     tools: bool = True
     request_id: str | None = Field(default=None, max_length=100)
+    map_context: MapContext | None = None
 
     @field_validator("contents")
     @classmethod
@@ -139,10 +161,10 @@ def compact_plan(p):
             "standard_route": {"unfit_ways": (p.get("standard_route") or {}).get("unfit_ways", [])}}
 
 
-def execute(name: str, args: dict, origin=None):
+def execute(name: str, args: dict, origin=None, map_context=None):
     from . import main  # main registers routes; keep the tool adapter independent of startup order
     if name == "tim_dia_diem":
-        return resolve_place(args["query"], origin), None
+        return resolve_place(args["query"], origin, map_context), None
     if name == "danh_sach_xe":
         return {"vehicles": [p.to_json() for p in vehicles.all_profiles().values()]}, None
     if name == "kiem_tra_xe_vao_hem":
@@ -214,7 +236,7 @@ def system_prompt(enabled):
 Danh mục xe: {fleet}. VF3/VF 3 = vinfast-vf-3, VF5 = vinfast-vf-5; Fortuner = toyota-fortuner.
 Luôn gọi công cụ trước khi trả lời về xe vào/ra hoặc chỗ dừng. Tìm tọa độ bằng tim_dia_diem rồi lap_ke_hoach.
 Không đoán tọa độ. Ngoài khu vực TP.HCM trước sáp nhập thì từ chối ngắn; câu vô nghĩa hoặc thiếu điểm đến thì hỏi lại, không lập kế hoạch.
-Nếu tim_dia_diem.requires_clarification=true, hỏi chọn địa chỉ/chi nhánh cụ thể và KHÔNG gọi lap_ke_hoach. Nếu selection_reason có nội dung, phải nói rõ lý do đã chọn. Không có results thì xin địa chỉ/ghim, không đoán.
+Nếu tim_dia_diem.requires_clarification=true, hỏi chọn địa chỉ/chi nhánh cụ thể và KHÔNG gọi lap_ke_hoach. Nếu selection_reason có nội dung, phải nói rõ lý do đã chọn. Không có results thì chỉ nói: “Bạn chạm vào địa điểm trên bản đồ nhé.” Không đoán địa điểm.
 Xe 7 chỗ = class-m, xe cỡ nhỏ = class-xs, sedan = class-s. Mẫu xe không nhận ra thì hỏi lại hoặc danh_sach_xe, không tự chọn.
 "tối nay 7h" = 19:00 hôm nay; "sáng mai" = ngày mai; đổi ngày nhưng giữ giờ nếu không nói giờ. Ngày/giờ tính theo Asia/Ho_Chi_Minh.
 Mọi số trong câu trả lời (kể cả số nhà, mẫu xe, thời gian) PHẢI xuất hiện trong kết quả công cụ; không tính nhẩm, làm tròn, tự tạo số liệu. Có thể tránh nhắc số khi không cần.
@@ -367,6 +389,9 @@ def events(req: AgentRequest):
                         if note and note not in answer: answer += "\n" + note
                         evidence_note = latest_plan.get("evidence_note")
                         if evidence_note and evidence_note not in answer: answer += "\n" + evidence_note
+                    last_geo = next((r for r in reversed(results) if 'results' in r), None)
+                    if not latest_plan and last_geo is not None and not last_geo.get('results'):
+                        answer = TAP_PLACE
                     # Never emit unsupported numbers, even from engine prose formatting.
                     if number_violations(answer, results):
                         answer = "Chưa đủ bằng chứng để kết luận xe vào và ra được. Vui lòng xem bằng chứng từng đoạn và xác minh tại chỗ."
@@ -398,7 +423,8 @@ def events(req: AgentRequest):
                             raise ValueError("Chưa tìm được điểm đến; không được đoán tọa độ.")
                         if geo and not any(abs(float(args.get("lat",0))-p["lat"])<.0002 and abs(float(args.get("lon",0))-p["lon"])<.0002 for p in geo["results"]):
                             raise ValueError("Tọa độ phải lấy đúng từ kết quả tìm địa điểm.")
-                    result, ui = yield from bounded(execute, min(float(os.environ.get('AGENT_TOOL_TIMEOUT','40')), max(.01,160-(time.monotonic()-started))), name, args, req.origin)
+                    context_args = (req.map_context,) if name == 'tim_dia_diem' else ()
+                    result, ui = yield from bounded(execute, min(float(os.environ.get('AGENT_TOOL_TIMEOUT','40')), max(.01,160-(time.monotonic()-started))), name, args, req.origin, *context_args)
                     if name in ("lap_ke_hoach", "tim_cho_do_gan"): latest_plan = result
                     if ui: yield {"type":"ui", "plan":ui}
                 except Exception as exc:
@@ -421,9 +447,6 @@ def stream(req):
 # Adapter safeguards deliberately live here; the routing/evidence engine is unchanged.
 _TOOL_SLOTS = threading.BoundedSemaphore(8)
 _key_cooldowns: dict[str, float] = {}
-_geo_cache: dict = {}
-_nominatim_lock = threading.Lock()
-_nominatim_at = 0.0
 
 
 def normalize_vehicle(value):
@@ -514,93 +537,28 @@ def call_tool(name, args, origin=None):
 
 
 def _nominatim(q):
-    global _nominatim_at
-    with _nominatim_lock:
-        time.sleep(max(0, 1.05 - (time.monotonic() - _nominatim_at)))
-        _nominatim_at = time.monotonic()
-        r = httpx.get('https://nominatim.openstreetmap.org/search',
-            params={'q': q, 'format':'jsonv2','limit':5,'countrycodes':'vn',
-                    'viewbox':'106.30,11.20,107.10,10.35','bounded':1,'addressdetails':1},
-            headers={'User-Agent':'NgoNgach/1.0 (HCMC address resolver)'},timeout=7)
-        r.raise_for_status()
-        return [{'label':p['display_name'],'lat':float(p['lat']),'lon':float(p['lon']),
-                 'source':'Nominatim / OpenStreetMap', 'precision': 'house' if p.get('address',{}).get('house_number') else p.get('type','place')}
-                for p in r.json()]
+    from .geocoding import nominatim
+    return nominatim(q)
 
 
-def resolve_place(query, origin=None):
-    from . import main
-    from .config import GOONG_API_KEY, in_hcmc
-    from .osm import cached_graph, haversine
-    q = str(query).strip()
-    if len(q) < 3: raise ValueError('Bạn cho biết địa chỉ hoặc địa danh cụ thể ở TP.HCM nhé?')
-    norm = strip_accents(q).lower()
-    if re.search(r'\b(ha noi|hanoi|da nang|danang|can tho|hai phong|vung tau|binh duong|dong nai)\b', norm):
-        return {'results':[], 'outside_service_area':True,'note':'Hiện chỉ có bằng chứng cho khu vực TP.HCM trước sáp nhập.'}
-    cachekey = (norm, tuple(origin) if origin else None)
-    if cachekey in _geo_cache and time.monotonic()-_geo_cache[cachekey][0] < 300:
-        return copy.deepcopy(_geo_cache[cachekey][1])
-    out=[]; failures=[]
-    curated = [dict(p,source='Điểm nhà đã đối chiếu OSM',precision='house') for p in DEMO_PLACES
-               if norm in strip_accents(p['label']).lower() or strip_accents(p['label'].split(',')[0]).lower() in norm]
-    if curated: return {'results':curated,'requires_clarification':False}
-    near = origin or (10.7769,106.7009)
-    if GOONG_API_KEY:
-        try:
-            r=httpx.get('https://rsapi.goong.io/v2/place/autocomplete',params={
-                'api_key':GOONG_API_KEY,'input':q,'location':f'{near[0]},{near[1]}','limit':4},timeout=6)
-            r.raise_for_status()
-            predictions = r.json().get('predictions',[])
-            for p in predictions[:3]:
-                desc=p.get('description','')
-                if not any(s in strip_accents(desc).lower() for s in ('ho chi minh','thu duc','sai gon')): continue
-                detail=httpx.get('https://rsapi.goong.io/v2/place/detail',params={
-                    'api_key':GOONG_API_KEY,'place_id':p['place_id']},timeout=5)
-                detail.raise_for_status(); place=detail.json().get('result',{});loc=place.get('geometry',{}).get('location',{})
-                if 'lat' in loc and 'lng' in loc and in_hcmc(loc['lat'],loc['lng']):
-                    out.append({'label':place.get('formatted_address') or desc,'lat':loc['lat'],'lon':loc['lng'],'source':'Goong','precision':'place'})
-        except Exception: failures.append('Goong tạm không có dữ liệu')
-    broad = []
-    house = re.match(r'(?:hem\s+)?(\d+[a-z]?(?:/\d+[a-z]?)*)(?![a-z0-9/])', norm)
-    if house and out and not any(re.search(r'(?<![a-z0-9/])'+re.escape(house[1])+r'(?![a-z0-9/])',strip_accents(p['label']).lower()) for p in out):
-        broad, out = out, []
-        near = (broad[0]['lat'], broad[0]['lon'])
-    if not out:
-        # No network/build_graph side effects: inspect loaded/cached local alley names.
-        g=cached_graph(*near)
-        if g:
-            street=re.sub(r',.*$', '', norm).strip()
-            for w in g.ways.values():
-                name=strip_accents(w.name or '').lower()
-                if name and w.is_alley and (street in name or name in street):
-                    la,lo=g.nodes[w.nodes[len(w.nodes)//2]]
-                    out.append({'label':w.name,'lat':la,'lon':lo,'source':'Tên hẻm OpenStreetMap','precision':'alley'})
-                    if len(out)>=3: break
-    if not out:
-        try: out=_nominatim(q)
-        except Exception: failures.append('Nominatim tạm không có dữ liệu')
-    if not out and broad: out=broad
-    out=[p for p in out if in_hcmc(p['lat'],p['lon'])]
-    unique=[]
-    for p in out:
-        if not any(haversine(p['lat'],p['lon'],x['lat'],x['lon'])<25 or strip_accents(p['label']).lower()==strip_accents(x['label']).lower() for x in unique): unique.append(p)
-    out=unique[:3]
-    requested = re.search(r'(?<![a-z0-9])\d+[a-z]?(?:/\d+[a-z]?)*', norm)
-    if requested:
-        exact = [p for p in out if re.search(r'(?<![a-z0-9/])'+re.escape(requested[0])+r'(?![a-z0-9/])', strip_accents(p['label']).lower())]
-        if len(exact) == 1: out=exact
-    result={'results':out,'requires_clarification':len(out)>1,'source_warnings':failures}
-    if len(out)>1 and origin:
-        out.sort(key=lambda p:haversine(*origin,p['lat'],p['lon']))
-        result['selection_reason']='Chọn điểm gần vị trí xuất phát nhất; cần xác nhận nếu khác chi nhánh bạn định tới.'
-        result['requires_clarification']=False
-    # A broad street match must not silently become the exact house entrance.
-    requested_house=re.match(r'(?:hem\s+)?(\d+[a-z]?(?:/\d+[a-z]?)*)(?![a-z0-9/])', norm)
-    if requested_house and out and not re.search(r'(?<![a-z0-9/])'+re.escape(requested_house[1])+r'(?![a-z0-9/])',strip_accents(out[0]['label']).lower()):
-        result['requires_clarification']=True
-        result['note']='Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?'
-    if len(_geo_cache)>256: _geo_cache.clear()
-    _geo_cache[cachekey]=(time.monotonic(),copy.deepcopy(result))
+def resolve_place(query, origin=None, map_context=None):
+    from .config import in_hcmc
+    from .geocoding import distinctive_coverage
+    from .osm import haversine
+    if map_context:
+        context = map_context if isinstance(map_context, MapContext) else MapContext.model_validate(map_context)
+        matches = [p for p in context.candidates if in_hcmc(p.lat, p.lon) and distinctive_coverage(query, p.name) >= .7]
+        matches.sort(key=lambda p: (-distinctive_coverage(query, p.name), haversine(context.center.lat, context.center.lon, p.lat, p.lon)))
+        unique = []
+        for p in matches:
+            if not any(strip_accents(p.name) == strip_accents(x['label']) and haversine(p.lat, p.lon, x['lat'], x['lon']) < 15 for x in unique):
+                unique.append({'label': p.name, 'lat': p.lat, 'lon': p.lon, 'layer': p.layer, 'source': 'Trên bản đồ', 'precision': 'place'})
+        if unique:
+            return {'results': unique[:3], 'requires_clarification': len(unique) > 1}
+    from .geocoding import resolve_place as resolve
+    near = (map_context.center.lat, map_context.center.lon) if isinstance(map_context, MapContext) else origin
+    result = resolve(query, near, limit=3, nominatim_search=_nominatim, prefer_curated=True)
+    if not result.get('results'): result['note'] = TAP_PLACE
     return result
 
 
@@ -725,7 +683,7 @@ def fallback_events(req, contents):
     if args.get('query'):
         query=args.pop('query')
         yield {'type':'tool_call','name':'tim_dia_diem','args':{'query':query}}
-        try: geo,_=yield from bounded(execute,30,'tim_dia_diem',{'query':query},req.origin)
+        try: geo,_=yield from bounded(execute,30,'tim_dia_diem',{'query':query},req.origin,req.map_context)
         except Exception as exc:
             yield {'type':'error','text':safe_error(exc)};return
         results.append(geo)
@@ -734,7 +692,7 @@ def fallback_events(req, contents):
         yield {'type':'tool_result','name':'tim_dia_diem','summary':summary('tim_dia_diem',geo),'result':geo}
         if not geo.get('results') or geo.get('requires_clarification'):
             labels='; '.join(p['label'] for p in geo.get('results',[]))
-            answer=('Bạn muốn tới điểm nào: '+labels+'?') if labels else 'Chưa xác minh được địa chỉ. Bạn cho biết phường, tên đường hoặc gửi ghim vị trí nhé?'
+            answer=('Bạn muốn tới điểm nào: '+labels+'?') if labels else TAP_PLACE
             yield {'type':'answer','text':answer};yield finish(answer);return
         args.update({k:geo['results'][0][k] for k in ('lat','lon','label')})
         reason=geo.get('selection_reason')

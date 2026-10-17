@@ -2,6 +2,7 @@ import { CloudRain, FlaskConical, Layers, MapPin, Navigation, Sparkles, X } from
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { api, type AgentPlan, type AreaBuild, type AreaData, type Config, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
+import type { MapContext } from './mapSearch'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
 import { GoongContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
@@ -18,6 +19,7 @@ const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
 export default function App() {
   const [agentOpen, setAgentOpen] = useState(false)
+  const [mapContext, setMapContext] = useState<MapContext | null>(null)
   const [cfg, setCfg] = useState<Config | null>(null)
   const [fleet, setFleet] = useState<{ classes: Vehicle[]; models: Vehicle[] }>({ classes: [], models: [] })
   const [origin, setOrigin] = useState<Place | null>(null)
@@ -230,6 +232,7 @@ export default function App() {
         <MapView styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} origin={origin} destination={dest}
           toggles={toggles} floodMoment={floodMoment} padding={padding} frame={frame}
           onPick={(lat, lon, x, y) => setPick({ lat, lon, x, y })}
+          onFeatures={setMapContext} onPlaceClick={(p) => chooseDest({ lat: p.lat, lon: p.lon, label: p.name })}
           onWayClick={openEvidence}
           onStopClick={(i) => { setSelected(i); setSheet((s) => (s === 'peek' ? 'half' : s)) }} />
       </ErrorBoundary>
@@ -244,7 +247,7 @@ export default function App() {
               rainOn={rainOn} setRainOn={(on) => { setAgentRain(null); setRainOn(on) }} rainMm={rainMm} setRainMm={(mm) => { setAgentRain(null); setRainMm(mm) }} setFlag={setFlag}
               canArrive={!!plan} onArrive={() => { setArrived(true); setConfirmed(''); setMenu(null) }} />
           </header>
-          <Directions origin={origin} dest={dest} setOrigin={setOrigin} setDest={chooseDest} locating={locating} onLocate={locate}
+          <Directions origin={origin} dest={dest} setOrigin={setOrigin} setDest={chooseDest} locating={locating} onLocate={locate} mapContext={mapContext}
             vehicle={vehicle} fleet={fleet} vMode={vMode} setVMode={setVMode} classId={classId} setClassId={setClassId}
             modelId={modelId} setModelId={setModelId} vetcLinked={vetcLinked} openVetc={() => setVetcOpen(true)} unlinkVetc={() => setVetcLinked(false)}
             intent={intent} setIntent={(i) => { setIntent(i); setDwell(i === 'pickup' ? 15 : 120) }} dwell={dwell} setDwell={setDwell}
@@ -292,7 +295,7 @@ export default function App() {
             options={[{ value: 'arrival', label: 'Đoạn cuối' }, { value: 'trip', label: 'Cả tuyến' }]} />
         </div>
       )}
-      <Agent origin={origin} onPlan={applyAgent} open={agentOpen} setOpen={setAgentOpen} />
+      <Agent origin={origin} onPlan={applyAgent} open={agentOpen} setOpen={setAgentOpen} mapContext={mapContext} />
       <div className="map-tools">
         <LayersMenu open={menu === 'layers'} onOpen={(o) => setMenu(o ? 'layers' : null)} toggles={toggles} setToggles={setToggles}
           floodMoment={floodMoment} setFloodMoment={setFloodMoment} />
