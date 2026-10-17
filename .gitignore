@@ -38,3 +38,5 @@ docs/qa/mcp/before.jsonl
 docs/qa/mcp/public-certifi.jsonl
 docs/qa/mcp/after.jsonl
 docs/qa/mcp/final-core.jsonl
+docs/qa/reverify-results.json
+docs/qa/reverify/
