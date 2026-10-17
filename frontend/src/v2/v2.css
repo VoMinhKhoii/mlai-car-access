@@ -155,7 +155,7 @@
   .v2-word { font-size: 40px; margin: 2px 0 4px; }
   .v2-facts > div { padding: 8px; }
   .v2-facts dd { font-size: 13px; }
-  .v2-ask { position: static; flex: 0 0 auto; box-shadow: none; }
+  .v2-ask { position: static; flex: 0 0 auto; margin-left: auto; }
   .v2-facts dd.v2-note { display: none; }
   .v2-status { min-height: 0; }
   .v2-xs { width: 264px; }
