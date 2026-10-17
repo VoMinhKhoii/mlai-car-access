@@ -7,7 +7,6 @@ Small passes across cells avoid spending the entire night on the 3,000-way demo 
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import logging
 import os
@@ -22,6 +21,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
+from app import fcntl_compat as fcntl  # noqa: E402  (no fcntl on Windows)
 from app import alonhadat, live, osm, parcels, portal_gate  # noqa: E402
 from app.parcel_points import ParcelPoints  # noqa: E402
 import city_scope

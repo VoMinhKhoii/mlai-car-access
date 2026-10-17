@@ -233,6 +233,15 @@ def _forecast_hours(lat: float, lon: float) -> list[tuple[datetime, float]]:
 
 def rain_spells(lat: float, lon: float) -> list[dict]:
     """Rain spells around a point in the planner's format: measured hours, then the forecast, each draining DRAIN_H."""
+    return rain_coverage(lat, lon)[0]
+
+
+def rain_coverage(lat: float, lon: float) -> tuple[list[dict], datetime]:
+    """Rain spells plus the instant up to which rain is actually known (last gauge or forecast hour).
+
+    When gauges and forecast are both unavailable the coverage ends in the distant past, so the
+    planner reports missing rain instead of treating "no data" as "no rain".
+    """
     near = sorted(rain_gauges(), key=lambda g: haversine(lat, lon, g["lat"], g["lon"]))[:2]
     near = [g for g in near if haversine(lat, lon, g["lat"], g["lon"]) <= RAIN_GAUGE_M]
     measured: dict[datetime, tuple[float, str]] = {}
@@ -242,12 +251,15 @@ def rain_spells(lat: float, lon: float) -> list[dict]:
                 measured[t] = (v, f"đo tại {g['name']}")
     last = max(measured) if measured else datetime.now(VN_TZ).replace(minute=0, second=0, microsecond=0)
     hours = {t: mv for t, mv in measured.items()}
-    for t, v in _forecast_hours(lat, lon):
+    forecast = _forecast_hours(lat, lon)
+    for t, v in forecast:
         if t > last:
             hours[t] = (v, "dự báo Open-Meteo")
+    known = [t for t, _ in forecast] + list(measured)
+    known_until = max(known) if known else datetime.min.replace(tzinfo=VN_TZ)
     spells = []
     for t, (mm, src) in sorted(hours.items()):
         if mm > 0:
             spells.append({"start": (t - timedelta(hours=1)).isoformat(), "end": (t + timedelta(hours=DRAIN_H)).isoformat(),
                            "mm_per_h": mm, "source": src, "measured": src.startswith("đo")})
-    return spells
+    return spells, known_until

@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import hashlib
 import os
-import fcntl
+from . import fcntl_compat as fcntl
 import json
 import re
 import sys

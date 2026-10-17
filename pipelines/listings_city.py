@@ -731,7 +731,7 @@ def main():
     p.add_argument('--no-alonhadat',action='store_true')
     args = p.parse_args()
     # Only this pipeline's process lock; never touches the cadastral crawler lease.
-    import fcntl
+    from app import fcntl_compat as fcntl
     RAW.mkdir(parents=True,exist_ok=True)
     with (RAW/'engine.lock').open('a+') as lock:
         try:

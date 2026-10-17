@@ -5,7 +5,7 @@ import base64
 import binascii
 import csv
 from datetime import datetime, timezone
-import fcntl
+from . import fcntl_compat as fcntl
 import hmac
 import json
 import math

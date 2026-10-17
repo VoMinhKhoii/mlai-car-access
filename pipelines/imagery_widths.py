@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime
-import fcntl
 import json
 import math
 import os
@@ -19,6 +18,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'backend'), str(ROOT)]
+from app import fcntl_compat as fcntl  # noqa: E402  (no fcntl on Windows)
 # Process-local authorization for this explicitly requested batch, never a saved flag.
 os.environ.setdefault('FLAG_GOOGLE_LOOKUP', '1')
 

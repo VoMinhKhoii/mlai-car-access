@@ -5,7 +5,7 @@ crawler-only state cannot impose hours of local API backoff or a long rate wait.
 No proxy, identity change, alternative endpoint or response body is involved.
 """
 from __future__ import annotations
-import fcntl
+from . import fcntl_compat as fcntl
 import json
 import os
 import threading

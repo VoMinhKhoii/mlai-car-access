@@ -334,7 +334,9 @@ def tide(start: str | None = None, hours: Annotated[int, Field(gt=0, le=168)] = 
         t0 = datetime.fromisoformat(start) if start else datetime.now(VN_TZ).replace(hour=0, minute=0, second=0, microsecond=0)
     except ValueError:
         raise HTTPException(422, "start must be an ISO 8601 datetime")
-    live_tide = hydro.tide_status() if flags.enabled("live_hydro") else None
+    if t0.tzinfo is None:
+        t0 = t0.replace(tzinfo=VN_TZ)  # a bare local time is HCMC time; live tide points are timezone-aware
+    live_tide =hydro.tide_status() if flags.enabled("live_hydro") else None
     series = tide_series(t0, hours)
     has_live = any(p["kind"] in ("measured", "model") for p in series)
     return {"series": series, "alarm_levels_m": tide_meta()["alarm_levels_m"],
@@ -569,6 +571,11 @@ def _ai_guard(fn, *args):
         raise HTTPException(424, str(exc))
     except budget.OverBudget as exc:
         raise HTTPException(429, f"Dừng để không tốn phí: {exc}")
+    except Expired:
+        raise HTTPException(504, "Mô hình AI trả lời quá chậm. Hãy thử lại sau.")
+    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
+        # Every key rate-limited/down, a safety block without `parts`, or output that is not JSON.
+        raise HTTPException(502, "Nhà cung cấp AI đang lỗi hoặc trả về nội dung không đọc được. Hãy thử lại sau.")
 
 
 class TextIn(Strict):

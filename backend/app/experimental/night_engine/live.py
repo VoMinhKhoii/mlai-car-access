@@ -13,7 +13,7 @@ street of this area. Coordinates are shifted ~90 m, so they are never used for m
 from __future__ import annotations
 
 import hashlib
-import fcntl
+from ... import fcntl_compat as fcntl
 import os
 import re
 import json

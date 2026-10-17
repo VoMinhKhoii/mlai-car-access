@@ -6,7 +6,6 @@ At the stop deadline the crawler saves state and exits; no daily recurrence exis
 from __future__ import annotations
 import argparse
 from datetime import datetime
-import fcntl
 import json
 import os
 from pathlib import Path
@@ -16,6 +15,8 @@ import threading
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'backend'))
+from app import fcntl_compat as fcntl  # noqa: E402  (no fcntl on Windows)
 DEFAULT_STATUS=ROOT/'backend/cache/live/crawl_night_schedule.json'
 
 

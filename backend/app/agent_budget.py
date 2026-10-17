@@ -1,7 +1,7 @@
 """Gemini's demo cap, shared by every server process. Paid access is opt-in."""
 from __future__ import annotations
 
-import fcntl
+from . import fcntl_compat as fcntl
 import json
 import os
 import re

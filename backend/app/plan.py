@@ -86,6 +86,8 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
         if fit[wid] != "fits" or w.kind == "main" or wrs[wid].lo >= 6:
             continue
         for n in (w.nodes[0], w.nodes[-1]):
+            if fit[wid] == "unknown":
+                break  # an unmeasured junction at either end must not be downgraded to "tight" by the other end
             for pid in g.node_ways.get(n, ()):
                 if pid == wid or not g.ways[pid].drivable:
                     continue
@@ -228,9 +230,14 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     if dwell < 0:
         raise ValueError("Dwell duration must be nonnegative")
     depart = arrive + timedelta(minutes=dwell)
-    rain = (list(rain_scenario) if rain_scenario is not None and len(rain_scenario) > 0 else
-            (hydro.rain_spells(dest_lat, dest_lon) if flags.enabled("live_hydro") else []))
-    flood_snapshot = FloodSnapshot(rain)
+    rain_known_until = None  # an explicit scenario is authoritative for every time
+    if rain_scenario:
+        rain = list(rain_scenario)
+    elif flags.enabled("live_hydro"):
+        rain, rain_known_until = hydro.rain_coverage(dest_lat, dest_lon)
+    else:
+        rain = []
+    flood_snapshot = FloodSnapshot(rain, rain_known_until=rain_known_until)
     cap = WALK_CAP_M[intent]
 
     g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations, live_area, synthetic_demo_file)

@@ -9,7 +9,7 @@ from __future__ import annotations
 import base64
 from contextlib import contextmanager
 from datetime import datetime, timezone
-import fcntl
+from . import fcntl_compat as fcntl
 import hashlib
 import io
 import json

@@ -8,7 +8,7 @@ Caps protect one backend's own spend; they are not a $0 billing guarantee for a 
 from __future__ import annotations
 
 import hashlib
-import fcntl
+from . import fcntl_compat as fcntl
 import os
 import threading
 from datetime import datetime, timedelta, timezone

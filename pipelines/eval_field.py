@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import errno
 import io
 import hashlib
 import json
@@ -399,7 +400,10 @@ def _print_success_line(text: str, result_code: int) -> int:
     try:
         print(text)
         sys.stdout.flush()
-    except BrokenPipeError:
+    except OSError as exc:
+        # Windows reports a closed pipe as EINVAL rather than BrokenPipeError.
+        if not isinstance(exc, BrokenPipeError) and exc.errno != errno.EINVAL:
+            raise
         try:
             null_fd = os.open(os.devnull, os.O_WRONLY)
             try:

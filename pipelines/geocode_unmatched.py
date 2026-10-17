@@ -15,7 +15,6 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
-import fcntl
 import hashlib
 import json
 import math
@@ -29,6 +28,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'backend'))
+from app import fcntl_compat as fcntl  # noqa: E402  (no fcntl on Windows)
 sys.path.insert(0, str(ROOT / 'pipelines'))
 import httpx
 from common import fold, load_env_local, norm_name, USER_AGENT

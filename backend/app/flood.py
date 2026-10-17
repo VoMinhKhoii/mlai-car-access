@@ -300,8 +300,27 @@ def _tide_depth(level: float, p: FloodProfile, metadata: dict | None = None) -> 
 LIVE_FILE = ROOT_STORE / "live_flood_reports.jsonl"
 _FEATURE_OF_SOURCE = {"photo": "ai_photo_evidence", "camera": "ai_camera_flood"}
 STATUS_ORDER = {"passable": 0, "risky": 1, "blocked": 2}
-KNOWLEDGE_ORDER = {"known": 0, "missing_history": 1, "missing_tide": 2,
+KNOWLEDGE_ORDER = {"known": 0, "missing_history": 1, "missing_rain": 2, "missing_tide": 2,
                    "stale_positive_observation": 3}
+
+
+def _usable_report(r) -> dict | None:
+    """A report the snapshot can always read: ISO `observed_at` and a finite `depth_cm` (or none).
+
+    One malformed approved report must never take down every plan, so it is skipped instead.
+    """
+    if not isinstance(r, dict) or not isinstance(r.get("observed_at"), str):
+        return None
+    try:
+        datetime.fromisoformat(r["observed_at"])
+        depth = r.get("depth_cm")
+        if depth is not None:
+            depth = float(depth)
+            if not math.isfinite(depth):
+                return None
+    except (TypeError, ValueError):
+        return None
+    return {**r, "depth_cm": depth}
 
 
 def live_reports() -> list[dict]:
@@ -312,7 +331,12 @@ def live_reports() -> list[dict]:
     for line in LIVE_FILE.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
-        r = json.loads(line)
+        try:
+            r = _usable_report(json.loads(line))
+        except ValueError:
+            r = None  # a torn line from an interrupted append
+        if r is None:
+            continue
         if flags.enabled(_FEATURE_OF_SOURCE.get(r.get("source"), "ai_text_rules")) and r.get("observed_at"):
             out.append(r)
     return out
@@ -343,9 +367,14 @@ def _as_time(value: str, like: datetime) -> datetime:
 class FloodSnapshot:
     """Request-scoped immutable evidence plus memoized assessments for all timing probes."""
 
-    def __init__(self, rain_scenario: list[dict] | None = None, reports: list[dict] | None = None):
+    def __init__(self, rain_scenario: list[dict] | None = None, reports: list[dict] | None = None,
+                 rain_known_until: datetime | None = None):
         self.rain = tuple(dict(s) for s in (rain_scenario or []))
-        self.reports = tuple(dict(r) for r in (live_reports() if reports is None else reports))
+        # None: the rain scenario is authoritative for every time. Otherwise rain is only known
+        # up to this instant (end of live gauge/forecast coverage); later times are missing_rain.
+        self.rain_known_until = rain_known_until
+        self.reports = tuple(r for r in (_usable_report(r) for r in (live_reports() if reports is None else reports))
+                             if r is not None)
         self.generations = evidence_generation()
         self.tide_metadata = _tide_meta(self.generations[1])
         self.tide_extremes = _cached_extremes(self.generations[1])
@@ -551,6 +580,10 @@ def _assess_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], s
     elif tide_needed and tp is None:
         knowledge = "missing_tide"
         reason = "Không có dữ liệu triều hợp lệ tại thời điểm này"
+    elif (p and p.count("rain", "combined") and snapshot.rain_known_until is not None
+          and t > snapshot.rain_known_until):
+        knowledge = "missing_rain"
+        reason = "Không có dữ liệu mưa (đo hoặc dự báo) tại thời điểm này"
     elif p is None and not fresh_dry and depth is None:
         knowledge = "missing_history"
         reason = "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường"
