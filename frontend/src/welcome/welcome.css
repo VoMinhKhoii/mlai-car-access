@@ -51,7 +51,7 @@ button { font: inherit; color: inherit; }
 .note { margin: 0; font-size: var(--step-small); color: var(--muted); max-width: 52ch; }
 
 /* ---------- Deck: one slide on screen at a time ---------- */
-.deck { position: relative; height: 100svh; }
+.deck { position: relative; height: 100svh; overflow: hidden; }
 .slide {
   position: absolute; inset: 0;
   display: grid; gap: var(--m); padding: var(--m) var(--m) calc(var(--m) + 56px);
@@ -124,6 +124,14 @@ button { font: inherit; color: inherit; }
 /* Slide 6: tool names */
 .tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
 .tools code { font: 500 var(--step-small)/1 ui-monospace, 'SF Mono', Menlo, monospace; background: var(--paper); padding: 10px 12px; }
+
+/* Slide 6: install command */
+.install { background: var(--ink); color: var(--paper); padding: 14px 16px 12px; display: grid; gap: 8px; max-width: 60ch; }
+.install-head { margin: 0; display: flex; justify-content: space-between; align-items: center; font-size: var(--step-small); font-weight: 500; }
+.install-head button { border: 0; background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 500; padding: 0 14px; min-height: 32px; cursor: pointer; }
+.install pre { margin: 0; white-space: pre-wrap; word-break: break-all; }
+.install code { font: 400 clamp(13px, 0.75rem + 0.25vw, 16px)/1.5 ui-monospace, 'SF Mono', Menlo, monospace; }
+.install-foot { margin: 0; font-size: 12px; opacity: 0.7; }
 
 /* Slide 7 */
 .s-end { place-items: center; }
