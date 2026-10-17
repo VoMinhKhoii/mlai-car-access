@@ -177,6 +177,10 @@ const FIT = {
   fits: { tone: 'ok', label: 'Fits' }, tight: { tone: 'warn', label: 'Tight' }, no: { tone: 'bad', label: 'Does not fit' },
   unknown: { tone: 'muted', label: 'Unknown width' }, blocked: { tone: 'bad', label: 'Currently blocked' }, lot: { tone: 'ok', label: 'Car park' },
 } as const
+// Strict fit stays unknown until the whole way is certified; the sampled estimate still answers the chip.
+const EST_FIT = { fits: { tone: 'ok', label: 'Likely fits' }, tight: { tone: 'warn', label: 'Likely tight' }, no: { tone: 'bad', label: 'Likely does not fit' } } as const
+const fitOf = (s: StopPoint) => s.fit.class === 'unknown' && s.estimate?.answer && s.estimate.answer in EST_FIT
+  ? EST_FIT[s.estimate.answer as keyof typeof EST_FIT] : FIT[s.fit.class] ?? FIT.unknown
 const LEGAL = { Permitted: { tone: 'ok', label: 'Permitted' }, Restricted: { tone: 'warn', label: 'Restricted' }, Prohibited: { tone: 'bad', label: 'Prohibited' }, Unverified: { tone: 'muted', label: 'Unknown rules' } } as const
 const FLOOD = { passable: { tone: 'ok', label: 'Within vehicle limits' }, risky: { tone: 'warn', label: 'Possible flooding' }, blocked: { tone: 'bad', label: 'Exceeds vehicle limits' } } as const
 
@@ -250,7 +254,7 @@ export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, 
   maneuver: ManeuverState | null; maneuverDisabled: boolean
   onManeuver: () => void; onReplay: () => void; onDismiss: () => void
 }) {
-  const fit = FIT[s.fit.class] ?? FIT.unknown
+  const fit = fitOf(s)
   const legal = LEGAL[s.legality.status]
   const flood = floodPresentation(s.flood.stay)
   const title = s.kind === 'door' ? 'At the door' : s.kind === 'lot' ? s.lot?.name ?? s.name : s.name
@@ -336,7 +340,7 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
   const need = s.fit.needed
   return (
     <div className="checks">
-      <Check icon={<CarFront size={16} />} title="Entry route" tone={(FIT[s.fit.class] ?? FIT.unknown).tone}>
+      <Check icon={<CarFront size={16} />} title="Entry route" tone={fitOf(s).tone}>
         {wr ? <>
           {wr.hi == null ? `At least ${metres(wr.lo)}` : `Width ${fmtWidth(wr.lo, wr.hi)}`}
           {wr.width_basis === 'synthetic_demo_width' || !wr.top_tier ? ' (unmeasured)' : ''}{need && `, vehicle needs ${metres(need.tight_min, 2)}`}.
