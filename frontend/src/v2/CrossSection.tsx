@@ -1,4 +1,4 @@
-import type { Cut } from './derive'
+import type { Cut, Tone } from './derive'
 
 interface Props {
   cut: Cut
@@ -8,6 +8,8 @@ interface Props {
   /** The engine's thresholds for this vehicle: room with a parked motorbike row, and the bare squeeze. */
   fitsMin?: number
   tightMin?: number
+  /** The verdict's tone, so the cut never reads green while the answer says no. */
+  tone?: Tone
   expanded: boolean
   onToggle: () => void
 }
@@ -16,17 +18,17 @@ const WALL_H = 2.3
 const MAX_SCENE = 14
 
 /** A to-scale section through the narrowest cut: walls, clear width, the car from behind. Units are metres. */
-export function CrossSection({ cut, body, mirror, vehicleName, fitsMin, tightMin, expanded, onToggle }: Props) {
+export function CrossSection({ cut, body, mirror, vehicleName, fitsMin, tightMin, tone = 'unknown', expanded, onToggle }: Props) {
   const lo = cut.lo
   const spareCm = lo != null ? Math.round(((lo - mirror) / 2) * 100) : null
   const short = spareCm != null && spareCm < 0
   const width = lo == null ? '' : cut.hi != null ? `${lo.toFixed(2)} to ${cut.hi.toFixed(2)} m` : `${lo.toFixed(2)} m`
 
   if (!expanded) {
-    return <button type="button" className={`v2-chip ${short ? 'is-short' : ''}`} onClick={onToggle} aria-expanded={false}
+    return <button type="button" className={`v2-chip tone-${short ? 'no' : tone}`} onClick={onToggle} aria-expanded={false}
       aria-label={`Narrowest cut ${width || 'not measured'}. Show the cross-section`}>
       <span className="v2-num">{lo != null ? `${lo.toFixed(2)} m` : 'Width ?'}</span>
-      {spareCm != null && <span key={spareCm} className="v2-xfade v2-num">{short ? `short ${-spareCm} cm` : `${spareCm} cm spare`}</span>}
+      {spareCm != null && <span key={spareCm} className="v2-xfade v2-num">{short ? `short ${-spareCm} cm a side` : `${spareCm} cm a side`}</span>}
     </button>
   }
 
@@ -54,7 +56,7 @@ export function CrossSection({ cut, body, mirror, vehicleName, fitsMin, tightMin
         <rect className="v2-wall-maybe" x={loH} y={-WALL_H} width={hiH - loH} height={WALL_H} />
       </>}
       <rect className="v2-ground" x={-half - 1} y={0} width={half * 2 + 2} height={0.3} />
-      {loH != null && <g className={short ? 'v2-spare is-short' : 'v2-spare'}>
+      {loH != null && <g className={`v2-spare tone-${short ? 'no' : tone}`}>
         <rect className="v2-anim" x={0} y={-1.3} width={1} height={0.22} style={t(`translate(${-loH}px, 0px) scale(${s}, 1)`)} />
         <rect className="v2-anim" x={0} y={-1.3} width={1} height={0.22} style={t(`translate(${loH}px, 0px) scale(${-s}, 1)`)} />
       </g>}

@@ -119,7 +119,7 @@ export default function AppV2() {
     {cfg && <MapV2 styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} destination={dest}
       anchor={cut ? { lat: cut.lat, lon: cut.lon } : null} anchorEl={anchorEl} padding={padding} onFeatures={setMapContext} onMap={(m) => { mapRef.current = m }} />}
     {cut && vehicle && createPortal(<div className="v2-anchor-inner">
-      <CrossSection cut={cut} body={vehicle.body_width} mirror={vehicle.mirror_width} vehicleName={vehicle.label} fitsMin={vehicle.fits_min} tightMin={vehicle.tight_min}
+      <CrossSection cut={cut} body={vehicle.body_width} mirror={vehicle.mirror_width} vehicleName={vehicle.label} fitsMin={vehicle.fits_min} tightMin={vehicle.tight_min} tone={ans?.tone}
         expanded={xsOpen} onToggle={() => { if (!xsOpen) revealCard(); setXsOpen(!xsOpen) }} />
       <span className="v2-stem" aria-hidden="true" />
     </div>, anchorEl)}
