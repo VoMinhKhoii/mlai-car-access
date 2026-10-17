@@ -115,7 +115,7 @@ def test_starts_are_rate_limited_and_other_traffic_reduces_budget(tmp_path, monk
     c = g.Goong(tmp_path, network=True, daily_quota=10, already_used=2, key='test', client=client(handle), delay=0)
     for i in range(2):
         c.get('/v2/geocode', address=f'{i} X')
-    assert starts[1] - starts[0] >= .5 and c.cap == 2
+    assert starts[1] - starts[0] >= .2 - 1e-9 and c.cap == 2
     with pytest.raises(g.StopGoong, match='budget'):
         c.get('/v2/geocode', address='3 X')
     c.close()
@@ -204,7 +204,7 @@ def test_quota_message_even_with_http_200_persists_stop(tmp_path, body):
         c.get('/v2/place/autocomplete', input='first')
     with pytest.raises(g.StopGoong, match='blocked'):
         c.get('/v2/place/autocomplete', input='second')
-    assert c.calls == 1 and (tmp_path/'STOP.json').exists()
+    assert c.calls == 1 and (tmp_path/'STOP-GOONG_API_KEY.json').exists()
     c.close()
 
 
@@ -295,3 +295,20 @@ def test_fire_source_survives_an_old_listing_daemon_replacement(monkeypatch, tmp
     store = evidence.EvidenceStore()
     b = next(b for b in store.by_way[9876543210] if 'Goong geocode' in b.detail)
     assert (b.tier, b.lo, b.hi) == ('Declared', .5, 3.5)
+
+
+def test_rotated_keys_have_independent_budget_and_refusal(tmp_path, monkeypatch):
+    monkeypatch.setenv('GOONG_JOB_KEY_VAR', 'GOONG_API_KEY_4')
+    c = g.Goong(tmp_path, network=True, max_calls=1, key='first',
+                client=client(lambda _: httpx.Response(429, json={'message': 'limit'})))
+    with pytest.raises(g.StopGoong):
+        c.get('/v2/place/autocomplete', input='same')
+    c.close()
+    monkeypatch.setenv('GOONG_JOB_KEY_VAR', 'GOONG_API_KEY_5')
+    c = g.Goong(tmp_path, network=True, max_calls=950, daily_quota=1000, explicit_cap=True, key='second',
+                client=client(lambda _: httpx.Response(200, json={'predictions': []})))
+    assert c.cap == 950 and c.usage() == 0
+    assert not c.has_cached('/v2/place/autocomplete', input='same')
+    c.get('/v2/place/autocomplete', input='same')
+    assert c.calls == c.usage() == 1
+    c.close()

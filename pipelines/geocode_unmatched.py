@@ -6,9 +6,9 @@ python3 pipelines/geocode_unmatched.py run  # replay cache only, zero API calls
 
 The key's plan is unknown. The owner's job cap is 2,000 requests per rolling
 24 hours, configurable with GOONG_JOB_MAX_REQUESTS or --max-requests.
-At most two request starts/s; any quota/limit refusal persists a hard stop.
+At most five request starts/s; any quota/limit refusal persists a hard stop.
 Responses (including errors) are cached by endpoint + query, without credentials.
-Validation runs first. Unprocessed records remain in the audit with a reason.
+A fixed validation sample is replayed each run. Unprocessed records remain in the audit with a reason.
 """
 from __future__ import annotations
 
@@ -50,9 +50,9 @@ class StopGoong(RuntimeError):
 
 
 class Goong:
-    """Crash-safe shared job budget, <= 2 request starts/s, no retries."""
+    """Crash-safe per-key job budget, <= 5 request starts/s, no retries."""
     def __init__(self, directory=RAW, network=False, max_calls=None, daily_quota=None,
-                 already_used=0, key=None, client=None, delay=.55):
+                 already_used=0, key=None, client=None, delay=.55, explicit_cap=False):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.lock = (self.directory / 'api.lock').open('a+')
@@ -63,18 +63,24 @@ class Goong:
             raise StopGoong('another_geocode_process_active') from None
         self.db = sqlite3.connect(self.directory / 'calls.sqlite')
         self.db.execute('CREATE TABLE IF NOT EXISTS calls (at REAL, endpoint TEXT, query_hash TEXT, status TEXT)')
+        if 'key_var' not in {r[1] for r in self.db.execute('PRAGMA table_info(calls)')}:
+            self.db.execute("ALTER TABLE calls ADD COLUMN key_var TEXT DEFAULT 'GOONG_API_KEY'")
         self.db.commit()
+        self.key_var = os.environ.get('GOONG_JOB_KEY_VAR', 'GOONG_API_KEY')
+        if not re.fullmatch(r'GOONG_API_KEY(?:_\d+)?', self.key_var):
+            raise ValueError('invalid_key_variable')
+        self.stop_path = self.directory / f'STOP-{self.key_var}.json'
         max_calls = int(os.environ.get('GOONG_JOB_MAX_REQUESTS', '2000')) if max_calls is None else max_calls
         self.network, self.max_calls = network, max(0, max_calls)
         self.quota, self.already_used = daily_quota, max(0, already_used)
         self.cap = self.max_calls
-        if daily_quota is not None:
+        if daily_quota is not None and not explicit_cap:
             self.cap = min(self.cap, max(0, math.ceil(daily_quota * .5) - 1 - self.already_used))
-        self.key = key if key is not None else load_env_local().get('GOONG_API_KEY', '')
+        self.key = key if key is not None else load_env_local().get(self.key_var, '')
         self.client = client or httpx.Client(timeout=15, headers={'User-Agent': USER_AGENT})
-        self.delay = max(.5, delay)
+        self.delay = max(.2, delay)
         self.calls = self.cache_hits = 0
-        self.stop_reason = read(self.directory/'STOP.json').get('reason')
+        self.stop_reason = read(self.stop_path).get('reason')
 
     def close(self):
         self.client.close()
@@ -82,12 +88,14 @@ class Goong:
         self.lock.close()
 
     def usage(self):
-        return self.db.execute('SELECT COUNT(*) FROM calls WHERE at>?', (time.time()-86400,)).fetchone()[0]
+        return self.db.execute('SELECT COUNT(*) FROM calls WHERE at>? AND key_var=?', (time.time()-86400, self.key_var)).fetchone()[0]
 
     def has_cached(self, endpoint, **params):
         identity = json.dumps([endpoint, params], ensure_ascii=False, sort_keys=True)
         key = hashlib.sha256(identity.encode()).hexdigest()
-        return (self.directory / 'responses' / f'{key}.json').exists()
+        cached = read(self.directory / 'responses' / f'{key}.json')
+        return bool(cached) and not ((cached.get('blocked') or cached.get('http_status') in (403, 429))
+            and cached.get('key_var', 'GOONG_API_KEY') != self.key_var)
 
     def get(self, endpoint, **params):
         if endpoint not in ('/v2/geocode', '/v2/place/autocomplete', '/v2/place/detail'):
@@ -98,6 +106,8 @@ class Goong:
         query_hash = hashlib.sha256(identity.encode()).hexdigest()
         path = self.directory / 'responses' / f'{query_hash}.json'
         cached = read(path)
+        if cached and (cached.get('blocked') or cached.get('http_status') in (403, 429)) and cached.get('key_var', 'GOONG_API_KEY') != self.key_var:
+            cached = {}  # A quota refusal belongs to its key, not the query.
         if cached:
             self.cache_hits += 1
             if cached.get('http_status') in (403, 429) or cached.get('blocked'):
@@ -110,7 +120,7 @@ class Goong:
             raise StopGoong(self.stop_reason)
         if not self.network:
             raise StopGoong('cache_miss_network_disabled')
-        blocked = read(self.directory / 'STOP.json')
+        blocked = read(self.stop_path)
         if blocked:
             self.stop_reason = blocked['reason']
             raise StopGoong(self.stop_reason)
@@ -119,11 +129,11 @@ class Goong:
         if self.calls >= self.max_calls or self.usage() >= self.cap:
             self.stop_reason = 'daily_budget_exhausted'
             raise StopGoong(self.stop_reason)
-        last = self.db.execute('SELECT MAX(at) FROM calls').fetchone()[0] or 0
+        last = self.db.execute('SELECT MAX(at) FROM calls WHERE key_var=?', (self.key_var,)).fetchone()[0] or 0
         time.sleep(max(0, self.delay - (time.time() - last)))
         # Reserve before sending. A crash or timeout consumes budget conservatively.
         with self.db:
-            cur = self.db.execute('INSERT INTO calls VALUES (?,?,?,?)', (time.time(), endpoint, query_hash, 'reserved'))
+            cur = self.db.execute('INSERT INTO calls (at,endpoint,query_hash,status,key_var) VALUES (?,?,?,?,?)', (time.time(), endpoint, query_hash, 'reserved', self.key_var))
             rowid = cur.lastrowid
         self.calls += 1
         status, body, reason = None, {}, None
@@ -147,13 +157,13 @@ class Goong:
         blocked = (status in (403, 429) or api_status in ('REQUEST_DENIED', 'PERMISSION_DENIED')
                    or bool(re.search(r'quota|limit', error_message, re.I)))
         atomic(path, {'endpoint': endpoint, 'query': params, 'fetched_at': now(),
-                      'http_status': status, 'body': body, 'blocked': blocked})
+                      'http_status': status, 'body': body, 'blocked': blocked, 'key_var': self.key_var})
         with self.db:
             ledger_status = f'blocked_{status}' if blocked and status not in (403, 429) else str(status or reason)
             self.db.execute('UPDATE calls SET status=? WHERE rowid=?', (ledger_status, rowid))
         if blocked:
             self.stop_reason = f'goong_blocked_{status}_{api_status}'
-            atomic(self.directory / 'STOP.json', {'reason': self.stop_reason, 'at': now()})
+            atomic(self.stop_path, {'reason': self.stop_reason, 'at': now()})
             raise StopGoong(self.stop_reason)
         if status is None or status >= 400:
             self.stop_reason = f'goong_http_{status or reason}'
@@ -574,7 +584,8 @@ def run(args):
     from app.evidence_queue import city_state
     before = city_state()
     before_ids = {wid for wid, r in before['ways'].items() if r['top_tier']}
-    api = Goong(network=args.network, max_calls=args.max_calls, already_used=args.already_used)
+    api = Goong(network=args.network, max_calls=args.max_calls, already_used=args.already_used,
+                delay=1 / args.requests_per_second, explicit_cap=args.max_calls is not None)
     results, checks, accepted = [], [], []
     try:
         for e in entries:
@@ -611,8 +622,8 @@ def run(args):
         from official_bulk import validate, cadastral_snapshot
         metadata = merge_official({'ways': {}}, list(prior.values()))
         report = {'generated_at': now(), 'quota': {'documented_free_daily': 1000, 'source': QUOTA_URL,
-                  'actual_key_plan': 'unknown; user-specified job cap, shared with live demo', 'max_task_calls_rolling_24h': api.cap,
-                  'requests_per_second_max': 2, 'calls_this_run': api.calls, 'calls_rolling_24h': api.usage(),
+                  'actual_key_plan': 'unknown; user-allocated recovery key, demo keys reserved', 'max_task_calls_rolling_24h': api.cap,
+                  'key_var': api.key_var, 'requests_per_second_max': args.requests_per_second, 'calls_this_run': api.calls, 'calls_rolling_24h': api.usage(),
                   'cache_hits': api.cache_hits, 'other_key_traffic': 'unknown unless supplied through --already-used',
                   'stop_reason': api.stop_reason}, 'inventory_fingerprint': inv['fingerprint'],
                   'entries': dict(Counter(e['source'] for e in entries)),
@@ -625,7 +636,7 @@ def run(args):
                    'same_way': sum(r['same_way'] for r in checks), 'different_way': sum(not r['same_way'] for r in snapped),
                    'same_way_pct_all_sample': round(100*sum(r['same_way'] for r in checks)/len(checks), 2) if checks else None,
                    'precision_proxy_pct_accepted': round(100*sum(r['same_way'] for r in snapped)/len(snapped), 2) if snapped else None,
-                   'caveat': 'Name-matched QĐ 4582 sample, fixed seed 4582; reference may itself be wrong. One geocode query each to reserve validation budget; no autocomplete fallback. Acceptance precision and recovery rate have different denominators.'},
+                   'caveat': 'Name-matched QĐ 4582 sample, fixed seed 4582; reference may itself be wrong. Cached historical geocodes or preflight-gated autocomplete; detail only after one strict prediction. Acceptance precision and recovery rate have different denominators.'},
                   'cadastral_declared': validation(compare_records, cadastral()),
                   'cadastral_q9_metadata': validate(metadata['ways'], cadastral_snapshot(RAW/'cadastral_snapshot.json')),
                   'coverage_before': before['coverage'], 'coverage_after': after['coverage'],
@@ -640,16 +651,16 @@ def run(args):
         report['new_source_way_ids'] = sorted(set(previous_new) | (after_ids-before_ids))
         report['new_source_ways'] = len(report['new_source_way_ids'])
         report['initial_coverage_before'] = previous_report.get('initial_coverage_before', before['coverage'])
-        times = [r[0] for r in api.db.execute('SELECT at FROM calls ORDER BY at')]
+        times = [r[0] for r in api.db.execute('SELECT at FROM calls WHERE key_var=? ORDER BY at', (api.key_var,))]
         report['quota'].update(calls_total_this_task=len(times),
-            http_status_counts=dict(api.db.execute('SELECT status,COUNT(*) FROM calls GROUP BY status')),
+            http_status_counts=dict(api.db.execute('SELECT status,COUNT(*) FROM calls WHERE key_var=? GROUP BY status', (api.key_var,))),
             minimum_request_start_spacing_s=round(min(b-a for a,b in zip(times,times[1:])), 6) if len(times)>1 else None,
             maximum_starts_in_one_second=max((sum(t<=v<t+1 for v in times) for t in times), default=0),
             documented_daily_fraction_used=len(times)/1000,
             job_cap_fraction_used=api.usage()/api.cap if api.cap else None,
             job_cap_unspent=max(0, api.cap-api.usage()), unspent_budget_usable=not bool(api.stop_reason))
-        refusals = [r[0] for r in api.db.execute("SELECT rowid FROM calls WHERE status IN ('403','429') OR status LIKE 'blocked_%'")]
-        report['quota']['api_calls_after_429'] = (api.db.execute('SELECT COUNT(*) FROM calls WHERE rowid>?', (min(refusals),)).fetchone()[0] if refusals else None)
+        refusals = [r[0] for r in api.db.execute("SELECT rowid FROM calls WHERE key_var=? AND (status IN ('403','429') OR status LIKE 'blocked_%')", (api.key_var,))]
+        report['quota']['api_calls_after_429'] = (api.db.execute('SELECT COUNT(*) FROM calls WHERE rowid>? AND key_var=?', (min(refusals), api.key_var)).fetchone()[0] if refusals else None)
         report['entries_with_geocode_response'] = {s: sum(r['source']==s and any(a.get('geocoded') for a in r['attempts'])
             for r in results) for s in ('fire', 'q9', 'listing')}
         responded = {r['id'] for r in results if any(a.get('geocoded') for a in r['attempts'])}
@@ -661,7 +672,7 @@ def run(args):
             'order': 'Fire candidates in saved live queue or within 2 km of a documented HUTECH campus; then district density',
             'preflight_skips': dict(Counter(e['priority']['preflight_reason'] for e in entries if e['priority']['preflight_reason'])),
             'fresh_query_strategy': 'one autocomplete per entry; detail only for one strict prediction missing coordinates',
-            'historical_run': '421 geocode requests under original <=5/s brief; updated <=2/s policy applied after 429, with zero further requests'}
+            'historical_run': '421 original-key requests, stopped on 429; scale recovery uses independent key budgets at <=5/s'}
         # Live verification is deliberately a separate, read-only request.
         for field in ('live_verification', 'credential_scan', 'q9_metadata_new_ways', 'validation_checks'):
             if field in previous_report:
@@ -677,8 +688,9 @@ def main():
     p.add_argument('command', choices=('prepare', 'run'))
     p.add_argument('--network', action='store_true')
     p.add_argument('--max-requests', '--max-calls', dest='max_calls', type=int,
-                   default=int(os.environ.get('GOONG_JOB_MAX_REQUESTS', '2000')))
+                   default=None)
     p.add_argument('--already-used', type=int, default=0, help='Other Goong calls used in the last day, deducted from the half-quota cap')
+    p.add_argument('--requests-per-second', type=float, default=5, choices=(1, 2, 3, 4, 5))
     p.add_argument('--sample-size', type=int, default=100)
     args = p.parse_args()
     if args.sample_size < 100:
