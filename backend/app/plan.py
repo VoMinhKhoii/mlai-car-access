@@ -264,10 +264,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
             walk_edge, walk_offset, connector = _project(g, lat, lon, lambda way: True, reached_walk_edges)
         if walk_edge is None or connector > WALK_CONNECTION_CAP_M:
             return None
-        network_distance = min(
-            wdist.get(walk_edge.u, INF) + walk_offset,
-            wdist.get(walk_edge.v, INF) + walk_edge.length - walk_offset,
-        )
+        network_distance, _ = _walk_start(walk_edge, walk_offset, wdist, we, woff, wd)
         if not math.isfinite(network_distance):
             return None
         return {"walk_edge_idx": walk_edge.idx, "walk_offset": walk_offset,
@@ -564,7 +561,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         result["walk"]["geometry"] = _walk_geometry(
             g, result["_c"], wpred, wdist, we, woff, dest_lat, dest_lon)
         result["walk"]["wade"] = _walk_wade(g, fps, result["_c"], wpred, wdist, arrive, rain,
-                                               flood_snapshot, vehicle.safe_water_depth)
+                                               flood_snapshot, vehicle.safe_water_depth, we, woff)
 
     failure_codes = sorted({code for result in rejected for code in result["failure_codes"]})
 
@@ -1331,23 +1328,27 @@ def _badges(checks, tier, lstatus) -> list[str]:
     return out
 
 
+def _walk_start(edge, offset, wdist, dest_edge, dest_offset, dest_connector=0.0):
+    """Distance and first graph node, or None for a direct path on one edge."""
+    distance, node = min((wdist.get(edge.u, INF) + offset, edge.u),
+                         (wdist.get(edge.v, INF) + edge.length - offset, edge.v))
+    if dest_edge is not None and edge.idx == dest_edge.idx:
+        direct = abs(offset - dest_offset) + dest_connector
+        if direct <= distance:
+            return direct, None
+    return distance, node
+
+
 def _walk_geometry(g, c: Candidate, wpred, wdist, dest_edge, dest_offset, dlat, dlon):
     if dest_edge is None or "walk_edge_idx" not in c.data:
         return []
     start_edge = g.edges[c.data["walk_edge_idx"]]
     start_offset = c.data["walk_offset"]
-    starts = [
-        (wdist[node] + distance, node)
-        for node, distance in (
-            (start_edge.u, start_offset),
-            (start_edge.v, start_edge.length - start_offset),
-        )
-        if node in wdist
-    ]
-    if not starts:
+    distance, node = _walk_start(start_edge, start_offset, wdist, dest_edge, dest_offset,
+                                 c.data.get("walk_destination_connector_m", 0.0))
+    if not math.isfinite(distance):
         return []
-    _, node = min(starts)
-    path_nodes = _path_nodes(wpred, node)
+    path_nodes = _path_nodes(wpred, node) if node is not None else []
     start_point = _interp(g, start_edge.u, start_edge.v, start_offset, start_edge.length)
     end_point = _interp(g, dest_edge.u, dest_edge.v, dest_offset, dest_edge.length)
     coords = [[start_point[1], start_point[0]]]
@@ -1361,23 +1362,24 @@ def _walk_geometry(g, c: Candidate, wpred, wdist, dest_edge, dest_offset, dlat, 
 
 
 def _walk_wade(g: AreaGraph, fps, c: Candidate, wpred, wdist, arrive: datetime, rain: list[dict],
-               snapshot: FloodSnapshot, safe_depth: float):
+               snapshot: FloodSnapshot, safe_depth: float, dest_edge=None, dest_offset=0.0):
     worst = None
     if c.kind == "door" or "walk_edge_idx" not in c.data:
         return None
     edge = g.edges[c.data["walk_edge_idx"]]
     offset = c.data["walk_offset"]
-    starts = [
-        (wdist[node] + distance, node)
-        for node, distance in ((edge.u, offset), (edge.v, edge.length - offset))
-        if node in wdist
-    ]
-    if not starts:
+    distance, node = _walk_start(edge, offset, wdist, dest_edge, dest_offset,
+                                 c.data.get("walk_destination_connector_m", 0.0))
+    if not math.isfinite(distance):
         return None
-    node = min(starts)[1]
+    # Include the partial edges at both ends; they need not occur in wpred.
+    way_ids = {edge.way_id}
+    if dest_edge is not None:
+        way_ids.add(dest_edge.way_id)
     while node in wpred:
         edge_idx, node = wpred[node]
-        way_id = g.edges[edge_idx].way_id
+        way_ids.add(g.edges[edge_idx].way_id)
+    for way_id in sorted(way_ids):
         assessment = snapshot.assess(fps.get(way_id), arrive, safe_depth, g.display_name(way_id))
         depth = assessment.depth
         if depth and depth.hi > WALK_WADE_M and (worst is None or depth.hi > worst["hi"]):

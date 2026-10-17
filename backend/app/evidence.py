@@ -11,7 +11,7 @@ import json
 import math
 import re
 from dataclasses import dataclass, field, replace
-from datetime import date
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from functools import lru_cache
 
@@ -914,7 +914,7 @@ def blocked_ways_today() -> dict[int, dict]:
     out = {}
     if not BLOCKAGE_FILE.exists():
         return out
-    today = date.today().isoformat()
+    today = datetime.now(timezone(timedelta(hours=7))).date().isoformat()
     for line in BLOCKAGE_FILE.read_text(encoding="utf-8").splitlines():
         try:
             b = json.loads(line) if line.strip() else None
