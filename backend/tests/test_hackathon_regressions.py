@@ -127,8 +127,8 @@ def test_blockage_submission_and_expiry_use_the_vietnam_day(tmp_path):
 
 @pytest.mark.parametrize('legs', [[], [{'steps': []}], [{'steps': [{'polyline': {'points': '~'}}]}]])
 def test_invalid_goong_geometry_fails_as_unavailable_instead_of_crashing(legs):
-    response = type('Response', (), {'json': lambda self: {'routes': [{'legs': legs}]}})()
-    with patch.object(corridor, 'CACHED_ONLY', False), patch.object(corridor.httpx, 'get', return_value=response):
+    with patch.object(corridor, 'CACHED_ONLY', False), \
+            patch.object(corridor, 'goong_direction', return_value={'routes': [{'legs': legs}]}):
         assert corridor.goong_route((10.8, 106.7), (10.8, 106.72)) is None
 
 
@@ -136,9 +136,27 @@ def test_valid_goong_geometry_passes_finite_coordinate_and_metric_checks():
     legs = [{'steps': [{'polyline': {'points': '_p~iF~ps|U_ulLnnqC_mqNvxq`@'},
                         'distance': {'value': 200}}],
              'distance': {'value': 200}, 'duration': {'value': 30}}]
-    response = SimpleNamespace(json=lambda: {'routes': [{'legs': legs}]})
-    with patch.object(corridor, 'CACHED_ONLY', False), patch.object(corridor.httpx, 'get', return_value=response):
+    with patch.object(corridor, 'CACHED_ONLY', False), \
+            patch.object(corridor, 'goong_direction', return_value={'routes': [{'legs': legs}]}):
         result = corridor.goong_route((10.8, 106.7), (10.8, 106.72))
     assert len(result['geometry']) == 3
     assert result['distance_m'] == 200
     assert result['duration_s'] == 30
+
+
+def test_goong_direction_rotates_past_an_exhausted_key():
+    from app import geocoding
+    calls = []
+
+    def fake_get(url, params, timeout):
+        calls.append(params['api_key'])
+        code = 429 if params['api_key'] == 'dead' else 200
+        return SimpleNamespace(status_code=code, is_error=code >= 400, json=lambda: {'routes': [{'legs': []}]})
+
+    with patch.object(geocoding, '_goong_keys', return_value=['dead', 'live']), \
+            patch.object(geocoding, 'goong_blocked_until', return_value=0), \
+            patch.object(geocoding, 'block_goong') as block, patch.object(geocoding.httpx, 'get', fake_get):
+        body = geocoding.goong_direction({'origin': '10.8,106.7', 'destination': '10.8,106.72'})
+    assert body == {'routes': [{'legs': []}]}
+    assert calls == ['dead', 'live']
+    block.assert_called_once_with(api_key='dead', daily=True)

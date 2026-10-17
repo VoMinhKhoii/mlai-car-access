@@ -18,6 +18,7 @@ import httpx
 
 from . import cameras, flags, hydro
 from .config import CACHED_ONLY, GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
+from .geocoding import goong_direction
 from .flood import DepthRange, flood_status, FloodProfile, FloodSnapshot, load_records, _street_key
 from .osm import ALLEY_NAME, haversine, strip_accents
 from .plan import _decode_polyline, _densify
@@ -53,9 +54,8 @@ def goong_route(origin, dest, via=None) -> dict | None:
         return None
     stops = ([f"{via['lat']},{via['lon']}"] if via else []) + [f"{dest[0]},{dest[1]}"]
     try:
-        r = httpx.get("https://rsapi.goong.io/v2/direction",
-                      params={"api_key": GOONG_API_KEY, "origin": f"{origin[0]},{origin[1]}",
-                              "destination": ";".join(stops), "vehicle": "car"}, timeout=15).json()
+        r = goong_direction({"origin": f"{origin[0]},{origin[1]}",
+                             "destination": ";".join(stops), "vehicle": "car"})
         legs = r["routes"][0]["legs"]
         steps, coords = [], []
         for leg in legs:

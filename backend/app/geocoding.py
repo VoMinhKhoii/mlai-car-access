@@ -185,6 +185,27 @@ def goong(endpoint, params, deadline=None):
     return {}
 
 
+def goong_direction(params, timeout=15):
+    """Goong Direction v2 body, rotating past keys whose daily quota or credential has failed."""
+    for credential in _goong_keys():
+        if goong_blocked_until(credential) > time.time():
+            continue
+        try:
+            response = httpx.get('https://rsapi.goong.io/v2/direction',
+                                 params=dict(params, api_key=credential), timeout=timeout)
+        except httpx.HTTPError:
+            return None
+        if response.status_code in (401, 403, 429):
+            block_goong(api_key=credential, daily=response.status_code == 429)
+            continue
+        try:
+            body = response.json()
+        except ValueError:
+            return None
+        return body if not response.is_error and isinstance(body, dict) else None
+    return None
+
+
 def initialize_name_index():
     """Deduplicate all cached cells into named ways/POIs, without AreaGraph objects."""
     global _names

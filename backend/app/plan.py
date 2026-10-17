@@ -1490,11 +1490,10 @@ def goong_drive(origin, dest) -> dict | None:
     if CACHED_ONLY:
         return None
     """Goong Direction v2 car route: geometry [[lon, lat]…], distance (m) and duration (s)."""
-    import httpx
     try:
-        r = httpx.get("https://rsapi.goong.io/v2/direction",
-                      params={"api_key": GOONG_API_KEY, "origin": f"{origin[0]},{origin[1]}",
-                              "destination": f"{dest[0]},{dest[1]}", "vehicle": "car"}, timeout=15).json()
+        from .geocoding import goong_direction
+        r = goong_direction({"origin": f"{origin[0]},{origin[1]}",
+                             "destination": f"{dest[0]},{dest[1]}", "vehicle": "car"})
         leg = r["routes"][0]["legs"][0]
         coords = []
         for step in leg["steps"]:
