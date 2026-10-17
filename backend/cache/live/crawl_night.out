@@ -18,3 +18,5 @@
 2026-10-17 11:03:29,323 INFO RANKED_CUT phase=queue way=1330786039 score=30.524777 at_m=5.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
 2026-10-17 11:12:12,656 INFO RANKED_DONE way=1330786039 status=measured
 2026-10-17 11:12:13,825 INFO RANKED_CUT phase=queue way=517513511 score=24.0 at_m=25.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 11:24:12,250 INFO RANKED_DONE way=517513511 status=measured
+2026-10-17 11:24:13,085 INFO RANKED_CUT phase=queue way=517523880 score=24.0 at_m=25.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']

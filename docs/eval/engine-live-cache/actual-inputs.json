@@ -1,0 +1,20 @@
+{
+  "backend/cache/osm/area_10.788_106.696.json": {
+    "clone_sha256": "be39bf6a9d4e2550ac6c351e20402995aadb920e89103bea23963b15a1a83fb5",
+    "clone_bytes": 1038820,
+    "current_source_sha256": "be39bf6a9d4e2550ac6c351e20402995aadb920e89103bea23963b15a1a83fb5",
+    "source_matches_snapshot_now": true
+  },
+  "backend/cache/live/areas/10.788_106.696.json": {
+    "clone_sha256": "6ab1a93da8ff2fe27f75727ffcc84abcd41dca025687cd7213aec3e36838fd3f",
+    "clone_bytes": 31792,
+    "current_source_sha256": "6ab1a93da8ff2fe27f75727ffcc84abcd41dca025687cd7213aec3e36838fd3f",
+    "source_matches_snapshot_now": true
+  },
+  "backend/cache/live/city_parcels.json": {
+    "clone_sha256": "9c293088e53e5fba3f91a96bcd3a9dff21d54f3e242b069c6d63deb99f4a6046",
+    "clone_bytes": 43796,
+    "current_source_sha256": "2f610a9413c5d1a852ee80b68d3d540a750c39ec17f42a1626cc63b37fa45d24",
+    "source_matches_snapshot_now": false
+  }
+}

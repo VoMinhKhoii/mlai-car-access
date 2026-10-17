@@ -340,6 +340,27 @@ def _area_path(key: str):
     return AREAS_DIR / f"{key}.json"
 
 
+def _legacy_parcel_record(rec: dict, key: str) -> dict | None:
+    """Read completed server-cache parcel cuts without reviving legacy photos/listings."""
+    status = rec.get("status")
+    if ("schema_version" in rec or rec.get("key") != key or not isinstance(status, dict)
+            or status.get("key") != key or status.get("state") != "done" or status.get("error")
+            or not isinstance(rec.get("parcels"), list) or not rec["parcels"]):
+        return None
+    try:
+        collected = datetime.fromisoformat(status["finished_at"])
+        if collected.tzinfo is None or collected > datetime.now(VN_TZ):
+            return None
+    except (KeyError, TypeError, ValueError):
+        return None
+    return {"schema_version": SCHEMA_VERSION, "key": key, "revision": 0,
+            "collected_at": collected.isoformat(), "expires_at": (collected + TTL).isoformat(),
+            "complete": False, "steps": {"legacy_parcels": {"state": "done",
+                "detail": "Restored parcel cuts only; legacy listings and photos excluded"}},
+            "counts": {"parcels": len(rec["parcels"])}, "parcels": rec["parcels"],
+            "listings": [], "photos": [], "news": []}
+
+
 def _load_area(key: str) -> dict | None:
     rec = _areas.get(key)
     if rec is not None:
@@ -348,6 +369,8 @@ def _load_area(key: str) -> dict | None:
         rec = read_json(_area_path(key), None)
     except CorruptState:
         return None
+    if isinstance(rec, dict) and "schema_version" not in rec:
+        rec = _legacy_parcel_record(rec, key)
     if rec and rec.get("schema_version") == SCHEMA_VERSION and rec.get("key") == key:
         _areas.put(key, rec)
         return rec

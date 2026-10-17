@@ -1,0 +1,126 @@
+{
+  "way_id": 35115025,
+  "name": "Đường Trần Doãn Khanh",
+  "tags": {
+    "highway": "residential",
+    "lane_markings": "no",
+    "name": "Đường Trần Doãn Khanh",
+    "surface": "asphalt"
+  },
+  "osm_url": "https://www.openstreetmap.org/way/35115025",
+  "width_range": {
+    "lo": 0,
+    "hi": 5.86,
+    "label": "Width unknown",
+    "top_tier": "Inferred",
+    "review": false,
+    "evidence": [
+      {
+        "lo": 3.5,
+        "hi": 15.0,
+        "tier": "Inferred",
+        "tier_vi": "Inferred",
+        "source": "OSM road class",
+        "detail": "highway=residential",
+        "observed_on": "",
+        "url": "https://www.openstreetmap.org/way/35115025",
+        "ai_feature": null,
+        "width_basis": "inferred",
+        "uncertainty_m": null,
+        "coverage": null,
+        "coverage_complete": false,
+        "measurement_schema": "",
+        "estimate_m": null,
+        "sample_count": null,
+        "sample_quality": {}
+      },
+      {
+        "lo": 0,
+        "hi": 5.86,
+        "tier": "Inferred",
+        "tier_vi": "Inferred",
+        "source": "Cadastral parcel-gap estimate",
+        "detail": "Narrowest valid sample 5.56 m; retained 5/5 cuts; 5 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+        "observed_on": "",
+        "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+        "ai_feature": "parcel_widths",
+        "width_basis": "parcel_gap_estimate",
+        "uncertainty_m": 0.3,
+        "coverage": {
+          "cut_count": 5,
+          "start_covered": false,
+          "end_covered": false,
+          "max_spacing_m": 5.0,
+          "truncated": false,
+          "complete": false,
+          "reason": "Cuts do not cover both endpoints and the whole way"
+        },
+        "coverage_complete": false,
+        "measurement_schema": "parcel-usable-v2",
+        "estimate_m": 5.56,
+        "sample_count": 5,
+        "sample_quality": {
+          "accepted_cuts": 5,
+          "rejected_cuts": [],
+          "bottleneck_support": 5,
+          "median_m": 5.58,
+          "mad_m": 0.020000000000000462,
+          "isolated_low_outlier": false,
+          "geometry_checked": true,
+          "sample_min_m": 5.56,
+          "sample_max_m": 5.65,
+          "confidence_note": null
+        }
+      }
+    ],
+    "overruled": [
+      {
+        "lo": 3.5,
+        "hi": 15.0,
+        "tier": "Inferred",
+        "tier_vi": "Inferred",
+        "source": "OSM road class",
+        "detail": "highway=residential",
+        "observed_on": "",
+        "url": "https://www.openstreetmap.org/way/35115025",
+        "ai_feature": null,
+        "width_basis": "inferred",
+        "uncertainty_m": null,
+        "coverage": null,
+        "coverage_complete": false,
+        "measurement_schema": "",
+        "estimate_m": null,
+        "sample_count": null,
+        "sample_quality": {}
+      }
+    ],
+    "way_out_claims": [],
+    "width_basis": "parcel_gap_estimate",
+    "coverage": {
+      "cut_count": 5,
+      "start_covered": false,
+      "end_covered": false,
+      "max_spacing_m": 5.0,
+      "truncated": false,
+      "complete": false,
+      "reason": "Cuts do not cover both endpoints and the whole way"
+    },
+    "decisive_clearance": false,
+    "sampled_estimate": {
+      "value_m": 5.56,
+      "lo": 5.26,
+      "hi": 5.86,
+      "tier": "Inferred",
+      "source": "Cadastral parcel-gap estimate",
+      "conflicted": false,
+      "scope": "sampled_bottleneck_only",
+      "guarantees_clearance": false
+    },
+    "official_width_records": []
+  },
+  "flood_history": {
+    "records": [],
+    "inferred_from": ""
+  },
+  "photos": []
+}

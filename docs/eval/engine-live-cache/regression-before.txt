@@ -1,0 +1,31 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_ministop_legacy_cache_reaches_http_evidence_and_plan ___________
+
+cached_http = (<starlette.testclient.TestClient object at 0x124631610>, PosixPath('/private/var/folders/4b/18tv83z972lfxrd5kw3_44lm0... 'lat': 10.78869, ...}, {'at_m': 34.3, 'gap_m': 5.08, 'heading_deg': 47.75, 'lat': 10.7888047, ...}], ...}, ...], ...})
+
+    def test_ministop_legacy_cache_reaches_http_evidence_and_plan(cached_http):
+        client, path, record = cached_http
+        original = path.read_bytes()
+        response = client.post(f'/api/evidence/way/{WAY}', json={'lat': LAT, 'lon': LON})
+        assert response.status_code == 200
+        data = response.json()
+        width = data['width_range']
+>       parcel = next(b for b in width['evidence'] if b['ai_feature'] == 'parcel_widths')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       StopIteration
+
+backend/tests/test_engine_live_cache.py:60: StopIteration
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/test_engine_live_cache.py::test_ministop_legacy_cache_reaches_http_evidence_and_plan
+1 failed, 2 warnings in 1.50s
