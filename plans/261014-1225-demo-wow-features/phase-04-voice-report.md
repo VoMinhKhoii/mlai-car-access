@@ -12,6 +12,8 @@ dependencies: [3]
 ## Overview
 Nút micro trên màn hình kết quả: người dùng nói tự nhiên ("vào được nhưng phải gập gương, ra phải lùi" / "đầu hẻm có ba gác chắn"); app chuyển thành `confirmation` (schema phase 3) hoặc `blockage`, cho người dùng xem lại rồi gửi. Mọi report vẫn pending chờ duyệt.
 
+> Baseline đã hoàn tất trước extension2026-10-17. [Phase7](./phase-07-voice-capture-and-report-context.md) thay SpeechRecognition bằng MediaRecorder→Gemini Audio và explicit transcript/parse; không mở lại checkbox phase4. `10s` dưới đây là text-parser deadline. Sau cutover dùng matrix phase7:missing config424/budget429 thay fallback unclear cũ; quota chung20/IP+global60/h. Human mic cần verified paid project; model audio không lấy từ camera Risk Assessment cũ.
+
 ## Requirements
 - Functional:
   - STT bằng Web Speech API (`SpeechRecognition`/`webkitSpeechRecognition`, `lang="vi-VN"`); không hỗ trợ → ô gõ chữ.

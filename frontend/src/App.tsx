@@ -430,7 +430,7 @@ export default function App() {
   async function reportBlockage(reason: string) {
     if (!plan || !selectedStop || selectedStop.way_id == null) throw new Error('Điểm dừng này chưa có mã đường để gửi báo cáo vật cản.')
     await api.blockage({
-      lat: plan.destination.lat, lon: plan.destination.lon, way_id: selectedStop.way_id, reason,
+      lat: selectedStop.lat, lon: selectedStop.lon, way_id: selectedStop.way_id, reason,
     })
   }
 
@@ -610,8 +610,11 @@ export default function App() {
           <p className="muted">Báo cáo chỉ trở thành bằng chứng sau khi người điều hành duyệt. Không làm thay đổi kết luận phù hợp hay an toàn.</p>
           {selectedStop.kind === 'lot' || selectedStop.way_id == null
             ? <p className="muted" role="status">Bãi đỗ không xác nhận xe đã vào hẻm. Chọn một điểm dừng trên đường để gửi báo cáo.</p>
-            : <VoiceReport stop={selectedStop} vehicleId={plan.vehicle.id} destination={plan.destination}
+            : <VoiceReport key={`${tripKey}:${plan.vehicle.id}:${selectedStop.lat}:${selectedStop.lon}:${selectedStop.way_id}`}
+              stop={selectedStop} vehicleId={plan.vehicle.id} destination={plan.destination}
               voiceEnabled={cfg.flags.some((flag) => flag.name === 'ai_voice_report' && flag.enabled)}
+              audioEnabled={cfg.flags.some((flag) => flag.name === 'ai_voice_input' && flag.enabled)}
+              audioReady={cfg.voice_audio.configured} audioModel={cfg.voice_audio.model} textProvider={cfg.ai_provider}
               onConfirm={confirmArrival} onBlockage={reportBlockage} />}
         </div>
       )}
@@ -806,7 +809,12 @@ function reportSummary(r: Report): string {
       : 'tọa độ không rõ'
     return `${p.vehicle_label}: ${result} · ${exit} · ${widthImpact} · ${location} · hẻm OSM ${ingress} · way ra ${egress}`
   }
-  if (r.type === 'blockage') return `${p.reason} (đoạn ${p.way_id}, ngày ${p.date})`
+  if (r.type === 'blockage') {
+    const location = Number.isFinite(Number(p.stop_lat)) && Number.isFinite(Number(p.stop_lon))
+      ? `${Number(p.stop_lat).toFixed(5)}, ${Number(p.stop_lon).toFixed(5)}`
+      : 'tọa độ không rõ'
+    return `${p.reason} · ${p.way_name ?? `OSM ${p.way_id}`} · ${location} · ${p.date}`
+  }
   if (r.type === 'flood_report') return `${p.street ?? 'không rõ đường'}: ${p.depth_cm ?? '?'} cm`
   return String(p.street ?? p.type ?? p.notes ?? '')
 }

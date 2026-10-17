@@ -56,6 +56,7 @@ guest = TestClient(app)
 cfg = guest.get("/api/config")
 out["initial_flag_values"] = {item["name"]: item["enabled"] for item in cfg.json()["flags"]}
 out["config_operator"] = cfg.json()["operator"]
+out["config_voice_audio"] = cfg.json()["voice_audio"]
 out["config_has_secret"] = os.environ["OPERATOR_SECRET_VALUE"] in cfg.text
 
 for name, method, url, body in [
@@ -197,6 +198,34 @@ out["blockage_rate_limited_before_graph"] = packed(guest.post("/api/blockage", j
     "lat": lat, "lon": lon, "way_id": main_road_way_id, "reason": "test"}))
 reports.allow_guest = original_allow_guest_2
 main.cached_graph = original_cached_graph
+block_ingress = parcels.path_into(g, stop_lat, stop_lon)
+block_way_id = block_ingress[-1][0]
+block_lat, block_lon = block_ingress[-1][1][-1]
+block_mismatch = None
+for dlat, dlon in ((.0001, 0), (-.0001, 0), (0, .0001), (0, -.0001),
+                   (.0002, 0), (-.0002, 0), (0, .0002), (0, -.0002)):
+    candidate = (block_lat + dlat, block_lon + dlon)
+    candidate_graph = main.cached_graph(*candidate)
+    if candidate_graph is None or block_way_id not in candidate_graph.ways:
+        continue
+    _, _, distance = main.plan._project(
+        candidate_graph, *candidate, lambda way: way.id == block_way_id)
+    if distance > main.plan.WALK_SNAP_M:
+        block_mismatch = candidate
+        break
+if block_mismatch is None:
+    raise AssertionError("demo graph has no cached point more than 5 m from the selected blockage way")
+pending_before_bad_blockage = len(reports._load()["reports"])
+out["blockage_wrong_location"] = packed(guest.post("/api/blockage", json={
+    "lat": block_mismatch[0], "lon": block_mismatch[1], "way_id": block_way_id, "reason": "Xe chắn lối"}))
+out["pending_before_bad_blockage"] = pending_before_bad_blockage
+out["pending_after_bad_blockage"] = len(reports._load()["reports"])
+out["blockage_valid"] = packed(guest.post("/api/blockage", json={
+    "lat": block_lat, "lon": block_lon, "way_id": block_way_id, "reason": "Xe chắn lối"}))
+blockage_rid = out["blockage_valid"]["json"]["report_id"]
+out["blockage_payload"] = reports._load()["reports"][blockage_rid]["payload"]
+out["blockage_way_name"] = g.ways[block_way_id].name or f"OSM {block_way_id}"
+out["blockage_expected_location"] = [block_lat, block_lon]
 sub = guest.post("/api/confirm", json={
     "stop_lat": stop_lat, "stop_lon": stop_lon, "vehicle_id": "toyota-vios",
     "result": "in", "exit": "turned"})
@@ -313,7 +342,8 @@ class OperatorAccess(unittest.TestCase):
             "VAODUOC_STORE": str(store), "VAODUOC_CACHE": str(cache), "VAODUOC_FLAGS": str(flags),
             "VAODUOC_DIST": str(dist), "OPERATOR_SECRET_FILE": str(secret_file), "OPERATOR_SECRET_VALUE": SECRET,
             "APP_ORIGINS": "https://app.example", "VERCEL": "", "GOONG_API_KEY": "", "GOONG_MAPTILES_KEY": "",
-            "GEMINI_API_KEY": "", "OPENAI_API_KEY": "", "ANTHROPIC_API_KEY": "", "GOOGLE_MAPS_API_KEY": "",
+            "GEMINI_API_KEY": "", "GEMINI_VOICE_MODEL": "", "GEMINI_VOICE_PAID_CONFIRMED": "",
+            "OPENAI_API_KEY": "", "ANTHROPIC_API_KEY": "", "GOOGLE_MAPS_API_KEY": "",
             "FLAG_LIVE_CRAWL": "0", "FLAG_LIVE_HYDRO": "0",
         })
         env.pop("OPERATOR_SECRET", None)
@@ -346,6 +376,7 @@ class OperatorAccess(unittest.TestCase):
         self.assertEqual(self.r["op_status"], {"available": True, "operator": True})
         self.assertEqual(self.r["config_operator"], {"available": True, "signed_in": False})
         self.assertFalse(self.r["config_has_secret"])
+        self.assertEqual(self.r["config_voice_audio"], {"configured": False, "model": None})
 
     def test_cross_origin_mutation_is_refused_even_with_a_valid_session(self):
         self.assertEqual(self.status("op_flags"), 200)
@@ -388,6 +419,18 @@ class OperatorAccess(unittest.TestCase):
         self.assertEqual(self.status("confirm_off_way_stop"), 422)
         self.assertIn("ánh xạ trực tiếp lên hẻm", self.r["confirm_off_way_stop"]["json"]["detail"])
         self.assertEqual(self.r["pending_before_off_way"], self.r["pending_after_off_way"])
+        self.assertEqual(self.status("blockage_wrong_location"), 422)
+        self.assertEqual(self.r["pending_before_bad_blockage"], self.r["pending_after_bad_blockage"])
+        self.assertEqual(self.status("blockage_valid"), 202)
+        blockage_payload = self.r["blockage_payload"]
+        self.assertEqual(blockage_payload["way_id"], self.r["confirm_expected_stop_way_id"])
+        self.assertEqual(blockage_payload["way_name"], self.r["blockage_way_name"])
+        self.assertIn("stop_lat", blockage_payload)
+        self.assertIn("stop_lon", blockage_payload)
+        self.assertEqual(
+            [blockage_payload["stop_lat"], blockage_payload["stop_lon"]],
+            self.r["blockage_expected_location"],
+        )
         self.assertEqual(self.status("confirm_guest"), 202)
         self.assertEqual(self.r["confirm_guest"]["json"]["status"], "pending")
         self.assertEqual(self.r["projected_before_approval"], 0)

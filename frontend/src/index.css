@@ -485,6 +485,11 @@ i.dash { background: repeating-linear-gradient(90deg, var(--fit-unknown) 0 5px, 
 .voice-input-row textarea:focus-visible, .voice-report > textarea:focus-visible { outline: 3px solid var(--route); outline-offset: 2px; }
 .voice-input-row .icon-btn { width: var(--tap); height: var(--tap); flex: none; }
 .voice-help { color: var(--text-2); font-size: var(--fs-11); }
+.voice-audio-disclosure { margin: 0; color: var(--text-2); font-size: var(--fs-11); line-height: 1.45; }
+.voice-audio-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+.voice-audio-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--tap); }
+.voice-textarea { display: block; width: 100%; box-sizing: border-box; min-height: var(--tap); padding: var(--s-2) var(--s-3); border: 1px solid var(--outline-strong); border-radius: var(--r-sm); background: var(--surface); color: var(--text); font: inherit; font-size: 16px; line-height: 1.5; resize: vertical; }
+.voice-textarea:focus-visible { outline: 3px solid var(--route); outline-offset: 2px; }
 .voice-parse { align-self: flex-start; min-height: var(--tap); }
 .voice-choice { display: flex; flex-direction: column; gap: var(--s-2); margin: 0; padding: 0; border: 0; }
 .voice-choice legend { margin-bottom: var(--s-2); font-size: var(--fs-12); font-weight: 700; }

@@ -18,3 +18,5 @@ backend/cache/live/alonhadat/
 key.txt
 .venv/
 .coverage
+gemini_api_key.txt
+gemini_api_key.txt

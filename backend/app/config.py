@@ -36,6 +36,9 @@ FLAG_FILE = _path_override("VAODUOC_FLAGS", ROOT / "backend" / "flags.json")
 FRONTEND_DIST = _path_override("VAODUOC_DIST", ROOT / "frontend" / "dist")
 
 GOONG_API_KEY = os.environ.get("GOONG_API_KEY", "")
+
+GEMINI_VOICE_MODEL = os.environ.get("GEMINI_VOICE_MODEL", "").strip()
+GEMINI_VOICE_PAID_CONFIRMED = os.environ.get("GEMINI_VOICE_PAID_CONFIRMED") == "1"
 GOONG_MAPTILES_KEY = os.environ.get("GOONG_MAPTILES_KEY", "")
 
 # Raced in parallel; the first valid answer wins (overpass-api.de is usually ~1 s, kumi ~35 s).

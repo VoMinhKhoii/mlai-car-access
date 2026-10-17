@@ -18,6 +18,7 @@ Chốt kịch bản 3 × 90 s trên khu demo, chạy thử trên laptop + điệ
   2. Điện thoại: "Tôi đã đỗ ở đây" → bật mưa giả lập → thông báo "rời trước HH:MM".
   3. Điện thoại: nói xác nhận → thẻ xem lại → gửi → laptop (operator) duyệt → evidence panel hiện claim "Lối ra".
 - Live: một địa chỉ ngoài khu demo chạy được (#1, #2); nếu Overpass chậm thì nói rõ và quay về kịch bản.
+- Update 2026-10-17: phần voice mới dùng Gemini Audio theo phases 7–9. Smoke qua HTTP LAN ở bước cũ không chứng minh mic; dùng HTTPS tin cậy/Android USB loopback và normal isolated backend có key/model. Fixture credential-free tiếp tục chỉ chứng minh luồng tay; không expose fixture lên LAN hoặc gắn key vào fixture.
 - Fallback: chặn mạng tới Gemini → #4 dùng chip; #1, #2 không bị ảnh hưởng.
 
 ## Related Code Files

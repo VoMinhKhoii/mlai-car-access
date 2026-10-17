@@ -1,16 +1,20 @@
 """R-10: every upstream AI attempt reserves quota first; caps and corrupt counters stop spending (fail closed)."""
 from __future__ import annotations
-
+import asyncio
+import base64
+import io
+import wave
 import json
 import tempfile
 import time
 import unittest
 from pathlib import Path
 from unittest import mock
+from datetime import datetime
 
 import httpx
 
-from app import ai, budget, live, news, osm
+from app import ai, budget, live, news, osm, voice
 from app.deadline import Expired
 
 
@@ -197,6 +201,153 @@ class GoogleQuota(unittest.TestCase):
                 usage.write_text("{broken")
                 with self.assertRaises(budget.OverBudget):
                     budget.spend("streetview_metadata")
+
+class VoiceRequestQuota(unittest.TestCase):
+    def test_voice_global_hour_limit_survives_reloads_and_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            usage = Path(tmp) / "voice_usage.json"
+            with mock.patch.object(budget, "VOICE_USAGE_FILE", usage), \
+                    mock.patch.object(budget, "VOICE_REQUESTS_PER_HOUR", 2):
+                budget.reserve_voice_request()
+                persisted = json.loads(usage.read_text())
+                self.assertEqual(persisted["count"], 1)
+                budget.reserve_voice_request()  # A fresh call reads the persisted counter.
+                with self.assertRaises(budget.OverBudget):
+                    budget.reserve_voice_request()
+                usage.write_text("{broken")
+                with self.assertRaises(budget.OverBudget):
+                    budget.reserve_voice_request()
+                bucket = datetime.now(budget.VN_TZ).strftime("%Y-%m-%dT%H")
+                for damaged in (
+                    "{}",
+                    json.dumps({"bucket": bucket}),
+                    json.dumps({"count": 1}),
+                    json.dumps({"bucket": "not-a-bucket", "count": 1}),
+                    json.dumps({"bucket": bucket, "count": True}),
+                    json.dumps({"bucket": bucket, "count": -1}),
+                    json.dumps({"bucket": bucket, "count": 1, "extra": 1}),
+                ):
+                    usage.write_text(damaged)
+                    with self.subTest(damaged=damaged), self.assertRaises(budget.OverBudget):
+                        budget.reserve_voice_request()
+
+
+class GeminiAudio(unittest.IsolatedAsyncioTestCase):
+    async def test_audio_request_uses_server_header_key_and_json_transcript(self):
+        actual_async_client = httpx.AsyncClient
+        observed = {}
+
+        async def respond(request):
+            observed["request"] = request
+            return httpx.Response(200, json={"candidates": [{"content": {"parts": [
+                {"text": json.dumps({"transcript": "Xe vào được"})},
+            ]}}]})
+
+        transport = httpx.MockTransport(respond)
+
+        def client_factory(**kwargs):
+            return actual_async_client(transport=transport, **kwargs)
+
+        with mock.patch.object(voice.httpx, "AsyncClient", side_effect=client_factory), \
+                mock.patch.object(voice.ai, "gemini_keys", return_value=["voice-test-key"]), \
+                mock.patch.object(voice, "GEMINI_VOICE_MODEL", "test-audio-model"), \
+                mock.patch.object(voice.budget, "reserve_ai") as reserve:
+            deadline = asyncio.get_running_loop().time() + 5
+            wav_data = voice._pcm_to_wav(b"\x00\x01" * 16)
+            result = await voice._transcribe_with_gemini(wav_data, deadline)
+
+        request = observed["request"]
+        body = json.loads(request.content)
+        audio_part = body["contents"][0]["parts"][1]["inlineData"]
+        self.assertEqual(result, {"kind": "transcript", "text": "Xe vào được"})
+        self.assertEqual(request.headers.get("x-goog-api-key"), "voice-test-key")
+        self.assertEqual(request.url.query, b"")
+        self.assertEqual(audio_part["mimeType"], "audio/wav")
+        self.assertEqual(base64.b64decode(audio_part["data"]), wav_data)
+        with wave.open(io.BytesIO(wav_data), "rb") as wav_file:
+            self.assertEqual((wav_file.getnchannels(), wav_file.getframerate(), wav_file.getsampwidth()), (1, 16_000, 2))
+        format_config = body["generationConfig"]["responseFormat"]["text"]
+        self.assertEqual(format_config["mimeType"], "APPLICATION_JSON")
+        self.assertEqual(format_config["schema"]["type"], "object")
+        self.assertFalse(format_config["schema"]["additionalProperties"])
+        reserve.assert_called_once_with("gemini", "test-audio-model", "voice-test-key")
+    async def test_non_success_gemini_responses_are_never_parsed_as_transcripts(self):
+        actual_async_client = httpx.AsyncClient
+
+        for status in (400, 401, 403, 404, 429, 500, 503):
+            async def respond(request, status=status):
+                return httpx.Response(status, json={"error": {"message": "provider failure"}})
+
+            transport = httpx.MockTransport(respond)
+
+            def client_factory(**kwargs):
+                return actual_async_client(transport=transport, **kwargs)
+
+            with mock.patch.object(voice.httpx, "AsyncClient", side_effect=client_factory), \
+                    mock.patch.object(voice.ai, "gemini_keys", return_value=["voice-test-key"]), \
+                    mock.patch.object(voice, "GEMINI_VOICE_MODEL", "test-audio-model"), \
+                    mock.patch.object(voice.budget, "reserve_ai"):
+                deadline = asyncio.get_running_loop().time() + 5
+                if status == 429:
+                    expected = voice.AudioProviderRateLimited
+                elif status in (400, 401, 403, 404):
+                    expected = voice.AudioRequestError
+                else:
+                    expected = voice.AudioProviderFailure
+                with self.subTest(status=status), self.assertRaises(expected):
+                    await voice._transcribe_with_gemini(voice._pcm_to_wav(b"\\x00\\x01" * 16), deadline)
+
+    async def test_voice_rotates_past_a_key_at_its_attempt_budget(self):
+        actual_async_client = httpx.AsyncClient
+        observed_keys = []
+
+        async def respond(request):
+            observed_keys.append(request.headers["x-goog-api-key"])
+            return httpx.Response(200, json={"candidates": [{"content": {"parts": [
+                {"text": json.dumps({"transcript": "Xe vào được"})},
+            ]}}]})
+
+        transport = httpx.MockTransport(respond)
+
+        def client_factory(**kwargs):
+            return actual_async_client(transport=transport, **kwargs)
+
+        with mock.patch.object(voice.httpx, "AsyncClient", side_effect=client_factory), \
+                mock.patch.object(voice.ai, "gemini_keys", return_value=["capped-key", "available-key"]), \
+                mock.patch.object(voice, "GEMINI_VOICE_MODEL", "test-audio-model"), \
+                mock.patch.object(voice.budget, "reserve_ai", side_effect=[
+                    budget.OverBudget("capped"), None,
+                ]) as reserve:
+            deadline = asyncio.get_running_loop().time() + 5
+            result = await voice._transcribe_with_gemini(voice._pcm_to_wav(b"\\x00\\x01" * 16), deadline)
+
+        self.assertEqual(result, {"kind": "transcript", "text": "Xe vào được"})
+        self.assertEqual(observed_keys, ["available-key"])
+        self.assertEqual(reserve.call_count, 2)
+
+    def test_readiness_requires_model_key_decoder_and_paid_confirmation(self):
+        with mock.patch.object(voice.ai, "has_gemini_key", return_value=True), \
+                mock.patch.object(voice, "GEMINI_VOICE_MODEL", "test-audio-model"), \
+                mock.patch.object(voice.shutil, "which", return_value="/usr/bin/ffmpeg"), \
+                mock.patch.object(voice, "GEMINI_VOICE_PAID_CONFIRMED", False):
+            self.assertEqual(voice.audio_config(), {"configured": False, "model": "test-audio-model"})
+        with mock.patch.object(voice.ai, "has_gemini_key", return_value=True), \
+                mock.patch.object(voice, "GEMINI_VOICE_MODEL", "test-audio-model"), \
+                mock.patch.object(voice.shutil, "which", return_value="/usr/bin/ffmpeg"), \
+                mock.patch.object(voice, "GEMINI_VOICE_PAID_CONFIRMED", True):
+            self.assertEqual(voice.audio_config(), {"configured": True, "model": "test-audio-model"})
+
+    def test_audio_formats_are_allowlisted_and_long_transcripts_are_rejected(self):
+        self.assertEqual(voice._content_format("audio/webm;codecs=opus"), ("audio/webm", "webm"))
+        self.assertEqual(voice._content_format("audio/ogg;codecs=opus"), ("audio/ogg", "ogg"))
+        with self.assertRaises(voice.AudioRequestError) as error:
+            voice._content_format("audio/mpeg")
+        self.assertEqual(error.exception.status_code, 415)
+        result = voice._extract_transcript({"candidates": [{"content": {"parts": [
+            {"text": json.dumps({"transcript": "x" * 301})},
+        ]}}]})
+        self.assertEqual(result["kind"], "unclear")
+        self.assertNotIn("text", result)
 
 
 if __name__ == "__main__":

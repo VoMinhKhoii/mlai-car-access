@@ -51,7 +51,7 @@ Plan tạo trên nhánh `fix/access-safety-hardening` từ local `main`; impleme
 ## Dependencies & Execution
 
 Thực hiện tuần tự 1 → 2 → 3 → 4 → 5: các phase cùng sửa `plan.py`, `main.py`, `App.tsx`, `api.ts`; một integration owner, không chạy sibling edits trên các file này. Team có thể bắt đầu đo thực địa trong lúc sửa code, nhưng phase 5 chỉ đóng khi dữ liệu thật và code mới đều đạt.
-Không có unfinished plan trong project khi quét `ak plan list/resolve` và `plans/**/plan.md`; cross-plan deps rỗng.
+Snapshot lúc tạo plan: chưa có unfinished plan khác. Quét lại 2026-10-17: `261014-1225-demo-wow-features` còn mở và đã thêm phases 7–9 cho Gemini Audio + voice trip/report. Không thêm blockedBy/blocks: voice dùng output hardening phases 1–4 đã completed, không phụ thuộc khảo sát phase 5; cũng không thay geometry/evidence. Cùng sửa `main.py`, `App.tsx`, `api.ts` và docs nên một integration owner, rebase khi có thay đổi đồng thời. Voice-ready không đóng R-11/R-12 hoặc cho phép tuyên bố safety/field release đã verified.
 Research reused: hai review backend độc lập và bsk ở phiên trước; đối chiếu lại source trước lập plan. Mode: hard, không lập lại nghiên cứu tổng quan; red-team sau draft.
 
 ## Verification Environment

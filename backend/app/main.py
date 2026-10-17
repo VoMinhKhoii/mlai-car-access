@@ -9,6 +9,7 @@ operator session (auth.py).
 """
 from __future__ import annotations
 
+import asyncio
 import math
 import re
 from datetime import date, datetime, timedelta, timezone
@@ -26,7 +27,7 @@ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validato
 from starlette.concurrency import run_in_threadpool
 
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, SIDE_CLEARANCE_M, in_hcmc
-from . import ai, auth, budget, cameras, corridor, flags, geometry, google_lookup, hydro, live, parcels, plan, reports, vehicles
+from . import ai, auth, budget, cameras, corridor, flags, geometry, google_lookup, hydro, live, parcels, plan, reports, vehicles, voice
 from .evidence import STORE_EVIDENCE
 from .flood import tide_meta, tide_series
 from .osm import build_graph, cached_graph, haversine, strip_accents
@@ -148,6 +149,7 @@ def config(request: Request):
         "map_style": GOONG_STYLE.format(key=GOONG_MAPTILES_KEY) if GOONG_MAPTILES_KEY else FALLBACK_STYLE,
         "goong": {"tiles": bool(GOONG_MAPTILES_KEY), "api": bool(GOONG_API_KEY)},
         "ai_provider": ai.provider(),
+        "voice_audio": voice.audio_config(),
         "flags": flags.describe(),
         "tide": {k: tide_meta()[k] for k in ("station", "bulletin", "issued_at", "source_url", "alarm_levels_m", "note")},
         "demo_center": DEMO_CENTER,
@@ -509,14 +511,78 @@ class VoiceParse(Strict):
 @app.post("/api/voice/parse")
 def parse_voice_report(body: VoiceParse, request: Request):
     from time import monotonic
+    if not flags.enabled("ai_voice_report"):
+        raise HTTPException(403, "Tính năng AI 'ai_voice_report' đang tắt")
+    if not ai.provider():
+        raise HTTPException(424, "Chưa cấu hình nhà cung cấp AI cho phân tích văn bản.")
     _guest_limit(request, bucket="voice_parse")
+    try:
+        budget.reserve_voice_request()
+    except budget.OverBudget:
+        raise HTTPException(429, "Voice đã chạm hạn mức chung trong giờ này.", headers={"Retry-After": "3600"})
     deadline = monotonic() + 10
     try:
         return ai.parse_voice_report(body.text, deadline=deadline)
     except ai.FeatureOff as exc:
         raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
-    except (ai.NoModel, budget.OverBudget, Expired, httpx.HTTPError, ValueError, TypeError, KeyError, IndexError, AttributeError):
+    except budget.OverBudget:
+        raise HTTPException(429, "AI đã chạm hạn mức chi phí trong ngày.", headers={"Retry-After": "3600"})
+    except ai.NoModel as exc:
+        raise HTTPException(424, "Chưa cấu hình nhà cung cấp AI cho phân tích văn bản.") from exc
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code == 429:
+            raise HTTPException(429, "Nhà cung cấp AI đang giới hạn yêu cầu; hãy thử lại sau.", headers={"Retry-After": "60"}) from exc
+        if exc.response.status_code in (401, 403, 404) or (
+            exc.response.status_code == 400 and "API key" in exc.response.text
+        ):
+            raise HTTPException(424, "Nhà cung cấp AI hoặc model chưa được cấp quyền.") from exc
         return {"kind": "unclear", "question": "Không nhận diện được. Hãy chọn loại báo cáo thủ công."}
+    except (Expired, httpx.HTTPError, ValueError, TypeError, KeyError, IndexError, AttributeError):
+        return {"kind": "unclear", "question": "Không nhận diện được. Hãy chọn loại báo cáo thủ công."}
+
+
+@app.post("/api/voice/transcribe")
+async def transcribe_voice(request: Request, response: Response):
+    deadline = asyncio.get_running_loop().time() + voice.TRANSCRIBE_DEADLINE_S
+    response.headers["Cache-Control"] = "no-store"
+    body_complete = False
+    admitted = False
+    try:
+        async with asyncio.timeout_at(deadline):
+            if not flags.enabled("ai_voice_input"):
+                raise HTTPException(403, "Tính năng thu âm Gemini đang tắt.")
+            if not voice.audio_config()["configured"]:
+                raise HTTPException(424, "Thu âm Gemini chưa sẵn sàng; hãy nhập nội dung hoặc dùng lựa chọn thủ công.")
+            _guest_limit(request, bucket="voice_parse")
+            try:
+                await run_in_threadpool(budget.reserve_voice_request)
+            except budget.OverBudget as exc:
+                raise HTTPException(429, "Voice đã chạm hạn mức chung trong giờ này.", headers={"Retry-After": "3600"}) from exc
+            if not voice.try_admit():
+                raise HTTPException(429, "Đang xử lý hai bản ghi khác; hãy thử lại sau.", headers={"Retry-After": "5"})
+            admitted = True
+            data, mime = await voice.read_audio(request, deadline)
+            body_complete = True
+            return await voice.transcribe_audio(data, mime, deadline)
+    except TimeoutError:
+        if not body_complete:
+            raise HTTPException(408, "Tải bản ghi quá chậm; hãy thử lại.")
+        return voice.unclear_result()
+    except voice.AudioRequestError as exc:
+        raise HTTPException(exc.status_code, str(exc)) from exc
+    except voice.AudioPipelineTimeout:
+        if not body_complete:
+            raise HTTPException(408, "Tải bản ghi quá chậm; hãy thử lại.")
+        return voice.unclear_result()
+    except voice.AudioProviderRateLimited as exc:
+        raise HTTPException(429, "Gemini đang giới hạn yêu cầu; hãy thử lại sau.", headers={"Retry-After": "60"}) from exc
+    except budget.OverBudget as exc:
+        raise HTTPException(429, "AI đã chạm hạn mức chi phí trong ngày.", headers={"Retry-After": "3600"}) from exc
+    except voice.AudioProviderFailure:
+        return voice.unclear_result()
+    finally:
+        if admitted:
+            voice.release_admission()
 
 
 class Blockage(Strict):
@@ -529,8 +595,16 @@ class Blockage(Strict):
 @app.post("/api/blockage", status_code=202)
 def blockage(b: Blockage, request: Request):
     _guest_limit(request)
-    _graph_with(b.lat, b.lon, [b.way_id])
-    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Tài xế báo", "date": date.today().isoformat()}
+    g = _graph_with(b.lat, b.lon, [b.way_id])
+    edge, _, distance = plan._project(g, b.lat, b.lon, lambda way: way.id == b.way_id)
+    if edge is None or distance > plan.WALK_SNAP_M:
+        raise HTTPException(422, "Tọa độ báo cáo phải nằm trong 5 m của chính đoạn đường đã chọn.")
+    way = g.ways[b.way_id]
+    payload = {
+        "way_id": b.way_id, "way_name": way.name or f"OSM {b.way_id}",
+        "stop_lat": b.lat, "stop_lon": b.lon, "reason": b.reason,
+        "source": "Tài xế báo", "date": date.today().isoformat(),
+    }
     rec = reports.submit("blockage", payload, "Tài xế báo vật cản")
     return {"status": "pending", "report_id": rec["report_id"]}
 

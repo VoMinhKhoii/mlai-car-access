@@ -56,6 +56,11 @@ AI_FEATURES = {
         "detail": "Nhận diện ý định xác nhận xe vào/ra hoặc báo vật cản; kết quả luôn cần người dùng xem lại và gửi.",
         "default": False,
     },
+    "ai_voice_input": {
+        "label": "Chuyển giọng nói thành văn bản",
+        "detail": "Thu âm chỉ được gửi Gemini sau khi tài xế bấm Chuyển thành văn bản; không lưu âm thanh trong ứng dụng.",
+        "default": False,
+    },
     "google_lookup": {
         "label": "Tra cứu Google (Street View, quán trong hẻm)",
         "detail": "Chỉ hiển thị trực tiếp, không lưu, không dùng làm bằng chứng. Có giới hạn chi phí cứng dưới mức miễn phí.",

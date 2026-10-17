@@ -17,6 +17,7 @@ export interface Config {
   map_style: string
   goong: { tiles: boolean; api: boolean }
   ai_provider: [string, string] | null
+  voice_audio: { configured: boolean; model: string | null }
   flags: Flag[]
   tide: { station: string; bulletin: string; issued_at: string; source_url: string; alarm_levels_m: Record<string, number>; note: string }
   demo_center: [number, number]
@@ -221,6 +222,11 @@ export interface VoiceParseResult {
   reason?: string
   question?: string
 }
+export interface VoiceTranscriptionResult {
+  kind: 'transcript' | 'unclear'
+  text?: string
+  question?: string
+}
 
 export interface PlanRequest {
   lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
@@ -285,7 +291,14 @@ export const api = {
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
   confirm: (body: { stop_lat: number; stop_lon: number; vehicle_id: string; result: 'in' | 'tight' | 'no'; exit: 'through' | 'turned' | 'reversed' | 'unknown' }) =>
     post('/api/confirm', body).then(j<{ status: 'pending'; report_id: string }>),
-  parseVoice: (text: string) => post('/api/voice/parse', { text }).then(j<VoiceParseResult>),
+  parseVoice: (text: string, signal?: AbortSignal) => post('/api/voice/parse', { text }, signal).then(j<VoiceParseResult>),
+  transcribeVoice: (audio: Blob, signal?: AbortSignal) =>
+    fetch('/api/voice/transcribe', {
+      method: 'POST',
+      headers: { 'content-type': audio.type },
+      body: audio,
+      signal,
+    }).then(j<VoiceTranscriptionResult>),
   blockage: (body: { lat: number; lon: number; way_id: number; reason: string }) =>
     post('/api/blockage', body).then(j<{ status: 'pending'; report_id: string }>),
   setFlag: (name: string, enabled: boolean) => post('/api/flags', { name, enabled }).then(j<{ flags: Flag[] }>),

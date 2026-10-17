@@ -17,6 +17,8 @@ from .storage import CorruptState, read_json, write_json
 
 USAGE_FILE = STORE / "google_usage.json"
 AI_USAGE_FILE = STORE / "ai_usage.json"
+VOICE_USAGE_FILE = STORE / "voice_usage.json"
+VOICE_REQUESTS_PER_HOUR = 60
 VN_TZ = timezone(timedelta(hours=7))
 
 # sku → (monthly cap we allow, Google free monthly allowance, note)
@@ -87,6 +89,36 @@ def reserve_ai(provider: str, model: str, key: str) -> None:
         for old in sorted(k for k in u if k < day)[:-30]:  # keep a month of history
             del u[old]
         write_json(AI_USAGE_FILE, u, indent=1)
+
+
+def reserve_voice_request() -> None:
+    """Persist a deployment-wide fixed Vietnam-hour voice request cap."""
+    bucket = datetime.now(VN_TZ).strftime("%Y-%m-%dT%H")
+    with _lock:
+        if VOICE_USAGE_FILE.exists():
+            usage = _load(VOICE_USAGE_FILE)
+            if not isinstance(usage, dict) or set(usage) != {"bucket", "count"}:
+                raise OverBudget("voice request counter is invalid; stop to avoid unbounded spend")
+            stored_bucket, count = usage["bucket"], usage["count"]
+            if not isinstance(stored_bucket, str):
+                raise OverBudget("voice request counter is invalid; stop to avoid unbounded spend")
+            try:
+                parsed_bucket = datetime.strptime(stored_bucket, "%Y-%m-%dT%H")
+            except ValueError as exc:
+                raise OverBudget("voice request counter is invalid; stop to avoid unbounded spend") from exc
+            if parsed_bucket.strftime("%Y-%m-%dT%H") != stored_bucket:
+                raise OverBudget("voice request counter is invalid; stop to avoid unbounded spend")
+            if isinstance(count, bool) or not isinstance(count, int) or not 0 <= count <= VOICE_REQUESTS_PER_HOUR:
+                raise OverBudget("voice request counter is invalid; stop to avoid unbounded spend")
+        else:
+            stored_bucket, count = bucket, 0
+        current = count if stored_bucket == bucket else 0
+        if current >= VOICE_REQUESTS_PER_HOUR:
+            raise OverBudget(f"voice: đã chạm hạn mức giờ ({VOICE_REQUESTS_PER_HOUR} request)")
+        try:
+            write_json(VOICE_USAGE_FILE, {"bucket": bucket, "count": current + 1})
+        except OSError as exc:
+            raise OverBudget("voice request counter cannot be written; stop to avoid unbounded spend") from exc
 
 
 def report() -> dict:

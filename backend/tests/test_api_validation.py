@@ -43,7 +43,7 @@ httpx.get = no_network
 httpx.post = no_network
 
 from fastapi.testclient import TestClient
-from app import ai, budget, cameras, config, evidence, flags, flood, live, osm, plan as route_plan, reports, vehicles, deadline
+from app import ai, budget, cameras, config, evidence, flags, flood, live, osm, plan as route_plan, reports, vehicles, deadline, voice
 from app.main import app
 
 Path.read_text = original_read_text
@@ -77,6 +77,7 @@ corridor_base = {
 }
 
 responses = {}
+responses["voice_audio_config"] = preset_response.json()["voice_audio"]
 responses["synthetic_demo_data"] = preset_response.json().get("synthetic_demo_data")
 for name, value in {
     "plan_malformed": "not-a-date",
@@ -99,8 +100,13 @@ responses["maneuver_low_width"] = packed(client.get("/api/vehicles/toyota-fortun
 responses["maneuver_high_width"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 15.01}))
 responses["outside_hcmc"] = packed(client.post("/api/plan", json={**base, "lat": 21.0285, "lon": 105.8542}))
 original_voice_call = ai._call
+original_voice_provider = ai.provider
+original_audio_config = voice.audio_config
+original_transcribe_audio = voice.transcribe_audio
+original_try_admit = voice.try_admit
 voice_deadlines = []
 flags.set_flag("ai_voice_report", True)
+ai.provider = lambda: ("gemini", "test-model")
 def successful_voice_call(prompt, **kwargs):
     voice_deadlines.append(kwargs.get("deadline"))
     return {"kind": "confirmation", "result": "tight", "exit": "reversed", "confidence": 0.95}
@@ -114,10 +120,23 @@ ai._call = lambda prompt, **kwargs: []
 responses["voice_non_object"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
 ai._call = lambda prompt, **kwargs: {"kind": "confirmation", "result": "in", "confidence": "cao"}
 responses["voice_bad_confidence"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
+ai.provider = lambda: None
+responses["voice_no_provider"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+ai.provider = lambda: ("gemini", "test-model")
 def no_voice_model(prompt, **kwargs):
     raise ai.NoModel("no test model")
 ai._call = no_voice_model
 responses["voice_no_model"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+def over_voice_budget(prompt, **kwargs):
+    raise budget.OverBudget("test exhausted")
+ai._call = over_voice_budget
+responses["voice_provider_budget"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+def rate_limited_voice_call(prompt, **kwargs):
+    request = httpx.Request("POST", "https://gemini.test")
+    response = httpx.Response(429, request=request)
+    raise httpx.HTTPStatusError("rate limited", request=request, response=response)
+ai._call = rate_limited_voice_call
+responses["voice_provider_429"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
 for name, error_type in (
     ("voice_empty_candidates", IndexError),
     ("voice_invalid_provider_shape", AttributeError),
@@ -137,10 +156,66 @@ responses["voice_quota_calls"] = [
 responses["voice_deadline_seconds"] = voice_deadlines[-1] - time.monotonic()
 responses["voice_quota_21st"] = packed(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}))
 reports._rate.clear()
-reports.allow_guest("testclient")
-ai._call = original_voice_call
+responses["voice_no_model_status"] = responses["voice_no_model"]["status"]
+flags.set_flag("ai_voice_input", False)
+responses["voice_audio_flag_off"] = packed(client.post(
+    "/api/voice/transcribe", content=b"audio", headers={"content-type": "audio/webm;codecs=opus"}))
+flags.set_flag("ai_voice_input", True)
+responses["voice_audio_not_ready"] = packed(client.post(
+    "/api/voice/transcribe", content=b"audio", headers={"content-type": "audio/webm;codecs=opus"}))
+voice.audio_config = lambda: {"configured": True, "model": "test-model"}
+audio_requests = []
+async def fake_audio_transcription(data, mime, deadline_at):
+    audio_requests.append((len(data), mime, deadline_at))
+    return {"kind": "transcript", "text": "Xe vào được"}
+voice.transcribe_audio = fake_audio_transcription
+reports._rate.clear()
+audio_transcript_response = client.post(
+    "/api/voice/transcribe", content=b"small audio", headers={"content-type": "audio/webm;codecs=opus"})
+responses["voice_audio_transcript"] = packed(audio_transcript_response)
+responses["voice_audio_no_store"] = audio_transcript_response.headers.get("cache-control") == "no-store"
+async def invalid_audio_provider_request(data, mime, deadline_at):
+    raise voice.AudioRequestError(424, "model request not supported")
+voice.transcribe_audio = invalid_audio_provider_request
+responses["voice_audio_provider_config"] = packed(client.post(
+    "/api/voice/transcribe", content=b"small audio", headers={"content-type": "audio/webm;codecs=opus"}))
+voice.transcribe_audio = fake_audio_transcription
+responses["voice_audio_empty"] = packed(client.post(
+    "/api/voice/transcribe", content=b"", headers={"content-type": "audio/webm;codecs=opus"}))
+responses["voice_audio_bad_type"] = packed(client.post(
+    "/api/voice/transcribe", content=b"audio", headers={"content-type": "audio/mpeg"}))
+responses["voice_audio_too_large"] = packed(client.post(
+    "/api/voice/transcribe", content=b"x" * (1024 * 1024 + 1), headers={"content-type": "audio/webm;codecs=opus"}))
+original_reserve_voice = budget.reserve_voice_request
+budget.reserve_voice_request = lambda: (_ for _ in ()).throw(budget.OverBudget("hourly cap"))
+responses["voice_global_budget"] = packed(client.post(
+    "/api/voice/transcribe", content=b"audio", headers={"content-type": "audio/webm;codecs=opus"}))
+budget.reserve_voice_request = original_reserve_voice
+voice.try_admit = lambda: False
+responses["voice_audio_busy"] = packed(client.post(
+    "/api/voice/transcribe", content=b"audio", headers={"content-type": "audio/webm;codecs=opus"}))
+voice.try_admit = original_try_admit
+reports._rate.clear()
+ai._call = successful_voice_call
+flags.set_flag("ai_voice_report", True)
+flags.set_flag("ai_voice_input", True)
+shared_calls = [
+    client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}).status_code for _ in range(19)
+]
+shared_calls.append(client.post(
+    "/api/voice/transcribe", content=b"small audio", headers={"content-type": "audio/webm;codecs=opus"}).status_code)
+shared_calls.append(client.post("/api/voice/parse", json={"text": "Tôi vào hẻm"}).status_code)
+responses["voice_shared_quota"] = shared_calls
+voice.audio_config = original_audio_config
+voice.transcribe_audio = original_transcribe_audio
+flags.set_flag("ai_voice_input", False)
 flags.set_flag("ai_voice_report", False)
+ai._call = original_voice_call
+ai.provider = original_voice_provider
+reports._rate.clear()
 responses["voice_flag_off"] = packed(client.post("/api/voice/parse", json={"text": "Xe tôi vào được"}))
+responses["voice_audio_reports_unchanged"] = len(reports._load()["reports"])
+responses["voice_audio_provider_calls"] = len(audio_requests)
 responses["maneuver"] = packed(client.get("/api/vehicles/toyota-fortuner/maneuver", params={"width": 12}))
 
 responses["unknown_vehicle"] = packed(client.post("/api/plan", json={**base, "vehicle_id": "unknown-vehicle"}))
@@ -183,6 +258,7 @@ paths = {
     "ai_live_flood": ai.LIVE_FLOOD_FILE,
     "budget_usage": budget.USAGE_FILE,
     "budget_ai_usage": budget.AI_USAGE_FILE,
+    "budget_voice_usage": budget.VOICE_USAGE_FILE,
     "camera_readings": cameras.READINGS_FILE,
     "camera_jobs": cameras.JOBS_FILE,
     "evidence_confirmations": evidence.CONFIRM_FILE,
@@ -227,6 +303,8 @@ class ApiValidation(unittest.TestCase):
             "GOONG_API_KEY": "",
             "GOONG_MAPTILES_KEY": "",
             "GEMINI_API_KEY": "",
+            "GEMINI_VOICE_MODEL": "",
+            "GEMINI_VOICE_PAID_CONFIRMED": "",
             "OPENAI_API_KEY": "",
             "ANTHROPIC_API_KEY": "",
             "GOOGLE_MAPS_API_KEY": "",
@@ -299,7 +377,7 @@ class ApiValidation(unittest.TestCase):
             with self.subTest(case=name):
                 self.assert_status(name, 422)
 
-    def test_voice_parse_normalizes_intents_and_falls_back_without_model(self) -> None:
+    def test_voice_parse_uses_bounded_error_contract(self) -> None:
         self.assert_status("voice_confirmation", 200)
         self.assertEqual(self.responses["voice_confirmation"]["json"], {
             "kind": "confirmation", "result": "tight", "exit": "reversed",
@@ -309,22 +387,46 @@ class ApiValidation(unittest.TestCase):
             "kind": "blockage", "reason": "Xe ba gác chắn đầu hẻm",
         })
         for name in (
-            "voice_unclear", "voice_no_model", "voice_empty_candidates",
+            "voice_unclear", "voice_empty_candidates",
             "voice_invalid_provider_shape", "voice_deadline_expired",
+            "voice_non_object", "voice_bad_confidence",
         ):
             with self.subTest(case=name):
                 self.assert_status(name, 200)
                 self.assertEqual(self.responses[name]["json"]["kind"], "unclear")
+        for name in ("voice_no_provider", "voice_no_model"):
+            with self.subTest(case=name):
+                self.assert_status(name, 424)
+        self.assert_status("voice_provider_budget", 429)
+        self.assert_status("voice_provider_429", 429)
         self.assert_status("voice_too_long", 422)
         self.assertEqual(self.responses["voice_quota_calls"], [200] * 20)
         self.assertEqual(self.responses["voice_quota_21st"]["status"], 429)
         self.assertGreater(self.responses["voice_deadline_seconds"], 0)
         self.assertLessEqual(self.responses["voice_deadline_seconds"], 10)
-        for name in ("voice_non_object", "voice_bad_confidence"):
-            with self.subTest(case=name):
-                self.assert_status(name, 200)
-                self.assertEqual(self.responses[name]["json"]["kind"], "unclear")
         self.assert_status("voice_flag_off", 403)
+
+    def test_audio_transcription_guards_and_manual_fallback(self) -> None:
+        self.assertEqual(self.responses["voice_audio_config"], {"configured": False, "model": None})
+        self.assert_status("voice_audio_flag_off", 403)
+        self.assert_status("voice_audio_not_ready", 424)
+        self.assert_status("voice_audio_transcript", 200)
+        self.assertEqual(self.responses["voice_audio_transcript"]["json"], {
+            "kind": "transcript", "text": "Xe vào được",
+        })
+        self.assert_status("voice_audio_provider_config", 424)
+        self.assert_status("voice_audio_empty", 422)
+        self.assert_status("voice_audio_bad_type", 415)
+        self.assert_status("voice_audio_too_large", 413)
+        self.assert_status("voice_global_budget", 429)
+        self.assert_status("voice_audio_busy", 429)
+        self.assertEqual(self.responses["voice_audio_provider_calls"], 2)
+        self.assertEqual(self.responses["voice_audio_reports_unchanged"], 0)
+        shared = self.responses["voice_shared_quota"]
+        self.assertEqual(shared[:19], [200] * 19)
+        self.assertEqual(shared[19], 200)
+        self.assertEqual(shared[20], 429)
+        self.assertTrue(self.responses["voice_audio_no_store"])
 
     def test_duration_must_be_a_finite_positive_integer(self) -> None:
         for name in ("duration_zero", "duration_negative", "duration_fractional", "duration_non_finite"):

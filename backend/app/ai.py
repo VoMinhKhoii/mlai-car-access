@@ -44,6 +44,13 @@ def _require(flag: str) -> None:
 
 _rr = 0
 
+def has_gemini_key() -> bool:
+    return any(
+        os.environ.get(name)
+        for name in os.environ
+        if name == "GEMINI_API_KEY" or name.startswith("GEMINI_API_KEY_")
+    )
+
 
 def gemini_keys() -> list[str]:
     """All AI Studio keys (GEMINI_API_KEY, GEMINI_API_KEY_2…), rotated round-robin."""
