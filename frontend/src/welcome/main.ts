@@ -113,7 +113,6 @@ async function boot() {
 
 /* ---------- MCP install command: points at the origin this page is served from ---------- */
 const cmd = $('#mcp-cmd')!
-if (location.protocol === 'https:') cmd.textContent = `claude mcp add --transport http ngo-ngach ${location.origin}/mcp`
 $<HTMLButtonElement>('#copy-mcp')!.addEventListener('click', async (e) => {
   const b = e.currentTarget as HTMLButtonElement
   try { await navigator.clipboard.writeText(cmd.textContent ?? ''); b.textContent = 'Copied' } catch { b.textContent = 'Select and copy' }
