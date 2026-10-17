@@ -49,10 +49,31 @@ def connect():
     return con
 
 
-def has_official(wid):
+_names_key, _names = None, {}
+
+
+def way_name(wid):
+    global _names_key, _names
+    from . import evidence_queue
+    key = evidence_queue.stamp(evidence_queue.INVENTORY)
+    if key != _names_key:
+        _names = {int(k):v.get('tags',{}).get('name','') for k,v in evidence_queue.read(evidence_queue.INVENTORY).get('ways',{}).items()}
+        _names_key = key
+    return _names.get(wid,'')
+
+
+def official_bounds(wid, store=None):
     from . import evidence
-    evidence.STORE_EVIDENCE.refresh_footprints()
-    return any(b.tier=='Official' for b in evidence.STORE_EVIDENCE.by_way.get(wid,[]))
+    from .osm import Way
+    if store is None:
+        store = evidence.STORE_EVIDENCE
+        store.refresh_footprints()
+    # Legacy cadastral CSV is keyed by alley name, not always by OSM way id.
+    return [b for b in store.bounds_for(Way(wid,{'name':way_name(wid)},[])) if b.tier=='Official']
+
+
+def has_official(wid):
+    return bool(official_bounds(wid))
 
 
 def reserve(device, ip, wid):
@@ -109,7 +130,7 @@ def load_into(store):
     grouped = defaultdict(list)
     for row in records(limit=100000):
         wid = row['way_id']
-        official = any(b.tier=='Official' for b in store.by_way.get(wid,[]))
+        official = bool(official_bounds(wid,store))
         if row['status']=='approved' or row['status']=='consensus' and not official:
             grouped[wid].append(row)
     for wid, items in grouped.items():

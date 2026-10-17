@@ -4,8 +4,9 @@ python3 pipelines/geocode_unmatched.py prepare
 python3 pipelines/geocode_unmatched.py run --network
 python3 pipelines/geocode_unmatched.py run  # replay cache only, zero API calls
 
-The conservative default is the documented Free plan: 1,000 requests/day.
-Fewer than 50% (499) may be reserved across ALL runs in a rolling 24 hours.
+The key's plan is unknown. The owner's job cap is 2,000 requests per rolling
+24 hours, configurable with GOONG_JOB_MAX_REQUESTS or --max-requests.
+At most two request starts/s; any quota/limit refusal persists a hard stop.
 Responses (including errors) are cached by endpoint + query, without credentials.
 Validation runs first. Unprocessed records remain in the audit with a reason.
 """
@@ -19,6 +20,7 @@ import hashlib
 import itertools
 import json
 import math
+import os
 from pathlib import Path
 import random
 import re
@@ -49,9 +51,9 @@ class StopGoong(RuntimeError):
 
 
 class Goong:
-    """Crash-safe reservations, one process, <= 4 request starts/s, no retries."""
-    def __init__(self, directory=RAW, network=False, max_calls=499, daily_quota=1000,
-                 already_used=0, key=None, client=None, delay=.3):
+    """Crash-safe shared job budget, <= 2 request starts/s, no retries."""
+    def __init__(self, directory=RAW, network=False, max_calls=None, daily_quota=None,
+                 already_used=0, key=None, client=None, delay=.55):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.lock = (self.directory / 'api.lock').open('a+')
@@ -63,12 +65,15 @@ class Goong:
         self.db = sqlite3.connect(self.directory / 'calls.sqlite')
         self.db.execute('CREATE TABLE IF NOT EXISTS calls (at REAL, endpoint TEXT, query_hash TEXT, status TEXT)')
         self.db.commit()
+        max_calls = int(os.environ.get('GOONG_JOB_MAX_REQUESTS', '2000')) if max_calls is None else max_calls
         self.network, self.max_calls = network, max(0, max_calls)
         self.quota, self.already_used = daily_quota, max(0, already_used)
-        self.cap = max(0, math.ceil(daily_quota * .5) - 1 - self.already_used)
+        self.cap = self.max_calls
+        if daily_quota is not None:
+            self.cap = min(self.cap, max(0, math.ceil(daily_quota * .5) - 1 - self.already_used))
         self.key = key if key is not None else load_env_local().get('GOONG_API_KEY', '')
         self.client = client or httpx.Client(timeout=15, headers={'User-Agent': USER_AGENT})
-        self.delay = max(.25, delay)
+        self.delay = max(.5, delay)
         self.calls = self.cache_hits = 0
         self.stop_reason = None
 
@@ -79,6 +84,11 @@ class Goong:
 
     def usage(self):
         return self.db.execute('SELECT COUNT(*) FROM calls WHERE at>?', (time.time()-86400,)).fetchone()[0]
+
+    def has_cached(self, endpoint, **params):
+        identity = json.dumps([endpoint, params], ensure_ascii=False, sort_keys=True)
+        key = hashlib.sha256(identity.encode()).hexdigest()
+        return (self.directory / 'responses' / f'{key}.json').exists()
 
     def get(self, endpoint, **params):
         if endpoint not in ('/v2/geocode', '/v2/place/autocomplete', '/v2/place/detail'):
@@ -134,7 +144,9 @@ class Goong:
         # Some providers echo request URLs in error bodies. Remove our key recursively.
         body = json.loads(json.dumps(body, ensure_ascii=False).replace(self.key, '[REDACTED]'))
         api_status = str(body.get('status', '')).upper()
-        blocked = status in (403, 429) or api_status in ('OVER_QUERY_LIMIT', 'REQUEST_DENIED', 'PERMISSION_DENIED')
+        error_message = json.dumps(body.get('error') or body.get('message') or '') + ' ' + api_status
+        blocked = (status in (403, 429) or api_status in ('REQUEST_DENIED', 'PERMISSION_DENIED')
+                   or bool(re.search(r'quota|limit', error_message, re.I)))
         atomic(path, {'endpoint': endpoint, 'query': params, 'fetched_at': now(),
                       'http_status': status, 'body': body, 'blocked': blocked})
         with self.db:
@@ -238,7 +250,8 @@ class SnapIndex:
                 'lat': lat, 'lon': lon, 'provenance': f'Goong geocode + snap, distance {distance:.1f} m'}
 
 
-def locate(entry, api, index, validation_only=False):
+def locate_cached_geocode(entry, api, index, validation_only=False):
+    """Replay the pre-steering geocode experiment without new geocode calls."""
     attempts, accepted = [], {}
     names = [n for n in entry['names'] if chain(n)]
     if not names:
@@ -294,6 +307,101 @@ def locate(entry, api, index, validation_only=False):
     if len(accepted) == 1:
         return {**next(iter(accepted.values())), 'attempts': attempts}
     return {'reason': 'multiple_goong_way_candidates' if accepted else 'no_accepted_result', 'attempts': attempts}
+
+
+def preflight(entry, index):
+    names = {chain(n) for n in entry['names'] if chain(n)}
+    if not names:
+        return 'no_explicit_alley_number_and_street'
+    if len(names) != 1:
+        return 'ambiguous_source_address_before_call'
+    if not entry.get('ward') and not entry.get('district'):
+        return 'missing_source_administrative_context'
+    if not any(c in index.by_chain for c in names):
+        return 'no_same_chain_eligible_osm_way_before_call'
+    return None
+
+
+def locate(entry, api, index, validation_only=False):
+    # Reuse already-paid-for responses from the completed geocode experiment.
+    # This branch cannot initiate HTTP, including for an uncached address variant.
+    if hasattr(api, 'has_cached') and any(api.has_cached('/v2/geocode', address=q,
+            has_deprecated_administrative_unit='true') for n in entry['names'] for q in address_queries(entry, n)):
+        class CachedOnly:
+            def get(self, endpoint, **params):
+                if not api.has_cached(endpoint, **params):
+                    raise StopGoong('historical_cache_miss')
+                return api.get(endpoint, **params)
+        return locate_cached_geocode(entry, CachedOnly(), index, validation_only)
+    reason = preflight(entry, index)
+    if reason:
+        return {'reason': reason, 'attempts': []}
+    name = next(n for n in entry['names'] if chain(n))
+    query = address_queries(entry, name)[0]  # one autocomplete request per entry
+    attempts = []
+    try:
+        doc = api.get('/v2/place/autocomplete', input=query, limit=5)
+        attempts.append({'query': query, 'endpoint': 'autocomplete', 'geocoded': True})
+        predictions = {}
+        for r in doc.get('predictions', [])[:5]:
+            label = r.get('description', '')
+            if 'ho chi minh' in fold(label) and strict_name(label, chain(name)):
+                predictions[r.get('place_id') or label] = r
+        if len(predictions) != 1:
+            return {'reason': 'ambiguous_goong_predictions_before_detail' if predictions else 'returned_name_missing_exact_number_street', 'attempts': attempts}
+        prediction = next(iter(predictions.values()))
+        result = prediction
+        location = result.get('geometry', {}).get('location', {})
+        if location.get('lat') is None or location.get('lng') is None:
+            if not prediction.get('place_id'):
+                return {'reason': 'prediction_missing_coordinates_and_place_id', 'attempts': attempts}
+            result = api.get('/v2/place/detail', place_id=prediction['place_id']).get('result', {})
+            attempts.append({'query': query, 'endpoint': 'place_detail', 'geocoded': True})
+            location = result.get('geometry', {}).get('location', {})
+        labels = [result.get('name', ''), result.get('formatted_address', ''), result.get('description', '')]
+        if not any(strict_name(s, chain(name)) for s in labels) or 'ho chi minh' not in fold(', '.join(labels)):
+            return {'reason': 'detail_name_or_city_gate_failed', 'attempts': attempts}
+        snap = index.snap(location.get('lat'), location.get('lng'), chain(name))
+        return {**snap, 'query': query, 'returned_address': ', '.join(s for s in labels if s),
+                'source_chain': name, 'place_id': prediction.get('place_id'), 'attempts': attempts}
+    except StopGoong as exc:
+        attempts.append({'query': query, 'reason': str(exc)})
+        return {'reason': str(exc), 'attempts': attempts}
+
+
+def prioritize(entries, index, queue_doc=None, campuses=None):
+    """Fire queue/campus candidates first, then descending district density."""
+    from city_scope import districts as boundaries
+    if queue_doc is None:
+        queue_doc = read(RAW/'queue_priority.json')
+        if not queue_doc:
+            try:
+                r = httpx.get('http://127.0.0.1:8787/api/evidence/queue', params={'limit': 1000}, timeout=10)
+                r.raise_for_status()
+                queue_doc = r.json()
+                atomic(RAW/'queue_priority.json', queue_doc)
+            except (httpx.HTTPError, ValueError):
+                queue_doc = {'items': [], 'unavailable': True}
+    campuses = campuses if campuses is not None else read(ROOT/'docs/eval/hutech-campuses.json').get('campuses', [])
+    scores = {int(r['way_id']): r.get('score', 0) for r in queue_doc.get('items', [])}
+    campus_points = [(c.get('id', ''), Point(c['lon']*111320*math.cos(math.radians(10.82)), c['lat']*111320))
+                     for c in campuses if c.get('lat') is not None and c.get('lon') is not None]
+    out = []
+    for e in entries:
+        candidates = {int(r['id']): (r, line) for name in e['names'] for r, line in index.by_chain.get(chain(name), [])}
+        queue_ids = sorted(set(candidates) & scores.keys())
+        near = sorted({cid for r, line in candidates.values() for cid, pt in campus_points if line.distance(pt) <= 2000})
+        density = 0
+        for r, _ in candidates.values():
+            lon, lat = r['coords'][len(r['coords'])//2]
+            density = max(density, next((d['density'] for d in boundaries() if d['prepared'].covers(Point(lon, lat))), 0))
+        priority = {'high_value_fire': e['source']=='fire' and bool(queue_ids or near), 'queue_way_ids': queue_ids,
+                    'near_campus_ids': near, 'district_density_per_km2': round(density, 2),
+                    'preflight_reason': preflight(e, index), 'candidate_way_ids': sorted(candidates)}
+        out.append({**e, 'priority': priority})
+    return sorted(out, key=lambda e: (not e['priority']['high_value_fire'],
+        -max((scores[w] for w in e['priority']['queue_way_ids']), default=0) if e['priority']['high_value_fire'] else 0,
+        -e['priority']['district_density_per_km2'], digest(e['id'])))
 
 
 def source_entries(inv):

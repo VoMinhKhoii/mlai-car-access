@@ -166,7 +166,8 @@ def save(m,device,ip):
 @router.get('/api/field/crowd/review',dependencies=[Depends(require_token)])
 def review_list():
     items = crowd.records(limit=200)
-    return {'items':[{k:r[k] for k in ('id','way_id','lat','lon','width','method','nickname','status','reason','recorded_at','reviewer')} for r in items]}
+    return {'items':[{**{k:r[k] for k in ('id','way_id','lat','lon','width','method','nickname','status','reason','recorded_at','reviewer')},
+                      'official_bounds':[b.to_json() for b in crowd.official_bounds(r['way_id'])]} for r in items]}
 
 
 @router.get('/api/field/crowd/photo/{sid}',dependencies=[Depends(require_token)])

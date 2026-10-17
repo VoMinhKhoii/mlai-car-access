@@ -11,7 +11,7 @@ dist/field.html                          0.61 kB │ gzip:   0.37 kB
 dist/index.html                          1.12 kB │ gzip:   0.63 kB
 dist/assets/field-BKBb19BF.css          14.40 kB │ gzip:   3.53 kB
 dist/assets/main-DS3nshyA.css          102.81 kB │ gzip:  17.44 kB
-dist/assets/field-B2nCNXx1.js           42.17 kB │ gzip:  13.56 kB
+dist/assets/field-kL77xpA6.js           42.55 kB │ gzip:  13.66 kB
 dist/assets/jsx-runtime-DQiX38zQ.js    223.77 kB │ gzip:  70.43 kB
 dist/assets/main-BXIWn2mp.js         1,105.11 kB │ gzip: 298.31 kB
 
@@ -20,4 +20,4 @@ dist/assets/main-BXIWn2mp.js         1,105.11 kB │ gzip: 298.31 kB
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 526ms
+✓ built in 395ms

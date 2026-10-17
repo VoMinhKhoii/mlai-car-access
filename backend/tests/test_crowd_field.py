@@ -17,14 +17,14 @@ from app.field_server import app
 
 
 class LedgerStore:
-    def __init__(self): self.version=0; self.official={}; self.reload()
+    def __init__(self): self.version=0; self.official={}; self.official_names={}; self.reload()
     def refresh_footprints(self): pass
     def reload(self):
         self.version+=1
-        self.by_way={wid:list(bs) for wid,bs in self.official.items()}
+        self.by_way={wid:list(bs) for wid,bs in self.official.items()};self.by_name=self.official_names
         crowd.load_into(self)
     def _add(self,b,wid): self.by_way.setdefault(wid,[]).append(b)
-    def bounds_for(self,w): return self.by_way.get(w.id,[])
+    def bounds_for(self,w): return self.by_way.get(w.id,[])+self.by_name.get(ev._norm_alley(w.name),[])
     def way_out_for(self,wid): return []
 
 
@@ -136,6 +136,16 @@ class CrowdTests(unittest.TestCase):
         # Later Official coverage also suppresses already-consensus evidence.
         con=crowd.connect();con.execute("UPDATE submissions SET status='consensus'");con.commit();con.close()
         self.store.reload();self.assertEqual(len(self.store.by_way[self.wid]),1)
+
+    def test_official_bound_keyed_by_name_also_blocks_consensus(self):
+        name=crowd.way_name(self.wid)
+        self.assertTrue(name)
+        self.store.official_names={ev._norm_alley(name):[ev.Bound(3,3.5,'Official','Địa chính theo tên','')]}
+        self.store.reload()
+        self.post(self.client(),self.payload(),ip='net1')
+        r=self.post(self.client(),self.payload(photo_base64=self.photo(2)),ip='net2')
+        self.assertEqual(r.json()['status'],'pending')
+        self.assertEqual(self.approve(r.json()['id']).status_code,422)
 
     def test_disagreeing_reviewed_samples_widen_range_and_mark_review(self):
         a=self.post(self.client(),self.payload(width_m=2),ip='net1')
