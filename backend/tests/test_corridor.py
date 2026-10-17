@@ -46,7 +46,7 @@ class Corridor(unittest.TestCase):
             mock.patch.object(corridor, "_via_candidates", lambda o, d, pts: [CAM_Y]),
             mock.patch.object(corridor, "load_records", lambda: self.records),
             mock.patch.object(cameras, "registry", lambda: {"cameras": [CAM_X, CAM_Y]}),
-            mock.patch.object(cameras, "read_many", lambda ids: {i: self.readings[i] for i in ids if i in self.readings}),
+            mock.patch.object(cameras, "cached", lambda ids: {i: self.readings[i] for i in ids if i in self.readings}),
             mock.patch.object(corridor.flags, "enabled", lambda name: name != "live_hydro"),  # offline
         ]
         for p in patches:
@@ -87,6 +87,17 @@ class Corridor(unittest.TestCase):
         out, _ = self.run_corridor()
         self.assertEqual(out["typical_factor"], corridor.TRAFFIC_FACTOR["dong"])
         self.assertGreater(out["routes"][1]["delay_min"], 0)
+
+    def test_one_frame_traffic_unknown_is_not_presented_as_free_flow(self):
+        self.readings = {"x": reading(CAM_X, "khong_ro"), "y": reading(CAM_Y, "khong_ro")}
+        out, _ = self.run_corridor()
+        self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
+        self.assertTrue(all(route["delay_min"] == 0 for route in out["routes"]))
+        self.assertIn("ETA không thể loại trừ ùn tắc", out["summary"])
+
+    def test_route_payload_counts_traffic_unknown_for_route_rows(self):
+        out, _ = self.run_corridor()
+        self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
 
     def test_water_deeper_than_the_car_can_wade_blocks_the_route(self):
         self.readings = {"x": reading(CAM_X, depth_cm=40), "y": reading(CAM_Y)}
@@ -148,13 +159,63 @@ class OfficialRegistry(unittest.TestCase):
         self.assertEqual(cameras._table(rows[0]["Location"])[0]["Shape"], "POINT(106.7 10.8)")
 
 
+class CameraJobScheduling(unittest.TestCase):
+    """Corridor answers from cached readings at once; an operator call queues at most 12 unread cameras."""
+
+    def setUp(self):
+        # 40 unread cameras strung along route A; each one is its own stretch (CLUSTER_GAP_M patched to 1 m).
+        self.cams = [{"id": f"c{i}", "name": f"Đường A - Hẻm {i}", "lat": 10.800,
+                      "lon": 106.700 + 0.02 * i / 40, "code": "", "type": "tth"} for i in range(40)]
+        self.scheduled: list[list[str]] = []
+        patches = [
+            mock.patch.object(corridor, "GOONG_API_KEY", "test"),
+            mock.patch.object(corridor, "goong_route", lambda o, d, via=None: None if via else
+                              _route([O, (10.800, 106.710), D], "Đường A", 10)),
+            mock.patch.object(corridor, "_via_candidates", lambda o, d, pts: []),
+            mock.patch.object(corridor, "load_records", lambda: []),
+            mock.patch.object(corridor, "CLUSTER_GAP_M", 1),  # every camera is its own stretch
+            mock.patch.object(cameras, "registry", lambda: {"cameras": self.cams}),
+            mock.patch.object(cameras, "cached", lambda ids: {}),
+            mock.patch.object(cameras, "schedule", lambda ids: self.scheduled.append(list(ids)) or
+                              {"id": "0123456789ab", "state": "queued"}),
+            mock.patch.object(corridor.flags, "enabled", lambda name: name != "live_hydro"),
+        ]
+        for p in patches:
+            p.start()
+            self.addCleanup(p.stop)
+
+    def test_guest_gets_forecast_now_and_no_camera_job(self):
+        out = corridor.corridor(O, D, "toyota-vios")
+        self.assertEqual(self.scheduled, [])
+        self.assertEqual(out["camera_job"]["state"], "not_scheduled")
+        hotspots = out["routes"][0]["hotspots"]
+        self.assertTrue(hotspots)
+        self.assertTrue(all(h["coverage"] == "unknown" and h["traffic"] is None for h in hotspots))
+
+    def test_operator_schedules_at_most_twelve_and_reports_the_rest_as_unknown(self):
+        out = corridor.corridor(O, D, "toyota-vios", schedule_cameras=True)
+        self.assertEqual(len(self.scheduled), 1)
+        self.assertEqual(len(self.scheduled[0]), cameras.MAX_JOB_CAMERAS)
+        self.assertEqual(len(set(self.scheduled[0])), cameras.MAX_JOB_CAMERAS)
+        job = out["camera_job"]
+        self.assertEqual(job["cameras_scheduled"], cameras.MAX_JOB_CAMERAS)
+        self.assertEqual(job["cameras_requested"], 40)
+        self.assertEqual(len(job["dropped"]), 40 - cameras.MAX_JOB_CAMERAS)
+        coverage = [h["coverage"] for h in out["routes"][0]["hotspots"]]
+        self.assertEqual(coverage.count("scheduled"), cameras.MAX_JOB_CAMERAS)
+        self.assertEqual(coverage.count("unknown"), 40 - cameras.MAX_JOB_CAMERAS)
+        # Scheduled but unread stretches are not treated as clear road.
+        self.assertTrue(all(h["traffic"] is None for h in out["routes"][0]["hotspots"]))
+
+
+
 class ModelFallback(unittest.TestCase):
     def test_next_model_reads_when_the_first_is_out_of_quota(self):
         import httpx
         from datetime import datetime
         calls = []
 
-        def fake_call(prompt, parts, model=None):
+        def fake_call(prompt, parts, model=None, *, deadline=None):
             calls.append(model)
             if model == "first":
                 raise httpx.HTTPStatusError("quota", request=httpx.Request("POST", "http://x"),
@@ -165,7 +226,8 @@ class ModelFallback(unittest.TestCase):
         with mock.patch.object(cameras, "CAMERA_MODELS", ["first", "second"]), \
                 mock.patch.object(cameras, "_resting", {}), \
                 mock.patch.object(cameras.ai, "_call", fake_call), \
-                mock.patch.object(cameras, "by_id", lambda: {"x": CAM_X}), \
+                mock.patch.object(cameras.ai, "provider", lambda: ("gemini", "test-model")), \
+                mock.patch.object(cameras, "by_id", lambda deadline=None: {"x": CAM_X}), \
                 mock.patch.object(cameras, "_log", lambda cam, rec: None), \
                 mock.patch.object(cameras, "_store", stored.append):
             cameras._ask(["x"], {"x": b"a"}, {"x": b"b"}, datetime.now(VN))

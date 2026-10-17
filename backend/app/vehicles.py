@@ -181,6 +181,12 @@ def _members(pid: str) -> list[VehicleProfile]:
 
 
 @lru_cache(maxsize=4096)
+def min_body_width(pid: str) -> float:
+    """Narrowest body width in a class, used when an observed vehicle is identified only by class."""
+    return min(member.body_width for member in _members(pid))
+
+
+@lru_cache(maxsize=4096)
 def turn_in_width(pid: str, street_width: float) -> float:
     """Narrowest alley a vehicle can turn into in one forward arc from a street (D16)."""
     worst = 0.0

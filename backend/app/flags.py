@@ -1,14 +1,14 @@
 """One flag per AI feature (D22), switchable at runtime.
 
-Defaults come from `backend/flags.json` if present, then env vars `FLAG_<NAME>=1|0`.
-When a flag is off, the engine behaves exactly as if that AI source did not exist.
+Defaults come from the persisted flags file, with `FLAG_<NAME>=1|0` environment overrides applied on load.
+An unreadable or invalid file loads every feature disabled; after an operator recovery write, only explicitly enabled flags are on.
 """
 from __future__ import annotations
 
-import json
 import os
 
 from .config import FLAG_FILE
+from .storage import CorruptState, read_json, write_json
 
 AI_FEATURES = {
     "live_crawl": {
@@ -18,12 +18,12 @@ AI_FEATURES = {
     },
     "parcel_widths": {
         "label": "Bề rộng hẻm theo thửa đất (cổng quy hoạch TP.HCM)",
-        "detail": "Khi lập kế hoạch, đo khoảng cách giữa hai thửa đất đối diện cho tối đa 12 hẻm gần điểm đến: bằng chứng mức Số liệu chính thức.",
+        "detail": "Dùng hình học thửa đất để ước tính khoảng trống; nguồn gốc chính thức nhưng không phải clear width đo thực tế và không xác nhận strict fit.",
         "default": True,
     },
     "parcel_deep_scan": {
-        "label": "Quét sâu đường vào điểm đến (mỗi 5 m)",
-        "detail": "Đo bề rộng theo thửa đất mỗi 5 m dọc đường từ đường lớn vào tận cửa (tối đa 300 m) để tìm chỗ hẹp nhất. Chậm: thêm 1–2 phút cho điểm đến mới; tắt thì đường vào chỉ đo 2 mặt cắt như các hẻm khác.",
+        "label": "Quét sâu đường vào/ra điểm đến (mỗi 5 m)",
+        "detail": "Quét các ways trên lối vào/ra theo chiều hợp lệ, lấy mẫu đầu-cuối và xấp xỉ mỗi 5 m trong ngân sách 60 cuts. Quét thưa/cắt cụt chỉ để tham khảo; ngay cả phủ đủ cũng không chứng minh hết vật cản. Tắt thì chỉ có mẫu nông.",
         "default": True,
     },
     "building_gaps": {
@@ -48,8 +48,13 @@ AI_FEATURES = {
     },
     "ai_camera_flood": {
         "label": "AI đọc camera giao thông",
-        "detail": "~800 camera công khai của TP.HCM, hai khung hình cách 13 giây → ngập và kẹt xe lúc này; chọn tuyến đường lớn từ A đến B.",
+        "detail": "~800 camera công khai của TP.HCM; đọc tối đa hai khung hình cách ~13 giây. Một khung hình chỉ cho thấy ngập, không kết luận giao thông. Tuyến đường lớn được chọn theo Goong.",
         "default": True,
+    },
+    "ai_voice_report": {
+        "label": "Báo cáo bằng giọng nói",
+        "detail": "Nhận diện ý định xác nhận xe vào/ra hoặc báo vật cản; kết quả luôn cần người dùng xem lại và gửi.",
+        "default": False,
     },
     "google_lookup": {
         "label": "Tra cứu Google (Street View, quán trong hẻm)",
@@ -77,12 +82,22 @@ _state: dict[str, bool] = {}
 
 
 def _load() -> None:
-    saved = json.loads(FLAG_FILE.read_text()) if FLAG_FILE.exists() else {}
+    corrupt = False
+    try:
+        saved = read_json(FLAG_FILE, {})
+        if not isinstance(saved, dict) or any(
+                name in saved and not isinstance(saved[name], bool) for name in AI_FEATURES):
+            corrupt = True
+    except CorruptState:
+        saved, corrupt = {}, True
     for name, meta in AI_FEATURES.items():
-        value = saved.get(name, meta["default"])
-        env = os.environ.get(f"FLAG_{name.upper()}")
-        if env is not None:
-            value = env.strip() in ("1", "true", "yes", "on")
+        if corrupt:
+            value = False
+        else:
+            value = saved.get(name, meta["default"])
+            env = os.environ.get(f"FLAG_{name.upper()}")
+            if env is not None:
+                value = env.strip() in ("1", "true", "yes", "on")
         _state[name] = bool(value)
 
 
@@ -98,7 +113,7 @@ def set_flag(name: str, value: bool) -> None:
     if not _state:
         _load()
     _state[name] = value
-    FLAG_FILE.write_text(json.dumps(_state, indent=1))
+    write_json(FLAG_FILE, _state, indent=1)
 
 
 def describe() -> list[dict]:

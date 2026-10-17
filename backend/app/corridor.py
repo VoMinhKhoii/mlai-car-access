@@ -2,7 +2,7 @@
 
 Goong gives one car route and no traffic. Alternatives come from routing via traffic cameras that lie
 to either side of it (cameras sit on the arterials, so a camera is a good via point). Each route is
-scored with what its own cameras see now (traffic, standing water, two frames a refresh apart) and the
+scored with its own camera readings (up to two frames about 13 seconds apart; a one-frame read cannot establish traffic movement) and
 flood forecast along it (tide, rain and IRD history, as for alleys). The arrival plan still decides
 the last stretch into the alley.
 """
@@ -18,7 +18,7 @@ import httpx
 
 from . import cameras, flags, hydro
 from .config import GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
-from .flood import (DepthRange, FloodProfile, _street_key, depth_at, flood_status, load_records)
+from .flood import DepthRange, flood_status, FloodProfile, FloodSnapshot, load_records, _street_key
 from .osm import ALLEY_NAME, haversine, strip_accents
 from .plan import _decode_polyline, _densify
 from .vehicles import get_profile
@@ -151,35 +151,32 @@ def _route_cams(pts) -> list[list[dict]]:
             for cl in clusters]
 
 
-def _forecast_flood(pts, route, depart, rain, safe) -> list[dict]:
+def _forecast_flood(pts, route, depart, rain, safe, snapshot: FloodSnapshot) -> list[dict]:
     """Flood forecast along the route from IRD history, tide and rain (same model as for alleys)."""
     lats, lons = [p[0] for p in pts], [p[1] for p in pts]
     s, n, w, e = min(lats) - 0.007, max(lats) + 0.007, min(lons) - 0.007, max(lons) + 0.007
     groups: dict[str, list] = {}
-    for r in load_records():
-        if not (s <= r.lat <= n and w <= r.lon <= e):
+    for record in load_records():
+        if not (s <= record.lat <= n and w <= record.lon <= e):
             continue
-        d, p = _nearest_far(pts, r.lat, r.lon)
-        if p is None:
+        distance, point = _nearest_far(pts, record.lat, record.lon)
+        if point is None:
             continue
-        same = _street_key(r.street) and _street_key(r.street) == _street_key(p[3])
-        if (r.precision == "high" and d <= 50) or (r.precision == "medium" and d <= 120 and (same or d <= 40)) \
-                or (same and d <= 700):
-            groups.setdefault(p[3] or r.street, []).append((p[2], r))
+        same = _street_key(record.street) and _street_key(record.street) == _street_key(point[3])
+        if (record.precision == "high" and distance <= 50) or \
+                (record.precision == "medium" and distance <= 120 and (same or distance <= 40)) or \
+                (same and distance <= 700):
+            groups.setdefault(point[3] or record.street, []).append((point[2], record))
     out = []
     total = max(1.0, pts[-1][2])
     for street, hits in groups.items():
         along = min(a for a, _ in hits)
         t = depart + timedelta(seconds=route["duration_s"] * along / total)
-        if not rain and flags.enabled("live_hydro"):  # no what-if rain: measured near this street, then forecast
-            spells = hydro.rain_spells(hits[0][1].lat, hits[0][1].lon)
-        else:
-            spells = rain
-        dr = depth_at(FloodProfile([r for _, r in hits]), t, spells, street)
-        if dr is None:
-            continue
-        out.append({"street": street, "at": _fmt(t), "along_m": round(along), "depth": dr.to_json(),
-                    "status": flood_status(dr, safe), "records": len(hits)})
+        assessment = snapshot.assess(FloodProfile([record for _, record in hits]), t, safe, street)
+        item = assessment.to_json()
+        item.update({"street": street, "at": t.isoformat(), "along_m": round(along),
+                     "records": len(hits)})
+        out.append(item)
     return sorted(out, key=lambda x: x["along_m"])
 
 
@@ -206,7 +203,12 @@ def _label(route) -> str:
 # ---- scoring --------------------------------------------------------------------
 
 def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id: str,
-             depart_at: datetime | None = None, rain: list[dict] | None = None) -> dict:
+             depart_at: datetime | None = None, rain: list[dict] | None = None,
+             schedule_cameras: bool = False) -> dict:
+    """Route choice from the flood forecast and whatever camera readings are cached now; never waits on cameras.
+
+    With schedule_cameras (operator only), the unread cameras most relevant to the routes are queued as one bounded
+    background job (`camera_job`); the client polls it and asks again once it is ready."""
     if not GOONG_API_KEY:
         return {"available": False, "reason": "Cần GOONG_API_KEY để tìm tuyến đường lớn"}
     p = get_profile(vehicle_id)
@@ -233,23 +235,71 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
 
     clusters = [_route_cams(pts) for _, pts in routes]
     cam_ids = [c["id"] for cls in clusters for cl in cls for c in cl]
-    readings = cameras.read_many(cam_ids) if use_cams and cam_ids else {}
+    readings = cameras.cached(cam_ids) if use_cams else {}
+    camera_job = None
+    if use_cams and cam_ids:
+        chosen, dropped = _camera_subset(clusters, readings)
+        if chosen and schedule_cameras:
+            try:
+                job = cameras.schedule(chosen)
+                camera_job = {"id": job["id"], "state": job["state"], "dropped": dropped}
+            except cameras.Busy as exc:
+                camera_job = {"id": None, "state": "busy", "retry_after": exc.retry_after, "dropped": dropped,
+                              "reason": "Hàng đợi đọc camera đang đầy"}
+        camera_job = camera_job or {"id": None, "state": "not_scheduled", "dropped": dropped,
+                                    "reason": None if not chosen else "Cần đăng nhập điều hành để đọc camera mới"}
+        camera_job.update(cameras_requested=len(set(cam_ids) - set(readings)),
+                          cameras_scheduled=len(chosen) if camera_job["id"] else 0)
+        scheduled = set(chosen) if camera_job["id"] else set()
+    else:
+        scheduled = set()
 
-    seen = [_observe(cls, readings, p) for cls in clusters]
+    seen = [_observe(cls, readings, p, scheduled) for cls in clusters]
     factors = {h["name"]: TRAFFIC_FACTOR[h["traffic"]] for hs in seen for h in hs if h["traffic"]}
     typical = statistics.median(factors.values()) if factors else 1.0
-    out = [_score(i, r, pts, hs, typical, p, depart, rain or [])
+    request_rain = rain if rain is not None else []
+    flood_snapshot = FloodSnapshot(request_rain)
+    out = [_score(i, r, pts, hs, typical, p, depart, request_rain, flood_snapshot)
            for i, ((r, pts), hs) in enumerate(zip(routes, seen))]
     ok = [x for x in out if x["status"] != "blocked"] or out
     best = min(ok, key=lambda x: (x["status"] == "blocked", x["eta_min"], x["distance_m"]))
     best["chosen"] = True
+    summary = _summary(best, out[0], out)
+    if use_cams and best["status"] != "blocked" and best["traffic_unknown"] > 0:
+        count = best["traffic_unknown"]
+        summary += f" {count} đoạn giao thông chưa được camera xác nhận; ETA không thể loại trừ ùn tắc tại các đoạn đó."
     return {"available": True, "depart_at": depart.isoformat(timespec="minutes"), "checked_at": now.isoformat(timespec="seconds"),
             "live": use_cams, "live_note": None if use_cams else _why_not_live(lead),
             "vehicle": {"id": p.id, "label": p.label, "safe_water_depth": p.safe_water_depth},
-            "routes": out, "summary": _summary(best, out[0], out), "typical_factor": round(typical, 2),
+            "routes": out, "summary": summary, "typical_factor": round(typical, 2),
             "cameras_read": sum(1 for x in readings.values() if x.get("state") == "ok"),
             "cameras_offline": sum(1 for x in readings.values() if x.get("state") == "offline"),
+            "camera_job": camera_job,
             "source": {"cameras": cameras.PORTAL_URL, "routes": "Goong Direction v2 (car)"}}
+
+
+def _camera_subset(clusters, readings) -> tuple[list[str], list[dict]]:
+    """At most MAX_JOB_CAMERAS unread cameras: first the Goong route's clusters, one camera each (the nearest that
+    the portal does not mark as offline), then the alternatives'. Every other unread camera is dropped, with why."""
+    chosen: list[str] = []
+    for cls in clusters:
+        for cl in cls:
+            if any(c["id"] in readings for c in cl):
+                continue  # this stretch already has a fresh reading
+            usable = [c for c in cl if c.get("status") != "NOT_IMAGE" and c["id"] not in chosen]
+            if usable and len(chosen) < cameras.MAX_JOB_CAMERAS:
+                chosen.append(usable[0]["id"])
+    dropped = []
+    for cls in clusters:
+        for cl in cls:
+            for c in cl:
+                if c["id"] in readings or c["id"] in chosen or c["id"] in {d["id"] for d in dropped}:
+                    continue
+                why = ("camera báo mất tín hiệu" if c.get("status") == "NOT_IMAGE"
+                       else "đoạn này đã có camera khác trong lượt đọc" if any(x["id"] in chosen for x in cl)
+                       else f"vượt giới hạn {cameras.MAX_JOB_CAMERAS} camera mỗi lượt")
+                dropped.append({"id": c["id"], "name": c["name"], "reason": why})
+    return chosen, dropped
 
 
 def _why_not_live(lead: float) -> str:
@@ -259,7 +309,7 @@ def _why_not_live(lead: float) -> str:
     return f"Giờ đi {when}: camera chỉ cho biết lúc này, nên tuyến được chọn theo dự báo ngập (triều, mưa, lịch sử)."
 
 
-def _observe(cls, readings, p) -> list[dict]:
+def _observe(cls, readings, p, scheduled: set[str] = frozenset()) -> list[dict]:
     """What the cameras of each cluster see: worst confident traffic level and deepest water."""
     out = []
     for cl in cls:
@@ -281,11 +331,13 @@ def _observe(cls, readings, p) -> list[dict]:
                     "name": (shown or cl[0])["name"], "lat": (shown or cl[0])["lat"], "lon": (shown or cl[0])["lon"],
                     "along_m": cl[0]["along_m"], "traffic": traffic, "traffic_vi": cameras.TRAFFIC_VI.get(traffic), "delay_min": 0,
                     "depth_cm": depth or None, "flood_status": fstat,
+                    # read: a fresh reading exists; scheduled: in the running job; unknown: not read this time.
+                    "coverage": "read" if reads else "scheduled" if any(c["id"] in scheduled for c in cl) else "unknown",
                     "at": shown and (shown.get("image_time") or shown.get("at") or "")[11:16]})
     return out
 
 
-def _score(i, r, pts, hotspots, typical, p, depart, rain) -> dict:
+def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapshot) -> dict:
     reasons: list[tuple[float, str]] = []  # (weight in minutes, text), in route order
     risky, blocked = 0, False
     length, base_min = max(1.0, pts[-1][2]), r["duration_s"] / 60
@@ -313,16 +365,21 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain) -> dict:
         elif h["flood_status"] == "risky":
             risky += 1
             reasons.append((RISKY_FLOOD_MIN, f"Camera {h['name']} lúc {h['at']}: ngập ~{h['depth_cm']} cm"))
-    forecast = _forecast_flood(pts, r, depart, rain, p.safe_water_depth)
+    forecast = _forecast_flood(pts, r, depart, rain, p.safe_water_depth, snapshot)
     for f in forecast:
-        lo, hi = f["depth"]["lo"] * 100, f["depth"]["hi"] * 100
+        depth = f["depth"]
         if f["status"] == "blocked":
             blocked = True
-            reasons.append((999, f"Dự báo ngập {lo:.0f}–{hi:.0f} cm ở {f['street']} lúc {f['at']}: "
+            detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
+                      if depth else "không rõ độ sâu")
+            reasons.append((999, f"Dự báo ngập {detail} ở {f['street']} lúc {_fmt(datetime.fromisoformat(f['at']))}: "
                                  "quá mức an toàn của xe"))
         elif f["status"] == "risky":
             risky += 1
-            reasons.append((RISKY_FLOOD_MIN, f"Dự báo có thể ngập {lo:.0f}–{hi:.0f} cm ở {f['street']} lúc {f['at']}"))
+            detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
+                      if depth else f"chưa đủ dữ liệu ({f['reason']})")
+            reasons.append((RISKY_FLOOD_MIN, f"Dự báo {detail} ở {f['street']} lúc "
+                                             f"{_fmt(datetime.fromisoformat(f['at']))}"))
     alleys, at = [], 0.0
     for s in r["steps"]:  # alleys at either end are the arrival plan's (or the start's) business
         if s["name"] and ALLEY_NAME.match(s["name"]) and END_M < at < r["distance_m"] - END_M and s["name"] not in alleys:
@@ -337,6 +394,7 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain) -> dict:
             "is_goong": i == 0, "geometry": r["geometry"], "distance_m": r["distance_m"],
             "base_min": round(base_min), "delay_min": round(delay), "eta_min": round(eta), "status": status,
             "hotspots": hotspots, "flood_forecast": forecast, "alleys": alleys,
+            "traffic_unknown": sum(1 for h in hotspots if h["traffic"] is None),
             "reasons": [t for _, t in reasons], "top_reason": max(reasons)[1] if reasons else None,
             "cameras_on_route": sum(len(h["cameras"]) for h in hotspots), "chosen": False}
 
@@ -345,9 +403,10 @@ def _summary(best: dict, goong: dict, routes: list[dict]) -> str:
     if best["status"] == "blocked":
         return "Mọi tuyến đều có đoạn ngập quá mức an toàn của xe. Cân nhắc đổi giờ đi."
     if best is goong:
-        worse = [x for x in routes if x is not best]
-        tail = f" Các tuyến khác chậm hơn {min(x['eta_min'] for x in worse) - best['eta_min']} phút trở lên." \
-            if worse else ""
+        others = [x for x in routes if x is not best]
+        gap = min((x["eta_min"] for x in others), default=best["eta_min"]) - best["eta_min"]
+        tail = f" Các tuyến khác chậm hơn {gap} phút trở lên." if gap > 0 else \
+            " Có tuyến khác nhanh tương đương." if others else ""
         return f"Đi tuyến Goong gợi ý ({best['label']}), khoảng {best['eta_min']} phút.{tail}"
     why = goong["top_reason"] or "tuyến này nhanh hơn"
     gain = goong["eta_min"] - best["eta_min"]

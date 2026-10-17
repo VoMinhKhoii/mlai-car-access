@@ -2,10 +2,10 @@
 
 Registry: the camera layer of Cổng thông tin giao thông TP.HCM, ~800 cameras with the portal's own
 status (UP / NOT_IMAGE), fetched from the portal hourly the way its public map page does; the shipped
-data/cameras/hcmc_cameras.json (pipelines/camera_registry.py) is the fallback. A still refreshes about every 12 s, so a reading takes two
-frames a refresh apart and the vision model reads them together: queued traffic that has not
-moved is seen, not guessed from one frame. Offline cameras answer a fixed placeholder image and
-are never sent to the model. Every reading is logged to store/camera_readings.jsonl.
+data/cameras/hcmc_cameras.json (pipelines/camera_registry.py) is the fallback. A job aims for two frames about 13 s apart.
+When its deadline cannot cover another refresh, one frame may still provide a flood observation, but traffic is forced
+unknown because a still cannot establish movement. The stored frame count is shown to the user. Offline cameras answer
+a fixed placeholder image and are never sent to the model; every reading is logged to store/camera_readings.jsonl.
 """
 from __future__ import annotations
 
@@ -21,7 +21,9 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import ai, flags
+from .deadline import Expired, timeout
 from .config import CAMERA_READ_TTL_S, CAMERA_STALE_MIN, DATA, STORE
+from .storage import CorruptState, read_json, write_json
 from .osm import haversine, strip_accents
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -48,7 +50,8 @@ _resting: dict[str, float] = {}
 
 DEPTH_CM = {"kho": 0, "uot": 0, "duoi_15cm": 10, "15_30cm": 25, "30_50cm": 40, "tren_50cm": 60}
 TRAFFIC = ("thong_thoang", "dong", "un_u", "ket_cung")
-TRAFFIC_VI = {"thong_thoang": "Thông thoáng", "dong": "Đông, vẫn chạy", "un_u": "Ùn ứ", "ket_cung": "Kẹt cứng"}
+TRAFFIC_VI = {"thong_thoang": "Thông thoáng", "dong": "Đông, vẫn chạy", "un_u": "Ùn ứ",
+              "ket_cung": "Kẹt cứng", "khong_ro": "Không rõ"}
 
 PROMPT = """Ảnh tĩnh từ {n} camera giao thông TP.HCM. Mỗi camera có 1 hoặc 2 ảnh; 2 ảnh là cùng camera chụp cách
 nhau ~13 giây: so sánh vị trí xe giữa hai ảnh để biết xe đang chạy hay đứng yên. Đọc từng camera độc lập.
@@ -66,50 +69,96 @@ Ngập: chỉ khi thấy nước đọng phủ mặt đường. Mặt đường 
 bằng vật tham chiếu (bánh xe máy cao ~60 cm, lề đường ~15 cm, nước tóe quanh bánh xe).
 Giao thông trên lòng đường camera nhìn rõ nhất: thong_thoang = xe chạy tự do, nhiều khoảng trống;
 dong = nhiều xe nhưng vẫn chạy đều; un_u = xe chen kín, nhích chậm; ket_cung = xe kín lòng đường và gần như
-không di chuyển giữa hai ảnh. Đường vắng ban đêm là thong_thoang.
-Nếu hai chiều đường khác nhau, đánh giá theo chiều kẹt hơn và nói rõ chiều nào trong evidence."""
+không di chuyển giữa hai ảnh. Một ảnh không xác định được chuyển động: bắt buộc traffic="khong_ro", nhưng vẫn
+đánh giá ngập từ ảnh đó. Đường vắng ban đêm là thong_thoang. Nếu hai chiều đường khác nhau, đánh giá theo chiều
+kẹt hơn và nói rõ chiều nào trong evidence."""
 
 
 class FeatureOff(Exception):
     pass
 
 
-_reg: dict = {"t": 0.0, "data": None, "by_id": {}}
+_reg: dict = {"t": 0.0, "data": None, "by_id": {}, "pending": False}
 _reg_lock = threading.Lock()
+_registry_pool = ThreadPoolExecutor(1, thread_name_prefix="camera-registry")
 
 
-def registry() -> dict:
-    """Cameras with the portal's current status; refreshed hourly, the shipped file if the portal is down."""
+def registry(deadline: float | None = None) -> dict:
+    """Return the published registry, scheduling an hourly refresh only for no-deadline readers."""
+    submit = False
+    previous_attempt = 0.0
     with _reg_lock:
-        if time.time() - _reg["t"] > REGISTRY_TTL_S:
-            _reg["t"] = time.time()  # a portal outage is retried next hour, not on every request
-            try:
-                _set_registry({"source": "Cổng thông tin giao thông TP.HCM (camera layer, live)",
-                               "fetched_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
-                               "cameras": fetch_official()})
-            except Exception as exc:
-                print(f"camera registry: portal unavailable ({type(exc).__name__}), using shipped file")
-                if _reg["data"] is None:
-                    _set_registry(json.loads(REGISTRY.read_text(encoding="utf-8")))
-        return _reg["data"]
+        _seed_registry_locked()
+        now = time.time()
+        if deadline is None and not _reg["pending"] and now - _reg["t"] > REGISTRY_TTL_S:
+            previous_attempt = _reg["t"]
+            _reg["t"] = now
+            _reg["pending"] = True
+            submit = True
+        data = _reg["data"]
+    if submit:
+        try:
+            _registry_pool.submit(_refresh_registry)
+        except RuntimeError as exc:
+            with _reg_lock:
+                _reg["pending"] = False
+                _reg["t"] = previous_attempt
+            print(f"camera registry: refresh unavailable ({type(exc).__name__}), using published registry")
+    return data
 
 
-def _set_registry(data: dict) -> None:
+def _seed_registry_locked() -> None:
+    if _reg["data"] is None:
+        _set_registry_locked(json.loads(REGISTRY.read_text(encoding="utf-8")))
+
+
+def _set_registry_locked(data: dict) -> None:
     _reg["data"], _reg["by_id"] = data, {c["id"]: c for c in data["cameras"]}
 
 
-def by_id() -> dict[str, dict]:
-    registry()
-    return _reg["by_id"]
+def _refresh_registry() -> None:
+    try:
+        cameras = fetch_official()
+        data = {"source": "Cổng thông tin giao thông TP.HCM (camera layer, live)",
+                "fetched_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
+                "cameras": cameras}
+        with _reg_lock:
+            _set_registry_locked(data)
+            _reg["t"] = time.time()
+    except Exception as exc:
+        print(f"camera registry: portal unavailable ({type(exc).__name__}), using published registry")
+    finally:
+        with _reg_lock:
+            _reg["pending"] = False
 
 
-def fetch_official() -> list[dict]:
+
+
+
+
+
+
+def by_id(deadline: float | None = None) -> dict[str, dict]:
+    registry(deadline)
+    with _reg_lock:
+        return _reg["by_id"]
+
+
+def _cached_by_id() -> dict[str, dict]:
+    """Current in-memory registry, or the shipped registry, without scheduling a portal request."""
+    with _reg_lock:
+        _seed_registry_locked()
+        return _reg["by_id"]
+
+
+def fetch_official(deadline: float | None = None) -> list[dict]:
     """The portal's camera layer, asked for exactly as its public map page asks (anonymous visitor session)."""
-    with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (VaoDuoc-hackathon)"}, timeout=60,
+    with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (VaoDuoc-hackathon)"},
                       follow_redirects=True) as c:
-        c.get(PORTAL_URL).raise_for_status()
+        c.get(PORTAL_URL, timeout=timeout(deadline, 60)).raise_for_status()
         r = c.post(LAYER_URL, content=json.dumps(LAYER_QUERY),
-                   headers={"Content-Type": "text/plain; charset=utf-8", "X-AjaxPro-Method": "SearchQuery"})
+                   headers={"Content-Type": "text/plain; charset=utf-8", "X-AjaxPro-Method": "SearchQuery"},
+                   timeout=timeout(deadline, 60))
         r.raise_for_status()
     value = _ajaxpro_json(r.text)["value"]
     rows = next(t for t in value[1] if isinstance(t, list) and t and isinstance(t[0], list)
@@ -183,16 +232,19 @@ def street_names(cam: dict) -> list[str]:
 _snaps: dict[str, tuple[float, bytes | None]] = {}
 
 
-def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S) -> bytes | None:
+def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S, *, deadline: float | None = None) -> bytes | None:
     """Current still, or None if the camera is offline (placeholder image) or unreachable."""
     hit = _snaps.get(cam_id)
     if hit and time.time() - hit[0] < max_age_s:
         return hit[1]
-    if by_id().get(cam_id, {}).get("status") == "NOT_IMAGE":  # the portal itself says it has no picture
+    timeout(deadline, 12)
+    cameras = by_id(deadline)
+    if cameras.get(cam_id, {}).get("status") == "NOT_IMAGE":  # the portal itself says it has no picture
         return None
     img = None
     try:
-        r = httpx.get(SNAPSHOT_URL.format(cam=cam_id, ms=int(time.time() * 1000)), timeout=12,
+        r = httpx.get(SNAPSHOT_URL.format(cam=cam_id, ms=int(time.time() * 1000)),
+                      timeout=timeout(deadline, 12),
                       headers={"User-Agent": "Mozilla/5.0 (VaoDuoc-hackathon)"})
         if r.status_code == 200 and r.headers.get("content-type", "").startswith("image/") \
                 and hashlib.md5(r.content).hexdigest() != PLACEHOLDER_MD5:
@@ -203,10 +255,65 @@ def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S) -> bytes | None:
     return img
 
 
-# ---- readings -------------------------------------------------------------------
+# ---- readings and jobs ------------------------------------------------------------
+#
+# A reading normally uses two stills ~13 s apart. If the job deadline cannot cover another refresh, one still may be
+# used for flood observation only; traffic is forced unknown because one frame cannot show movement. This work runs
+# in bounded jobs, never inside the route request. An operator queues at most MAX_JOB_CAMERAS cameras;
+# MAX_ACTIVE_JOBS run at once, MAX_QUEUED_CAMERAS wait, and a camera already being read is coalesced.
+
+MAX_JOB_CAMERAS = 12
+MAX_ACTIVE_JOBS = 2
+MAX_QUEUED_CAMERAS = 24
+JOB_TTL_S = 300
+JOBS_FILE = STORE / "camera_jobs.json"
 
 _reads: dict[str, dict] = {}
-_busy = threading.Lock()  # one batch at a time per instance, so parallel requests share readings
+_state = threading.Lock()
+_inflight: dict[str, threading.Event] = {}
+_jobs: dict[str, dict] = {}
+_job_pool = ThreadPoolExecutor(MAX_ACTIVE_JOBS, thread_name_prefix="camera-job")
+_restored = False
+
+
+class Busy(Exception):
+    def __init__(self, retry_after: int) -> None:
+        super().__init__(f"retry after {retry_after}s")
+        self.retry_after = retry_after
+
+
+def _restore() -> None:
+    """After a restart: recent readings come back from the log; jobs that were running are interrupted."""
+    global _restored
+    if _restored:
+        return
+    _restored = True
+    if READINGS_FILE.exists():
+        now = datetime.now(VN_TZ)
+        for line in READINGS_FILE.read_text(encoding="utf-8").splitlines()[-500:]:
+            try:
+                rec = json.loads(line)
+                age = (now - datetime.fromisoformat(rec["at"])).total_seconds()
+            except (ValueError, KeyError, TypeError):
+                continue
+            if 0 <= age < CAMERA_READ_TTL_S and rec.get("id"):
+                rec.setdefault("frames", None)
+                if rec.get("state") == "ok" and (not isinstance(rec["frames"], int) or rec["frames"] < 2):
+                    rec["traffic"] = "khong_ro"
+                rec["_t"] = time.time() - age
+                _reads[rec["id"]] = rec
+    try:
+        saved = read_json(JOBS_FILE, {})
+    except CorruptState:
+        saved = {}
+    for jid, job in saved.items():
+        if job.get("state") in ("queued", "running"):
+            job.update(state="interrupted", error="Máy chủ khởi động lại khi đang đọc camera")
+        _jobs[jid] = job
+
+
+def _persist() -> None:
+    write_json(JOBS_FILE, {jid: {k: v for k, v in j.items() if not k.startswith("_")} for jid, j in _jobs.items()})
 
 
 def latest(cam_id: str) -> dict | None:
@@ -214,62 +321,218 @@ def latest(cam_id: str) -> dict | None:
     return r if r and time.time() - r["_t"] < CAMERA_READ_TTL_S else None
 
 
-def read_many(cam_ids: list[str]) -> dict[str, dict]:
-    """Read cameras: first frames now, second frames one refresh later, then BATCH cameras per model call.
+def cached(cam_ids: list[str]) -> dict[str, dict]:
+    """Readings that are still fresh, for the cameras that have one."""
+    return {c: public(r) for c in dict.fromkeys(cam_ids) if (r := latest(c))}
 
-    Readings are cached for CAMERA_READ_TTL_S; failed model calls are not cached, so the next request retries.
-    """
+
+def schedule(cam_ids: list[str]) -> dict:
+    """Queue one reading job for up to MAX_JOB_CAMERAS cameras. Raises FeatureOff or Busy."""
     if not flags.enabled("ai_camera_flood"):
         raise FeatureOff("ai_camera_flood")
-    ids = list(dict.fromkeys(c for c in cam_ids if c in by_id()))
-    with _busy:
-        todo = [c for c in ids if not latest(c)]
-        if todo:
-            _read_batch(todo)
-    return {c: public(_reads.get(c) or {"id": c, **_where(c), "state": "error"}) for c in ids}
+    available = _cached_by_id()
+    ids = [c for c in dict.fromkeys(cam_ids) if c in available][:MAX_JOB_CAMERAS]
+    now = datetime.now(VN_TZ)
+    with _state:
+        if _expire(now):
+            _persist()
+        waiting = sum(len(j["cameras"]) for j in _jobs.values()
+                      if j.get("_worker_pending") and not j.get("_worker_started"))
+        if waiting + len(ids) > MAX_QUEUED_CAMERAS:
+            raise Busy(retry_after=30)
+        jid = hashlib.sha1(f"{now.isoformat()}:{','.join(ids)}:{os.urandom(4).hex()}".encode()).hexdigest()[:12]
+        job = {"id": jid, "state": "queued", "cameras": ids, "created_at": now.isoformat(timespec="seconds"),
+               "expires_at": (now + timedelta(seconds=JOB_TTL_S)).isoformat(timespec="seconds"),
+               "finished_at": None, "error": None, "_deadline": time.monotonic() + JOB_TTL_S,
+               "_worker_pending": True, "_worker_started": False}
+        _jobs[jid] = job
+        try:
+            _persist()
+        except Exception:
+            _jobs.pop(jid, None)
+            raise
+    try:
+        _job_pool.submit(_run_job, jid)
+    except RuntimeError as exc:
+        with _state:
+            _jobs.pop(jid, None)
+            _persist()
+        raise Busy(retry_after=30) from exc
+    return job_view(jid)
 
 
-def _where(cam_id: str) -> dict:
-    c = by_id()[cam_id]
-    return {"name": c["name"], "lat": c["lat"], "lon": c["lon"]}
+def _expire(now: datetime) -> bool:
+    changed = False
+    for jid in list(_jobs):
+        job = _jobs[jid]
+        if datetime.fromisoformat(job["expires_at"]) <= now:
+            if job["state"] in ("queued", "running"):
+                job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+                changed = True
+            elif job["state"] in ("ready", "error", "interrupted", "expired"):
+                if (now - datetime.fromisoformat(job["expires_at"])).total_seconds() > JOB_TTL_S \
+                        and not job.get("_worker_pending"):
+                    del _jobs[jid]  # forgotten one TTL after expiry, never while its worker still occupies capacity
+                    changed = True
+                elif job["state"] == "ready":
+                    job["state"] = "expired"
+                    changed = True
+    return changed
 
 
-def _read_batch(todo: list[str]) -> None:
+def _run_job(jid: str) -> None:
+    with _state:
+        job = _jobs[jid]
+        job["_worker_started"] = True
+        deadline = job["_deadline"]
+        already_expired = job["state"] == "expired" or time.monotonic() >= deadline
+        if already_expired:
+            job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+            mine, theirs = [], []
+        else:
+            job["state"] = "running"
+            mine, theirs = [], []
+            for c in job["cameras"]:
+                if latest(c):
+                    continue
+                if c in _inflight:
+                    theirs.append(_inflight[c])
+                else:
+                    _inflight[c] = threading.Event()
+                    mine.append(c)
+        try:
+            _persist()
+        except Exception as exc:
+            job["state"], job["error"] = "error", f"Không lưu được trạng thái camera ({type(exc).__name__})"
+            job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
+            job["_worker_pending"] = False
+            job["_finished"] = time.monotonic()
+            for cam_id in mine:
+                event = _inflight.pop(cam_id, None)
+                if event is not None:
+                    event.set()
+            return
+    expired, failure = already_expired, None
+    try:
+        if mine:
+            _read_batch(mine, deadline=deadline)
+    except Expired:
+        expired = True
+    except Exception as exc:  # the job fails; the cameras stay unread (unknown), never "clear"
+        failure = f"{type(exc).__name__}"
+    finally:
+        with _state:
+            for c in mine:
+                _inflight.pop(c).set()
+    if not expired:
+        for ev in theirs:
+            try:
+                ev.wait(timeout=timeout(deadline, 90))
+            except Expired:
+                expired = True
+                break
+    with _state:
+        expired = expired or job["state"] == "expired" or time.monotonic() >= deadline
+        read = [c for c in job["cameras"] if latest(c)]
+        if expired:
+            job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+        else:
+            job["state"] = "ready" if read else "error"
+            job["error"] = failure or (None if read else "Không đọc được camera nào (mất tín hiệu, hết hạn mức AI)")
+        job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
+        job["_worker_pending"] = False
+        _persist()
+
+
+def job_view(jid: str) -> dict | None:
+    with _state:
+        changed = _expire(datetime.now(VN_TZ))
+        job = _jobs.get(jid)
+        if changed:
+            _persist()
+        if job is None:
+            return None
+        out = {k: v for k, v in job.items() if not k.startswith("_")}
+    reads = cached(out["cameras"])
+    out["readings"] = list(reads.values()) if out["state"] in ("ready", "error", "expired") else []
+    out["unread"] = [c for c in out["cameras"] if c not in reads]
+    return out
+
+
+def _where(cam_id: str, deadline: float | None = None) -> dict | None:
+    camera = by_id(deadline).get(cam_id)
+    if camera is None:
+        return None
+    return {"name": camera["name"], "lat": camera["lat"], "lon": camera["lon"]}
+
+def _sleep_with_deadline(seconds: float, deadline: float | None) -> bool:
+    if deadline is None:
+        time.sleep(seconds)
+        return True
+    left = deadline - time.monotonic()
+    if left <= 0.5 or seconds > left - 0.5:
+        return False
+    time.sleep(seconds)
+    return True
+
+
+def _read_batch(todo: list[str], *, deadline: float | None = None) -> None:
     now = datetime.now(VN_TZ)
     with ThreadPoolExecutor(12) as pool:
-        first = dict(zip(todo, pool.map(lambda c: snapshot(c, max_age_s=0), todo)))
-        t0 = time.time()
+        first = dict(zip(todo, pool.map(lambda c: snapshot(c, max_age_s=0, deadline=deadline), todo)))
+        t0 = time.monotonic()
         live = [c for c in todo if first[c]]
         second: dict[str, bytes | None] = {}
-        for wait in (REFRESH_S, 6):  # the next refresh, so the two frames differ
-            time.sleep(max(0.0, t0 + wait - time.time()))
-            t0 = time.time()
+        for wait in (REFRESH_S, 6):  # attempt another frame only when the job deadline can cover the wait
             left = [c for c in live if not second.get(c) or second[c] == first[c]]
-            second.update(zip(left, pool.map(lambda c: snapshot(c, max_age_s=0), left)))
+            if not left:
+                break
+            if not _sleep_with_deadline(max(0.0, t0 + wait - time.monotonic()), deadline):
+                break
+            t0 = time.monotonic()
+            try:
+                second.update(zip(left, pool.map(
+                    lambda c: snapshot(c, max_age_s=0, deadline=deadline), left)))
+            except Expired:
+                break
+        timeout(deadline, 1)
         for c in todo:
             if not first[c]:
-                _store({"id": c, **_where(c), "at": now.isoformat(timespec="seconds"), "state": "offline"})
+                location = _where(c, deadline)
+                if location is not None:
+                    _store({"id": c, **location, "at": now.isoformat(timespec="seconds"), "state": "offline"})
         groups = [live[i:i + BATCH] for i in range(0, len(live), BATCH)]
-        list(pool.map(lambda g: _ask(g, first, second, now), groups))
+        list(pool.map(lambda g: _ask(g, first, second, now, deadline=deadline), groups))
 
 
-def _ask(group: list[str], first: dict, second: dict, now: datetime) -> None:
+def _ask(group: list[str], first: dict, second: dict, now: datetime, *,
+         deadline: float | None = None) -> None:
+    cameras = by_id(deadline)
+    group = [camera_id for camera_id in group if camera_id in cameras and camera_id in first]
+    if not group:
+        return
     parts: list = []
     frames = {}
-    for i, c in enumerate(group, 1):
-        fs = [first[c]] + ([second[c]] if second.get(c) and second[c] != first[c] else [])
-        frames[c] = len(fs)
-        parts += [f"Camera {i}: {by_id()[c]['name']} ({len(fs)} ảnh)"] + fs
+    for i, camera_id in enumerate(group, 1):
+        fs = [first[camera_id]] + (
+            [second[camera_id]] if second.get(camera_id) and second[camera_id] != first[camera_id] else []
+        )
+        frames[camera_id] = len(fs)
+        parts += [f"Camera {i}: {cameras[camera_id]['name']} ({len(fs)} ảnh)"] + fs
     out, model = None, None
     for model in CAMERA_MODELS:
         if _resting.get(model, 0) > time.time():
             continue
         try:
-            out = ai._call(PROMPT.replace("{n}", str(len(group))), parts, model=model)
+            out = ai._call(PROMPT.replace("{n}", str(len(group))), parts, model=model, deadline=deadline)
             break
+        except Expired:
+            raise
         except ai.NoModel:
-            for c in group:
-                _store({"id": c, **_where(c), "at": now.isoformat(timespec="seconds"), "state": "no_model"})
+            for camera_id in group:
+                camera = cameras[camera_id]
+                _store({"id": camera_id, "name": camera["name"], "lat": camera["lat"], "lon": camera["lon"],
+                        "at": now.isoformat(timespec="seconds"), "state": "no_model"})
             return
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code in (429, 503):  # quota spent on every key, or overloaded: next model
@@ -284,17 +547,18 @@ def _ask(group: list[str], first: dict, second: dict, now: datetime) -> None:
         print("camera batch failed: every camera model is out of quota")
         return
     answers = {int(a.get("camera", 0)): a for a in out.get("cameras", []) if isinstance(a, dict)}
-    for i, c in enumerate(group, 1):
-        a = answers.get(i)
-        if a:
-            _store(_record(by_id()[c], a, frames[c], now, model))
+    for i, camera_id in enumerate(group, 1):
+        answer = answers.get(i)
+        if answer:
+            _store(_record(cameras[camera_id], answer, frames[camera_id], now, model))
 
 
 def _record(cam: dict, out: dict, frames: int, now: datetime, model: str) -> dict:
     rec = {"id": cam["id"], "name": cam["name"], "lat": cam["lat"], "lon": cam["lon"],
            "at": now.isoformat(timespec="seconds"), "frames": frames, "image_time": out.get("image_time"),
            "usable": bool(out.get("usable", True)), "flooded": bool(out.get("flooded")),
-           "depth_class": out.get("depth_class"), "traffic": out.get("traffic"),
+           "depth_class": out.get("depth_class"),
+           "traffic": out.get("traffic") if frames >= 2 else "khong_ro",
            "evidence": out.get("evidence"), "confidence": float(out.get("confidence") or 0),
            "model": f"gemini/{model}" if (ai.provider() or ("",))[0] == "gemini" else "/".join(ai.provider())}
     rec["depth_cm"] = DEPTH_CM.get(rec["depth_class"]) if rec["flooded"] else 0
@@ -327,11 +591,14 @@ def _log(cam: dict, rec: dict) -> None:
     if rec["state"] == "ok" and rec["flooded"] and rec["depth_cm"]:
         names = street_names(cam)
         flood = {"kind": "flood_report", "street": names[0] if names else cam["name"],
-                 "lat": cam["lat"], "lon": cam["lon"], "camera_id": cam["id"], "depth_cm": rec["depth_cm"],
-                 "observed_at": rec["at"], "confidence": rec["confidence"], "evidence": rec["evidence"],
+                 "lat": cam["lat"], "lon": cam["lon"], "camera_id": cam["id"], "frames": rec["frames"],
+                 "depth_cm": rec["depth_cm"], "observed_at": rec["at"],
+                 "confidence": rec["confidence"], "evidence": rec["evidence"],
                  "source": "camera", "streets": names}
         flood["gate"] = ai._gate(flood, ["street", "depth_cm", "observed_at"])
         ai._append(ai.REVIEW_FILE, flood)
+        # Published without operator review on purpose: the image comes from the city's own camera portal, not from
+        # a user, and holding a positive flood sighting back could let a plan call a flooded street dry.
         if flood["gate"] == "ACCEPT":
             ai._append(ai.LIVE_FLOOD_FILE, flood)
 
@@ -342,3 +609,6 @@ def public(rec: dict) -> dict:
     if out.get("traffic") in TRAFFIC_VI:
         out["traffic_vi"] = TRAFFIC_VI[out["traffic"]]
     return out
+
+
+_restore()

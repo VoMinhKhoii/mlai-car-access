@@ -4,3 +4,4 @@ pydantic>=2
 python-multipart>=0.0.9
 requests>=2.31
 shapely>=2.0
+uvicorn>=0.29

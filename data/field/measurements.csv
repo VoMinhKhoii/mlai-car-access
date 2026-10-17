@@ -1,1 +1,1 @@
-osm_way_id,alley_name,width_m,date,measured_by,note,photo_url
+osm_way_id,alley_name,lat,lon,width_m,uncertainty_m,bottleneck_at_m,obstruction,date,measured_by,note,photo_url,cut_count,start_covered,end_covered,max_spacing_m,truncated,complete,width_basis

@@ -54,6 +54,13 @@ Confidence levels:
 | 0.4 | Midpoint of the OSM street, used when Nominatim fails |
 | 0.0 | Not found |
 
+## Field evaluator (R-11)
+
+From the repository root, run the behavioral evaluator suite with `.venv/bin/python -m unittest pipelines.test_eval_field -v`.
+Its synthetic fixtures live in temporary directories and test mechanics only; they are never field evidence.
+
+Evaluator exit codes: `0` = split created or scored gate passed; `1` = scored field gate failed; `2` = invalid or insufficient input; `3` = scoring/report infrastructure failure (for example, Overpass unavailable). Exit `1` means a report was successfully scored; exit `3` does not produce a report.
+
 ## Pipeline 2: Chợ Tốt listings → Declared evidence (`chotot_listings.py`)
 
 ```bash

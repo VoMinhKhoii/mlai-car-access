@@ -60,14 +60,17 @@ class Tide(unittest.TestCase):
         t = T0 + timedelta(days=3)
         with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
                 mock.patch.object(hydro, "tide_point", lambda _: (1.45, "model")):
-            d = flood.depth_at(prof, t, [])
+            assessment = flood.depth_at(prof, t, [])
+        d = assessment.depth
+        self.assertIsNotNone(d)
         self.assertEqual((d.lo, d.hi), (0.0, 0.20))  # 1.45 ± 0.15 spans below BĐ1 to above BĐ2
         self.assertIn("mô hình", d.drivers[0])
         with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
                 mock.patch.object(hydro, "tide_point", lambda _: (1.45, "measured")):
-            d = flood.depth_at(prof, t, [])
+            assessment = flood.depth_at(prof, t, [])
+        d = assessment.depth
+        self.assertIsNotNone(d)
         self.assertEqual((d.lo, d.hi), (0.0, 0.10))
-
 
 class Rain(unittest.TestCase):
     NOW = datetime(2026, 10, 5, 22, tzinfo=VN)
@@ -79,8 +82,15 @@ class Rain(unittest.TestCase):
     def spells(self, lat=10.775, lon=106.685):
         hours = lambda g: [(self.NOW.replace(hour=h), v) for h, v in self.HOURS[g["id"]].items()]
         forecast = [(self.NOW + timedelta(hours=h), mm) for h, mm in ((-1, 50.0), (1, 0.0), (2, 12.0))]
+
+        class FixtureClock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return self.NOW.astimezone(tz) if tz else self.NOW.replace(tzinfo=None)
+
         with mock.patch.object(hydro, "rain_gauges", lambda: self.GAUGES), \
                 mock.patch.object(hydro, "gauge_hours", hours), \
+                mock.patch.object(hydro, "datetime", FixtureClock), \
                 mock.patch.object(hydro, "_forecast_hours", lambda la, lo: forecast):
             return hydro.rain_spells(lat, lon)
 

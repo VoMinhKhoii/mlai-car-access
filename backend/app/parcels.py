@@ -1,18 +1,13 @@
-"""Alley width from the HCMC cadastre (D32): the gap between the land parcels on either side of an alley.
+"""Parcel geometry supplies a gap estimate, not a physical clear-width measurement.
 
-The HCMC planning portal (thongtinquyhoach) answers a point with the land parcel there ("ranh" polygon, parcel
-number). Cadastral parcels are surveyed, so unlike satellite footprints they resolve 2 m alleys. For an alley we
-take two cross-sections (at 1/3 and 2/3 of its length): query a point a few metres to each side, get the two
-parcels, and measure along the cross-section from the alley line to each parcel boundary.
+The HCMC planning portal returns cadastral parcel boundary polygons. A cross-section measures the gap from the
+road centreline to each opposing parcel boundary; the usable-gap estimate subtracts USABLE_MARGIN but cannot
+account for steps, ramps, stalls or parked vehicles. Its official provenance does not make the usable estimate
+Official-tier or decisive clearance evidence.
 
-How a cut is computed: the portal returns each parcel's boundary polygon (not just its area). At a point on the
-alley we draw the line across it, ask for the parcel 3 m (then 5 m) to the left and to the right, and measure along
-that line from the alley centreline to each parcel boundary; left + right = the parcel gap.
-
-The gap is the legal right-of-way; steps, ramps, stalls and parked motorbikes narrow the built alley, so the
-usable width of a cut is gap − 1.0 m (USABLE_MARGIN). Nearby roads get 2 cuts; the path from the main road to the
-destination gets a cut every 5 m (DEEP_STEP), so its narrowest point is found wherever it is.
-The endpoint is undocumented: low concurrency, cached, and the build stops when the portal reports "blocked".
+Deep scans sample full OSM ways on legal ingress and egress paths, including endpoints and approximately every
+DEEP_STEP metres, with a shared DEEP_MAX_CUTS budget. Sparse or truncated coverage stays diagnostic-only. Even
+complete cuts do not prove that every obstruction between them is absent.
 """
 from __future__ import annotations
 
@@ -23,12 +18,14 @@ from concurrent.futures import ThreadPoolExecutor
 import httpx
 from shapely.geometry import LineString, Point, Polygon, shape
 
+from .deadline import timeout
+
 URL = "https://sqhkt-qlqh.tphcm.gov.vn/computing/930/api/v3.1/a-z/all"
 HEADERS = {"User-Agent": "Mozilla/5.0 VaoDuoc-hackathon/0.3", "Referer": "https://thongtinquyhoach.hochiminhcity.gov.vn/"}
 MAX_ALLEYS = 6
 USABLE_MARGIN = 1.0   # m subtracted from every parcel gap
-DEEP_STEP = 5.0       # m between cuts on the path into the destination
-DEEP_MAX_CUTS = 60    # 300 m of alley
+DEEP_STEP = 5.0       # m maximum intended spacing between deep-scan cuts
+DEEP_MAX_CUTS = 60    # shared cap across full ways on ingress and egress paths
 OFFSETS = (1.5, 3.0, 5.0)   # metres to each side: closest first, so a narrow alley hits the facing parcel
 MIN_SIDE = 0.3              # a side closer than this means the map line sits on a parcel edge: reject the cut
 KX, KY = 109_400.0, 110_540.0  # metres per degree at ~10.8° N
@@ -38,10 +35,16 @@ class Blocked(Exception):
     pass
 
 
-def _parcel(lat: float, lon: float) -> dict | None:
+class DeadlineExceeded(Blocked):
+    """The area build ran out of its server deadline; stop issuing portal requests."""
+
+
+
+def _parcel(lat: float, lon: float, deadline: float | None = None) -> dict | None:
     for attempt in range(2):  # the portal is slow at times: one retry, then give up on this point
         try:
-            r = httpx.post(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"}, headers=HEADERS, timeout=20)
+            r = httpx.post(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"}, headers=HEADERS,
+                           timeout=timeout(deadline, 20, DeadlineExceeded))
             r.raise_for_status()
             break
         except httpx.HTTPError:
@@ -63,14 +66,14 @@ def _local(lon: float, lat: float, lat0: float, lon0: float) -> tuple[float, flo
     return ((lon - lon0) * KX, (lat - lat0) * KY)
 
 
-def _cross_section(p_ll, n_xy, lat0, lon0) -> float | None:
+def _cross_section(p_ll, n_xy, lat0, lon0, deadline: float | None = None) -> float | None:
     """Width of one cross-section: query each side, then measure from the alley point to both parcels."""
     px, py = _local(p_ll[1], p_ll[0], lat0, lon0)
     for off in OFFSETS:
         sides = []
         for sgn in (1, -1):
             qx, qy = px + sgn * n_xy[0] * off, py + sgn * n_xy[1] * off
-            sides.append(_parcel(lat0 + qy / KY, lon0 + qx / KX))
+            sides.append(_parcel(lat0 + qy / KY, lon0 + qx / KX, deadline))
         if not all(sides) or sides[0]["id"] == sides[1]["id"]:
             continue
         polys = [Polygon([_local(x, y, lat0, lon0) for x, y in (g.exterior.coords)]) if g.geom_type == "Polygon"
@@ -91,13 +94,13 @@ def _cross_section(p_ll, n_xy, lat0, lon0) -> float | None:
     return None
 
 
-def _cut_at(line: LineString, d: float, lat0: float, lon0: float) -> dict | None:
+def _cut_at(line: LineString, d: float, lat0: float, lon0: float, deadline: float | None = None) -> dict | None:
     p, a, b = line.interpolate(d), line.interpolate(max(0.0, d - 1)), line.interpolate(min(line.length, d + 1))
     dx, dy = b.x - a.x, b.y - a.y
     norm = math.hypot(dx, dy) or 1.0
     lat, lon = lat0 + p.y / KY, lon0 + p.x / KX
     try:
-        gap = _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0)
+        gap = _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0, deadline)
     except Blocked:
         raise
     except Exception:  # one bad cut must not lose the others
@@ -108,22 +111,42 @@ def _cut_at(line: LineString, d: float, lat0: float, lon0: float) -> dict | None
             "width_m": round(max(0.5, gap - USABLE_MARGIN), 2)}
 
 
-def measure(way_coords: list[tuple[float, float]], step: float | None = None, max_cuts: int = 2) -> dict | None:
-    """way_coords as (lat, lon). Cuts at 1/3 and 2/3 of the line, or every `step` metres (up to max_cuts).
-    Returns {"samples": [usable widths], "cuts": [{lat, lon, at_m, gap_m, width_m}]} or None."""
+def measure(way_coords: list[tuple[float, float]], step: float | None = None, max_cuts: int = 2,
+            deadline: float | None = None) -> dict | None:
+    """Return sampled usable-width estimates plus segment coverage diagnostics."""
+    if len(way_coords) < 2 or max_cuts <= 0:
+        return None
     lat0, lon0 = way_coords[0]
     line = LineString([_local(lo, la, lat0, lon0) for la, lo in way_coords])
-    if line.length < (6 if step else 16):
+    if not math.isfinite(line.length) or line.length < (6 if step else 16):
         return None
-    if step:
-        at = [min(line.length - 1, step / 2 + i * step) for i in range(max_cuts) if step / 2 + i * step < line.length]
+    if step and step > 0:
+        segment_count = max(1, math.ceil(line.length / step))
+        requested_count = segment_count + 1
+        truncated = requested_count > max_cuts
+        if truncated and max_cuts >= 2:
+            targets = [line.length * round(i * segment_count / (max_cuts - 1)) / segment_count
+                       for i in range(max_cuts)]
+        elif truncated:
+            targets = [line.length / 2]
+        else:
+            targets = [line.length * i / segment_count for i in range(requested_count)]
     else:
-        at = [line.length / 3, 2 * line.length / 3]
-    with ThreadPoolExecutor(3 if step else 1) as pool:
-        cuts = [c for c in pool.map(lambda d: _cut_at(line, d, lat0, lon0), at) if c]
+        targets = [line.length / 3, 2 * line.length / 3]
+        truncated = False
+    with ThreadPoolExecutor(min(3, len(targets))) as pool:
+        cuts = [cut for cut in pool.map(lambda distance: _cut_at(line, distance, lat0, lon0, deadline), targets)
+                if cut]
     if not cuts:
         return None
-    return {"samples": [c["width_m"] for c in cuts], "cuts": cuts}
+    positions = sorted(cut["at_m"] for cut in cuts)
+    return {
+        "samples": [cut["width_m"] for cut in cuts],
+        "cuts": cuts,
+        "segment_length_m": round(line.length, 1),
+        "truncated": truncated,
+        "max_spacing_m": round(max((b - a for a, b in zip(positions, positions[1:])), default=0.0), 1),
+    }
 
 
 def path_into(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple[float, float]]]]:
@@ -135,10 +158,6 @@ def path_into(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple
     if e is None:
         return []
     main = {n for w in g.ways.values() if w.kind == "main" and w.drivable for n in w.nodes}
-    rev: dict[int, list] = {}
-    for a, lst in g.drive_adj.items():
-        for eidx, b in lst:
-            rev.setdefault(b, []).append((eidx, a))
     dist, pred = dijkstra(g.drive_adj, {n: 0.0 for n in main}, lambda x: True, lambda x: g.edges[x].length)
     ends = [(dist[n] + (off if n == e.u else e.length - off), n) for n in (e.u, e.v) if n in dist]
     if not ends:
@@ -162,45 +181,97 @@ def path_into(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple
             pieces.append((e.way_id, [g.nodes[last], door]))
     return pieces
 
+def path_out(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple[float, float]]]]:
+    """Shortest legal directed route from the destination point to a main road, split by OSM way."""
+    from .plan import _interp, _path_nodes, _project, dijkstra
 
-def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True) -> list[dict]:
-    """Deep scan of the path into the destination (a cut every 5 m; flag parcel_deep_scan), plus 2 cuts on the
-    nearest other roads. cache: key → result or None (keys "deep:<lat>,<lon>:<way>" and "<way>")."""
-    out: dict[int, dict] = {}
-    budget = DEEP_MAX_CUTS
-    for wid, coords in (path_into(g, dest_lat, dest_lon) if deep else []):
-        key = f"deep:{dest_lat:.5f},{dest_lon:.5f}:{wid}"
-        if key not in cache and budget > 0:
-            res = measure(coords, step=DEEP_STEP, max_cuts=budget)
-            cache[key] = res
-        res = cache.get(key)
-        if res:
-            budget -= len(res["cuts"])
-            out[wid] = {"way_id": wid, **res, "deep": True}
-
-    near = []
-    for w in g.ways.values():
-        if w.kind == "main" or not w.drivable or w.id in out:
+    edge, offset, _ = _project(g, dest_lat, dest_lon, lambda way: way.drivable)
+    if edge is None:
+        return []
+    way = g.ways[edge.way_id]
+    sources = {}
+    if way.oneway >= 0:
+        sources[edge.v] = edge.length - offset
+    if way.oneway <= 0:
+        sources[edge.u] = offset
+    main_nodes = {node for road in g.ways.values() if road.kind == "main" and road.drivable
+                  for node in road.nodes}
+    dist, pred = dijkstra(g.drive_adj, sources, lambda _: True, lambda idx: g.edges[idx].length)
+    targets = [(dist[node], node) for node in main_nodes if node in dist]
+    if not targets:
+        return []
+    _, main_node = min(targets)
+    nodes = _path_nodes(pred, main_node)[::-1]
+    destination = _interp(g, edge.u, edge.v, offset, edge.length)
+    pieces: list[tuple[int, list[tuple[float, float]]]] = []
+    for a, b in zip(nodes, nodes[1:]):
+        way_id = g.edges[pred[b][0]].way_id
+        if g.ways[way_id].kind == "main":
             continue
-        d = min(haversine(dest_lat, dest_lon, *g.nodes[n]) for n in w.nodes)
-        if d <= 400:
-            near.append((d, w))
-    near.sort(key=lambda x: x[0])
-    todo = [w for _, w in near if str(w.id) not in cache][:MAX_ALLEYS]
+        if pieces and pieces[-1][0] == way_id:
+            pieces[-1][1].append(g.nodes[b])
+        else:
+            pieces.append((way_id, [g.nodes[a], g.nodes[b]]))
+    if way.kind != "main":
+        if pieces and pieces[0][0] == edge.way_id:
+            pieces[0][1].insert(0, destination)
+        else:
+            pieces.insert(0, (edge.way_id, [destination, g.nodes[nodes[0]]]))
+    return pieces
 
-    def one(w):
-        try:
-            return w.id, measure([g.nodes[n] for n in w.nodes])
-        except Blocked:
-            raise
-        except Exception:
-            return w.id, None
 
-    with ThreadPoolExecutor(3) as pool:
-        for wid, res in pool.map(one, todo):
-            cache[str(wid)] = res
-    for _, w in near:
-        res = cache.get(str(w.id))
-        if res and "cuts" in res:
-            out[w.id] = {"way_id": w.id, **res, "deep": False}
+def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True,
+                 deadline: float | None = None) -> list[dict]:
+    """Scan full ways on legal ingress and egress paths, then shallow-scan nearby roads.
+
+    If `deadline` passes, DeadlineExceeded is raised with `.partial` set to the ways already measured (each one is a
+    complete per-way result with its own coverage); ways not reached are simply absent, i.e. unknown."""
+    out: dict[int, dict] = {}
+    near = []
+    stopped = None
+    try:
+        budget = DEEP_MAX_CUTS
+        paths = path_into(g, dest_lat, dest_lon) + path_out(g, dest_lat, dest_lon) if deep else []
+        for way_id in dict.fromkeys(way_id for way_id, _ in paths):
+            key = f"deep-v2:{dest_lat:.5f},{dest_lon:.5f}:{way_id}"
+            if key not in cache and budget > 0:
+                way = g.ways[way_id]
+                cache[key] = measure([g.nodes[node] for node in way.nodes], step=DEEP_STEP, max_cuts=budget,
+                                     deadline=deadline)
+            result = cache.get(key)
+            if result:
+                budget = max(0, budget - len(result.get("cuts", [])))
+                out[way_id] = {"way_id": way_id, **result, "deep": True}
+
+        for way in g.ways.values():
+            if way.kind == "main" or not way.drivable or way.id in out:
+                continue
+            distance = min(haversine(dest_lat, dest_lon, *g.nodes[node]) for node in way.nodes)
+            if distance <= 400:
+                near.append((distance, way))
+        near.sort(key=lambda item: item[0])
+        todo = [way for _, way in near if f"width-v2:{way.id}" not in cache][:MAX_ALLEYS]
+
+        def one(way):
+            try:
+                return way.id, measure([g.nodes[node] for node in way.nodes], deadline=deadline)
+            except Blocked:
+                raise
+            except Exception:
+                return way.id, None
+
+        with ThreadPoolExecutor(3) as pool:
+            for way_id, result in pool.map(one, todo):
+                cache[f"width-v2:{way_id}"] = result
+    except DeadlineExceeded as exc:
+        stopped = exc
+    for _, way in near:
+        result = cache.get(f"width-v2:{way.id}")
+        if result and "cuts" in result:
+            out[way.id] = {"way_id": way.id, **result, "deep": False}
+    if stopped is not None:
+        stopped.partial = list(out.values())
+        raise stopped
     return list(out.values())
+
+

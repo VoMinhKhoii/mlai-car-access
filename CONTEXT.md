@@ -43,8 +43,20 @@ The narrowest width a vehicle can actually use along an alley segment, after fix
 _Avoid_: alley width, road width, lộ giới
 
 **Width Range**:
-The current estimate of a segment's Clear Width, as a minimum and a maximum in metres set by its Evidence.
-_Avoid_: width estimate, predicted width
+The evidence-based minimum and maximum estimates for one segment; a numeric range alone does not prove usable Clear Width.
+_Avoid_: width score, verified width
+
+**Width Basis**:
+What the width value represents: physical clear width, parcel-gap estimate, road-width estimate, declared width, or an inference.
+_Avoid_: source tier, confidence
+
+**Longitudinal Coverage**:
+Whether width evidence reaches both segment endpoints, its maximum sample spacing, and whether sampling was truncated.
+_Avoid_: sample count alone
+
+**Decisive Clearance**:
+Physical measured or observed Clear Width with stated uncertainty, complete endpoint coverage, and no evidence conflict.
+_Avoid_: inferred fit, parcel width
 
 **Alley Label**:
 The familiar Vietnamese name shown for a Width Range: hẻm xe máy, hẻm ba gác, hẻm xe hơi, or ô tô tránh.
@@ -55,7 +67,7 @@ One sourced, dated observation that sets a minimum or maximum on a Width Range o
 _Avoid_: data point, signal, label
 
 **Evidence Tier**:
-How much a source is trusted, strongest first: Measured, Official, Observed, Declared, Inferred. A higher tier sets the range; lower tiers may only narrow it.
+Trust classification for evidence source, strongest first: Measured, Official, Observed, Declared, Inferred. Consistent higher-tier evidence controls the range; lower tiers may narrow it. This is distinct from Width Basis: official source provenance does not make an inferred parcel gap a measured clear width.
 _Avoid_: confidence level, weight, priority
 
 ### Vehicles
@@ -77,16 +89,16 @@ A vehicle identified through the driver's VETC account rather than chosen by han
 _Avoid_: synced car, VETC car
 
 **Stop Point**:
-A place the vehicle can get into, stop at for its Stop Intent, and get back out of; the destination door is the best possible Stop Point.
-_Avoid_: parking spot, handoff point, drop point
+A candidate location evaluated for route-in, Stop Legality, Walk Leg, and Way Out; some checks may remain explicitly unverified.
+_Avoid_: guaranteed parking spot, handoff point, drop point
 
 **Stop Intent**:
 Whether the vehicle will be left there (Park, *đỗ xe*) or stop briefly with the driver aboard to let people or goods on or off (Pickup/Drop-off, *dừng xe*). The Vietnamese terms match the legal split between đỗ and dừng.
 _Avoid_: trip type, mode
 
 **Way Out**:
-How a vehicle leaves a Stop Point using only alleys it fits: drive through, turn around, or reverse to a turning space.
-_Avoid_: exit, egress
+How a vehicle may leave a Stop Point, with direction and confidence; turns or parking-lot gates without maneuver evidence remain unverified.
+_Avoid_: guaranteed exit
 
 **Reverse Limit**:
 The longest reversing distance that still counts as a normal Way Out; a Stop Point needing more has a tight exit.
@@ -97,25 +109,25 @@ The part of the road and alley network that one specific vehicle fits.
 _Avoid_: drivable graph, car network
 
 **Walk Leg**:
-The on-foot path between a Stop Point and the destination door.
+The mapped walking path and any separate, possibly unverified connection to the Stop Point or destination door.
 _Avoid_: last mile, remaining distance
 
 **Hard Check**:
-A pass/fail test every Stop Point must pass to be offered: route in on the Fit Network, a Way Out, flood within the wading limit, Stop Legality, and a Walk Leg under its cap.
+A safety or legality evaluation for each Stop Point: fit network, Way Out, flood, Stop Legality, and Walk Leg. A candidate with missing evidence remains unverified rather than being called safe.
 _Avoid_: constraint, filter
 
 **Unverified**:
-Said of an alley or Stop Point with no evidence either way on a check; it is kept, but ranked after every verified option.
+A check whose evidence is insufficient or conflicting to establish the result; it is not a safety or permission claim and ranks after verified options.
 _Avoid_: low risk, safe, unknown risk
 
 ### Flood
 
 **Dwell Window**:
-The time from arrival until the vehicle leaves a Stop Point; the flood check covers the route in, the Stop Point and the Way Out across it.
+The time from arrival until the vehicle leaves a Stop Point. Three flood checks span this window: (1) the route in is checked at the vehicle's arrival time, (2) the Stop Point is checked across the entire stay, and (3) the Way Out is checked at departure time. The per-leg assessment is owned by `backend/app/plan.py`.
 _Avoid_: trip time, parking duration
 
 **Depth Range**:
-The expected minimum and maximum water depth on a segment during a Dwell Window, from tide, rain and that street's flood history.
+The estimated minimum and maximum water depth on a segment during a Dwell Window, from tide, rain and that street's flood history. A missing numeric Depth Range is not a verdict: it may mean no depth was estimated, or that required evidence is missing. Read the separate Flood Knowledge before interpreting it.
 _Avoid_: flood level, predicted depth
 
 **Safe Water Depth**:
@@ -123,18 +135,38 @@ The deepest still water a specific vehicle should drive through, part of its Veh
 _Avoid_: wading depth (the manufacturer's figure is only one input), ground clearance
 
 **Flood Status**:
-A segment's verdict for one vehicle and Dwell Window: passable, risky (treated as Unverified), or blocked.
+A segment's verdict for one vehicle and Dwell Window: passable (known evidence supports staying within the vehicle limit), risky (the range straddles the limit, or knowledge is incomplete), or blocked (known positive evidence reaches the limit). The assessment is owned by `backend/app/flood.py`.
 _Avoid_: flood risk, flood score
+
+**Flood Knowledge**:
+Whether the flood assessment rests on complete evidence or has a known gap: known (sound), missing_history (no past observations), missing_tide (tide required but unavailable), or stale_positive_observation (expired flood report with no newer valid dry observation). Implemented by `FloodAssessment` and `FloodSnapshot` in `backend/app/flood.py`.
+_Avoid_: confidence, risk level
+
+**Observation Validity**:
+An observation (flood or dry report) that is within `FLOOD_REPORT_VALID_H` from its recorded time. An expired positive observation persists until a newer, still-valid dry observation arrives; absence of record is not evidence of dryness. Observation validity is owned by `FloodSnapshot` in `backend/app/flood.py`.
+_Avoid_: stale data, outdated evidence
 
 ### Community
 
 **Arrival Confirmation**:
-A driver's one-tap report after arriving (got in / tight / couldn't get in), recorded as Observed Evidence for their Vehicle Profile.
+A driver's one-tap report after arriving (got in / tight / couldn't get in); once an Operator approves it, it becomes Observed Evidence for their Vehicle Profile.
 _Avoid_: feedback, rating, review
 
 **Temporary Blockage**:
-A same-day obstruction in an alley, such as a wedding or funeral tent, a market or parked motorbikes, reported by drivers; it expires at the end of the day.
+A same-day obstruction in an alley, such as a wedding or funeral tent, a market or parked motorbikes, reported by drivers and approved by an Operator; it expires at the end of the day.
 _Avoid_: incident, closure
+
+**Pending Report**:
+A guest or AI submission (confirmation, blockage, flood report, stop rule, photo reading) waiting for an Operator's decision; it is not Evidence until approved, and an expired one never becomes Evidence.
+_Avoid_: submission, ticket
+
+**Operator**:
+A signed-in person allowed to change flags, schedule Live Area Builds and camera reads, spend AI quota and approve or reject Pending Reports.
+_Avoid_: admin, moderator
+
+**Live Area Build**:
+The server-run collection of listings, cadastral cuts, news and listing photos around a destination, published as a versioned area record that expires after 12 hours; plans read it from the server, never from the browser.
+_Avoid_: crawl result, area data
 
 **Standard Route**:
 The route an ordinary car map would give, shown next to the Arrival Plan for contrast.

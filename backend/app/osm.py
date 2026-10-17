@@ -18,6 +18,8 @@ from functools import lru_cache
 import httpx
 
 from .config import AREA_RADIUS_M, CACHE, OVERPASS_ENDPOINTS
+from .deadline import Expired, timeout
+from .storage import LRU
 
 DEMO_FILE = CACHE / "osm" / "demo_binhthanh.json"
 DEMO_BBOX = (10.785, 106.690, 10.815, 106.727)  # s, w, n, e
@@ -125,6 +127,7 @@ class AreaGraph:
     drive_adj: dict[int, list[tuple[int, int]]] = field(default_factory=dict)
     walk_adj: dict[int, list[tuple[int, int]]] = field(default_factory=dict)
     node_ways: dict[int, set[int]] = field(default_factory=dict)
+    drive_neighbors: dict[int, set[int]] = field(default_factory=dict)
     parking: list[dict] = field(default_factory=list)
     source: str = ""
 
@@ -132,7 +135,19 @@ class AreaGraph:
         return self.nodes[n]
 
     def drive_degree(self, n: int) -> int:
-        return len({w for w in self.node_ways.get(n, ()) if self.ways[w].drivable})
+        if n in self.drive_neighbors:
+            return len(self.drive_neighbors[n])
+        neighbors = set()
+        for way_id in self.node_ways.get(n, ()):
+            way = self.ways[way_id]
+            if not way.drivable:
+                continue
+            for a, b in zip(way.nodes, way.nodes[1:]):
+                if a == n:
+                    neighbors.add(b)
+                elif b == n:
+                    neighbors.add(a)
+        return len(neighbors)
 
     def edge_coords(self, e: Edge, forward: bool = True) -> list[list[float]]:
         a, b = (e.u, e.v) if forward else (e.v, e.u)
@@ -168,7 +183,7 @@ def _inside(lat: float, lon: float, bbox, margin_deg: float = 0.0) -> bool:
     return s + margin_deg <= lat <= n - margin_deg and w + margin_deg <= lon <= e - margin_deg
 
 
-def _fetch_overpass(lat: float, lon: float, radius: float) -> dict:
+def _fetch_overpass(lat: float, lon: float, radius: float, deadline: float | None = None) -> dict:
     r = int(radius)
     q = f"""[out:json][timeout:120];
 (
@@ -184,7 +199,7 @@ out skel qt;"""
     headers = {"User-Agent": "VaoDuoc/0.3 (MLAI Hackathon 2026; minhkhoitdn@gmail.com)"}
 
     def ask(ep: str) -> dict:
-        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=150)
+        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=timeout(deadline, 150))
         resp.raise_for_status()
         data = resp.json()
         if not data.get("elements"):
@@ -199,11 +214,17 @@ out skel qt;"""
             for fut in as_completed(futures):
                 try:
                     return fut.result()
+                except Expired:
+                    raise
                 except Exception as exc:  # wait for the next mirror
                     errors.append(str(exc)[:120])
         finally:
             pool.shutdown(wait=False, cancel_futures=True)
-        time.sleep(8 * (attempt + 1))
+        if attempt < 2:
+            delay = 8 * (attempt + 1)
+            if deadline is not None and deadline - time.monotonic() <= delay + 0.5:
+                raise Expired("hết thời hạn tải bản đồ OSM")
+            time.sleep(delay)
     raise RuntimeError(f"Overpass unavailable: {errors}")
 
 
@@ -218,44 +239,52 @@ _fetch_locks: dict[str, threading.Lock] = {}
 _locks_guard = threading.Lock()
 
 
-def load_elements(lat: float, lon: float) -> tuple[list[dict], str]:
+def load_elements(lat: float, lon: float, deadline: float | None = None) -> tuple[list[dict], str]:
     key = area_key(lat, lon)
     with _locks_guard:
         lock = _fetch_locks.setdefault(key, threading.Lock())
-    with lock:  # the plan request and the live build must not download the same area twice
-        return _load_elements(lat, lon, key)
+    if deadline is None:
+        with lock:  # the plan request and the live build must not download the same area twice
+            return _load_elements(lat, lon, key)
+    wait = deadline - time.monotonic() - 0.5
+    if wait <= 0 or not lock.acquire(timeout=wait):
+        raise Expired("hết thời hạn chờ tải bản đồ OSM")
+    try:
+        return _load_elements(lat, lon, key, deadline)
+    finally:
+        lock.release()
 
 
-def _load_elements(lat: float, lon: float, key: str) -> tuple[list[dict], str]:
+def _load_elements(lat: float, lon: float, key: str, deadline: float | None = None) -> tuple[list[dict], str]:
     if key == "demo":
         return json.loads(DEMO_FILE.read_text())["elements"], "demo-cache"
     path = CACHE / "osm" / f"area_{key}.json"
     if path.exists():
         return json.loads(path.read_text())["elements"], f"cache:{key}"
-    data = _fetch_overpass(lat, lon, AREA_RADIUS_M)
+    data = _fetch_overpass(lat, lon, AREA_RADIUS_M, deadline)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data))
     return data["elements"], f"overpass:{key}"
 
 
-_GRAPHS: dict[str, AreaGraph] = {}
+_GRAPHS = LRU(32)  # bounded: a long-running backend sees many areas
 
 
 def cached_graph(lat: float, lon: float) -> AreaGraph | None:
     """The area graph only if it is already on disk or in memory (never downloads; used while typing)."""
     key = area_key(lat, lon)
     if key in _GRAPHS:
-        return _GRAPHS[key]
+        return _GRAPHS.get(key)
     if key == "demo" or (CACHE / "osm" / f"area_{key}.json").exists():
         return build_graph(lat, lon)
     return None
 
 
-def build_graph(lat: float, lon: float) -> AreaGraph:
+def build_graph(lat: float, lon: float, deadline: float | None = None) -> AreaGraph:
     key = area_key(lat, lon)
     if key in _GRAPHS:
-        return _GRAPHS[key]
-    elements, source = load_elements(lat, lon)
+        return _GRAPHS.get(key)
+    elements, source = load_elements(lat, lon, deadline)
     g = AreaGraph(center=(lat, lon), source=source)
     raw_ways = []
     for el in elements:
@@ -292,6 +321,8 @@ def build_graph(lat: float, lon: float) -> AreaGraph:
             g.node_ways.setdefault(a, set()).add(w.id)
             g.node_ways.setdefault(b, set()).add(w.id)
             if w.drivable:
+                g.drive_neighbors.setdefault(a, set()).add(b)
+                g.drive_neighbors.setdefault(b, set()).add(a)
                 if w.oneway >= 0:
                     g.drive_adj.setdefault(a, []).append((e.idx, b))
                 if w.oneway <= 0:
@@ -299,5 +330,5 @@ def build_graph(lat: float, lon: float) -> AreaGraph:
             if w.walkable:
                 g.walk_adj.setdefault(a, []).append((e.idx, b))
                 g.walk_adj.setdefault(b, []).append((e.idx, a))
-    _GRAPHS[key] = g
+    _GRAPHS.put(key, g)
     return g

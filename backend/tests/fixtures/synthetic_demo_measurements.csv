@@ -1,0 +1,4 @@
+osm_way_id,alley_name,lat,lon,width_m,uncertainty_m,bottleneck_at_m,obstruction,date,measured_by,note,photo_url,cut_count,start_covered,end_covered,max_spacing_m,truncated,complete,width_basis
+544982029,,10.789668,106.715661,6.2,0.1,0,DEMO,2026-10-15,SYNTHETIC-DEMO,"SYNTHETIC DEMO ONLY; complete stop coverage fixture, not a field measurement",,12,1,1,4.5,0,1,synthetic_demo_width
+609967096,,10.789668,106.715661,6.2,0.1,0,DEMO,2026-10-15,SYNTHETIC-DEMO,"SYNTHETIC DEMO ONLY; complete ingress coverage fixture, not a field measurement",,12,1,1,4.5,0,1,synthetic_demo_width
+165400090,,10.790078,106.715712,6.2,0.1,0,DEMO,2026-10-15,SYNTHETIC-DEMO,"SYNTHETIC DEMO ONLY; complete egress coverage fixture, not a field measurement",,12,1,1,4.5,0,1,synthetic_demo_width
