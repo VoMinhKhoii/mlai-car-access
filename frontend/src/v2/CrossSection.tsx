@@ -5,6 +5,9 @@ interface Props {
   body: number
   mirror: number
   vehicleName: string
+  /** The engine's thresholds for this vehicle: room with a parked motorbike row, and the bare squeeze. */
+  fitsMin?: number
+  tightMin?: number
   expanded: boolean
   onToggle: () => void
 }
@@ -13,7 +16,7 @@ const WALL_H = 2.3
 const MAX_SCENE = 14
 
 /** A to-scale section through the narrowest cut: walls, clear width, the car from behind. Units are metres. */
-export function CrossSection({ cut, body, mirror, vehicleName, expanded, onToggle }: Props) {
+export function CrossSection({ cut, body, mirror, vehicleName, fitsMin, tightMin, expanded, onToggle }: Props) {
   const lo = cut.lo
   const spareCm = lo != null ? Math.round(((lo - mirror) / 2) * 100) : null
   const short = spareCm != null && spareCm < 0
@@ -75,6 +78,7 @@ export function CrossSection({ cut, body, mirror, vehicleName, expanded, onToggl
       <div className={short ? 'is-short' : ''}><dt>{short ? 'Short a side' : 'Spare a side'}</dt>
         <dd key={spareCm ?? 'x'} className="v2-num v2-xfade">{spareCm == null ? 'Unknown' : `${Math.abs(spareCm)} cm`}</dd></div>
     </dl>
+    {fitsMin != null && tightMin != null && <p key={vehicleName} className="v2-xs-needs v2-xfade">{vehicleName} needs {tightMin.toFixed(2)} m to squeeze through, {fitsMin.toFixed(2)} m with motorbikes parked.</p>}
     <p className="v2-xs-foot">{cut.tier} width, drawn to scale{(cut.hi ?? lo ?? 0) > MAX_SCENE ? `, walls past ${MAX_SCENE} m not shown` : ''}</p>
   </div>
 }

@@ -25,6 +25,8 @@ function useMedia(q: string) {
   return on
 }
 
+const FIRST_DEST = { lat: 10.794915, lon: 106.712909, label: 'Hẻm 92 Xô Viết Nghệ Tĩnh, Bình Thạnh' }
+
 export default function AppV2() {
   const [cfg, setCfg] = useState<Config | null>(null)
   const [models, setModels] = useState<Vehicle[]>([])
@@ -53,8 +55,9 @@ export default function AppV2() {
     document.title = 'Ngõ Ngách'
     api.config().then((c) => {
       setCfg(c)
-      const first = c.presets[0]
-      if (first) { setDwell(first.dwell_min); setDest({ lat: first.lat, lon: first.lon, label: first.label }) }
+      // Open on a real alley where the two cars get different answers from the live engine (Fortuner: no, VF 3: tight),
+      // so the vehicle switch shows its point on the first screen.
+      setDwell(30); setDest(FIRST_DEST)
     }).catch(() => setError('Could not reach the server.'))
     const loadVehicles = (tries: number) => api.vehicles().then((v) => setModels(v.models))
       .catch(() => { if (tries > 0) window.setTimeout(() => loadVehicles(tries - 1), 2000) })
@@ -116,7 +119,7 @@ export default function AppV2() {
     {cfg && <MapV2 styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} destination={dest}
       anchor={cut ? { lat: cut.lat, lon: cut.lon } : null} anchorEl={anchorEl} padding={padding} onFeatures={setMapContext} onMap={(m) => { mapRef.current = m }} />}
     {cut && vehicle && createPortal(<div className="v2-anchor-inner">
-      <CrossSection cut={cut} body={vehicle.body_width} mirror={vehicle.mirror_width} vehicleName={vehicle.label}
+      <CrossSection cut={cut} body={vehicle.body_width} mirror={vehicle.mirror_width} vehicleName={vehicle.label} fitsMin={vehicle.fits_min} tightMin={vehicle.tight_min}
         expanded={xsOpen} onToggle={() => { if (!xsOpen) revealCard(); setXsOpen(!xsOpen) }} />
       <span className="v2-stem" aria-hidden="true" />
     </div>, anchorEl)}

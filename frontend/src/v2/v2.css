@@ -106,13 +106,13 @@
 .v2-xs-close { min-height: 44px; min-width: 44px; margin: -8px -4px -8px 0; background: none; border: 0; color: var(--v2-accent); font-size: 13px;
   font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .v2-xs-svg { display: block; width: 100%; height: auto; margin: 10px 0 8px; }
-.v2-wall { fill: var(--v2-slate); }
-.v2-wall-maybe { fill: var(--v2-slate-soft); }
+.v2-wall { fill: var(--v2-accent); }
+.v2-wall-maybe { fill: #a3b394; }
 .v2-ground { fill: var(--v2-muted); }
-.v2-car { fill: var(--v2-accent); }
+.v2-car { fill: var(--v2-ink); }
 .v2-tyre { fill: var(--v2-ink); }
-.v2-glass { fill: var(--v2-sage); }
-.v2-lamp { fill: var(--v2-blush); }
+.v2-glass { fill: var(--v2-slate); }
+.v2-lamp { fill: #b8432f; }
 .v2-plate { fill: var(--v2-paper); }
 .v2-spare rect { fill: var(--v2-fits-line); }
 .v2-spare.is-short rect { fill: var(--v2-no); }
@@ -166,3 +166,4 @@
   .v2-anim, .v2-seg button { transition: none; }
   .v2-xfade { animation: none; }
 }
+.v2-xs-needs { font-size: 13px; color: var(--v2-ink); margin-top: 8px !important; line-height: 1.4; }
