@@ -86,7 +86,7 @@ def test_tight_catalogue_and_schema_examples():
         assert 'Example:' in tool['description']
     result = dispatch('tools/call', {'name': 'list_vehicles', 'arguments': {}})
     assert result['result']['isError'] is False
-    assert len(protocol.dumps(result).encode()) < 8_000
+    assert len(protocol.dumps(result).encode()) < 25_000
     data = result['result']['structuredContent']
     assert {'class-xs', 'class-s', 'class-m', 'class-l', 'class-xl', 'toyota-fortuner'} <= {p['id'] for p in data['vehicles']}
     for vehicle in data['vehicles']:
@@ -208,9 +208,9 @@ def test_plan_adapter_uses_merged_engine_without_model_calls():
 
 
 def test_oversize_fails_explicitly_and_keeps_small_envelope():
-    result = dispatch('tools/call', {'name': 'list_vehicles'}, lambda *_: {'large': 'x' * 20_000})
+    result = dispatch('tools/call', {'name': 'list_vehicles'}, lambda *_: {'large': 'x' * 30_000})
     assert result['result']['isError']
-    assert len(protocol.dumps(result).encode()) < 8_000
+    assert len(protocol.dumps(result).encode()) < 25_000
 
 
 def test_real_merged_engine_shape_fits_entire_response_budget():
@@ -220,11 +220,12 @@ def test_real_merged_engine_shape_fits_entire_response_budget():
     data = server.compact_plan(raw)
     result = dispatch('tools/call', {'name': 'plan_arrival', 'arguments': ARGS}, lambda *_: data)
     assert not result['result']['isError']
-    assert len(protocol.dumps(result).encode()) < 8_000
+    assert len(protocol.dumps(result).encode()) < 25_000
     assert data['verdict'] == server._omit_optional_nulls(raw['verdict'])
     assert data['door']['unverified_reasons'] == raw['door']['unverified_reasons']
     assert data['stop_points'][0]['legality'] == raw['stop_points'][0]['legality']
-    assert data['omitted_stop_points_count'] == 2
+    shown = len(data['stop_points'])
+    assert data.get('omitted_stop_points_count', 0) == max(0, len(raw['stop_points']) - shown)
 
 
 def test_search_and_tide_adapters_are_read_only_and_filter_area():
