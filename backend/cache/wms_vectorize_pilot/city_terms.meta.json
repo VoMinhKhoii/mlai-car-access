@@ -1,0 +1,26 @@
+{
+  "url": "https://opendata.hochiminhcity.gov.vn/dieu-khoan-su-dung",
+  "retrieved_at": "2026-10-17T00:37:06Z",
+  "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)",
+  "status": 200,
+  "headers": {
+    "date": "Sat, 17 Oct 2026 00:37:07 GMT",
+    "content-type": "text/html; charset=utf-8",
+    "connection": "keep-alive",
+    "x-drupal-cache": "HIT",
+    "etag": "W/\"1792195553-0\"",
+    "content-language": "vi",
+    "x-frame-options": "SAMEORIGIN, SAMEORIGIN",
+    "cache-control": "public, max-age=0",
+    "last-modified": "Sat, 17 Oct 2026 00:05:53 GMT",
+    "expires": "Sun, 19 Nov 1978 05:00:00 GMT",
+    "vary": "Cookie",
+    "strict-transport-security": "max-age=63072000",
+    "x-xss-protection": "1; mode=block",
+    "content-security-policy": "frame-ancestors 'self'",
+    "content-encoding": "gzip",
+    "transfer-encoding": "chunked"
+  },
+  "bytes": 47670,
+  "sha256": "e76082effc4da081060fb59ffb660edc7d5f7fe4e29751918d292ac537311545"
+}

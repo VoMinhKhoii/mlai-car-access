@@ -1,0 +1,36 @@
+{
+  "way_id": "610082030",
+  "status": 200,
+  "latency_s": [
+    2.687,
+    0.562
+  ],
+  "door_way_id": 610082030,
+  "saved_full_cuts": 7,
+  "attempted_cuts": 15,
+  "evidence": [
+    {
+      "lo": 5.92,
+      "hi": 6.22,
+      "tier": "Official",
+      "tier_vi": "Số liệu chính thức",
+      "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+      "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,9 m (thửa cách nhau 6,9 m)",
+      "observed_on": "",
+      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+      "ai_feature": "parcel_widths"
+    },
+    {
+      "lo": 3.44,
+      "hi": 4.41,
+      "tier": "Official",
+      "tier_vi": "Số liệu chính thức",
+      "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+      "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 7 mặt cắt, cách nhau 5 m): hẹp nhất 3,2 m (thửa cách nhau 4,2 m)",
+      "observed_on": "",
+      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+      "ai_feature": "parcel_widths"
+    }
+  ],
+  "full_7_cut_evidence_present": true
+}

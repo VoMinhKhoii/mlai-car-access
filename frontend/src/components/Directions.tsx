@@ -2,14 +2,16 @@ import { ArrowUpDown, Car, Clock, Crosshair, MapPin, ParkingSquare, Search, User
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { api, type Intent, type SearchResult, type Vehicle } from '../api'
 import { ChipMenu, Segmented, metres, minutes, vn } from '../ds/ui'
+import { matchMapPlaces, type MapContext } from '../mapSearch'
 import { fromLocal } from '../datetime'
 
 export interface Place { lat: number; lon: number; label: string }
 export type VehicleMode = 'class' | 'model' | 'vetc'
 
 /** One place input with Goong/OSM autocomplete. */
-function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
+function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext }: {
   kind: 'origin' | 'dest'; value: Place | null; onPick: (p: Place | null) => void; placeholder: string; extra?: React.ReactNode
+  mapContext?: MapContext | null
   near?: { lat: number; lon: number } | null
 }) {
   const [q, setQ] = useState<string | null>(null)
@@ -60,8 +62,10 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
       try {
         const r = await api.search(v, near, request.signal)
         if (gen !== generation.current || request.signal.aborted) return
-        setResults(r.results.slice(0, 6))
-        setStatus(r.results.length ? 'idle' : 'empty')
+        const local = mapContext ? matchMapPlaces(v, mapContext.candidates, mapContext.center, 6)
+          .map((p) => ({ label: p.name, lat: p.lat, lon: p.lon, source: 'Trên bản đồ' })) : []
+        setResults([...local, ...r.results].slice(0, 6))
+        setStatus((local.length + r.results.length) ? 'idle' : 'empty')
         setMessage('Không tìm thấy địa chỉ. Thử tên đường hoặc địa chỉ khác.')
       } catch {
         if (gen !== generation.current || request.signal.aborted) return
@@ -137,6 +141,7 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near }: {
 }
 
 export function Directions(p: {
+  mapContext: MapContext | null
   origin: Place | null; dest: Place | null; setOrigin: (x: Place | null) => void; setDest: (x: Place | null) => void
   locating: boolean; onLocate: () => void
   vehicle?: Vehicle; fleet: { classes: Vehicle[]; models: Vehicle[] }
@@ -156,7 +161,7 @@ export function Directions(p: {
         <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} near={p.dest ?? p.origin} placeholder="Điểm đi: vị trí của bạn"
           extra={<button type="button" className="icon-btn sm" aria-label="Dùng vị trí hiện tại" title="Dùng vị trí hiện tại" onClick={p.onLocate}>
             <Crosshair size={16} className={p.locating ? 'spin' : ''} /></button>} />
-        <PlaceField kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Đến địa chỉ, hẻm…" />
+        <PlaceField mapContext={p.mapContext} kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Đến địa chỉ, hẻm…" />
         <span className="places-rail" aria-hidden />
         <button type="button" className="icon-btn swap" aria-label="Đổi điểm đi và điểm đến" onClick={() => { const o = p.origin; p.setOrigin(p.dest); p.setDest(o) }}>
           <ArrowUpDown size={16} />

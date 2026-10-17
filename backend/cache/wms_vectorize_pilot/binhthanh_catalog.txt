@@ -1,0 +1,225 @@
+HCMC GEOPORTAL - HCMC DONRE
+HCMC GEOPORTAL
+Search
+Map
+Sign in
+Search
+Full text
+Bình Thạnh
+96 record(s)
+Available actions
+Viewable
+(80)
+Topics
+Kế hoạch sử dụng đất
+(60)
+Hiện trạng sử dụng đất
+(8)
+Quy hoạch sử dụng đất
+(8)
+Ranh giới
+(5)
+Đo đạc và bản đồ
+(3)
+Viễn thám
+(2)
+Độ cao
+(1)
+Keywords
+Kế hoạch sử dụng đất
+(60)
+Kế hoạch sử dụng đất 2018
+(15)
+Kế hoạch sử dụng đất 2020
+(12)
+Kế hoạch sử dụng đất 2022
+(12)
+Kế hoạch sử dụng đất 2023
+(12)
+Kế hoạch sử dụng đất 2021
+(9)
+Hiện trạng sử dụng đất
+(8)
+Quy hoạch sử dụng đất
+(8)
+Quy hoạch sử dụng đất 2020
+(8)
+Ranh giới
+(5)
+Viễn thám
+(5)
+GeoTiff
+(5)
+Ảnh trực giao
+(5)
+Mô hình số độ cao (DEM)
+(4)
+Hiện trạng sử dụng đất 2014
+(4)
+Hiện trạng sử dụng đất 2019
+(4)
+Ranh thửa Quận 2
+(4)
+Tin tài nguyên môi trường
+(3)
+Đo đạc và bản đồ
+(3)
+Môi trường
+(2)
+Ô nhiễm không khí
+(2)
+Cơ sở đo đạc
+(2)
+Viễn thám
+(2)
+LiDAR
+(1)
+2014
+(1)
+Biến dạng mặt đất
+(1)
+Web Map Service
+(1)
+Velocity
+(1)
+InSAR
+(1)
+Phần mềm VBDLIS
+(1)
+Phần mềm VNPT iLIS
+(1)
+Thông cáo báo chí
+(1)
+Công bố nền tảng chia sẻ dữ liệu
+(1)
+Ranh thửa Quận 1
+(1)
+Hệ thống điểm
+(1)
+Contact for the resource
+Sở Tài nguyên và Môi trường Thành phố Hồ Chí Minh
+(81)
+Trung tâm Ứng dụng Công nghệ thông tin và Dữ liệu phía Nam
+(33)
+Trung tâm Ứng dụng công nghệ thông tin phía Nam
+(27)
+Trung tâm Dữ liệu thông tin phía Nam
+(12)
+Trung tâm Ứng dụng công nghệ thông tin và dữ liệu phía Nam
+(11)
+Sở Tài nguyên và Môi trường thành phố Hồ Chí Minh
+(7)
+Trung tâm Công nghệ Thông tin Tài nguyên và Môi trường
+(5)
+Liên danh Công ty TNHH MTV Tài nguyên và Môi trường miền Nam và Tổng Công ty Tài nguyên và Môi trường Việt Nam - Công ty TNHH MTV
+(4)
+Văn phòng đăng ký đất đai
+(3)
+Trung tâm Công nghệ thông tin và truyền thông
+(1)
+Trung tâm Ứng dụng hệ thống thông tin địa lý
+(1)
+Years
+Inva
+(1)
+2025
+(9)
+2024
+(10)
+2023
+(10)
+2021
+(26)
+2010
+(5)
+Representation types
+Vector
+(3)
+Update frequencies
+Khi cần thiết
+(68)
+05 năm
+(8)
+Không xác định
+(8)
+Không thường xuyên
+(5)
+status
+Đã hoàn thành
+(83)
+Đang tiếp tục
+(6)
+Scale
+25000
+(17)
+10000
+(19)
+5000
+(39)
+2000
+(9)
+1000
+(5)
+From
+1
+-
+10
+/
+96
+Dữ liệu Kế hoạch sử dụng đất năm 2018 Quận Bình Thạnh - TP. Hồ Chí Minh
+- Quận Bình Thạnh được thành lập năm 1976 trên cơ sở sáp nhập 2 quận, Bình Hòa và Thạnh Mỹ Tây, quận Bình Thạnh hiện nay có diện tích tự nhiên là 2.078,59 ha, chiếm 0,99% diện tích toàn Thành phố và được chia thành 20 phường: Phường 1, Phường 2, Phường 3, Phường 5, Phường 6, Phường 7, Phường 11, Phường 12, Phường 13, Phường14, Phường 15, Phường 17, Phường 19, Phường 21, Phường 22, Phường 24, Phường 25, Phường 26, Phường 27, Phường 28
+- Kế hoạch sử dụng đất trên địa bàn quận Bình Thạnh có quy hoạch sử dụng đất đến năm 2020 và kế hoạch sử dụng đất 5 năm (2011-2015) quận Bình Thạnh được Ủy ban nhân dân Thành phố phê duyệt theo Quyết định số 2355/QĐ-UBND ngày 16 tháng 5 năm 2014, đây là căn cứ pháp lý để thực hiện công tác quản lý sử dụng đất đến năm 2020. Kế hoạch sử dụng đất năm 2017 của quận Bình Thạnh được Ủy ban nhân dân Thành phố phê duyệt theo Quyết định số 1459/QĐ-UBND ngày 31 tháng 3 năm 2017, đây là căn cứ pháp lý để giao đất, cho thuê đất, chuyển mục đích sử dụng đất trên địa bàn quận trong năm 2017
+- Kế hoạch sử dụng đất 2018, quận Bình Thạnh có 08 công trình, dự án phát sinh mới được đăng ký nhu cầu sử dụng đất và 43 công trình, dự án chuyển tiếp từ các năm trước.
+- Bản đồ Kế hoạch sử dụng đất năm 2018 quận Bình Thạnh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Categories
+Dữ liệu Quy hoạch sử dụng đất đến năm 2020 Quận Bình Tân - TP. Hồ Chí Minh
+Quận Bình Tân được hình thành trên cơ sở tách 3 xã: Bình Hưng Hòa, Bình Trị Đông, Tân Tạo và thị trấn An Lạc thuộc huyện Bình Chánh, tổng diện tích tự nhiên của Quận Bình Tân là: 5.888,6778 ha. Trong đó, đất nông nghiệp chiếm 1.571,8 ha, đất chuyên dùng chiếm 1.752,7069 ha; đất ở đô thị chiếm 1.872,7409 ha; đất chưa sử dụng chiếm 81,43 ha. 
+Căn cứ Công văn số 483/UBND-ĐTMT ngày 27 tháng 01 năm 2014 của Ủy ban nhân dân thành phố về thực hiện Nghị quyết số 02/NQ-CP ngày 06 tháng 01 năm 2014 của Chính phủ về quy hoạch sử dụng đất đến năm 2020 và kế hoạch sử dụng đất 5 năm kỳ đầu (2011-2015) của thành phố Hồ Chí Minh.
+Bản đồ quy hoạch, kế hoạch sử dụng đất kỳ này (2011-2020) được chuyển từ file gốc DGN sang dạng GIS và công bố các dịch vụ Web theo chuẩn OGC WMS, WFS, WMTS để khai thác và sử dụng dễ dàng trên nền tảng Desktop, Mobile và WebGIS theo đúng quy định.
+Dữ liệu Hiện trạng sử dụng đất năm 2019 Quận Bình Thạnh – Thành phố Hồ Chí Minh
+Căn cứ Kế hoạch số 5817/KH-STNMT-QLĐ ngày 14 tháng 7 năm 2020 của Sở Tài nguyên và Môi trường về việc kế hoạch kiểm kê đất đai, lập bản đồ hiện trạng sử dụng đất năm 2019 trên địa bàn thành phố;
+Bản đồ hiện trạng sử dụng đất năm 2019 được thành lập dựa trên:
+- Bản đồ địa giới hành chính 364/CT;
+- Bản đồ địa chính các phường thuộc Quận Bình Thạnh;
+- Bản đồ hiện trạng sử dụng đất năm 2014 Quận Bình Thạnh hệ tọa độ VN2000, kinh tuyến trung ương 105045', múi chiếu 30;
+- Bản đồ hiện trạng sử dụng đất năm 2019 cấp phường hệ tọa độ VN2000, kinh tuyến trung ương 105045', múi chiếu 30;
+- Số liệu kiểm kê đất đai năm 2019 Quận Bình Thạnh;
+- Bản đồ Hiện trạng sử dụng đất năm 2019 Quận Bình Thạnh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2023 Quận Bình Thạnh - TP. Hồ Chí Minh
+- Quận Bình Thạnh được thành lập năm 1976 trên cơ sở sáp nhập 02 quận Bình Hòa và Thạnh Mỹ Tây; quận Bình Thạnh hiện nay có diện tích tự nhiên là 2.078,59 ha, chiếm 0,99% diện tích toàn Thành phố và được chia thành 20 phường.
+- Kế hoạch sử dụng đất năm 2023 quận Bình Thạnh là nhiệm vụ phải thực hiện, nhằm cụ thể hóa công tác quản lý và sử dụng đất trong năm 2023. Kế hoạch sử dụng đất sau khi được cơ quan nhà nước có thẩm quyền phê duyệt sẽ là cơ sở pháp lý cho công tác quản lý Nhà nước về đất đai, là căn cứ để giao đất, cho thuê đất, chuyển mục đích sử dụng đất, nhằm khai thác và phát huy hiệu quả nguồn lực đất đai để thực hiện các công trình, dự án phát triển kinh tế - xã hội của huyện.
+- Kế hoạch sử dụng đất 2023 quận Bình Thạnh có 06 công trình dự án và 01 cơ sở nhà đấu giá quyền sử dụng đất đăng ký trong kế hoạch sử dụng đất năm 2016, 2017, 2018 và 2020; 01 công trình dự án có quy mô rất lớn trong năm 2022; kế hoạch sử dụng đất năm 2023 trên địa bàn quận Bình Thạnh đăng ký mới 07 công trình dự án và 02 cơ sở nhà đấu giá quyền sử dụng đất.
+- Bản đồ Kế hoạch sử dụng đất năm 2023 quận Bình Thạnh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2023 Quận Bình Tân - TP. Hồ Chí Minh
+- Bình Tân là quận được thành lập trên cơ sở tách một phần của huyện Bình Chánh với diện tích tự nhiên là 5.202,09 ha theo Nghị định số 130/NĐ-CP ngày 05 tháng 11 năm 2003 của Chính Phủ về việc tách huyện Bình Chánh thành quận Bình Tân và huyện Bình Chánh và được chia thành 10 phường. Quận Bình Tân có tọa độ địa lý từ 10o27’38” đến 10o45’30” vĩ độ Bắc và từ 106o27’51” đến 106o42’00” kinh độ Đông.
+- Kế hoạch sử dụng đất năm 2023 quận Bình Tân được xây dựng trên cơ sở nghiên cứu các tài liệu về điều kiện tự nhiên, kinh tế xã hội, tài nguyên đất đai của quận; tham khảo, tổng hợp quy hoạch của các ngành có trên địa bàn quận, đặc biệt là xác định các chỉ tiêu sử dụng đất Thành phố phân bổ trong năm kế hoạch và phân bổ đến từng phường.
+- Kế hoạch sử dụng đất năm 2023 quận Bình Tân là nhiệm vụ cần phải thực hiện, nhằm cụ thể hóa công tác quản lý và sử dụng đất trong năm 2023. Kế hoạch sử dụng đất sau khi được cơ quan Nhà nước có thẩm quyền phê duyệt sẽ là cơ sở pháp lý của công tác quản lý Nhà nước về đất đai, là căn cứ để giao đất, cho thuê đất, chuyển mục đích sử dụng đất. Nhằm khai thác và phát huy hiệu quả nguồn lực đất đai để thực hiện các công trình, dự án phát triển kinh tế - xã hội của quận.
+- Kế hoạch sử dụng đất năm 2023, trên địa bàn Quận Bình Tân có tổng số 34 công trình, dự án đăng ký thực hiện (Trong đó có 32 công trình, dự án thuộc kế hoạch sử dụng đất năm 2022 và 02 công trình, dự án đăng ký mới trong kế hoạch sử dụng đất năm 2023).
+- Bản đồ Kế hoạch sử dụng đất năm 2023 Quận Bình Tân được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2022 Quận Bình Tân - TP. Hồ Chí Minh
+- Bình Tân là quận được thành lập trên cơ sở tách một phần của huyện Bình Chánh với diện tích tự nhiên là 5.202,09 ha theo Nghị định số 130/NĐ-CP ngày 05 tháng 11 năm 2003 của Chính Phủ về việc tách huyện Bình Chánh thành quận Bình Tân và huyện Bình Chánh và được chia thành 10 phường. Quận Bình Tân có tọa độ địa lý từ 10°27’38” đến 10°45’30” vĩ độ Bắc và từ 106°27’51” đến 106°42’00” kinh độ Đông.
+- Kế hoạch sử dụng đất năm 2022 quận Bình Tân được xây dựng trên cơ sở nghiên cứu các tài liệu về điều kiện tự nhiên, kinh tế xã hội, tài nguyên đất đai của quận; tham khảo, tổng hợp quy hoạch của các ngành có trên địa bàn quận, đặc biệt là xác định các chỉ tiêu sử dụng đất Thành phố phân bổ trong năm kế hoạch và phân bổ đến từng phường.
+- Kế hoạch sử dụng đất năm 2022 quận Bình Tân là nhiệm vụ cần phải thực hiện, nhằm cụ thể hóa công tác quản lý và sử dụng đất trong năm 2022. Kế hoạch sử dụng đất sau khi được cơ quan Nhà nước có thẩm quyền phê duyệt sẽ là cơ sở pháp lý của công tác quản lý Nhà nước về đất đai, là căn cứ để giao đất, cho thuê đất, chuyển mục đích sử dụng đất. Nhằm khai thác và phát huy hiệu quả nguồn lực đất đai để thực hiện các công trình, dự án phát triển kinh tế - xã hội của quận.
+- Kế hoạch sử dụng đất năm 2022, trên địa bàn Quận Bình Tân có tổng số 44 công trình, dự án chuyển tiếp từ kế hoạch sử dụng đất những năm trước (2015: 4 dự án, 2016: 5 dự án, 2017: 3 dự án, 2018: 18 dự án, 2019: 6 dự án, 2020: 7 dự án, 2021: 1 dự án); không có công trình, dự án đăng ký mới trong kế hoạch sử dụng đất năm 2022.
+- Bản đồ Kế hoạch sử dụng đất năm 2022 Quận Bình Tân được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2018 Huyện Bình Chánh - TP. Hồ Chí Minh
+- Huyện Bình Chánh nằm về phía Tây của Thành phố là một trong 5 huyện ngoại thành, có tổng diện tích tự nhiên là 25255,99 ha, chiếm 12% diện tích toàn thành phố bao gồm 01 thị trấn Tân Túc và 15 xã: Phạm Văn Hai, Vĩnh Lộc A, Vĩnh Lộc B, Bình Lợi, Lê Minh Xuân, Tân Nhựt, Tân Kiên, Bình Hưng, Phong Phú, An Phú Tây, Hưng Long, Đa Phước, Tân Quý Tây, Bình Chánh, Quy Đức
+- Kế hoạch sử dụng đất năm 2018 huyện Bình Chánh được xây dựng dựa trên nhu cầu sử dụng đất của các ngành, lĩnh vực, cá nhân và tổ chức đăng ký. Đồng thời, có tham khảo số liệu phân khai chỉ tiêu sử dụng đất cho huyện Bình Chánh theo đề án điều chỉnh quy hoạch sử dụng đất đến năm 2020 và kế hoạch sử dụng đất 5 năm (2016 - 2020) của Thành phố đã báo cáo thông qua Hội đồng thẩm định của Chính Phủ
+- Kế hoạch sử dụng đất năm 2018 bao gồm 368 công trình, dự án. Xác định các chỉ tiêu sử dụng đất năm 2017 chưa thực hiện nhưng vẫn phù hợp với kinh tế - xã hội trên địa bàn huyện. Năm 2018 có 24 công trình, dự án đăng ký mới có 344 công trình, dự án chưa thực hiện xong trong năm 2017 và được chuyển sang kế hoạch năm 2018 tiếp tục thực hiện (Năm 2015 chuyển 117 dự án, năm 2016 chuyển sang 132 dự án, năm 2017 chuyển sang 95 dự án).
+- Bản đồ Kế hoạch sử dụng đất năm 2018 huyện Bình Chánh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2022 Quận Bình Thạnh - TP. Hồ Chí Minh
+- Quận Bình Thạnh được thành lập năm 1976 trên cơ sở sáp nhập 02 quận Bình Hòa và Thạnh Mỹ Tây; quận Bình Thạnh hiện nay có diện tích tự nhiên là 2.078,59 ha, chiếm 0,99% diện tích toàn Thành phố và được chia thành 20 phường.
+- Kế hoạch sử dụng đất năm 2022 quận Bình Thạnh là nhiệm vụ phải thực hiện, nhằm cụ thể hóa công tác quản lý và sử dụng đất trong năm 2022. Kế hoạch sử dụng đất sau khi được cơ quan nhà nước có thẩm quyền phê duyệt sẽ là cơ sở pháp lý cho công tác quản lý Nhà nước về đất đai, là căn cứ để giao đất, cho thuê đất, chuyển mục đích sử dụng đất, nhằm khai thác và phát huy hiệu quả nguồn lực đất đai để thực hiện các công trình, dự án phát triển kinh tế - xã hội của huyện.
+- Kế hoạch sử dụng đất 2022 quận Bình Thạnh 40 công trình, dự án. Có 08/40 công trình, dự án đã hoàn thành các thủ tục về chuyển mục đích sử dụng đất, giao đất, cho thuê đất theo quy định của Luật Đất đai, đạt 20% số lượng dự án, tương đương với diện tích 8,89 ha. Có 21/40 công trình, dự án không chuyển tiếp kế hoạch sử dụng đất, chiếm 52,5% về số lượng dự án – tương đương với diện tích là 31,87 ha, và 07 cơ sở nhà, đất bán đấu giá QSDĐ với diện tích 0,11. Có 11/40 công trình, dự án đang triển khai thực hiện chiếm 27,5% số lượng dự án, tương đương với 70,52 ha, kế hoạch sử dụng đất năm 2022 sẽ tiếp tục thực hiện.
+- Bản đồ Kế hoạch sử dụng đất năm 2022 quận Bình Thạnh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2020 Quận Bình Tân - TP. Hồ Chí Minh
+- Quận Bình Tân là một quận mới thành lập vào cuối năm 2003 của thành phố Hồ Chí Minh.Quận nằm ở cửa ngõ phía Tây của thành phố, có quốc lộ 1A chạy ngang qua vành ngoài của thành phố. Song song quốc lộ 1A là tuyến đường Hồng Bàng - Hùng Vương đi các quận nội thành. Bến xe Miền Tây là bến xe chính đi các tỉnh Đồng bằng Sông Cửu Long. Quận gồm 10 phường: phường Bình Hưng Hoà, phường Bình Hưng Hoà A, phường Bình Hưng Hoà B, phường Bình Trị Đông, phường Bình Trị Đông A, phường Bình Trị Đông B, phường Tân Tạo, phường Tân Tạo A, phường An Lạc, phường An Lạc A.
+- Kế hoạch sử dụng đất năm 2020 Quận Bình Tân là nhiệm vụ cần phải thực hiện, nhằm cụ thể hóa công tác quản lý và sử dụng đất trong năm 2020. Kế hoạch sử dụng đất sau khi được cơ quan Nhà nước có thẩm quyền phê duyệt sẽ là cơ sở pháp lý của công tác quản lý Nhà nước về đất đai, là căn cứ để giao đất, cho thuê đất, chuyển mục đích sử dụng đất, nhằm khai thác và phát huy hiệu quả nguồn lực đất đai để thực hiện các công trình, dự án phát triển kinh tế - xã hội của quận.
+- Bản đồ Kế hoạch sử dụng đất năm 2020 Quận Bình Tân được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+Dữ liệu Kế hoạch sử dụng đất năm 2020 Quận Bình Thạnh - TP. Hồ Chí Minh
+- Quận Bình Thạnh được thành lập năm 1976 trên cơ sở sáp nhập 2 quận, Bình Hòa và Thạnh Mỹ Tây, quận Bình Thạnh hiện nay có diện tích tự nhiên là 2.078,59 ha, chiếm 0,99% diện tích toàn Thành phố và được chia thành 20 phường: Phường 1, Phường 2, Phường 3, Phường 5, Phường 6, Phường 7, Phường 11, Phường 12, Phường 13, Phường14, Phường 15, Phường 17, Phường 19, Phường 21, Phường 22, Phường 24, Phường 25, Phường 26, Phường 27, Phường 28
+- Kế hoạch sử dụng đất trên địa bàn quận Bình Thạnh có quy hoạch sử dụng đất đến năm 2020 và kế hoạch sử dụng đất cuối kỳ (2016-2020) của Thành phố Hồ Chí Minh đã được Chính phủ phê duyệt theo Nghị quyết số 80/NQ-CP ngày 19 tháng 6 năm 2018.
+- Kế hoạch sử dụng đất 2020, quận Bình Thạnh có 44 công trình, dự án.
+- Bản đồ Kế hoạch sử dụng đất năm 2018 quận Bình Thạnh được thu thập, chuẩn hóa và cung cấp dữ liệu qua dịch vụ Web theo tiêu chuẩn OGC WFS, WMTS, WMS.
+About
+Github

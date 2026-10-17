@@ -1,4 +1,4 @@
-"""HTTP API for Vào Được (working name). Run: uvicorn app.main:app --host 127.0.0.1 --port 8787 --workers 1
+"""HTTP API for Ngõ Ngách (working name). Run: uvicorn app.main:app --host 127.0.0.1 --port 8787 --workers 1
 
 One continuously running process owns all state (area builds, reviews, sessions, quotas, camera jobs): run a single
 worker with persistent VAODUOC_STORE / VAODUOC_CACHE / VAODUOC_FLAGS.
@@ -10,6 +10,8 @@ operator session (auth.py).
 from __future__ import annotations
 
 import math
+import json
+from contextlib import asynccontextmanager
 import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -17,16 +19,16 @@ from functools import lru_cache
 from typing import Annotated, Literal
 
 import httpx
-from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile, Path as ApiPath
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator
 from starlette.concurrency import run_in_threadpool
 
-from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, SIDE_CLEARANCE_M, in_hcmc
-from . import ai, auth, budget, cameras, corridor, flags, geometry, google_lookup, hydro, live, parcels, plan, reports, vehicles
+from .config import CACHED_ONLY, FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, SIDE_CLEARANCE_M, in_hcmc
+from . import agent, agent_budget, coverage, evidence_routes, geocoding, tide_refresh, ai, auth, budget, cameras, corridor, flags, geometry, google_lookup, hydro, live, parcels, plan, reports, vehicles
 from .evidence import STORE_EVIDENCE
 from .flood import tide_meta, tide_series
 from .osm import build_graph, cached_graph, haversine, strip_accents
@@ -42,7 +44,20 @@ PHOTO_MAGIC = ((b"\xff\xd8\xff", "image/jpeg"), (b"\x89PNG\r\n\x1a\n", "image/pn
 JOB_ID = re.compile(r"^[0-9a-f]{12}$")
 REPORT_ID = re.compile(r"^(r-\d{8}-[0-9a-f]{12}|legacy-[0-9a-f]{16})$")
 
-app = FastAPI(title="Vào Được API")
+@asynccontextmanager
+async def lifespan(app):
+    geocoding.initialize_name_index()
+    geocoding.configure_curated(PRESETS, agent.DEMO_PLACES)
+    stop, thread = tide_refresh.start_refresher() if not CACHED_ONLY else (None, None)
+    try:
+        yield
+    finally:
+        if stop:
+            stop.set()
+            thread.join(timeout=1)
+
+app = FastAPI(title="Ngõ Ngách API", lifespan=lifespan)
+app.include_router(evidence_routes.router_for(app))
 app.add_middleware(CORSMiddleware, allow_origins=sorted(auth.allowed_origins()), allow_credentials=True,
                    allow_methods=["GET", "POST"], allow_headers=["content-type"])
 
@@ -150,6 +165,7 @@ def config(request: Request):
         "ai_provider": ai.provider(),
         "flags": flags.describe(),
         "tide": {k: tide_meta()[k] for k in ("station", "bulletin", "issued_at", "source_url", "alarm_levels_m", "note")},
+        "coverage": coverage.summary(),
         "demo_center": DEMO_CENTER,
         "synthetic_demo_data": bool(getattr(app.state, "synthetic_demo_data", False)),
         "presets": [{**p, "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
@@ -198,7 +214,7 @@ def _maneuver_result(vehicle_id: str, width_cm: int) -> dict:
 
 
 @app.get("/api/vehicles/{vehicle_id}/maneuver")
-def vehicle_maneuver(vehicle_id: Annotated[str, Field(max_length=80)],
+def vehicle_maneuver(vehicle_id: Annotated[str, ApiPath(max_length=80)],
                      width: Annotated[float, Field(ge=1.5, le=15, allow_inf_nan=False)]):
     try:
         return _maneuver_result(vehicle_id, round(width * 100))
@@ -208,53 +224,18 @@ def vehicle_maneuver(vehicle_id: Annotated[str, Field(max_length=80)],
 
 @app.get("/api/search")
 def search(q: Annotated[str, Field(max_length=200)], lat: Lat | None = None, lon: Lon | None = None):
-    """Goong place search (all of Vietnam) ranked around the given point, plus alley names from the street
-    graph of that area when it is already loaded (Goong often does not know small alleys by name)."""
+    if len(q.strip()) < 3:
+        return {"results": []}
     near = (lat, lon) if lat is not None and lon is not None else DEMO_CENTER
-    q_norm = strip_accents(q)
-    goong, alleys = [], []
-    try:
-        if GOONG_API_KEY:
-            r = httpx.get("https://rsapi.goong.io/v2/place/autocomplete",
-                          params={"api_key": GOONG_API_KEY, "input": q, "location": f"{near[0]},{near[1]}",
-                                  "limit": 7}, timeout=10)
-            for p in r.json().get("predictions", []):
-                desc = p.get("description") or ""
-                if strip_accents("Hồ Chí Minh") not in strip_accents(desc):
-                    continue  # HCMC only (D30)
-                goong.append({"label": desc, "place_id": p.get("place_id"), "source": "Goong"})
-        else:
-            r = httpx.get("https://nominatim.openstreetmap.org/search",
-                          params={"q": q, "format": "jsonv2", "limit": 7, "countrycodes": "vn",
-                                  "viewbox": "106.30,11.20,107.10,10.35", "bounded": 1},
-                          headers={"User-Agent": "VaoDuoc-hackathon/0.3"}, timeout=10)
-            for p in r.json():
-                goong.append({"label": p["display_name"], "lat": float(p["lat"]), "lon": float(p["lon"]),
-                              "source": "Nominatim"})
-    except Exception:
-        pass
-    g = cached_graph(*near)
-    if g and len(q_norm) >= 3:
-        seen = set()
-        for w in g.ways.values():
-            if w.name and w.is_alley and q_norm in strip_accents(w.name) and w.name not in seen:
-                seen.add(w.name)
-                la, lo = g.nodes[w.nodes[len(w.nodes) // 2]]
-                alleys.append({"label": w.name, "lat": la, "lon": lo, "source": "Tên hẻm (OSM)"})
-                if len(alleys) >= 3:
-                    break
-    # Goong first; alley names fill in what Goong does not know.
-    return {"results": (goong[:7] + alleys)[:10]}
+    return geocoding.resolve_place(q, near, limit=10, select_nearest=False)
 
 
 @app.get("/api/place/{place_id}")
-def place(place_id: Annotated[str, Field(max_length=300)]):
-    if not GOONG_API_KEY:
-        raise HTTPException(424, "Chưa có GOONG_API_KEY")
-    r = httpx.get("https://rsapi.goong.io/v2/place/detail", params={"api_key": GOONG_API_KEY, "place_id": place_id},
-                  timeout=10).json()
-    loc = r["result"]["geometry"]["location"]
-    return {"lat": loc["lat"], "lon": loc["lng"], "label": r["result"].get("formatted_address") or r["result"].get("name")}
+def place(place_id: Annotated[str, ApiPath(max_length=300)]):
+    result = geocoding.resolve_id(place_id)
+    if result:
+        return result
+    raise HTTPException(424, "Nguồn địa điểm tạm gián đoạn. Hãy tìm lại để dùng kết quả có tọa độ.")
 
 
 def _require_iso_datetime_string(value: object) -> object:
@@ -319,7 +300,7 @@ def _synthetic_demo_input(request: Request, scenario: str | None, lat: float, lo
 @app.post("/api/plan")
 def make_plan(req: PlanRequest, request: Request):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
@@ -344,16 +325,7 @@ def make_plan(req: PlanRequest, request: Request):
 
 @app.get("/api/reverse")
 def reverse(lat: Lat, lon: Lon):
-    """Address for a point (Goong reverse geocoding), used for "Vị trí của tôi" and map clicks."""
-    if GOONG_API_KEY:
-        try:
-            r = httpx.get("https://rsapi.goong.io/Geocode", params={"latlng": f"{lat},{lon}", "api_key": GOONG_API_KEY},
-                          timeout=10).json()
-            if r.get("results"):
-                return {"label": r["results"][0]["formatted_address"], "source": "Goong"}
-        except Exception:
-            pass
-    return {"label": f"{lat:.5f}, {lon:.5f}", "source": "toạ độ"}
+    return geocoding.reverse(lat, lon)
 
 
 @app.get("/api/tide")
@@ -363,10 +335,13 @@ def tide(start: str | None = None, hours: Annotated[int, Field(gt=0, le=168)] = 
     except ValueError:
         raise HTTPException(422, "start must be an ISO 8601 datetime")
     live_tide = hydro.tide_status() if flags.enabled("live_hydro") else None
-    return {"series": tide_series(t0, hours), "alarm_levels_m": tide_meta()["alarm_levels_m"],
-            "station": tide_meta()["station"], "source_url": (live_tide or {}).get("source_url") or tide_meta()["source_url"],
+    series = tide_series(t0, hours)
+    has_live = any(p["kind"] in ("measured", "model") for p in series)
+    return {"series": series, "alarm_levels_m": tide_meta()["alarm_levels_m"],
+            "station": tide_meta()["station"], "source_url": (live_tide or {}).get("source_url") if has_live else tide_meta()["source_url"],
             "readings": (live_tide or {}).get("readings", []), "last_reading": (live_tide or {}).get("last_reading"),
-            "model_err_m": (live_tide or {}).get("model_err_m")}
+            "model_err_m": (live_tide or {}).get("model_err_m"),
+            "bulletin": tide_meta(), "live_source": live_tide}
 
 
 class WayQuery(Strict):
@@ -376,9 +351,9 @@ class WayQuery(Strict):
 
 
 @app.post("/api/evidence/way/{way_id}")
-def evidence_for_way(way_id: WayId, req: WayQuery, request: Request):
+def evidence_for_way(way_id: Annotated[int, ApiPath(gt=0)], req: WayQuery, request: Request):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     live_area, _ = live.area_status(req.lat, req.lon)
     _, demo_file = _synthetic_demo_input(
         request, req.demo_scenario, req.lat, req.lon, way_id=way_id,
@@ -402,7 +377,7 @@ class Point(Strict):
 @app.post("/api/area/build", status_code=202)
 def area_build(req: Point, _op: Operator):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     if not flags.enabled("live_crawl"):
         raise HTTPException(409, "Thu thập dữ liệu trực tiếp đang tắt")
     try:
@@ -446,7 +421,7 @@ def reload_evidence(_op: Operator):
 
 def _graph_with(lat: float, lon: float, way_ids: list[int]):
     if not in_hcmc(lat, lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     g = cached_graph(lat, lon)
     if g is None:
         raise HTTPException(422, "Khu vực này chưa có bản đồ trên máy chủ")
@@ -478,7 +453,7 @@ def confirm(c: Confirmation, request: Request):
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {c.vehicle_id}")
     if not in_hcmc(c.stop_lat, c.stop_lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     _guest_limit(request)
     g = cached_graph(c.stop_lat, c.stop_lon)
     if g is None:
@@ -697,7 +672,7 @@ def route_corridor(req: CorridorRequest, request: Request):
     """Large-road route choice from A to B: flood forecast plus cached camera readings, answered immediately.
     An operator request also queues the most relevant unread cameras (see `camera_job` in the answer)."""
     if not (in_hcmc(*req.origin) and in_hcmc(*req.destination)):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
@@ -754,7 +729,7 @@ def lookup_places(lat: Lat, lon: Lon, _op: Operator):
 
 
 @app.get("/api/lookup/place/{place_id}")
-def lookup_place(place_id: Annotated[str, Field(max_length=300)], _op: Operator):
+def lookup_place(place_id: Annotated[str, ApiPath(max_length=300)], _op: Operator):
     return _lookup_guard(google_lookup.place_details, place_id)
 
 
@@ -769,9 +744,84 @@ def lookup_ask(a: AskIn, _op: Operator):
     return _lookup_guard(google_lookup.ask_maps, a.lat, a.lon, a.alley)
 
 
+@app.post("/api/agent")
+def arrival_agent(req: agent.AgentRequest, request: Request):
+    _guest_limit(request, "agent")
+    return StreamingResponse(agent.stream(req, allow_model=auth.is_operator(request) and not CACHED_ONLY), media_type="application/x-ndjson",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
+@app.post("/api/agent/cancel/{request_id}")
+def cancel_agent(request_id: str):
+    agent.cancel(request_id)
+    return {"cancelled": True}
+
+
+@app.get("/api/agent/tools")
+def agent_tools():
+    return [{"name": t["name"], "description": t["description"], "inputSchema": t["parameters"]} for t in agent.TOOLS]
+
+
+@app.post("/api/agent/tool/{name}")
+def agent_tool(name: str, args: dict):
+    from importlib.util import module_from_spec, spec_from_file_location
+    from pathlib import Path
+    spec = spec_from_file_location("ngo_ngach_mcp", Path(__file__).resolve().parents[2] / "mcp" / "protocol.py")
+    protocol = module_from_spec(spec)
+    spec.loader.exec_module(protocol)
+    schema = next((t["parameters"] for t in agent.TOOLS if t["name"] == name), None)
+    if schema is None: raise HTTPException(404, "Công cụ không tồn tại.")
+    try:
+        protocol.schema_args(schema, args)
+        result, _ = agent.call_tool(name, args)
+        return result
+    except protocol.RPCError as exc: raise HTTPException(422, exc.message)
+    except Exception as exc: raise HTTPException(422, agent.safe_error(exc))
+
+
+# MCP Streamable HTTP, stable 2025-11-25, stateless JSON response mode.
+# GET is explicitly 405 (no unsolicited SSE stream); no dependency on the MCP SDK.
+from fastapi import Request as MCPRequest
+
+
+@app.api_route("/mcp", methods=["POST", "GET", "DELETE"])
+async def mcp_http(request: MCPRequest):
+    import hmac
+    import os
+    from importlib.util import module_from_spec, spec_from_file_location
+    from pathlib import Path
+    from fastapi.responses import JSONResponse
+    from starlette.concurrency import run_in_threadpool
+    origins = {"http://localhost:8787", "http://127.0.0.1:8787", "http://localhost:5173", "http://127.0.0.1:5173"}
+    origins.update(x.strip() for x in os.environ.get("MCP_ALLOWED_ORIGINS", "").split(",") if x.strip())
+    if request.headers.get("origin") and request.headers["origin"] not in origins:
+        return JSONResponse({"error":"Origin not allowed"},status_code=403)
+    token=os.environ.get("MCP_AUTH_TOKEN")
+    if token and not hmac.compare_digest(request.headers.get("authorization", ""), "Bearer "+token):
+        return JSONResponse({"error":"Unauthorized"},status_code=401)
+    if request.method != "POST": return Response(status_code=405,headers={"Allow":"POST"})
+    if "application/json" not in request.headers.get("content-type", ""):
+        return JSONResponse({"error":"Content-Type must be application/json"},status_code=415)
+    accept=request.headers.get("accept", "")
+    if not all(t in accept for t in ("application/json","text/event-stream")):
+        return JSONResponse({"error":"Accept must include application/json and text/event-stream"},status_code=406)
+    spec=spec_from_file_location("ngo_ngach_mcp",Path(__file__).resolve().parents[2]/"mcp"/"protocol.py")
+    protocol=module_from_spec(spec);spec.loader.exec_module(protocol)
+    version=request.headers.get("mcp-protocol-version", "2025-03-26")
+    if version not in protocol.VERSIONS[0:3]: return JSONResponse({"error":"Unsupported MCP protocol version"},status_code=400)
+    raw=await request.body()
+    if len(raw)>64_000: return JSONResponse({"error":"Request too large"},status_code=413)
+    try: body=json.loads(raw)
+    except (ValueError,UnicodeDecodeError):
+        return JSONResponse({"jsonrpc":"2.0","id":None,"error":{"code":-32700,"message":"Parse error"}},status_code=400)
+    response=await run_in_threadpool(protocol.dispatch,body,agent_tools,lambda name,args:agent_tool(name,args))
+    if response is None: return Response(status_code=202)
+    return JSONResponse(response,headers={"Cache-Control":"no-store"})
+
+
 @app.get("/api/budget")
 def spend_report(_op: Operator):
-    return {"usage": budget.report(), "ai": budget.ai_report()}
+    return {"usage": budget.report(), "ai": budget.ai_report(), "gemini_paid": agent_budget.report()}
 
 
 # ---- unknown API paths and the single-page app --------------------------------------------------

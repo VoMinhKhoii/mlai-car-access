@@ -1,0 +1,23 @@
+{
+  "stage": "original-before",
+  "status": "aborted-to-preserve-free-budget",
+  "planned_count": 12,
+  "completed_count": 2,
+  "passed": 1,
+  "pass_rate_completed_only": 0.5,
+  "comparable_full_baseline": false,
+  "source": "agent-eval-before.log",
+  "cases": [
+    {
+      "id": "pickup-01",
+      "success": true,
+      "latency_s": 13.82
+    },
+    {
+      "id": "address-01",
+      "success": false,
+      "latency_s": 16.348,
+      "failure_category": "provider-free-quota"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+  warnings.warn(
+test_blind_has_no_tools_and_no_paid (test_agent.AgentTests.test_blind_has_no_tools_and_no_paid) ... ok
+test_budget_reserves_thought_tokens_and_refuses_next_call (test_agent.AgentTests.test_budget_reserves_thought_tokens_and_refuses_next_call) ... ok
+test_free_rotation_and_paid_opt_in (test_agent.AgentTests.test_free_rotation_and_paid_opt_in) ... ok
+test_signed_parts_survive_followup (test_agent.AgentTests.test_signed_parts_survive_followup) ... /Users/khoivo/Developer/mlai-car-access/backend/app/vehicles.py:112: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/vehicles/vn_car_profiles.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(CSV_PATH, encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_six_tool_rounds (test_agent.AgentTests.test_six_tool_rounds) ... ok
+test_tide_coverage (test_agent.AgentTests.test_tide_coverage) ... ok
+test_curated_house_end_wins_without_search (test_agent2.AgentRoundTwoTests.test_curated_house_end_wins_without_search) ... ok
+test_deadline_survives_model_omission_and_followup (test_agent2.AgentRoundTwoTests.test_deadline_survives_model_omission_and_followup) ... ok
+test_october17_no_false_flood_deadline (test_agent2.AgentRoundTwoTests.test_october17_no_false_flood_deadline) ... ok
+test_official_extrema_and_no_extrapolation (test_agent2.AgentRoundTwoTests.test_official_extrema_and_no_extrapolation) ... ok
+test_reuse_successful_free_key_between_tool_rounds (test_agent2.AgentRoundTwoTests.test_reuse_successful_free_key_between_tool_rounds) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.011s
+
+OK

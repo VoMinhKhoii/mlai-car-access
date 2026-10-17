@@ -1,0 +1,17 @@
+{
+  "url": "https://opendata.hochiminhcity.gov.vn/robots.txt",
+  "retrieved_at": "2026-10-17T00:37:04Z",
+  "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)",
+  "status": 404,
+  "headers": {
+    "date": "Sat, 17 Oct 2026 00:37:04 GMT",
+    "content-type": "text/html",
+    "connection": "keep-alive",
+    "strict-transport-security": "max-age=63072000",
+    "content-encoding": "gzip",
+    "set-cookie": "_frontend=!m7eOXWA+/HNlA+CgCwsyXMX4tpbVZos5EQh4dRkf+Ob6qc1HqClVDz3PlGrdeju0OqZSbUt/RxS8nqw=; path=/; Httponly; Secure, TS01b74016=0150c7cfd170e00fefe26f9ad4268095e5b5c159e7ce1e2f988875c667bedd37fa7e617349d8e53627286bc9eb8d6374880e7ffb1b00a7321b4f357b674e1e94e1b733210e; Path=/; Domain=.hochiminhcity.gov.vn; Secure; HttpOnly",
+    "transfer-encoding": "chunked"
+  },
+  "bytes": 162,
+  "sha256": "340c8464c2007ce3f80682e15dfafa4180b641d53c14201b929906b7b0284d87"
+}

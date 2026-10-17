@@ -26,7 +26,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
   if (!corridor) {
     return busy ? (
       <section className="corridor">
-        <header><LoaderCircle size={15} className="spin" /><span><b>Tuyến đường lớn</b> · đang tính…</span></header>
+        <header><LoaderCircle size={15} className="spin" /><span><b>Đường tới</b> · đang tính…</span></header>
       </section>
     ) : null
   }
@@ -40,7 +40,7 @@ export function CorridorCard({ corridor, busy, selected, onSelect, onCamera }: {
     <section className={`corridor ${busy ? 'is-stale' : ''}`} aria-live="polite">
       <header>
         {busy ? <LoaderCircle size={15} className="spin" /> : <Route size={15} />}
-        <span><b>Tuyến đường lớn</b> · {corridor.live ? `camera ${floodTimeLabel(corridor.checked_at)}` : 'theo dự báo'}</span>
+        <span><b>Đường tới</b> · {corridor.live ? `camera ${floodTimeLabel(corridor.checked_at)}` : 'theo dự báo'}</span>
       </header>
       {why && <p className="corridor-sum">{why}</p>}
       <ol className="corr-list">
@@ -182,7 +182,7 @@ export function CameraPanel({ cam, canRead, onClose, onRead }: {
   }, [cam.id])
   const r = cam.state === 'ok' ? cam : null
   return (
-    <aside className="evidence card camera-panel" role="dialog" aria-label={`Camera ${cam.name}`}>
+    <aside className="evidence glass camera-panel" role="dialog" aria-label={`Camera ${cam.name}`}>
       <header>
         <div>
           <span className="faint">Camera giao thông TP.HCM · trực tiếp</span>

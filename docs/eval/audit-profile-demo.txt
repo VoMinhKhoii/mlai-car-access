@@ -1,0 +1,53 @@
+         6820064 function calls in 1.493 seconds
+
+   Ordered by: cumulative time
+   List reduced from 179 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.084    0.084    1.496    1.496 plan.py:175(plan)
+      740    0.009    0.000    0.834    0.001 plan.py:347(_evaluate)
+      740    0.157    0.000    0.702    0.001 legality.py:62(legality_on_street)
+   346175    0.377    0.000    0.507    0.000 osm.py:44(haversine)
+        6    0.083    0.014    0.217    0.036 plan.py:93(dijkstra)
+        4    0.000    0.000    0.185    0.046 plan.py:203(search)
+    18617    0.013    0.000    0.169    0.000 flood.py:236(depth_at)
+    10676    0.009    0.000    0.166    0.000 flood.py:294(worst_over)
+        2    0.000    0.000    0.100    0.050 plan.py:190(flood_at)
+        2    0.005    0.003    0.100    0.050 plan.py:191(<dictcomp>)
+        2    0.037    0.019    0.093    0.046 plan.py:131(_project)
+    18619    0.091    0.000    0.092    0.000 flood.py:141(tide_level)
+    56394    0.040    0.000    0.085    0.000 osm.py:84(drivable)
+  1543464    0.070    0.000    0.070    0.000 {method 'get' of 'dict' objects}
+        4    0.017    0.004    0.064    0.016 osm.py:156(nearest_node)
+      740    0.048    0.000    0.063    0.000 legality.py:31(_sign_rules)
+    83702    0.036    0.000    0.059    0.000 plan.py:205(<lambda>)
+    12483    0.005    0.000    0.056    0.000 flood.py:218(_live_bound)
+        1    0.000    0.000    0.039    0.039 plan.py:687(_standard_route)
+    81074    0.024    0.000    0.037    0.000 plan.py:206(<lambda>)
+  1038527    0.036    0.000    0.036    0.000 {built-in method math.radians}
+        1    0.005    0.005    0.035    0.035 plan.py:710(_layers)
+    12483    0.003    0.000    0.034    0.000 flood.py:204(live_reports)
+    20561    0.003    0.000    0.032    0.000 plan.py:215(<lambda>)
+   710971    0.032    0.000    0.032    0.000 {built-in method math.cos}
+    12485    0.006    0.000    0.031    0.000 pathlib.py:1230(exists)
+   692350    0.030    0.000    0.030    0.000 {built-in method math.sin}
+      740    0.008    0.000    0.025    0.000 plan.py:462(_way_out)
+    12487    0.002    0.000    0.022    0.000 pathlib.py:1008(stat)
+   116490    0.016    0.000    0.021    0.000 osm.py:58(highway)
+    18404    0.007    0.000    0.021    0.000 osm.py:70(kind)
+    43416    0.020    0.000    0.020    0.000 {method 'search' of 're.Pattern' objects}
+   248478    0.020    0.000    0.020    0.000 plan.py:200(way_of)
+    12487    0.015    0.000    0.019    0.000 {built-in method posix.stat}
+    12483    0.011    0.000    0.017    0.000 flood.py:24(_street_key)
+        1    0.003    0.003    0.017    0.017 plan.py:55(compute_fit)
+   346175    0.017    0.000    0.017    0.000 {built-in method math.asin}
+   346175    0.016    0.000    0.016    0.000 {built-in method math.sqrt}
+    20561    0.003    0.000    0.015    0.000 plan.py:212(<lambda>)
+    57747    0.014    0.000    0.014    0.000 {built-in method _heapq.heappop}
+    20561    0.008    0.000    0.013    0.000 osm.py:96(walkable)
+    65253    0.009    0.000    0.013    0.000 osm.py:62(name)
+     6335    0.001    0.000    0.011    0.000 {built-in method builtins.any}
+    10754    0.002    0.000    0.009    0.000 plan.py:493(<genexpr>)
+    83702    0.009    0.000    0.009    0.000 plan.py:81(_usable)
+
+

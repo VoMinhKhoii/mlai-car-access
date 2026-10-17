@@ -1,0 +1,579 @@
+{
+  "summary": {
+    "stage": "after",
+    "mode": "live",
+    "count": 4,
+    "passed": 4,
+    "pass_rate": 1.0,
+    "latency_p50_s": 3.463,
+    "latency_p90_s": 5.147,
+    "free_calls": 8,
+    "paid_calls": 0,
+    "spent_usd": 0.0
+  },
+  "cases": [
+    {
+      "id": "address-01",
+      "district": "Quận 1",
+      "query": "Tôi lái VF3 tới 135 Nam Kỳ Khởi Nghĩa, Quận 1, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 5.147,
+      "success": true,
+      "failures": [],
+      "number_violations": [
+        {
+          "type": "validation",
+          "violations": [
+            "1",
+            "2",
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        }
+      ],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+          }
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.7770374,
+                "lon": 106.69535,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.777991344000043,
+                "lon": 106.69639933600007,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.774858670000071,
+                "lon": 106.69937332800004,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "validation",
+          "violations": [
+            "1",
+            "2",
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        },
+        {
+          "type": "answer",
+          "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái VF3 tới 135 Nam Kỳ Khởi Nghĩa, Quận 1, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.7770374,
+                          "lon": 106.69535,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.777991344000043,
+                          "lon": 106.69639933600007,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.774858670000071,
+                          "lon": 106.69937332800004,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickup-01",
+      "district": "Quận 1",
+      "query": "VF3 đón khách tại 135 Nam Kỳ Khởi Nghĩa, Quận 1 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 2.597,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.7770374,
+                "lon": 106.69535,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.777991344000043,
+                "lon": 106.69639933600007,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.774858670000071,
+                "lon": 106.69937332800004,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Bạn muốn đến địa chỉ 135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh hay 135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "VF3 đón khách tại 135 Nam Kỳ Khởi Nghĩa, Quận 1 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.7770374,
+                          "lon": 106.69535,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.777991344000043,
+                          "lon": 106.69639933600007,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.774858670000071,
+                          "lon": 106.69937332800004,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Bạn muốn đến địa chỉ 135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh hay 135A Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-02",
+      "district": "Quận 3",
+      "query": "Tôi lái Fortuner tới hẻm 12/3 Cao Thắng, Quận 3, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 4.329,
+      "success": true,
+      "failures": [],
+      "number_violations": [
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        }
+      ],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "hẻm 12/3 Cao Thắng, Quận 3"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7702949,
+                "lon": 106.6818005,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.76986307900006,
+                "lon": 106.68132937700005,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": [],
+            "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+          }
+        },
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        },
+        {
+          "type": "answer",
+          "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái Fortuner tới hẻm 12/3 Cao Thắng, Quận 3, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "hẻm 12/3 Cao Thắng, Quận 3"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7702949,
+                          "lon": 106.6818005,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.76986307900006,
+                          "lon": 106.68132937700005,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": [],
+                      "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickup-02",
+      "district": "Quận 3",
+      "query": "Fortuner đón khách tại hẻm 12/3 Cao Thắng, Quận 3 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 2.5,
+      "success": true,
+      "failures": [],
+      "number_violations": [
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        }
+      ],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "hẻm 12/3 Cao Thắng, Quận 3"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7702949,
+                "lon": 106.6818005,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.76986307900006,
+                "lon": 106.68132937700005,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": [],
+            "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+          }
+        },
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        },
+        {
+          "type": "answer",
+          "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Fortuner đón khách tại hẻm 12/3 Cao Thắng, Quận 3 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "hẻm 12/3 Cao Thắng, Quận 3"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7702949,
+                          "lon": 106.6818005,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.76986307900006,
+                          "lon": 106.68132937700005,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": [],
+                      "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

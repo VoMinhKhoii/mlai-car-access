@@ -136,7 +136,8 @@ class EvidenceSafetyTests(unittest.TestCase):
             }
             with patch.multiple("app.evidence", **sources):
                 normal = EvidenceStore(_field_file=fixture)
-                self.assertNotIn(544982029, normal.by_way)
+                self.assertFalse(any(bound.tier in ("Measured", "Synthetic")
+                                     for bound in normal.by_way.get(544982029, [])))
 
                 graph = AreaGraph(center=(10.0, 106.0), ways={
                     544982029: Way(544982029, {"highway": "residential", "name": "Hẻm demo"}, [1, 2]),

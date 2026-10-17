@@ -1,22 +1,31 @@
-import { CloudRain, FlaskConical, Layers, LogIn, LogOut, MapPin, Navigation, Sparkles, X } from 'lucide-react'
+import { ChevronDown, ChevronUp, CloudRain, Ellipsis, Layers, LocateFixed, MapPin, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ApiError, api, poll, routeSourceLabel, type AreaBuild, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type ManeuverState, type Plan, type Preset, type RainSpell, type Report, type RouteSource, type Vehicle, type WayEvidence } from './api'
+import { ApiError, api, poll, routeSourceLabel, type AgentPlan, type AreaBuild, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type ManeuverState, type Plan, type Preset, type RainSpell, type Report, type RouteSource, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles, type ManeuverOverlay } from './MapView'
+import { Agent } from './components/Agent'
+import type { MapContext } from './mapSearch'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
-import { StandardRouteContrast, LiveStrip, NewsList, StopRow, Verdict, exitFloodFailure } from './components/Result'
+import { StandardRouteContrast, LiveStrip, NewsList, StopPhases, StopRow, Verdict, exitFloodFailure } from './components/Result'
 import { VoiceReport } from './components/VoiceReport'
 import { useParkingWatch } from './parkingWatch'
 import { EvidencePanel } from './components/Evidence'
 import { CameraPanel, CorridorCard } from './components/Corridor'
 import { TideTimeline } from './components/TideTimeline'
-import { Segmented, metres, useOutside, vnt } from './ds/ui'
+import { Segmented, metres, minutes, useOutside } from './ds/ui'
 
 import { fromLocal, timestamp, toLocal } from './datetime'
 const DEMO_ORIGIN: Place = { lat: 10.7725, lon: 106.698, label: 'Chợ Bến Thành, Quận 1' }
 const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
 export default function App() {
+  const [agentOpen, setAgentOpen] = useState(false)
+  const [islandOpen, setIslandOpen] = useState(true)
+  const [ask, setAsk] = useState<{ q: string; id: number } | null>(null)
+  const [askDraft, setAskDraft] = useState('')
+  const [dockH, setDockH] = useState(0)
+  const dockRef = useRef<HTMLElement | null>(null)
+  const [mapContext, setMapContext] = useState<MapContext | null>(null)
   const [cfg, setCfg] = useState<Config | null>(null)
   const [fleet, setFleet] = useState<{ classes: Vehicle[]; models: Vehicle[] }>({ classes: [], models: [] })
   const [origin, setOrigin] = useState<Place | null>(null)
@@ -35,7 +44,7 @@ export default function App() {
   const [plan, setPlan] = useState<Plan | null>(null)
   const [planTripKey, setPlanTripKey] = useState('')
   const [selected, setSelected] = useState(0)
-  const [stopOpen, setStopOpen] = useState(false)
+  const [, setStopOpen] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, standard: false, cams: true })
@@ -46,9 +55,9 @@ export default function App() {
   const [story, setStory] = useState('')
   const [demoScenarioId, setDemoScenarioId] = useState<string | null>(null)
   const [pick, setPick] = useState<{ lat: number; lon: number; x: number; y: number } | null>(null)
-  const [menu, setMenu] = useState<'demo' | 'layers' | null>(null)
+  const [menu, setMenu] = useState<'demo' | 'layers' | 'samples' | null>(null)
   const [arrived, setArrived] = useState(false)
-  const [sheet, setSheet] = useState<'peek' | 'half' | 'full'>('half')
+  const [sheet, setSheet] = useState<'peek' | 'half' | 'full'>('peek')
   const [locating, setLocating] = useState(false)
   const [frame, setFrame] = useState<'arrival' | 'trip'>('arrival')
   const [now, setNow] = useState(() => Date.now())
@@ -78,8 +87,13 @@ export default function App() {
 
   const vehicleId = vMode === 'class' ? classId : vMode === 'model' ? modelId : vetcLinked ? 'toyota-fortuner' : ''
   const vehicle = useMemo(() => [...fleet.classes, ...fleet.models].find((v) => v.id === vehicleId), [fleet, vehicleId])
-  // "Đi ngay" = the next 5-minute mark, so the plan only refreshes when that mark moves.
-  const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString())! : arrive
+  // "Đi ngay" = the next 5-minute mark when the trip was set up. It is pinned there so the clock
+  // tick doesn't re-plan the trip (closing open cards, the arrival dialog and the parking watch)
+  // every 5 minutes; changing the destination, vehicle, intent, stay or "Đi ngay" itself re-anchors it.
+  const nowTripInputs = JSON.stringify([dest, origin, vehicleId, intent, dwell, arriveNow])
+  const [nowAnchor, setNowAnchor] = useState(() => ({ key: nowTripInputs, at: now }))
+  if (nowAnchor.key !== nowTripInputs) setNowAnchor({ key: nowTripInputs, at: now })
+  const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(nowAnchor.at / 300e3) * 300e3).toISOString())! : arrive
   const arriveISO = fromLocal(arriveLocal)
   const rain: RainSpell[] = useMemo(() => {
     if (!rainOn || !arriveISO) return []
@@ -158,6 +172,14 @@ export default function App() {
   }
 
   const selectedStop = plan?.stop_points[selected]
+  const hasDock = !!dest
+  useEffect(() => {
+    const el = dockRef.current
+    if (!el) { setDockH(0); return }
+    const ro = new ResizeObserver(() => setDockH(Math.round(el.getBoundingClientRect().height)))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [hasDock, plan])
   const watch = useParkingWatch({
     request: activePlanRequest, plan, selectedIndex: selected, enabled: !!plan && planTripKey === tripKey && !busy && intent === 'park',
     demo: new URLSearchParams(window.location.search).get('demo') === '1',
@@ -310,6 +332,23 @@ export default function App() {
     if (operator && plan?.area.building) watchBuild(plan.area.key)
   }, [operator, plan?.area.building, plan?.area.key, watchBuild])
 
+  function applyAgent(p: AgentPlan) {
+    const local = toLocal(p.arrive_at)
+    if (!local) return
+    chooseDest({ lat: p.lat, lon: p.lon, label: p.label })
+    setVMode(p.vehicle_id.startsWith('class-') ? 'class' : 'model')
+    if (p.vehicle_id.startsWith('class-')) setClassId(p.vehicle_id)
+    else setModelId(p.vehicle_id)
+    setIntent(p.intent)
+    setArriveNow(false)
+    setArrive(local)
+    setDwell(p.dwell_min)
+    setRainOn(p.rain.length > 0)
+    if (p.rain[0]) setRainMm(p.rain[0].mm_per_h)
+    setSelected(0)
+    setSheet(isMobile() ? 'half' : 'peek')
+  }
+
   function chooseDest(p: Place | null) {
     buildCtl.current?.abort()
     setDest(p)
@@ -361,7 +400,7 @@ export default function App() {
     setDemoScenarioId(p.id)
     setStory(p.story)
     setMenu(null)
-    setSheet('half')
+    setSheet(isMobile() ? 'half' : 'peek')
   }
 
   function setDepartureAt(iso: string) {
@@ -434,157 +473,152 @@ export default function App() {
     })
   }
 
-  const padding = isMobile() ? { top: 190, left: 24, right: 24, bottom: 320 } : { top: 60, left: 460, right: 80, bottom: 190 }
+  const inspector = !!(way || cam || agentOpen)
+  const mobile = isMobile()
+  const padding = mobile
+    ? { top: 76, left: 16, right: 16, bottom: dockH + 16 }
+    : { top: 96, left: 32, right: 88 + (inspector ? 436 : 0), bottom: dockH + 32 }
 
-  if (!cfg) return <div className="boot">{error ? `Không kết nối được máy chủ: ${error}` : <span className="boot-mark display">Vào Được</span>}</div>
+  if (!cfg) return <div className="boot">{error ? `Không kết nối được máy chủ: ${error}` : <span className="boot-mark display">Ngõ Ngách</span>}</div>
 
   const goongOn = cfg.goong.tiles
+  const islandExpanded = islandOpen
+  const stayLabel = intent === 'pickup' ? 'Đón/trả 15 phút' : `Đỗ ${minutes(dwell)}`
+  const whenLabel = arriveNow ? 'Đi ngay' : `Đến ${arriveLocal.slice(11, 16)}`
+  const parkingWatch = (watch.active || (plan?.intent === 'park' && selectedStop)) ? (
+    <ParkingWatch watch={watch} stop={selectedStop ?? null} canArrive={!!plan && !!selectedStop}
+      onArrive={() => setArrived(true)} onNotice={setNotice} />
+  ) : null
   return (
-    <div className={`app ${way || cam ? 'has-evidence' : ''}`}>
+    <div className={`app ${inspector ? 'has-inspector' : ''} ${dest || watch.active ? 'has-dock' : ''}`} style={{ '--dock-h': `${dockH}px` } as React.CSSProperties}>
       <ErrorBoundary label="Bản đồ">
         <MapView styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} origin={origin} destination={dest}
           toggles={toggles} floodMoment={floodMoment} padding={padding} frame={frame}
           corridor={corridor?.available ? corridor : null} routeSel={routeSel} cams={cams} maneuver={maneuverOverlay}
-          onCameraClick={(id) => { setWay(null); openCamera(id) }}
+          onCameraClick={(id) => { setWay(null); setAgentOpen(false); openCamera(id) }}
           onPick={(lat, lon, x, y) => setPick({ lat, lon, x, y })}
-          onWayClick={openEvidence}
+          onFeatures={setMapContext} onPlaceClick={(p) => chooseDest({ lat: p.lat, lon: p.lon, label: p.name })} onWayClick={(id, lat, lon) => { setAgentOpen(false); void openEvidence(id, lat, lon) }}
           onStopClick={(i) => {
             setSelected(i)
-            setStopOpen(false)
-            setSheet((s) => (s === 'peek' ? 'half' : s))
-            // A pin can select a stop that is scrolled out of the list: bring its card (header, evidence link) into view.
-            requestAnimationFrame(() => document.querySelectorAll('.stop')[i]?.scrollIntoView({ block: 'start', behavior: 'smooth' }))
+            setSheet('full')
+            requestAnimationFrame(() => document.querySelectorAll('.stop')[i]?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }))
           }} />
       </ErrorBoundary>
 
-      <div className="side">
-        <section className="card top">
-          <header className="brand">
-            <span className="logo" aria-hidden>VĐ</span>
-            <span className="brand-name display">Vào Được</span>
-            <span className="brand-sub">lớp hẻm cho T-Maps</span>
-            <DemoMenu open={menu === 'demo'} onOpen={(o) => setMenu(o ? 'demo' : null)} cfg={cfg} loadPreset={loadPreset}
-              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm} setRainMm={setRainMm} setFlag={setFlag}
-              canArrive={!!plan} onArrive={() => { setArrived(true); setMenu(null) }}
-              onLogin={login} onLogout={logout} onApproved={() => runRef.current()} />
-          </header>
-          <Directions origin={origin} dest={dest} setOrigin={setOrigin} setDest={chooseDest} locating={locating} onLocate={locate}
-            vehicle={vehicle} fleet={fleet} vMode={vMode} setVMode={setVMode} classId={classId} setClassId={setClassId}
-            modelId={modelId} setModelId={setModelId} vetcLinked={vetcLinked} openVetc={() => setVetcOpen(true)} unlinkVetc={() => setVetcLinked(false)}
-            intent={intent} setIntent={setIntent} dwell={dwell} setDwell={setDwell}
-            arrive={arriveLocal} setArrive={setArrive} arriveNow={arriveNow} setArriveNow={setArriveNow} />
-        </section>
+      <section className={`island glass ${islandExpanded ? 'is-open' : ''}`} aria-label="Chuyến đi">
+        {islandExpanded ? (
+          <>
+            <header className="island-head">
+              <span className="wordmark display">Ngõ Ngách</span>
+              <button type="button" className="btn btn-ghost btn-sm island-collapse" aria-label="Thu gọn ô chuyến đi để xem bản đồ" onClick={() => setIslandOpen(false)}>
+                <ChevronUp size={16} />Thu gọn
+              </button>
+            </header>
+            <Directions mapContext={mapContext} origin={origin} dest={dest} setOrigin={setOrigin} setDest={(p) => { chooseDest(p); if (p) setIslandOpen(false) }} locating={locating} onLocate={locate}
+              vehicle={vehicle} fleet={fleet} vMode={vMode} setVMode={setVMode} classId={classId} setClassId={setClassId}
+              modelId={modelId} setModelId={setModelId} vetcLinked={vetcLinked} openVetc={() => setVetcOpen(true)} unlinkVetc={() => setVetcLinked(false)}
+              intent={intent} setIntent={setIntent} dwell={dwell} setDwell={setDwell}
+              arrive={arriveLocal} setArrive={setArrive} arriveNow={arriveNow} setArriveNow={setArriveNow} />
+            <form className="island-ask" onSubmit={(e) => {
+              e.preventDefault()
+              const q = askDraft.trim()
+              setWay(null); setCam(null); setAgentOpen(true)
+              if (q) { setAsk({ q, id: Date.now() }); setAskDraft('') }
+            }}>
+              <input value={askDraft} onChange={(e) => setAskDraft(e.target.value)} aria-label="Hỏi AlleyAI bằng một câu"
+                placeholder="Hỏi một câu: “Fortuner tới 113/4 Võ Duy Ninh”" />
+              <button type="submit" className="btn btn-sm btn-tonal">Hỏi AlleyAI</button>
+            </form>
+          </>
+        ) : (
+          <button type="button" className="island-summary" onClick={() => setIslandOpen(true)} aria-label="Sửa chuyến đi">
+            <span className="wordmark display">Ngõ Ngách</span>
+            <span className="island-trip">
+              {origin && <span className="island-from">{origin.label.split(',')[0]}</span>}
+              <span className="island-to">{dest ? dest.label.split(',')[0] : 'Chọn điểm đến'}</span>
+            </span>
+            <span className="island-meta">{vehicle?.label ?? 'Chưa chọn xe'} · {stayLabel} · {whenLabel}</span>
+          </button>
+        )}
+      </section>
 
-        <section className={`card sheet sheet-${sheet}`} aria-label="Kết quả">
-          <button type="button" className="sheet-handle" aria-label="Thu/mở bảng kết quả"
-            onClick={() => setSheet((s) => (s === 'peek' ? 'half' : s === 'half' ? 'full' : 'peek'))}><i /></button>
-          <div className="sheet-body">
-            {error && <p className="error-line">{error}</p>}
-            {notice && <p className="error-line" role="status" onClick={() => setNotice('')}>{notice}</p>}
-            {!dest && <Welcome presets={cfg.presets} loadPreset={loadPreset} />}
-            {dest && !plan && busy && <SkeletonResult />}
-            {plan && (
-              <>
-                <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Kết quả chuyến đi">
-                {story && <details className="why scenario-note"><summary>Kịch bản demo</summary><p>{story}</p></details>}
-                <Verdict plan={plan} onDeparture={setDepartureAt} stale={busy || planTripKey !== tripKey} />
-                {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
-                  onSelect={(i) => { setRouteSel(i); setFrame('trip') }} onCamera={(c) => { setWay(null); setCam(c) }} />}
-                {plan.live_crawl && <AreaStatusLine plan={plan} build={build} operator={operator} onBuild={startBuild} />}
-                {build && <LiveStrip build={build} />}
-                {plan.area_data && <NewsList items={plan.area_data.news} />}
-                <h3 className="section-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý</h3>
-                <div className="stops">
-                  {plan.stop_points.map((s, i) => (
-                    <StopRow key={`${s.lat},${s.lon}`} s={s} plan={plan} index={i} selected={i === selected} open={i === selected && stopOpen}
-                      maneuver={i === selected ? activeManeuver : null}
-                      onSelect={() => { if (i === selected) setStopOpen((o) => !o); else { setSelected(i); setStopOpen(false) } }}
-                      onEvidence={(id) => openEvidence(id, s.lat, s.lon)}
-                      onManeuver={() => void openManeuver(i, s)} maneuverDisabled={busy || planTripKey !== tripKey || !vehicleId}
-                      onReplay={replayManeuver} onDismiss={closeManeuver} />
-                  ))}
-                  {!plan.stop_points.length && <p className="muted">{plan.verdict.detail}</p>}
-                </div>
-                {(watch.active || (plan.intent === 'park' && selectedStop)) && (
-                  <section className="parking-watch" aria-label="Theo dõi điểm đỗ">
-                    <div className="watch-heading">
-                      <div><strong>{watch.active ? 'Đang theo dõi điểm đỗ' : 'Theo dõi điểm đỗ'}</strong>
-                        <small>{watch.active ? watch.session?.stopName : 'Kiểm tra lại khi thẻ đang mở'}</small></div>
-                      {watch.active
-                        ? <button type="button" className="btn btn-ghost btn-sm" onClick={watch.end}>Kết thúc</button>
-                        : <button type="button" className="btn btn-outline btn-sm" disabled={!watch.canStart} onClick={() => watch.start()}>Bắt đầu</button>}
-                    </div>
-                    <small>Thông báo là tùy chọn; cảnh báo vẫn hiện khi thẻ còn mở.</small>
-                    {watch.active && !watch.contextMatches && <small>Theo dõi vẫn gắn với chuyến đã lưu, không phải lựa chọn hiện tại.</small>}
-                    {watch.active && <div className="watch-meta">
-                      <span>{watch.checking ? 'Đang kiểm tra…' : watch.lastCheckLabel ? `Kiểm tra lúc ${watch.lastCheckLabel}` : 'Chưa có lần kiểm tra thành công'}</span>
-                      <button type="button" className="link-btn" onClick={() => void watch.check()} disabled={watch.checking}>Kiểm tra ngay</button>
-                      {'Notification' in window && Notification.permission !== 'granted' && (
-                        <button type="button" className="link-btn" onClick={async () => {
-                          try {
-                            const permission = await watch.requestNotifications()
-                            setNotice(permission === 'granted'
-                              ? 'Đã bật thông báo trên thiết bị.'
-                              : 'Thông báo không được bật. Cảnh báo vẫn hiện trong ứng dụng khi thẻ đang mở.')
-                          } catch {
-                            setNotice('Không bật được thông báo. Cảnh báo vẫn hiện trong ứng dụng khi thẻ đang mở.')
-                          }
-                        }}>Bật thông báo</button>
-                      )}
-                    </div>}
-                    {!watch.active && selectedStop && !selectedStop.verified
-                      && <small>Điểm dừng chưa xác minh; theo dõi không xác nhận xe vào hoặc ra được.</small>}
-                    {watch.error && <p className="watch-error" role="status">
-                      Lỗi kiểm tra{watch.lastCheckLabel ? ` · lần gần nhất ${watch.lastCheckLabel}` : ''}: {watch.error}
-                    </p>}
-                    {watch.banner && <p className="watch-alert" role="alert">{watch.banner}
-                      <button type="button" className="link-btn" onClick={watch.clearBanner}>Đóng</button>
-                    </p>}
-                  </section>
-                )}
-                {plan.door && !plan.door.ok && (
-                  <details className="why">
-                    <summary>Vì sao không vào tận cửa?</summary>
-                    <ul>{plan.door.fail_reasons.map((r, i) => <li key={i}>{vnt(r)}</li>)}</ul>
-                  </details>
-                )}
-                {vehicle && <StandardRouteContrast plan={plan} vehicleLabel={vehicle.label} show={toggles.standard} onToggle={() => setToggles((t) => ({ ...t, standard: !t.standard }))} />}
-                <details className="why sources"><summary>Nguồn dữ liệu</summary><p>{goongOn ? 'Goong (bản đồ nền)' : 'bản đồ nền tạm'}, OpenStreetMap{plan.standard_route ? `, tuyến tham chiếu ${routeSourceLabel(plan.standard_route.source)}` : ''}, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt, camera giao thông TP.HCM.</p></details>
-                </ErrorBoundary>
-              </>
-            )}
-            {watch.active && !plan && <section className="parking-watch" aria-label="Theo dõi điểm đỗ">
-              <div className="watch-heading">
-                <div><strong>Đang theo dõi điểm đỗ</strong><small>{watch.session?.stopName}</small></div>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={watch.end}>Kết thúc</button>
-              </div>
-              <p className="watch-error">{watch.error
-                ? `Lỗi kiểm tra${watch.lastCheckLabel ? ` · lần gần nhất ${watch.lastCheckLabel}` : ''}: ${watch.error}`
-                : watch.banner || 'Theo dõi bằng cách kiểm tra lại khi thẻ đang mở.'}</p>
-            </section>}
-          </div>
-        </section>
-      </div>
+      <SamplesMenu presets={cfg.presets} open={menu === 'samples'} onOpen={(o) => setMenu(o ? 'samples' : null)}
+        onPick={(p) => { loadPreset(p); setIslandOpen(false); setMenu(null) }} />
 
-      {plan && ((plan.origin && plan.stop_points[selected]?.approach) || corridor?.available) && (
-        <div className="frame-toggle">
-          <Segmented label="Khung bản đồ" value={frame} onChange={setFrame}
-            options={[{ value: 'arrival', label: 'Đoạn cuối' }, { value: 'trip', label: 'Cả tuyến' }]} />
-        </div>
-      )}
-      <div className="map-tools">
+      <Agent origin={origin} onPlan={(p) => { applyAgent(p); setIslandOpen(false) }} open={agentOpen} setOpen={(o) => { if (o) { setWay(null); setCam(null) } setAgentOpen(o) }} mapContext={mapContext} ask={ask} />
+
+      <nav className="rail glass" aria-label="Công cụ bản đồ">
         <LayersMenu open={menu === 'layers'} onOpen={(o) => setMenu(o ? 'layers' : null)} toggles={toggles} setToggles={setToggles}
           floodMoment={floodMoment} setFloodMoment={setFloodMoment} standardSource={plan?.standard_route?.source ?? null} />
-      </div>
+        <button type="button" className="icon-btn raised" aria-label="Dùng vị trí hiện tại" title="Dùng vị trí hiện tại" onClick={locate}>
+          <LocateFixed size={19} className={locating ? 'spin' : ''} />
+        </button>
+        <DemoMenu open={menu === 'demo'} onOpen={(o) => setMenu(o ? 'demo' : null)} cfg={cfg} loadPreset={loadPreset} story={story}
+          rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm} setRainMm={setRainMm} setFlag={setFlag}
+          onLogin={login} onLogout={logout} onApproved={() => runRef.current()} />
+      </nav>
 
-      {plan && (
-        <div className="timeline-dock">
-          <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Biểu đồ triều">
-            <TideTimeline arrive={plan.window.arrive} depart={plan.window.depart} leaveBeforeAt={plan.timing?.leave_before_at} orAfterAt={plan.intent === 'park' ? plan.timing?.or_after_at : null}
-              timingReason={plan.timing?.reason} timingApproximate={plan.timing?.approximate} exitFloods={exitFloodFailure(plan)} station={cfg.tide.station} rain={plan.window.rain}
-              onChange={(iso) => { const local = toLocal(iso); if (local) { setArriveNow(false); setArrive(local) } }} />
-          </ErrorBoundary>
-        </div>
+      {(dest || watch.active) && (
+        <section ref={dockRef} className={`dock glass dock-${sheet}`} aria-label="Hành trình: vào, ở lại, ra">
+          <button type="button" className="sheet-handle" aria-label="Thu hoặc mở bảng hành trình"
+            onClick={() => setSheet((s) => (s === 'peek' ? 'half' : s === 'half' ? 'full' : 'peek'))}><i /></button>
+          <div className="dock-body">
+            {error && <p className="error-line">{error}</p>}
+            {notice && <p className="error-line" role="status" onClick={() => setNotice('')}>{notice}</p>}
+            {dest && !plan && busy && <SkeletonResult />}
+            {plan && (
+              <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Kết quả chuyến đi">
+                <div className="dock-main">
+                  <div className="dock-verdict">
+                    <Verdict plan={plan} onDeparture={setDepartureAt} stale={busy || planTripKey !== tripKey} />
+                    <div className="dock-bar">
+                      <button type="button" className="btn btn-outline btn-sm" aria-expanded={sheet !== 'peek'}
+                        onClick={() => setSheet((s) => (s === 'peek' ? 'full' : 'peek'))}>
+                        {sheet !== 'peek' ? <><ChevronDown size={16} />Ẩn chi tiết</> : `Xem ${plan.stop_points.length} chỗ ${plan.intent === 'park' ? 'đỗ' : 'dừng'}: vào, ở lại, ra`}
+                      </button>
+                      {((plan.origin && plan.stop_points[selected]?.approach) || corridor?.available) && (
+                        <Segmented label="Khung bản đồ" value={frame} onChange={setFrame}
+                          options={[{ value: 'arrival', label: 'Đoạn cuối' }, { value: 'trip', label: 'Cả tuyến' }]} />
+                      )}
+                    </div>
+                  </div>
+                  <div className="dock-tide">
+                    <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Biểu đồ triều">
+                      <TideTimeline arrive={plan.window.arrive} depart={plan.window.depart} leaveBeforeAt={plan.timing?.leave_before_at} orAfterAt={plan.intent === 'park' ? plan.timing?.or_after_at : null}
+                        timingReason={plan.timing?.reason} timingApproximate={plan.timing?.approximate} exitFloods={exitFloodFailure(plan)} station={cfg.tide.station} rain={plan.window.rain}
+                        onChange={(iso) => { const local = toLocal(iso); if (local) { setArriveNow(false); setArrive(local) } }} />
+                    </ErrorBoundary>
+                  </div>
+                </div>
+                <div className="dock-detail">
+                  <div className="dock-stops">
+                    {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
+                      onSelect={(i) => { setRouteSel(i); setFrame('trip') }} onCamera={(c) => { setWay(null); setAgentOpen(false); setCam(c) }} />}
+                    <h3 className="phase-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'}</h3>
+                    <div className="stops">
+                      {plan.stop_points.map((s, i) => (
+                        <StopRow key={`${s.lat},${s.lon}`} s={s} index={i} selected={i === selected} onSelect={() => setSelected(i)} />
+                      ))}
+                      {!plan.stop_points.length && <p>{plan.verdict.detail}</p>}
+                    </div>
+                    {plan.live_crawl && <AreaStatusLine plan={plan} build={build} operator={operator} onBuild={startBuild} />}
+                    {build && <LiveStrip build={build} />}
+                    {plan.area_data && <NewsList items={plan.area_data.news} />}
+                    {vehicle && <StandardRouteContrast plan={plan} vehicleLabel={vehicle.label} show={toggles.standard} onToggle={() => setToggles((t) => ({ ...t, standard: !t.standard }))} />}
+                    <details className="why sources"><summary>Nguồn dữ liệu</summary><p>{goongOn ? 'Goong (bản đồ nền)' : 'bản đồ nền tạm'}, OpenStreetMap{plan.standard_route ? `, tuyến tham chiếu ${routeSourceLabel(plan.standard_route.source)}` : ''}, IRD 2002–2026, Đài KTTV Nam Bộ, VETC, Chợ Tốt, camera giao thông TP.HCM.</p></details>
+                  </div>
+                  {selectedStop && (
+                    <StopPhases s={selectedStop} plan={plan} onEvidence={(id) => { setAgentOpen(false); void openEvidence(id, selectedStop.lat, selectedStop.lon) }}
+                      maneuver={activeManeuver} maneuverDisabled={busy || planTripKey !== tripKey || !vehicleId}
+                      onManeuver={() => void openManeuver(selected, selectedStop)} onReplay={replayManeuver} onDismiss={closeManeuver}
+                      stay={parkingWatch} />
+                  )}
+                </div>
+              </ErrorBoundary>
+            )}
+            {!plan && parkingWatch}
+          </div>
+        </section>
       )}
 
       {cam && !way && (
@@ -607,9 +641,9 @@ export default function App() {
         <div className="arrive card" role="dialog" aria-label="Báo cáo sau khi đến">
           <button type="button" className="icon-btn close" aria-label="Đóng" onClick={() => setArrived(false)}><X size={16} /></button>
           <h3 className="display">Bạn đã tới điểm dừng?</h3>
-          <p className="muted">Báo cáo chỉ trở thành bằng chứng sau khi người điều hành duyệt. Không làm thay đổi kết luận phù hợp hay an toàn.</p>
+          <p>Báo cáo chỉ trở thành bằng chứng sau khi người điều hành duyệt. Không làm thay đổi kết luận phù hợp hay an toàn.</p>
           {selectedStop.kind === 'lot' || selectedStop.way_id == null
-            ? <p className="muted" role="status">Bãi đỗ không xác nhận xe đã vào hẻm. Chọn một điểm dừng trên đường để gửi báo cáo.</p>
+            ? <p role="status">Bãi đỗ không xác nhận xe đã vào hẻm. Chọn một điểm dừng trên đường để gửi báo cáo.</p>
             : <VoiceReport stop={selectedStop} vehicleId={plan.vehicle.id} destination={plan.destination}
               voiceEnabled={cfg.flags.some((flag) => flag.name === 'ai_voice_report' && flag.enabled)}
               onConfirm={confirmArrival} onBlockage={reportBlockage} />}
@@ -620,7 +654,7 @@ export default function App() {
         <div className="scrim" onClick={() => setVetcOpen(false)}>
           <div className="modal card" role="dialog" aria-label="Liên kết VETC" onClick={(e) => e.stopPropagation()}>
             <span className="tag brand">Mô phỏng · chưa có API VETC</span>
-            <h3 className="display">Vào Được muốn đọc thông tin xe trong VETC</h3>
+            <h3 className="display">Ngõ Ngách muốn đọc thông tin xe trong VETC</h3>
             <p>Chỉ để tính xe có vừa hẻm và lội nước được không:</p>
             <ul><li>Danh sách xe (biển số đã che)</li><li>Mẫu xe và số chỗ</li></ul>
             <p className="faint">Không đọc vị trí hay lịch sử qua trạm. Theo Luật Bảo vệ dữ liệu cá nhân 91/2025, bạn có thể rút lại đồng ý bất cứ lúc nào.</p>
@@ -635,24 +669,71 @@ export default function App() {
   )
 }
 
-function Welcome({ presets, loadPreset }: { presets: Preset[]; loadPreset: (p: Preset) => void }) {
+/** "Báo nếu nước lên": re-checks the parked stop while the tab is open. One component for both the stop and the no-plan state. */
+function ParkingWatch({ watch, stop, canArrive, onArrive, onNotice }: {
+  watch: ReturnType<typeof useParkingWatch>; stop: Plan['stop_points'][number] | null
+  canArrive: boolean; onArrive: () => void; onNotice: (s: string) => void
+}) {
   return (
-    <div className="welcome">
-      <h2 className="display">Xe của bạn vào được, và ra được, không?</h2>
-      <p className="muted">Nhập điểm đến. Vào Được kiểm tra bề rộng hẻm theo đúng xe của bạn, triều và ngập trong lúc bạn ở lại, luật dừng đỗ, rồi chỉ chỗ dừng gần nhất kèm quãng đi bộ.</p>
-      <div className="legend-row" aria-hidden>
-        <span><i style={{ background: 'var(--fit-fits)' }} />Vừa xe</span>
-        <span><i style={{ background: 'var(--fit-tight)' }} />Chật</span>
-        <span><i style={{ background: 'var(--fit-no)' }} />Không vừa</span>
-        <span><i className="dash" />Chưa rõ</span>
+    <section className="parking-watch" aria-label="Báo nếu nước lên">
+      <div className="watch-heading">
+        <div><strong>{watch.active ? 'Đang theo dõi nước' : 'Báo nếu nước lên'}</strong>
+          <small>{watch.active ? watch.session?.stopName : 'Kiểm tra lại khi thẻ còn mở; thông báo là tùy chọn.'}</small></div>
+        {watch.active
+          ? <button type="button" className="btn btn-ghost btn-sm" onClick={watch.end}>Kết thúc</button>
+          : <button type="button" className="btn btn-outline btn-sm" disabled={!watch.canStart} onClick={() => watch.start()}>Bắt đầu</button>}
       </div>
-      <h3 className="section-title">Thử nhanh</h3>
-      <ul className="examples">
-        {presets.map((p) => (
-          <li key={p.id}><button type="button" onClick={() => loadPreset(p)}><MapPin size={16} /><span><b>{p.title}</b><small>{p.label}</small></span></button></li>
-        ))}
-      </ul>
-      <p className="faint tip">Mẹo: nhấp chuột phải (hoặc nhấn giữ) trên bản đồ để đặt điểm đi, điểm đến.</p>
+      {watch.active && !watch.contextMatches && <small>Theo dõi vẫn gắn với chuyến đã lưu, không phải lựa chọn hiện tại.</small>}
+      {watch.active && <div className="watch-meta">
+        <span>{watch.checking ? 'Đang kiểm tra…' : watch.lastCheckLabel ? `Kiểm tra lúc ${watch.lastCheckLabel}` : 'Chưa có lần kiểm tra thành công'}</span>
+        <button type="button" className="link-btn" onClick={() => void watch.check()} disabled={watch.checking}>Kiểm tra ngay</button>
+        {'Notification' in window && Notification.permission !== 'granted' && (
+          <button type="button" className="link-btn" onClick={async () => {
+            try {
+              const permission = await watch.requestNotifications()
+              onNotice(permission === 'granted'
+                ? 'Đã bật thông báo trên thiết bị.'
+                : 'Thông báo không được bật. Cảnh báo vẫn hiện trong ứng dụng khi thẻ đang mở.')
+            } catch {
+              onNotice('Không bật được thông báo. Cảnh báo vẫn hiện trong ứng dụng khi thẻ đang mở.')
+            }
+          }}>Bật thông báo</button>
+        )}
+      </div>}
+      {!watch.active && stop && !stop.verified
+        && <small>Điểm dừng chưa xác minh; theo dõi không xác nhận xe vào hoặc ra được.</small>}
+      {watch.error && <p className="watch-error" role="status">
+        Lỗi kiểm tra{watch.lastCheckLabel ? ` · lần gần nhất ${watch.lastCheckLabel}` : ''}: {watch.error}
+      </p>}
+      {watch.banner && <p className="watch-alert" role="alert">{watch.banner}
+        <button type="button" className="link-btn" onClick={watch.clearBanner}>Đóng</button>
+      </p>}
+      {canArrive && <button type="button" className="btn btn-tonal btn-sm watch-arrive" onClick={onArrive}>Đã tới nơi: báo hẻm thế nào</button>}
+    </section>
+  )
+}
+
+/** Sample trips live in their own capsule on the left, so the trip island stays a single editor. */
+function SamplesMenu({ presets, open, onOpen, onPick }: { presets: Preset[]; open: boolean; onOpen: (o: boolean) => void; onPick: (p: Preset) => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useOutside(ref, open, () => onOpen(false))
+  if (!presets.length) return null
+  return (
+    <div className="samples" ref={ref}>
+      <button type="button" className={`samples-btn glass ${open ? 'is-open' : ''}`} aria-expanded={open} aria-controls="samples-panel" onClick={() => onOpen(!open)}>
+        Chuyến mẫu <span className="samples-count num">{presets.length}</span>
+      </button>
+      {open && (
+        <div id="samples-panel" className="popover samples-panel" role="dialog" aria-label="Chuyến mẫu">
+          <p className="welcome-lede">Ngõ Ngách so bề rộng hẻm với đúng xe của bạn, xem triều lúc bạn ở lại, rồi chỉ chỗ dừng gần nhất. Thử một chuyến:</p>
+          <ul className="examples">
+            {presets.map((p) => (
+              <li key={p.id}><button type="button" onClick={() => onPick(p)}><b>{p.label}</b><small>{p.title}</small></button></li>
+            ))}
+          </ul>
+          <p className="faint">Hoặc nhấp chuột phải trên bản đồ để đặt điểm đi, điểm đến.</p>
+        </div>
+      )}
     </div>
   )
 }
@@ -703,7 +784,7 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
     <div className="tool" ref={ref}>
       <button type="button" className={`icon-btn raised ${open ? 'on' : ''}`} aria-label="Lớp bản đồ" aria-expanded={open} onClick={() => onOpen(!open)}><Layers size={19} /></button>
       {open && (
-        <div className="popover pop-right layers" role="dialog" aria-label="Lớp bản đồ">
+        <div className="popover pop-left layers" role="dialog" aria-label="Lớp bản đồ">
           <h4>Lớp bản đồ</h4>
           {row('fit', 'Độ vừa hẻm với xe của bạn', <span className="sw-fit" />)}
           <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Vừa</span><span><i style={{ background: 'var(--fit-tight)' }} />Chật</span><span><i style={{ background: 'var(--fit-no)' }} />Không vừa</span><span><i className="dash" />Chưa rõ</span><span><i style={{ background: 'var(--fit-blocked)' }} />Bị chặn</span></div>
@@ -719,10 +800,10 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
   )
 }
 
-function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, setRainMm, setFlag, canArrive, onArrive, onLogin, onLogout, onApproved }: {
-  open: boolean; onOpen: (o: boolean) => void; cfg: Config; loadPreset: (p: Preset) => void
+function DemoMenu({ open, onOpen, cfg, loadPreset, story, rainOn, setRainOn, rainMm, setRainMm, setFlag, onLogin, onLogout, onApproved }: {
+  open: boolean; onOpen: (o: boolean) => void; cfg: Config; loadPreset: (p: Preset) => void; story: string
   rainOn: boolean; setRainOn: (b: boolean) => void; rainMm: number; setRainMm: (n: number) => void
-  setFlag: (f: Flag, on: boolean) => void; canArrive: boolean; onArrive: () => void
+  setFlag: (f: Flag, on: boolean) => void
   onLogin: (secret: string) => Promise<void>; onLogout: () => Promise<void>; onApproved: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -732,26 +813,26 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
   const op = cfg.operator.signed_in
   return (
     <div className="tool demo" ref={ref}>
-      <button type="button" className={`btn btn-ghost btn-sm ${open ? 'on' : ''}`} aria-expanded={open} onClick={() => onOpen(!open)}>
-        <FlaskConical size={15} />Demo
+      <button type="button" className={`icon-btn raised ${open ? 'on' : ''}`} aria-label="Kịch bản demo và điều hành" title="Kịch bản demo và điều hành" aria-expanded={open} onClick={() => onOpen(!open)}>
+        <Ellipsis size={19} />
       </button>
       {open && (
-        <div className="popover pop-right demo-menu" role="dialog" aria-label="Công cụ demo">
-          <h4>Kịch bản</h4>
+        <div className="popover pop-left demo-menu" role="dialog" aria-label="Kịch bản demo và điều hành">
+          <h4>Kịch bản demo</h4>
+          {story && <p className="scenario-story">{story}</p>}
           <ul className="examples compact">
-            {cfg.presets.map((p) => <li key={p.id}><button type="button" onClick={() => loadPreset(p)}><MapPin size={14} /><span><b>{p.title}</b><small>{p.label}</small></span></button></li>)}
+            {cfg.presets.map((p) => <li key={p.id}><button type="button" onClick={() => loadPreset(p)}><b>{p.title}</b><small>{p.label}</small></button></li>)}
           </ul>
           <h4>Giả lập</h4>
           <label className="layer-row"><input type="checkbox" checked={rainOn} onChange={(e) => setRainOn(e.target.checked)} /><CloudRain size={15} /><span>Mưa giả định {rainOn ? `${rainMm} mm/h` : '(tắt: dùng mưa đo)'}</span></label>
           {rainOn && <input type="range" min={10} max={90} step={5} value={rainMm} onChange={(e) => setRainMm(Number(e.target.value))} aria-label="Lượng mưa" />}
-          <button type="button" className="btn btn-outline btn-sm" disabled={!canArrive} onClick={onArrive}><Navigation size={14} />Đã tới nơi</button>
           <h4>Điều hành</h4>
           {!cfg.operator.available ? (
             <p className="faint">Chức năng điều hành chưa bật trên máy chủ này.</p>
           ) : op ? (
             <div className="operator-row">
               <span>Đang đăng nhập điều hành</span>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={onLogout}><LogOut size={14} />Đăng xuất</button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={onLogout}>Đăng xuất</button>
             </div>
           ) : (
             <form className="operator-row" onSubmit={async (e) => {
@@ -761,12 +842,12 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
             }}>
               <input type="password" autoComplete="current-password" aria-label="Mật khẩu điều hành" placeholder="Mật khẩu điều hành"
                 value={secret} onChange={(e) => setSecret(e.target.value)} />
-              <button type="submit" className="btn btn-outline btn-sm" disabled={!secret}><LogIn size={14} />Đăng nhập</button>
+              <button type="submit" className="btn btn-outline btn-sm" disabled={!secret}>Đăng nhập</button>
               {loginError && <small className="error-line">{loginError}</small>}
             </form>
           )}
           {op && <ReportQueue onApproved={onApproved} />}
-          <h4><Sparkles size={13} /> Nguồn dữ liệu và AI</h4>
+          <h4>Nguồn dữ liệu</h4>
           {!op && <p className="faint">Chỉ người điều hành mới bật/tắt được.</p>}
           <ul className="flags">
             {cfg.flags.map((f) => (
@@ -781,7 +862,7 @@ function DemoMenu({ open, onOpen, cfg, loadPreset, rainOn, setRainOn, rainMm, se
 
 const REPORT_KIND: Record<Report['type'], string> = {
   confirmation: 'Xác nhận sau khi đến', blockage: 'Vật cản tạm thời', flood_report: 'Báo ngập',
-  stop_rule: 'Quy định dừng/đỗ', photo_reading: 'AI đọc ảnh',
+  stop_rule: 'Quy định dừng/đỗ', photo_reading: 'AI đọc ảnh', field_measurement: 'Đo hiện trường',
 }
 
 function reportSummary(r: Report): string {
@@ -806,6 +887,7 @@ function reportSummary(r: Report): string {
       : 'tọa độ không rõ'
     return `${p.vehicle_label}: ${result} · ${exit} · ${widthImpact} · ${location} · hẻm OSM ${ingress} · way ra ${egress}`
   }
+  if (r.type === 'field_measurement') return `${p.width_m} m · ${p.method} · OSM ${p.osm_way_id} · ${p.note ?? ''}`
   if (r.type === 'blockage') return `${p.reason} (đoạn ${p.way_id}, ngày ${p.date})`
   if (r.type === 'flood_report') return `${p.street ?? 'không rõ đường'}: ${p.depth_cm ?? '?'} cm`
   return String(p.street ?? p.type ?? p.notes ?? '')

@@ -1,0 +1,3 @@
+{"type": "progress", "text": "AI đang bận; tiếp tục kiểm tra yêu cầu bằng công cụ và bằng chứng."}
+{"type": "answer", "text": "Bạn lái mẫu xe nào hoặc xe thuộc nhóm kích thước nào?"}
+{"type": "done", "contents": [{"role": "user", "parts": [{"text": "asdfgh zxcvbn @@@ ???"}]}, {"role": "model", "parts": [{"text": "Bạn lái mẫu xe nào hoặc xe thuộc nhóm kích thước nào?"}]}]}

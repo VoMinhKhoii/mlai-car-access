@@ -8,6 +8,7 @@ Caps protect one backend's own spend; they are not a $0 billing guarantee for a 
 from __future__ import annotations
 
 import hashlib
+import fcntl
 import os
 import threading
 from datetime import datetime, timedelta, timezone
@@ -53,7 +54,9 @@ def spend(sku: str) -> None:
         raise OverBudget(f"{sku}: not an allowed Google SKU")
     now = datetime.now(VN_TZ)
     month, day = now.strftime("%Y-%m"), now.strftime("%Y-%m-%d")
-    with _lock:
+    USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with _lock, USAGE_FILE.with_suffix(".lock").open("a") as lease:
+        fcntl.flock(lease, fcntl.LOCK_EX)
         u = _load(USAGE_FILE)
         m = u.setdefault(month, {}).setdefault(sku, 0)
         d = u.setdefault(day, {}).setdefault(sku, 0)

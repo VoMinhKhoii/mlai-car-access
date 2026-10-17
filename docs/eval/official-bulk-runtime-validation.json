@@ -1,0 +1,50 @@
+{
+  "ways_checked": 295,
+  "changed_clear_width_or_other_evidence": 0,
+  "metadata_nonempty": 295,
+  "example_way": 192289502,
+  "example_current_width": {
+    "lo": 5.5,
+    "hi": 10.0,
+    "top_tier": "Inferred"
+  },
+  "example_metadata": [
+    {
+      "id": "ht_lg_hem_pla_line.343",
+      "source_id": "hcmgis_pla_2021",
+      "source_date": "2021-08-09",
+      "name": "xa lộ Hà Nội",
+      "road_base_width_m": null,
+      "reported_road_width_m": [
+        50.0,
+        50.0
+      ],
+      "width_definition": "Source field chieurong; base/surface/clear-width meaning unverified",
+      "planned_right_of_way_m": null,
+      "url": "https://maps.hcmgis.vn/statistic",
+      "reported_position_accuracy": 0.8,
+      "position_accuracy_unit": "not_verified_from_service_metadata",
+      "match_method": "whole_way_geometry_90pct_3m",
+      "match": {
+        "aligned_fraction": 1.0,
+        "fraction_within_3m": 1.0,
+        "length_fraction_within_3m": 1.0,
+        "max_distance_m": 1.822,
+        "mean_distance_m": 1.048
+      },
+      "way_ids": [
+        192289502
+      ],
+      "osm_name": "Cầu Rạch Chiếc",
+      "status": "historical_width_definition_unverified",
+      "tier": "Official",
+      "affects_clear_width": false,
+      "source_title": "HCMGIS Maps / Phước Long A: Hiện trạng lộ giới hẻm (Line)",
+      "reuse": "WFS Fees/AccessConstraints NONE; explicit data licence not stated; permission needed for redistribution",
+      "attribution": "",
+      "detail": "Số liệu nền đường / lộ giới theo hồ sơ có ngày; chưa xác minh hiện trạng thông thủy. Không dùng để kết luận xe vào được hoặc không vào được."
+    }
+  ],
+  "network_calls": 0,
+  "http_guard": "requests and sync/async httpx requests forbidden"
+}

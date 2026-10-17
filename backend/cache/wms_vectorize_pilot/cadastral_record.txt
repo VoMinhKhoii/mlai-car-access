@@ -1,0 +1,130 @@
+Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)
+HCMC GEOPORTAL
+Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)
+Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác "Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh" theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường.
+Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan.
+Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu.
+Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh)  tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết).
+Simple
+Date (Revision)
+2010-01-30
+Edition
+V2010
+Presentation form
+Digital map
+Purpose
+Dữ liệu ranh thửa được cung cấp tạm thời phục phụ tham chiếu để làm nền phát triển và xây dựng các dữ liệu, ứng dụng khác trong khi chờ đợi Sở TNMT triển khai xây dựng CSDL địa chính mới hơn.
+Dữ liệu ranh thửa đất mang chỉ mang tính chất tham khảo, tham chiếu để phục vụ các mục tiêu khác nhau. Dữ liệu ranh thửa đất không có giá trị pháp lý để xử lý các vấn đề liên quan đến quản lý nhà nuốc về đất đai)
+Status
+On going
+owner
+Sở Tài nguyên và Môi trường Thành phố Hồ Chí Minh
+-
+Nguyễn Toàn Thắng
+(
+Giám đốc
+)
+63 Lý Tự Trọng, Phường Bến Nghé
+,
+Thành phố Hồ Chí Minh
+,
+Quận 1
+,
+028
+,
+Việt Nam
+028 38293661
+028 38231806
+Maintenance and update frequency
+Irregular
+Keywords
+Ranh thửa Quận 1
+Keywords
+Access constraints
+Copyright
+Use constraints
+Copyright
+Other constraints
+Dữ liệu này được khai thác và sử dụng miễn phí. Các ứng dụng thương mại hoặc các dự án, công trình, nhiệm vụ sử dụng dữ liệu này phải thực hiện nghĩa vụ tài chính theo quy định
+Denominator
+1000
+Metadata language
+vie
+Character set
+UTF8
+Topic category
+Boundaries
+Begin date
+2010-01-01
+End date
+2010-12-31
+N
+S
+E
+W
+Reference system identifier
+WGS84, VN2000
+Transformation parameter availability
+No
+Checkpoint Availability
+No
+Point in Pixel
+OnLine resource
+Hệ thống trục tích hợp các dịch vụ Web Tài nguyên và Môi trường
+(
+WWW:LINK-1.0-http--link
+)
+Khai thác và sử dụng dữ liệu ranh thửa qua dịch vụ WFS tại đây
+OnLine resource
+tnmt:v_q1_bennghe
+(
+OGC:WMS-1.1.1-http-get-capabilities
+)
+Ranh thửa đất Phường Bến Nghé - Quận 1 khai thác qua dịch vụ WMS
+Hierarchy level
+Dataset
+Statement
+Dữ liệu ranh thửa đất phường Bến Nghé - Quận 1 (2010) được xây dựng theo quy trình tại Thông tư 26/2014/TT-BTNMT về Ban hành quy trình và định mức kinh tế-kỹ thuật xây dựng CSDL tài nguyên và môi trường và kiểm tra nghiệm thu theo quy định tại Thông tư 58/2015/TT-BTNMT về Quy định thẩm định, kiểm tra và nghiệm thu dự án ứng dụng CNTT Tài nguyên và Môi trường
+File identifier
+246a5939-530d-47e7-84b4-99d686e73811
+XML
+Metadata language
+vie
+Character set
+UTF8
+Date stamp
+2024-01-09T09:26:05
+Metadata standard name
+ISO 19115:2003/19139
+Metadata standard version
+1.0
+pointOfContact
+Trung tâm Công nghệ Thông tin Tài nguyên và Môi trường
+-
+Bùi Hồng Sơn
+(
+Giám đốc
+)
+63 Lý Tự Trọng, Phường Bến Nghé
+,
+Thành phố Hồ Chí Minh
+,
+Quận 1
+,
+028
+,
+Việt Nam
++84 903746638
+Overviews
+Spatial extent
+N
+S
+E
+W
+Keywords
+Provided by
+Share on social sites
+Access to the portal
+Read here the full details and access to the data.
+Associated resources
+Not available

@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-17T00:17:23+00:00",
+  "worker_pid": 35019,
+  "worker_state": "waiting_for_free_reset",
+  "free_resume_at": "2026-10-17T14:00:00+07:00",
+  "targets": 1551,
+  "queue_top_n": 1000,
+  "campus_500m_ways": 556,
+  "preselected_validation_ways": 40,
+  "strict_v2_readings": 52,
+  "strict_v2_image_ways": 18,
+  "strict_v2_pending": 3,
+  "strict_v2_usable_ways": 3,
+  "approved": 0,
+  "quarantined_v1_readings": 164,
+  "all_readings_including_quarantine": 216,
+  "unique_photos_read": 164,
+  "unique_way_ids_with_any_reading": 66,
+  "job_spent_usd": 0.9113399999999998,
+  "job_reserved_usd": 0,
+  "shared_spent_usd": 0.9975404999999997,
+  "shared_remaining_usd": 2.0024595000000005,
+  "google_usage": {
+    "streetview_metadata": {
+      "month": 5,
+      "month_cap": 5000,
+      "free_allowance": null,
+      "today": 5,
+      "day_cap": 1000,
+      "note": "Street View metadata: free, unlimited"
+    },
+    "streetview_static": {
+      "month": 0,
+      "month_cap": 4000,
+      "free_allowance": 10000,
+      "today": 0,
+      "day_cap": 400,
+      "note": "Street View Static: 10k free / month"
+    },
+    "places_nearby_pro": {
+      "month": 0,
+      "month_cap": 800,
+      "free_allowance": 5000,
+      "today": 0,
+      "day_cap": 100,
+      "note": "Nearby Search (Pro fields): 5k free / month; capped under 1k in case the field mask bills higher"
+    },
+    "places_details_atmosphere": {
+      "month": 0,
+      "month_cap": 400,
+      "free_allowance": 1000,
+      "today": 0,
+      "day_cap": 60,
+      "note": "Place Details with reviews/parking: 1k free / month"
+    },
+    "gemini_maps_grounding": {
+      "month": 0,
+      "month_cap": 300,
+      "free_allowance": null,
+      "today": 0,
+      "day_cap": 60,
+      "note": "Gemini grounding with Google Maps: counted defensively"
+    }
+  },
+  "google_job_delta": {
+    "streetview_metadata": 5,
+    "streetview_static": 0,
+    "places_nearby_pro": 0,
+    "places_details_atmosphere": 0,
+    "gemini_maps_grounding": 0
+  },
+  "validation": {
+    "at": "2026-10-17T00:16:45+00:00",
+    "n_ways": 0,
+    "n_images": 0,
+    "mae_m": null,
+    "bias_m": null,
+    "interval_coverage": null,
+    "auto_approve": false,
+    "decision": "REVIEW-only: no independent field truth or full-way coverage; cadastral gap minus 1 m is a proxy.",
+    "comparison": "visible clear-width midpoint vs nearest valid cadastral gap_m minus 1 m, within 15 m, way-weighted",
+    "matches": [],
+    "way_level_proxy": {
+      "n_ways": 0,
+      "mae_m": null,
+      "bias_m": null,
+      "note": "Unlocated views vs narrowest surveyed gap minus 1 m; location/date/obstructions may differ. Not independent truth.",
+      "matches": []
+    }
+  },
+  "google_failure": "REQUEST_DENIED: You must enable Billing on the Google Cloud Project",
+  "mapillary": "Skipped; MAPILLARY_CLIENT_TOKEN + --mapillary enables code path; no live authentication tested."
+}

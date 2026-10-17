@@ -1,3 +1,4 @@
+import type { MapContext } from './mapSearch'
 import type * as GeoJSON from 'geojson'
 export type Intent = 'park' | 'pickup'
 export type FitClass = 'fits' | 'tight' | 'no' | 'unknown' | 'blocked' | 'lot'
@@ -79,7 +80,7 @@ export interface WidthRange {
   width_basis: WidthBasis; coverage: WidthCoverage; decisive_clearance: boolean
 }
 export interface Depth { lo: number; hi: number; drivers: string[]; rain_driven: boolean; inferred: boolean }
-export type FloodKnowledge = 'known' | 'missing_tide' | 'missing_history' | 'stale_positive_observation'
+export type FloodKnowledge = 'known' | 'missing_tide' | 'missing_rain' | 'missing_history' | 'stale_positive_observation'
 export interface FloodFreshness { observed_at?: string; valid_until?: string; source?: string }
 export interface FloodCheck {
   status: FloodStatus; depth: Depth | null; knowledge: FloodKnowledge; reason: string | null
@@ -102,6 +103,7 @@ export const floodKnowledgeLabel = (knowledge: FloodKnowledge | undefined): stri
   switch (knowledge) {
     case 'known': return 'Có dữ liệu cho thời điểm kiểm tra'
     case 'missing_tide': return 'Thiếu dữ liệu triều cho thời điểm kiểm tra'
+    case 'missing_rain': return 'Thiếu dữ liệu mưa (đo hoặc dự báo) cho thời điểm kiểm tra'
     case 'missing_history': return 'Thiếu lịch sử ngập để ước lượng'
     case 'stale_positive_observation': return 'Ghi nhận ngập đã cũ; chưa có quan sát mới xác nhận nước rút'
     default: return 'Chưa đủ dữ liệu ngập'
@@ -212,6 +214,20 @@ export interface Corridor {
   camera_job: CorridorCameraJob | null
   source: { cameras: string; routes: string }
 }
+export interface AgentPlan {
+  lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
+  arrive_at: string; dwell_min: number; rain: RainSpell[]
+}
+export interface AgentEvidence { way_id: number; lat: number; lon: number; label: string; source?: string }
+export type AgentEvent =
+  | { type: 'tool_call'; name: string; args: Record<string, unknown> }
+  | { type: 'tool_result'; name: string; summary: string; result?: { verdict?: { estimate?: Estimate } } }
+  | { type: 'ui'; plan: AgentPlan }
+  | { type: 'answer'; text: string; evidence?: AgentEvidence[] }
+  | { type: 'progress'; text: string }
+  | { type: 'validation'; violations: string[]; action: string }
+  | { type: 'done'; contents: Record<string, unknown>[] }
+  | { type: 'error'; text: string }
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
 export interface VoiceParseResult {
@@ -269,7 +285,39 @@ export function delay(ms: number): Promise<void> {
   return promise
 }
 
+export interface Estimate { answer: 'fits' | 'tight' | 'no' | 'unknown'; confidence: 'high' | 'medium' | 'low'; basis: string }
+
 export const api = {
+  cancelAgent: (requestId: string) => post(`/api/agent/cancel/${encodeURIComponent(requestId)}`, {}).then(j<{ cancelled: boolean }>),
+  async agent(body: { contents: Record<string, unknown>[]; message: string; origin: [number, number] | null; tools: boolean; request_id?: string; map_context?: MapContext }, onEvent: (e: AgentEvent) => void, signal?: AbortSignal) {
+    const res = await fetch('/api/agent', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal })
+    if (!res.ok) { await j(res); return }
+    if (!res.body) throw new Error('Không đọc được câu trả lời.')
+    const reader = res.body.getReader()
+    const dec = new TextDecoder()
+    let buf = ''
+    let finished = false
+    const line = (s: string) => {
+      if (!s.trim()) return
+      const event = JSON.parse(s) as AgentEvent
+      if (event.type === 'done' || event.type === 'error') finished = true
+      onEvent(event)
+    }
+    try {
+      for (;;) {
+        const { done, value } = await reader.read()
+        buf += done ? dec.decode() : dec.decode(value, { stream: true })
+        let nl
+        while ((nl = buf.indexOf('\n')) >= 0) {
+          line(buf.slice(0, nl))
+          buf = buf.slice(nl + 1)
+        }
+        if (done) { line(buf); break }
+      }
+      if (!finished) throw new Error('Kết nối gián đoạn. Vui lòng thử lại.')
+    } finally { await reader.cancel().catch(() => {}); reader.releaseLock() }
+  },
+
   config: () => fetch('/api/config').then(j<Config>),
   vehicles: () => fetch('/api/vehicles').then(j<{ classes: Vehicle[]; models: Vehicle[] }>),
   search: (q: string, near?: { lat: number; lon: number } | null, signal?: AbortSignal) => fetch(`/api/search?q=${encodeURIComponent(q)}${near ? `&lat=${near.lat}&lon=${near.lon}` : ''}`, { signal }).then(j<{ results: SearchResult[] }>),
@@ -281,7 +329,7 @@ export const api = {
   wayEvidence: (wayId: number, lat: number, lon: number, demoScenario?: string | null, signal?: AbortSignal) =>
     post(`/api/evidence/way/${wayId}`, { lat, lon, demo_scenario: demoScenario ?? null }, signal).then(j<WayEvidence>),
   tide: (start: string, hours = 36) =>
-    fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string
+    fetch(`/api/tide?start=${encodeURIComponent(start)}&hours=${hours}`).then(j<{ series: { t: string; level_m: number; kind: 'measured' | 'model' | 'bulletin' }[]; alarm_levels_m: Record<string, number>; station: string; source_url: string; bulletin?: Config['tide']
       readings: { t: string; level_m: number }[]; last_reading: { t: string; level_m: number } | null; model_err_m: number | null }>),
   confirm: (body: { stop_lat: number; stop_lon: number; vehicle_id: string; result: 'in' | 'tight' | 'no'; exit: 'through' | 'turned' | 'reversed' | 'unknown' }) =>
     post('/api/confirm', body).then(j<{ status: 'pending'; report_id: string }>),
@@ -307,7 +355,7 @@ export const api = {
 }
 
 export interface Report {
-  report_id: string; type: 'confirmation' | 'blockage' | 'flood_report' | 'stop_rule' | 'photo_reading'
+  report_id: string; type: 'confirmation' | 'blockage' | 'flood_report' | 'stop_rule' | 'photo_reading' | 'field_measurement'
   payload: Record<string, unknown>; source: string; status: 'pending' | 'approved' | 'rejected' | 'expired'
   created_at: string; expires_at: string; reviewer: string | null; reviewed_at: string | null; revision: number
   legacy: boolean; publish_target: string | null

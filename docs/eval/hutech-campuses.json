@@ -1,0 +1,138 @@
+{
+  "verified_at": "2026-10-17T00:14:53.981034+07:00",
+  "campuses": [
+    {
+      "id": "binhthanh-dbp",
+      "query": "HUTECH 475A Điện Biên Phủ Bình Thạnh",
+      "search_label": "Hutech - Đại Học Công Nghệ Tp.hcm, 475A Đường Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+      "lat": 10.801617,
+      "lon": 106.714455,
+      "label": "Hutech - Đại Học Công Nghệ Tp.hcm, 475A Đường Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "resolved_at": "2026-10-17T00:00:09.180594+07:00",
+      "name": "Sai Gon Campus — Trụ sở Điện Biên Phủ",
+      "official_address": "475A Điện Biên Phủ, Phường Thạnh Mỹ Tây, TP.HCM",
+      "source_url": "https://www.hutech.edu.vn/",
+      "additional_source_urls": [
+        "https://daotao.hutech.edu.vn/default.aspx"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "binhthanh-uvk",
+      "query": "HUTECH 31/36 Ung Văn Khiêm Bình Thạnh",
+      "search_label": "HUTECH - Đại học Công nghệ TP.HCM (Ung Van Khiem Campus), 31/36 Ung Văn Khiêm, Thạnh Mỹ Tây, Hồ Chí Minh",
+      "lat": 10.8095728,
+      "lon": 106.7149885,
+      "label": "HUTECH - Đại học Công nghệ TP.HCM (Ung Van Khiem Campus), 31/36 Ung Văn Khiêm, Thạnh Mỹ Tây, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "resolved_at": "2026-10-17T00:00:09.979036+07:00",
+      "name": "Ung Van Khiem Campus",
+      "official_address": "31/36 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.HCM",
+      "source_url": "https://www.hutech.edu.vn/",
+      "additional_source_urls": [
+        "https://daotao.hutech.edu.vn/default.aspx"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "thuduc-e1",
+      "query": "HUTECH Khu Công nghệ cao Thủ Đức",
+      "search_label": "HUTECH - Đại học Công nghệ TP. Hồ Chí Minh, Lô E1 Khu Công nghệ Cao, Xa Lộ Hà Nội, Tăng Nhơn Phú, Hồ Chí Minh",
+      "lat": 10.855145893000042,
+      "lon": 106.78536445000009,
+      "label": "HUTECH - Đại học Công nghệ TP. Hồ Chí Minh, Lô E1 Khu Công nghệ Cao, Xa Lộ Hà Nội, Tăng Nhơn Phú, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "resolved_at": "2026-10-17T00:00:10.559567+07:00",
+      "name": "Thu Duc Campus — Trung tâm Đào tạo Nhân lực chất lượng cao",
+      "official_address": "Phân khu Đào tạo E1, Khu Công nghệ cao, Phường Tăng Nhơn Phú, TP.HCM",
+      "source_url": "https://www.hutech.edu.vn/",
+      "additional_source_urls": [
+        "https://daotao.hutech.edu.vn/default.aspx"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "thuduc-r",
+      "query": "HUTECH Khu R Viện Công Nghệ Cao Lô E2B4",
+      "search_label": "HUTECH Khu R- Institute of High Technology, Lô E2B4, Khu Công nghệ Cao, Tăng Nhơn Phú, Hồ Chí Minh",
+      "lat": 10.840888842000027,
+      "lon": 106.80898043100007,
+      "label": "HUTECH Khu R- Institute of High Technology, Lô E2B4, Khu Công nghệ Cao, Tăng Nhơn Phú, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "resolved_at": "2026-10-17T00:00:11.420171+07:00",
+      "name": "Hitech Park Campus — Viện Công nghệ Cao HUTECH",
+      "official_address": "Lô E2b-4, Đường D1, Khu Công nghệ cao, Phường Tăng Nhơn Phú, TP.HCM",
+      "source_url": "https://www.hutech.edu.vn/",
+      "additional_source_urls": [
+        "https://daotao.hutech.edu.vn/default.aspx"
+      ],
+      "status": "confirmed",
+      "aliases": [
+        "Khu R",
+        "HUTECH University - F Campus (SHTP)"
+      ]
+    },
+    {
+      "id": "binhthanh-medical",
+      "name": "Medical Campus — Trường Y và Khoa học Sức khỏe HUTECH",
+      "official_address": "276–282 Điện Biên Phủ, Phường Gia Định, TP.HCM",
+      "source_url": "https://truongy.hutech.edu.vn/",
+      "additional_source_urls": [
+        "https://daotao.hutech.edu.vn/default.aspx"
+      ],
+      "status": "confirmed",
+      "query": "HUTECH 276 Điện Biên Phủ",
+      "search_label": "Hutech - Cơ sở D Điện Biên Phủ, 276 Đường Điện Biên Phủ, Gia Định, Hồ Chí Minh",
+      "lat": 10.799468,
+      "lon": 106.7069006,
+      "label": "Hutech - Cơ sở D Điện Biên Phủ, 276 Đường Điện Biên Phủ, Gia Định, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "geocode_match": "HUTECH named POI and address",
+      "resolved_at": "2026-10-17T00:14:53.723720+07:00",
+      "aliases": [
+        "Cơ sở D Điện Biên Phủ",
+        "Viện đào tạo sau đại học tại 276 Điện Biên Phủ (Goong legacy label)"
+      ]
+    },
+    {
+      "id": "thuduc-aidt",
+      "name": "Viện Trí tuệ Nhân tạo và Chuyển đổi số HUTECH",
+      "official_address": "10/80C Song Hành Xa Lộ Hà Nội, Phường Tăng Nhơn Phú, TP.HCM",
+      "source_url": "https://aidt.hutech.edu.vn/vi/contact",
+      "additional_source_urls": [],
+      "status": "confirmed",
+      "query": "10/80C Song Hành Xa Lộ Hà Nội",
+      "search_label": "10/80C Song Hành Xa Lộ Hà Nội, Tăng Nhơn Phú, Hồ Chí Minh",
+      "lat": 10.8550176,
+      "lon": 106.7853313,
+      "label": "10/80C Song Hành Xa Lộ Hà Nội, Tăng Nhơn Phú, Hồ Chí Minh",
+      "radius_m": 2000,
+      "geocoder": "Goong via /api/search and /api/place",
+      "geocode_match": "exact official street address",
+      "resolved_at": "2026-10-17T00:14:53.980997+07:00"
+    }
+  ],
+  "discovery": {
+    "official_campuses": 5,
+    "additional_official_facilities": 1,
+    "source_urls": [
+      "https://www.hutech.edu.vn/",
+      "https://www.hutech.edu.vn/homepage/co-so-vat-chat",
+      "https://www.hutech.edu.vn/homepage/gioi-thieu-hutech/so-do-den-truong",
+      "https://truongy.hutech.edu.vn/",
+      "https://daotao.hutech.edu.vn/default.aspx",
+      "https://aidt.hutech.edu.vn/vi/contact"
+    ],
+    "goong_crosscheck_queries": [
+      "HUTECH",
+      "Đại học Công nghệ TP.HCM"
+    ]
+  },
+  "note": "Five named campuses confirmed by official Medical Campus and registrar pages, plus AIDT at its separately published contact address. Faculty offices and libraries within these sites share their campus circle. AIDT uses the Goong exact-address pin at 10/80C, approximately 15 m from the E1 campus pin. Partner hospitals and third-party dormitories are excluded."
+}

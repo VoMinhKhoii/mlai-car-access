@@ -1,0 +1,154 @@
+{
+  "recorded_at": "2026-10-17T01:35:51.879603+07:00",
+  "note": "End-of-run input fingerprints; source start/end fingerprints are in audit-sweep.json. Cache contents are not frozen copies.",
+  "files": {
+    "backend/cache/osm/area_10.728_106.644.json": {
+      "sha256": "c00938284167ca3291de583a8047e72a0283841b5e974046b20e9fd16d75b305",
+      "bytes": 416036
+    },
+    "backend/cache/osm/area_10.732_106.588.json": {
+      "sha256": "da86d4bea800614d070c2e224611a311b4b906ba12c1aafe129db2e63c2292dd",
+      "bytes": 219580
+    },
+    "backend/cache/osm/area_10.748_106.760.json": {
+      "sha256": "172b057f557b0f3ed5d0d80e09da4a161c0952071b52fd664fdf9c22af2b94da",
+      "bytes": 61700
+    },
+    "backend/cache/osm/area_10.752_106.640.json": {
+      "sha256": "3ce06064fef59cfe651c4cc9c5f6f109065b2070bb1578ea772869590584dc91",
+      "bytes": 1127179
+    },
+    "backend/cache/osm/area_10.760_106.756.json": {
+      "sha256": "bf495d48a3a6c3250d4116b75e50def48ee6b17c7f93a7545795ca587df878ef",
+      "bytes": 144073
+    },
+    "backend/cache/osm/area_10.764_106.608.json": {
+      "sha256": "ab8331806b319459a4aec9b45c0dbcde24a54088491bccff554f63bcf5e12c02",
+      "bytes": 606774
+    },
+    "backend/cache/osm/area_10.764_106.668.json": {
+      "sha256": "4529002fbd0d0e02b8c185f3562b2dd759c5425476bb089c26d82c1a4cff215c",
+      "bytes": 1140035
+    },
+    "backend/cache/osm/area_10.764_106.692.json": {
+      "sha256": "3588aa0e5fe5998f1a3375c84a39a8d4945f4d9a34798d41495fdf9dc6068c4f",
+      "bytes": 1357133
+    },
+    "backend/cache/osm/area_10.772_106.644.json": {
+      "sha256": "3af2913bdee04b23f6ab0e3da6bb288c7fc8ecc5fae075ab6a95695a973c1067",
+      "bytes": 964047
+    },
+    "backend/cache/osm/area_10.784_106.804.json": {
+      "sha256": "c4feaabea9de99c44ab12c97850ade159d89758f3961a50b60c9bb6d2200b6a2",
+      "bytes": 251066
+    },
+    "backend/cache/osm/area_10.788_106.668.json": {
+      "sha256": "00e7735d4d734b54acad87941c385177bc1060c32e87f6bc5e69b11c23ceb430",
+      "bytes": 1036542
+    },
+    "backend/cache/osm/area_10.792_106.660.json": {
+      "sha256": "1ccd07e5fc21bd7485ccbaf2cbeeedb02862f5b4e9dfd5f9358ab2aec119973d",
+      "bytes": 948539
+    },
+    "backend/cache/osm/area_10.804_106.872.json": {
+      "sha256": "5ea33635620b1a7c6821016388013cdcd8f68e8cff31e64dd739230e3096fb0d",
+      "bytes": 114011
+    },
+    "backend/cache/osm/area_10.812_106.692.json": {
+      "sha256": "80a33981fa171912b11d5054a2953157808d6206d71f4a74ce8426495fb75436",
+      "bytes": 1010602
+    },
+    "backend/cache/osm/area_10.812_106.708.json": {
+      "sha256": "a4a473e317a0e932bf8520f6287778073bba83f0cf649d432b465f5ba30db716",
+      "bytes": 694071
+    },
+    "backend/cache/osm/area_10.812_106.712.json": {
+      "sha256": "d82a1f505637b8f9e1c25d1496746603dc4a02284e7c7c5305fd5af35b131be4",
+      "bytes": 567121
+    },
+    "backend/cache/osm/area_10.812_106.824.json": {
+      "sha256": "a0a92eaca4303d1d923b5ba26d6f9252430c793db18711b37e4015e48a9056fc",
+      "bytes": 250766
+    },
+    "backend/cache/osm/area_10.816_106.704.json": {
+      "sha256": "93e38b377b07281bc0ad5c2289540292afdbb8181200381941cacb92b11bb06b",
+      "bytes": 714443
+    },
+    "backend/cache/osm/area_10.816_106.708.json": {
+      "sha256": "4b17fd062569f22fee16e10e3cef46e92a0f63ba2db3d08e8f99aa5d22153c82",
+      "bytes": 625158
+    },
+    "backend/cache/osm/area_10.816_106.712.json": {
+      "sha256": "c89a94bfe22fedbffe6f6973ceb8a8e8cea11ae54341dc32e4c6fe328dabe76d",
+      "bytes": 521772
+    },
+    "backend/cache/osm/area_10.816_106.724.json": {
+      "sha256": "fd17f4ebd8678389f21346e8dd5e3b7b92415bc4041c318ae4f0f8548d7ae3e6",
+      "bytes": 308288
+    },
+    "backend/cache/osm/area_10.820_106.608.json": {
+      "sha256": "9c605599904ea266f608de6e6ed89885524c289bccf28a7e2c461f2bd6815eee",
+      "bytes": 403041
+    },
+    "backend/cache/osm/area_10.820_106.704.json": {
+      "sha256": "7aacbf1eebe096890e428e598584e62ab4b951b8615231d86aa408746037ba04",
+      "bytes": 616426
+    },
+    "backend/cache/osm/area_10.820_106.724.json": {
+      "sha256": "a40ece46e158dda66674cc27a147ed1fbf33eed53ac20119eac8398b63c96812",
+      "bytes": 351841
+    },
+    "backend/cache/osm/area_10.840_106.808.json": {
+      "sha256": "ecf29c37c98b0e99ad3577231022e481fb38f6f14a532e5179e2392fb49ef6d3",
+      "bytes": 326316
+    },
+    "backend/cache/osm/area_10.856_106.784.json": {
+      "sha256": "a0ede103f79f58797b5d778546ae9a940ee5b5ef7099103e3d4511975024515d",
+      "bytes": 443646
+    },
+    "backend/cache/osm/area_10.860_106.708.json": {
+      "sha256": "3caf766002530baaa4af1ba861ae66e345bd416bd1fd18e0f62d86322c807578",
+      "bytes": 296280
+    },
+    "backend/cache/osm/area_10.864_106.704.json": {
+      "sha256": "2a5e5194c1975f06ce1f2e179ad1dd9f732fed63940b502197ec8204eade56f2",
+      "bytes": 323578
+    },
+    "backend/cache/osm/area_10.892_106.724.json": {
+      "sha256": "7ad32407ed9aed8e4bfae373e8030143c663263e1d46c43d64ea8c3b466138ec",
+      "bytes": 233744
+    },
+    "backend/cache/osm/demo_binhthanh.json": {
+      "sha256": "1a1596e2406d43775c854c038f9b0c3886af1837dafdc8b8f5238af8c3cc8525",
+      "bytes": 2348680
+    },
+    "backend/cache/live/areas/10.840_106.808.json": {
+      "sha256": "2e188399abf7a2348be457a5eda7f25e8eb13c14f81a60207491c09c7081ca7f",
+      "bytes": 1014
+    },
+    "backend/cache/live/areas/demo.json": {
+      "sha256": "e3979f04913eaff444e9110a7337f3f8ff5bc1e5b304ce8a9dc5558c5193c565",
+      "bytes": 129016
+    },
+    "backend/cache/live/areas/10.856_106.784.json": {
+      "sha256": "461797bf4c919f17ada7322cea9eac08fb1f9498349992ebded079b49d6d710f",
+      "bytes": 1693
+    },
+    "backend/cache/live/city_parcels.json": {
+      "sha256": "e7124460194b56bfb2aa7330de30fb153f04b5c7b652e71f81f3fb99a611ad7c",
+      "bytes": 40457
+    },
+    "backend/flags.json": {
+      "sha256": "a2995b7f2a64520656a23afbd8a96e36d012e9062804835ec408c00cbbcb2dc8",
+      "bytes": 281
+    },
+    "data/flood/tide_forecast.json": {
+      "sha256": "8205d9adb3ed9cd80e2bcbb7e0d9d19d9ab27395caae4224836a3573045e2bfd",
+      "bytes": 3213
+    },
+    "data/vehicles/vn_car_profiles.csv": {
+      "sha256": "a3fcef3f4755862027ff17b36226fcb742b0987861af4e4da35335b206d4c7b0",
+      "bytes": 23428
+    }
+  }
+}

@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
@@ -24,7 +25,7 @@ BASE = "https://alonhadat.com.vn"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) "
                          "Chrome/128 Safari/537.36 VaoDuoc-hackathon/0.3"}
 PAGES = 5          # 20 listings per page
-TTL = timedelta(hours=12)
+TTL = timedelta(hours=float(os.environ.get("LISTINGS_TTL_H", "12")))
 
 
 def _get(url: str, deadline: float | None = None) -> str:

@@ -1,0 +1,2885 @@
+[
+  {
+    "label": "113/4",
+    "vehicle": "toyota-fortuner",
+    "cold_area_s": 1.5972201250260696,
+    "first_plan_s": 0.7066713750245981,
+    "warm_median_s": 0.5227234999765642,
+    "result": {
+      "verdict": {
+        "code": "unverified",
+        "headline": "Chưa đủ bằng chứng để khẳng định",
+        "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m"
+      },
+      "counts": {
+        "candidates": 684,
+        "passed": 218,
+        "rejected": 466
+      },
+      "door": {
+        "ok": false,
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 0.0,
+            "hi": 4.5,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Official",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 1.5,
+                "hi": 4.5,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/464839550",
+                "ai_feature": null,
+                "coverage_complete": true,
+                "coverage_m": null,
+                "measurement_schema": ""
+              },
+              {
+                "lo": 0.0,
+                "hi": 7.27,
+                "tier": "Official",
+                "tier_vi": "Số liệu chính thức",
+                "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                "observed_on": "",
+                "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                "ai_feature": "parcel_widths",
+                "coverage_complete": false,
+                "coverage_m": null,
+                "measurement_schema": "parcel-usable-v2"
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 3.0
+          }
+        },
+        "way_out": {
+          "mode": "unknown",
+          "reverse_m": 31,
+          "tight_exit": true,
+          "text": "Lùi khoảng 31 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+          "geometry": [
+            [
+              106.71666136514123,
+              10.792105888393326
+            ],
+            [
+              106.7165781,
+              10.7918393
+            ],
+            [
+              106.7167621,
+              10.7917413
+            ],
+            [
+              106.7168619,
+              10.7916317
+            ],
+            [
+              106.7169447,
+              10.7915167
+            ],
+            [
+              106.7170703,
+              10.7912748
+            ],
+            [
+              106.7170982,
+              10.7912213
+            ],
+            [
+              106.7172566,
+              10.7909122
+            ],
+            [
+              106.7173309,
+              10.7907783
+            ],
+            [
+              106.7173985,
+              10.7906566
+            ],
+            [
+              106.7174552,
+              10.7905545
+            ],
+            [
+              106.7176137,
+              10.7902406
+            ]
+          ]
+        },
+        "fail_reasons": [
+          "Trong phạm vi 5 m tính từ mép đường giao nhau; Phần đường chỉ đủ một làn xe cơ giới: không được đỗ"
+        ],
+        "verified": false
+      },
+      "stops": [
+        {
+          "kind": "street",
+          "way_id": 193085738,
+          "name": "Đường Võ Duy Ninh",
+          "lat": 10.791805007531996,
+          "lon": 106.7166424858583,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 39,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.7166424858583,
+                10.791805007531996
+              ],
+              [
+                106.7165781,
+                10.7918393
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 2.0,
+              "hi": 8.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=service",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/193085738",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.7166424858583,
+                10.791805007531996
+              ],
+              [
+                106.7165781,
+                10.7918393
+              ],
+              [
+                106.7165168,
+                10.7918569
+              ],
+              [
+                106.7163246,
+                10.791912
+              ],
+              [
+                106.7162246,
+                10.7919222
+              ],
+              [
+                106.7159298,
+                10.7919088
+              ],
+              [
+                106.7157297,
+                10.7918997
+              ],
+              [
+                106.7156915,
+                10.791898
+              ],
+              [
+                106.7153669,
+                10.7918832
+              ],
+              [
+                106.7152901,
+                10.7918827
+              ],
+              [
+                106.715108,
+                10.7918815
+              ],
+              [
+                106.715074,
+                10.7918776
+              ],
+              [
+                106.7148428,
+                10.7918721
+              ],
+              [
+                106.7147032,
+                10.7918404
+              ],
+              [
+                106.7145972,
+                10.7917838
+              ],
+              [
+                106.7143268,
+                10.7915021
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 604837651,
+          "name": "Hẻm 75 Nguyễn Hữu Cảnh",
+          "lat": 10.792209595567076,
+          "lon": 106.71718047693496,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 58,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.71718047693496,
+                10.792209595567076
+              ],
+              [
+                106.717109,
+                10.7921939
+              ],
+              [
+                106.7166614,
+                10.792106
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "tight",
+            "width_range": {
+              "lo": 2.5,
+              "hi": 15.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/604837651",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 35,
+            "tight_exit": true,
+            "text": "Lùi khoảng 35 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71718047693496,
+                10.792209595567076
+              ],
+              [
+                106.7174888,
+                10.7922773
+              ],
+              [
+                106.7175814,
+                10.7922945
+              ],
+              [
+                106.7180639,
+                10.792375
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 609967226,
+          "name": "Hẻm 75/2 Nguyễn Hữu Cảnh",
+          "lat": 10.79268935,
+          "lon": 106.71746005,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 138,
+            "verified": false,
+            "minutes": 2,
+            "geometry": [
+              [
+                106.71746005,
+                10.79268935
+              ],
+              [
+                106.7174888,
+                10.7922773
+              ],
+              [
+                106.717109,
+                10.7921939
+              ],
+              [
+                106.7166614,
+                10.792106
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "tight",
+            "width_range": {
+              "lo": 2.5,
+              "hi": 15.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/609967226",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 46,
+            "tight_exit": true,
+            "text": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71746005,
+                10.79268935
+              ],
+              [
+                106.7174888,
+                10.7922773
+              ],
+              [
+                106.7175814,
+                10.7922945
+              ],
+              [
+                106.7180639,
+                10.792375
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "113/4",
+    "vehicle": "vinfast-vf-3",
+    "cold_area_s": 1.5972201250260696,
+    "first_plan_s": 0.8106259580235928,
+    "warm_median_s": 0.5184925840003416,
+    "result": {
+      "verdict": {
+        "code": "unverified",
+        "headline": "Chưa đủ bằng chứng để khẳng định",
+        "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m"
+      },
+      "counts": {
+        "candidates": 684,
+        "passed": 218,
+        "rejected": 466
+      },
+      "door": {
+        "ok": false,
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 0.0,
+            "hi": 4.5,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Official",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 1.5,
+                "hi": 4.5,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/464839550",
+                "ai_feature": null,
+                "coverage_complete": true,
+                "coverage_m": null,
+                "measurement_schema": ""
+              },
+              {
+                "lo": 0.0,
+                "hi": 7.27,
+                "tier": "Official",
+                "tier_vi": "Số liệu chính thức",
+                "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                "observed_on": "",
+                "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                "ai_feature": "parcel_widths",
+                "coverage_complete": false,
+                "coverage_m": null,
+                "measurement_schema": "parcel-usable-v2"
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.65
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+          "geometry": [
+            [
+              106.71666136514123,
+              10.792105888393326
+            ],
+            [
+              106.7165781,
+              10.7918393
+            ],
+            [
+              106.7167621,
+              10.7917413
+            ],
+            [
+              106.7168619,
+              10.7916317
+            ],
+            [
+              106.7169447,
+              10.7915167
+            ],
+            [
+              106.7170703,
+              10.7912748
+            ],
+            [
+              106.7170982,
+              10.7912213
+            ],
+            [
+              106.7172566,
+              10.7909122
+            ],
+            [
+              106.7173309,
+              10.7907783
+            ],
+            [
+              106.7173985,
+              10.7906566
+            ],
+            [
+              106.7174552,
+              10.7905545
+            ],
+            [
+              106.7176137,
+              10.7902406
+            ]
+          ]
+        },
+        "fail_reasons": [
+          "Trong phạm vi 5 m tính từ mép đường giao nhau; Phần đường chỉ đủ một làn xe cơ giới: không được đỗ"
+        ],
+        "verified": false
+      },
+      "stops": [
+        {
+          "kind": "street",
+          "way_id": 193085738,
+          "name": "Đường Võ Duy Ninh",
+          "lat": 10.791805007531996,
+          "lon": 106.7166424858583,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 39,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.7166424858583,
+                10.791805007531996
+              ],
+              [
+                106.7165781,
+                10.7918393
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "tight",
+            "width_range": {
+              "lo": 2.0,
+              "hi": 8.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=service",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/193085738",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.7166424858583,
+                10.791805007531996
+              ],
+              [
+                106.7167621,
+                10.7917413
+              ],
+              [
+                106.7168619,
+                10.7916317
+              ],
+              [
+                106.7169447,
+                10.7915167
+              ],
+              [
+                106.7170703,
+                10.7912748
+              ],
+              [
+                106.7170982,
+                10.7912213
+              ],
+              [
+                106.7172566,
+                10.7909122
+              ],
+              [
+                106.7173309,
+                10.7907783
+              ],
+              [
+                106.7173985,
+                10.7906566
+              ],
+              [
+                106.7174552,
+                10.7905545
+              ],
+              [
+                106.7176137,
+                10.7902406
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 604837651,
+          "name": "Hẻm 75 Nguyễn Hữu Cảnh",
+          "lat": 10.792209595567076,
+          "lon": 106.71718047693496,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 58,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.71718047693496,
+                10.792209595567076
+              ],
+              [
+                106.717109,
+                10.7921939
+              ],
+              [
+                106.7166614,
+                10.792106
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "tight",
+            "width_range": {
+              "lo": 2.5,
+              "hi": 15.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/604837651",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.71718047693496,
+                10.792209595567076
+              ],
+              [
+                106.717109,
+                10.7921939
+              ],
+              [
+                106.7166614,
+                10.792106
+              ],
+              [
+                106.7165781,
+                10.7918393
+              ],
+              [
+                106.7167621,
+                10.7917413
+              ],
+              [
+                106.7168619,
+                10.7916317
+              ],
+              [
+                106.7169447,
+                10.7915167
+              ],
+              [
+                106.7170703,
+                10.7912748
+              ],
+              [
+                106.7170982,
+                10.7912213
+              ],
+              [
+                106.7172566,
+                10.7909122
+              ],
+              [
+                106.7173309,
+                10.7907783
+              ],
+              [
+                106.7173985,
+                10.7906566
+              ],
+              [
+                106.7174552,
+                10.7905545
+              ],
+              [
+                106.7176137,
+                10.7902406
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 609967226,
+          "name": "Hẻm 75/2 Nguyễn Hữu Cảnh",
+          "lat": 10.79268935,
+          "lon": 106.71746005,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 138,
+            "verified": false,
+            "minutes": 2,
+            "geometry": [
+              [
+                106.71746005,
+                10.79268935
+              ],
+              [
+                106.7174888,
+                10.7922773
+              ],
+              [
+                106.717109,
+                10.7921939
+              ],
+              [
+                106.7166614,
+                10.792106
+              ],
+              [
+                106.71666136514123,
+                10.792105888393326
+              ],
+              [
+                106.716661,
+                10.792106
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "tight",
+            "width_range": {
+              "lo": 2.5,
+              "hi": 15.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/609967226",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 46,
+            "tight_exit": true,
+            "text": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71746005,
+                10.79268935
+              ],
+              [
+                106.7174888,
+                10.7922773
+              ],
+              [
+                106.7175814,
+                10.7922945
+              ],
+              [
+                106.7180639,
+                10.792375
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "220/9",
+    "vehicle": "toyota-vios",
+    "cold_area_s": 0.0024270000285468996,
+    "first_plan_s": 0.6989221249823458,
+    "warm_median_s": 0.47135804197750986,
+    "result": {
+      "verdict": {
+        "code": "unverified",
+        "headline": "Chưa đủ bằng chứng để khẳng định",
+        "detail": "Gợi ý: đỗ tại Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m"
+      },
+      "counts": {
+        "candidates": 736,
+        "passed": 221,
+        "rejected": 515
+      },
+      "door": {
+        "ok": false,
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 0.0,
+            "hi": 5.79,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Official",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/32584409",
+                "ai_feature": null,
+                "coverage_complete": true,
+                "coverage_m": null,
+                "measurement_schema": ""
+              },
+              {
+                "lo": 0.0,
+                "hi": 5.79,
+                "tier": "Official",
+                "tier_vi": "Số liệu chính thức",
+                "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                "observed_on": "",
+                "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                "ai_feature": "parcel_widths",
+                "coverage_complete": false,
+                "coverage_m": null,
+                "measurement_schema": "parcel-usable-v2"
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.88
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+          "geometry": [
+            [
+              106.7123904724097,
+              10.799239911769355
+            ],
+            [
+              106.7123911,
+              10.7992432
+            ],
+            [
+              106.712408,
+              10.7993365
+            ],
+            [
+              106.7127117,
+              10.7992719
+            ],
+            [
+              106.7129889,
+              10.799213
+            ],
+            [
+              106.7128916,
+              10.7987087
+            ],
+            [
+              106.7126196,
+              10.7987612
+            ],
+            [
+              106.7123105,
+              10.7988209
+            ],
+            [
+              106.7122133,
+              10.7983551
+            ],
+            [
+              106.7120916,
+              10.7983859
+            ],
+            [
+              106.7119066,
+              10.7984327
+            ],
+            [
+              106.7118386,
+              10.79845
+            ],
+            [
+              106.7115854,
+              10.7985144
+            ],
+            [
+              106.7113836,
+              10.7985618
+            ],
+            [
+              106.7110915,
+              10.7986187
+            ]
+          ]
+        },
+        "fail_reasons": [
+          "Trong phạm vi 5 m tính từ mép đường giao nhau"
+        ],
+        "verified": false
+      },
+      "stops": [
+        {
+          "kind": "street",
+          "way_id": 32584409,
+          "name": "Hẻm 220/9 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799289850000001,
+          "lon": 106.71239955,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 6,
+            "verified": false,
+            "minutes": 0,
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 5.79,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/32584409",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 5.79,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.28,
+              "tight_min": 2.18,
+              "door_min": 2.88
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7127117,
+                10.7992719
+              ],
+              [
+                106.7129889,
+                10.799213
+              ],
+              [
+                106.7128916,
+                10.7987087
+              ],
+              [
+                106.7126196,
+                10.7987612
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 610082005,
+          "name": "Hẻm 294/22 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799714124122591,
+          "lon": 106.71248138762185,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 54,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 8.05,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/610082005",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 8.05,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,8 m (thửa cách nhau 8,8 m); p20 7,8 m, p80 7,8 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.28,
+              "tight_min": 2.18,
+              "door_min": 2.88
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 8,
+            "tight_exit": false,
+            "text": "Lùi khoảng 8 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 1173855538,
+          "name": "Xô Viết Nghệ Tĩnh",
+          "lat": 10.79932014595478,
+          "lon": 106.71115651252967,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 182,
+            "verified": false,
+            "minutes": 3,
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ],
+              [
+                106.7113502,
+                10.7993823
+              ],
+              [
+                106.7113933,
+                10.7993808
+              ],
+              [
+                106.7115056,
+                10.7993841
+              ],
+              [
+                106.711573,
+                10.7993861
+              ],
+              [
+                106.7116822,
+                10.7993755
+              ],
+              [
+                106.7117635,
+                10.7993676
+              ],
+              [
+                106.7118112,
+                10.7993674
+              ],
+              [
+                106.7118354,
+                10.7994069
+              ],
+              [
+                106.7119453,
+                10.7993911
+              ],
+              [
+                106.7119537,
+                10.7995003
+              ],
+              [
+                106.7120791,
+                10.7994848
+              ],
+              [
+                106.7120779,
+                10.7994731
+              ],
+              [
+                106.7121983,
+                10.7994576
+              ],
+              [
+                106.7121952,
+                10.7994439
+              ],
+              [
+                106.712169,
+                10.79928
+              ],
+              [
+                106.7122801,
+                10.7992616
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "fits",
+            "width_range": {
+              "lo": 5.5,
+              "hi": 10.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 5.5,
+                  "hi": 10.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM số làn xe",
+                  "detail": "highway=primary, lanes=2",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/1173855538",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.28,
+              "tight_min": 2.18,
+              "door_min": 2.88
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "verified_model",
+            "text": "Đi tiếp ra đường lớn",
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "main-road-signs",
+                "status": "Unverified",
+                "text": "Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này",
+                "citation": "Dữ liệu biển báo chưa đầy đủ"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "220/9",
+    "vehicle": "toyota-fortuner",
+    "cold_area_s": 0.0024270000285468996,
+    "first_plan_s": 0.7075958749628626,
+    "warm_median_s": 0.47182029200484976,
+    "result": {
+      "verdict": {
+        "code": "unverified",
+        "headline": "Chưa đủ bằng chứng để khẳng định",
+        "detail": "Gợi ý: đỗ tại Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m"
+      },
+      "counts": {
+        "candidates": 736,
+        "passed": 221,
+        "rejected": 515
+      },
+      "door": {
+        "ok": false,
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 0.0,
+            "hi": 5.79,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Official",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/32584409",
+                "ai_feature": null,
+                "coverage_complete": true,
+                "coverage_m": null,
+                "measurement_schema": ""
+              },
+              {
+                "lo": 0.0,
+                "hi": 5.79,
+                "tier": "Official",
+                "tier_vi": "Số liệu chính thức",
+                "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                "observed_on": "",
+                "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                "ai_feature": "parcel_widths",
+                "coverage_complete": false,
+                "coverage_m": null,
+                "measurement_schema": "parcel-usable-v2"
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 3.0
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+          "geometry": [
+            [
+              106.7123904724097,
+              10.799239911769355
+            ],
+            [
+              106.7123911,
+              10.7992432
+            ],
+            [
+              106.712408,
+              10.7993365
+            ],
+            [
+              106.7127117,
+              10.7992719
+            ],
+            [
+              106.7129889,
+              10.799213
+            ],
+            [
+              106.7128916,
+              10.7987087
+            ],
+            [
+              106.7126196,
+              10.7987612
+            ],
+            [
+              106.7123105,
+              10.7988209
+            ],
+            [
+              106.7122133,
+              10.7983551
+            ],
+            [
+              106.7120916,
+              10.7983859
+            ],
+            [
+              106.7119066,
+              10.7984327
+            ],
+            [
+              106.7118386,
+              10.79845
+            ],
+            [
+              106.7115854,
+              10.7985144
+            ],
+            [
+              106.7113836,
+              10.7985618
+            ],
+            [
+              106.7110915,
+              10.7986187
+            ]
+          ]
+        },
+        "fail_reasons": [
+          "Trong phạm vi 5 m tính từ mép đường giao nhau"
+        ],
+        "verified": false
+      },
+      "stops": [
+        {
+          "kind": "street",
+          "way_id": 32584409,
+          "name": "Hẻm 220/9 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799289850000001,
+          "lon": 106.71239955,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 6,
+            "verified": false,
+            "minutes": 0,
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 5.79,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/32584409",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 5.79,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7127117,
+                10.7992719
+              ],
+              [
+                106.7129889,
+                10.799213
+              ],
+              [
+                106.7128916,
+                10.7987087
+              ],
+              [
+                106.7126196,
+                10.7987612
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 610082005,
+          "name": "Hẻm 294/22 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799714124122591,
+          "lon": 106.71248138762185,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 54,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 8.05,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/610082005",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 8.05,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,8 m (thửa cách nhau 8,8 m); p20 7,8 m, p80 7,8 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 8,
+            "tight_exit": false,
+            "text": "Lùi khoảng 8 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 1173855538,
+          "name": "Xô Viết Nghệ Tĩnh",
+          "lat": 10.79932014595478,
+          "lon": 106.71115651252967,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 182,
+            "verified": false,
+            "minutes": 3,
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ],
+              [
+                106.7113502,
+                10.7993823
+              ],
+              [
+                106.7113933,
+                10.7993808
+              ],
+              [
+                106.7115056,
+                10.7993841
+              ],
+              [
+                106.711573,
+                10.7993861
+              ],
+              [
+                106.7116822,
+                10.7993755
+              ],
+              [
+                106.7117635,
+                10.7993676
+              ],
+              [
+                106.7118112,
+                10.7993674
+              ],
+              [
+                106.7118354,
+                10.7994069
+              ],
+              [
+                106.7119453,
+                10.7993911
+              ],
+              [
+                106.7119537,
+                10.7995003
+              ],
+              [
+                106.7120791,
+                10.7994848
+              ],
+              [
+                106.7120779,
+                10.7994731
+              ],
+              [
+                106.7121983,
+                10.7994576
+              ],
+              [
+                106.7121952,
+                10.7994439
+              ],
+              [
+                106.712169,
+                10.79928
+              ],
+              [
+                106.7122801,
+                10.7992616
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "fits",
+            "width_range": {
+              "lo": 5.5,
+              "hi": 10.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 5.5,
+                  "hi": 10.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM số làn xe",
+                  "detail": "highway=primary, lanes=2",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/1173855538",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "door_min": 3.0
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "verified_model",
+            "text": "Đi tiếp ra đường lớn",
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "main-road-signs",
+                "status": "Unverified",
+                "text": "Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này",
+                "citation": "Dữ liệu biển báo chưa đầy đủ"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "220/9",
+    "vehicle": "vinfast-vf-3",
+    "cold_area_s": 0.0024270000285468996,
+    "first_plan_s": 0.7149510830058716,
+    "warm_median_s": 0.47642637498211116,
+    "result": {
+      "verdict": {
+        "code": "unverified",
+        "headline": "Chưa đủ bằng chứng để khẳng định",
+        "detail": "Gợi ý: đỗ tại Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m"
+      },
+      "counts": {
+        "candidates": 736,
+        "passed": 221,
+        "rejected": 515
+      },
+      "door": {
+        "ok": false,
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 0.0,
+            "hi": 5.79,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Official",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/32584409",
+                "ai_feature": null,
+                "coverage_complete": true,
+                "coverage_m": null,
+                "measurement_schema": ""
+              },
+              {
+                "lo": 0.0,
+                "hi": 5.79,
+                "tier": "Official",
+                "tier_vi": "Số liệu chính thức",
+                "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                "observed_on": "",
+                "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                "ai_feature": "parcel_widths",
+                "coverage_complete": false,
+                "coverage_m": null,
+                "measurement_schema": "parcel-usable-v2"
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.65
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+          "geometry": [
+            [
+              106.7123904724097,
+              10.799239911769355
+            ],
+            [
+              106.7123911,
+              10.7992432
+            ],
+            [
+              106.712408,
+              10.7993365
+            ],
+            [
+              106.7127117,
+              10.7992719
+            ],
+            [
+              106.7129889,
+              10.799213
+            ],
+            [
+              106.7128916,
+              10.7987087
+            ],
+            [
+              106.7126196,
+              10.7987612
+            ],
+            [
+              106.7123105,
+              10.7988209
+            ],
+            [
+              106.7122133,
+              10.7983551
+            ],
+            [
+              106.7120916,
+              10.7983859
+            ],
+            [
+              106.7119066,
+              10.7984327
+            ],
+            [
+              106.7118386,
+              10.79845
+            ],
+            [
+              106.7115854,
+              10.7985144
+            ],
+            [
+              106.7113836,
+              10.7985618
+            ],
+            [
+              106.7110915,
+              10.7986187
+            ]
+          ]
+        },
+        "fail_reasons": [
+          "Trong phạm vi 5 m tính từ mép đường giao nhau"
+        ],
+        "verified": false
+      },
+      "stops": [
+        {
+          "kind": "street",
+          "way_id": 32584409,
+          "name": "Hẻm 220/9 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799289850000001,
+          "lon": 106.71239955,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 6,
+            "verified": false,
+            "minutes": 0,
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 5.79,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/32584409",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 5.79,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.71239955,
+                10.799289850000001
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7127117,
+                10.7992719
+              ],
+              [
+                106.7129889,
+                10.799213
+              ],
+              [
+                106.7128916,
+                10.7987087
+              ],
+              [
+                106.7126196,
+                10.7987612
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 610082005,
+          "name": "Hẻm 294/22 Xô Viết Nghệ Tĩnh",
+          "lat": 10.799714124122591,
+          "lon": 106.71248138762185,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 54,
+            "verified": false,
+            "minutes": 1,
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "unknown",
+            "width_range": {
+              "lo": 0.0,
+              "hi": 8.05,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Official",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 2.5,
+                  "hi": 15.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=residential",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/610082005",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                },
+                {
+                  "lo": 0.0,
+                  "hi": 8.05,
+                  "tier": "Official",
+                  "tier_vi": "Số liệu chính thức",
+                  "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+                  "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,8 m (thửa cách nhau 8,8 m); p20 7,8 m, p80 7,8 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+                  "observed_on": "",
+                  "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                  "ai_feature": "parcel_widths",
+                  "coverage_complete": false,
+                  "coverage_m": null,
+                  "measurement_schema": "parcel-usable-v2"
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "unknown",
+            "reverse_m": 8,
+            "tight_exit": false,
+            "text": "Lùi khoảng 8 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+            "geometry": [
+              [
+                106.71248138762185,
+                10.799714124122591
+              ],
+              [
+                106.7124669,
+                10.7996436
+              ],
+              [
+                106.712408,
+                10.7993365
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123105,
+                10.7988209
+              ],
+              [
+                106.7122133,
+                10.7983551
+              ],
+              [
+                106.7120916,
+                10.7983859
+              ],
+              [
+                106.7119066,
+                10.7984327
+              ],
+              [
+                106.7118386,
+                10.79845
+              ],
+              [
+                106.7115854,
+                10.7985144
+              ],
+              [
+                106.7113836,
+                10.7985618
+              ],
+              [
+                106.7110915,
+                10.7986187
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "lane-unknown",
+                "status": "Unverified",
+                "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "street",
+          "way_id": 1173855538,
+          "name": "Xô Viết Nghệ Tĩnh",
+          "lat": 10.79932014595478,
+          "lon": 106.71115651252967,
+          "tier": 2,
+          "verified": false,
+          "walk": {
+            "meters": 182,
+            "verified": false,
+            "minutes": 3,
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ],
+              [
+                106.7113502,
+                10.7993823
+              ],
+              [
+                106.7113933,
+                10.7993808
+              ],
+              [
+                106.7115056,
+                10.7993841
+              ],
+              [
+                106.711573,
+                10.7993861
+              ],
+              [
+                106.7116822,
+                10.7993755
+              ],
+              [
+                106.7117635,
+                10.7993676
+              ],
+              [
+                106.7118112,
+                10.7993674
+              ],
+              [
+                106.7118354,
+                10.7994069
+              ],
+              [
+                106.7119453,
+                10.7993911
+              ],
+              [
+                106.7119537,
+                10.7995003
+              ],
+              [
+                106.7120791,
+                10.7994848
+              ],
+              [
+                106.7120779,
+                10.7994731
+              ],
+              [
+                106.7121983,
+                10.7994576
+              ],
+              [
+                106.7121952,
+                10.7994439
+              ],
+              [
+                106.712169,
+                10.79928
+              ],
+              [
+                106.7122801,
+                10.7992616
+              ],
+              [
+                106.7123911,
+                10.7992432
+              ],
+              [
+                106.7123904724097,
+                10.799239911769355
+              ],
+              [
+                106.71239,
+                10.79924
+              ]
+            ],
+            "wade": null
+          },
+          "fit": {
+            "class": "fits",
+            "width_range": {
+              "lo": 5.5,
+              "hi": 10.0,
+              "label": "Chưa rõ bề rộng",
+              "top_tier": "Inferred",
+              "review": false,
+              "evidence": [
+                {
+                  "lo": 5.5,
+                  "hi": 10.0,
+                  "tier": "Inferred",
+                  "tier_vi": "Suy luận",
+                  "source": "OSM số làn xe",
+                  "detail": "highway=primary, lanes=2",
+                  "observed_on": "",
+                  "url": "https://www.openstreetmap.org/way/1173855538",
+                  "ai_feature": null,
+                  "coverage_complete": true,
+                  "coverage_m": null,
+                  "measurement_schema": ""
+                }
+              ],
+              "overruled": [],
+              "way_out_claims": []
+            },
+            "note": null,
+            "needed": {
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "door_min": 2.65
+            }
+          },
+          "way_out": {
+            "mode": "through",
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "verified_model",
+            "text": "Đi tiếp ra đường lớn",
+            "geometry": [
+              [
+                106.71115651252967,
+                10.79932014595478
+              ],
+              [
+                106.7111631,
+                10.7993918
+              ]
+            ]
+          },
+          "legality": {
+            "status": "Unverified",
+            "rules": [
+              {
+                "code": "main-road-signs",
+                "status": "Unverified",
+                "text": "Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này",
+                "citation": "Dữ liệu biển báo chưa đầy đủ"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,23 @@
+# Render Blueprint for a team test deployment. Free plan: the service sleeps after ~15 minutes idle and its
+# disk is not persistent, so operator sessions, reports and caches reset on every restart or redeploy.
+services:
+  - type: web
+    name: ngo-ngach
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: feat/ui-taste-v2
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/config
+    autoDeploy: true
+    envVars:
+      # Paste these in the Render dashboard; they are never committed.
+      - key: GOONG_API_KEY
+        sync: false
+      - key: GOONG_MAPTILES_KEY
+        sync: false
+      - key: PROD_GEMINI_API_KEY
+        sync: false
+      # Operator login for the demo menu; Render generates it, read it from the dashboard.
+      - key: OPERATOR_SECRET
+        generateValue: true

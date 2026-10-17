@@ -26,6 +26,11 @@ AI_FEATURES = {
         "detail": "Quét các ways trên lối vào/ra theo chiều hợp lệ, lấy mẫu đầu-cuối và xấp xỉ mỗi 5 m trong ngân sách 60 cuts. Quét thưa/cắt cụt chỉ để tham khảo; ngay cả phủ đủ cũng không chứng minh hết vật cản. Tắt thì chỉ có mẫu nông.",
         "default": True,
     },
+    "footprint_widths": {
+        "label": "Bề rộng suy luận từ mái nhà (đã hiệu chỉnh)",
+        "detail": "Thử nghiệm, tắt mặc định: hiệu chỉnh Overture bằng địa chính vẫn sai số ±11,4 m và chưa phân biệt được hẻm hẹp/rộng. Mức Suy luận; địa chính luôn ưu tiên.",
+        "default": False,
+    },
     "building_gaps": {
         "label": "Bề rộng từ khoảng cách giữa hai dãy nhà",
         "detail": "Thử nghiệm, tắt mặc định: khoảng cách giữa footprint nhà hai bên hẻm (Overture). Kiểm chứng cho thấy chưa phân biệt được hẻm hẹp và hẻm rộng (lệch ~2–4 m).",

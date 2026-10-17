@@ -1,0 +1,996 @@
+{
+  "source_sha256": {
+    "backend/app/plan.py": "8b5a359cd081e747418533d7b3a9d32ae390f1a0aa211b6b0850e398cd9d3344",
+    "backend/app/evidence.py": "925b31e1d1a0d84cf0dd69023c4bb0932bed0839db79712202a48ac004f0326f",
+    "backend/app/vehicles.py": "28c69f4989f91f639f21b1fba6154ef44bebadb7245427c820cf6c34943f692e",
+    "backend/app/parcels.py": "e1796d2482f6bde26a50fbfa076f4f69387f51fdc75bfb5e08759d8ed501fc4c",
+    "backend/app/geometry.py": "9536092f2abc8cdfe6c44c08beeecc9070b5388bed5322eb64a28fa9f35cf2fa",
+    "backend/app/osm.py": "eedea7d77697645e1b90f18ce53b647272948b3d6553ee70cd10db766a1ddb7e",
+    "backend/app/flood.py": "dd3e98a039f7087c84f515b2c740c66c1505b4c887d5761dbb4789675a7ec2e2",
+    "backend/app/legality.py": "67b455d98e81efcf535aa4f345514bfd2095a6ad5b17f752dd4246f3710c6320",
+    "backend/app/live.py": "09a87e91e8e0fc82aaed55b072f59cedd164060127ff28f1c82642fc1a7fb1da",
+    "backend/app/config.py": "f7fa82dca31f864ed05b92b2cf2a19885a238d7906c9c2fbf26a63682e32099c",
+    "backend/app/parking_data.py": "382e20f0492efe4db2f270de7da711ed3842551b37a788e82c7ac5505eb8132b"
+  },
+  "cases": [
+    {
+      "id": "width-bottleneck",
+      "input": {
+        "way_id": 20,
+        "samples": [
+          1.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ],
+        "cuts": [
+          {
+            "width_m": 1.0,
+            "gap_m": 2.0
+          },
+          {
+            "width_m": 4.0,
+            "gap_m": 5.0
+          },
+          {
+            "width_m": 4.0,
+            "gap_m": 5.0
+          },
+          {
+            "width_m": 4.0,
+            "gap_m": 5.0
+          },
+          {
+            "width_m": 4.0,
+            "gap_m": 5.0
+          }
+        ],
+        "deep": true
+      },
+      "observed": {
+        "range": [
+          0.0,
+          1.3
+        ],
+        "vios_fit": "no"
+      },
+      "expected": "Retain a valid 1 m bottleneck or mark unresolved; do not certify the entire way as fitting",
+      "triggered": true
+    },
+    {
+      "id": "tier-review",
+      "input": [
+        {
+          "lo": 0.9,
+          "hi": 1.1,
+          "tier": "Measured",
+          "tier_vi": "Đo thực tế",
+          "source": "tape narrow",
+          "detail": "",
+          "observed_on": "2026-10-17",
+          "url": "",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": ""
+        },
+        {
+          "lo": 4.0,
+          "hi": 4.2,
+          "tier": "Measured",
+          "tier_vi": "Đo thực tế",
+          "source": "tape wide",
+          "detail": "",
+          "observed_on": "2026-09-01",
+          "url": "",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": ""
+        },
+        {
+          "lo": 4.0,
+          "hi": 4.1,
+          "tier": "Declared",
+          "tier_vi": "Tin rao / tự khai",
+          "source": "listing",
+          "detail": "",
+          "observed_on": "2026-01-01",
+          "url": "",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": ""
+        }
+      ],
+      "observed": {
+        "combined": [
+          0.9,
+          4.2,
+          "Measured",
+          true
+        ],
+        "vios_fit": "unknown"
+      },
+      "expected": "A lower-tier listing must not resolve conflicting measurements into a confident fit",
+      "triggered": true
+    },
+    {
+      "id": "stale-deep",
+      "input": {
+        "old": {
+          "way_id": 20,
+          "samples": [
+            7.0
+          ],
+          "cuts": [],
+          "deep": true,
+          "queried_at": "2026-01-01"
+        },
+        "fresh": {
+          "samples": [
+            2.0
+          ],
+          "cuts": [],
+          "queried_at": "2026-10-17"
+        }
+      },
+      "observed": {
+        "way_id": 20,
+        "samples": [
+          7.0
+        ],
+        "cuts": [],
+        "deep": true,
+        "queried_at": "2026-01-01"
+      },
+      "expected": "Fresh contradictory cuts require reconciliation; deep is coverage, not recency",
+      "triggered": true
+    },
+    {
+      "id": "legacy-margin",
+      "input": "data/official/parcel_gaps.csv",
+      "observed": {
+        "hem 53/86 tran khanh du": [
+          {
+            "lo": 0.0,
+            "hi": 1.55,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "audit CSV",
+            "detail": "Khoảng cách giữa hai thửa đất đối diện (cổng Thông tin quy hoạch TP.HCM); khoảng thửa gốc 2.25 m; trừ 1 m = 1.25 m, bất định ±0,3 m; chưa rõ phạm vi",
+            "observed_on": "2026-09-28",
+            "url": "",
+            "ai_feature": null,
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "legacy-raw-gap-converted-v2"
+          }
+        ],
+        "hem 71 nguyen cong hoan": [
+          {
+            "lo": 0.0,
+            "hi": 1.95,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "audit CSV",
+            "detail": "Khoảng cách giữa hai thửa đất đối diện (cổng Thông tin quy hoạch TP.HCM); khoảng thửa gốc 2.65 m; trừ 1 m = 1.65 m, bất định ±0,3 m; chưa rõ phạm vi",
+            "observed_on": "2026-09-28",
+            "url": "",
+            "ai_feature": null,
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "legacy-raw-gap-converted-v2"
+          }
+        ],
+        "hem 134/109 ly chinh thang": [
+          {
+            "lo": 0.0,
+            "hi": 4.5,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "audit CSV",
+            "detail": "Khoảng cách giữa hai thửa đất đối diện (cổng Thông tin quy hoạch TP.HCM); khoảng thửa gốc 5.2 m; trừ 1 m = 4.2 m, bất định ±0,3 m; chưa rõ phạm vi",
+            "observed_on": "2026-09-28",
+            "url": "",
+            "ai_feature": null,
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "legacy-raw-gap-converted-v2"
+          }
+        ]
+      },
+      "expected": "Raw CSV parcel gaps must use the same versioned 1 m conversion as live cuts",
+      "triggered": true
+    },
+    {
+      "id": "corner-cut",
+      "input": "4 m L corridor, cut at its 90-degree vertex",
+      "observed": {
+        "samples": [],
+        "cuts": [],
+        "schema": "parcel-usable-v2",
+        "attempted": 1,
+        "attempts": [
+          {
+            "at_m": 20.0,
+            "valid": false,
+            "reason": "geometry_invalid_or_no_opposing_frontage"
+          }
+        ],
+        "coverage": {
+          "length_m": 40.0,
+          "sampled_from_m": 20.000000000366267,
+          "sampled_to_m": 20.000000000366267,
+          "all_valid": false,
+          "complete": false
+        }
+      },
+      "expected": "The 4 m raw corridor should not become a 5.66 m raw gap at its bend",
+      "triggered": true
+    },
+    {
+      "id": "deep-budget",
+      "input": "Two 400 m ways, one successful cut on each",
+      "observed": {
+        "requested_cuts": [
+          60
+        ],
+        "total": 60
+      },
+      "expected": "60 attempted cuts total, independent of successful yield",
+      "triggered": true
+    },
+    {
+      "id": "vehicle-door",
+      "input": "Toyota Vios width derivation",
+      "observed": {
+        "body": 1.73,
+        "mirror": 1.98,
+        "fits": 3.2800000000000002,
+        "tight": 2.18,
+        "door": 2.88,
+        "D15_door": 2.88
+      },
+      "expected": "D15 specifies W including mirrors for door_min; implementation uses body width",
+      "triggered": true
+    },
+    {
+      "id": "confirmation-mirror",
+      "input": "Vios got in: body 1.73 m, mirrors 1.98 m",
+      "observed": {
+        "lo": 1.98,
+        "hi": null,
+        "tier": "Observed",
+        "tier_vi": "Đã quan sát",
+        "source": "Xác nhận sau khi đến",
+        "detail": "Tài xế Vios xác nhận vào được",
+        "observed_on": "2026-10-17",
+        "url": "",
+        "ai_feature": null,
+        "coverage_complete": true,
+        "coverage_m": null,
+        "measurement_schema": ""
+      },
+      "expected": "Q10 specifies mirror-width lower bound (or capture a folded-mirror context), not body+.20",
+      "triggered": true
+    },
+    {
+      "id": "vehicle-water-units",
+      "input": {
+        "wading_depth_mm": "0.2",
+        "powertrain": "ICE",
+        "gc_m": 0.15
+      },
+      "observed": [
+        0.15,
+        "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm"
+      ],
+      "expected": "Compare metres with metres; an invalid/sub-clearance 0.2 mm value must not enable the wading rule",
+      "triggered": true
+    },
+    {
+      "id": "vehicle-provenance",
+      "input": "CSV marks VF 8 turning radius DERIVED; metadata",
+      "observed": {
+        "id": "vinfast-vf-8-the-all-new-2026",
+        "label": "VinFast VF 8 The All New (2026)",
+        "kind": "model",
+        "size_class": "M",
+        "powertrain": "EV",
+        "body_width": 1.872,
+        "mirror_width": 2.123,
+        "mirror_estimated": false,
+        "length": 4.701,
+        "turning_radius": 5.34,
+        "turning_radius_estimated": true,
+        "ground_clearance": 0.17,
+        "safe_water_depth": 0.17,
+        "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+        "members": [],
+        "fits_min": 3.42,
+        "tight_min": 2.32,
+        "three_point_width": 7.41,
+        "three_point_length": 15.38,
+        "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF8NP&year=2026&lv1=1313352&lv2=1313404",
+        "door_min": 3.02,
+        "assumptions": "min_turning_radius_m is DERIVED, not published: outer-front-wheel radius = wheelbase/sin(outer steer angle 32.1 deg from VN owner manual) = 2.840/sin(32.1) = 5.34 m (kinematic; add ~0.1-0.3 m for kerb/body). GC unladen. Rear track 1596. Curb weight 1870 kg. Deposit page (Jun-2026) confirms 4701x1872x1670: https://vinfastauto.com/vn_vi/dat-coc-xe-vf8-the-all-new-2026 . No published turning figure; steering angles inner 38.2 deg / outer 32.1 deg (same platform dims as Limo Green). Flood chapter explicitly: 'do not drive if water exceeds ground clearance'; flood damage excluded from warranty: https://om.vinfastauto.com/vi_vn/detail?car=VF8NP&year=2026&lv1=1313348&lv2=1313383"
+      },
+      "expected": "Derived turning radius should be labelled estimated; class metadata must preserve uncertainty",
+      "triggered": true
+    },
+    {
+      "id": "turn-cache-version",
+      "input": "Length changes from 5.998 m to 12 m for the same Ford Transit profile id",
+      "observed": {
+        "cached_width": 9.09,
+        "new_body_diagonal_lower_bound": 12.776888929443349
+      },
+      "expected": "A spec change must invalidate id-only three_point.json; 9.09 m cannot turn a 12 m long rectangle",
+      "triggered": true
+    },
+    {
+      "id": "double-encroachment",
+      "input": "4.0 m parcel gap; 1.0 m usable deduction already includes parked motorbikes",
+      "observed": {
+        "usable": 3.0,
+        "fortuner_fit": "tight",
+        "fortuner_fits_threshold": 3.4050000000000002,
+        "mirror_plus_side_clearance": 2.705
+      },
+      "expected": "Document whether the same motorbike row is being deducted twice; calibrate one obstacle budget",
+      "triggered": true
+    },
+    {
+      "id": "way-split",
+      "input": [
+        [
+          10,
+          [
+            1,
+            2,
+            3
+          ],
+          {
+            "highway": "tertiary"
+          }
+        ],
+        [
+          20,
+          [
+            2,
+            4,
+            5
+          ],
+          {}
+        ],
+        [
+          30,
+          [
+            4,
+            6
+          ],
+          {}
+        ]
+      ],
+      "observed": [
+        {
+          "mode": "unknown",
+          "strict": false,
+          "reverse_m": 20,
+          "tight_exit": false,
+          "text": "Lùi khoảng 20 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+          "geometry": [
+            [
+              106.71018310795988,
+              10.80090464990049
+            ],
+            [
+              106.71,
+              10.80090464990049
+            ],
+            [
+              106.71,
+              10.8
+            ]
+          ]
+        },
+        {
+          "mode": "unknown",
+          "strict": false,
+          "reverse_m": 20,
+          "tight_exit": false,
+          "text": "Lùi khoảng 20 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+          "geometry": [
+            [
+              106.71018310795988,
+              10.80090464990049
+            ],
+            [
+              106.71,
+              10.80090464990049
+            ],
+            [
+              106.71,
+              10.8
+            ]
+          ]
+        }
+      ],
+      "expected": "Identical physical T junction must have the same exit under an OSM way split",
+      "triggered": true
+    },
+    {
+      "id": "shortest-tree-exit",
+      "input": "200 m alley plus a 240 m fitting forward loop; stop halfway",
+      "observed": [
+        {
+          "vehicle": "vinfast-vf-3",
+          "fit": {
+            "10": "fits",
+            "20": "fits",
+            "30": "fits"
+          },
+          "way_out": {
+            "mode": "through",
+            "strict": true,
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "verified_model",
+            "text": "Đi tiếp ra đường lớn",
+            "geometry": [
+              [
+                106.71,
+                10.800899320363726
+              ],
+              [
+                106.71,
+                10.801809299800977
+              ],
+              [
+                106.71018281535649,
+                10.801809299800977
+              ],
+              [
+                106.71018281535649,
+                10.8
+              ],
+              [
+                106.71,
+                10.8
+              ]
+            ]
+          }
+        },
+        {
+          "vehicle": "kia-carnival",
+          "fit": {
+            "10": "fits",
+            "20": "tight",
+            "30": "fits"
+          },
+          "way_out": {
+            "mode": "through",
+            "strict": false,
+            "reverse_m": 0,
+            "tight_exit": false,
+            "manoeuvre_status": "unknown",
+            "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+            "geometry": [
+              [
+                106.71,
+                10.800899320363726
+              ],
+              [
+                106.71,
+                10.801809299800977
+              ],
+              [
+                106.71018281535649,
+                10.801809299800977
+              ],
+              [
+                106.71018281535649,
+                10.8
+              ],
+              [
+                106.71,
+                10.8
+              ]
+            ]
+          }
+        }
+      ],
+      "expected": "Both cars have the same topological forward exit; search for an alternative instead of inspecting one predecessor",
+      "triggered": true
+    },
+    {
+      "id": "oneway-exit",
+      "input": "One-way u→v dead end, stop 20 m from u",
+      "observed": [
+        {
+          "mode": "none",
+          "strict": false,
+          "text": "Không tìm thấy đường ra theo chiều được phép trong dữ liệu hiện có"
+        },
+        {
+          "mode": "none",
+          "strict": false,
+          "text": "Không tìm thấy đường ra theo chiều được phép trong dữ liệu hiện có"
+        }
+      ],
+      "expected": "Neither reversing nor turning around may exit against the one-way direction",
+      "triggered": true
+    },
+    {
+      "id": "junction-turn",
+      "input": "Two 4 m alleys meeting at 90 degrees",
+      "observed": {
+        "fit": {
+          "10": "fits",
+          "20": "fits"
+        },
+        "carnival_one_arc_need": 4.5866272169594895
+      },
+      "expected": "Route transitions need vehicle swept-path feasibility; equal-width alleys currently skip the turn check",
+      "triggered": true
+    },
+    {
+      "id": "access-tags",
+      "input": [
+        {
+          "access": "private"
+        },
+        {
+          "access": "private",
+          "motorcar": "destination"
+        },
+        {
+          "motorcar": "no"
+        },
+        {
+          "motor_vehicle": "no",
+          "motorcar": "yes"
+        },
+        {
+          "vehicle": "no"
+        },
+        {
+          "junction": "roundabout"
+        },
+        {
+          "bridge": "yes",
+          "maxweight": "1"
+        }
+      ],
+      "observed": [
+        {
+          "access": "private",
+          "drivable": false,
+          "oneway_parsed": 0
+        },
+        {
+          "access": "private",
+          "motorcar": "destination",
+          "drivable": true,
+          "oneway_parsed": 0
+        },
+        {
+          "motorcar": "no",
+          "drivable": false,
+          "oneway_parsed": 0
+        },
+        {
+          "motor_vehicle": "no",
+          "motorcar": "yes",
+          "drivable": false,
+          "oneway_parsed": 0
+        },
+        {
+          "vehicle": "no",
+          "drivable": true,
+          "oneway_parsed": 0
+        },
+        {
+          "junction": "roundabout",
+          "drivable": true,
+          "oneway_parsed": 0
+        },
+        {
+          "bridge": "yes",
+          "maxweight": "1",
+          "drivable": true,
+          "oneway_parsed": 0
+        }
+      ],
+      "expected": "Honor tag specificity, vehicle=no, implicit roundabout direction, and per-vehicle bridge constraints",
+      "triggered": true
+    },
+    {
+      "id": "gate",
+      "input": "Untagged residential way through a private gate node",
+      "observed": {
+        "1": [
+          [
+            0,
+            2
+          ]
+        ],
+        "2": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "expected": "Block the private gate node unless explicit access exists",
+      "triggered": true
+    },
+    {
+      "id": "private-walk",
+      "input": {
+        "highway": "service",
+        "access": "private"
+      },
+      "observed": true,
+      "expected": "Access restrictions must also apply to foot routing",
+      "triggered": true
+    },
+    {
+      "id": "lot-connector",
+      "input": "Lot 70 m off a main-road node; no connecting way",
+      "observed": {
+        "strict": false,
+        "meters": 70,
+        "geometry": [
+          [
+            106.71,
+            10.8
+          ],
+          [
+            106.71,
+            10.800633254930343
+          ]
+        ],
+        "flood": null
+      },
+      "expected": "A public, fitting mapped entrance path is needed before certifying a lot connection",
+      "triggered": true
+    },
+    {
+      "id": "partial-route",
+      "input": "Final way excluded by search; source endpoint still in dist",
+      "observed": {
+        "strict": true,
+        "meters": 20,
+        "side": "u",
+        "geometry": [
+          [
+            106.71,
+            10.8
+          ],
+          [
+            106.71018310740835,
+            10.8
+          ]
+        ],
+        "flood": null
+      },
+      "expected": "Route in should recheck final partial edge; _evaluate rejects unfit street stops separately",
+      "triggered": true
+    },
+    {
+      "id": "weighted-meters",
+      "input": "100 m tight approach plus 10 m of final edge",
+      "observed": {
+        "strict": true,
+        "meters": 110,
+        "side": "u",
+        "geometry": [
+          [
+            106.71,
+            10.8
+          ],
+          [
+            106.71091407678244,
+            10.8
+          ],
+          [
+            106.71100563048662,
+            10.8
+          ]
+        ],
+        "flood": null
+      },
+      "expected": "Report about 110 physical metres, not about 140 penalty-weighted metres",
+      "triggered": true
+    },
+    {
+      "id": "walk-edge",
+      "input": {
+        "edge_m": 100,
+        "destination_offset": 90,
+        "stop_offset": 80
+      },
+      "observed": {
+        "reported_by_endpoint_rule_m": 30,
+        "drawn_m": 9.856452187066441,
+        "geometry": [
+          [
+            106.71073242963342,
+            10.8
+          ],
+          [
+            106.7108226691042,
+            10.8
+          ]
+        ]
+      },
+      "expected": "Distance and geometry must both follow the same 10 m sub-edge path",
+      "triggered": true
+    },
+    {
+      "id": "no-walk-crash",
+      "input": "Cached graph containing only a motorway",
+      "observed": null,
+      "expected": "Return insufficient walk coverage, not an AttributeError",
+      "triggered": false
+    },
+    {
+      "id": "graph-revision-cache",
+      "input": "Disk OSM refresh replaces way 10 with 20 under the same source",
+      "observed": [
+        20
+      ],
+      "expected": "Width cache must contain new way 20",
+      "triggered": false
+    },
+    {
+      "id": "moving-water",
+      "input": {
+        "range": [
+          0.1,
+          0.3
+        ],
+        "rain_driven": true,
+        "safe_water_depth": 0.4
+      },
+      "observed": "blocked",
+      "expected": "D14 says rain flood reaching 0.30 m is blocked for every vehicle",
+      "triggered": true
+    },
+    {
+      "id": "missing-tide",
+      "input": "2027-10-17T12:00:00+07:00",
+      "observed": {
+        "tide": null,
+        "depth": "DepthRange(lo=0.0, hi=0.0, drivers=[], rain_driven=False, inferred=False, known=False, unknown_reasons=['Ngoài thời hạn dự báo triều'])",
+        "status": "unknown"
+      },
+      "expected": "Missing forecast must be Unverified, not passable",
+      "triggered": true
+    },
+    {
+      "id": "rain-pulse",
+      "input": [
+        {
+          "start": "2026-10-17T12:01:00+07:00",
+          "end": "2026-10-17T12:14:00+07:00",
+          "mm_per_h": 60
+        }
+      ],
+      "observed": {
+        "sampled": "blocked",
+        "inside": "blocked",
+        "one_minute_after": "blocked"
+      },
+      "expected": "Dwell evaluation must include event boundaries and account for retained water",
+      "triggered": true
+    },
+    {
+      "id": "dwell-extrema",
+      "input": "Synthetic tide extremum at arrival+7 minutes between two sampled endpoints",
+      "observed": {
+        "sampled": "blocked",
+        "peak": "blocked"
+      },
+      "expected": "Include published extrema inside the stay, not just an arrival-anchored 15-minute grid",
+      "triggered": true
+    },
+    {
+      "id": "rain-order",
+      "input": [
+        {
+          "start": "2026-10-17T12:00:00+07:00",
+          "end": "2026-10-17T13:00:00+07:00",
+          "mm_per_h": 10
+        },
+        {
+          "start": "2026-10-17T12:00:00+07:00",
+          "end": "2026-10-17T13:00:00+07:00",
+          "mm_per_h": 60
+        }
+      ],
+      "observed": [
+        60.0,
+        60.0
+      ],
+      "expected": "Overlapping scenarios need a documented order-independent combination or validation",
+      "triggered": true
+    },
+    {
+      "id": "worst-depth",
+      "input": "Two passable depths: 1–2 cm then 10–12 cm",
+      "observed": {
+        "status": "passable",
+        "depth": {
+          "lo": 0.1,
+          "hi": 0.12,
+          "drivers": [],
+          "rain_driven": false,
+          "inferred": false,
+          "known": true,
+          "unknown_reasons": []
+        },
+        "time": "2026-10-17T12:15:00+07:00"
+      },
+      "expected": "Worst depth/time should show the later 10–12 cm interval even when status ties",
+      "triggered": true
+    },
+    {
+      "id": "rain-no-history",
+      "input": "100 mm/h on a street with no flood history",
+      "observed": {
+        "range": {
+          "lo": null,
+          "hi": null,
+          "drivers": [
+            "Mưa 100 mm/h (chưa có ghi nhận ngập ở đoạn này)"
+          ],
+          "rain_driven": true,
+          "inferred": false,
+          "known": false,
+          "unknown_reasons": [
+            "Chưa có hồ sơ đáp ứng ngập của đoạn đường",
+            "Chưa biết độ sâu ứng với mưa lớn tại đoạn này"
+          ]
+        },
+        "VF3_status": "unknown"
+      },
+      "expected": "No historical record cannot establish a universal safe upper bound of 10 cm",
+      "triggered": true
+    },
+    {
+      "id": "no-rule-permitted",
+      "input": "8 m tertiary street, no applicable sign/ordinance",
+      "observed": {
+        "status": "Unverified",
+        "rules": [
+          {
+            "code": "no-rule",
+            "status": "Unverified",
+            "text": "Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ",
+            "citation": "Dữ liệu pháp lý tại vị trí chưa đầy đủ"
+          }
+        ]
+      },
+      "expected": "No known prohibition with incomplete sign/curb coverage means Unverified, not an affirmative permission",
+      "triggered": true
+    },
+    {
+      "id": "sign-extent",
+      "input": "P.130 at x=0; stop at x=60 on same uninterrupted way",
+      "observed": [
+        {
+          "code": "sign-P130",
+          "status": "Prohibited",
+          "text": "Biển P.130 cấm dừng và đỗ xe",
+          "citation": "QCVN 41:2024/BGTVT, biển P.130"
+        }
+      ],
+      "expected": "Apply sign direction/side/extent until its terminating condition",
+      "triggered": true
+    },
+    {
+      "id": "sign-unrelated",
+      "input": "P.130 20 m away, not on the candidate's way",
+      "observed": [],
+      "expected": "Do not attach an unassociated sign to every nearby street",
+      "triggered": true
+    },
+    {
+      "id": "parking-tag-fee",
+      "input": {
+        "parking:both:fee": "no"
+      },
+      "observed": [],
+      "expected": "Free parking is not prohibited parking; parse semantic restriction keys only",
+      "triggered": true
+    },
+    {
+      "id": "legality-window",
+      "input": "Park 17 Oct 23:00–18 Oct 01:00 next to P.131c",
+      "observed": {
+        "at_arrival": [
+          {
+            "code": "sign-P130",
+            "status": "Prohibited",
+            "text": "Biển P.130 cấm dừng và đỗ xe",
+            "citation": "QCVN 41:2024/BGTVT, biển P.130"
+          }
+        ],
+        "at_departure": [
+          {
+            "code": "sign-P130",
+            "status": "Prohibited",
+            "text": "Biển P.130 cấm dừng và đỗ xe",
+            "citation": "QCVN 41:2024/BGTVT, biển P.130"
+          }
+        ]
+      },
+      "expected": "Check legal validity across entire parked interval, not only arrival",
+      "triggered": true
+    },
+    {
+      "id": "junction-degree",
+      "input": "Physical T junction: parent way [1,2,3], branch [2,4]",
+      "observed": 2,
+      "expected": "Physical branch degree is 3; distinct way count 2 misses the 5 m exclusion",
+      "triggered": true
+    },
+    {
+      "id": "junction-shape-node",
+      "input": "Stop 4 m from a detected degree-three junction, behind a shape node at 3 m",
+      "observed": {
+        "status": "Prohibited",
+        "rules": [
+          {
+            "code": "junction-5m",
+            "status": "Prohibited",
+            "text": "Trong phạm vi 5 m tính từ mép đường giao nhau",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      "expected": "A shape node must not hide the nearby 5 m junction exclusion",
+      "triggered": true
+    },
+    {
+      "id": "legal-road-proxies",
+      "input": "covered=yes is not necessarily a tunnel; OSM trunk is not necessarily a statutory expressway",
+      "observed": [
+        {
+          "tags": {
+            "covered": "yes"
+          },
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "no-rule",
+              "status": "Unverified",
+              "text": "Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ",
+              "citation": "Dữ liệu pháp lý tại vị trí chưa đầy đủ"
+            }
+          ]
+        },
+        {
+          "tags": {
+            "highway": "trunk"
+          },
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "no-rule",
+              "status": "Unverified",
+              "text": "Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ",
+              "citation": "Dữ liệu pháp lý tại vị trí chưa đầy đủ"
+            }
+          ]
+        }
+      ],
+      "expected": "Do not present road-class/covered proxies as established statutory prohibitions",
+      "triggered": true
+    }
+  ]
+}

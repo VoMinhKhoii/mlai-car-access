@@ -1,0 +1,49 @@
+test_anonymous_requires_issued_cookie_but_not_login (test_crowd_field.CrowdTests.test_anonymous_requires_issued_cookie_but_not_login) ... /Users/khoivo/Library/Python/3.11/lib/python/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+  warnings.warn(message, DeprecationWarning)
+ok
+test_device_hourly_limit_across_different_ways (test_crowd_field.CrowdTests.test_device_hourly_limit_across_different_ways) ... ok
+test_disagreeing_reviewed_samples_widen_range_and_mark_review (test_crowd_field.CrowdTests.test_disagreeing_reviewed_samples_widen_range_and_mark_review) ... ok
+test_invalid_photo_method_range_location_and_confirmation (test_crowd_field.CrowdTests.test_invalid_photo_method_range_location_and_confirmation) ... ok
+test_limits_ten_per_ip_hour_and_three_per_device_way (test_crowd_field.CrowdTests.test_limits_ten_per_ip_hour_and_three_per_device_way) ... ok
+test_official_needs_explicit_review_even_after_two_devices (test_crowd_field.CrowdTests.test_official_needs_explicit_review_even_after_two_devices) ... ok
+test_pending_is_not_evidence_and_review_is_token_protected (test_crowd_field.CrowdTests.test_pending_is_not_evidence_and_review_is_token_protected) ... ok
+test_photo_strips_identifiers_but_retains_gps_time (test_crowd_field.CrowdTests.test_photo_strips_identifiers_but_retains_gps_time) ... ok
+test_qr_url_stats_privacy_and_daily_distinct_way_count (test_crowd_field.CrowdTests.test_qr_url_stats_privacy_and_daily_distinct_way_count) ... ok
+test_same_device_same_ip_or_same_photo_cannot_create_consensus (test_crowd_field.CrowdTests.test_same_device_same_ip_or_same_photo_cannot_create_consensus) ... ok
+test_two_independent_devices_agree_and_duplicate_does_not_count (test_crowd_field.CrowdTests.test_two_independent_devices_agree_and_duplicate_does_not_count) ... ok
+test_arrival_reuses_existing_confirmation_evidence_and_deduplicates (test_field_kit.FieldKitTests.test_arrival_reuses_existing_confirmation_evidence_and_deduplicates) ... /Users/khoivo/Developer/mlai-car-access/backend/app/vehicles.py:115: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/vehicles/vn_car_profiles.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(CSV_PATH, encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/khoivo/Developer/mlai-car-access/backend/app/evidence.py:391: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/official/parcel_gaps.csv' mode='r' encoding='utf-8'>
+  for row in csv.DictReader(open(path, encoding="utf-8")):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_concurrent_atomic_appends_do_not_lose_rows (test_field_kit.FieldKitTests.test_concurrent_atomic_appends_do_not_lose_rows) ... ok
+test_csv_metadata_and_idempotent_retry_hot_reload (test_field_kit.FieldKitTests.test_csv_metadata_and_idempotent_retry_hot_reload) ... ok
+test_field_server_has_no_paid_or_admin_surface (test_field_kit.FieldKitTests.test_field_server_has_no_paid_or_admin_surface) ... ok
+test_gps_snap_uses_cached_way_geometry (test_field_kit.FieldKitTests.test_gps_snap_uses_cached_way_geometry) ... ok
+test_invalid_measurements_do_not_append (test_field_kit.FieldKitTests.test_invalid_measurements_do_not_append) ... ok
+test_legacy_schema_and_extra_columns_survive_upgrade (test_field_kit.FieldKitTests.test_legacy_schema_and_extra_columns_survive_upgrade) ... ok
+test_other_process_append_refreshes_already_warm_plan (test_field_kit.FieldKitTests.test_other_process_append_refreshes_already_warm_plan) ... ok
+test_pacing_is_observed_and_point_sample_not_whole_way_guarantee (test_field_kit.FieldKitTests.test_pacing_is_observed_and_point_sample_not_whole_way_guarantee) ... ok
+test_photo_bytes_and_exif_are_preserved_and_require_token (test_field_kit.FieldKitTests.test_photo_bytes_and_exif_are_preserved_and_require_token) ... ok
+test_real_queue_measurement_appears_in_api_plan (test_field_kit.FieldKitTests.test_real_queue_measurement_appears_in_api_plan) ... /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+  warnings.warn(
+/Users/khoivo/Developer/mlai-car-access/backend/app/evidence.py:391: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/official/parcel_gaps.csv' mode='r' encoding='utf-8'>
+  for row in csv.DictReader(open(path, encoding="utf-8")):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/khoivo/Library/Python/3.11/lib/python/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+  warnings.warn(message, DeprecationWarning)
+ok
+test_tokens_fail_closed_on_every_field_api_and_alias (test_field_kit.FieldKitTests.test_tokens_fail_closed_on_every_field_api_and_alias) ... /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py:353: ResourceWarning: unclosed <socket.socket fd=10, family=2, type=1, proto=6, laddr=('0.0.0.0', 0)>
+  obj, end = self.scan_once(s, idx)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py:353: ResourceWarning: unclosed <socket.socket fd=9, family=2, type=1, proto=6, laddr=('0.0.0.0', 0)>
+  obj, end = self.scan_once(s, idx)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 44.230s
+
+OK

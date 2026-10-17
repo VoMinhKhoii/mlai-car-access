@@ -1,4 +1,4 @@
-import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, Play, RotateCcw, TriangleAlert, X } from 'lucide-react'
+import { Newspaper, ChevronDown, CircleCheck, LoaderCircle, OctagonAlert, Play, RotateCcw, X } from 'lucide-react'
 import { floodKnowledgeLabel, routeSourceLabel, type AreaBuild, type FloodCheck, type LegFloodCheck, type ManeuverState, type NewsItem, type Plan, type StopPoint } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
@@ -32,11 +32,10 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
     && knownPassable(door.route_in.flood) && knownPassable(door.flood.stay) && knownPassable(door.way_out.flood)
   const isUnverified = plan.verdict.code === 'unverified' || !!(best && !best.verified)
   const recommendation = isUnverified && best && !accessSuccess
-    ? `Gợi ý: ${verb} ở ${best.name} · đi bộ ${minutes(best.walk.minutes)}`
+    ? `Gợi ý: ${verb.toLowerCase()} ${best.kind === 'door' ? 'trước cửa nhà' : `ở ${best.name}`}${best.walk.meters >= 20 ? `, đi bộ ${minutes(best.walk.minutes)}` : ''}`
     : null
   const doorWhy = plan.door && !plan.door.ok ? plan.door.fail_reasons[0] : null
   let tone: Tone = 'ok'
-  let icon = <CircleCheck size={18} />
   let head = plan.verdict.headline
   let sub: string | null = plan.verdict.detail || null
 
@@ -45,7 +44,6 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
   const floodHazard = timing?.failure_codes.some((code) => code === 'flood_exit' || code === 'flood_arrival' || code === 'flood_stay') ?? false
   if (timing && (floodHazard || timing.reason || timing.leave_before_at || timing.or_after_at)) {
     tone = 'warn'
-    icon = floodHazard ? <Droplets size={18} /> : <TriangleAlert size={18} />
     head = timing.failure_codes.includes('flood_exit') ? 'Cần kiểm tra ngập trên đường ra' : floodHazard ? 'Cần kiểm tra ngập cho chuyến đi' : 'Chưa xác định được giờ rời phù hợp'
     sub = [timing.reason, timing.leave_before_at && `Giờ rời sớm hơn: ${floodTimeLabel(timing.leave_before_at)}`,
       plan.intent === 'park' && timing.or_after_at && `Giờ rời muộn hơn: ${floodTimeLabel(timing.or_after_at)}`].filter(Boolean).join('. ')
@@ -54,7 +52,6 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
     }
   } else if (accessSuccess) {
     tone = 'ok'
-    icon = <CarFront size={18} />
     head = 'Xe vào và ra được'
     sub = plan.intent === 'park'
       ? 'Ngập trong ngưỡng xe ở cả ba khoảng kiểm tra. Luật đỗ xe chưa xác minh.'
@@ -69,19 +66,16 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
     sub = best ? vnt(best.way_out.text) : sub
   } else if (plan.verdict.code === 'nearby' && best) {
     tone = 'brand'
-    icon = <ArrowRightLeft size={18} />
     head = `${verb} ở ${best.name}, đi bộ ${minutes(best.walk.minutes)}`
     sub = doorWhy ? `Không nên vào tận cửa: ${lower(vnt(doorWhy))}` : null
   } else if (plan.verdict.code === 'none') {
     tone = 'bad'
-    icon = <Ban size={18} />
   }
 
   const trip = best?.trip
   return (
     <section className={`verdict tone-${tone} ${stale ? 'is-stale' : ''}`} aria-live="polite">
-      {(KICKER[tone] || stale) && <div className="verdict-kicker">{KICKER[tone] && <>{icon}<span>{KICKER[tone]}</span> </>}{stale && <LoaderCircle size={14} className="spin" aria-label="Đang cập nhật" />}</div>}
-      <h2 className="display">{head}</h2>
+      <h2 className="display">{head}{stale && <LoaderCircle size={16} className="spin verdict-stale" aria-label="Đang cập nhật" />}</h2>
       {sub && <p className="verdict-sub">{sub}</p>}
       {recommendation && <p className="verdict-recommendation">{recommendation}</p>}
       {timing?.approximate && <p className="faint">Kiểm tra giờ rời theo khoảng di chuyển ước lượng; không bảo đảm điều kiện thực tế liên tục.</p>}
@@ -102,14 +96,12 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
       {trip && (
         <div className="trip">
           <span className="trip-big display num">{minutes(trip.total_min)}</span>
-          <span className="trip-meta"><CarFront size={14} /> {distance(trip.drive_m)} · {minutes(trip.drive_min)} lái</span>
-          <span className="trip-meta"><Footprints size={14} /> {trip.walk_m} m đi bộ</span>
+          <span className="trip-meta">lái {distance(trip.drive_m)}, {minutes(trip.drive_min)} · đi bộ {trip.walk_m} m</span>
         </div>
       )}
     </section>
   )
 }
-const KICKER: Record<Tone, string> = { ok: 'Vào được', brand: 'Dừng gần đó', warn: 'Cẩn thận giờ về', muted: '', bad: 'Không có chỗ phù hợp', water: '' }
 const THEN: Record<string, string> = { door: 'vào và ra tận cửa được', nearby: 'đỗ gần đó, ra được', unverified: 'gợi ý vẫn chưa xác minh', none: 'vẫn chưa có chỗ phù hợp' }
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
 
@@ -205,6 +197,7 @@ function LegFloodEvidence({ check }: { check: LegFloodCheck | null | undefined }
   return (
     <>
       <FloodEvidenceDetail check={check} />
+      <details className="leg-more"><summary>Chi tiết theo đoạn và thời điểm</summary>
       {check?.interval && <p>{check.interval.approximate ? 'Khoảng di chuyển ước lượng' : 'Khoảng thời gian ở lại'}: {floodTimeLabel(check.interval.start)} tới {floodTimeLabel(check.interval.end)}.</p>}
       {check?.legs.length ? <ul className="flood-legs">{check.legs.map((leg, i) => (
         <li key={`${leg.way_id}-${i}`}>
@@ -213,6 +206,7 @@ function LegFloodEvidence({ check }: { check: LegFloodCheck | null | undefined }
           <FloodEvidenceDetail check={leg} />
         </li>
       ))}</ul> : <p>Chưa có bằng chứng theo từng đoạn đường.</p>}
+      </details>
     </>
   )
 }
@@ -240,41 +234,146 @@ function exitShort(s: StopPoint) {
   return s.way_out.observed?.length ? `${label} · Có thông tin lối ra` : label
 }
 
-export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, maneuver, maneuverDisabled, onManeuver, onReplay, onDismiss }: {
-  s: StopPoint; plan: Plan; index: number; selected: boolean; open: boolean
-  onSelect: () => void; onEvidence: (wayId: number) => void
+export function StopRow({ s, index, selected, onSelect }: { s: StopPoint; index: number; selected: boolean; onSelect: () => void }) {
+  const fit = FIT[s.fit.class] ?? FIT.unknown
+  const flood = floodPresentation(s.flood.stay)
+  return (
+    <article className={`stop ${selected ? 'is-selected' : ''}`}>
+      <button type="button" className="stop-head" onClick={onSelect} aria-pressed={selected}>
+        <span className={`stop-pin ${s.verified ? '' : 'unverified'}`}>{index + 1}</span>
+        <span className="stop-main">
+          <span className="stop-name">{stopTitle(s)}</span>
+          <span className="stop-meta">{kindLabel(s)} · đi bộ {s.walk.meters} m</span>
+          {s.fit.width_range && s.fit.needed && <WidthGauge lo={s.fit.width_range.lo} hi={s.fit.width_range.hi} need={s.fit.needed.tight_min}
+            tone={fit.tone} measured={s.fit.width_range.width_basis !== 'synthetic_demo_width' && !!s.fit.width_range.top_tier} />}
+          <span className="stop-status">
+            <span className={`dot t-${fit.tone}`}>{fit.label}</span>
+            <span className={`dot t-${exitTone(s)}`}>{exitShort(s)}</span>
+            <span className={`dot t-${flood.tone === 'ok' ? 'water' : flood.tone}`}>{flood.label}</span>
+          </span>
+        </span>
+        <span className="stop-time num">{s.trip ? minutes(s.trip.total_min) : minutes(s.walk.minutes)}</span>
+      </button>
+    </article>
+  )
+}
+
+/** The alley as a bar, 0–6 m: solid up to the width we are sure of, light over the uncertain range,
+    and a mark where this car needs the alley to be. If the mark sits on the solid part, the car fits. */
+function WidthGauge({ lo, hi, need, tone, measured, scale }: { lo: number; hi: number | null; need: number; tone: Tone; measured: boolean; scale?: boolean }) {
+  const MAX = 6
+  const x = (m: number) => `${Math.max(0, Math.min(100, (m / MAX) * 100))}%`
+  const top = Math.min(hi ?? MAX, MAX)
+  return (
+    <span className={`gauge t-${tone} ${measured ? '' : 'is-estimate'} ${scale ? 'has-scale' : ''}`}
+      role="img" aria-label={`Hẻm rộng ${hi == null ? `ít nhất ${metres(lo)}` : fmtWidth(lo, hi)}; xe cần ${metres(need, 2)}${measured ? '' : '; bề rộng chưa đo'}`}>
+      <span className="gauge-track">
+        <i className="gauge-range" style={{ left: x(lo), width: `calc(${x(top)} - ${x(lo)})` }} />
+        <i className="gauge-sure" style={{ width: x(lo) }} />
+        <i className="gauge-car" style={{ left: x(need) }} />
+      </span>
+      {scale && <span className="gauge-scale" aria-hidden><span>0</span><span style={{ left: x(need) }}>xe cần {vn(need, 2)}</span><span>6 m</span></span>}
+    </span>
+  )
+}
+
+const stopTitle = (s: StopPoint) => s.kind === 'door' ? 'Trước cửa nhà' : s.kind === 'lot' ? s.lot?.name ?? s.name : s.name
+
+/** The selected stop, told in the order the trip happens: getting in, staying, getting out. */
+export function StopPhases({ s, plan, onEvidence, maneuver, maneuverDisabled, onManeuver, onReplay, onDismiss, stay }: {
+  s: StopPoint; plan: Plan; onEvidence: (wayId: number) => void
   maneuver: ManeuverState | null; maneuverDisabled: boolean
   onManeuver: () => void; onReplay: () => void; onDismiss: () => void
+  stay?: React.ReactNode
 }) {
-  const fit = FIT[s.fit.class] ?? FIT.unknown
+  const wr = s.fit.width_range
+  const need = s.fit.needed
   const legal = LEGAL[s.legality.status]
-  const flood = floodPresentation(s.flood.stay)
-  const title = s.kind === 'door' ? 'Trước cửa nhà' : s.kind === 'lot' ? s.lot?.name ?? s.name : s.name
+  return (
+    <div className="phases">
+      <section className="phase" aria-labelledby="phase-in">
+        <h3 id="phase-in" className="phase-title">Vào · {stopTitle(s)}</h3>
+        <Check title="Bề rộng" tone={(FIT[s.fit.class] ?? FIT.unknown).tone}>
+          {wr && need && <WidthGauge lo={wr.lo} hi={wr.hi} need={need.tight_min} tone={(FIT[s.fit.class] ?? FIT.unknown).tone}
+            measured={wr.width_basis !== 'synthetic_demo_width' && !!wr.top_tier} scale />}
+          {wr ? <>
+            {wr.hi == null ? `Rộng ít nhất ${metres(wr.lo)}` : `Rộng ${fmtWidth(wr.lo, wr.hi)}`}
+            {wr.width_basis === 'synthetic_demo_width' || !wr.top_tier ? ' (chưa đo)' : ''}{need && `, xe cần ${metres(need.tight_min, 2)}`}.
+            {s.route_in && (s.route_in.available
+              ? s.route_in.meters != null && <> Đoạn trong hẻm {s.route_in.meters} m.</>
+              : <> Chưa có đường vào phù hợp với xe.</>)}
+            {wr.review && <> <b>Bằng chứng mâu thuẫn, cần duyệt.</b></>}
+          </> : s.kind === 'lot' ? 'Bãi đỗ gần đây; chưa có hình học xác minh cổng vào.' : vnt(s.fit.note ?? 'Chưa có dữ liệu bề rộng.')}
+          {s.way_id && <button type="button" className="link-btn" onClick={() => onEvidence(s.way_id!)}>Xem bằng chứng</button>}
+        </Check>
+        <Check title="Nước trên đường vào" tone={floodPresentation(s.route_in?.flood).tone}>
+          <LegFloodEvidence check={s.route_in?.flood} />
+        </Check>
+        <Check title="Đi bộ tới nơi" tone={s.walk.wade ? 'warn' : 'ok'}>
+          {s.walk.meters} m, khoảng {minutes(s.walk.minutes)}
+          {s.walk.wade && `; lội nước ${Math.round(s.walk.wade.lo * 100)}–${Math.round(s.walk.wade.hi * 100)} cm`}
+          {s.walk.connection && !s.walk.connection.mapped && (
+            <p className="unverified">
+              {s.walk.connection.reason} (điểm dừng {s.walk.connection.stop_to_walk_m} m; địa chỉ {s.walk.connection.destination_to_walk_m} m).
+            </p>
+          )}
+          {plan.intent === 'pickup' && '. Khách đi bộ quãng này tới xe.'}
+        </Check>
+      </section>
+
+      <section className="phase" aria-labelledby="phase-stay">
+        <h3 id="phase-stay" className="phase-title">Ở lại</h3>
+        <Check title="Nước lúc ở lại" tone={floodPresentation(s.flood.stay).tone}>
+          <LegFloodEvidence check={s.flood.stay} />
+          <p>Xe lội được tới {Math.round(plan.vehicle.safe_water_depth * 100)} cm.</p>
+        </Check>
+        <Check title={plan.intent === 'park' ? `Luật đỗ xe · ${legal.label.toLowerCase()}` : `Luật dừng xe · ${legal.label.toLowerCase()}`} tone={legal.tone}>
+          <ul className="rules">
+            {s.legality.rules.map((r, i) => <li key={i}>{vnt(r.text)} <cite>{r.citation}</cite></li>)}
+          </ul>
+        </Check>
+        {stay}
+      </section>
+
+      <section className="phase" aria-labelledby="phase-out">
+        <h3 id="phase-out" className="phase-title">Ra</h3>
+        <Check title="Lối ra" tone={exitTone(s)}>
+          {vnt(s.way_out.text)}
+          {!!s.way_out.observed?.length && <details className="way-out-observations">
+            <summary>{s.way_out.observed.length} thông tin đã duyệt, không đổi kết luận</summary>
+            <ul>{s.way_out.observed.slice(0, 4).map((claim, i) => (
+              <li key={`${claim.source}-${claim.detail}-${i}`}>
+                {vnt(claim.detail)} <small>{vnt(claim.source)}{claim.observed_on ? ` · ${claim.observed_on}` : ''}</small>
+              </li>
+            ))}</ul>
+          </details>}
+        </Check>
+        <Check title="Nước trên đường ra" tone={floodPresentation(s.way_out.flood).tone}>
+          <LegFloodEvidence check={s.way_out.flood} />
+        </Check>
+        <Maneuver s={s} plan={plan} maneuver={maneuver} disabled={maneuverDisabled} onOpen={onManeuver} onReplay={onReplay} onDismiss={onDismiss} />
+      </section>
+
+      {s.unverified_reasons.length > 0 && (
+        <p className="unverified phases-note">Chưa xác minh: {vnt(s.unverified_reasons.join('; '))}</p>
+      )}
+    </div>
+  )
+}
+
+function Maneuver({ s, plan, maneuver, disabled, onOpen, onReplay, onDismiss }: {
+  s: StopPoint; plan: Plan; maneuver: ManeuverState | null; disabled: boolean
+  onOpen: () => void; onReplay: () => void; onDismiss: () => void
+}) {
   const wr = s.fit.width_range
   const supportedWidth = !!wr?.decisive_clearance && wr.evidence.length > 0
   const narrowerThanMirrors = wr != null && wr.lo < plan.vehicle.mirror_width
   const canShowClearance = supportedWidth && !narrowerThanMirrors
   const replayable = maneuver?.status === 'ready' && maneuver.result.moves != null && !!maneuver.result.poses?.length
   return (
-    <article className={`stop ${selected ? 'is-selected' : ''}`}>
-      <button type="button" className="stop-head" onClick={onSelect} aria-expanded={open}>
-        <span className={`stop-pin ${s.verified ? '' : 'unverified'}`}>{index + 1}</span>
-        <span className="stop-main">
-          <span className="stop-name">{title}</span>
-          <span className="stop-meta">{kindLabel(s)} · đi bộ {s.walk.meters} m</span>
-        </span>
-        <span className="stop-time display num">{s.trip ? minutes(s.trip.total_min) : `${s.walk.minutes}′`}</span>
-      </button>
-      <div className="stop-tags">
-        <Tag tone={fit.tone} icon={<CarFront size={13} />}>{fit.label}</Tag>
-        <Tag tone={exitTone(s)} icon={<Navigation size={13} />}>{exitShort(s)}</Tag>
-        <Tag tone={flood.tone === 'ok' ? 'water' : flood.tone} icon={<Droplets size={13} />}>{flood.label}</Tag>
-        <Tag tone={legal.tone} icon={<Landmark size={13} />}>{legal.label}</Tag>
-      </div>
-      {selected && <div className="maneuver-entry">
-        <button type="button" className="btn btn-outline" onClick={onManeuver} disabled={maneuverDisabled} aria-expanded={!!maneuver}>
-          <CarFront size={16} />
-          {maneuver?.status === 'error' ? 'Thử tải lại' : maneuver ? 'Ẩn mô phỏng' : 'Xem xe trong hẻm'}
+    <div className="maneuver-entry">
+        <button type="button" className="btn btn-outline btn-sm" onClick={onOpen} disabled={disabled} aria-expanded={!!maneuver}>
+          {maneuver?.status === 'error' ? 'Thử tải lại' : maneuver ? 'Ẩn mô phỏng' : 'Xem quay đầu'}
         </button>
         {maneuver && <section className="maneuver-panel" aria-label="Mô phỏng quay đầu trong hành lang thẳng">
           <header>
@@ -319,76 +418,17 @@ export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, 
               </button>}
             </div>)}
         </section>}
-      </div>}
-      {open && <StopChecks s={s} plan={plan} onEvidence={onEvidence} />}
-    </article>
-  )
-}
-
-function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvidence: (wayId: number) => void }) {
-  const wr = s.fit.width_range
-  const need = s.fit.needed
-  return (
-    <div className="checks">
-      <Check icon={<CarFront size={16} />} title="Đường vào" tone={(FIT[s.fit.class] ?? FIT.unknown).tone}>
-        {wr ? <>
-          {wr.hi == null ? `Rộng ít nhất ${metres(wr.lo)}` : `Rộng ${fmtWidth(wr.lo, wr.hi)}`}
-          {wr.width_basis === 'synthetic_demo_width' || !wr.top_tier ? ' (chưa đo)' : ''}{need && `, xe cần ${metres(need.tight_min, 2)}`}.
-          {s.route_in && (s.route_in.available
-            ? s.route_in.meters != null && <> Đoạn trong hẻm {s.route_in.meters} m.</>
-            : <> Chưa có đường vào phù hợp với xe.</>)}
-          {wr.review && <> <b>Bằng chứng mâu thuẫn, cần duyệt.</b></>}
-        </> : s.kind === 'lot' ? 'Bãi đỗ gần đây; chưa có hình học xác minh cổng vào.' : vnt(s.fit.note ?? 'Chưa có dữ liệu bề rộng.')}
-        {s.way_id && <button type="button" className="link-btn" onClick={() => onEvidence(s.way_id!)}>Xem bằng chứng</button>}
-      </Check>
-      <Check icon={<Navigation size={16} />} title="Đường ra" tone={exitTone(s)}>
-        {vnt(s.way_out.text)}
-        {!!s.way_out.observed?.length && <details className="way-out-observations">
-          <summary>{s.way_out.observed.length} thông tin đã duyệt, không đổi kết luận</summary>
-          <ul>{s.way_out.observed.slice(0, 4).map((claim, i) => (
-            <li key={`${claim.source}-${claim.detail}-${i}`}>
-              {vnt(claim.detail)} <small>{vnt(claim.source)}{claim.observed_on ? ` · ${claim.observed_on}` : ''}</small>
-            </li>
-          ))}</ul>
-        </details>}
-      </Check>
-      <Check icon={<Droplets size={16} />} title="Ngập trên đường vào" tone={floodPresentation(s.route_in?.flood).tone}>
-        <LegFloodEvidence check={s.route_in?.flood} />
-      </Check>
-      <Check icon={<Droplets size={16} />} title="Ngập lúc ở lại" tone={floodPresentation(s.flood.stay).tone}>
-        <LegFloodEvidence check={s.flood.stay} />
-        <p>Ngưỡng nước của xe: {Math.round(plan.vehicle.safe_water_depth * 100)} cm.</p>
-      </Check>
-      <Check icon={<Droplets size={16} />} title="Ngập trên đường ra" tone={floodPresentation(s.way_out.flood).tone}>
-        <LegFloodEvidence check={s.way_out.flood} />
-      </Check>
-      <Check icon={<Landmark size={16} />} title={plan.intent === 'park' ? 'Luật đỗ xe' : 'Luật dừng xe'} tone={LEGAL[s.legality.status].tone}>
-        <ul className="rules">
-          {s.legality.rules.map((r, i) => <li key={i}>{vnt(r.text)} <cite>{r.citation}</cite></li>)}
-        </ul>
-      </Check>
-      <Check icon={<Footprints size={16} />} title="Đi bộ" tone={s.walk.wade ? 'warn' : 'ok'}>
-        {s.walk.meters} m, khoảng {minutes(s.walk.minutes)}
-        {s.walk.wade && `; lội nước ${Math.round(s.walk.wade.lo * 100)}–${Math.round(s.walk.wade.hi * 100)} cm`}
-        {s.walk.connection && !s.walk.connection.mapped && (
-          <p className="unverified">
-            {s.walk.connection.reason} (điểm dừng {s.walk.connection.stop_to_walk_m} m; địa chỉ {s.walk.connection.destination_to_walk_m} m).
-          </p>
-        )}
-        {plan.intent === 'pickup' && '. Khách đi bộ quãng này tới xe.'}
-      </Check>
-      {s.unverified_reasons.length > 0 && (
-        <p className="unverified"><TriangleAlert size={14} /> Chưa xác minh: {vnt(s.unverified_reasons.join('; '))}</p>
-      )}
     </div>
   )
 }
 
-function Check({ icon, title, tone, children }: { icon: React.ReactNode; title: string; tone: Tone; children: React.ReactNode }) {
+const TONE_WORD: Record<Tone, string> = { ok: 'Ổn', water: 'Ổn', brand: 'Ổn', warn: 'Cần chú ý', bad: 'Không ổn', muted: 'Chưa rõ' }
+
+function Check({ title, tone, children }: { title: string; tone: Tone; children: React.ReactNode }) {
   return (
     <div className={`check t-${tone}`}>
-      <span className="check-ico">{icon}</span>
-      <div><b>{title}</b><div className="check-detail">{children}</div></div>
+      <b className="check-title">{title} <span className={`tag ${tone}`}>{TONE_WORD[tone]}</span></b>
+      <div className="check-detail">{children}</div>
     </div>
   )
 }

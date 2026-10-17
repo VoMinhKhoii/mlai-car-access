@@ -74,6 +74,29 @@ function distanceMeters(a: { lat: number; lon: number }, b: { lat: number; lon: 
   return 2 * EARTH_RADIUS_M * Math.asin(Math.min(1, Math.sqrt(h)))
 }
 
+let notifyWorker: Promise<ServiceWorkerRegistration | null> | null = null
+
+// Android Chrome only shows notifications through a service worker (`new Notification()` throws there).
+function notificationWorker(): Promise<ServiceWorkerRegistration | null> {
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) return Promise.resolve(null)
+  notifyWorker ??= navigator.serviceWorker.register(`${import.meta.env.BASE_URL}notify-sw.js`)
+    .then(() => Promise.race([
+      navigator.serviceWorker.ready,
+      new Promise<null>((resolve) => window.setTimeout(() => resolve(null), 5_000)),
+    ]))
+    .catch(() => null)
+  return notifyWorker
+}
+
+async function notify(title: string, body: string) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return
+  try {
+    const registration = await notificationWorker()
+    if (registration) return await registration.showNotification(title, { body })
+  } catch { /* fall back to the page notification */ }
+  try { new Notification(title, { body }) } catch { /* in-app banner remains available */ }
+}
+
 function floodRank(status: string | null | undefined) {
   return status === 'blocked' ? 2 : status === 'risky' ? 1 : status === 'passable' ? 0 : -1
 }
@@ -126,8 +149,9 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
 
   const requestNotifications = useCallback(async () => {
     if (!('Notification' in window)) return 'unsupported' as const
-    if (Notification.permission === 'default') return Notification.requestPermission()
-    return Notification.permission
+    const permission = Notification.permission === 'default' ? await Notification.requestPermission() : Notification.permission
+    if (permission === 'granted') void notificationWorker()
+    return permission
   }, [])
 
   const start = useCallback(() => {
@@ -148,7 +172,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
 
   const check = useCallback(async () => {
     const active = sessionRef.current
-    if (!active || document.visibilityState === 'hidden') return
+    if (!active) return  // also runs in a background tab, so the system notification can reach the driver
     const seqId = ++seq.current
     ctlRef.current?.abort()
     const ctl = new AbortController()
@@ -173,9 +197,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
         const key = 'stop-missing'
         const message = `Không tìm thấy lại điểm dừng ${active.stopName} trong phạm vi 15 m. Hãy kiểm tra trước khi rời.`
         if (!active.alerts.includes(key)) setBanner(message)
-        if (!active.alerts.includes(key) && 'Notification' in window && Notification.permission === 'granted') {
-          try { new Notification('Không tìm thấy điểm dừng', { body: message }) } catch { /* in-app banner remains */ }
-        }
+        if (!active.alerts.includes(key)) void notify('Không tìm thấy điểm dừng', message)
         setSession((current) => current === active ? {
           ...current, request: currentRequest, lastCheckedAt: Date.now(),
           alerts: current.alerts.includes(key) ? current.alerts : [...current.alerts, key],
@@ -213,9 +235,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
       if (unseen.length) {
         const message = unseen.map(({ text }) => text).join(' ')
         setBanner(message)
-        if ('Notification' in window && Notification.permission === 'granted') {
-          try { new Notification('Cập nhật điểm đỗ', { body: message }) } catch { /* in-app banner remains available */ }
-        }
+        void notify('Cập nhật điểm đỗ', message)
       }
       setSession((current) => current === active ? {
         ...current, request: currentRequest, lastCheckedAt: stamp,

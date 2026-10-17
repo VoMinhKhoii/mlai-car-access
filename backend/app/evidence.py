@@ -10,11 +10,11 @@ import csv
 import json
 import math
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date
 from pathlib import Path
 
-from . import flags, vehicles
+from . import flags, vehicles, footprints, declared_index, official_widths
 from .config import DATA, STORE
 from .osm import AreaGraph, Way, strip_accents
 
@@ -61,6 +61,14 @@ class Bound:
     uncertainty_m: float | None = None
     coverage: dict | None = None
 
+    coverage_complete: bool = False
+    coverage_m: float | None = None
+    measurement_schema: str = ""
+    estimate_m: float | None = None
+    sample_count: int | None = None
+    sample_cuts: list[dict] = field(default_factory=list, repr=False)
+    sample_quality: dict = field(default_factory=dict)
+
     def __post_init__(self) -> None:
         if self.width_basis is None:
             self.width_basis = {
@@ -76,7 +84,10 @@ class Bound:
                 "tier": self.tier, "tier_vi": TIER_VI[self.tier], "source": self.source,
                 "detail": self.detail, "observed_on": self.observed_on, "url": self.url,
                 "ai_feature": self.feature or None, "width_basis": self.width_basis,
-                "uncertainty_m": self.uncertainty_m, "coverage": self.coverage}
+                "uncertainty_m": self.uncertainty_m, "coverage": self.coverage,
+                "coverage_complete": bool(self.coverage and self.coverage.get("complete")),
+                "measurement_schema": self.measurement_schema, "estimate_m": self.estimate_m,
+                "sample_count": self.sample_count, "sample_quality": self.sample_quality}
 
 
 @dataclass
@@ -91,6 +102,8 @@ class WidthRange:
     width_basis: str = "unknown"
     coverage: dict = field(default_factory=_empty_coverage)
     decisive_clearance: bool = False
+
+    official_width_records: list[dict] = field(default_factory=list)
 
     @property
     def label(self) -> str:
@@ -114,7 +127,8 @@ class WidthRange:
                 "overruled": [b.to_json() for b in self.overruled],
                 "way_out_claims": [b.to_json() for b in self.way_out_claims],
                 "width_basis": self.width_basis, "coverage": self.coverage,
-                "decisive_clearance": self.decisive_clearance}
+                "decisive_clearance": self.decisive_clearance,
+                "official_width_records": self.official_width_records}
 
 
 
@@ -281,7 +295,34 @@ class EvidenceIndex:
         self._load_csv(PARCEL_FILE, "Inferred", "Khoảng cách thửa đất (cổng Thông tin quy hoạch TP.HCM)",
                        pad=None, width_basis="parcel_gap_estimate")
         self._load_confirmations()
+        if flags.enabled("footprint_widths"):
+            self._load_footprints()
+        declared_index.load_into(self)
+        from . import imagery_evidence
+        imagery_evidence.load_into(self)
 
+
+    def _load_footprints(self) -> None:
+        self._footprint_stamp, data = footprints.snapshot()
+        if not data:
+            return
+        calibration = data.get("calibration", {})
+        error = calibration.get("uncertainty_radius_m", 0)
+        release = data.get("dataset", {}).get("release", "")
+        for wid, r in data["ways"].items():
+            lo, hi = r.get("lo"), r.get("hi")
+            if not isinstance(lo, (float, int)) or not isinstance(hi, (float, int)) or not .5 <= lo <= hi < OPEN_HI:
+                continue
+            source = (f"Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; "
+                      f"sai số ±{error:.1f} m so với địa chính)")
+            detail = (f"{r['source']}; Overture {release}. {r['samples']}/{r['attempted']} mặt cắt hai phía, "
+                      f"cách 10 m; khoảng nhà p10 {r['gap_p10_m']:.1f} m, trung vị {r['gap_median_m']:.1f} m. "
+                      f"Hiệu chỉnh theo {calibration.get('matched_ways', 0)} đoạn địa chính; "
+                      "trừ 1 m giả định lấn chiếm, thêm ±0,5 m bất định vật cản. "
+                      "Suy luận từ mái nhà; không xác nhận lối đi thông thoáng. Địa chính được ưu tiên.")
+            self._add(Bound(lo, hi, "Inferred", source, detail,
+                            observed_on=data.get("generated_at", "")[:10],
+                            url="https://docs.overturemaps.org/guides/buildings/", feature="footprint_widths"), wid)
 
     def _load_listings(self) -> None:
         # With live crawling on, listings come only from the on-demand area builds (live.py).
@@ -315,7 +356,7 @@ class EvidenceIndex:
                 length = _num(pc.get("segment_length_m"))
                 cuts = []
                 for cut in raw_cuts:
-                    if not isinstance(cut, dict):
+                    if not isinstance(cut, dict) or cut.get("valid") is False:
                         invalid = True
                         continue
                     width, gap = _num(cut.get("width_m")), _num(cut.get("gap_m"))
@@ -355,7 +396,9 @@ class EvidenceIndex:
                           f"{width:.1f} m (thửa cách nhau {narrow['gap_m']:.1f} m)").replace(".", ",")
                 self._add(Bound(width, width, "Inferred", "Khoảng trống hình học giữa hai thửa đất",
                                 detail, url="https://thongtinquyhoach.hochiminhcity.gov.vn/",
-                                feature="parcel_widths", width_basis="parcel_gap_estimate", coverage=coverage),
+                                feature="parcel_widths", width_basis="parcel_gap_estimate", coverage=coverage,
+                                estimate_m=width, sample_count=len(cuts), sample_cuts=[item[0] for item in cuts],
+                                measurement_schema="parcel-usable-v2"),
                           way_id)
                 if invalid:
                     self.review_by_way.add(way_id)
@@ -396,7 +439,7 @@ class EvidenceIndex:
         w = _num(it.get("width_m"))
         if w:
             where = "đo ở đầu hẻm" if it.get("width_at_mouth") else "không rõ vị trí đo"
-            self._add(Bound(0.5, w, detail=f"“hẻm {w:g} m” ({where})", **common), way_id)
+            self._add(Bound(0.5, w, detail=f"“hẻm {w:g} m” ({where})", estimate_m=w, **common), way_id)
         claim = it.get("access_claim")
         claims = {"xe_hoi": (2.2, OPEN_HI, "“hẻm xe hơi”"), "xe_hoi_tranh": (4.5, OPEN_HI, "“xe hơi tránh nhau”"),
                   "ba_gac": (0.5, 3.0, "“hẻm ba gác”"), "xe_may": (0.5, 2.2, "“hẻm xe máy”")}
@@ -415,7 +458,8 @@ class EvidenceIndex:
         doc = json.loads(FIRE_FILE.read_text(encoding="utf-8"))
         for it in doc["items"]:
             b = Bound(0.5, FIRE_TRUCK_MIN, "Declared", "QĐ 4582/QĐ-UBND TP.HCM (24/7/2026)",
-                      f"Xe chữa cháy không vào được ({it['ward']}): thường do hẻm hẹp hơn 3,5 m",
+                      f"Xe chữa cháy không vào được ({it['ward']}): thường do hẻm hẹp hơn 3,5 m"
+                      + (f"; {it['provenance']}" if it.get("provenance") else ""),
                       observed_on="2026-07-24", url=doc["url"])
             for wid in it["way_ids"]:
                 self._add(b, wid)
@@ -489,6 +533,10 @@ class EvidenceIndex:
                 bound = Bound(lo, hi, tier, source, row.get("note") or f"{w:g} m",
                               observed_on=row.get("date", ""), url=row.get("photo_url", ""),
                               width_basis=basis, uncertainty_m=uncertainty, coverage=coverage)
+                if path == PARCEL_FILE:
+                    bound = replace(bound, lo=0.0, hi=max(0.0, w-1.0)+0.3,
+                                    estimate_m=max(0.0, w-1.0), coverage_complete=False,
+                                    measurement_schema="legacy-raw-gap-converted-v2")
                 self._add(bound, way_id, name)
 
     def _load_confirmations(self) -> None:
@@ -583,6 +631,33 @@ class EvidenceStore:
         index = EvidenceIndex(self._exclude_measured_way_ids, self._exclude_measured_names)
         index.load_static(self._field_file)
         self.snapshot = index
+        self._imagery_stamp = getattr(index, "_imagery_stamp", None)
+        self._declared_stamp = getattr(index, "_declared_stamp", None)
+        self._product_stamps = self._stamps()
+        self.version += 1
+
+    @staticmethod
+    def _stamps():
+        from . import imagery_evidence
+        def stamp(p):
+            try:
+                st = p.stat()
+                return st.st_mtime_ns, st.st_size
+            except FileNotFoundError:
+                return None
+        return (footprints.snapshot()[0], declared_index.snapshot()[0],
+                official_widths.snapshot()[0], imagery_evidence.active_stamp(),
+                stamp(FIELD_FILE), stamp(CONFIRM_FILE))
+
+    def refresh_footprints(self):
+        if self._stamps() != self._product_stamps:
+            self.reload()
+
+    def bounds_for(self, way):
+        return self.snapshot.bounds_for(way)
+
+    def _add(self, bound, way_id=None, name=None):
+        self.snapshot._add(bound, way_id, name)
         self.version += 1
 
     @property
@@ -608,20 +683,53 @@ class EvidenceStore:
         return EvidenceView(self.snapshot, overlay)
 
 
+def _validate_parcel_bound(g, w, b):
+    if b.feature != 'parcel_widths' or not b.sample_cuts:
+        return b
+    from .width_samples import assess
+    cuts, quality = assess(g, w, b.sample_cuts)
+    if not cuts:
+        return replace(b, lo=0, hi=OPEN_HI, estimate_m=None, coverage_complete=False,
+                       measurement_schema='parcel-survey-unresolved-v2', sample_count=0,
+                       sample_quality=quality,
+                       detail='Mặt cắt cache không hợp lệ về hình học; chưa xác minh bề rộng toàn đoạn')
+    narrow = min(c['width_m'] for c in cuts)
+    complete = b.coverage_complete and not quality['rejected_cuts']
+    return replace(b, lo=max(0, narrow-.3) if complete else 0, hi=narrow+.3,
+                   estimate_m=narrow, coverage_complete=complete, sample_count=len(cuts),
+                   sample_quality=quality,
+                   detail=(f"Mẫu hợp lệ hẹp nhất {narrow:.2f} m; giữ {len(cuts)}/{len(b.sample_cuts)} mặt cắt; "
+                           f"{quality['bottleneck_support']} mẫu xác nhận nút thắt. "
+                           'Khoảng thửa trừ 1 m, bất định ±0,3 m; chưa bảo đảm toàn đoạn.').replace('.', ','))
+
+
 STORE_EVIDENCE = EvidenceStore()
 
 
 def width_ranges(g: AreaGraph, evidence: EvidenceView | None = None) -> dict[int, WidthRange]:
+    STORE_EVIDENCE.refresh_footprints()
     evidence = evidence or STORE_EVIDENCE.view()
     out = {}
     for way in g.ways.values():
         bounds = _osm_bounds(way) + evidence.bounds_for(way)
-        lo, hi, top, review, overruled, active = _combine(bounds)
+        candidates, city_ignored, city_review = declared_index.prepare(way.id, bounds)
+        footprint_bounds = [b for b in candidates if b.feature == "footprint_widths"]
+        ignored = []
+        if footprint_bounds:
+            if any(b.tier in ("Measured", "Official") for b in candidates):
+                ignored = footprint_bounds
+                candidates = [b for b in candidates if b not in footprint_bounds]
+            else:
+                candidates = [b for b in candidates if not (b.tier == "Inferred" and
+                    b.source in ("OSM phân loại đường", "OSM số làn xe"))]
+        lo, hi, top, review, overruled, active = _combine(candidates)
+        review = review or city_review
+        overruled += ignored + city_ignored
         review = review or way.id in evidence.review_by_way
         basis, coverage, decisive = _width_metadata(active, review)
         out[way.id] = WidthRange(
             lo, hi, top, bounds, review, overruled, evidence.way_out_for(way.id),
-            basis, coverage, decisive,
+            basis, coverage, decisive, official_widths.for_way(way.id),
         )
     return out
 

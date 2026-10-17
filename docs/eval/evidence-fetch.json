@@ -1,0 +1,2164 @@
+{
+  "started_at": "2026-10-16T18:27:35+00:00",
+  "finished_at": "2026-10-16T18:36:34+00:00",
+  "runtime_s": 539,
+  "network_pages": 357,
+  "listing_rows_from_network_pages": 16796,
+  "http_calls": {
+    "gateway.chotot.com": 357,
+    "alonhadat.com.vn": 2
+  },
+  "chotot_blocking_responses": 0,
+  "chotot_partitions": 44,
+  "chotot_source_districts": 22,
+  "alonhadat": {
+    "status": "stopped_on_http_429",
+    "persisted_backoff": true
+  },
+  "source_log": "data/raw/listings-city-fetch.log",
+  "method": "Initial fetch metadata and structured per-network-page stdout records; subsequent fetch_report.json describes only the latest refresh cycle.",
+  "pages": [
+    {
+      "district": "Quận 1",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 1",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 4",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 4",
+      "type": "u",
+      "page": 0,
+      "ads": 30
+    },
+    {
+      "district": "Quận 5",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 5",
+      "type": "u",
+      "page": 0,
+      "ads": 43
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Củ Chi",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Củ Chi",
+      "type": "u",
+      "page": 0,
+      "ads": 9
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 0,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Cần Giờ",
+      "type": "s",
+      "page": 0,
+      "ads": 7
+    },
+    {
+      "district": "Huyện Cần Giờ",
+      "type": "u",
+      "page": 0,
+      "ads": 0
+    },
+    {
+      "district": "Quận 1",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 1",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 4",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 5",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "u",
+      "page": 1,
+      "ads": 41
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "u",
+      "page": 1,
+      "ads": 35
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "u",
+      "page": 1,
+      "ads": 31
+    },
+    {
+      "district": "Huyện Củ Chi",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "u",
+      "page": 1,
+      "ads": 11
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "u",
+      "page": 1,
+      "ads": 39
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 1,
+      "ads": 50
+    },
+    {
+      "district": "Quận 1",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 1",
+      "type": "u",
+      "page": 2,
+      "ads": 16
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 4",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 5",
+      "type": "s",
+      "page": 2,
+      "ads": 31
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "u",
+      "page": 2,
+      "ads": 11
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Củ Chi",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 2,
+      "ads": 50
+    },
+    {
+      "district": "Quận 1",
+      "type": "s",
+      "page": 3,
+      "ads": 24
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "u",
+      "page": 3,
+      "ads": 16
+    },
+    {
+      "district": "Quận 4",
+      "type": "s",
+      "page": 3,
+      "ads": 39
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "u",
+      "page": 3,
+      "ads": 43
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Củ Chi",
+      "type": "s",
+      "page": 3,
+      "ads": 8
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 3,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "u",
+      "page": 4,
+      "ads": 14
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 4,
+      "ads": 50
+    },
+    {
+      "district": "Quận 3",
+      "type": "s",
+      "page": 5,
+      "ads": 34
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 11",
+      "type": "s",
+      "page": 5,
+      "ads": 43
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "u",
+      "page": 5,
+      "ads": 34
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Bình Chánh",
+      "type": "s",
+      "page": 5,
+      "ads": 15
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 5,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Phú Nhuận",
+      "type": "s",
+      "page": 6,
+      "ads": 14
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 6,
+      "ads": 50
+    },
+    {
+      "district": "Quận 6",
+      "type": "s",
+      "page": 7,
+      "ads": 7
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận 10",
+      "type": "s",
+      "page": 7,
+      "ads": 24
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "u",
+      "page": 7,
+      "ads": 27
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "u",
+      "page": 7,
+      "ads": 30
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Huyện Hóc Môn",
+      "type": "s",
+      "page": 7,
+      "ads": 38
+    },
+    {
+      "district": "Huyện Nhà Bè",
+      "type": "s",
+      "page": 7,
+      "ads": 38
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 7,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "u",
+      "page": 8,
+      "ads": 39
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "u",
+      "page": 8,
+      "ads": 5
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "u",
+      "page": 8,
+      "ads": 27
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 8,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "u",
+      "page": 8,
+      "ads": 30
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 9,
+      "ads": 50
+    },
+    {
+      "district": "Quận 7",
+      "type": "s",
+      "page": 10,
+      "ads": 38
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 10,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 11,
+      "ads": 50
+    },
+    {
+      "district": "Quận 8",
+      "type": "s",
+      "page": 12,
+      "ads": 43
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 12,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 13,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Thạnh",
+      "type": "s",
+      "page": 14,
+      "ads": 41
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Bình",
+      "type": "s",
+      "page": 14,
+      "ads": 17
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 14,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 15,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 16,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 16,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 16,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 16,
+      "ads": 50
+    },
+    {
+      "district": "Quận Tân Phú",
+      "type": "s",
+      "page": 16,
+      "ads": 35
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 16,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 17,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 17,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 17,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 17,
+      "ads": 50
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 17,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 18,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 18,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 18,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "u",
+      "page": 18,
+      "ads": 34
+    },
+    {
+      "district": "Thành phố Thủ Đức",
+      "type": "s",
+      "page": 18,
+      "ads": 41
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 19,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 19,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 19,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 20,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 20,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 20,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 21,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 21,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 21,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 22,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 22,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 22,
+      "ads": 50
+    },
+    {
+      "district": "Quận 12",
+      "type": "s",
+      "page": 23,
+      "ads": 34
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 23,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 23,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 24,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 24,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 25,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 25,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 26,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 26,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 27,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 27,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 28,
+      "ads": 50
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 28,
+      "ads": 50
+    },
+    {
+      "district": "Quận Bình Tân",
+      "type": "s",
+      "page": 29,
+      "ads": 0
+    },
+    {
+      "district": "Quận Gò Vấp",
+      "type": "s",
+      "page": 29,
+      "ads": 10
+    }
+  ]
+}

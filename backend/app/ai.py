@@ -11,6 +11,7 @@ model's output: text and photo extractions become pending reports and need an op
 """
 from __future__ import annotations
 
+import copy
 import base64
 import json
 import math
@@ -20,7 +21,7 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from . import budget, flags, reports
+from . import agent_budget, budget, flags, reports
 from .deadline import timeout
 from .config import STORE
 
@@ -65,12 +66,37 @@ def provider() -> tuple[str, str] | None:
     return None
 
 
+def gemini_generate(request, body: dict) -> dict:
+    """Retry a truncated/empty generation once; request settles each attempt's usage."""
+    body = copy.deepcopy(body)
+    config = body.setdefault("generationConfig", {})
+    config["maxOutputTokens"] = min(agent_budget.MAX_OUTPUT_TOKENS, max(
+        agent_budget.AGENT_OUTPUT_TOKENS,
+        config.get("maxOutputTokens", agent_budget.AGENT_OUTPUT_TOKENS)))
+    for attempt in range(2):
+        data = request(body)
+        candidates = data.get("candidates") or []
+        candidate = candidates[0] if candidates else {}
+        parts = (candidate.get("content") or {}).get("parts")
+        if candidate.get("finishReason") != "MAX_TOKENS" and parts:
+            return data
+        if attempt == 0:
+            # Use a new body so the signed history and the previous request stay intact.
+            body = copy.deepcopy(body)
+            config = body["generationConfig"]
+            config["maxOutputTokens"] = min(config["maxOutputTokens"] * 2,
+                                             agent_budget.MAX_OUTPUT_TOKENS)
+    raise ValueError("Mô hình đã hết giới hạn sinh câu trả lời hoặc trả về nội dung rỗng sau khi tự thử lại. "
+                     "Vui lòng rút gọn câu hỏi rồi thử lại.")
+
+
 def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str = "image/jpeg",
           model: str | None = None, *, deadline: float | None = None) -> dict:
     """One model call, bounded by an optional absolute monotonic deadline."""
     prov = provider()
     if not prov:
         raise NoModel("Cần GEMINI_API_KEY, OPENAI_API_KEY hoặc ANTHROPIC_API_KEY trong .env.local")
+    explicit_model = model is not None
     name, model = prov[0], (model if prov[0] == "gemini" and model else prov[1])
     items = image if isinstance(image, list) else [image] if image else []
     b64s = [x if isinstance(x, str) else ("b64", base64.b64encode(x).decode()) for x in items]
@@ -79,24 +105,34 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
                                       {"inline_data": {"mime_type": mime, "data": x[1]}} for x in b64s]
         body = {"contents": [{"parts": parts}],
                 "generationConfig": {"responseMimeType": "application/json", "temperature": 0}}
-        r, over = None, None
-        for key in gemini_keys():  # rotate past rate limits, spent quota and keys that cannot serve this model
-            timeout(deadline, 60)  # do not reserve quota for an attempt that cannot start
-            try:
-                budget.reserve_ai("gemini", model, key)
-            except budget.OverBudget as exc:
-                over = exc
-                continue
-            call_timeout = timeout(deadline, 60)
-            r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-                           params={"key": key}, json=body, timeout=call_timeout)
-            bad_key = r.status_code == 400 and "API key" in r.text
-            if r.status_code not in (429, 503, 403, 404) and not bad_key:
-                break
-        if r is None:
-            raise over or NoModel("Không có khóa Gemini")
-        r.raise_for_status()
-        text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+        def request(body):
+            r, over = None, None
+            if not explicit_model and not agent_budget.free_project_available():
+                raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết.")
+            for key in gemini_keys():  # rotate past rate limits, spent quota and keys that cannot serve this model
+                timeout(deadline, 60)  # do not reserve quota for an attempt that cannot start
+                try:
+                    budget.reserve_ai("gemini", model, key)
+                except budget.OverBudget as exc:
+                    over = exc
+                    continue
+                call_timeout = timeout(deadline, 60)
+                r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                               params={"key": key}, json=body, timeout=call_timeout)
+                if not explicit_model and agent_budget.daily_quota_error(r.status_code, r.text):
+                    agent_budget.cool_down_free_project()
+                    raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết.")
+                bad_key = r.status_code == 400 and "API key" in r.text
+                if r.status_code not in (429, 503, 403, 404) and not bad_key:
+                    break
+            if r is None:
+                raise over or NoModel("Không có khóa Gemini")
+            r.raise_for_status()
+            data = r.json()
+            agent_budget.free_usage(data.get("usageMetadata"))
+            return data
+        data = gemini_generate(request, body)
+        text = "".join(p.get("text", "") for p in data["candidates"][0]["content"]["parts"] if not p.get("thought"))
     elif name == "openai":
         content = [{"type": "text", "text": prompt}]
         content += [{"type": "text", "text": x} if isinstance(x, str) else
@@ -250,4 +286,3 @@ def read_listing_photo(image: bytes, mime: str = "image/jpeg", *, deadline: floa
     out["gate"] = _gate(out, ["alley_width_m", "reference"])
     out["model"] = "/".join(provider() or ())
     return out
-

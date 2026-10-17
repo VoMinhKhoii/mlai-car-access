@@ -9,7 +9,7 @@ from pathlib import Path
 
 from . import flags, hydro, parking_data
 from .config import (ALLEY_SPEED_MPS, FLOOD_TIMING_HORIZON_H, FLOOD_TIMING_STEP_MIN,
-                     FLOOD_TRAVERSAL_MARGIN_MIN, GOONG_API_KEY, PICKUP_DWELL_MIN,
+                     FLOOD_TRAVERSAL_MARGIN_MIN, GOONG_API_KEY, CACHED_ONLY, PICKUP_DWELL_MIN,
                      REVERSE_LIMIT_M, WALK_CAP_M, WALK_WADE_M)
 from .evidence import STORE_EVIDENCE, WidthRange, blocked_ways_today, width_ranges
 from .flood import (KNOWLEDGE_ORDER, STATUS_ORDER, FloodAssessment, FloodSnapshot, _street_key,
@@ -34,9 +34,17 @@ _FP = LRU(32)
 
 def area(lat: float, lon: float, generations: tuple[str, str] | None = None, live_area: dict | None = None,
          synthetic_demo_file: Path | None = None):
+    STORE_EVIDENCE.refresh_footprints()
     g = build_graph(lat, lon)
-    key = (area_key(lat, lon), g.source, tuple(f["enabled"] for f in flags.describe()),
+    key = (area_key(lat, lon), g.source, id(g), tuple(f["enabled"] for f in flags.describe()),
            synthetic_demo_file)
+    from . import live
+    city = live.city_parcels()
+    if flags.enabled("parcel_widths"):
+        merged_parcels = live._merge_city(g, (live_area or {}).get("parcels", []))
+        if merged_parcels:
+            live_area = {"listings": [], "photos": [], **(live_area or {}), "parcels": merged_parcels,
+                         "revision": str((live_area or {}).get("revision", "")) + ":" + str(id(city))}
     view = STORE_EVIDENCE.view(live_area, synthetic_demo_file=synthetic_demo_file)
     wkey = key + (STORE_EVIDENCE.version, (live_area or {}).get("key"), (live_area or {}).get("revision"))
     wrs = _WR.get(wkey)
@@ -78,6 +86,8 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
         if fit[wid] != "fits" or w.kind == "main" or wrs[wid].lo >= 6:
             continue
         for n in (w.nodes[0], w.nodes[-1]):
+            if fit[wid] == "unknown":
+                break  # an unmeasured junction at either end must not be downgraded to "tight" by the other end
             for pid in g.node_ways.get(n, ()):
                 if pid == wid or not g.ways[pid].drivable:
                     continue
@@ -217,10 +227,17 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     vehicle = get_profile(vehicle_id)
     arrive = (arrive_at or datetime.now(VN_TZ)).astimezone(VN_TZ)
     dwell = dwell_min if dwell_min is not None else (PICKUP_DWELL_MIN if intent == "pickup" else 120)
+    if dwell < 0:
+        raise ValueError("Dwell duration must be nonnegative")
     depart = arrive + timedelta(minutes=dwell)
-    rain = (list(rain_scenario) if rain_scenario is not None and len(rain_scenario) > 0 else
-            (hydro.rain_spells(dest_lat, dest_lon) if flags.enabled("live_hydro") else []))
-    flood_snapshot = FloodSnapshot(rain)
+    rain_known_until = None  # an explicit scenario is authoritative for every time
+    if rain_scenario:
+        rain = list(rain_scenario)
+    elif flags.enabled("live_hydro"):
+        rain, rain_known_until = hydro.rain_coverage(dest_lat, dest_lon)
+    else:
+        rain = []
+    flood_snapshot = FloodSnapshot(rain, rain_known_until=rain_known_until)
     cap = WALK_CAP_M[intent]
 
     g, wrs, fps = area(dest_lat, dest_lon, flood_snapshot.generations, live_area, synthetic_demo_file)
@@ -563,6 +580,10 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     verdict = _verdict(chosen, door_eval, intent, cap)
     if no_stop_reason:
         verdict["detail"] = "Không tìm thấy lối đi bộ được nối với điểm dừng trong phạm vi 35 m."
+    if chosen:
+        verdict["estimate"] = chosen[0].get("estimate")
+    elif door_eval:
+        verdict["estimate"] = door_eval.get("estimate")
     timing = None
     flood_timing_needed = _needs_flood_timing(chosen, rejected)
     if flood_timing_needed:
@@ -830,6 +851,161 @@ def _candidate_timing_qualified(c: Candidate, ctx: PlanContext, arrive: datetime
     )
 
 
+CONFIDENCE_VI = {"high": "cao", "medium": "trung bình", "low": "thấp"}
+
+
+def _width_hypothesis(wr):
+    """Keep the point's actual source separate from whole-way verification.
+
+    A failed Official survey is missing evidence, not a zero-width observation.
+    Its fused interval may have a finite, weaker cap; taking that interval's
+    midpoint invents a narrow Official measurement (D50).
+    """
+    if wr.review or wr.top_tier is None:
+        return None
+    from .evidence import TIERS
+    active = [b for b in wr.evidence if b not in wr.overruled and
+              b.measurement_schema != 'parcel-survey-unresolved-v2']
+    for tier in TIERS[TIERS.index(wr.top_tier):]:
+        bounds = [b for b in active if b.tier == tier and (b.estimate_m is not None or b.lo > 0)]
+        if not bounds:
+            continue
+        samples = [b for b in bounds if b.estimate_m is not None]
+        if samples:
+            b = min(samples, key=lambda b: b.estimate_m)
+            value = b.estimate_m  # never relabel a weaker cap as this sample
+        else:
+            lo, hi = max(b.lo for b in bounds), min(b.hi for b in bounds)
+            if lo > hi:
+                return None
+            b = min(bounds, key=lambda b: b.hi)
+            value = (lo + min(hi, lo+3)) / 2
+        return {'value_m': value, 'tier': tier, 'source': b.source,
+                'sampled': bool(samples), 'sample_count': b.sample_count,
+                'bottleneck_support': b.sample_quality.get('bottleneck_support'),
+                'isolated_low_outlier': b.sample_quality.get('isolated_low_outlier', False),
+                'fallback_from_unresolved': tier != wr.top_tier}
+    # Diagnostic callers can supply an interval without individual bounds.
+    if not wr.evidence and wr.lo > 0:
+        return {'value_m': (wr.lo+min(wr.hi,wr.lo+3))/2, 'tier': wr.top_tier,
+                'source': 'Khoảng bề rộng', 'sampled': False, 'sample_count': None,
+                'bottleneck_support': None, 'isolated_low_outlier': False,
+                'fallback_from_unresolved': False}
+    return None
+
+
+def _width_estimate(wr):
+    hypothesis = _width_hypothesis(wr)
+    return hypothesis['value_m'] if hypothesis else None
+
+
+def _estimate(c, g, wrs, p, checks, failures):
+    """D50: useful hypothesis + ordinal evidence confidence; hard checks are unchanged."""
+    route, wo = checks['route_in'], checks['way_out']
+    segments = {}
+    for ei, length in (route or {}).get('_segments', []) + wo.get('_segments', []):
+        segments[ei] = max(segments.get(ei, 0), length)
+    if c.way_id is not None and c.edge_idx is not None:
+        segments.setdefault(c.edge_idx, .01)
+    total = sum(segments.values())
+    widths = [wrs[g.edges[ei].way_id] for ei in segments]
+    hypotheses = [_width_hypothesis(wr) for wr in widths]
+    values = [h['value_m'] if h else None for h in hypotheses]
+    strong_m = quantitative_m = 0.0
+    measured = 0
+    for (ei, length), wr in zip(segments.items(), widths):
+        numeric = [b for b in wr.evidence if b.tier in ('Measured', 'Official', 'Observed')
+                   and b not in wr.overruled and (b.estimate_m is not None or (b.hi < 40 and b.hi > 0 and
+                        b.measurement_schema != 'parcel-survey-unresolved-v2'))]
+        if numeric:
+            measured += 1
+            quantitative_m += length
+        if wr.top_tier in ('Measured', 'Official') and wr.lo > 0 and not wr.review and (
+                not wr.evidence or any(b.tier == wr.top_tier and b.coverage_complete for b in wr.evidence)):
+            strong_m += length
+    coverage = {'sampled_segments': measured, 'total_segments': len(segments),
+                'sample_supported_fraction': round(quantitative_m / total, 3) if total else 0,
+                'complete_strong_fraction': round(strong_m / total, 3) if total else 0,
+                'scope': 'Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn'}
+    # Passage uses tight_min; opening the door uses the separate stop threshold.
+    stop_value = _width_estimate(wrs[c.way_id]) if c.way_id is not None else None
+    if not widths or any(v is None for v in values):
+        answer = 'unknown'
+    elif min(values) >= p.fits_min and (stop_value is None or stop_value >= p.door_min):
+        answer = 'fits'
+    else:
+        # A point below a threshold is a low-confidence negative, not a hard exclusion.
+        answer = 'tight' if min(values) >= p.tight_min and (stop_value is None or stop_value >= p.door_min) else 'no'
+    if failures:
+        answer = 'no'
+    confidence = 'low'
+    legal = checks['legality']
+    flood = checks['flood']['stay']['status']
+    if total and quantitative_m / total >= .5 and not any(w.review for w in widths):
+        confidence = 'medium'
+    threshold_clear = all(wr.lo >= p.fits_min for wr in widths) and (
+        c.way_id is None or wrs[c.way_id].lo >= p.door_min)
+    if (total and strong_m / total >= 1 - 1e-9 and threshold_clear and route and route.get('strict')
+            and wo.get('strict') and flood == 'passable' and legal['status'] == 'Permitted'
+            and not c.data.get('walk_path', {}).get('unverified', True)):
+        confidence = 'high'
+    if answer == 'unknown' or wo['mode'] in ('unknown', 'none') or any(w.review for w in widths):
+        confidence = 'low'
+    hard_legal = legal['status'] in ('Prohibited', 'Restricted')
+    hard_width = any(not wr.review and any(
+        b.tier in ('Measured', 'Official') and b.tier == wr.top_tier and b not in wr.overruled and
+        (b.feature != 'parcel_widths' or b.sample_quality.get('bottleneck_support', b.sample_count or 0) >= 2) and
+        b.hi < (p.door_min if g.edges[ei].way_id == c.way_id else p.tight_min)
+        for b in wr.evidence) for ei, wr in zip(segments, widths))
+    if hard_legal or hard_width or flood == 'blocked':
+        answer, confidence = 'no', 'high'
+    elif not route or failures:
+        confidence = 'low'
+        if (not route or wo['mode'] == 'none') and checks.get('fit', {}).get('class') not in ('no', 'blocked'):
+            # A missing directed path in this cached graph does not measure a
+            # narrow street. Keep the failed Hard Check, but say what is unknown.
+            answer = 'unknown'
+    if c.kind == 'lot' and not failures:
+        answer = 'unknown'  # no measured entrance / internal manoeuvre envelope
+    tier_names = {'Measured':'đo thực tế', 'Official':'địa chính / chính thức', 'Observed':'quan sát',
+                  'Declared':'tin rao / tự khai', 'Inferred':'suy luận'}
+    finite = [(v, wr, ei, h) for v, wr, ei, h in zip(values, widths, segments, hypotheses) if v is not None]
+    limiting_json = None
+    if finite:
+        value, limiting, ei, hypothesis = min(finite, key=lambda x: x[0])
+        way = g.ways[g.edges[ei].way_id]
+        limiting_json = {**hypothesis, 'way_id': way.id, 'way_name': g.display_name(way.id),
+                         'osm_url': f'https://www.openstreetmap.org/way/{way.id}'}
+        basis = [f"{tier_names.get(hypothesis['tier'], 'thiếu nguồn')} ≈{value:.2f} m".replace('.', ',')
+                 + f" ({g.display_name(way.id)}; OSM {way.id})"]
+        if hypothesis['fallback_from_unresolved']:
+            basis.append('khảo sát chưa có mẫu hợp lệ; dùng nguồn yếu hơn để ước tính')
+        if (answer == 'no' and not (hard_legal or hard_width or flood == 'blocked') and
+                (hypothesis['fallback_from_unresolved'] or hypothesis['isolated_low_outlier'] or
+                 (hypothesis['sample_count'] is not None and (hypothesis['bottleneck_support'] or 0) < 2))):
+            confidence = 'low'
+            basis.append('nút thắt chưa có hai mặt cắt nhất quán')
+    else:
+        basis = ['chưa có bề rộng đủ để ước lượng']
+    basis.append(f"{measured}/{len(segments)} đoạn có mẫu đo ({coverage['sample_supported_fraction']:.0%} chiều dài có mẫu)")
+    if strong_m < total:
+        basis.append('chưa đo kín tuyến')
+    if wo['mode'] == 'unknown' or wo.get('manoeuvre_status') == 'unknown':
+        basis.append('chưa rõ đường ra / thao tác rẽ')
+    if flood in ('unknown', 'risky'):
+        basis.append('chưa rõ ngập' if flood == 'unknown' else 'có thể ngập')
+    if legal['status'] == 'Unverified':
+        basis.append('chưa xác minh pháp lý')
+    if hard_legal:
+        basis.extend(r['text'] + ' (' + r['citation'] + ')' for r in legal['rules']
+                     if r['status'] in ('Prohibited', 'Restricted'))
+    elif failures:
+        basis.append(failures[0])
+    return {'answer': answer, 'confidence': confidence, 'basis': ' · '.join(basis), 'coverage': coverage,
+            'limiting_width': limiting_json}
+
+
+
 def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
               arr, ext, fit_arr, fit_ext, arr_times, exit_times) -> dict:
     g, wrs, fit, fit_notes = ctx.g, ctx.wrs, ctx.fit, ctx.fit_notes
@@ -952,7 +1128,17 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         "reason": None if not walk_connection_unverified else
         "Khoảng cách nối gần nhất chỉ là ước tính; đoạn chưa có lối đi bộ OSM không được vẽ",
     }
+    def estimate_route(value):
+        value = dict(value or {})
+        value["_segments"] = [(ei, g.edges[ei].length) for ei in value.get("edge_ids", [])]
+        return value
+    estimate_checks = {**checks, "route_in": estimate_route(route_output), "way_out": estimate_route(way_out_output)}
+    estimate = _estimate(c, g, wrs, p, estimate_checks, reasons_fail)
+    # Confidence can never imply verification beyond the canonical hard checks.
+    if not (ok and tier <= 1) and estimate["confidence"] == "high" and estimate["answer"] != "no":
+        estimate["confidence"] = "medium"
     return {
+        "estimate": estimate,
         "ok": ok, "kind": c.kind, "name": c.name, "lat": c.lat, "lon": c.lon, "way_id": way_id,
         "tier": tier, "verified": ok and tier <= 1,
         "badges": _badges(checks, tier, legality_status),
@@ -1209,6 +1395,8 @@ def _decode_polyline(s: str) -> list[list[float]]:
 
 
 def goong_drive(origin, dest) -> dict | None:
+    if CACHED_ONLY:
+        return None
     """Goong Direction v2 car route: geometry [[lon, lat]…], distance (m) and duration (s)."""
     import httpx
     try:

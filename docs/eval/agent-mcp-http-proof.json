@@ -1,0 +1,1242 @@
+[
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {},
+        "clientInfo": {
+          "name": "raw-eval",
+          "version": "1"
+        }
+      }
+    },
+    "status": 200,
+    "content_type": "application/json",
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "serverInfo": {
+          "name": "ngo-ngach",
+          "title": "Ngõ Ngách",
+          "version": "1.0.0"
+        },
+        "instructions": "Địa chỉ TP.HCM; giờ Asia/Ho_Chi_Minh. Evidence uncertainty must be preserved."
+      }
+    }
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "method": "notifications/initialized"
+    },
+    "status": 202,
+    "content_type": null,
+    "response": null
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/list"
+    },
+    "status": 200,
+    "content_type": "application/json",
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "name": "tim_dia_diem",
+            "description": "Tìm địa chỉ/hẻm ở TP.HCM. Trả tối đa 3 điểm đã có tọa độ. Search HCMC addresses/POIs; ambiguous matches require clarification.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "query"
+              ]
+            }
+          },
+          {
+            "name": "lap_ke_hoach",
+            "description": "Kiểm tra xe vào và ra, bề rộng có nguồn, ngập, luật dừng đỗ, chỗ dừng và quãng đi bộ. Plan arrival, exit, flood and legal stopping; never a safety guarantee.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "vehicle_id": {
+                  "type": "string"
+                },
+                "arrive_at": {
+                  "type": "string",
+                  "description": "ISO datetime +07:00"
+                },
+                "dwell_min": {
+                  "type": "integer"
+                },
+                "intent": {
+                  "type": "string",
+                  "enum": [
+                    "park",
+                    "pickup"
+                  ]
+                },
+                "rain_mm_per_h": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "label",
+                "vehicle_id",
+                "arrive_at",
+                "dwell_min",
+                "intent"
+              ]
+            }
+          },
+          {
+            "name": "muc_trieu",
+            "description": "Các đỉnh/chân triều và báo động, tối đa 36 giờ; không phải dự báo ngoài thời gian bản tin. Official tide bulletin extrema; no extrapolated forecast.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string"
+                },
+                "hours": {
+                  "type": "integer",
+                  "maximum": 36
+                }
+              },
+              "required": [
+                "start"
+              ]
+            }
+          },
+          {
+            "name": "kiem_tra_xe_vao_hem",
+            "description": "Kiểm tra một đoạn hẻm cho xe, kèm bằng chứng. Single-alley vehicle fit with sourced evidence; not a full route check.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                },
+                "way_id": {
+                  "type": "integer"
+                },
+                "vehicle_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "way_id",
+                "vehicle_id"
+              ]
+            }
+          },
+          {
+            "name": "tim_cho_do_gan",
+            "description": "Tìm điểm dừng/đỗ gần đích, chỉ trả các điểm và bằng chứng. Nearby stop points only, for park or pickup.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lon": {
+                  "type": "number"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "vehicle_id": {
+                  "type": "string"
+                },
+                "arrive_at": {
+                  "type": "string",
+                  "description": "ISO datetime +07:00"
+                },
+                "dwell_min": {
+                  "type": "integer"
+                },
+                "intent": {
+                  "type": "string",
+                  "enum": [
+                    "park",
+                    "pickup"
+                  ]
+                },
+                "rain_mm_per_h": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "label",
+                "vehicle_id",
+                "arrive_at",
+                "dwell_min",
+                "intent"
+              ]
+            }
+          },
+          {
+            "name": "danh_sach_xe",
+            "description": "Danh mục mẫu xe và nhóm kích thước, thông số có nguồn. List vehicle models and size classes with sourced dimensions.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/call",
+      "params": {
+        "name": "danh_sach_xe",
+        "arguments": {}
+      }
+    },
+    "status": 200,
+    "content_type": "application/json",
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"vehicles\": [{\"id\": \"class-xs\", \"label\": \"XS · Xe cỡ nhỏ\", \"kind\": \"class\", \"size_class\": \"XS\", \"powertrain\": \"mixed\", \"body_width\": 1.68, \"mirror_width\": 1.93, \"mirror_estimated\": true, \"length\": 3.815, \"turning_radius\": 4.7, \"turning_radius_estimated\": false, \"ground_clearance\": 0.151, \"safe_water_depth\": 0.151, \"safe_water_basis\": \"Thấp nhất trong nhóm (Kia Morning): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [\"VinFast VF 3\", \"Kia Morning\", \"Hyundai Grand i10\"], \"fits_min\": 3.23, \"tight_min\": 2.13, \"three_point_width\": 6.37, \"source_url\": \"\"}, {\"id\": \"class-s\", \"label\": \"S · Sedan & crossover cỡ B/C\", \"kind\": \"class\", \"size_class\": \"S\", \"powertrain\": \"mixed\", \"body_width\": 1.845, \"mirror_width\": 2.095, \"mirror_estimated\": true, \"length\": 4.66, \"turning_radius\": 5.5, \"turning_radius_estimated\": false, \"ground_clearance\": 0.133, \"safe_water_depth\": 0.133, \"safe_water_basis\": \"Thấp nhất trong nhóm (Toyota Vios): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [\"Toyota Vios\", \"Honda City\", \"Hyundai Accent\", \"Mazda Mazda3\", \"VinFast VF 5\", \"Toyota Yaris Cross\", \"Hyundai Creta\", \"Kia Seltos\", \"Mitsubishi Xforce\", \"VinFast VF 6\", \"Toyota Corolla Cross\", \"Mazda CX-5\", \"Mitsubishi Xpander\"], \"fits_min\": 3.39, \"tight_min\": 2.29, \"three_point_width\": 7.5, \"source_url\": \"\"}, {\"id\": \"class-m\", \"label\": \"M · SUV/MPV 7 chỗ & sedan cỡ D\", \"kind\": \"class\", \"size_class\": \"M\", \"powertrain\": \"mixed\", \"body_width\": 1.935, \"mirror_width\": 2.207, \"mirror_estimated\": false, \"length\": 4.92, \"turning_radius\": 6.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.14, \"safe_water_depth\": 0.14, \"safe_water_basis\": \"Thấp nhất trong nhóm (Toyota Camry): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [\"Toyota Camry\", \"Mercedes-Benz C-Class\", \"VinFast VF 7\", \"Ford Territory\", \"VinFast VF 8 The All New (2026)\", \"VinFast VF 8 (2022-2025 generation)\", \"Toyota Fortuner\", \"Hyundai Santa Fe\", \"Ford Everest\", \"Toyota Innova Cross\", \"VinFast Limo Green\"], \"fits_min\": 3.51, \"tight_min\": 2.41, \"three_point_width\": 8.07, \"source_url\": \"\"}, {\"id\": \"class-l\", \"label\": \"L · Xe lớn, bán tải, tải nhẹ\", \"kind\": \"class\", \"size_class\": \"L\", \"powertrain\": \"mixed\", \"body_width\": 2.065, \"mirror_width\": 2.26, \"mirror_estimated\": true, \"length\": 5.362, \"turning_radius\": 7.33, \"turning_radius_estimated\": false, \"ground_clearance\": 0.13, \"safe_water_depth\": 0.13, \"safe_water_basis\": \"Thấp nhất trong nhóm (Hyundai New Porter H150): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [\"VinFast VF 9\", \"Kia Carnival\", \"Ford Ranger\", \"Hyundai New Porter H150\", \"Isuzu QKR\"], \"fits_min\": 3.56, \"tight_min\": 2.46, \"three_point_width\": 9.16, \"source_url\": \"\"}, {\"id\": \"class-xl\", \"label\": \"XL · Xe khách 16 chỗ, van\", \"kind\": \"class\", \"size_class\": \"XL\", \"powertrain\": \"mixed\", \"body_width\": 2.068, \"mirror_width\": 2.474, \"mirror_estimated\": false, \"length\": 6.195, \"turning_radius\": 6.7, \"turning_radius_estimated\": false, \"ground_clearance\": 0.15, \"safe_water_depth\": 0.15, \"safe_water_basis\": \"Thấp nhất trong nhóm (Ford Transit): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [\"Hyundai Solati\", \"Ford Transit\"], \"fits_min\": 3.77, \"tight_min\": 2.67, \"three_point_width\": 9.09, \"source_url\": \"\"}, {\"id\": \"vinfast-vf-3\", \"label\": \"VinFast VF 3\", \"kind\": \"model\", \"size_class\": \"XS\", \"powertrain\": \"EV\", \"body_width\": 1.679, \"mirror_width\": 1.748, \"mirror_estimated\": false, \"length\": 3.19, \"turning_radius\": 4.5, \"turning_radius_estimated\": false, \"ground_clearance\": 0.175, \"safe_water_depth\": 0.175, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.05, \"tight_min\": 1.95, \"three_point_width\": 5.85, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF3&year=2026&lv1=1272213&lv2=1272256\"}, {\"id\": \"kia-morning\", \"label\": \"Kia Morning\", \"kind\": \"model\", \"size_class\": \"XS\", \"powertrain\": \"ICE\", \"body_width\": 1.595, \"mirror_width\": 1.845, \"mirror_estimated\": true, \"length\": 3.595, \"turning_radius\": 4.7, \"turning_radius_estimated\": false, \"ground_clearance\": 0.151, \"safe_water_depth\": 0.151, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.14, \"tight_min\": 2.04, \"three_point_width\": 6.23, \"source_url\": \"https://kiavietnam.com.vn/storage/new-sorento-new-morning-2025/e-brochure-new-morning-2025.pdf\"}, {\"id\": \"hyundai-grand-i10\", \"label\": \"Hyundai Grand i10\", \"kind\": \"model\", \"size_class\": \"XS\", \"powertrain\": \"ICE\", \"body_width\": 1.68, \"mirror_width\": 1.93, \"mirror_estimated\": true, \"length\": 3.815, \"turning_radius\": 4.7, \"turning_radius_estimated\": true, \"ground_clearance\": 0.157, \"safe_water_depth\": 0.157, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.23, \"tight_min\": 2.13, \"three_point_width\": 6.37, \"source_url\": \"https://hyundai.thanhcong.vn/new-grand-i10?attr=thong-so\"}, {\"id\": \"toyota-vios\", \"label\": \"Toyota Vios\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.73, \"mirror_width\": 1.98, \"mirror_estimated\": true, \"length\": 4.425, \"turning_radius\": 5.1, \"turning_radius_estimated\": false, \"ground_clearance\": 0.133, \"safe_water_depth\": 0.133, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.28, \"tight_min\": 2.18, \"three_point_width\": 7.1, \"source_url\": \"https://www.toyota.com.vn/vios\"}, {\"id\": \"honda-city\", \"label\": \"Honda City\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.748, \"mirror_width\": 1.998, \"mirror_estimated\": true, \"length\": 4.589, \"turning_radius\": 5.0, \"turning_radius_estimated\": false, \"ground_clearance\": 0.134, \"safe_water_depth\": 0.134, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.3, \"tight_min\": 2.2, \"three_point_width\": 7.16, \"source_url\": \"https://www.honda.com.vn/o-to/chi-tiet/2\"}, {\"id\": \"hyundai-accent\", \"label\": \"Hyundai Accent\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.765, \"mirror_width\": 2.015, \"mirror_estimated\": true, \"length\": 4.535, \"turning_radius\": 5.5, \"turning_radius_estimated\": true, \"ground_clearance\": 0.165, \"safe_water_depth\": 0.165, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.31, \"tight_min\": 2.21, \"three_point_width\": 7.42, \"source_url\": \"https://hyundai.thanhcong.vn/all-new-accent?attr=thong-so\"}, {\"id\": \"mazda-mazda3\", \"label\": \"Mazda Mazda3\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.795, \"mirror_width\": 2.045, \"mirror_estimated\": true, \"length\": 4.66, \"turning_radius\": 5.3, \"turning_radius_estimated\": false, \"ground_clearance\": 0.145, \"safe_water_depth\": 0.145, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.34, \"tight_min\": 2.25, \"three_point_width\": 7.39, \"source_url\": \"https://mazdamotors.vn/media/bv5f24gc/e-brochure-mazda3-sedan-230625.pdf\"}, {\"id\": \"toyota-camry\", \"label\": \"Toyota Camry\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"HEV\", \"body_width\": 1.84, \"mirror_width\": 2.09, \"mirror_estimated\": true, \"length\": 4.92, \"turning_radius\": 5.8, \"turning_radius_estimated\": false, \"ground_clearance\": 0.14, \"safe_water_depth\": 0.14, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.39, \"tight_min\": 2.29, \"three_point_width\": 7.9, \"source_url\": \"https://www.toyota.com.vn/camry\"}, {\"id\": \"mercedes-benz-c-class\", \"label\": \"Mercedes-Benz C-Class\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE\", \"body_width\": 1.82, \"mirror_width\": 2.033, \"mirror_estimated\": false, \"length\": 4.751, \"turning_radius\": 6.2, \"turning_radius_estimated\": true, \"ground_clearance\": 0.15, \"safe_water_depth\": 0.15, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.33, \"tight_min\": 2.23, \"three_point_width\": 8.04, \"source_url\": \"https://www.mercedes-benz.com.vn/content/dam/vietnam/passengercars/price-brochure/sedan/C-Class%20Brochure.pdf\"}, {\"id\": \"vinfast-vf-5\", \"label\": \"VinFast VF 5\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"EV\", \"body_width\": 1.723, \"mirror_width\": 1.973, \"mirror_estimated\": true, \"length\": 3.967, \"turning_radius\": 5.25, \"turning_radius_estimated\": false, \"ground_clearance\": 0.16, \"safe_water_depth\": 0.16, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.27, \"tight_min\": 2.17, \"three_point_width\": 6.88, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF5&year=2026&lv1=1276822&lv2=1276869\"}, {\"id\": \"toyota-yaris-cross\", \"label\": \"Toyota Yaris Cross\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE/HEV\", \"body_width\": 1.77, \"mirror_width\": 2.02, \"mirror_estimated\": true, \"length\": 4.31, \"turning_radius\": 5.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.21, \"safe_water_depth\": 0.21, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.32, \"tight_min\": 2.22, \"three_point_width\": 7.06, \"source_url\": \"https://www.toyota.com.vn/yaris-cross\"}, {\"id\": \"hyundai-creta\", \"label\": \"Hyundai Creta\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.79, \"mirror_width\": 2.04, \"mirror_estimated\": true, \"length\": 4.33, \"turning_radius\": 5.4, \"turning_radius_estimated\": false, \"ground_clearance\": 0.2, \"safe_water_depth\": 0.2, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.34, \"tight_min\": 2.24, \"three_point_width\": 7.24, \"source_url\": \"https://hyundai.thanhcong.vn/san-pham/new-creta?attr=thong-so\"}, {\"id\": \"kia-seltos\", \"label\": \"Kia Seltos\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.8, \"mirror_width\": 2.05, \"mirror_estimated\": true, \"length\": 4.365, \"turning_radius\": 5.3, \"turning_radius_estimated\": false, \"ground_clearance\": 0.19, \"safe_water_depth\": 0.19, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.35, \"tight_min\": 2.25, \"three_point_width\": 7.17, \"source_url\": \"https://kiavietnam.com.vn/storage/thang-10/e-brochure-new-seltos.pdf\"}, {\"id\": \"mitsubishi-xforce\", \"label\": \"Mitsubishi Xforce\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.81, \"mirror_width\": 2.06, \"mirror_estimated\": true, \"length\": 4.39, \"turning_radius\": 5.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.222, \"safe_water_depth\": 0.222, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.36, \"tight_min\": 2.26, \"three_point_width\": 7.1, \"source_url\": \"https://www.mitsubishi-motors.com.vn/new-xforce\"}, {\"id\": \"vinfast-vf-6\", \"label\": \"VinFast VF 6\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"EV\", \"body_width\": 1.834, \"mirror_width\": 2.084, \"mirror_estimated\": true, \"length\": 4.241, \"turning_radius\": 5.35, \"turning_radius_estimated\": false, \"ground_clearance\": 0.17, \"safe_water_depth\": 0.17, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.38, \"tight_min\": 2.28, \"three_point_width\": 7.07, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF6&year=2026&lv1=1280996&lv2=1281048\"}, {\"id\": \"toyota-corolla-cross\", \"label\": \"Toyota Corolla Cross\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE/HEV\", \"body_width\": 1.825, \"mirror_width\": 2.075, \"mirror_estimated\": true, \"length\": 4.46, \"turning_radius\": 5.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.161, \"safe_water_depth\": 0.161, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.38, \"tight_min\": 2.28, \"three_point_width\": 7.17, \"source_url\": \"https://www.toyota.com.vn/corolla-cross\"}, {\"id\": \"mazda-cx-5\", \"label\": \"Mazda CX-5\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.845, \"mirror_width\": 2.095, \"mirror_estimated\": true, \"length\": 4.59, \"turning_radius\": 5.5, \"turning_radius_estimated\": false, \"ground_clearance\": 0.2, \"safe_water_depth\": 0.2, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.39, \"tight_min\": 2.29, \"three_point_width\": 7.5, \"source_url\": \"https://mazdamotors.vn/media/nyonsmri/e-brochure-mazda-cx-5-230625.pdf\"}, {\"id\": \"vinfast-vf-7\", \"label\": \"VinFast VF 7\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"EV\", \"body_width\": 1.893, \"mirror_width\": 2.143, \"mirror_estimated\": true, \"length\": 4.55, \"turning_radius\": 5.6, \"turning_radius_estimated\": false, \"ground_clearance\": 0.184, \"safe_water_depth\": 0.184, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.44, \"tight_min\": 2.34, \"three_point_width\": 7.48, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF7&year=2026&lv1=1282214&lv2=1282266\"}, {\"id\": \"ford-territory\", \"label\": \"Ford Territory\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE\", \"body_width\": 1.935, \"mirror_width\": 2.185, \"mirror_estimated\": true, \"length\": 4.685, \"turning_radius\": 6.2, \"turning_radius_estimated\": true, \"ground_clearance\": 0.19, \"safe_water_depth\": 0.19, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.49, \"tight_min\": 2.39, \"three_point_width\": 8.07, \"source_url\": \"https://tuoitre.vn/chi-tiet-ford-territory-2025-ra-mat-viet-nam-gia-tu-762-trieu-thay-doi-tien-nghi-dau-mazda-cx-5-20250816001731191.htm\"}, {\"id\": \"vinfast-vf-8-the-all-new-2026\", \"label\": \"VinFast VF 8 The All New (2026)\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"EV\", \"body_width\": 1.872, \"mirror_width\": 2.123, \"mirror_estimated\": false, \"length\": 4.701, \"turning_radius\": 5.34, \"turning_radius_estimated\": false, \"ground_clearance\": 0.17, \"safe_water_depth\": 0.17, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.42, \"tight_min\": 2.32, \"three_point_width\": 7.41, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF8NP&year=2026&lv1=1313352&lv2=1313404\"}, {\"id\": \"vinfast-vf-8-2022-2025-generation\", \"label\": \"VinFast VF 8 (2022-2025 generation)\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"EV\", \"body_width\": 1.934, \"mirror_width\": 2.184, \"mirror_estimated\": true, \"length\": 4.75, \"turning_radius\": 6.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.175, \"safe_water_depth\": 0.175, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.48, \"tight_min\": 2.38, \"three_point_width\": 8.03, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF8&year=2026&lv1=1266329&lv2=1266381\"}, {\"id\": \"toyota-fortuner\", \"label\": \"Toyota Fortuner\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE\", \"body_width\": 1.855, \"mirror_width\": 2.105, \"mirror_estimated\": true, \"length\": 4.795, \"turning_radius\": 5.8, \"turning_radius_estimated\": false, \"ground_clearance\": 0.279, \"safe_water_depth\": 0.35, \"safe_water_basis\": \"50% độ lội nước công bố (700 mm, nước tĩnh, 7 km/h)\", \"members\": [], \"fits_min\": 3.41, \"tight_min\": 2.31, \"three_point_width\": 7.84, \"source_url\": \"https://www.toyota.com.vn/fortuner\"}, {\"id\": \"hyundai-santa-fe\", \"label\": \"Hyundai Santa Fe\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE/HEV\", \"body_width\": 1.9, \"mirror_width\": 2.15, \"mirror_estimated\": true, \"length\": 4.83, \"turning_radius\": 5.78, \"turning_radius_estimated\": false, \"ground_clearance\": 0.177, \"safe_water_depth\": 0.177, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.45, \"tight_min\": 2.35, \"three_point_width\": 7.84, \"source_url\": \"https://hyundai.thanhcong.vn/san-pham/santa-fe?attr=thong-so\"}, {\"id\": \"ford-everest\", \"label\": \"Ford Everest\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE\", \"body_width\": 1.923, \"mirror_width\": 2.207, \"mirror_estimated\": false, \"length\": 4.914, \"turning_radius\": 5.9, \"turning_radius_estimated\": false, \"ground_clearance\": 0.2, \"safe_water_depth\": 0.4, \"safe_water_basis\": \"50% độ lội nước công bố (800 mm, nước tĩnh, 7 km/h)\", \"members\": [], \"fits_min\": 3.51, \"tight_min\": 2.41, \"three_point_width\": 7.98, \"source_url\": \"https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-everest-2026-active-2-0-at-4x2-1234\"}, {\"id\": \"vinfast-vf-9\", \"label\": \"VinFast VF 9\", \"kind\": \"model\", \"size_class\": \"L\", \"powertrain\": \"EV\", \"body_width\": 2.065, \"mirror_width\": 2.254, \"mirror_estimated\": false, \"length\": 5.119, \"turning_radius\": 7.33, \"turning_radius_estimated\": false, \"ground_clearance\": 0.175, \"safe_water_depth\": 0.175, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.55, \"tight_min\": 2.45, \"three_point_width\": 9.07, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF9&year=2026&lv1=1312174&lv2=1312400\"}, {\"id\": \"mitsubishi-xpander\", \"label\": \"Mitsubishi Xpander\", \"kind\": \"model\", \"size_class\": \"S\", \"powertrain\": \"ICE\", \"body_width\": 1.75, \"mirror_width\": 2.0, \"mirror_estimated\": true, \"length\": 4.595, \"turning_radius\": 5.2, \"turning_radius_estimated\": false, \"ground_clearance\": 0.225, \"safe_water_depth\": 0.225, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.3, \"tight_min\": 2.2, \"three_point_width\": 7.22, \"source_url\": \"https://www.mitsubishi-motors.com.vn/newxpander\"}, {\"id\": \"toyota-innova-cross\", \"label\": \"Toyota Innova Cross\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"ICE/HEV\", \"body_width\": 1.845, \"mirror_width\": 2.095, \"mirror_estimated\": true, \"length\": 4.755, \"turning_radius\": 5.67, \"turning_radius_estimated\": false, \"ground_clearance\": 0.17, \"safe_water_depth\": 0.17, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.39, \"tight_min\": 2.29, \"three_point_width\": 7.65, \"source_url\": \"https://www.toyota.com.vn/innova-cross\"}, {\"id\": \"vinfast-limo-green\", \"label\": \"VinFast Limo Green\", \"kind\": \"model\", \"size_class\": \"M\", \"powertrain\": \"EV\", \"body_width\": 1.872, \"mirror_width\": 2.123, \"mirror_estimated\": false, \"length\": 4.74, \"turning_radius\": 5.34, \"turning_radius_estimated\": false, \"ground_clearance\": 0.18, \"safe_water_depth\": 0.18, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.42, \"tight_min\": 2.32, \"three_point_width\": 7.45, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=Limo%20Green&year=2026&lv1=1327954&lv2=1327999\"}, {\"id\": \"kia-carnival\", \"label\": \"Kia Carnival\", \"kind\": \"model\", \"size_class\": \"L\", \"powertrain\": \"ICE\", \"body_width\": 2.01, \"mirror_width\": 2.26, \"mirror_estimated\": true, \"length\": 5.155, \"turning_radius\": 5.8, \"turning_radius_estimated\": false, \"ground_clearance\": 0.172, \"safe_water_depth\": 0.172, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.56, \"tight_min\": 2.46, \"three_point_width\": 8.03, \"source_url\": \"https://kiavietnam.com.vn/storage/e-brochure/e-brochure-new-carnival-hybrid-v8-2-1.pdf\"}, {\"id\": \"ford-ranger\", \"label\": \"Ford Ranger\", \"kind\": \"model\", \"size_class\": \"L\", \"powertrain\": \"ICE\", \"body_width\": 1.918, \"mirror_width\": 2.208, \"mirror_estimated\": false, \"length\": 5.362, \"turning_radius\": 6.35, \"turning_radius_estimated\": false, \"ground_clearance\": 0.235, \"safe_water_depth\": 0.4, \"safe_water_basis\": \"50% độ lội nước công bố (800 mm, nước tĩnh, 7 km/h)\", \"members\": [], \"fits_min\": 3.51, \"tight_min\": 2.41, \"three_point_width\": 8.49, \"source_url\": \"https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-ranger-2026-wildtrak-2-0-4x4-at-1294\"}, {\"id\": \"hyundai-solati\", \"label\": \"Hyundai Solati\", \"kind\": \"model\", \"size_class\": \"XL\", \"powertrain\": \"ICE\", \"body_width\": 2.038, \"mirror_width\": 2.288, \"mirror_estimated\": true, \"length\": 6.195, \"turning_radius\": 6.3, \"turning_radius_estimated\": false, \"ground_clearance\": 0.18, \"safe_water_depth\": 0.18, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.59, \"tight_min\": 2.49, \"three_point_width\": 8.97, \"source_url\": \"https://hyundai.thanhcong.vn/solati-2\"}, {\"id\": \"ford-transit\", \"label\": \"Ford Transit\", \"kind\": \"model\", \"size_class\": \"XL\", \"powertrain\": \"ICE\", \"body_width\": 2.068, \"mirror_width\": 2.474, \"mirror_estimated\": false, \"length\": 5.998, \"turning_radius\": 6.7, \"turning_radius_estimated\": false, \"ground_clearance\": 0.15, \"safe_water_depth\": 0.15, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.77, \"tight_min\": 2.67, \"three_point_width\": 9.09, \"source_url\": \"https://www.binhtanford.com/so-sanh-cac-phien-ban-ford-transit-2025/\"}, {\"id\": \"hyundai-new-porter-h150\", \"label\": \"Hyundai New Porter H150\", \"kind\": \"model\", \"size_class\": \"L\", \"powertrain\": \"ICE\", \"body_width\": 1.74, \"mirror_width\": 1.99, \"mirror_estimated\": true, \"length\": 5.12, \"turning_radius\": 7.33, \"turning_radius_estimated\": true, \"ground_clearance\": 0.13, \"safe_water_depth\": 0.13, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.29, \"tight_min\": 2.19, \"three_point_width\": 9.16, \"source_url\": \"https://hyundai.thanhcong.vn/new-porter-h150\"}, {\"id\": \"isuzu-qkr\", \"label\": \"Isuzu QKR\", \"kind\": \"model\", \"size_class\": \"L\", \"powertrain\": \"ICE\", \"body_width\": 1.86, \"mirror_width\": 2.11, \"mirror_estimated\": true, \"length\": 5.165, \"turning_radius\": 5.7, \"turning_radius_estimated\": false, \"ground_clearance\": 0.195, \"safe_water_depth\": 0.195, \"safe_water_basis\": \"Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.41, \"tight_min\": 2.31, \"three_point_width\": 8.09, \"source_url\": \"https://isuzu-vietnam.com/xetai-vn/qkr-vn/xe-tai-isuzu-qkr-qlr77fe5b-cabin-sat-xi/\"}]}"
+          }
+        ],
+        "structuredContent": {
+          "vehicles": [
+            {
+              "id": "class-xs",
+              "label": "XS · Xe cỡ nhỏ",
+              "kind": "class",
+              "size_class": "XS",
+              "powertrain": "mixed",
+              "body_width": 1.68,
+              "mirror_width": 1.93,
+              "mirror_estimated": true,
+              "length": 3.815,
+              "turning_radius": 4.7,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.151,
+              "safe_water_depth": 0.151,
+              "safe_water_basis": "Thấp nhất trong nhóm (Kia Morning): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [
+                "VinFast VF 3",
+                "Kia Morning",
+                "Hyundai Grand i10"
+              ],
+              "fits_min": 3.23,
+              "tight_min": 2.13,
+              "three_point_width": 6.37,
+              "source_url": ""
+            },
+            {
+              "id": "class-s",
+              "label": "S · Sedan & crossover cỡ B/C",
+              "kind": "class",
+              "size_class": "S",
+              "powertrain": "mixed",
+              "body_width": 1.845,
+              "mirror_width": 2.095,
+              "mirror_estimated": true,
+              "length": 4.66,
+              "turning_radius": 5.5,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.133,
+              "safe_water_depth": 0.133,
+              "safe_water_basis": "Thấp nhất trong nhóm (Toyota Vios): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [
+                "Toyota Vios",
+                "Honda City",
+                "Hyundai Accent",
+                "Mazda Mazda3",
+                "VinFast VF 5",
+                "Toyota Yaris Cross",
+                "Hyundai Creta",
+                "Kia Seltos",
+                "Mitsubishi Xforce",
+                "VinFast VF 6",
+                "Toyota Corolla Cross",
+                "Mazda CX-5",
+                "Mitsubishi Xpander"
+              ],
+              "fits_min": 3.39,
+              "tight_min": 2.29,
+              "three_point_width": 7.5,
+              "source_url": ""
+            },
+            {
+              "id": "class-m",
+              "label": "M · SUV/MPV 7 chỗ & sedan cỡ D",
+              "kind": "class",
+              "size_class": "M",
+              "powertrain": "mixed",
+              "body_width": 1.935,
+              "mirror_width": 2.207,
+              "mirror_estimated": false,
+              "length": 4.92,
+              "turning_radius": 6.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.14,
+              "safe_water_depth": 0.14,
+              "safe_water_basis": "Thấp nhất trong nhóm (Toyota Camry): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [
+                "Toyota Camry",
+                "Mercedes-Benz C-Class",
+                "VinFast VF 7",
+                "Ford Territory",
+                "VinFast VF 8 The All New (2026)",
+                "VinFast VF 8 (2022-2025 generation)",
+                "Toyota Fortuner",
+                "Hyundai Santa Fe",
+                "Ford Everest",
+                "Toyota Innova Cross",
+                "VinFast Limo Green"
+              ],
+              "fits_min": 3.51,
+              "tight_min": 2.41,
+              "three_point_width": 8.07,
+              "source_url": ""
+            },
+            {
+              "id": "class-l",
+              "label": "L · Xe lớn, bán tải, tải nhẹ",
+              "kind": "class",
+              "size_class": "L",
+              "powertrain": "mixed",
+              "body_width": 2.065,
+              "mirror_width": 2.26,
+              "mirror_estimated": true,
+              "length": 5.362,
+              "turning_radius": 7.33,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.13,
+              "safe_water_depth": 0.13,
+              "safe_water_basis": "Thấp nhất trong nhóm (Hyundai New Porter H150): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [
+                "VinFast VF 9",
+                "Kia Carnival",
+                "Ford Ranger",
+                "Hyundai New Porter H150",
+                "Isuzu QKR"
+              ],
+              "fits_min": 3.56,
+              "tight_min": 2.46,
+              "three_point_width": 9.16,
+              "source_url": ""
+            },
+            {
+              "id": "class-xl",
+              "label": "XL · Xe khách 16 chỗ, van",
+              "kind": "class",
+              "size_class": "XL",
+              "powertrain": "mixed",
+              "body_width": 2.068,
+              "mirror_width": 2.474,
+              "mirror_estimated": false,
+              "length": 6.195,
+              "turning_radius": 6.7,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.15,
+              "safe_water_depth": 0.15,
+              "safe_water_basis": "Thấp nhất trong nhóm (Ford Transit): Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [
+                "Hyundai Solati",
+                "Ford Transit"
+              ],
+              "fits_min": 3.77,
+              "tight_min": 2.67,
+              "three_point_width": 9.09,
+              "source_url": ""
+            },
+            {
+              "id": "vinfast-vf-3",
+              "label": "VinFast VF 3",
+              "kind": "model",
+              "size_class": "XS",
+              "powertrain": "EV",
+              "body_width": 1.679,
+              "mirror_width": 1.748,
+              "mirror_estimated": false,
+              "length": 3.19,
+              "turning_radius": 4.5,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.175,
+              "safe_water_depth": 0.175,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.05,
+              "tight_min": 1.95,
+              "three_point_width": 5.85,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF3&year=2026&lv1=1272213&lv2=1272256"
+            },
+            {
+              "id": "kia-morning",
+              "label": "Kia Morning",
+              "kind": "model",
+              "size_class": "XS",
+              "powertrain": "ICE",
+              "body_width": 1.595,
+              "mirror_width": 1.845,
+              "mirror_estimated": true,
+              "length": 3.595,
+              "turning_radius": 4.7,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.151,
+              "safe_water_depth": 0.151,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.14,
+              "tight_min": 2.04,
+              "three_point_width": 6.23,
+              "source_url": "https://kiavietnam.com.vn/storage/new-sorento-new-morning-2025/e-brochure-new-morning-2025.pdf"
+            },
+            {
+              "id": "hyundai-grand-i10",
+              "label": "Hyundai Grand i10",
+              "kind": "model",
+              "size_class": "XS",
+              "powertrain": "ICE",
+              "body_width": 1.68,
+              "mirror_width": 1.93,
+              "mirror_estimated": true,
+              "length": 3.815,
+              "turning_radius": 4.7,
+              "turning_radius_estimated": true,
+              "ground_clearance": 0.157,
+              "safe_water_depth": 0.157,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.23,
+              "tight_min": 2.13,
+              "three_point_width": 6.37,
+              "source_url": "https://hyundai.thanhcong.vn/new-grand-i10?attr=thong-so"
+            },
+            {
+              "id": "toyota-vios",
+              "label": "Toyota Vios",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.73,
+              "mirror_width": 1.98,
+              "mirror_estimated": true,
+              "length": 4.425,
+              "turning_radius": 5.1,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.133,
+              "safe_water_depth": 0.133,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.28,
+              "tight_min": 2.18,
+              "three_point_width": 7.1,
+              "source_url": "https://www.toyota.com.vn/vios"
+            },
+            {
+              "id": "honda-city",
+              "label": "Honda City",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.748,
+              "mirror_width": 1.998,
+              "mirror_estimated": true,
+              "length": 4.589,
+              "turning_radius": 5.0,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.134,
+              "safe_water_depth": 0.134,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.3,
+              "tight_min": 2.2,
+              "three_point_width": 7.16,
+              "source_url": "https://www.honda.com.vn/o-to/chi-tiet/2"
+            },
+            {
+              "id": "hyundai-accent",
+              "label": "Hyundai Accent",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.765,
+              "mirror_width": 2.015,
+              "mirror_estimated": true,
+              "length": 4.535,
+              "turning_radius": 5.5,
+              "turning_radius_estimated": true,
+              "ground_clearance": 0.165,
+              "safe_water_depth": 0.165,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.31,
+              "tight_min": 2.21,
+              "three_point_width": 7.42,
+              "source_url": "https://hyundai.thanhcong.vn/all-new-accent?attr=thong-so"
+            },
+            {
+              "id": "mazda-mazda3",
+              "label": "Mazda Mazda3",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.795,
+              "mirror_width": 2.045,
+              "mirror_estimated": true,
+              "length": 4.66,
+              "turning_radius": 5.3,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.145,
+              "safe_water_depth": 0.145,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.34,
+              "tight_min": 2.25,
+              "three_point_width": 7.39,
+              "source_url": "https://mazdamotors.vn/media/bv5f24gc/e-brochure-mazda3-sedan-230625.pdf"
+            },
+            {
+              "id": "toyota-camry",
+              "label": "Toyota Camry",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "HEV",
+              "body_width": 1.84,
+              "mirror_width": 2.09,
+              "mirror_estimated": true,
+              "length": 4.92,
+              "turning_radius": 5.8,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.14,
+              "safe_water_depth": 0.14,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.39,
+              "tight_min": 2.29,
+              "three_point_width": 7.9,
+              "source_url": "https://www.toyota.com.vn/camry"
+            },
+            {
+              "id": "mercedes-benz-c-class",
+              "label": "Mercedes-Benz C-Class",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE",
+              "body_width": 1.82,
+              "mirror_width": 2.033,
+              "mirror_estimated": false,
+              "length": 4.751,
+              "turning_radius": 6.2,
+              "turning_radius_estimated": true,
+              "ground_clearance": 0.15,
+              "safe_water_depth": 0.15,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.33,
+              "tight_min": 2.23,
+              "three_point_width": 8.04,
+              "source_url": "https://www.mercedes-benz.com.vn/content/dam/vietnam/passengercars/price-brochure/sedan/C-Class%20Brochure.pdf"
+            },
+            {
+              "id": "vinfast-vf-5",
+              "label": "VinFast VF 5",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "EV",
+              "body_width": 1.723,
+              "mirror_width": 1.973,
+              "mirror_estimated": true,
+              "length": 3.967,
+              "turning_radius": 5.25,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.16,
+              "safe_water_depth": 0.16,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.27,
+              "tight_min": 2.17,
+              "three_point_width": 6.88,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF5&year=2026&lv1=1276822&lv2=1276869"
+            },
+            {
+              "id": "toyota-yaris-cross",
+              "label": "Toyota Yaris Cross",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE/HEV",
+              "body_width": 1.77,
+              "mirror_width": 2.02,
+              "mirror_estimated": true,
+              "length": 4.31,
+              "turning_radius": 5.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.21,
+              "safe_water_depth": 0.21,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.32,
+              "tight_min": 2.22,
+              "three_point_width": 7.06,
+              "source_url": "https://www.toyota.com.vn/yaris-cross"
+            },
+            {
+              "id": "hyundai-creta",
+              "label": "Hyundai Creta",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.79,
+              "mirror_width": 2.04,
+              "mirror_estimated": true,
+              "length": 4.33,
+              "turning_radius": 5.4,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.2,
+              "safe_water_depth": 0.2,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.34,
+              "tight_min": 2.24,
+              "three_point_width": 7.24,
+              "source_url": "https://hyundai.thanhcong.vn/san-pham/new-creta?attr=thong-so"
+            },
+            {
+              "id": "kia-seltos",
+              "label": "Kia Seltos",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.8,
+              "mirror_width": 2.05,
+              "mirror_estimated": true,
+              "length": 4.365,
+              "turning_radius": 5.3,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.19,
+              "safe_water_depth": 0.19,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.35,
+              "tight_min": 2.25,
+              "three_point_width": 7.17,
+              "source_url": "https://kiavietnam.com.vn/storage/thang-10/e-brochure-new-seltos.pdf"
+            },
+            {
+              "id": "mitsubishi-xforce",
+              "label": "Mitsubishi Xforce",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.81,
+              "mirror_width": 2.06,
+              "mirror_estimated": true,
+              "length": 4.39,
+              "turning_radius": 5.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.222,
+              "safe_water_depth": 0.222,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.36,
+              "tight_min": 2.26,
+              "three_point_width": 7.1,
+              "source_url": "https://www.mitsubishi-motors.com.vn/new-xforce"
+            },
+            {
+              "id": "vinfast-vf-6",
+              "label": "VinFast VF 6",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "EV",
+              "body_width": 1.834,
+              "mirror_width": 2.084,
+              "mirror_estimated": true,
+              "length": 4.241,
+              "turning_radius": 5.35,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.17,
+              "safe_water_depth": 0.17,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.38,
+              "tight_min": 2.28,
+              "three_point_width": 7.07,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF6&year=2026&lv1=1280996&lv2=1281048"
+            },
+            {
+              "id": "toyota-corolla-cross",
+              "label": "Toyota Corolla Cross",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE/HEV",
+              "body_width": 1.825,
+              "mirror_width": 2.075,
+              "mirror_estimated": true,
+              "length": 4.46,
+              "turning_radius": 5.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.161,
+              "safe_water_depth": 0.161,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.38,
+              "tight_min": 2.28,
+              "three_point_width": 7.17,
+              "source_url": "https://www.toyota.com.vn/corolla-cross"
+            },
+            {
+              "id": "mazda-cx-5",
+              "label": "Mazda CX-5",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.845,
+              "mirror_width": 2.095,
+              "mirror_estimated": true,
+              "length": 4.59,
+              "turning_radius": 5.5,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.2,
+              "safe_water_depth": 0.2,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.39,
+              "tight_min": 2.29,
+              "three_point_width": 7.5,
+              "source_url": "https://mazdamotors.vn/media/nyonsmri/e-brochure-mazda-cx-5-230625.pdf"
+            },
+            {
+              "id": "vinfast-vf-7",
+              "label": "VinFast VF 7",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "EV",
+              "body_width": 1.893,
+              "mirror_width": 2.143,
+              "mirror_estimated": true,
+              "length": 4.55,
+              "turning_radius": 5.6,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.184,
+              "safe_water_depth": 0.184,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.44,
+              "tight_min": 2.34,
+              "three_point_width": 7.48,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF7&year=2026&lv1=1282214&lv2=1282266"
+            },
+            {
+              "id": "ford-territory",
+              "label": "Ford Territory",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE",
+              "body_width": 1.935,
+              "mirror_width": 2.185,
+              "mirror_estimated": true,
+              "length": 4.685,
+              "turning_radius": 6.2,
+              "turning_radius_estimated": true,
+              "ground_clearance": 0.19,
+              "safe_water_depth": 0.19,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.49,
+              "tight_min": 2.39,
+              "three_point_width": 8.07,
+              "source_url": "https://tuoitre.vn/chi-tiet-ford-territory-2025-ra-mat-viet-nam-gia-tu-762-trieu-thay-doi-tien-nghi-dau-mazda-cx-5-20250816001731191.htm"
+            },
+            {
+              "id": "vinfast-vf-8-the-all-new-2026",
+              "label": "VinFast VF 8 The All New (2026)",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "EV",
+              "body_width": 1.872,
+              "mirror_width": 2.123,
+              "mirror_estimated": false,
+              "length": 4.701,
+              "turning_radius": 5.34,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.17,
+              "safe_water_depth": 0.17,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.42,
+              "tight_min": 2.32,
+              "three_point_width": 7.41,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF8NP&year=2026&lv1=1313352&lv2=1313404"
+            },
+            {
+              "id": "vinfast-vf-8-2022-2025-generation",
+              "label": "VinFast VF 8 (2022-2025 generation)",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "EV",
+              "body_width": 1.934,
+              "mirror_width": 2.184,
+              "mirror_estimated": true,
+              "length": 4.75,
+              "turning_radius": 6.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.175,
+              "safe_water_depth": 0.175,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.48,
+              "tight_min": 2.38,
+              "three_point_width": 8.03,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF8&year=2026&lv1=1266329&lv2=1266381"
+            },
+            {
+              "id": "toyota-fortuner",
+              "label": "Toyota Fortuner",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE",
+              "body_width": 1.855,
+              "mirror_width": 2.105,
+              "mirror_estimated": true,
+              "length": 4.795,
+              "turning_radius": 5.8,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.279,
+              "safe_water_depth": 0.35,
+              "safe_water_basis": "50% độ lội nước công bố (700 mm, nước tĩnh, 7 km/h)",
+              "members": [],
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "three_point_width": 7.84,
+              "source_url": "https://www.toyota.com.vn/fortuner"
+            },
+            {
+              "id": "hyundai-santa-fe",
+              "label": "Hyundai Santa Fe",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE/HEV",
+              "body_width": 1.9,
+              "mirror_width": 2.15,
+              "mirror_estimated": true,
+              "length": 4.83,
+              "turning_radius": 5.78,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.177,
+              "safe_water_depth": 0.177,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.45,
+              "tight_min": 2.35,
+              "three_point_width": 7.84,
+              "source_url": "https://hyundai.thanhcong.vn/san-pham/santa-fe?attr=thong-so"
+            },
+            {
+              "id": "ford-everest",
+              "label": "Ford Everest",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE",
+              "body_width": 1.923,
+              "mirror_width": 2.207,
+              "mirror_estimated": false,
+              "length": 4.914,
+              "turning_radius": 5.9,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.2,
+              "safe_water_depth": 0.4,
+              "safe_water_basis": "50% độ lội nước công bố (800 mm, nước tĩnh, 7 km/h)",
+              "members": [],
+              "fits_min": 3.51,
+              "tight_min": 2.41,
+              "three_point_width": 7.98,
+              "source_url": "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-everest-2026-active-2-0-at-4x2-1234"
+            },
+            {
+              "id": "vinfast-vf-9",
+              "label": "VinFast VF 9",
+              "kind": "model",
+              "size_class": "L",
+              "powertrain": "EV",
+              "body_width": 2.065,
+              "mirror_width": 2.254,
+              "mirror_estimated": false,
+              "length": 5.119,
+              "turning_radius": 7.33,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.175,
+              "safe_water_depth": 0.175,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.55,
+              "tight_min": 2.45,
+              "three_point_width": 9.07,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF9&year=2026&lv1=1312174&lv2=1312400"
+            },
+            {
+              "id": "mitsubishi-xpander",
+              "label": "Mitsubishi Xpander",
+              "kind": "model",
+              "size_class": "S",
+              "powertrain": "ICE",
+              "body_width": 1.75,
+              "mirror_width": 2.0,
+              "mirror_estimated": true,
+              "length": 4.595,
+              "turning_radius": 5.2,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.225,
+              "safe_water_depth": 0.225,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.3,
+              "tight_min": 2.2,
+              "three_point_width": 7.22,
+              "source_url": "https://www.mitsubishi-motors.com.vn/newxpander"
+            },
+            {
+              "id": "toyota-innova-cross",
+              "label": "Toyota Innova Cross",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "ICE/HEV",
+              "body_width": 1.845,
+              "mirror_width": 2.095,
+              "mirror_estimated": true,
+              "length": 4.755,
+              "turning_radius": 5.67,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.17,
+              "safe_water_depth": 0.17,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.39,
+              "tight_min": 2.29,
+              "three_point_width": 7.65,
+              "source_url": "https://www.toyota.com.vn/innova-cross"
+            },
+            {
+              "id": "vinfast-limo-green",
+              "label": "VinFast Limo Green",
+              "kind": "model",
+              "size_class": "M",
+              "powertrain": "EV",
+              "body_width": 1.872,
+              "mirror_width": 2.123,
+              "mirror_estimated": false,
+              "length": 4.74,
+              "turning_radius": 5.34,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.18,
+              "safe_water_depth": 0.18,
+              "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.42,
+              "tight_min": 2.32,
+              "three_point_width": 7.45,
+              "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=Limo%20Green&year=2026&lv1=1327954&lv2=1327999"
+            },
+            {
+              "id": "kia-carnival",
+              "label": "Kia Carnival",
+              "kind": "model",
+              "size_class": "L",
+              "powertrain": "ICE",
+              "body_width": 2.01,
+              "mirror_width": 2.26,
+              "mirror_estimated": true,
+              "length": 5.155,
+              "turning_radius": 5.8,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.172,
+              "safe_water_depth": 0.172,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.56,
+              "tight_min": 2.46,
+              "three_point_width": 8.03,
+              "source_url": "https://kiavietnam.com.vn/storage/e-brochure/e-brochure-new-carnival-hybrid-v8-2-1.pdf"
+            },
+            {
+              "id": "ford-ranger",
+              "label": "Ford Ranger",
+              "kind": "model",
+              "size_class": "L",
+              "powertrain": "ICE",
+              "body_width": 1.918,
+              "mirror_width": 2.208,
+              "mirror_estimated": false,
+              "length": 5.362,
+              "turning_radius": 6.35,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.235,
+              "safe_water_depth": 0.4,
+              "safe_water_basis": "50% độ lội nước công bố (800 mm, nước tĩnh, 7 km/h)",
+              "members": [],
+              "fits_min": 3.51,
+              "tight_min": 2.41,
+              "three_point_width": 8.49,
+              "source_url": "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-ranger-2026-wildtrak-2-0-4x4-at-1294"
+            },
+            {
+              "id": "hyundai-solati",
+              "label": "Hyundai Solati",
+              "kind": "model",
+              "size_class": "XL",
+              "powertrain": "ICE",
+              "body_width": 2.038,
+              "mirror_width": 2.288,
+              "mirror_estimated": true,
+              "length": 6.195,
+              "turning_radius": 6.3,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.18,
+              "safe_water_depth": 0.18,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.59,
+              "tight_min": 2.49,
+              "three_point_width": 8.97,
+              "source_url": "https://hyundai.thanhcong.vn/solati-2"
+            },
+            {
+              "id": "ford-transit",
+              "label": "Ford Transit",
+              "kind": "model",
+              "size_class": "XL",
+              "powertrain": "ICE",
+              "body_width": 2.068,
+              "mirror_width": 2.474,
+              "mirror_estimated": false,
+              "length": 5.998,
+              "turning_radius": 6.7,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.15,
+              "safe_water_depth": 0.15,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.77,
+              "tight_min": 2.67,
+              "three_point_width": 9.09,
+              "source_url": "https://www.binhtanford.com/so-sanh-cac-phien-ban-ford-transit-2025/"
+            },
+            {
+              "id": "hyundai-new-porter-h150",
+              "label": "Hyundai New Porter H150",
+              "kind": "model",
+              "size_class": "L",
+              "powertrain": "ICE",
+              "body_width": 1.74,
+              "mirror_width": 1.99,
+              "mirror_estimated": true,
+              "length": 5.12,
+              "turning_radius": 7.33,
+              "turning_radius_estimated": true,
+              "ground_clearance": 0.13,
+              "safe_water_depth": 0.13,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.29,
+              "tight_min": 2.19,
+              "three_point_width": 9.16,
+              "source_url": "https://hyundai.thanhcong.vn/new-porter-h150"
+            },
+            {
+              "id": "isuzu-qkr",
+              "label": "Isuzu QKR",
+              "kind": "model",
+              "size_class": "L",
+              "powertrain": "ICE",
+              "body_width": 1.86,
+              "mirror_width": 2.11,
+              "mirror_estimated": true,
+              "length": 5.165,
+              "turning_radius": 5.7,
+              "turning_radius_estimated": false,
+              "ground_clearance": 0.195,
+              "safe_water_depth": 0.195,
+              "safe_water_basis": "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm",
+              "members": [],
+              "fits_min": 3.41,
+              "tight_min": 2.31,
+              "three_point_width": 8.09,
+              "source_url": "https://isuzu-vietnam.com/xetai-vn/qkr-vn/xe-tai-isuzu-qkr-qlr77fe5b-cabin-sat-xi/"
+            }
+          ]
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "method": "tools/call",
+      "params": {
+        "name": "kiem_tra_xe_vao_hem",
+        "arguments": {
+          "lat": 10.792106,
+          "lon": 106.716661,
+          "way_id": 464839531,
+          "vehicle_id": "VF3"
+        }
+      }
+    },
+    "status": 200,
+    "content_type": "application/json",
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"way_id\": 464839531, \"vehicle\": {\"id\": \"vinfast-vf-3\", \"label\": \"VinFast VF 3\", \"kind\": \"model\", \"size_class\": \"XS\", \"powertrain\": \"EV\", \"body_width\": 1.679, \"mirror_width\": 1.748, \"mirror_estimated\": false, \"length\": 3.19, \"turning_radius\": 4.5, \"turning_radius_estimated\": false, \"ground_clearance\": 0.175, \"safe_water_depth\": 0.175, \"safe_water_basis\": \"Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm\", \"members\": [], \"fits_min\": 3.05, \"tight_min\": 1.95, \"three_point_width\": 5.85, \"source_url\": \"https://om.vinfastauto.com/vi_vn/detail?car=VF3&year=2026&lv1=1272213&lv2=1272256\"}, \"fit\": \"tight\", \"note\": null, \"width_range\": {\"lo\": 2.2, \"hi\": null, \"label\": \"Hẻm xe hơi\", \"top_tier\": \"Declared\", \"review\": false, \"evidence\": [{\"lo\": 1.5, \"hi\": 4.5, \"tier\": \"Inferred\", \"tier_vi\": \"Suy luận\", \"source\": \"OSM phân loại đường\", \"detail\": \"service=alley (1 ô tô hoặc 2 xe máy)\", \"observed_on\": \"\", \"url\": \"https://www.openstreetmap.org/way/464839531\", \"ai_feature\": null}, {\"lo\": 2.2, \"hi\": null, \"tier\": \"Declared\", \"tier_vi\": \"Tin rao / tự khai\", \"source\": \"Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)\", \"detail\": \"1 tin độc lập ước tính / 1 tin; đồng thuận 100%. Khoảng hợp các lời khai; bề rộng tin rao là giới hạn trên, không phải đo thông thủy. Chưa đo thực tế.\", \"observed_on\": \"2026-10-16\", \"url\": \"https://www.nhatot.com/132243131.htm\", \"ai_feature\": \"ai_listings\"}], \"overruled\": [{\"lo\": 1.5, \"hi\": 4.5, \"tier\": \"Inferred\", \"tier_vi\": \"Suy luận\", \"source\": \"OSM phân loại đường\", \"detail\": \"service=alley (1 ô tô hoặc 2 xe máy)\", \"observed_on\": \"\", \"url\": \"https://www.openstreetmap.org/way/464839531\", \"ai_feature\": null}], \"way_out_claims\": []}, \"evidence\": [{\"lo\": 1.5, \"hi\": 4.5, \"tier\": \"Inferred\", \"tier_vi\": \"Suy luận\", \"source\": \"OSM phân loại đường\", \"detail\": \"service=alley (1 ô tô hoặc 2 xe máy)\", \"observed_on\": \"\", \"url\": \"https://www.openstreetmap.org/way/464839531\", \"ai_feature\": null}, {\"lo\": 2.2, \"hi\": null, \"tier\": \"Declared\", \"tier_vi\": \"Tin rao / tự khai\", \"source\": \"Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)\", \"detail\": \"1 tin độc lập ước tính / 1 tin; đồng thuận 100%. Khoảng hợp các lời khai; bề rộng tin rao là giới hạn trên, không phải đo thông thủy. Chưa đo thực tế.\", \"observed_on\": \"2026-10-16\", \"url\": \"https://www.nhatot.com/132243131.htm\", \"ai_feature\": \"ai_listings\"}], \"scope\": \"Chỉ kiểm tra bề rộng đoạn hẻm; chưa kiểm tra toàn tuyến, đường ra, ngập hay luật dừng đỗ.\"}"
+          }
+        ],
+        "structuredContent": {
+          "way_id": 464839531,
+          "vehicle": {
+            "id": "vinfast-vf-3",
+            "label": "VinFast VF 3",
+            "kind": "model",
+            "size_class": "XS",
+            "powertrain": "EV",
+            "body_width": 1.679,
+            "mirror_width": 1.748,
+            "mirror_estimated": false,
+            "length": 3.19,
+            "turning_radius": 4.5,
+            "turning_radius_estimated": false,
+            "ground_clearance": 0.175,
+            "safe_water_depth": 0.175,
+            "safe_water_basis": "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm",
+            "members": [],
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "three_point_width": 5.85,
+            "source_url": "https://om.vinfastauto.com/vi_vn/detail?car=VF3&year=2026&lv1=1272213&lv2=1272256"
+          },
+          "fit": "tight",
+          "note": null,
+          "width_range": {
+            "lo": 2.2,
+            "hi": null,
+            "label": "Hẻm xe hơi",
+            "top_tier": "Declared",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 1.5,
+                "hi": 4.5,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/464839531",
+                "ai_feature": null
+              },
+              {
+                "lo": 2.2,
+                "hi": null,
+                "tier": "Declared",
+                "tier_vi": "Tin rao / tự khai",
+                "source": "Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)",
+                "detail": "1 tin độc lập ước tính / 1 tin; đồng thuận 100%. Khoảng hợp các lời khai; bề rộng tin rao là giới hạn trên, không phải đo thông thủy. Chưa đo thực tế.",
+                "observed_on": "2026-10-16",
+                "url": "https://www.nhatot.com/132243131.htm",
+                "ai_feature": "ai_listings"
+              }
+            ],
+            "overruled": [
+              {
+                "lo": 1.5,
+                "hi": 4.5,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/464839531",
+                "ai_feature": null
+              }
+            ],
+            "way_out_claims": []
+          },
+          "evidence": [
+            {
+              "lo": 1.5,
+              "hi": 4.5,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/464839531",
+              "ai_feature": null
+            },
+            {
+              "lo": 2.2,
+              "hi": null,
+              "tier": "Declared",
+              "tier_vi": "Tin rao / tự khai",
+              "source": "Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)",
+              "detail": "1 tin độc lập ước tính / 1 tin; đồng thuận 100%. Khoảng hợp các lời khai; bề rộng tin rao là giới hạn trên, không phải đo thông thủy. Chưa đo thực tế.",
+              "observed_on": "2026-10-16",
+              "url": "https://www.nhatot.com/132243131.htm",
+              "ai_feature": "ai_listings"
+            }
+          ],
+          "scope": "Chỉ kiểm tra bề rộng đoạn hẻm; chưa kiểm tra toàn tuyến, đường ra, ngập hay luật dừng đỗ."
+        },
+        "isError": false
+      }
+    }
+  }
+]

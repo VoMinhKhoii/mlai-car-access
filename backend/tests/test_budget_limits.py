@@ -27,6 +27,8 @@ class AiQuota(unittest.TestCase):
         self.posts: list[str] = []
         patches = [
             mock.patch.object(budget, "AI_USAGE_FILE", self.usage),
+            mock.patch.object(ai.agent_budget, "FILE", Path(self.tmp.name) / "gemini.json"),
+            mock.patch.object(ai.agent_budget, "STORE", Path(self.tmp.name)),
             mock.patch.object(ai, "provider", lambda: ("gemini", "test-model")),
             mock.patch.object(ai, "gemini_keys", lambda: ["key-one", "key-two"]),
         ]

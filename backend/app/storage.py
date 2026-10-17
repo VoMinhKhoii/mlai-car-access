@@ -75,3 +75,7 @@ class LRU:
     def clear(self) -> None:
         with self._lock:
             self._data.clear()
+
+    def pop(self, key, default=None):
+        with self._lock:
+            return self._data.pop(key, default)

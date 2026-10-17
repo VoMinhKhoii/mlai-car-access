@@ -1,0 +1,175 @@
+{
+  "config": {
+    "status": 200,
+    "seconds": 4.64,
+    "operator_available": true,
+    "synthetic_demo_data": true,
+    "flags": {
+      "parcel_deep_scan": true,
+      "footprint_widths": false,
+      "building_gaps": false,
+      "live_hydro": false
+    }
+  },
+  "search_hutech": {
+    "status": 200,
+    "seconds": 0.009,
+    "results": 6
+  },
+  "plan_113_4": {
+    "status": 200,
+    "verdict": {
+      "code": "unverified",
+      "headline": "Chưa đủ bằng chứng để khẳng định",
+      "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m",
+      "estimate": {
+        "answer": "fits",
+        "confidence": "low",
+        "basis": "suy luận ≈3,50 m (Đường Võ Duy Ninh; OSM 193085738) · 0/1 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 1,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 3.5,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 193085738,
+          "way_name": "Đường Võ Duy Ninh",
+          "osm_url": "https://www.openstreetmap.org/way/193085738"
+        }
+      }
+    },
+    "stops": 3,
+    "walks_m": [
+      39,
+      46,
+      98
+    ]
+  },
+  "camera_registry": {
+    "status": 200,
+    "seconds": 0.014,
+    "cameras": 796
+  },
+  "camera_still": {
+    "status": 404,
+    "seconds": 0.002,
+    "expected": "404 in cached-only mode with no cached still"
+  },
+  "camera_read_guest": {
+    "status": 401,
+    "state": null
+  },
+  "operator_login": {
+    "status": 200
+  },
+  "camera_read_operator": {
+    "status": 202,
+    "result": {
+      "state": "running",
+      "reading": null,
+      "job": {
+        "id": "f9eaadb086c1",
+        "state": "running",
+        "cameras": [
+          "662b86c41afb9c00172dd31c"
+        ],
+        "created_at": "2026-10-17T10:16:37+07:00",
+        "expires_at": "2026-10-17T10:21:37+07:00",
+        "finished_at": null,
+        "error": null,
+        "readings": [],
+        "unread": [
+          "662b86c41afb9c00172dd31c"
+        ]
+      }
+    }
+  },
+  "corridor": {
+    "status": 200,
+    "available": false,
+    "reason": "Cần GOONG_API_KEY để tìm tuyến đường lớn"
+  },
+  "maneuver": {
+    "status": 200,
+    "seconds": 0.004,
+    "moves": 8,
+    "poses": 120,
+    "frame": "corridor"
+  },
+  "h160_fixture": {
+    "status": 200,
+    "synthetic": true,
+    "stops": 3,
+    "verdict": {
+      "code": "unverified",
+      "headline": "Chưa đủ bằng chứng để khẳng định",
+      "detail": "Gợi ý: đỗ tại Trước cửa nhà, đi bộ 0 m",
+      "estimate": {
+        "answer": "fits",
+        "confidence": "low",
+        "basis": "thiếu nguồn ≈6,20 m (Hẻm 160 Ngô Tất Tố; OSM 544982029) · 0/1 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · có thể ngập · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 1,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 6.2,
+          "tier": "Synthetic",
+          "source": "Synthetic demo fixture",
+          "sampled": false,
+          "sample_count": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 544982029,
+          "way_name": "Hẻm 160 Ngô Tất Tố",
+          "osm_url": "https://www.openstreetmap.org/way/544982029"
+        }
+      }
+    }
+  },
+  "alleyai": {
+    "status": 200,
+    "events": [
+      "tool_call",
+      "tool_result",
+      "tool_call",
+      "tool_result",
+      "ui",
+      "answer",
+      "done"
+    ],
+    "answer": "Chưa đủ bằng chứng để khẳng định\nGợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m\nVì sao: suy luận ≈3,50 m (Đường Võ Duy Ninh; OSM 193085738) · 0/1 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý.\nĐường Võ Duy Ninh; đi bộ 39 m; nguồn: OSM phân loại đường."
+  },
+  "tide": {
+    "status": 200,
+    "seconds": 0.003,
+    "points": 97,
+    "kinds": [
+      "bulletin"
+    ],
+    "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ"
+  },
+  "queue": {
+    "status": 200,
+    "seconds": 0.792,
+    "available": true,
+    "items": 3
+  },
+  "paid_calls": 0,
+  "paid_ledger_exists": false,
+  "paid_spent_usd": 0
+}

@@ -1,130 +1,159 @@
-/* Primitives. Class names are the component API: .btn, .icon-btn, .chip, .field, .card, .seg, .tag, .pill, .tabs, .popover. */
+/* Primitives. Class names are the component API: .glass, .card, .btn, .icon-btn, .chip, .field, .seg, .tag, .dot, .tabs, .popover. */
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }
 body {
-  font-family: var(--font-ui); font-size: var(--fs-14); line-height: 1.5; color: var(--text);
+  font-family: var(--font-ui); font-size: var(--fs-15); line-height: 1.4; color: var(--text);
   background: var(--n-100); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  font-feature-settings: "tnum" 1, "cv11" 1;
+  font-feature-settings: "tnum" 1;
 }
-button, input, select { font: inherit; color: inherit; }
-button { cursor: pointer; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 a { color: var(--brand-600); text-underline-offset: 2px; }
 h1, h2, h3, h4, p { margin: 0; }
-:focus-visible { outline: 2px solid var(--route); outline-offset: 2px; border-radius: var(--r-xs); }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--r-xs); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.display { font-family: var(--font-display); font-optical-sizing: auto; letter-spacing: -0.01em; }
-.muted { color: var(--text-2); }
-.faint { color: var(--text-3); }
+.display { font-family: var(--font-display); letter-spacing: -0.02em; }
+.muted { color: var(--text); }
+.faint { color: var(--text-3); font-size: var(--fs-12); }
 .num { font-variant-numeric: tabular-nums; }
 
-/* card */
-.card { background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--e-2); }
+/* ---------- Liquid Glass: the control layer only (island, dock, rail, inspector) ----------
+   Content inside a glass surface is never boxed in more glass; it sits on space and one tone step. */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  box-shadow: var(--glass-rim), var(--glass-lift); /* taste-skill-ignore: Liquid Glass control layer floats over the live map (chosen direction) */
+}
+/* Chromium: liquidGlass.ts adds a per-surface displacement filter, so the map bends at the rim. */
+.lg-refract .glass { backdrop-filter: var(--lg-refract,) blur(var(--glass-blur)) saturate(185%) brightness(1.03); }
+.glass.clear { --glass-blur: 4px; --glass-bg: rgb(255 255 255 / 0.52); }
 
-/* buttons */
+/* dense material: menus, dialogs and lists that open over glass */
+.card {
+  background: var(--glass-dense);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-radius: var(--r-lg); box-shadow: var(--glass-rim), var(--e-3); /* taste-skill-ignore: menus and dialogs are real overlays */
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .lg-refract .glass, .card { background: var(--surface-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  .glass, .card { background: var(--surface-solid); box-shadow: inset 0 0 0 1px var(--text-2), var(--e-2); } /* taste-skill-ignore: high-contrast mode outline */
+}
+
+/* buttons: capsules, because they are controls */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
   min-height: 40px; padding: 0 var(--s-4); border-radius: var(--r-pill); border: 0;
-  font-weight: 600; font-size: var(--fs-14); transition: background var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  font-weight: 600; font-size: var(--fs-15);
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.btn:active { transform: translateY(1px); }
+.btn:active { transform: scale(.97); }
 .btn-primary { background: var(--brand); color: var(--on-dark); }
 .btn-primary:hover { background: var(--brand-600); }
-.btn-tonal { background: var(--brand-tint); color: var(--brand); }
-.btn-tonal:hover { background: #d4e8e6; }
+.btn-tonal { background: var(--brand-tint); color: var(--brand-600); }
+.btn-tonal:hover { background: #d8e7fa; }
 .btn-ghost { background: transparent; color: var(--text); }
 .btn-ghost:hover { background: var(--surface-sunk); }
-.btn-outline { background: var(--surface); color: var(--text); box-shadow: inset 0 0 0 1px var(--outline-strong); }
-.btn-outline:hover { background: var(--surface-sunk); }
-.btn-sm { min-height: 32px; padding: 0 var(--s-3); font-size: var(--fs-12); }
+.btn-outline { background: var(--surface-sunk); color: var(--text); }
+.btn-outline:hover { background: rgb(0 0 0 / .08); }
+.btn-sm { min-height: 34px; padding: 0 var(--s-3); font-size: var(--fs-12); }
 .btn[disabled] { opacity: .45; cursor: default; }
+.btn[disabled]:active { transform: none; }
 
 .icon-btn {
   display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-pill);
-  border: 0; background: transparent; color: var(--text-2); transition: background var(--t-fast), color var(--t-fast);
+  border: 0; background: transparent; color: var(--text);
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.icon-btn:hover { background: var(--surface-sunk); color: var(--text); }
-.icon-btn.raised { background: var(--surface); box-shadow: var(--e-2); color: var(--text); width: var(--tap); height: var(--tap); }
-.icon-btn.raised:hover { background: var(--n-25); }
-.icon-btn.on { background: var(--brand-tint); color: var(--brand); }
+.icon-btn:hover { background: var(--surface-sunk); }
+.icon-btn:active { transform: scale(.94); }
+.icon-btn.raised { width: var(--tap); height: var(--tap); }
+.icon-btn.on { background: var(--brand-tint); color: var(--brand-600); }
 
-/* chips (settings summary, filters) */
+/* chips: the trip's settings, each a control */
 .chip {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px 0 10px;
-  border-radius: var(--r-pill); border: 1px solid var(--outline); background: var(--surface);
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px;
+  border-radius: var(--r-pill); border: 0; background: var(--surface-sunk);
   font-size: var(--fs-12); font-weight: 600; color: var(--text); white-space: nowrap;
-  transition: border-color var(--t-fast), background var(--t-fast);
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.chip:hover { border-color: var(--outline-strong); background: var(--n-25); }
-.chip[aria-expanded="true"] { border-color: var(--brand); background: var(--brand-tint); color: var(--brand); }
-.chip svg { color: var(--text-2); flex: none; }
-.chip[aria-expanded="true"] svg { color: var(--brand); }
+.chip:hover { background: rgb(0 0 0 / .08); }
+.chip:active { transform: scale(.97); }
+.chip[aria-expanded="true"] { background: var(--text); color: var(--n-0); }
+.chip svg { flex: none; }
 
 /* fields */
 .field {
   display: flex; align-items: center; gap: var(--s-2); height: 44px; padding: 0 var(--s-3);
-  border-radius: var(--r-md); background: var(--surface-sunk); border: 1px solid transparent;
-  transition: border-color var(--t-fast), background var(--t-fast);
+  border-radius: var(--r-md); background: var(--surface-sunk);
+  transition: background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); /* taste-skill-ignore: transition list, not a shadow */
 }
-.field:focus-within { background: var(--surface); border-color: var(--route); box-shadow: 0 0 0 3px rgb(31 94 255 / .12); }
-.field input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: var(--fs-15); }
+.field:focus-within { background: var(--n-0); box-shadow: 0 0 0 2px var(--brand); } /* taste-skill-ignore: focus ring on a form field */
+.field input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: var(--fs-17); }
 .field input::placeholder { color: var(--text-3); }
 select.select, input.input {
   height: 40px; padding: 0 var(--s-3); border-radius: var(--r-sm); border: 1px solid var(--outline-strong);
-  background: var(--surface); font-size: var(--fs-14); width: 100%;
+  background: var(--n-0); font-size: var(--fs-15); width: 100%;
 }
 
 /* segmented control */
-.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 3px; border-radius: var(--r-pill); background: var(--surface-sunk); }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 2px; border-radius: var(--r-pill); background: var(--surface-sunk); }
 .seg button {
-  min-height: 34px; border: 0; border-radius: var(--r-pill); background: transparent; color: var(--text-2);
-  font-size: var(--fs-12); font-weight: 600; padding: 0 var(--s-3); transition: background var(--t-fast), color var(--t-fast);
+  min-height: 32px; border: 0; border-radius: var(--r-pill); background: transparent; color: var(--text);
+  font-size: var(--fs-12); font-weight: 600; padding: 0 var(--s-3); transition: background var(--t-fast) var(--ease);
 }
-.seg button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: var(--e-1); }
+.seg button[aria-pressed="true"] { background: var(--n-0); box-shadow: 0 1px 3px rgb(0 0 0 / .12); } /* taste-skill-ignore: selected segment of a segmented control */
 
-/* tags: small status labels, always text + colour */
+/* status: a coloured mark plus a word, never a capsule */
 .tag {
-  display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 8px; border-radius: var(--r-pill);
-  font-size: var(--fs-11); font-weight: 600; white-space: nowrap; background: var(--surface-sunk); color: var(--text-2);
+  display: inline-flex; align-items: center; gap: 6px; min-height: 22px; padding: 0 6px; border-radius: var(--r-xs);
+  font-size: var(--fs-12); font-weight: 600; white-space: nowrap; background: var(--surface-sunk); color: var(--text);
 }
-.tag svg { flex: none; }
-.tag.ok { background: var(--fit-fits-tint); color: #0f6b41; }
-.tag.warn { background: var(--fit-tight-tint); color: #8a5a00; }
-.tag.bad { background: var(--fit-no-tint); color: #a42424; }
-.tag.muted { background: var(--fit-unknown-tint); color: var(--n-600); }
-.tag.water { background: var(--flood-tint); color: #1e3a9a; }
-.tag.brand { background: var(--brand-tint); color: var(--brand); }
-
-/* pills floating on the map */
-.pill {
-  display: inline-flex; align-items: center; gap: var(--s-2); height: 36px; padding: 0 14px; border-radius: var(--r-pill);
-  background: var(--surface); box-shadow: var(--e-2); font-size: var(--fs-12); font-weight: 600;
-}
+.tag svg { display: none; }
+.tag.ok { background: var(--fit-fits-tint); color: #0c5c36; }
+.tag.warn { background: var(--fit-tight-tint); color: #6e4700; }
+.tag.bad { background: var(--fit-no-tint); color: #8f1f1f; }
+.tag.muted { background: var(--fit-unknown-tint); color: var(--text); }
+.tag.water { background: var(--flood-tint); color: #1a3486; }
+.tag.brand { background: var(--brand-tint); color: var(--brand-600); }
+.dot { display: inline-flex; align-items: center; gap: 6px; }
+.dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--fit-unknown); flex: none; }
+.dot.t-ok::before, .t-ok > .dot::before { background: var(--fit-fits); }
+.dot.t-warn::before, .t-warn > .dot::before { background: var(--fit-tight); }
+.dot.t-bad::before, .t-bad > .dot::before { background: var(--fit-no); }
+.dot.t-water::before, .t-water > .dot::before, .dot.t-brand::before, .t-brand > .dot::before { background: var(--flood-risky); }
+.dot.t-muted::before, .t-muted > .dot::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--fit-unknown); } /* taste-skill-ignore: hollow dot means unknown status */
 
 /* tabs */
-.tabs { display: flex; gap: var(--s-1); border-bottom: 1px solid var(--outline); }
+.tabs { display: flex; gap: var(--s-1); }
 .tabs button {
-  border: 0; background: none; padding: 10px 10px 9px; font-size: var(--fs-12); font-weight: 600; color: var(--text-2);
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  border: 0; background: none; min-height: 36px; padding: 0 12px; border-radius: var(--r-pill);
+  font-size: var(--fs-12); font-weight: 600; color: var(--text);
 }
-.tabs button[aria-selected="true"] { color: var(--brand); border-color: var(--brand); }
+.tabs button[aria-selected="true"] { background: var(--text); color: var(--n-0); }
 
-/* popover */
+/* popover: dense material over glass */
 .popover {
-  position: absolute; z-index: 30; min-width: 260px; padding: var(--s-3); background: var(--surface);
-  border-radius: var(--r-md); box-shadow: var(--e-3); animation: pop var(--t-med) var(--ease);
+  position: absolute; z-index: 30; min-width: 260px; padding: var(--s-3);
+  background: var(--glass-dense); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+  border-radius: var(--r-lg); box-shadow: var(--glass-rim), var(--e-3); /* taste-skill-ignore: menus and dialogs are real overlays */
+  transform-origin: top right; animation: pop var(--t-fast) var(--ease);
 }
-@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
 
-/* skeleton */
-.skel { border-radius: var(--r-xs); background: linear-gradient(90deg, var(--n-100), var(--n-50), var(--n-100)); background-size: 200% 100%; animation: skel 1.2s linear infinite; }
-@keyframes skel { to { background-position: -200% 0; } }
+/* skeleton: still blocks */
+.skel { border-radius: var(--r-xs); background: var(--surface-sunk); }
 
 /* progress */
-.bar { height: 3px; border-radius: 3px; background: var(--n-100); overflow: hidden; }
-.bar > i { display: block; height: 100%; background: var(--route); border-radius: 3px; transition: width var(--t-med) var(--ease); }
+.bar { height: 3px; border-radius: 3px; background: var(--surface-sunk); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--brand); border-radius: 3px; transition: width var(--t-med) var(--ease); }
 .spin { animation: spin 900ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+  .spin { animation: spin 900ms linear infinite !important; }
 }

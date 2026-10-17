@@ -88,3 +88,6 @@ CAMERA_STALE_MIN = 10
 # store/camera_readings.jsonl).
 TRAFFIC_FACTOR = {"thong_thoang": 1.0, "dong": 1.3, "un_u": 2.0, "ket_cung": 4.0}
 TRAFFIC_QUEUE_MIN = {"un_u": 3, "ket_cung": 10}
+
+# Read-only local verification: refuse cache misses rather than contacting upstream services.
+CACHED_ONLY = os.environ.get("NGONGACH_CACHED_ONLY", "0") == "1"

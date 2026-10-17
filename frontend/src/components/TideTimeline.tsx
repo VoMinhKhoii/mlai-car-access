@@ -31,9 +31,10 @@ export function TideTimeline(props: Props) {
   return <TideChart {...props} a0={a0} departAt={departAt} />
 }
 
-function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, timingReason, timingApproximate, exitFloods, station, rain, onChange }: Props & { a0: number; departAt: number }) {
+function TideChart({ a0, departAt, leaveBeforeAt, orAfterAt, timingReason, timingApproximate, exitFloods, station, rain, onChange }: Props & { a0: number; departAt: number }) {
   const t0 = dayStart(a0)
   const [series, setSeries] = useState<{ t: number; v: number; kind: string }[]>([])
+  const [bulletin, setBulletin] = useState<{ bulletin: string; source_url: string; note: string } | null>(null)
   const [readings, setReadings] = useState<{ t: number; v: number }[]>([])
   const [latestReading, setLatestReading] = useState<{ t: number; v: number } | null>(null)
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'error'>('loading')
@@ -61,6 +62,7 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
       }))
       const latestAt = r.last_reading ? timestamp(r.last_reading.t) : null
       setLatestReading(latestAt != null && r.last_reading && Number.isFinite(r.last_reading.level_m) ? { t: latestAt, v: r.last_reading.level_m } : null)
+      setBulletin(r.bulletin ?? null)
       setLoadState('ready')
       setErr(r.model_err_m)
       setAlarms(Object.fromEntries(Object.entries(r.alarm_levels_m).filter(([, v]) => Number.isFinite(v))))
@@ -128,22 +130,21 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
   }
 
   return (
-    <section className="timeline card" aria-label="Mực nước triều và thời gian ở lại">
+    <section className="timeline" aria-label="Mực nước triều và thời gian ở lại">
       <header>
         <Waves size={15} />
         <b>Triều · {station.replace(/\s*\(.*\)/, '')}</b>
-        <span className="faint tl-hint">· kéo khung để đổi giờ</span>
-        <span className="tl-peak num">{peak ? <>Cao nhất có dữ liệu lúc ở: <b>{vn(peak.v, 2)} m</b> · {floodTimeLabel(new Date(peak.t).toISOString())}
-          {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · báo động 3: {vn(alarms.BD3, 1)} m</span>}</> : loadState === 'loading' ? 'Đang lấy dữ liệu triều' : 'Chưa có dữ liệu triều trong lúc ở'}</span>
+        <span className="tl-hint">Kéo để đổi giờ đến</span>
+        <span className="tl-peak num">{peak ? <>Đỉnh triều lúc bạn ở lại: <b>{vn(peak.v, 2)} m</b> · {floodTimeLabel(new Date(peak.t).toISOString())}
+          {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · báo động 3: {vn(alarms.BD3, 1)} m</span>}</> : loadState === 'loading' ? 'Đang lấy dữ liệu triều' : 'Chưa có số đo lúc bạn ở lại'}</span>
       </header>
-      <p className="tl-live num">Chuyến đi: {floodTimeLabel(arrive)} tới {floodTimeLabel(depart)}.</p>
-      <p className="tl-live num" role="status">
+      {(lastRead || loadState !== 'ready') && <p className="tl-live num" role="status">
         {loadState === 'loading' ? 'Đang lấy dữ liệu triều.'
           : loadState === 'error' ? 'Không tải được dữ liệu triều; chưa thể đối chiếu chuyến đi.'
           : lastRead
             ? <>Số đo trong khoảng: {floodTimeLabel(new Date(lastRead.t).toISOString())}, <b>{vn(lastRead.v, 2)} m</b>.</>
             : 'Không có số đo triều xác nhận trong khoảng chuyến đi.'}
-      </p>
+      </p>}
       <details className="why tl-details">
         <summary>Chi tiết dữ liệu triều</summary>
         <p className="tl-live num">
@@ -153,25 +154,20 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
           {wet && <>Mưa đo {hhmm(wet.s).slice(0, 2)}–{hhmm(wet.e).slice(0, 2)}h: <b>{vn(wet.mm, 1)} mm</b> ({wet.source.replace(/^đo tại /, '')}).</>}
           {!lastRead && !latestReading && loadState === 'ready' && 'Không có số đo triều cho thời gian này.'}
         </p>
+        {bulletin && series.some((p) => p.kind === 'bulletin') && <p className="tl-live" title={bulletin.note}><a href={bulletin.source_url} target="_blank" rel="noreferrer">{bulletin.bulletin}</a> · nội suy đỉnh/chân triều, không phải số đo tại đường.</p>}
         {timingReason && <p className="tl-live">{timingReason}</p>}
         {timingApproximate && <p className="tl-live">Khoảng di chuyển và giờ rời là ước lượng, không bảo đảm điều kiện thực tế liên tục.</p>}
       </details>
-      <div className="tl-track" ref={track} onClick={(e) => { if (e.target === e.currentTarget || (e.target as Element).tagName === 'svg' || (e.target as Element).tagName === 'path') change(snap(tAt(e.clientX))) }}>
+      <div className={`tl-track ${series.length ? '' : 'is-empty'}`} ref={track} onClick={(e) => { if (e.target === e.currentTarget || (e.target as Element).tagName === 'svg' || (e.target as Element).tagName === 'path') change(snap(tAt(e.clientX))) }}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-          <defs>
-            <linearGradient id="tl-water" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="var(--flood-risky)" stopOpacity=".32" />
-              <stop offset="1" stopColor="var(--flood-low)" stopOpacity=".05" />
-            </linearGradient>
-          </defs>
-          {area && <path d={area} fill="url(#tl-water)" />}
+          {area && <path d={area} fill="var(--flood-risky)" fillOpacity=".16" />}
           {bars.map((b) => (
             <rect key={b.s} x={pct(b.s)} width={Math.max(0.3, pct(b.e) - pct(b.s) - 0.25)} y={100 - Math.min(60, b.mm * 1.5)}
               height={Math.min(60, b.mm * 1.5)} className={`tl-rain ${b.measured ? 'measured' : ''}`}><title>{`${vn(b.mm, 1)} mm/h · ${b.source}`}</title></rect>
           ))}
           <path d={path(measured)} fill="none" stroke="var(--flood-risky)" strokeWidth="1.6" vectorEffect="non-scaling-stroke" />
           {model.length > 0 && <path d={path(model)} fill="none" stroke="var(--flood-risky)" strokeWidth="1.6" strokeDasharray="4 3" vectorEffect="non-scaling-stroke" />}
-          {Object.entries(alarms).map(([k, v]) => (
+          {series.length > 0 && Object.entries(alarms).map(([k, v]) => (
             <line key={k} x1="0" x2="100" y1={y(v)} y2={y(v)} stroke={k === 'BD3' ? 'var(--fit-no)' : 'var(--fit-tight)'} strokeOpacity=".55"
               strokeDasharray="3 3" strokeWidth="1" vectorEffect="non-scaling-stroke" />
           ))}

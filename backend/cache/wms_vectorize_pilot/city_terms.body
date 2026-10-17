@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "https://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html lang="vi" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2K9T9ENTE4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2K9T9ENTE4');
+  </script>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="csrf-token" content="4sWPhTlJAmt1IcyNq1FCyivsAVhHqjiDCKRXOgOQock=" />
+<meta name="Generator" content="VNPT" />
+<meta name="og:image" content="https://opendata.hochiminhcity.gov.vn/sites/default/files/ogimage.png" />
+<link rel="shortcut icon" href="https://opendata.hochiminhcity.gov.vn/sites/default/files/hcm_0_0.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript">    
+    $(document).ready(function() {
+      jQuery.ajaxSetup({
+        beforeSend: function(xhr) {
+
+          xhr.setRequestHeader('token', "asdfjhasdf-45dfgdf-234-546456jgf");
+        }
+      });
+    });</script>
+  <title>Điều khoản sử dụng | Cổng dữ liệu mở Thành Phố Hồ Chí Minh</title>
+  <link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/system/system.base.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/system/system.messages.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/system/system.theme.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.tabs.min.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/aggregator/aggregator.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/date/date_api/date.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/date/date_popup/themes/datepicker.1.7.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/dkan/dkan_data_story/css/dkan_data_story.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/dkan/dkan_harvest/modules/dkan_harvest_dashboard/css/dkan_harvest_dashboard.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/field/theme/field.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/field_hidden/field_hidden.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/node/node.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/panopoly-widgets.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/panopoly-widgets-spotlight.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/radix_layouts/radix_layouts.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/modules/user/user.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/views/css/views.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/sites/all/modules/ckeditor/css/ckeditor.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/ctools/css/ctools.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panels/css/panels.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panels/css/panels_admin.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/dkan/dkan_topics/theme/dkan_topics.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans::400,300,700" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/sites/default/files/font-icon-select-general-generated-1.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/dkan/dkan_dataset/css/dkan_dataset.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/nuboot_radix.style.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/dkan-flaticon.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/dkan-topics.css?suqz82" media="all" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/print.css?suqz82" media="print" />
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/sites/default/files/colorizer/nuboot_radix-0cb778aa.css" media="all" />
+
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/ie.css?suqz82" media="all" />
+<![endif]-->
+
+<!--[if IE 9]>
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/ie9.css?suqz82" media="all" />
+<![endif]-->
+
+<!--[if IE 8]>
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/css/ie8.css?suqz82" media="all" />
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_images/panopoly-images.css?suqz82" media="all" />
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+.panel-full-width .panel-top .tint, .panel-full-width .panel-hero .tint, .panel-dkan-front .panel-top .tint, .panel-dkan-front .panel-hero .tint{
+
+	position: absolute;
+	height: 900px;
+	width: 0%;
+	z-index: -1;
+	right: 0;
+
+}
+#gioi_thieu_hero{
+  background-color: rgba(29, 60, 81, 0.72);
+  padding:5px 20px 5px 20px;
+  text-align: justify;
+  text-justify: inter-word;
+  border-radius: 15px 50px;
+}
+@media only screen and (max-width: 600px) {
+    .panel-dkan-front .panel-hero .inside{
+      padding:0px;
+    }
+}
+
+#block-dkan-sitewide-dkan-sitewide-search-bar form {
+    display: block;
+    margin: 8px 0;
+    margin-top: 8px;
+    position: relative;
+    width: 100%;
+    margin-top: 55px;
+}
+
+#block-dkan-sitewide-dkan-sitewide-search-bar input.form-control{
+  /*min-width:230px;*/
+  height: 36px;
+  margin: 0;
+}
+
+#block-dkan-sitewide-dkan-sitewide-search-bar form {
+
+    display: block;
+    margin: 8px 0;
+    margin-top: 8px;
+    margin-top: 8px;
+    position: relative;
+    min-width: 230px;
+    margin-top: 55px;
+
+}
+
+.branding .logo {
+    margin: 0px 0px 0px 0;
+}
+#button_gioi_thieu_hero{
+  visibility:hidden;
+}
+.custom_panel_title>.pane-title{
+  	background-color: #006bb7;
+    padding: 16px 16px 20px;
+	position: relative;
+	text-align: center;
+	z-index: 2;
+    color:white;
+    font-weight:bold;
+    border-radius: 5px;
+}
+
+.custom_panel_title>.pane-title::after{
+ position: absolute;
+ content: '';
+ top: 100%;
+ left: 50%;
+ margin: 0 0 0 -25px;
+ border: 20px solid;
+    border-top-color: currentcolor;
+    border-top-width: 20px;
+    border-right-color: currentcolor;
+    border-right-width: 20px;
+    border-bottom-color: currentcolor;
+    border-bottom-width: 20px;
+    border-left-color: currentcolor;
+    border-left-width: 20px;
+border-width: 25px 21px;
+border-color: #006bb7 transparent transparent;
+}
+.copyright.pull-left {
+    float: none !important;
+    margin: 0 auto;
+ 
+}
+.copyright.pull-right {
+    float: none !important;
+    margin: 0 auto;
+  text-align: center;
+    
+}
+.internal2 {
+    padding-left: 20px;
+}
+.muc-luc{
+          margin-bottom: 10px;
+}
+body.maintenance-page {
+
+    background-color: #E8EAEA;
+    text-align: center;
+    font-family: 'Varela Round', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #313131;
+    font-size: 25px;
+
+
+}
+.illustration {
+    display: block;
+    max-height:480px;
+    margin: 0 auto;
+
+}
+
+.stickyGuide{
+  position: sticky;
+    top: 50px !important;
+}
+@media only screen and (min-width: 768px) {
+div.col-md-3.radix-layouts-sidebar.panel-panel{ 
+  position: sticky; 
+ 
+}
+}
+@media only screen and (min-width: 1380px) {
+    .footer{
+      position: absolute;
+    }
+}
+.footer{
+   /* position: absolute;*/
+   	bottom: 0;
+    left: 0;
+    right: 0;   
+      height: 40px;
+   
+        display: table;
+  width: 100%;
+  
+  padding: 20px 0px 0px 0px !important;
+  border-top: solid 2px #0090ea;
+}
+html {
+    position:relative;
+    min-height: 100%;
+}
+#main-wrapper{
+  padding-bottom: 12% !important;
+}
+.radix-layouts-sidebar .item-list ul li, .nav-simple li {
+    margin: 0;
+    line-height: 1.1666666666666667em;
+    padding: 0;
+    border-bottom: 1px dotted #CCC;
+    position: relative;
+    margin-bottom: 13px;
+}
+
+.panel-col-first-new{
+	padding-top: 200px;
+}
+.custom-search {
+    width: 50%;
+    margin: auto;
+    /* margin-bottom: 80px; */
+    /* margin-left: 245px; */
+    font-family: Open Sans;
+    /* font-style: italic; */
+    font-weight: normal;
+    line-height: 20px;
+    /* top: -40px; */
+    font-size: 16px;
+    opacity: 0.7;
+}
+.custom-search:hover{
+   opacity: 1;
+}
+.custom-search:active {
+   opacity: 1;
+} 
+
+.topic>.pane-title {
+    position: sticky;
+    bottom: 220px;
+    width: 30%;
+    height: 100%;
+    left: 40%;
+    background: #10559E;
+    border-radius: 40.3808px;
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 75px;
+    font-family: Open Sans;
+    font-style: normal;
+    text-align: center;
+}
+@media only screen and (max-width: 768px){
+.topic>.pane-title {
+    width: auto;
+    height: auto;
+    left: auto;
+  }
+
+}
+@media only screen and (max-width: 1000px){
+.custom-search {
+    width: 70%;
+ /*margin-left: 150px;*/
+}
+
+}
+#dkan-sitewide-dataset-search-form input.form-text, #dkan-sitewide-dataset-search-form--2 input.form-text {
+    padding-right: 30px;
+    font-size: 16px;
+    height: 43px;
+    border-radius: 24px;
+    border: 2px solid #dfe1e5;
+    /* padding-top: 22px; */
+    /* padding-bottom: 22px; */
+}
+#block-dkan-sitewide-dkan-sitewide-search-bar {
+	display: none;
+}
+.topic>.pane-content {
+        background-color: rgba(29, 60, 81, 0.72);
+  padding:5px 20px 5px 20px;
+  text-align: justify;
+  text-justify: inter-word;
+  border-radius: 15px 50px;
+
+
+
+}
+@media only screen and (min-width: 1218px){
+.topic>.pane-content {
+    width: 1150px;
+      background-color: rgba(29, 60, 81, 0.72);
+  padding:5px 20px 5px 20px;
+  text-align: justify;
+  text-justify: inter-word;
+  border-radius: 15px 50px;
+  }}
+
+ .panel-full-width .panel-top, .panel-full-width .panel-hero, .panel-dkan-front .panel-top, .panel-dkan-front .panel-hero {
+     /*background-position: 0% 0%; */
+      background-position: 50% 35%;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    margin-bottom: -25px;
+    overflow: hidden;
+  height:500px;
+}
+.custom_panel_title_02>.pane-content{
+    /*margin-left: 30px;
+    margin-right: 30px;*/
+}
+.custom_panel_title_02>.pane-title{
+  margin-bottom: 0px;
+  	background-color: white;
+	text-align: center;
+	z-index: 2;
+    color:#10559E;
+  font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 60px;
+      border-color: #87bbe0;
+  padding-bottom: 0px;
+  /*padding-top: 5px;*/
+  text-shadow: 1px 1px #2790ff;
+}
+.pane-dkan-topics-featured >.pane-title {    padding-top: 10px;}
+
+@media only screen and (min-width: 1522px){
+.custom_panel_title_02{
+
+  }
+
+}
+
+
+
+.copyright.pull-left {
+font-size:14px;
+}
+.copyright.pull-right{font-size:14px;}
+#dkan-sitewide-dataset-search-form button[type="submit"], #dkan-sitewide-dataset-search-form input[type="submit"], #dkan-sitewide-dataset-search-form--2 button[type="submit"], #dkan-sitewide-dataset-search-form--2 input[type="submit"] {top: 7px;}
+
+.xanhnhat{
+color:white;
+}
+.footer a {
+     color: white;
+}
+.view-dkan-topics-featured {
+    margin: 0.5em 0;
+}
+.custom-search .pane-content{
+    /* margin-top: 70px; */
+}
+.topic .pane-content .view-dkan-topics-featured .view-content{
+  font-size: 16px;
+}
+.view-dkan-topics-featured .topic-icon a::before {
+    font-size: 6em;
+    line-height: 1em;
+}
+
+.custom_panel_title_02 .pane-content .view-dkan-data-stories .view-content .views-row .views-field-title .field-content {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.custom_panel_title_02 .pane-content .view-dkan-data-stories .view-content .views-row .views-field-title .field-content:hover{
+text-decoration: underline;
+
+
+}
+.custom_panel_title_02 .pane-content .view-dkan-data-stories .view-content .views-row .views-field-body .field-content {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+.pull-right-custom{
+  float: none !important;
+}
+.footer-size{
+font-size:14px;
+}
+.footer-margin{
+
+    margin-bottom: 15px;
+
+}
+.link_web{
+color:black;
+font-size: 14px;
+}
+.title-stories{
+      overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+font-size:18px;
+      margin-top: 12px;
+    margin-bottom: 7px;
+      font-weight: bold;
+}
+
+.copyright-class p{
+  margin : 0;
+}
+
+.logo-vnpt{
+  margin: 10px 0 10px 0;
+  height: 50px;
+}
+.site-name-vnpt{
+  margin: 10px 0 0 0;
+  font-size: 18pt;
+  color: #177eea;
+}
+
+.ln-h-25
+{
+  line-height:25px !important;
+}
+.ml-0
+{
+  margin-left:0px !important;
+}
+.rss-custom-first{
+    margin-top: 35px;
+}
+.pane-data-stories .pane-title,.page-header{
+    /* font-size: 34px;
+   border-bottom: 1px solid #161a1d;*/
+      border-bottom: 0px;
+  font-size: 25px;
+  color: #10559e;
+    font-weight: bold;
+}
+.title-stories-primary .field-content {    
+  font-weight: bold;
+    font-size: 18px;
+}
+.custom_body_stories{
+overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.title-stories-primary .field-content a:hover,.title-stories a:hover{text-decoration: none;}
+.custom-date-update{  font-size: 14px;
+    color: gray;}
+.rss-custom-first .pane-content a:hover,.rss-custom .pane-content a:hover {text-decoration: none;}
+.custom-list-stories{
+    margin-top: -30px;
+}
+
+.btn-log-out a, .btn-register a{
+	color: white;
+  	text-decoration: none;
+}
+
+.btn-log-in a{
+  	text-decoration: none;
+}
+.custom-groups{text-align: center;}
+.custom-image-groups .field-content .topic-medium{    width: 165px;
+  height: 165px;}
+
+.contact-form .form-actions #edit-submit{
+background: #0A77BD;
+     border-color: #0A77BD;
+}
+
+.contact-form .form-actions #edit-submit:hover {
+background: #005489;
+  border-color: #005489;
+}
+.form-actions #edit-submit {
+    background: #0A77BD;
+    border-color: #0A77BD;
+}
+.form-actions #edit-submit:hover {
+background: #005489;
+  border-color: #005489;
+}
+.custom_contact .pane-title{
+  margin-top: 0px;
+}
+#aggregator  .feed-item  .feed-item-title{
+  font-weight: bold;
+    font-size: 18px;
+}
+#aggregator  .feed-item .feed-item-meta .feed-item-date{
+    font-size: 14px;
+    color: gray;
+    font-style: italic;
+}
+#aggregator  .feed-item .feed-item-body{
+#margin-top: -20px;
+}
+.custom_block_group{
+text-align: center;
+}
+.custom_title_group .pane-title{
+font-size: 25px;
+    color: #10559e;
+    font-weight: bold;
+      border-color: #87bbe0;
+    margin-top: 0px;
+      margin-bottom: 0px;
+}
+
+.custom_contact .pane-title{font-size: 25px;
+    color: #10559e;
+    font-weight: bold;}
+
+
+.title-stories-02{
+      overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+font-size:18px;
+      margin-top: 12px;
+    margin-bottom: 7px;
+   font-weight: bold;
+  
+}
+.custom_block_group .pane-content .view-group-block .view-content .views-row .views-field-body .field-content{text-align: justify;}
+
+#edit-date-filter-value-wrapper,
+#edit-date-filter-min-wrapper,
+#edit-date-filter-max-wrapper {
+	display: inline-block !important;
+}
+
+#edit-date-filter-datastore-min-datepicker-popup-0, #edit-date-filter-datastore-max-datepicker-popup-0{
+	width: 140px;
+}
+
+.views-widget .form-type-textfield .form-text{
+  width: 160px;
+}
+
+.views-widget .form-type-select .form-select{
+  width: 140px;
+}
+
+ul.action-links {
+    margin: 0px;
+}
+
+.page-admin .page-header {
+    margin: 0 0 5px;
+}
+/*]]>*/-->
+</style>
+  <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link href="/css/ie.css" media="screen" rel="stylesheet" type="text/css" />
+  <![endif]-->
+  <script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/jquery/1.10/jquery.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/misc/jquery.once.js?v=1.2"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/misc/drupal.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.tabs.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_images/panopoly-images.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/dkan/dkan_plugins/js/colorPicker.behavior.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/recline/js/jsondataview.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/recline/js/restdataview.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/sites/default/files/languages/vi_CebNnTD701fKfoJKtQy9oIMWzLseU4b_ZWTsjyZMiPg.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/libraries/jquery.imagesloaded/jquery.imagesloaded.min.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/sites/all/modules/google_analytics/googleanalytics.js?suqz82"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-143547096-1", {"cookieDomain":"auto","allowLinker":true});ga("require", "linker");ga("linker:autoLink", ["https:\/\/opendata.hochiminhcity.gov.vn"]);ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/contrib/radix/assets/js/radix.script.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/themes/nuboot_radix/assets/js/nuboot_radix.script.js?suqz82"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"nuboot_radix","theme_token":"xZyRHza_6df82RqKrjQGqwk1P9OSNxmM06obS1Xnw4I","js":{"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets-spotlight.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/custom_style_sticker_header.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/custom_link_web_footer.js":1,"profiles\/dkan\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"https:\/\/opendata.hochiminhcity.gov.vn\/profiles\/dkan\/themes\/nuboot_radix\/assets\/js\/bootstrap.min.js":1,"profiles\/dkan\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.core.min.js":1,"profiles\/dkan\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.widget.min.js":1,"profiles\/dkan\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.tabs.min.js":1,"profiles\/dkan\/modules\/contrib\/panopoly_images\/panopoly-images.js":1,"profiles\/dkan\/modules\/dkan\/dkan_plugins\/js\/colorPicker.behavior.js":1,"profiles\/dkan\/modules\/contrib\/recline\/js\/jsondataview.js":1,"profiles\/dkan\/modules\/contrib\/recline\/js\/restdataview.js":1,"public:\/\/languages\/vi_CebNnTD701fKfoJKtQy9oIMWzLseU4b_ZWTsjyZMiPg.js":1,"profiles\/dkan\/libraries\/jquery.imagesloaded\/jquery.imagesloaded.min.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"profiles\/dkan\/themes\/contrib\/radix\/assets\/js\/radix.script.js":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/js\/nuboot_radix.script.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.tabs.css":1,"modules\/aggregator\/aggregator.css":1,"profiles\/dkan\/modules\/contrib\/date\/date_api\/date.css":1,"profiles\/dkan\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"profiles\/dkan\/modules\/dkan\/dkan_data_story\/css\/dkan_data_story.css":1,"profiles\/dkan\/modules\/dkan\/dkan_harvest\/modules\/dkan_harvest_dashboard\/css\/dkan_harvest_dashboard.css":1,"modules\/field\/theme\/field.css":1,"profiles\/dkan\/modules\/contrib\/field_hidden\/field_hidden.css":1,"modules\/node\/node.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_widgets\/panopoly-widgets-spotlight.css":1,"profiles\/dkan\/modules\/contrib\/radix_layouts\/radix_layouts.css":1,"modules\/user\/user.css":1,"profiles\/dkan\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"profiles\/dkan\/modules\/contrib\/ctools\/css\/ctools.css":1,"profiles\/dkan\/modules\/contrib\/panels\/css\/panels.css":1,"profiles\/dkan\/modules\/contrib\/panels\/css\/panels_admin.css":1,"profiles\/dkan\/modules\/dkan\/dkan_topics\/theme\/dkan_topics.css":1,"\/\/fonts.googleapis.com\/css?family=Open+Sans::400,300,700":1,"public:\/\/font-icon-select-general-generated-1.css":1,"profiles\/dkan\/modules\/dkan\/dkan_dataset\/css\/dkan_dataset.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/nuboot_radix.style.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/dkan-flaticon.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/dkan-topics.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/print.css":1,"https:\/\/opendata.hochiminhcity.gov.vn\/sites\/default\/files\/colorizer\/nuboot_radix-0cb778aa.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie9.css":1,"profiles\/dkan\/themes\/nuboot_radix\/assets\/css\/ie8.css":1,"profiles\/dkan\/modules\/contrib\/panopoly_images\/panopoly-images.css":1,"0":1}},"urlIsAjaxTrusted":{"\/dieu-khoan-su-dung":true},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackDomainMode":2,"trackCrossDomains":["https:\/\/opendata.hochiminhcity.gov.vn"]}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-dieu-khoan-su-dung panel-layout-radix_bryant panel-region-contentmain panel-region-sidebar" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Nhảy đến nội dung</a>
+  </div>
+    <header id="header" class="header">
+  <div class="branding container">
+          <a class="logo navbar-btn pull-left" href="/" title="Trang chủ">
+        <img src="https://opendata.hochiminhcity.gov.vn/sites/default/files/logo_tphcm_0.png" alt="Trang chủ" class="logo-vnpt"/>
+      </a>
+            <!-- views exposed search -->
+      </div>
+
+  <div class="navigation-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div> <!-- /.navbar-header -->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+                      <ul id="main-menu" class="menu nav navbar-nav">
+              <li class="first leaf menu-link-trang-chủ"><a href="/" title="">Trang chủ</a></li>
+<li class="leaf menu-link-tập-dữ-liệu"><a href="/search/type/dataset" title="">Tập dữ liệu</a></li>
+<li class="leaf menu-link-tin-tức"><a href="/story" title="">Tin tức</a></li>
+<li class="leaf menu-link-giới-thiệu"><a href="/gi%E1%BB%9Bi-thi%E1%BB%87u-c%E1%BB%95ng-d%E1%BB%AF-li%E1%BB%87u-m%E1%BB%9F">Giới thiệu</a></li>
+<li class="last leaf menu-link-liên-hệ"><a href="/contact" title="">Liên hệ</a></li>
+            </ul>
+          
+          <!-- user menu -->
+          <section id="block-dkan-sitewide-dkan-sitewide-user-menu" class="block block-dkan-sitewide block-- clearfix">
+
+        <div class="content">
+    <button class="btn btn-log-in" style="margin: 6px; width: 100px;"><a href="/user/login">Đăng nhập</a></button><button class="btn btn-register" style="margin: 6px; width: 100px; background-color: #DA241B;"><a href="/user/register" class="sub">Đăng ký</a></button>  </div>
+
+</section>
+        </div><!-- /.navbar-collapse -->
+      </nav><!-- /.navbar -->
+    </div><!-- /.container -->
+  </div> <!-- /.navigation -->
+</header>
+
+<div id="main-wrapper">
+  <div id="main" class="main container">
+
+    <ul class="breadcrumb"><li class="home-link"><a href="/"><i class="fa fa fa-home"></i><span> Home</span></a></li><li><a href="/">Trang chủ</a></li><li class="active-trail">Điều khoản sử dụng</li></ul>        
+
+    <div class="main-row">
+
+      <section>
+        <a id="main-content"></a>
+                                                  <div class="region region-content">
+    
+<div class="panel-display bryant clearfix radix-bryant" >
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 radix-layouts-sidebar panel-panel">
+        <div class="panel-panel-inner">
+          <div class="panel-pane pane-block pane-block-8"  >
+  
+        <h2 class="pane-title">
+      Mục lục    </h2>
+    
+  
+  <div class="pane-content">
+    <div class="document">
+<div class="section" id="gioi-thieu">
+<div class="toctree-wrapper compound">
+<div class="muc-luc"><a class="reference internal" href="#quy-dinh-chung">Quy định chung</a></div>
+<div class="muc-luc"><a class="reference internal" href="#quyen-so-huu-tri-tue">1. Quyền sở hữu trí tuệ</a></div>
+<div class="muc-luc"><a class="reference internal" href="#quyen-thay-doi-cap-nhat-thong-tin">2. Quyền thay đổi cập nhật thông tin</a></div>
+<div class="muc-luc"><a class="reference internal" href="#lien-ket-ben-thu-ba">3. Liên kết bên thứ 3 </a></div>
+<div class="muc-luc"><a class="reference internal" href="#cam-ket-bao-mat-thong-tin">4. Cam kết Bảo mật thông tin</a></div>
+<div class="muc-luc"><a class="reference internal" href="#khuoc-tu-bao-dam">5. Khước từ bảo đảm</a></div>
+<div class="muc-luc"><a class="reference internal" href="#gioi-han-trach-nhiem">6. Giới hạn trách nhiệm</a></div>
+<div class="muc-luc"><a class="reference internal" href="#dieu-khoan-va-dieu-khoan-ve-dich-vu">7. Tài khoản và điều khoản về dịch vụ</a></div>
+<div class="muc-luc"><a class="reference internal" href="#xu-ly-vi-pham">8. Xử lý vi phạm</a></div>
+<div class="muc-luc"><a class="reference internal" href="#cham-dut-su-dung">9. Chấm dứt sử dụng</a></div>
+<div class="muc-luc"><a class="reference internal" href="#boi-thuong-thiet-hai">10. Bồi thường thiệt hại</a></div>
+<div class="muc-luc"><a class="reference internal" href="#quyen-quyet-dinh-cuoi-cung">11. Quyền quyết định cuối cùng</a></div>
+</div>
+</div>
+</div>
+  </div>
+
+  
+  </div>
+        </div>
+      </div>
+      <div class="col-md-9 radix-layouts-content panel-panel">
+        <div class="panel-panel-inner">
+          <div class="panel-pane pane-block pane-block-9"  >
+  
+      
+  
+  <div class="pane-content">
+    <div class="wy-grid-for-nav">
+<div class="wy-nav-content">
+<div class="rst-content">
+<div class="document">
+<div class="section" id="quy-dinh-chung">
+<h2><em><strong>Quy định chung</strong></em></h2>
+<p>Chào mừng bạn đến với chuyên trang Hệ Thống Cổng Thông Tin Tích Hợp Và Chia Sẻ Dữ Liệu Bản Đồ Nền.</p>
+<p>Chuyên trang Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền là một trang thông tin điện tử thuộc bản quyền của Trung tâm Công nghệ Thông tin và Truyền thông Thành phố Hồ Chí Minh, cung cấp thông tin về dữ liệu đất đai, hồ sơ giao dich biến động, bản đồ địa chính, bản đồ địa hình, bản đồ quy hoạch.</p>
+<p>Thông tin dữ liệu mang tính chất tham khảo, đối chiếu, Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không chịu bất cứ trách nhiệm cũng như thiệt hại nào liên quan đến việc thực hiện nghĩa vụ cập nhật thông tin chậm trễ do đường truyền, các tai nạn do thiên tai, hỏa hoạn…và sự tác động của bên thứ ba hoặc các sự cố nằm ngoài khả năng kiểm soát của Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền.</p>
+<p>Bạn chấp nhận sử dụng hoặc vào trang tphcm-opendata.vnptit.vn hay bất kỳ sản phẩm, phầm mềm, nguồn dữ liệu và các dịch vụ nào của hệ thống là bạn đã thể hiện đồng ý với các điều khoản và điều kiện được nêu ở đây. Nếu bạn không đồng ý với bất kỳ điều khoản, chính sách bảo mật, hoặc hướng dẫn sử dụng dành cho người dùng xin vui lòng không sử dụng dịch vụ.</p>
+<p>Trường hợp có bất kỳ điều khoản nào (một phần hay toàn bộ) hết hiệu lực hoặc không thể thi hành vì bất kỳ lý do gì sẽ chỉ ảnh hưởng đến điều khoản đã xác định hết hiệu lực và không ảnh hưởng đến các điều khoản còn lại, Nếu có sự khác biệt giữa các điều khoản thì quy định mới nhất sẽ có hiệu lực.</p>
+<div class="section" id="quyen-so-huu-tri-tue">
+<h3><strong>Quyền sở hữu trí tuệ</strong></h3>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền được phát triển và sở hữu bởi Trung tâm Công nghệ Thông tin và Truyền thông, tất cả các quyền sở hữu trí tuệ liên quan đến hệ thống, bao gồm tất cả hình ảnh, dữ liệu, thông tin, nội dung chứa đựng trong hệ thống, các sửa đổi bổ sung, cập nhật và các tài liệu hướng dẫn liên quan sẽ thuộc quyền sở hữu duy nhất bởi Trung tâm Công nghệ Thông tin và Truyền thông Thành phố Hồ Chí Minh.</p>
+<p>Không một cá nhân, tổ chức nào được phép sao chép, tái tạo, phân phối hoặc các hình thức xâm phạm tới bản quyền của chủ sở hữu nếu không có sự đồng ý và cho phép bằng văn bản của Trung tâm Công nghệ Thông tin và Truyền thông.</p>
+<p>Trường hợp các đơn vị, cơ quan, đơn vị thứ ba muốn hợp tác sử dung cần được Trung tâm Công nghệ Thông tin và Truyền thông chấp thuận bằng văn bản, mọi nội dung liên quan cần tuân theo quy định và điều khoản tại Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ.</p>
+</div>
+<div class="section" id="quyen-thay-doi-cap-nhat-thong-tin">
+<h3><strong>Quyền thay đổi cập nhật thông tin</strong></h3>
+<p>Hệ thống có thể thay đổi và hoặc chấm dứt các nội dung của một phần hay toàn bộ mà không cần phải báo trước với người sử dụng.</p>
+<p>Hệ thống có quyền thực hiện các biện pháp an ninh để bảo vệ chống lại sự truy cập trái phép hoặc các sửa đổi trái phép, tiết lộ hoặc phá hủy thông tin trên hệ thống.</p>
+<p>Hệ thống có thể thay đổi, cập nhật thông tin, thay đổi điều khoản và các quyết định mà không cần thông báo cho người dùng.</p>
+</div>
+<div class="section" id="lien-ket-ben-thu-ba">
+<h3><strong>Liên kết bên thứ ba</strong></h3>
+<p>Để thuận tiện cho bạn, Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền có chứa những liên kết đến những website của bên thứ ba sở hữu, công bố, duy trì. Các trang liên kết không thuộc quyền quản lý của chúng tôi và do đó, Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không chịu trách nhiệm, xác nhận hay có nghĩa vụ đối với bất kỳ nội dung nào liên quan đến các liên kết đó.</p>
+<p>Bạn xác nhận và đồng ý rằng Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không chịu trách nhiệm hoặc có nghĩa vụ trực tiếp hay gián tiếp đối với bất kỳ thiệt hại hoặc tổn thất nào liên quan tới việc sử dung hay căn cứ vào nội dung, sản phẩm, dịch vụ hiện có trên website khác. Bạn nên tìm hiểu kỹ về các nhà cung cấp trước khi thực hiện bất kỳ giao dịch nào với bên thứ ba.</p>
+</div>
+<div class="section" id="cam-ket-bao-mat-thong-tin">
+<h3><strong>Cam kết Bảo mật thông tin</strong></h3>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền cung cấp một số lớp dữ liệu quan trọng phục vụ trong công tác quản lý Nhà Nước, mọi thông tin không được phép sao chép hoặc cung cấp trái phép khi chưa được sự chấp thuận bằng văn bản của Trung tâm Công nghệ Thông tin và Truyền thông.</p>
+</div>
+<div class="section" id="khuoc-tu-bao-dam">
+<h3><strong>Khước từ bảo đảm</strong></h3>
+<p>Website này được cung cấp thông tin dựa vào việc tích hợp dữ liệu từ Quận Huyện nên Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không đảm bảo rằng website sẽ luôn sẵn sàng, có thể sử dụng, không bị gián đoạn, đúng thời gian, chính xác, an toàn, không có lỗi hoặc virus cũng như chắc chắn về kết quả đạt được sau khi sử dụng website.</p>
+<p>Bạn đồng ý rằng bạn tự chịu rủi ro khi sử dụng các dịch vụ. Trong phạm vi đầy đủ nhất mà pháp luật cho phép, Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền khước từ mọi bảo đảm, rõ ràng hoặc ngụ ý, liên quan đến các dịch vụ và việc bạn sử dụng các dịch vụ.</p>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không đưa ra bảo đảm hoặc cam đoan nào về tính chính xác hoặc hoàn chỉnh của nội dung trên trang này hoặc nội dung trên bất kỳ các trang nào dẫn đến trang này và không nhận lãnh trách nhiệm pháp lý hoặc trách nhiệm cho bất kỳ sai sót, lỗi, hoặc những điểm không chính xác trong nội dung, tổn thương ở người hoặc thiệt hại tài sản, mang bất kỳ tính chất gì, do hệ quả của việc bạn truy cập và sử dụng dịch vụ của chúng tôi, bất kỳ việc truy cập hoặc sử dụng không được phép các máy chủ bảo mật của chúng tôi.</p>
+</div>
+<div class="section" id="gioi-han-trach-nhiem">
+<h3><strong>Giới hạn trách nhiệm</strong></h3>
+<p>Trong mọi trường hợp, Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền, các viên chức, giám đốc, nhân viên, hoặc bên đại diện của Trung tâm Công nghệ Thông tin và Truyền thông không chịu trách nhiệm với bạn về bất kỳ thiệt hại trực tiếp, gián tiếp, liên quan, đặc biệt, mang tính trừng phạt hoặc hậu quả nào phát sinh từ bất kỳ sai sót, lỗi, hoặc những điểm không chính xác trong nội dung, tổn thương ở người hoặc thiệt hại tài sản, mang bất kỳ tính chất gì, do hệ quả của việc bạn truy cập và sử dụng dịch vụ của chúng tôi, bất kỳ việc truy cập hoặc sử dụng không được phép các máy chủ bảo mật của chúng tôi và/hoặc bất kỳ gián đoạn hoặc chấm dứt truyền tải đến và từ các dịch vụ của chúng tôi, bất kỳ virus, hoặc loại tương tự nào có thể được truyền đến hoặc thông qua các dịch vụ của chúng tôi do bất kỳ bên thứ ba nào thực hiện.</p>
+</div>
+<div class="section" id="dieu-khoan-va-dieu-khoan-ve-dich-vu">
+<h3><strong>Tài khoản và điều khoản về dịch vụ</strong></h3>
+<p>Để truy cập sử dụng một số tính năng, dịnh vụ về chia sẻ dữ liệu của chúng tôi bạn cần đăng ký để được hướng dẫn sử dụng dịch vụ.</p>
+<p>Bạn không bao giờ được sử dụng tài khoản của người khác khi không được cho phép.</p>
+<p>Khi sử dụng bằng tài khoản bạn phải chịu hoàn toàn trách nhiệm đối với hoạt động diễn ra trên tài khoản của mình.</p>
+<p>Bạn cần cung cấp ngay lập tức cho Trung tâm Công nghệ Thông tin và Truyền thông Thành phố Hồ Chí Minh về bất kỳ vi phạm nào đối với sự cố về bảo mật tài khoản cũng như các sử dụng trái phép tài khoản của bạn.</p>
+<p>Chỉ những người được cung cấp tài khoản mới được thực hiện sử dụng các dịch vụ download và chia sẻ của chúng tôi.</p>
+</div>
+<div class="section" id="xu-ly-vi-pham">
+<h3><strong>Xử lý vi phạm</strong></h3>
+<p>Trường hợp bạn vi phạm bất cứ điều khoản nào cũng như các truy cập trái phép ảnh hưởng đến hệ thống tùy theo mức độ vi phạm bạn sẽ phải chịu hoàn toàn trách nhiệm trước cơ quan có thẩm quyền và toàn bộ tổn thất do bạn cố ý hay vô ý gây ra.</p>
+</div>
+<div class="section" id="cham-dut-su-dung">
+<h3><strong>Chấm dứt sử dụng</strong></h3>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền có quyền chấm dứt việc truy cập của bạn vào hệ thống bất cứ khi nào tùy vào sự xem xét, quyết định duy nhất thuộc về Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền.</p>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền không chịu bất cứ trách nhiệm nào của bạn và bên thứ ba về hậu quả việc phát sinh hoặc liên quan từ việc chấm dứt này.</p>
+<p>Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền có quyền chấm dứt việc truy cập của bạn vào hệ thống bất cứ khi nào tùy vào sự xem xét, quyết định duy nhất thuộc về Hệ thống cổng thông tin tích hợp và chia sẻ dữ liệu bản đồ nền.</p>
+</div>
+<div class="section" id="boi-thuong-thiet-hai">
+<h3><strong>Bồi thường thiệt hại</strong></h3>
+<p>Trường hợp bạn vi phạm bất cứ điều khoản nào cũng như các truy cập trái phép ảnh hưởng đến hệ thống tùy theo mức độ vi phạm bạn sẽ phải chịu hoàn toàn trách nhiệm trước cơ quan có thẩm quyền và toàn bộ tổn thất do bạn cố ý hay vô ý gây ra.</p>
+</div>
+<div class="section" id="quyen-quyet-dinh-cuoi-cung">
+<h3><strong>Quyền quyết định cuối cùng</strong></h3>
+<p>Trường hợp bạn vi phạm bất cứ điều khoản nào cũng như các truy cập trái phép ảnh hưởng đến hệ thống tùy theo mức độ vi phạm bạn sẽ phải chịu hoàn toàn trách nhiệm trước cơ quan có thẩm quyền và toàn bộ tổn thất do bạn cố ý hay vô ý gây ra.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+  </div>
+
+  
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div><!-- /.bryant -->  </div>
+      </section>
+
+    </div>
+
+  </div> <!-- /#main -->
+</div> <!-- /#main-wrapper -->
+
+<footer id="footer" class="footer">
+  <div class="container">
+    <small>  <div class="region region-footer">
+    <section id="block-block-11" class="block block-block block-- clearfix">
+
+        <div class="content">
+    <div class="row ln-h-25">
+<div class="col-md-6">
+<div>ỦY BAN NHÂN DÂN THÀNH PHỐ HỒ CHÍ MINH</div>
+<div style="font-size: 16pt;">TRUNG TÂM CHUYỂN ĐỔI SỐ</div>
+<p>    <i class="fa fa-map-marker"></i> Lầu 4, 26 Lý Tự Trọng, Phường Bến Nghé, Quận 1, TP Hồ Chí Minh<br />
+    <i class="fa fa-phone"></i> 028.38.233.717<br />
+    <i class="fa fa-envelope"></i> <a href="mailto:ttcds@tphcm.gov.vn">ttcds@tphcm.gov.vn</a>
+  </div>
+<div class="col-md-3">
+    <a href="/guideline">Hướng dẫn sử dụng</a><br />
+    <a href="/dieu-khoan-su-dung">Điều khoản sử dụng</a><br />
+    <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a>
+  </div>
+<div class="col-md-3">
+<div>LIÊN KẾT WEBSITE</div>
+<div class="form-group">
+<select class="form-control" id="liknkwweb">
+      <option value="#"><br />
+            Chọn<br />
+          </option><br />
+          <option value="http://www.ict-hcm.gov.vn"><br />
+            Sở Thông Tin-TT<br />
+          </option><br />
+          <option value="http://www.sldtbxh.hochiminhcity.gov.vn"><br />
+            Sở LĐTBXH TPHCM<br />
+          </option><br />
+          <option value="http://www.thanhdoan.hochiminhcity.gov.vn"><br />
+            Thành đoàn TPHCM<br />
+          </option><br />
+      </select>
+</div>
+</div>
+</div>
+  </div>
+
+</section>
+  </div>
+</small>
+  </div>
+  <div style="background-color: #1865a1; margin-top: 10px;">
+    <div class="container">
+      <small class="pull-left copyright-class"><p>Giấy phép số 91/GP-TTĐT, do Cục Phát thanh, Truyền hình và Thông tin điện tử - Bộ Thông tin và Truyền thông cấp ngày 26/04/2018 - ĐT: 028 3520 2720</p>
+</small>
+      <small class="pull-right" >Version: 1.0.0</small>
+    </div>
+  </div>
+</footer>
+  <script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/panopoly-widgets.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/panopoly-widgets-spotlight.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/custom_style_sticker_header.js?suqz82"></script>
+<script type="text/javascript" src="https://opendata.hochiminhcity.gov.vn/profiles/dkan/modules/contrib/panopoly_widgets/custom_link_web_footer.js?suqz82"></script>
+</body>
+</html>

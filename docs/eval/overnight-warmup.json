@@ -1,0 +1,516 @@
+{
+  "baseline_builds": [
+    {
+      "way_id": 192512413,
+      "label": "Hẻm 548 Điện Biên Phủ",
+      "lat": 10.8000326,
+      "lon": 106.7155079,
+      "seconds": 107.933,
+      "state": "done",
+      "error_present": false,
+      "steps": [
+        {
+          "step": "map",
+          "state": "running",
+          "seconds": 0.081
+        },
+        {
+          "step": "map",
+          "state": "done",
+          "seconds": 0.081
+        },
+        {
+          "step": "parcels",
+          "state": "running",
+          "seconds": 0.081
+        },
+        {
+          "step": "parcels",
+          "state": "done",
+          "seconds": 35.781
+        },
+        {
+          "step": "listings",
+          "state": "running",
+          "seconds": 35.782
+        },
+        {
+          "step": "listings",
+          "state": "done",
+          "seconds": 35.93
+        },
+        {
+          "step": "match",
+          "state": "running",
+          "seconds": 35.93
+        },
+        {
+          "step": "match",
+          "state": "done",
+          "seconds": 36.084
+        },
+        {
+          "step": "news",
+          "state": "running",
+          "seconds": 36.084
+        },
+        {
+          "step": "news",
+          "state": "done",
+          "seconds": 107.885
+        },
+        {
+          "step": "photos",
+          "state": "running",
+          "seconds": 107.886
+        },
+        {
+          "step": "photos",
+          "state": "done",
+          "seconds": 107.891
+        }
+      ],
+      "counts": {
+        "fetched": 0,
+        "unique": 706,
+        "in_area": 442,
+        "matched": 56,
+        "alleys": 52,
+        "photos_total": 0,
+        "photos_read": 0
+      },
+      "parcels": 79,
+      "photos": 50,
+      "path_ways": 1,
+      "city_path_ways": 1
+    },
+    {
+      "way_id": 32585926,
+      "label": "Hẻm 36 Nguyễn Gia Trí",
+      "lat": 10.80291,
+      "lon": 106.7163617,
+      "seconds": 124.917,
+      "state": "done",
+      "error_present": false,
+      "steps": [
+        {
+          "step": "map",
+          "state": "running",
+          "seconds": 0.085
+        },
+        {
+          "step": "map",
+          "state": "done",
+          "seconds": 0.086
+        },
+        {
+          "step": "parcels",
+          "state": "running",
+          "seconds": 0.086
+        },
+        {
+          "step": "parcels",
+          "state": "done",
+          "seconds": 31.529
+        },
+        {
+          "step": "listings",
+          "state": "running",
+          "seconds": 31.529
+        },
+        {
+          "step": "listings",
+          "state": "done",
+          "seconds": 31.679
+        },
+        {
+          "step": "match",
+          "state": "running",
+          "seconds": 31.679
+        },
+        {
+          "step": "match",
+          "state": "done",
+          "seconds": 31.837
+        },
+        {
+          "step": "news",
+          "state": "running",
+          "seconds": 31.837
+        },
+        {
+          "step": "news",
+          "state": "done",
+          "seconds": 124.872
+        },
+        {
+          "step": "photos",
+          "state": "running",
+          "seconds": 124.873
+        },
+        {
+          "step": "photos",
+          "state": "done",
+          "seconds": 124.882
+        }
+      ],
+      "counts": {
+        "fetched": 0,
+        "unique": 706,
+        "in_area": 442,
+        "matched": 56,
+        "alleys": 52,
+        "photos_total": 0,
+        "photos_read": 0
+      },
+      "parcels": 83,
+      "photos": 50,
+      "path_ways": 2,
+      "city_path_ways": 2
+    }
+  ],
+  "warm_builds": [
+    {
+      "way_id": 192512413,
+      "label": "Hẻm 548 Điện Biên Phủ",
+      "lat": 10.8000326,
+      "lon": 106.7155079,
+      "seconds": 1.362,
+      "state": "done",
+      "steps": [
+        {
+          "step": "map",
+          "state": "running",
+          "seconds": 0.0
+        },
+        {
+          "step": "map",
+          "state": "done",
+          "seconds": 0.164
+        },
+        {
+          "step": "parcels",
+          "state": "running",
+          "seconds": 0.164
+        },
+        {
+          "step": "parcels",
+          "state": "done",
+          "seconds": 0.212
+        },
+        {
+          "step": "listings",
+          "state": "running",
+          "seconds": 0.212
+        },
+        {
+          "step": "listings",
+          "state": "done",
+          "seconds": 0.344
+        },
+        {
+          "step": "match",
+          "state": "running",
+          "seconds": 0.344
+        },
+        {
+          "step": "match",
+          "state": "done",
+          "seconds": 0.519
+        },
+        {
+          "step": "news",
+          "state": "running",
+          "seconds": 0.519
+        },
+        {
+          "step": "news",
+          "state": "done",
+          "seconds": 1.339
+        },
+        {
+          "step": "photos",
+          "state": "running",
+          "seconds": 1.339
+        },
+        {
+          "step": "photos",
+          "state": "done",
+          "seconds": 1.343
+        }
+      ],
+      "counts": {
+        "fetched": 0,
+        "unique": 706,
+        "in_area": 442,
+        "matched": 56,
+        "alleys": 52,
+        "photos_total": 0,
+        "photos_read": 0
+      },
+      "parcels": 86,
+      "error_present": false,
+      "requests": {
+        "ai": 0,
+        "portal": 0
+      }
+    },
+    {
+      "way_id": 32585926,
+      "label": "Hẻm 36 Nguyễn Gia Trí",
+      "lat": 10.80291,
+      "lon": 106.7163617,
+      "seconds": 0.893,
+      "state": "done",
+      "steps": [
+        {
+          "step": "map",
+          "state": "running",
+          "seconds": 0.0
+        },
+        {
+          "step": "map",
+          "state": "done",
+          "seconds": 0.052
+        },
+        {
+          "step": "parcels",
+          "state": "running",
+          "seconds": 0.052
+        },
+        {
+          "step": "parcels",
+          "state": "done",
+          "seconds": 0.105
+        },
+        {
+          "step": "listings",
+          "state": "running",
+          "seconds": 0.105
+        },
+        {
+          "step": "listings",
+          "state": "done",
+          "seconds": 0.217
+        },
+        {
+          "step": "match",
+          "state": "running",
+          "seconds": 0.217
+        },
+        {
+          "step": "match",
+          "state": "done",
+          "seconds": 0.359
+        },
+        {
+          "step": "news",
+          "state": "running",
+          "seconds": 0.359
+        },
+        {
+          "step": "news",
+          "state": "done",
+          "seconds": 0.877
+        },
+        {
+          "step": "photos",
+          "state": "running",
+          "seconds": 0.877
+        },
+        {
+          "step": "photos",
+          "state": "done",
+          "seconds": 0.879
+        }
+      ],
+      "counts": {
+        "fetched": 0,
+        "unique": 706,
+        "in_area": 442,
+        "matched": 56,
+        "alleys": 52,
+        "photos_total": 0,
+        "photos_read": 0
+      },
+      "parcels": 86,
+      "error_present": false,
+      "requests": {
+        "ai": 0,
+        "portal": 0
+      }
+    }
+  ],
+  "plan_proof": {
+    "way_id": 610251656,
+    "door_way_id": 610251656,
+    "lat": 10.8158727,
+    "lon": 106.7199274,
+    "area_key": "10.816_106.720",
+    "not_in_any_area": true,
+    "area_file_exists": false,
+    "http_status": 200,
+    "seconds": 0.741,
+    "top_tier": "Official",
+    "official": [
+      {
+        "tier": "Official",
+        "tier_vi": "Số liệu chính thức",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 4,5 m (thửa cách nhau 5,5 m)"
+      }
+    ]
+  },
+  "crawl_observation": {
+    "captured_at": "2026-10-16T23:19:00.239839+07:00",
+    "pid": 8674,
+    "run_started_at": "2026-10-16T23:09:27.730+07:00",
+    "initial_ways": 29,
+    "state": {
+      "cells_done": [],
+      "cells_visited": [
+        "demo",
+        "10.816_106.720",
+        "10.816_106.708",
+        "10.804_106.732",
+        "10.792_106.732"
+      ],
+      "listings_done": [
+        "13109:s",
+        "13109:u",
+        "13109:alonhadat",
+        "13096:s",
+        "13096:u",
+        "13111:s",
+        "13111:u",
+        "13098:s",
+        "13098:u",
+        "13099:s",
+        "13099:u",
+        "13119:s",
+        "13119:u",
+        "13105:s",
+        "13105:u",
+        "13110:s",
+        "13110:u",
+        "13112:s",
+        "13112:u",
+        "13102:s",
+        "13102:u",
+        "13100:s",
+        "13100:u",
+        "13106:s",
+        "13106:u",
+        "13113:s",
+        "13113:u",
+        "13101:s",
+        "13101:u",
+        "13107:s",
+        "13107:u",
+        "13118:s",
+        "13118:u",
+        "13103:s",
+        "13103:u",
+        "13108:s",
+        "13108:u",
+        "13117:s",
+        "13117:u",
+        "13115:s",
+        "13115:u",
+        "13116:s",
+        "13116:u",
+        "13120:s",
+        "13120:u"
+      ],
+      "blocked": 0,
+      "errors": 46,
+      "updated_at": "2026-10-16T23:18:59.772157+07:00",
+      "ways_measured": 121,
+      "ways_with_data": 101,
+      "pid": 8674,
+      "stop_at": "2026-10-17T07:30:00+07:00",
+      "listing_errors": 21
+    },
+    "osm_files": 33,
+    "osm_bytes": 24698493,
+    "elapsed_s": 572.51,
+    "ways_per_min": 9.642,
+    "cadastral_percent": 83.47,
+    "new_osm_files_in_window": 15
+  },
+  "active_crawl": {
+    "cells_done": [],
+    "cells_visited": [
+      "demo",
+      "10.816_106.720",
+      "10.816_106.708",
+      "10.804_106.732",
+      "10.792_106.732"
+    ],
+    "listings_done": [
+      "13109:s",
+      "13109:u",
+      "13109:alonhadat",
+      "13096:s",
+      "13096:u",
+      "13111:s",
+      "13111:u",
+      "13098:s",
+      "13098:u",
+      "13099:s",
+      "13099:u",
+      "13119:s",
+      "13119:u",
+      "13105:s",
+      "13105:u",
+      "13110:s",
+      "13110:u",
+      "13112:s",
+      "13112:u",
+      "13102:s",
+      "13102:u",
+      "13100:s",
+      "13100:u",
+      "13106:s",
+      "13106:u",
+      "13113:s",
+      "13113:u",
+      "13101:s",
+      "13101:u",
+      "13107:s",
+      "13107:u",
+      "13118:s",
+      "13118:u",
+      "13103:s",
+      "13103:u",
+      "13108:s",
+      "13108:u",
+      "13117:s",
+      "13117:u",
+      "13115:s",
+      "13115:u",
+      "13116:s",
+      "13116:u",
+      "13120:s",
+      "13120:u"
+    ],
+    "blocked": 1,
+    "errors": 46,
+    "updated_at": "2026-10-16T23:18:59.772157+07:00",
+    "ways_measured": 121,
+    "ways_with_data": 101,
+    "pid": 15721,
+    "stop_at": "2026-10-17T07:30:00+07:00",
+    "listing_errors": 21,
+    "blocked_note": "One confirmed plaintext portal lock incident; prior parser logged it as Unavailable. Backoff started on deployment.",
+    "cooldown_until": "2026-10-16T23:29:00.240735+07:00",
+    "pid_source": "crawl_city.lock (active process); periodic state flush updates its PID on next save"
+  },
+  "conditional_projection": {
+    "assumption": "Portal recovers after current cooldown; no further prolonged blocks; measurement-cell fetch overhead similar to observation",
+    "measured_ways_by_0730": 4759,
+    "partially_visited_cells": 159,
+    "fully_measured_cells": "Not projected; currently zero.",
+    "repeated_locks": "Can substantially reduce coverage; full-city cadastral coverage is not promised."
+  }
+}

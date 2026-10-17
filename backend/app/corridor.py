@@ -17,7 +17,7 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import cameras, flags, hydro
-from .config import GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
+from .config import CACHED_ONLY, GOONG_API_KEY, TRAFFIC_FACTOR, TRAFFIC_QUEUE_MIN
 from .flood import DepthRange, flood_status, FloodProfile, FloodSnapshot, load_records, _street_key
 from .osm import ALLEY_NAME, haversine, strip_accents
 from .plan import _decode_polyline, _densify
@@ -49,6 +49,8 @@ def _fmt(t: datetime) -> str:
 
 def goong_route(origin, dest, via=None) -> dict | None:
     """Goong Direction v2 car route through an optional via point, with the street of every step."""
+    if CACHED_ONLY:
+        return None
     stops = ([f"{via['lat']},{via['lon']}"] if via else []) + [f"{dest[0]},{dest[1]}"]
     try:
         r = httpx.get("https://rsapi.goong.io/v2/direction",

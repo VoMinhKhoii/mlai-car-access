@@ -1,0 +1,196 @@
+{
+  "method": "FastAPI TestClient HTTP /api/plan + /api/config; real cached graphs and parcel merges; outgoing OSM blocked; Goong disabled; no lifespan background worker.",
+  "flags": {
+    "footprint_widths": true,
+    "parcel_widths": true,
+    "building_gaps": false
+  },
+  "plans": [
+    {
+      "district": "Q8",
+      "way_id": 193729286,
+      "name": "Hẻm 689 Đường Ba Đình",
+      "request": {
+        "lat": 10.747809727773003,
+        "lon": 106.6686262293489,
+        "label": "Hẻm 689 Đường Ba Đình",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "10.748_106.668",
+      "nearest_snapshot_cadastral_cut_m": 1755,
+      "door_fit": "unknown",
+      "width_range": {
+        "lo": 0.5,
+        "hi": 19.49,
+        "top_tier": "Inferred"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": false,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Ba Đình, đi bộ 36 m (~1 phút)",
+        "detail": ""
+      },
+      "official_unchanged_with_flag_off": false
+    },
+    {
+      "district": "Gò Vấp",
+      "way_id": 327452981,
+      "name": "Hẻm 1446/2 Lê Đức Thọ",
+      "request": {
+        "lat": 10.857891607499061,
+        "lon": 106.65382365673624,
+        "label": "Hẻm 1446/2 Lê Đức Thọ",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "10.856_106.652",
+      "nearest_snapshot_cadastral_cut_m": 6441,
+      "door_fit": "unknown",
+      "width_range": {
+        "lo": 0.5,
+        "hi": 18.33,
+        "top_tier": "Inferred"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": false,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Lê Đức Thọ, đi bộ 97 m (~1 phút)",
+        "detail": "Xe không nên vào tận cửa"
+      },
+      "official_unchanged_with_flag_off": false
+    },
+    {
+      "district": "Tân Phú",
+      "way_id": 373721652,
+      "name": "Hẻm 137 Trịnh Đình Trọng",
+      "request": {
+        "lat": 10.77517066472772,
+        "lon": 106.64142047926691,
+        "label": "Hẻm 137 Trịnh Đình Trọng",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "10.776_106.640",
+      "nearest_snapshot_cadastral_cut_m": 2497,
+      "door_fit": "unknown",
+      "width_range": {
+        "lo": 0.5,
+        "hi": 19.29,
+        "top_tier": "Inferred"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": false,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Trịnh Đình Trọng, đi bộ 110 m (~2 phút)",
+        "detail": "Xe không nên vào tận cửa"
+      },
+      "official_unchanged_with_flag_off": false
+    },
+    {
+      "district": "Bình Thạnh",
+      "way_id": 610082013,
+      "name": "Hẻm 441/14 Điện Biên Phủ",
+      "request": {
+        "lat": 10.802090967698637,
+        "lon": 106.71377071473313,
+        "label": "Hẻm 441/14 Điện Biên Phủ",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "demo",
+      "nearest_snapshot_cadastral_cut_m": 1,
+      "door_fit": "unknown",
+      "width_range": {
+        "lo": 1.5,
+        "hi": 3.97,
+        "top_tier": "Official"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": true,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Hẻm 441 Điện Biên Phủ, đi bộ 78 m (~1 phút)",
+        "detail": "Xe không nên vào tận cửa"
+      },
+      "official_unchanged_with_flag_off": true
+    },
+    {
+      "district": "Bình Thạnh",
+      "way_id": 610082016,
+      "name": "Hẻm 441/32 Điện Biên Phủ",
+      "request": {
+        "lat": 10.802478176762657,
+        "lon": 106.71396141532666,
+        "label": "Hẻm 441/32 Điện Biên Phủ",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "demo",
+      "nearest_snapshot_cadastral_cut_m": 17,
+      "door_fit": "no",
+      "width_range": {
+        "lo": 1.5,
+        "hi": 1.61,
+        "top_tier": "Official"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": true,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Hẻm 69/35 đường D2, đi bộ 120 m (~2 phút)",
+        "detail": "Xe không nên vào tận cửa"
+      },
+      "official_unchanged_with_flag_off": true
+    },
+    {
+      "district": "Bình Thạnh",
+      "way_id": 192512348,
+      "name": "Hẻm 29 Nguyễn Gia Trí",
+      "request": {
+        "lat": 10.80266884866479,
+        "lon": 106.71492473662516,
+        "label": "Hẻm 29 Nguyễn Gia Trí",
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "arrive_at": "2026-10-17T10:00:00+07:00",
+        "dwell_min": 15
+      },
+      "http_status": 200,
+      "area_key": "demo",
+      "nearest_snapshot_cadastral_cut_m": 28,
+      "door_fit": "tight",
+      "width_range": {
+        "lo": 3.36,
+        "hi": 6.44,
+        "top_tier": "Official"
+      },
+      "footprint_source": "Khoảng cách giữa các tòa nhà (ảnh vệ tinh, Overture; sai số ±11.4 m so với địa chính)",
+      "footprint_overruled": true,
+      "verdict": {
+        "code": "nearby",
+        "headline": "Dừng đón/trả tại Hẻm 29/2 Nguyễn Gia Trí, đi bộ 32 m (~1 phút)",
+        "detail": "Xe không nên vào tận cửa"
+      },
+      "official_unchanged_with_flag_off": true
+    }
+  ]
+}

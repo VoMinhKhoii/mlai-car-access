@@ -18,3 +18,14 @@ backend/cache/live/alonhadat/
 key.txt
 .venv/
 .coverage
+backend/cache/live/city_parcels.json
+backend/cache/live/city_parcels.json.tmp
+backend/cache/live/crawl_city_state.json*
+backend/cache/live/crawl_city.lock
+backend/cache/live/crawl_city.out
+backend/cache/portal_research/
+backend/cache/parcels_points/
+backend/cache/osm/city_batches/
+backend/cache/flood/
+backend/cache/live/parcels.lock
+backend/cache/live/areas/*.lock

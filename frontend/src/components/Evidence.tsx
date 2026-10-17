@@ -74,7 +74,7 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
     ...(google || grounding ? [{ id: 'lookup' as TabId, label: 'Tra cứu' }] : []),
   ]
   return (
-    <aside className="evidence card" role="dialog" aria-label={`Bằng chứng về ${way.name || 'đoạn đường'}`}>
+    <aside className="evidence glass" role="dialog" aria-label={`Bằng chứng về ${way.name || 'đoạn đường'}`}>
       <header>
         <div>
           <span className="faint">Bằng chứng cho đoạn đường</span>

@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import json
 import math
+from functools import lru_cache
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 import httpx
@@ -40,19 +42,39 @@ class DeadlineExceeded(Blocked):
 
 
 
-def _parcel(lat: float, lon: float, deadline: float | None = None) -> dict | None:
-    for attempt in range(2):  # the portal is slow at times: one retry, then give up on this point
+class Unavailable(Exception):
+    """Transport failure; never cache it as a measured no-data result."""
+
+
+def _parcel(lat: float, lon: float, deadline: float | None = None, client=None) -> dict | None:
+    from . import portal_gate
+    from .config import CACHED_ONLY
+    if CACHED_ONLY:
+        raise Unavailable("cached-only mode")
+    for attempt in range(2):
         try:
-            r = httpx.post(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"}, headers=HEADERS,
-                           timeout=timeout(deadline, 20, DeadlineExceeded))
+            timeout(deadline, 20, DeadlineExceeded)
+            with portal_gate.slot():
+                r = (client.post if client else httpx.post)(URL, data={"Lat": f"{lat:.7f}", "Lon": f"{lon:.7f}"},
+                    headers=HEADERS, timeout=timeout(deadline, 20, DeadlineExceeded))
+            locked = r.status_code in (403, 429) or "temporarily locked" in r.text.lower()
+            portal_gate.event("response", status=r.status_code, locked=locked)
+            if locked:
+                portal_gate.backoff()
+                raise Blocked()
             r.raise_for_status()
-            break
-        except httpx.HTTPError:
-            if attempt:
+            d = r.json()
+            if d == []:
                 return None
-    d = r.json()
-    if d.get("blocked"):
-        raise Blocked()
+            if not isinstance(d, dict):
+                raise Unavailable("Unexpected portal response")
+            if d.get("blocked"):
+                portal_gate.backoff()
+                raise Blocked()
+            break
+        except (httpx.HTTPError, ValueError) as exc:
+            if attempt:
+                raise Unavailable(type(exc).__name__) from exc
     info = json.loads(d["ThongTinChung"]) if isinstance(d.get("ThongTinChung"), str) else (d.get("ThongTinChung") or {})
     ranh = info.get("ranh")
     if not ranh:
@@ -66,15 +88,20 @@ def _local(lon: float, lat: float, lat0: float, lon0: float) -> tuple[float, flo
     return ((lon - lon0) * KX, (lat - lat0) * KY)
 
 
-def _cross_section(p_ll, n_xy, lat0, lon0, deadline: float | None = None) -> float | None:
+def _cross_section(p_ll, n_xy, lat0, lon0, deadline: float | None = None, parcel_lookup=None) -> float | None:
     """Width of one cross-section: query each side, then measure from the alley point to both parcels."""
+    if callable(deadline) and parcel_lookup is None:
+        parcel_lookup, deadline = deadline, None
     px, py = _local(p_ll[1], p_ll[0], lat0, lon0)
     for off in OFFSETS:
         sides = []
         for sgn in (1, -1):
             qx, qy = px + sgn * n_xy[0] * off, py + sgn * n_xy[1] * off
-            sides.append(_parcel(lat0 + qy / KY, lon0 + qx / KX, deadline))
-        if not all(sides) or sides[0]["id"] == sides[1]["id"]:
+            sides.append(parcel_lookup(lat0 + qy / KY, lon0 + qx / KX) if parcel_lookup else
+                         _parcel(lat0 + qy / KY, lon0 + qx / KX, deadline))
+            if not sides[-1]:
+                break
+        if len(sides) != 2 or not all(sides) or sides[0]["id"] == sides[1]["id"]:
             continue
         polys = [Polygon([_local(x, y, lat0, lon0) for x, y in (g.exterior.coords)]) if g.geom_type == "Polygon"
                  else Polygon([_local(x, y, lat0, lon0) for x, y in max(g.geoms, key=lambda q: q.area).exterior.coords])
@@ -94,14 +121,27 @@ def _cross_section(p_ll, n_xy, lat0, lon0, deadline: float | None = None) -> flo
     return None
 
 
-def _cut_at(line: LineString, d: float, lat0: float, lon0: float, deadline: float | None = None) -> dict | None:
+def _cut_at(line: LineString, d: float, lat0: float, lon0: float, deadline: float | None = None, parcel_lookup=None) -> dict | None:
+    if callable(deadline) and parcel_lookup is None:
+        parcel_lookup, deadline = deadline, None
+    # Reject diagonal corner cuts before any portal request (night audit addition).
+    coords, along = list(line.coords), 0.0
+    for i in range(1, len(coords)-1):
+        a0, vertex, b0 = coords[i-1], coords[i], coords[i+1]
+        along += math.dist(a0, vertex)
+        ax, ay = vertex[0]-a0[0], vertex[1]-a0[1]
+        bx, by = b0[0]-vertex[0], b0[1]-vertex[1]
+        denom = math.hypot(ax, ay)*math.hypot(bx, by)
+        if denom and abs(d-along) < 5 and (ax*bx+ay*by)/denom < math.cos(math.radians(15)):
+            return None
     p, a, b = line.interpolate(d), line.interpolate(max(0.0, d - 1)), line.interpolate(min(line.length, d + 1))
     dx, dy = b.x - a.x, b.y - a.y
     norm = math.hypot(dx, dy) or 1.0
     lat, lon = lat0 + p.y / KY, lon0 + p.x / KX
     try:
-        gap = _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0, deadline)
-    except Blocked:
+        gap = (_cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0, deadline, parcel_lookup)
+               if parcel_lookup else _cross_section((lat, lon), (-dy / norm, dx / norm), lat0, lon0, deadline))
+    except (Blocked, Unavailable):
         raise
     except Exception:  # one bad cut must not lose the others
         gap = None
@@ -112,7 +152,7 @@ def _cut_at(line: LineString, d: float, lat0: float, lon0: float, deadline: floa
 
 
 def measure(way_coords: list[tuple[float, float]], step: float | None = None, max_cuts: int = 2,
-            deadline: float | None = None) -> dict | None:
+            deadline: float | None = None, *, fractions=None, parcel_lookup=None) -> dict | None:
     """Return sampled usable-width estimates plus segment coverage diagnostics."""
     if len(way_coords) < 2 or max_cuts <= 0:
         return None
@@ -132,15 +172,17 @@ def measure(way_coords: list[tuple[float, float]], step: float | None = None, ma
         else:
             targets = [line.length * i / segment_count for i in range(requested_count)]
     else:
-        targets = [line.length / 3, 2 * line.length / 3]
+        targets = [line.length * f for f in (fractions if fractions is not None else (1/3, 2/3))]
         truncated = False
     with ThreadPoolExecutor(min(3, len(targets))) as pool:
-        cuts = [cut for cut in pool.map(lambda distance: _cut_at(line, distance, lat0, lon0, deadline), targets)
+        cuts = [cut for cut in pool.map(lambda distance: (_cut_at(line, distance, lat0, lon0, deadline, parcel_lookup) if parcel_lookup else
+                                                         _cut_at(line, distance, lat0, lon0, deadline)), targets)
                 if cut]
     if not cuts:
         return None
     positions = sorted(cut["at_m"] for cut in cuts)
     return {
+        "attempted": len(targets),
         "samples": [cut["width_m"] for cut in cuts],
         "cuts": cuts,
         "segment_length_m": round(line.length, 1),
@@ -221,11 +263,12 @@ def path_out(g, dest_lat: float, dest_lon: float) -> list[tuple[int, list[tuple[
 
 
 def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, deep: bool = True,
-                 deadline: float | None = None) -> list[dict]:
+                 deadline: float | None = None, city_cache: dict | None = None, parcel_lookup=None) -> list[dict]:
     """Scan full ways on legal ingress and egress paths, then shallow-scan nearby roads.
 
     If `deadline` passes, DeadlineExceeded is raised with `.partial` set to the ways already measured (each one is a
     complete per-way result with its own coverage); ways not reached are simply absent, i.e. unknown."""
+    city_cache = city_cache or {}
     out: dict[int, dict] = {}
     near = []
     stopped = None
@@ -236,11 +279,14 @@ def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, de
             key = f"deep-v2:{dest_lat:.5f},{dest_lon:.5f}:{way_id}"
             if key not in cache and budget > 0:
                 way = g.ways[way_id]
-                cache[key] = measure([g.nodes[node] for node in way.nodes], step=DEEP_STEP, max_cuts=budget,
-                                     deadline=deadline)
+                coords = [g.nodes[node] for node in way.nodes]
+                length = sum(haversine(*a, *b) for a, b in zip(coords, coords[1:]))
+                attempts = min(budget, max(1, math.ceil(length / DEEP_STEP) + 1))
+                cache[key] = measure(coords, step=DEEP_STEP, max_cuts=attempts,
+                                     deadline=deadline, parcel_lookup=parcel_lookup)
+                budget -= attempts  # failed cuts still used the shared scan budget
             result = cache.get(key)
             if result:
-                budget = max(0, budget - len(result.get("cuts", [])))
                 out[way_id] = {"way_id": way_id, **result, "deep": True}
 
         for way in g.ways.values():
@@ -250,11 +296,11 @@ def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, de
             if distance <= 400:
                 near.append((distance, way))
         near.sort(key=lambda item: item[0])
-        todo = [way for _, way in near if f"width-v2:{way.id}" not in cache][:MAX_ALLEYS]
+        todo = [way for _, way in near if f"width-v2:{way.id}" not in cache and str(way.id) not in city_cache][:MAX_ALLEYS]
 
         def one(way):
             try:
-                return way.id, measure([g.nodes[node] for node in way.nodes], deadline=deadline)
+                return way.id, measure([g.nodes[node] for node in way.nodes], deadline=deadline, parcel_lookup=parcel_lookup)
             except Blocked:
                 raise
             except Exception:
@@ -266,7 +312,7 @@ def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, de
     except DeadlineExceeded as exc:
         stopped = exc
     for _, way in near:
-        result = cache.get(f"width-v2:{way.id}")
+        result = cache.get(f"width-v2:{way.id}") or city_cache.get(str(way.id))
         if result and "cuts" in result:
             out[way.id] = {"way_id": way.id, **result, "deep": False}
     if stopped is not None:
@@ -275,3 +321,9 @@ def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, de
     return list(out.values())
 
 
+
+
+@lru_cache(maxsize=1)
+def point_cache():
+    from .parcel_points import ParcelPoints
+    return ParcelPoints()

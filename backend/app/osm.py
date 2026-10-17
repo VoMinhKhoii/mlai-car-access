@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import threading
 import time
@@ -183,7 +184,7 @@ def _inside(lat: float, lon: float, bbox, margin_deg: float = 0.0) -> bool:
     return s + margin_deg <= lat <= n - margin_deg and w + margin_deg <= lon <= e - margin_deg
 
 
-def _fetch_overpass(lat: float, lon: float, radius: float, deadline: float | None = None) -> dict:
+def _fetch_overpass(lat: float, lon: float, radius: float, deadline: float | None = None, polite: bool = False) -> dict:
     r = int(radius)
     q = f"""[out:json][timeout:120];
 (
@@ -207,6 +208,18 @@ out skel qt;"""
         return data
 
     errors = []
+    if polite:
+        for attempt in range(3):
+            for ep in OVERPASS_ENDPOINTS:
+                try:
+                    return ask(ep)
+                except Expired:
+                    raise
+                except Exception as exc:
+                    errors.append(type(exc).__name__)
+                    time.sleep(min(2, timeout(deadline, 2)))
+            time.sleep(min(10 * (attempt+1), timeout(deadline, 30)))
+        raise RuntimeError(f"Overpass unavailable: {errors}")
     for attempt in range(3):  # all mirrors at once; if every one fails (504s are common), wait and try again
         pool = ThreadPoolExecutor(len(OVERPASS_ENDPOINTS))
         futures = [pool.submit(ask, ep) for ep in OVERPASS_ENDPOINTS]
@@ -239,52 +252,76 @@ _fetch_locks: dict[str, threading.Lock] = {}
 _locks_guard = threading.Lock()
 
 
-def load_elements(lat: float, lon: float, deadline: float | None = None) -> tuple[list[dict], str]:
+def load_elements(lat: float, lon: float, deadline: float | None = None, polite: bool = False) -> tuple[list[dict], str]:
     key = area_key(lat, lon)
     with _locks_guard:
         lock = _fetch_locks.setdefault(key, threading.Lock())
     if deadline is None:
         with lock:  # the plan request and the live build must not download the same area twice
-            return _load_elements(lat, lon, key)
+            return _load_elements(lat, lon, key, polite=polite)
     wait = deadline - time.monotonic() - 0.5
     if wait <= 0 or not lock.acquire(timeout=wait):
         raise Expired("hết thời hạn chờ tải bản đồ OSM")
     try:
-        return _load_elements(lat, lon, key, deadline)
+        return _load_elements(lat, lon, key, deadline, polite)
     finally:
         lock.release()
 
 
-def _load_elements(lat: float, lon: float, key: str, deadline: float | None = None) -> tuple[list[dict], str]:
+def _load_elements(lat: float, lon: float, key: str, deadline: float | None = None, polite: bool = False) -> tuple[list[dict], str]:
     if key == "demo":
         return json.loads(DEMO_FILE.read_text())["elements"], "demo-cache"
     path = CACHE / "osm" / f"area_{key}.json"
     if path.exists():
         return json.loads(path.read_text())["elements"], f"cache:{key}"
-    data = _fetch_overpass(lat, lon, AREA_RADIUS_M, deadline)
+    from .config import CACHED_ONLY
+    if CACHED_ONLY:
+        raise RuntimeError("OSM cache miss in cached-only mode")
+    data = _fetch_overpass(lat, lon, AREA_RADIUS_M, deadline, polite=polite)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data))
+    from .storage import write_json
+    write_json(path, data)
     return data["elements"], f"overpass:{key}"
 
 
+_GRAPH_STAMPS = {}
 _GRAPHS = LRU(32)  # bounded: a long-running backend sees many areas
+
+
+def _graph_stamp(key):
+    p = DEMO_FILE if key == "demo" else CACHE / "osm" / f"area_{key}.json"
+    try:
+        st = p.stat()
+        return st.st_mtime_ns, st.st_size
+    except FileNotFoundError:
+        return None
 
 
 def cached_graph(lat: float, lon: float) -> AreaGraph | None:
     """The area graph only if it is already on disk or in memory (never downloads; used while typing)."""
     key = area_key(lat, lon)
-    if key in _GRAPHS:
+    if key in _GRAPHS and _GRAPH_STAMPS.get(key) == _graph_stamp(key):
         return _GRAPHS.get(key)
     if key == "demo" or (CACHE / "osm" / f"area_{key}.json").exists():
         return build_graph(lat, lon)
     return None
 
 
-def build_graph(lat: float, lon: float, deadline: float | None = None) -> AreaGraph:
+def build_graph(lat: float, lon: float, deadline: float | None = None, polite: bool = False) -> AreaGraph:
     key = area_key(lat, lon)
-    if key in _GRAPHS:
+    if key in _GRAPHS and _GRAPH_STAMPS.get(key) == _graph_stamp(key):
         return _GRAPHS.get(key)
-    elements, source = load_elements(lat, lon, deadline)
+    elements, source = load_elements(lat, lon, deadline, polite=polite)
+    g = graph_from_elements(lat, lon, elements, source)
+    if hasattr(_GRAPHS, "put"):
+        _GRAPHS.put(key, g)
+    else:
+        _GRAPHS[key] = g
+    _GRAPH_STAMPS[key] = _graph_stamp(key)
+    return g
+
+
+def graph_from_elements(lat, lon, elements, source="cached-batch"):
     g = AreaGraph(center=(lat, lon), source=source)
     raw_ways = []
     for el in elements:
@@ -330,5 +367,4 @@ def build_graph(lat: float, lon: float, deadline: float | None = None) -> AreaGr
             if w.walkable:
                 g.walk_adj.setdefault(a, []).append((e.idx, b))
                 g.walk_adj.setdefault(b, []).append((e.idx, a))
-    _GRAPHS.put(key, g)
     return g

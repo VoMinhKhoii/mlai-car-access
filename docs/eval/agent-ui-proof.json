@@ -1,0 +1,15 @@
+{
+  "browser": "T3 collaborative preview",
+  "server": "http://127.0.0.1:8788",
+  "conversation_restore": "Seeded a localStorage fixture, reloaded, confirmed question/answer/source chip restored",
+  "evidence": "Chip opened existing EvidencePanel with actual API data for OSM way 464839531, Hẻm 113/4 Võ Duy Ninh",
+  "stream_test": "Browser-local fetch fixture, zero Gemini calls",
+  "stop_visible_while_streaming": true,
+  "stop_aborted_stream_and_sent_cancel": true,
+  "stop_cleared_busy_and_rendered_error": "Đã dừng kiểm tra.",
+  "retry_completed": "Đã thử lại.",
+  "request_sequence": ["agent", "cancel", "agent"],
+  "mobile": { "width": 390, "height": 844, "horizontal_overflow": false, "textarea_font_px": 16, "compose_bottom": 844 },
+  "desktop": { "width": 1280, "height": 800, "horizontal_overflow": false, "minimum_suggestion_height": 40 },
+  "screenshot": "agent-production-mobile.png"
+}

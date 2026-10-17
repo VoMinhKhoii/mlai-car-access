@@ -1,0 +1,877 @@
+<html ng-app="gn_search_default" lang="" id="ng-app">
+  <head>
+    <title>Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác &quot;Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh&quot; theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường.Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&amp;MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&amp;MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan.Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu.Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh) tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết)." />
+    <meta name="keywords" content="" />
+    <meta property="og:title" content="Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)" />
+    <meta property="og:description" content="Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác &quot;Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh&quot; theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường.Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&amp;MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&amp;MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan.Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu.Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh) tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết)." />
+    <meta property="og:site_name" content="HCMC GEOPORTAL" />
+    <meta property="og:image" content="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811/attachments/z3066282683583_ef74669cddf863962edd947ddcf4aa5e.jpg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811/attachments/z3066282683583_ef74669cddf863962edd947ddcf4aa5e.jpg" />
+    <meta name="twitter:title" content="Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)" />
+    <meta name="twitter:description" content="Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác &quot;Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh&quot; theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường.Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&amp;MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&amp;MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan.Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu.Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh) tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết)." />
+    <meta name="twitter:site" content="HCMC GEOPORTAL" />
+    <link rel="canonical" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811" />
+    <link rel="icon" sizes="16x16 32x32 48x48" type="image/png" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/../../images/logos/favicon.png" />
+    <link href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/rss.search?sortBy=changeDate" rel="alternate" type="application/rss+xml" title="Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)" />
+    <link href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/portal.opensearch" rel="search" type="application/opensearchdescription+xml" title="Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)" />
+    <link href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/../../static/gn_search_default.css?v=9f867fd903a59ec7e2e619e83fc7d6bd36308b5a&amp;" rel="stylesheet" media="screen" />
+    <link href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/../../static/gn_metadata_pdf.css?v=9f867fd903a59ec7e2e619e83fc7d6bd36308b5a&amp;" rel="stylesheet" media="print" />
+  </head>
+  <body class="gn-nojs ">
+    <div class="gn-full">
+      <div class="navbar navbar-default gn-top-bar" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" title="" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only" />
+              <span class="icon-bar" />
+              <span class="icon-bar" />
+              <span class="icon-bar" />
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" id="topbar-left">
+              <li>
+                <a href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/">
+                  <img class="gn-logo" alt="" src="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/../../images/logos/2719ea86-e80c-4361-8d31-9820a4a4df88.png" />
+                  HCMC GEOPORTAL
+                </a>
+              </li>
+              <li>
+                <a title="" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search" onclick="location.href=('https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv//catalog.search#/search');return false;">
+                  <i class="fa fa-fw fa-search hidden-sm"> </i>
+                  <span />
+                </a>
+              </li>
+              <li id="map-menu" class="hidden-nojs">
+                <a title="" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv//catalog.search#/map">
+                  <i class="fa fa-fw fa-globe hidden-sm"> </i>
+                  <span />
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv//catalog.signin" title="">
+                  <i class="fa fa-sign-in fa-fw"> </i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container" role="main">
+        <div class="container-fluid gn-metadata-view gn-schema-iso19139">
+          <article id="246a5939-530d-47e7-84b4-99d686e73811" class="gn-md-view gn-metadata-display">
+            <div class="row">
+              <div class="col-md-8">
+                <header>
+                  <h1>
+                    <i class="fa gn-icon-">
+                      <!--icon-->
+                    </i>
+                    Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)
+                  </h1>
+                  <div class="gn-abstract">
+                    <p>Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác "Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh" theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường.</p>
+                    <p>Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&amp;MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&amp;MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan.</p>
+                    <p>Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu.</p>
+                    <p>Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh)  tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết).</p>
+                  </div>
+                  <script type="application/ld+json">{
+		"@context": "http://schema.org/",
+    
+      "@type": "schema:Dataset",
+    
+    
+		"@id": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811",
+		"includedInDataCatalog":[{"url":"https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search#","name":""}],
+    
+    "inLanguage":"",
+    
+    "name": "Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)",
+
+    
+    
+
+    "dateCreated": [
+    ],
+    "dateModified": [
+    ],
+    "datePublished": [
+    ],
+		"thumbnailUrl": [
+    
+    "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811/attachments/z3066282683583_ef74669cddf863962edd947ddcf4aa5e.jpg"
+    ],
+		"description": "Dữ liệu ranh thửa đất Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh, được xây dựng năm 2014 trong công tác \"Xây dựng cơ sở dữ liệu quản lý đất đai thành phố Hồ Chí Minh\" theo Quyết định số 5946/QĐ-UBND ngày 29/12/2009, CSDL địa chính của công tác này được xây dựng từ các nguồn: hồ sơ dữ liệu đất đai từ trước 1975, hồ sơ đất đai theo quyết định 6280/QĐ-UB-QLĐT, kết quả tổng điều tra kê khai đăng ký nhà đất năm 1999, sổ điều tra điền dã - tổng kiểm kê đất đai 2010, hồ sơ GCNQSDĐ được cấp theo các quyết định 38/2002/QĐ-UB-ĐT, 04/2003/QĐ-UB, 90/2004/QĐ-UB và 54/2007/QĐ-UBND, bản đồ bằng khoán trước 1975, bản đồ giải thửa 299/TTg, bản đồ địa chính 02/CT-UB, sơ đồ nền và bản đồ địa chính chính quy. Cơ sở dữ liệu địa chính được lưu trữ dưới dạng ESRI GeoDatabase theo phần mềm VILIS của Bộ Tài nguyên và Môi trường. Thực hiện kế hoạch nhiệm vụ về thu thập, quản lý, khai thác và sử dụng dữ liệu TN&amp;MT năm 2018 theo Quyết định số 37/2018/QĐ-UBND ngày 09 tháng 10 năm 2018 của Ủy ban nhân dân thành phố Hồ Chí Minh ban hành Quy chế thu thập, quản lý, khai thác, chia sẻ và sử dụng thông tin, dữ liệu tài nguyên và môi trường trên địa bàn thành phố Hồ Chí Minh (theo quy định của (Nghị định số 73/2017/NĐ-CP ngày 14 tháng 6 năm 2017 của Chính phủ về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường), Dữ liệu ranh thửa phường Bến Nghé được trích xuất từ CSDL địa chính (VILIS) nói trên và chuẩn hóa, đưa vào lưu trữ, quản lý và cung cấp các dịch vụ Web trực tuyến để phục vụ kịp thời nhu cầu của ngành TN&amp;MT, các Sở ban ngành khác và các dự án liên quan trong việc triển khai Đề án “Xây dựng Thành phố Hồ Chí Minh trở thành Thành phố Thông minh giai đoạn 2017-2020, tầm nhìn đến năm 2025” của Thành phố và các dự án, công trình khác có liên quan. Các dịch vụ Web đều tuân thủ các tiêu chuẩn do Nhà nước quy định, chuẩn mở quốc tế như OGC WMS, OGC WFS, TMS, WMTS, KML, GeJson, GML, ... đáp ứng hệ tọa độ VN2000 Thành phố Hồ Chí Minh và WGS84 toàn cầu. Độ chính xác của dữ liệu ranh thửa phường Bến Nghé tương đương tỷ lệ 1/200 (14 mảnh),1/500 ((28 mảnh) và 1/1000 (2 mảnh) tùy thuộc vào từng khu vực (Liên hệ với đơn vị chức năng để biết thêm chi tiết).",
+
+    
+    
+
+    
+      "version": "V2010",
+    
+
+    
+    "keywords":[
+      "Ranh thửa Quận 1",""
+		],
+
+
+    
+
+    "author": [],
+    "contributor": [],
+    "creator": [],
+    "provider" : [
+   {
+        
+        
+        "@id":"",
+        "@type":"Organization"
+        
+          ,"name": "Trung tâm Công nghệ Thông tin Tài nguyên và Môi trường"
+          ,"email": ""
+        
+        ,"contactPoint": {
+          "@type" : "PostalAddress"
+          
+            ,"addressCountry": "Việt Nam"
+            ,"addressLocality": "Thành phố Hồ Chí Minh"
+            ,"postalCode": "028"
+            ,"streetAddress": "63 Lý Tự Trọng, Phường Bến Nghé"
+          }
+        }
+  ],
+    "copyrightHolder": [
+   {
+        
+        
+        "@id":"stnmt@tphcm.gov.vn",
+        "@type":"Organization"
+        
+          ,"name": "Sở Tài nguyên và Môi trường Thành phố Hồ Chí Minh"
+          ,"email": "stnmt@tphcm.gov.vn"
+        
+        ,"contactPoint": {
+          "@type" : "PostalAddress"
+          
+            ,"addressCountry": "Việt Nam"
+            ,"addressLocality": "Thành phố Hồ Chí Minh"
+            ,"postalCode": "028"
+            ,"streetAddress": "63 Lý Tự Trọng, Phường Bến Nghé"
+          }
+        }
+  ],
+    "user": [],
+    "sourceOrganization": [],
+    "publisher": []
+
+
+    
+
+    
+    
+    ,"distribution": [
+      
+        {
+         "@type":"DataDownload",
+         "contentUrl": "https://esb-stnmt.tphcm.gov.vn",
+         "encodingFormat":"WWW:LINK-1.0-http--link",
+         "name": "Hệ thống trục tích hợp các dịch vụ Web Tài nguyên và Môi trường",
+         "description": "Khai thác và sử dụng dữ liệu ranh thửa qua dịch vụ WFS tại đây"
+        }
+        ,
+        {
+         "@type":"DataDownload",
+         "contentUrl": "https://geodata-stnmt.tphcm.gov.vn/geoserver/tnmt/wms",
+         "encodingFormat":"OGC:WMS-1.1.1-http-get-capabilities",
+         "name": "tnmt:v_q1_bennghe",
+         "description": "Ranh thửa đất Phường Bến Nghé - Quận 1 khai thác qua dịch vụ WMS"
+        }
+        
+    ]
+    
+
+
+    ,"spatialCoverage": [
+    
+      {"@type":"Place",
+        "description": [
+        
+          ], 
+        "geo": [
+          
+              {"@type":"GeoShape",
+              "box": "106.692671699048 106.712520053958 10.7684020099483 10.789434839921"
+              }
+        ]}]
+
+
+    
+      ,"temporalCoverage": ["2010-01-01/2010-12-31" ]
+     
+      ,"license":  [
+            {
+              "@type": "CreativeWork",
+              "name": "Dữ liệu này được khai thác và sử dụng miễn phí. Các ứng dụng thương mại hoặc các dự án, công trình, nhiệm vụ sử dụng dữ liệu này phải thực hiện nghĩa vụ tài chính theo quy định"
+            }
+           ]
+    
+    
+    
+	}</script>
+                  <div gn-related="md" data-user="user" data-types="onlines">
+                    <!--icon-->
+                  </div>
+                </header>
+                <div>
+                  <div class="tab-content">
+                    <div id="gn-tab-default">
+                      <h1 class="hidden">Simple</h1>
+                      <div id="gn-view-d30286791e3912" class="gn-tab-content">
+                        <dl class="gn-date">
+                          <dt>Date (Revision)</dt>
+                          <dd>
+                            <span data-gn-humanize-time="2010-01-30" data-format="DD MMM YYYY">
+                              <!--gco:Date-->
+                              2010-01-30
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Edition</dt>
+                          <dd>
+                            <!--gmd:edition-->
+                            <span>
+                              <!--gmd:edition-->
+                              <p>V2010</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Presentation form</dt>
+                          <dd>
+                            <!--gmd:presentationForm-->
+                            <span title="Map represented in raster or vector form">Digital map</span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Purpose</dt>
+                          <dd>
+                            <!--gmd:purpose-->
+                            <span>
+                              <!--gmd:purpose-->
+                              <p>Dữ liệu ranh thửa được cung cấp tạm thời phục phụ tham chiếu để làm nền phát triển và xây dựng các dữ liệu, ứng dụng khác trong khi chờ đợi Sở TNMT triển khai xây dựng CSDL địa chính mới hơn.</p>
+                              <p>Dữ liệu ranh thửa đất mang chỉ mang tính chất tham khảo, tham chiếu để phục vụ các mục tiêu khác nhau. Dữ liệu ranh thửa đất không có giá trị pháp lý để xử lý các vấn đề liên quan đến quản lý nhà nuốc về đất đai)</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Status</dt>
+                          <dd>
+                            <!--gmd:status-->
+                            <span title="Data is continually being updated">On going</span>
+                          </dd>
+                        </dl>
+                        <div class="gn-contact">
+                          <strong>
+                            <!--email-->
+                            owner
+                          </strong>
+                          <address>
+                            <i class="fa fa-fw fa-envelope"> </i>
+                            <a href="mailto:stnmt@tphcm.gov.vn">
+                              <span>
+                                <!--gmd:organisationName-->
+                                Sở Tài nguyên và Môi trường Thành phố Hồ Chí Minh
+                              </span>
+                              -
+                              <span>
+                                <!--gmd:individualName-->
+                                Nguyễn Toàn Thắng
+                              </span>
+                              (
+                              <span>
+                                <!--gmd:positionName-->
+                                Giám đốc
+                              </span>
+                              )
+                              <!--email-->
+                            </a>
+                            <br />
+                            <div>
+                              <i class="fa fa-fw fa-map-marker">
+                                <!--address-->
+                              </i>
+                              <span>
+                                <!--gmd:deliveryPoint-->
+                                63 Lý Tự Trọng, Phường Bến Nghé
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:city-->
+                                Thành phố Hồ Chí Minh
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:administrativeArea-->
+                                Quận 1
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:postalCode-->
+                                028
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:country-->
+                                Việt Nam
+                              </span>
+                            </div>
+                            <i class="fa fa-fw fa-phone">
+                              <!--phone-->
+                            </i>
+                            <a href="tel:02838293661">028 38293661</a>
+                            <br />
+                            <i class="fa fa-fw fa-fax">
+                              <!--fax-->
+                            </i>
+                            <a href="tel:02838231806">028 38231806</a>
+                            <br />
+                          </address>
+                        </div>
+                        <dl>
+                          <dt>Maintenance and update frequency</dt>
+                          <dd>
+                            <!--gmd:maintenanceAndUpdateFrequency-->
+                            <span title="Data is updated in intervals that are uneven in duration">Irregular</span>
+                          </dd>
+                        </dl>
+                        <dl class="gn-keyword">
+                          <dt>Keywords</dt>
+                          <dd>
+                            <div>
+                              <ul>
+                                <li>
+                                  <span>
+                                    <!--gmd:keyword-->
+                                    <p>Ranh thửa Quận 1</p>
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </dd>
+                        </dl>
+                        <dl class="gn-keyword">
+                          <dt>Keywords</dt>
+                          <dd>
+                            <div>
+                              <ul>
+                                <li>
+                                  <span>
+                                    <!--gmd:keyword-->
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Access constraints</dt>
+                          <dd>
+                            <!--gmd:accessConstraints-->
+                            <span title="Exclusive right to the publication, production, or sale of the rights to a&#xA;        literary, dramatic, musical, or artistic work, or to the use of a commercial print or&#xA;        label, granted by law for a specified period of time to an author, composer, artist,&#xA;        distributor&#xA;      ">Copyright</span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Use constraints</dt>
+                          <dd>
+                            <!--gmd:useConstraints-->
+                            <span title="Exclusive right to the publication, production, or sale of the rights to a&#xA;        literary, dramatic, musical, or artistic work, or to the use of a commercial print or&#xA;        label, granted by law for a specified period of time to an author, composer, artist,&#xA;        distributor&#xA;      ">Copyright</span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Other constraints</dt>
+                          <dd>
+                            <!--gmd:otherConstraints-->
+                            <span>
+                              <!--gmd:otherConstraints-->
+                              <p>Dữ liệu này được khai thác và sử dụng miễn phí. Các ứng dụng thương mại hoặc các dự án, công trình, nhiệm vụ sử dụng dữ liệu này phải thực hiện nghĩa vụ tài chính theo quy định</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Denominator</dt>
+                          <dd>
+                            <!--gmd:denominator-->
+                            1000
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Metadata language</dt>
+                          <dd>
+                            <!--gmd:language-->
+                            <span>
+                              <!--gmd:language-->
+                              <p>vie</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Character set</dt>
+                          <dd>
+                            <!--gmd:characterSet-->
+                            <span title="8-bit variable size UCS Transfer Format, based on ISO/IEC 10646">UTF8</span>
+                          </dd>
+                        </dl>
+                        <dl class="gn-date">
+                          <dt>Topic category</dt>
+                          <dd>
+                            <ul>
+                              <li>
+                                <span title="Legal land descriptions. Examples: political and administrative&#xA;        boundaries&#xA;      ">Boundaries</span>
+                              </li>
+                            </ul>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Begin date</dt>
+                          <dd>
+                            <!--gml:beginPosition-->
+                            2010-01-01
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>End date</dt>
+                          <dd>
+                            <!--gml:endPosition-->
+                            2010-12-31
+                          </dd>
+                        </dl>
+                        <div class="thumbnail extent">
+                          <div class="input-group coord coord-north">
+                            <input type="text" class="form-control" aria-label="north" value="10.79" readonly="" />
+                            <span class="input-group-addon">N</span>
+                          </div>
+                          <div class="input-group coord coord-south">
+                            <input type="text" class="form-control" aria-label="south" value="10.77" readonly="" />
+                            <span class="input-group-addon">S</span>
+                          </div>
+                          <div class="input-group coord coord-east">
+                            <input type="text" class="form-control" aria-label="east" value="106.71" readonly="" />
+                            <span class="input-group-addon">E</span>
+                          </div>
+                          <div class="input-group coord coord-west">
+                            <input type="text" class="form-control" aria-label="west" value="106.69" readonly="" />
+                            <span class="input-group-addon">W</span>
+                          </div>
+                          <img class="gn-img-extent" alt="thumbnail" src="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/regions/geom.png?geomsrs=EPSG:4326&amp;geom=POLYGON((106.712520053958%2010.7684020099483,106.712520053958%2010.789434839921,106.692671699048%2010.789434839921,106.692671699048%2010.7684020099483,106.712520053958%2010.7684020099483))" />
+                        </div>
+                        <br />
+                        <br />
+                        <!--icon-->
+                      </div>
+                      <div id="gn-view-d30286791e3914" class="gn-tab-content">
+                        <dl class="gn-code">
+                          <dt>Reference system identifier</dt>
+                          <dd>
+                            <span>
+                              <!--gmd:code-->
+                              WGS84, VN2000
+                            </span>
+                            <p>
+                              <!--gmd:referenceSystemIdentifier-->
+                              <span>
+                                <!--gmd:title-->
+                              </span>
+                            </p>
+                          </dd>
+                        </dl>
+                        <!--icon-->
+                      </div>
+                      <div id="gn-view-d30286791e3916" class="gn-tab-content">
+                        <dl>
+                          <dt>Transformation parameter availability</dt>
+                          <dd>
+                            <!--gmd:transformationParameterAvailability-->
+                            No
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Checkpoint Availability</dt>
+                          <dd>
+                            <!--gmd:checkPointAvailability-->
+                            No
+                          </dd>
+                        </dl>
+                        <dl class="gn-date">
+                          <dt>Point in Pixel</dt>
+                          <dd>
+                            <ul>
+                              <li />
+                            </ul>
+                          </dd>
+                        </dl>
+                        <!--icon-->
+                      </div>
+                      <div id="gn-view-d30286791e3918" class="gn-tab-content">
+                        <dl class="gn-link">
+                          <dt>OnLine resource</dt>
+                          <dd>
+                            <a href="https://esb-stnmt.tphcm.gov.vn" title="Hệ thống trục tích hợp các dịch vụ Web Tài nguyên và Môi trường">
+                              <span>
+                                <!--gmd:onLine-->
+                                Hệ thống trục tích hợp các dịch vụ Web Tài nguyên và Môi trường
+                              </span>
+                            </a>
+                            (
+                            <span>
+                              <!--gmd:onLine-->
+                              <span>
+                                <!--gmd:protocol-->
+                                WWW:LINK-1.0-http--link
+                              </span>
+                            </span>
+                            )
+                            <p>
+                              <!--gmd:onLine-->
+                              <span>
+                                <!--gmd:description-->
+                                <p>Khai thác và sử dụng dữ liệu ranh thửa qua dịch vụ WFS tại đây</p>
+                              </span>
+                            </p>
+                          </dd>
+                        </dl>
+                        <dl class="gn-link">
+                          <dt>OnLine resource</dt>
+                          <dd>
+                            <a href="https://geodata-stnmt.tphcm.gov.vn/geoserver/tnmt/wms" title="tnmt:v_q1_bennghe">
+                              <span>
+                                <!--gmd:onLine-->
+                                tnmt:v_q1_bennghe
+                              </span>
+                            </a>
+                            (
+                            <span>
+                              <!--gmd:onLine-->
+                              <span>
+                                <!--gmd:protocol-->
+                                OGC:WMS-1.1.1-http-get-capabilities
+                              </span>
+                            </span>
+                            )
+                            <p>
+                              <!--gmd:onLine-->
+                              <span>
+                                <!--gmd:description-->
+                                <p>Ranh thửa đất Phường Bến Nghé - Quận 1 khai thác qua dịch vụ WMS</p>
+                              </span>
+                            </p>
+                          </dd>
+                        </dl>
+                        <!--icon-->
+                      </div>
+                      <div id="gn-view-d30286791e3920" class="gn-tab-content">
+                        <dl>
+                          <dt>Hierarchy level</dt>
+                          <dd>
+                            <!--gmd:level-->
+                            <span title="Information applies to the dataset">Dataset</span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Statement</dt>
+                          <dd>
+                            <!--gmd:statement-->
+                            <span>
+                              <!--gmd:statement-->
+                              <p>Dữ liệu ranh thửa đất phường Bến Nghé - Quận 1 (2010) được xây dựng theo quy trình tại Thông tư 26/2014/TT-BTNMT về Ban hành quy trình và định mức kinh tế-kỹ thuật xây dựng CSDL tài nguyên và môi trường và kiểm tra nghiệm thu theo quy định tại Thông tư 58/2015/TT-BTNMT về Quy định thẩm định, kiểm tra và nghiệm thu dự án ứng dụng CNTT Tài nguyên và Môi trường</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <!--icon-->
+                      </div>
+                      <div id="gn-view-d30286791e3923" class="gn-tab-content">
+                        <!--icon-->
+                      </div>
+                      <div id="gn-section-d30286791e3925" class="gn-tab-content">
+                        <dl>
+                          <dt>File identifier</dt>
+                          <dd>
+                            246a5939-530d-47e7-84b4-99d686e73811
+                            <a class="btn btn-default" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811/formatters/xml">
+                              <i class="fa fa-file-code-o">
+                                <!--file-->
+                              </i>
+                              <span>XML</span>
+                            </a>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Metadata language</dt>
+                          <dd>
+                            <!--gmd:language-->
+                            <span>
+                              <!--gmd:language-->
+                              <p>vie</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Character set</dt>
+                          <dd>
+                            <!--gmd:characterSet-->
+                            <span title="8-bit variable size UCS Transfer Format, based on ISO/IEC 10646">UTF8</span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Date stamp</dt>
+                          <dd>
+                            <!--gmd:dateStamp-->
+                            <span data-gn-humanize-time="2024-01-09T09:26:05">
+                              <!--gco:DateTime-->
+                              2024-01-09T09:26:05
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Metadata standard name</dt>
+                          <dd>
+                            <!--gmd:metadataStandardName-->
+                            <span>
+                              <!--gmd:metadataStandardName-->
+                              <p>ISO 19115:2003/19139</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Metadata standard version</dt>
+                          <dd>
+                            <!--gmd:metadataStandardVersion-->
+                            <span>
+                              <!--gmd:metadataStandardVersion-->
+                              <p>1.0</p>
+                            </span>
+                          </dd>
+                        </dl>
+                        <div class="gn-contact">
+                          <strong>
+                            <!--email-->
+                            pointOfContact
+                          </strong>
+                          <address>
+                            <i class="fa fa-fw fa-envelope"> </i>
+                            <a href="mailto:">
+                              <span>
+                                <!--gmd:organisationName-->
+                                Trung tâm Công nghệ Thông tin Tài nguyên và Môi trường
+                              </span>
+                              -
+                              <span>
+                                <!--gmd:individualName-->
+                                Bùi Hồng Sơn
+                              </span>
+                              (
+                              <span>
+                                <!--gmd:positionName-->
+                                Giám đốc
+                              </span>
+                              )
+                              <!--email-->
+                            </a>
+                            <br />
+                            <div>
+                              <i class="fa fa-fw fa-map-marker">
+                                <!--address-->
+                              </i>
+                              <span>
+                                <!--gmd:deliveryPoint-->
+                                63 Lý Tự Trọng, Phường Bến Nghé
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:city-->
+                                Thành phố Hồ Chí Minh
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:administrativeArea-->
+                                Quận 1
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:postalCode-->
+                                028
+                              </span>
+                              ,
+                              <span>
+                                <!--gmd:country-->
+                                Việt Nam
+                              </span>
+                            </div>
+                            <i class="fa fa-fw fa-phone">
+                              <!--phone-->
+                            </i>
+                            <a href="tel:+84903746638">+84 903746638</a>
+                            <br />
+                          </address>
+                        </div>
+                         
+                      </div>
+                       
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="gn-md-side gn-md-side-advanced col-md-4">
+                <section class="gn-md-side-overview">
+                  <h2>
+                    <i class="fa fa-fw fa-image">
+                      <!--image-->
+                    </i>
+                    <span>
+                      <!--gmd:MD_Metadata-->
+                      Overviews
+                    </span>
+                  </h2>
+                  <img data-gn-img-modal="md" class="gn-img-thumbnail" alt="overview" src="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811/attachments/z3066282683583_ef74669cddf863962edd947ddcf4aa5e.jpg" />
+                </section>
+                <section class="gn-md-side-extent">
+                  <h2>
+                    <i class="fa fa-fw fa-map-marker">
+                      <!--image-->
+                    </i>
+                    <span>
+                      <!--gmd:MD_Metadata-->
+                      Spatial extent
+                    </span>
+                  </h2>
+                  <div class="thumbnail extent">
+                    <div class="input-group coord coord-north">
+                      <input type="text" class="form-control" aria-label="north" value="10.79" readonly="" />
+                      <span class="input-group-addon">N</span>
+                    </div>
+                    <div class="input-group coord coord-south">
+                      <input type="text" class="form-control" aria-label="south" value="10.77" readonly="" />
+                      <span class="input-group-addon">S</span>
+                    </div>
+                    <div class="input-group coord coord-east">
+                      <input type="text" class="form-control" aria-label="east" value="106.71" readonly="" />
+                      <span class="input-group-addon">E</span>
+                    </div>
+                    <div class="input-group coord coord-west">
+                      <input type="text" class="form-control" aria-label="west" value="106.69" readonly="" />
+                      <span class="input-group-addon">W</span>
+                    </div>
+                    <img class="gn-img-extent" alt="thumbnail" src="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/regions/geom.png?geomsrs=EPSG:4326&amp;geom=POLYGON((106.712520053958%2010.7684020099483,106.712520053958%2010.789434839921,106.692671699048%2010.789434839921,106.692671699048%2010.7684020099483,106.712520053958%2010.7684020099483))" />
+                  </div>
+                  <br />
+                  <br />
+                </section>
+                <section class="gn-md-side-social">
+                  <h2>
+                    <i class="fa fa-fw fa-tag">
+                      <!--image-->
+                    </i>
+                    <span>
+                      <!--gmd:MD_Metadata-->
+                      Keywords
+                    </span>
+                  </h2>
+                </section>
+                <br />
+                <section class="gn-md-side-providedby">
+                  <h2>
+                    <i class="fa fa-fw fa-cog">
+                      <!--icon-->
+                    </i>
+                    <span>Provided by</span>
+                  </h2>
+                  <img class="gn-source-logo" alt="logo" src="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/../images/logos/2719ea86-e80c-4361-8d31-9820a4a4df88.png" />
+                </section>
+                <section class="gn-md-side-social">
+                  <h2>
+                    <i class="fa fa-fw fa-share-square-o">
+                      <!--icon-->
+                    </i>
+                    <span>Share on social sites</span>
+                  </h2>
+                  <a href="https://twitter.com/share?url=https%3A%2F%2Fgeoportal-stnmt.tphcm.gov.vn%2Fgeonetwork%2Fsrv%2Fapi%2Frecords%2F246a5939-530d-47e7-84b4-99d686e73811" target="_blank" aria-label="Twitter" class="btn btn-default">
+                    <i class="fa fa-fw fa-twitter">
+                      <!--icon-->
+                    </i>
+                  </a>
+                  <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fgeoportal-stnmt.tphcm.gov.vn%2Fgeonetwork%2Fsrv%2Fapi%2Frecords%2F246a5939-530d-47e7-84b4-99d686e73811" target="_blank" aria-label="Facebook" class="btn btn-default">
+                    <i class="fa fa-fw fa-facebook">
+                      <!--icon-->
+                    </i>
+                  </a>
+                  <a href="http://www.linkedin.com/shareArticle?mini=true&amp;summary=&amp;url=https%3A%2F%2Fgeoportal-stnmt.tphcm.gov.vn%2Fgeonetwork%2Fsrv%2Fapi%2Frecords%2F246a5939-530d-47e7-84b4-99d686e73811" target="_blank" aria-label="LinkedIn" class="btn btn-default">
+                    <i class="fa fa-fw fa-linkedin">
+                      <!--icon-->
+                    </i>
+                  </a>
+                  <a href="mailto:?subject=Dữ liệu ranh thửa phường Bến Nghé - Quận 1 (TP.HCM 2010)&amp;body=https%3A%2F%2Fgeoportal-stnmt.tphcm.gov.vn%2Fgeonetwork%2Fsrv%2Fapi%2Frecords%2F246a5939-530d-47e7-84b4-99d686e73811" target="_blank" aria-label="Email" class="btn btn-default">
+                    <i class="fa fa-fw fa-envelope-o">
+                      <!--icon-->
+                    </i>
+                  </a>
+                </section>
+                <section class="gn-md-side-access">
+                  <a class="btn btn-block btn-primary" href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/catalog.search#/metadata/246a5939-530d-47e7-84b4-99d686e73811">
+                    <i class="fa fa-fw fa-link">
+                      <!--icon-->
+                    </i>
+                    Access to the portal
+                  </a>
+                  <div class="hidden-xs hidden-sm">Read here the full details and access to the data.</div>
+                </section>
+                <section class="gn-md-side-associated">
+                  <h2>
+                    <i class="fa fa-fw fa-link">
+                      <!--icon-->
+                    </i>
+                    <span>Associated resources</span>
+                  </h2>
+                  <div gn-related="md" data-user="user" data-types="parent|children|services|datasets|hassources|sources|fcats|siblings|associated">Not available</div>
+                </section>
+              </div>
+            </div>
+            <footer>
+              <!--Not yet-->
+            </footer>
+          </article>
+          <br />
+          <br />
+        </div>
+      </div>
+      <div class="navbar navbar-default gn-bottom-bar" role="navigation">
+        <ul class="nav navbar-nav">
+          <li class="gn-footer-text" />
+          <li>
+            <a href="http://geonetwork-opensource.org/">
+              <i class="fa fa-fw"> </i>
+              <span />
+            </a>
+          </li>
+          <li class="hidden-sm">
+            <a href="https://github.com/geonetwork/core-geonetwork">
+              <i class="fa fa-github"> </i>
+              <span />
+            </a>
+          </li>
+          <li>
+            <a href="https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/eng/../../doc/api" title=""> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

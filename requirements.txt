@@ -5,3 +5,7 @@ python-multipart>=0.0.9
 requests>=2.31
 shapely>=2.0
 uvicorn>=0.29
+pdfplumber>=0.11
+
+Pillow>=10.4
+qrcode>=7.4

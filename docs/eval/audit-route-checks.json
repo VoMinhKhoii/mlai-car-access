@@ -1,0 +1,10 @@
+{
+  "counts": {
+    "plans": 150,
+    "routes": 323,
+    "full_steps": 1521,
+    "partial_steps": 315
+  },
+  "examples": [],
+  "note": "30 destinations × 5 vehicles; returned entry paths, not exit paths or an external origin approach."
+}

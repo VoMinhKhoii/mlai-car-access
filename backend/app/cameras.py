@@ -22,7 +22,7 @@ import httpx
 
 from . import ai, flags
 from .deadline import Expired, timeout
-from .config import CAMERA_READ_TTL_S, CAMERA_STALE_MIN, DATA, STORE
+from .config import CAMERA_READ_TTL_S, CAMERA_STALE_MIN, DATA, STORE, CACHED_ONLY
 from .storage import CorruptState, read_json, write_json
 from .osm import haversine, strip_accents
 
@@ -90,7 +90,7 @@ def registry(deadline: float | None = None) -> dict:
     with _reg_lock:
         _seed_registry_locked()
         now = time.time()
-        if deadline is None and not _reg["pending"] and now - _reg["t"] > REGISTRY_TTL_S:
+        if not CACHED_ONLY and deadline is None and not _reg["pending"] and now - _reg["t"] > REGISTRY_TTL_S:
             previous_attempt = _reg["t"]
             _reg["t"] = now
             _reg["pending"] = True
@@ -237,6 +237,8 @@ def snapshot(cam_id: str, max_age_s: float = SNAP_TTL_S, *, deadline: float | No
     hit = _snaps.get(cam_id)
     if hit and time.time() - hit[0] < max_age_s:
         return hit[1]
+    if CACHED_ONLY:
+        return hit[1] if hit else None
     timeout(deadline, 12)
     cameras = by_id(deadline)
     if cameras.get(cam_id, {}).get("status") == "NOT_IMAGE":  # the portal itself says it has no picture

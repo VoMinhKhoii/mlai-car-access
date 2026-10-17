@@ -1,0 +1,18 @@
+{
+  "url": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search?any=B%C3%ACnh%20Th%E1%BA%A1nh",
+  "retrieved_at": "2026-10-17T00:37:34Z",
+  "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)",
+  "status": 200,
+  "headers": {
+    "x-frame-options": "DENY",
+    "content-security-policy": "frame-ancestors 'none'",
+    "content-type": "text/html;charset=utf-8",
+    "date": "Sat, 17 Oct 2026 01:00:46 GMT",
+    "keep-alive": "timeout=20",
+    "connection": "keep-alive",
+    "set-cookie": "TBMCookie_13734111663641319109=563672001792197438cxcHi1t9FANZiWwdkDqGPW5Ok5c=; path=/, ___utmvm=###########; path=/, JSESSIONID=1EA1B7383AA3558D634AE0A9D8472620; path=/geonetwork; HttpOnly, _frontend=!IYS5N9xH2/fBr5CgCwsyXMX4tpbVZiP5XF9ILiCB+mqlXkN5Nr2Nap2D425mq6bqfvRreCq0gTfsn2g=; path=/; HttpOnly; secure, TS01d56134=0150c7cfd1da221db275546b60bd2c25d9c0cdef72699dccaff187076b60a94124e85df682145b614f3822b411cf453e75a596a5eba758d4531e61d2afab7a90decaf1bd39; path=/; domain=.geoportal-stnmt.tphcm.gov.vn; HttpOnly; secure, TS01eb5df5=0150c7cfd1375949075b1ce91e175799679ab35784699dccaff187076b60a94124e85df682b0a163a4f4567ba6c8627c97f8256be960ca606ae67bafe0471e1e8419798da0; path=/geonetwork; HttpOnly; secure",
+    "transfer-encoding": "chunked"
+  },
+  "bytes": 73151,
+  "sha256": "070e2ff87381ee652fda8a1151b4de888a0abb8989984e7f001b587e42f38e9e"
+}

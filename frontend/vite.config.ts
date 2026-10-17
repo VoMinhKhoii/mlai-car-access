@@ -7,5 +7,6 @@ const backend = process.env.BACKEND_ORIGIN ?? 'http://127.0.0.1:8787'
 
 export default defineConfig({
   plugins: [react()],
+  build: { rollupOptions: { input: { main: "index.html", field: "field.html" } } },
   server: { port: 5173, proxy: { '/api': backend } },
 })

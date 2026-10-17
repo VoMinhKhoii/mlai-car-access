@@ -1,52 +1,61 @@
-/* Vào Được design tokens.
-   Map-led and light. The base map and the semantic fit/flood colours carry the meaning; chrome stays quiet.
-   Type: Be Vietnam Pro everywhere; decisions and numbers use its heavier weights. */
+/* Ngõ Ngách design tokens.
+   The live map is the only backdrop. One layer of Liquid Glass carries the controls (trip island, journey dock,
+   map rail, inspector); content inside it is flat, separated by space and one tone step.
+   Status colours (fit, flood) carry meaning and are always paired with a word. */
 :root {
-  /* neutrals (warm-cool slate, tuned to sit on Goong's pale base map) */
+  /* neutrals */
   --n-0: #ffffff;
-  --n-25: #fbfcfb;
-  --n-50: #f4f6f5;
-  --n-100: #eaedec;
-  --n-200: #dbe0df;
-  --n-300: #c3cac9;
-  --n-500: #6b7876;
-  --n-600: #52605e;
-  --n-700: #36423f;
-  --n-900: #101816;
+  --n-25: #fbfbfd;
+  --n-50: #f5f5f7;
+  --n-100: #ececf0;
+  --n-200: #dcdce1;
+  --n-300: #c7c7cc;
+  --n-500: #6e6e73;
+  --n-600: #57575c;
+  --n-700: #3a3a3f;
+  --n-900: #1d1d1f;
 
-  /* roles */
-  --surface: var(--n-0);
-  --surface-sunk: var(--n-50);
-  --surface-raised: var(--n-0);
-  --outline: var(--n-200);
-  --outline-strong: var(--n-300);
+  /* roles: running text is always full ink; the softer ink is for 13px meta only */
+  --surface: transparent;
+  --surface-solid: #ffffff;
+  --surface-sunk: rgb(0 0 0 / 0.045);
+  --surface-raised: #ffffff;
+  --outline: rgb(0 0 0 / 0.08);
+  --outline-strong: rgb(0 0 0 / 0.16);
   --text: var(--n-900);
-  --text-2: var(--n-600);
-  --text-3: var(--n-500);
-  --on-dark: #f5f8f7;
+  --text-2: rgb(60 60 67 / 0.86);
+  --text-3: rgb(60 60 67 / 0.78);
+  --on-dark: #ffffff;
 
-  /* brand: deep road-sign teal, and a signal orange for the walk and the selected stop */
-  --brand: #0b4a52;
-  --brand-600: #0e5d67;
-  --brand-tint: #e3f0ef;
-  --signal: #f0562a;
+  /* glass: one recipe, light from above */
+  --glass-bg: rgb(255 255 255 / 0.68);
+  --glass-dense: rgb(255 255 255 / 0.9);
+  --glass-blur: 20px;
+  --glass-rim: inset 0 1px 0 rgb(255 255 255 / 0.75), 0 0 0 0.5px rgb(0 0 0 / 0.08);
+  --glass-lift: 0 8px 32px rgb(0 0 0 / 0.14);
+
+  /* action: system blue for the primary action, the chosen route and the selected stop only */
+  --brand: #0071e3;
+  --brand-600: #0062c4;
+  --brand-tint: #e6f0fc;
+  --signal: #f0562a;      /* the dotted walk on the map, nothing else */
   --signal-tint: #fdebe4;
 
   /* routes */
-  --route: #1f5eff;
+  --route: #0071e3;
   --route-casing: #ffffff;
-  --route-standard: #3a4246;
+  --route-standard: #3a3a3f;
 
   /* semantic: fit of an alley for THIS car */
   --fit-fits: #18915a;
   --fit-tight: #e09a12;
   --fit-no: #d33a3a;
-  --fit-unknown: #9aa6a8;
-  --fit-blocked: #7b45e0;
-  --fit-fits-tint: #e4f4ec;
-  --fit-tight-tint: #fdf2dc;
-  --fit-no-tint: #fbe6e6;
-  --fit-unknown-tint: #eef1f1;
+  --fit-unknown: #9aa1a6;
+  --fit-blocked: #8e1b1b;
+  --fit-fits-tint: rgb(24 145 90 / 0.12);
+  --fit-tight-tint: rgb(224 154 18 / 0.16);
+  --fit-no-tint: rgb(211 58 58 / 0.12);
+  --fit-unknown-tint: rgb(0 0 0 / 0.05);
 
   /* semantic: traffic a camera sees (busy but moving sits between fits and tight) */
   --traffic-busy: #e9c46a;
@@ -55,19 +64,19 @@
   --flood-low: #9cc7ff;
   --flood-risky: #3b6df0;
   --flood-over: #1b2f86;
-  --flood-tint: #e8f0ff;
+  --flood-tint: rgb(59 109 240 / 0.12);
 
-  /* type */
-  --font-ui: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --fs-11: 11.5px;
-  --fs-12: 12.5px;
-  --fs-14: 14px;
+  /* type: one family, five sizes. 13 meta · 15 body · 17 titles and controls · 22 verdicts · 34 the one big number */
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --fs-11: 13px;
+  --fs-12: 13px;
+  --fs-14: 15px;
   --fs-15: 15px;
   --fs-17: 17px;
   --fs-22: 22px;
-  --fs-28: 28px;
-  --fs-36: 36px;
+  --fs-28: 34px;
+  --fs-36: 34px;
 
   /* space (4pt) */
   --s-1: 4px;
@@ -78,23 +87,23 @@
   --s-6: 24px;
   --s-8: 32px;
 
-  /* shape */
+  /* shape: capsules for controls only; containers are concentric (inner = outer − padding) */
   --r-xs: 6px;
-  --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 20px;
-  --r-xl: 26px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 28px;
   --r-pill: 999px;
 
-  /* elevation: hairline + soft ambient, never heavy */
-  --e-1: 0 0 0 1px rgb(16 24 22 / 0.06), 0 1px 2px rgb(16 24 22 / 0.06);
-  --e-2: 0 0 0 1px rgb(16 24 22 / 0.06), 0 6px 20px -6px rgb(16 24 22 / 0.18);
-  --e-3: 0 0 0 1px rgb(16 24 22 / 0.07), 0 18px 48px -12px rgb(16 24 22 / 0.28);
+  /* elevation: one lift per floating layer, same light */
+  --e-1: none;
+  --e-2: 0 8px 32px rgb(0 0 0 / 0.14);
+  --e-3: 0 16px 48px rgb(0 0 0 / 0.18);
 
   /* motion */
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --t-fast: 120ms;
-  --t-med: 220ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 140ms;
+  --t-med: 240ms;
 
   --tap: 44px;
 }

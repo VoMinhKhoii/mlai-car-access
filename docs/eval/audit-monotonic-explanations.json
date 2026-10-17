@@ -1,0 +1,7548 @@
+[
+  {
+    "i": 13,
+    "lat": 10.81450656563857,
+    "lon": 106.70433975461812,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "toyota-fortuner",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Đường ven rạch Xuyên Tâm",
+        "lat": 10.8154506,
+        "lon": 106.70501125,
+        "way_id": 604803368,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 139,
+          "minutes": 2
+        },
+        "route_in": {
+          "meters": 535,
+          "side": "v",
+          "geometry": [
+            [
+              106.70348,
+              10.8110534
+            ],
+            [
+              106.7035595,
+              10.8112262
+            ],
+            [
+              106.7036354,
+              10.8113505
+            ],
+            [
+              106.7036893,
+              10.811447
+            ],
+            [
+              106.7037302,
+              10.8116434
+            ],
+            [
+              106.7037616,
+              10.8120798
+            ],
+            [
+              106.7038429,
+              10.8129659
+            ],
+            [
+              106.7038888,
+              10.8133705
+            ],
+            [
+              106.7039424,
+              10.8136668
+            ],
+            [
+              106.7040366,
+              10.8139496
+            ],
+            [
+              106.7041236,
+              10.8141322
+            ],
+            [
+              106.7042579,
+              10.814354
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.70501125,
+              10.8154506
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/604803368",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-fortuner": {
+        "ok": true,
+        "kind": "street",
+        "name": "Đường ven rạch Xuyên Tâm",
+        "lat": 10.8154506,
+        "lon": 106.70501125,
+        "way_id": 604803368,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 139,
+          "minutes": 2,
+          "geometry": [
+            [
+              106.70501125,
+              10.8154506
+            ],
+            [
+              106.7050045,
+              10.8155
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.70433975461812,
+              10.81450656563857
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 693,
+          "side": "v",
+          "geometry": [
+            [
+              106.70348,
+              10.8110534
+            ],
+            [
+              106.7035595,
+              10.8112262
+            ],
+            [
+              106.7036354,
+              10.8113505
+            ],
+            [
+              106.7036893,
+              10.811447
+            ],
+            [
+              106.7037302,
+              10.8116434
+            ],
+            [
+              106.7037616,
+              10.8120798
+            ],
+            [
+              106.7038429,
+              10.8129659
+            ],
+            [
+              106.7038888,
+              10.8133705
+            ],
+            [
+              106.7039424,
+              10.8136668
+            ],
+            [
+              106.7040366,
+              10.8139496
+            ],
+            [
+              106.7041236,
+              10.8141322
+            ],
+            [
+              106.7042579,
+              10.814354
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.70501125,
+              10.8154506
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/604803368",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Chu Văn An cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 3.5 m)",
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70501125,
+              10.8154506
+            ],
+            [
+              106.7050045,
+              10.8155
+            ],
+            [
+              106.704924,
+              10.8157207
+            ],
+            [
+              106.70488,
+              10.8158253
+            ],
+            [
+              106.7047753,
+              10.8159715
+            ],
+            [
+              106.7047175,
+              10.8160218
+            ],
+            [
+              106.7046463,
+              10.8160721
+            ],
+            [
+              106.7045691,
+              10.8161152
+            ],
+            [
+              106.7044181,
+              10.8161582
+            ],
+            [
+              106.7042998,
+              10.8161691
+            ],
+            [
+              106.7040513,
+              10.8161498
+            ],
+            [
+              106.703859,
+              10.8161801
+            ],
+            [
+              106.7036261,
+              10.8162871
+            ],
+            [
+              106.703561,
+              10.816317
+            ],
+            [
+              106.7034647,
+              10.8163741
+            ],
+            [
+              106.7033862,
+              10.8162507
+            ],
+            [
+              106.7030715,
+              10.8157563
+            ],
+            [
+              106.7030184,
+              10.8156704
+            ],
+            [
+              106.7029592,
+              10.8155747
+            ],
+            [
+              106.7027776,
+              10.815565
+            ],
+            [
+              106.7021457,
+              10.8155306
+            ],
+            [
+              106.7020064,
+              10.815523
+            ],
+            [
+              106.7018914,
+              10.8155177
+            ],
+            [
+              106.7017173,
+              10.8155084
+            ],
+            [
+              106.7009715,
+              10.8154686
+            ],
+            [
+              106.700854,
+              10.8154623
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 13,
+    "lat": 10.81450656563857,
+    "lon": 106.70433975461812,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "toyota-fortuner",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Đường ven rạch Xuyên Tâm",
+        "lat": 10.8154506,
+        "lon": 106.70501125,
+        "way_id": 604803368,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 139,
+          "minutes": 2
+        },
+        "route_in": {
+          "meters": 535,
+          "side": "v",
+          "geometry": [
+            [
+              106.70348,
+              10.8110534
+            ],
+            [
+              106.7035595,
+              10.8112262
+            ],
+            [
+              106.7036354,
+              10.8113505
+            ],
+            [
+              106.7036893,
+              10.811447
+            ],
+            [
+              106.7037302,
+              10.8116434
+            ],
+            [
+              106.7037616,
+              10.8120798
+            ],
+            [
+              106.7038429,
+              10.8129659
+            ],
+            [
+              106.7038888,
+              10.8133705
+            ],
+            [
+              106.7039424,
+              10.8136668
+            ],
+            [
+              106.7040366,
+              10.8139496
+            ],
+            [
+              106.7041236,
+              10.8141322
+            ],
+            [
+              106.7042579,
+              10.814354
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.70501125,
+              10.8154506
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/604803368",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-fortuner": {
+        "ok": true,
+        "kind": "street",
+        "name": "Đường ven rạch Xuyên Tâm",
+        "lat": 10.8154506,
+        "lon": 106.70501125,
+        "way_id": 604803368,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 139,
+          "minutes": 2,
+          "geometry": [
+            [
+              106.70501125,
+              10.8154506
+            ],
+            [
+              106.7050045,
+              10.8155
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.70433975461812,
+              10.81450656563857
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 693,
+          "side": "v",
+          "geometry": [
+            [
+              106.70348,
+              10.8110534
+            ],
+            [
+              106.7035595,
+              10.8112262
+            ],
+            [
+              106.7036354,
+              10.8113505
+            ],
+            [
+              106.7036893,
+              10.811447
+            ],
+            [
+              106.7037302,
+              10.8116434
+            ],
+            [
+              106.7037616,
+              10.8120798
+            ],
+            [
+              106.7038429,
+              10.8129659
+            ],
+            [
+              106.7038888,
+              10.8133705
+            ],
+            [
+              106.7039424,
+              10.8136668
+            ],
+            [
+              106.7040366,
+              10.8139496
+            ],
+            [
+              106.7041236,
+              10.8141322
+            ],
+            [
+              106.7042579,
+              10.814354
+            ],
+            [
+              106.7044995,
+              10.8146095
+            ],
+            [
+              106.7047505,
+              10.8148653
+            ],
+            [
+              106.7049104,
+              10.815049
+            ],
+            [
+              106.704985,
+              10.8151695
+            ],
+            [
+              106.7050177,
+              10.8153283
+            ],
+            [
+              106.705018,
+              10.8154012
+            ],
+            [
+              106.70501125,
+              10.8154506
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/604803368",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Chu Văn An cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 3.5 m)",
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70501125,
+              10.8154506
+            ],
+            [
+              106.7050045,
+              10.8155
+            ],
+            [
+              106.704924,
+              10.8157207
+            ],
+            [
+              106.70488,
+              10.8158253
+            ],
+            [
+              106.7047753,
+              10.8159715
+            ],
+            [
+              106.7047175,
+              10.8160218
+            ],
+            [
+              106.7046463,
+              10.8160721
+            ],
+            [
+              106.7045691,
+              10.8161152
+            ],
+            [
+              106.7044181,
+              10.8161582
+            ],
+            [
+              106.7042998,
+              10.8161691
+            ],
+            [
+              106.7040513,
+              10.8161498
+            ],
+            [
+              106.703859,
+              10.8161801
+            ],
+            [
+              106.7036261,
+              10.8162871
+            ],
+            [
+              106.703561,
+              10.816317
+            ],
+            [
+              106.7034647,
+              10.8163741
+            ],
+            [
+              106.7033862,
+              10.8162507
+            ],
+            [
+              106.7030715,
+              10.8157563
+            ],
+            [
+              106.7030184,
+              10.8156704
+            ],
+            [
+              106.7029592,
+              10.8155747
+            ],
+            [
+              106.7027776,
+              10.815565
+            ],
+            [
+              106.7021457,
+              10.8155306
+            ],
+            [
+              106.7020064,
+              10.815523
+            ],
+            [
+              106.7018914,
+              10.8155177
+            ],
+            [
+              106.7017173,
+              10.8155084
+            ],
+            [
+              106.7009715,
+              10.8154686
+            ],
+            [
+              106.700854,
+              10.8154623
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 39,
+    "lat": 10.81701241305269,
+    "lon": 106.70774996927413,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70774996927413,
+              10.81701241305269
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 39,
+    "lat": 10.81701241305269,
+    "lon": 106.70774996927413,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Hẻm 184/1 Nguyễn Xí cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 4.1 m)",
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70774996927413,
+              10.81701241305269
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 39,
+    "lat": 10.81701241305269,
+    "lon": 106.70774996927413,
+    "intent": "pickup",
+    "smaller": "toyota-fortuner",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-fortuner": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Hẻm 184/1 Nguyễn Xí cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 4.7 m)",
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70774996927413,
+              10.81701241305269
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 39,
+    "lat": 10.81701241305269,
+    "lon": 106.70774996927413,
+    "intent": "pickup",
+    "smaller": "kia-carnival",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "kia-carnival": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.56,
+            "tight_min": 2.46,
+            "door_min": 2.91
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 48,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70774996927413,
+              10.81701241305269
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 57,
+    "lat": 10.862585961196597,
+    "lon": 106.70583753766694,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "toyota-fortuner",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Võ Thị Thừa",
+        "lat": 10.862940790680888,
+        "lon": 106.706147145471,
+        "way_id": 592255767,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 84,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 430,
+          "side": "u",
+          "geometry": [
+            [
+              106.7052977,
+              10.8593466
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7059942,
+              10.8622749
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.706147145471,
+              10.862940790680888
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/592255767",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-fortuner": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Võ Thị Thừa",
+        "lat": 10.862940790680888,
+        "lon": 106.706147145471,
+        "way_id": 592255767,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 84,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.706147145471,
+              10.862940790680888
+            ],
+            [
+              106.7055135,
+              10.8631247
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.70583753766694,
+              10.862585961196597
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 557,
+          "side": "u",
+          "geometry": [
+            [
+              106.7052977,
+              10.8593466
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7059942,
+              10.8622749
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.706147145471,
+              10.862940790680888
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/592255767",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.706147145471,
+              10.862940790680888
+            ],
+            [
+              106.7055135,
+              10.8631247
+            ],
+            [
+              106.7051712,
+              10.8632241
+            ],
+            [
+              106.7051022,
+              10.8630543
+            ],
+            [
+              106.70507,
+              10.8629521
+            ],
+            [
+              106.7050338,
+              10.8628178
+            ],
+            [
+              106.7049909,
+              10.862669
+            ],
+            [
+              106.7049131,
+              10.8624095
+            ],
+            [
+              106.7047133,
+              10.8618826
+            ],
+            [
+              106.7049895,
+              10.8617481
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052977,
+              10.8593466
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 57,
+    "lat": 10.862585961196597,
+    "lon": 106.70583753766694,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "toyota-fortuner",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Võ Thị Thừa",
+        "lat": 10.862940790680888,
+        "lon": 106.706147145471,
+        "way_id": 592255767,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 84,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 430,
+          "side": "u",
+          "geometry": [
+            [
+              106.7052977,
+              10.8593466
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7059942,
+              10.8622749
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.706147145471,
+              10.862940790680888
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/592255767",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-fortuner": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Võ Thị Thừa",
+        "lat": 10.862940790680888,
+        "lon": 106.706147145471,
+        "way_id": 592255767,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 84,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.706147145471,
+              10.862940790680888
+            ],
+            [
+              106.7055135,
+              10.8631247
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.70583753766694,
+              10.862585961196597
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 557,
+          "side": "u",
+          "geometry": [
+            [
+              106.7052977,
+              10.8593466
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7059942,
+              10.8622749
+            ],
+            [
+              106.7062174,
+              10.8629204
+            ],
+            [
+              106.706147145471,
+              10.862940790680888
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/592255767",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.706147145471,
+              10.862940790680888
+            ],
+            [
+              106.7055135,
+              10.8631247
+            ],
+            [
+              106.7051712,
+              10.8632241
+            ],
+            [
+              106.7051022,
+              10.8630543
+            ],
+            [
+              106.70507,
+              10.8629521
+            ],
+            [
+              106.7050338,
+              10.8628178
+            ],
+            [
+              106.7049909,
+              10.862669
+            ],
+            [
+              106.7049131,
+              10.8624095
+            ],
+            [
+              106.7047133,
+              10.8618826
+            ],
+            [
+              106.7049895,
+              10.8617481
+            ],
+            [
+              106.7056706,
+              10.8613393
+            ],
+            [
+              106.7055013,
+              10.8609999
+            ],
+            [
+              106.7052456,
+              10.8604879
+            ],
+            [
+              106.705177,
+              10.8603503
+            ],
+            [
+              106.7051351,
+              10.8602363
+            ],
+            [
+              106.7051452,
+              10.860116
+            ],
+            [
+              106.7052702,
+              10.8594943
+            ],
+            [
+              106.7052905,
+              10.8593935
+            ],
+            [
+              106.7052977,
+              10.8593466
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "toyota-vios",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840375349999999,
+        "lon": 106.80756685,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 83,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 423,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.80756685,
+              10.840375349999999
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.58 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-vios": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840375349999999,
+        "lon": 106.80756685,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 83,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80756685,
+              10.840375349999999
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 419,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.80756685,
+              10.840375349999999
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80756685,
+              10.840375349999999
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.18 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.63 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "toyota-fortuner",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840375349999999,
+        "lon": 106.80756685,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 83,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 423,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.80756685,
+              10.840375349999999
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.58 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "toyota-fortuner": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840375349999999,
+        "lon": 106.80756685,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 83,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80756685,
+              10.840375349999999
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 419,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.80756685,
+              10.840375349999999
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80756685,
+              10.840375349999999
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.75 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "kia-carnival",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.58 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "kia-carnival": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.56,
+            "tight_min": 2.46,
+            "door_min": 2.91
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.46 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.91 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.58 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.67 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.97 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "kia-carnival",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.18 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.63 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "kia-carnival": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.56,
+            "tight_min": 2.46,
+            "door_min": 2.91
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.46 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.91 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.18 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.63 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.67 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.97 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "toyota-fortuner",
+    "wider": "kia-carnival",
+    "same_stop_comparison": {
+      "toyota-fortuner": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.75 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "kia-carnival": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.56,
+            "tight_min": 2.46,
+            "door_min": 2.91
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.46 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.91 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 61,
+    "lat": 10.83999198641327,
+    "lon": 106.80699834168878,
+    "intent": "pickup",
+    "smaller": "toyota-fortuner",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-fortuner": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 390,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.75 m)",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Đường D6",
+        "lat": 10.840240436180528,
+        "lon": 106.80741405364533,
+        "way_id": 726878556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chưa rõ bề rộng",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 59,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80699834168878,
+              10.83999198641327
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 504,
+          "side": "v",
+          "geometry": [
+            [
+              106.8070679,
+              10.8430872
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8073552,
+              10.8401976
+            ],
+            [
+              106.80741405364533,
+              10.840240436180528
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2.0,
+            "hi": 8.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 2.0,
+                "hi": 8.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/726878556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.80741405364533,
+              10.840240436180528
+            ],
+            [
+              106.8075786,
+              10.8403602
+            ],
+            [
+              106.8075551,
+              10.8403905
+            ],
+            [
+              106.8071876,
+              10.8408541
+            ],
+            [
+              106.8071098,
+              10.8408462
+            ],
+            [
+              106.8069425,
+              10.840722
+            ],
+            [
+              106.8067703,
+              10.8409371
+            ],
+            [
+              106.806598,
+              10.8411501
+            ],
+            [
+              106.8064635,
+              10.8413539
+            ],
+            [
+              106.8064099,
+              10.8415048
+            ],
+            [
+              106.8063908,
+              10.8416296
+            ],
+            [
+              106.8063841,
+              10.8417856
+            ],
+            [
+              106.806392,
+              10.841985
+            ],
+            [
+              106.8064005,
+              10.8421509
+            ],
+            [
+              106.8064283,
+              10.8422962
+            ],
+            [
+              106.8064716,
+              10.8424229
+            ],
+            [
+              106.8065305,
+              10.8425315
+            ],
+            [
+              106.8066062,
+              10.8426365
+            ],
+            [
+              106.806849,
+              10.842878
+            ],
+            [
+              106.807003,
+              10.8430252
+            ],
+            [
+              106.8070679,
+              10.8430872
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.67 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.97 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 69,
+    "lat": 10.816756220077712,
+    "lon": 106.70810195887259,
+    "intent": "pickup",
+    "smaller": "vinfast-vf-3",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "vinfast-vf-3": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Vừa xe",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "fits",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.05,
+            "tight_min": 1.95,
+            "door_min": 2.58
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70810195887259,
+              10.816756220077712
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 69,
+    "lat": 10.816756220077712,
+    "lon": 106.70810195887259,
+    "intent": "pickup",
+    "smaller": "toyota-vios",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-vios": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Hẻm 184/1 Nguyễn Xí cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 4.1 m)",
+          "needed": {
+            "fits_min": 3.28,
+            "tight_min": 2.18,
+            "door_min": 2.63
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70810195887259,
+              10.816756220077712
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 69,
+    "lat": 10.816756220077712,
+    "lon": 106.70810195887259,
+    "intent": "pickup",
+    "smaller": "toyota-fortuner",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "toyota-fortuner": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": "Rẽ vào từ Hẻm 184/1 Nguyễn Xí cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ 4.7 m)",
+          "needed": {
+            "fits_min": 3.41,
+            "tight_min": 2.31,
+            "door_min": 2.75
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70810195887259,
+              10.816756220077712
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  },
+  {
+    "i": 69,
+    "lat": 10.816756220077712,
+    "lon": 106.70810195887259,
+    "intent": "pickup",
+    "smaller": "kia-carnival",
+    "wider": "ford-transit",
+    "same_stop_comparison": {
+      "kia-carnival": {
+        "ok": false,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Không có đường ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1
+        },
+        "route_in": {
+          "meters": 340,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.56,
+            "tight_min": 2.46,
+            "door_min": 2.91
+          }
+        },
+        "way_out": {
+          "mode": "none",
+          "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [
+          "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+        ],
+        "unverified_reasons": [
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      },
+      "ford-transit": {
+        "ok": true,
+        "kind": "street",
+        "name": "Nhánh cạnh Hẻm 184/1 Nguyễn Xí",
+        "lat": 10.817213974300557,
+        "lon": 106.70777435468032,
+        "way_id": 898344556,
+        "tier": 2,
+        "verified": false,
+        "badges": [
+          "Chật",
+          "Đi thẳng ra",
+          "Không ngập",
+          "Chưa rõ đủ 2 làn xe"
+        ],
+        "walk": {
+          "meters": 105,
+          "minutes": 1,
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.70810195887259,
+              10.816756220077712
+            ]
+          ],
+          "wade": null
+        },
+        "route_in": {
+          "meters": 377,
+          "side": "u",
+          "geometry": [
+            [
+              106.7077638,
+              10.8152652
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7076049,
+              10.8170625
+            ],
+            [
+              106.7077187,
+              10.8171672
+            ],
+            [
+              106.70777435468032,
+              10.817213974300557
+            ]
+          ],
+          "flood": null
+        },
+        "fit": {
+          "class": "tight",
+          "width_range": {
+            "lo": 3.5,
+            "hi": 15.0,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "evidence": [
+              {
+                "lo": 3.5,
+                "hi": 15.0,
+                "tier": "Inferred",
+                "tier_vi": "Suy luận",
+                "source": "OSM phân loại đường",
+                "detail": "highway=residential",
+                "observed_on": "",
+                "url": "https://www.openstreetmap.org/way/898344556",
+                "ai_feature": null
+              }
+            ],
+            "overruled": [],
+            "way_out_claims": []
+          },
+          "note": null,
+          "needed": {
+            "fits_min": 3.77,
+            "tight_min": 2.67,
+            "door_min": 2.97
+          }
+        },
+        "way_out": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn, không phải lùi",
+          "geometry": [
+            [
+              106.70777435468032,
+              10.817213974300557
+            ],
+            [
+              106.7084952,
+              10.8178198
+            ],
+            [
+              106.7089383,
+              10.8172689
+            ],
+            [
+              106.7094689,
+              10.8166665
+            ],
+            [
+              106.7091908,
+              10.8164568
+            ],
+            [
+              106.708984,
+              10.8162841
+            ],
+            [
+              106.7085785,
+              10.8159455
+            ],
+            [
+              106.7077638,
+              10.8152652
+            ]
+          ]
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "at": null
+          },
+          "arrival_route": null,
+          "exit_route": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "lot": null
+      }
+    }
+  }
+]

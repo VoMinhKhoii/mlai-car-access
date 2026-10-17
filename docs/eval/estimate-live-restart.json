@@ -1,0 +1,22 @@
+{
+  "started_at": 1792196653.0888078,
+  "responses": [
+    {
+      "path": "/api/config",
+      "status": 200,
+      "seconds": 3.6592535420204513,
+      "models": 0
+    },
+    {
+      "path": "/api/vehicles",
+      "status": 200,
+      "seconds": 18.700089292018674,
+      "models": 34
+    }
+  ],
+  "checked_at": 1792196873.077885,
+  "warmup_elapsed_seconds": 219.98907709121704,
+  "paid_enabled": true,
+  "paid_limit_usd": 3.0,
+  "process": "44468 03:43 /Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python -m uvicorn app.main:app --host 127.0.0.1 --port 8787"
+}

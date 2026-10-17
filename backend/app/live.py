@@ -19,6 +19,8 @@ Chợ Tốt has no geo search, so listings are pulled by district and kept only 
 from __future__ import annotations
 
 import hashlib
+import os
+import fcntl
 import json
 import re
 import sys
@@ -69,7 +71,7 @@ class Busy(Exception):
 
 def _left(job: dict, limit: float) -> float:
     """HTTP timeout for the next call of this build; Expired once the build deadline has passed."""
-    return timeout(job["deadline"], limit)
+    return timeout(job.get("deadline"), limit)
 
 
 # ---------- districts ----------
@@ -266,6 +268,65 @@ def review_photo(photo_id: str, approve: bool, reviewer: str) -> dict:
     return rec
 
 
+CITY_PARCELS = DIR / "city_parcels.json"
+_city_stamp = None
+_city_cache: dict = {}
+_city_lock = threading.Lock()
+
+
+def city_parcels() -> dict:
+    """Crawler-owned shallow results, reloaded only after an atomic replacement."""
+    global _city_stamp, _city_cache
+    with _city_lock:
+        try:
+            st = CITY_PARCELS.stat()
+            stamp = (st.st_mtime_ns, st.st_size)
+        except FileNotFoundError:
+            _city_stamp, _city_cache = None, {}
+            return _city_cache
+        if stamp != _city_stamp:
+            data = json.loads(CITY_PARCELS.read_text())
+            _city_cache, _city_stamp = data, stamp
+        return _city_cache
+
+
+def _merge_city(g, measured: list[dict]) -> list[dict]:
+    city = city_parcels()
+    by_way = {wid: {"way_id": wid, **city[str(wid)], "deep": bool(city[str(wid)].get("deep"))}
+              for wid in g.ways if city.get(str(wid))}
+    for p in measured:
+        current = by_way.get(p["way_id"], {})
+        if current.get("sample_strategy") == "campus-full-5m" and p.get("queried_at", "") <= current.get("queried_at", ""):
+            continue  # an older partial destination scan must not mask the fresh full-way scan
+        seen, existing = p.get("queried_at", ""), current.get("queried_at", "")
+        if seen and existing and seen != existing:
+            if seen > existing:
+                by_way[p["way_id"]] = p
+            continue
+        if p.get("deep") or not by_way.get(p["way_id"], {}).get("deep"):
+            by_way[p["way_id"]] = p
+    return list(by_way.values())
+
+
+def _atomic_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+    with tmp.open("w") as f:
+        json.dump(value, f, ensure_ascii=False)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)
+
+
+def _save_parcel_cache(path, cache, original=None):
+    with path.with_suffix(".lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        current = json.loads(path.read_text()) if path.exists() else {}
+        changes = cache if original is None else {k: v for k, v in cache.items() if k not in original or original[k] != v}
+        current.update(changes)
+        _atomic_json(path, current)
+
+
 # ---------- area records (server-owned) ----------
 
 _areas = LRU(32)
@@ -293,6 +354,12 @@ def _load_area(key: str) -> dict | None:
     return None
 
 
+def _union_rows(previous, current, identity):
+    rows = {identity(row): row for row in previous}
+    rows.update({identity(row): row for row in current})
+    return list(rows.values())
+
+
 def _publish(job: dict) -> dict:
     key = job["key"]
     with _area_lock:
@@ -301,7 +368,10 @@ def _publish(job: dict) -> dict:
         rec = {"schema_version": SCHEMA_VERSION, "key": key, "revision": (prev or {}).get("revision", 0) + 1,
                "collected_at": now.isoformat(timespec="seconds"), "expires_at": (now + TTL).isoformat(timespec="seconds"),
                "complete": job["complete"], "steps": job["steps"], "counts": job["counts"],
-               "listings": job["listings"], "photos": job["photos"], "news": job["news"], "parcels": job["parcels"]}
+               "listings": _union_rows((prev or {}).get("listings", []), job["listings"], lambda r: r.get("url") or str(r.get("listing_id"))),
+               "photos": _union_rows((prev or {}).get("photos", []), job["photos"], lambda r: r.get("id") or r.get("image_url")),
+               "news": _union_rows((prev or {}).get("news", []), job["news"], lambda r: (r.get("street"), r.get("url"))),
+               "parcels": _union_rows((prev or {}).get("parcels", []), job["parcels"], lambda r: r["way_id"])}
         write_json(_area_path(key), rec)
         _areas.put(key, rec)
     return rec
@@ -374,30 +444,33 @@ def _run(job: dict, lat: float, lon: float) -> None:
                 cache = read_json(cache_path, {})
             except CorruptState:
                 cache = {}
+            original_cache = cache.copy()
             # The planning portal can be very slow: parcels get their own share of the deadline, so a slow portal
             # leaves a partial record (unmeasured ways stay unknown) instead of losing listings and news too.
             parcel_deadline = min(job["deadline"], time.monotonic() + PARCEL_BUDGET_S)
             try:
                 deep = flags.enabled("parcel_deep_scan")
                 job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep,
-                                                      deadline=parcel_deadline)
+                                                      deadline=parcel_deadline, city_cache=city_parcels())
                 _step(job, "parcels", "done",
                       f"{len(job['parcels'])} đường có ước tính khoảng trống từ hình học thửa đất"
                       + ("; lối vào/ra lấy mẫu sâu mỗi 5 m trong giới hạn" if deep else ""))
             except parcels.DeadlineExceeded as exc:
-                write_json(cache_path, cache)
+                _save_parcel_cache(cache_path, cache, original_cache)
                 if time.monotonic() >= job["deadline"] - 0.5:
                     raise Expired("hết thời hạn 300 giây khi đo thửa đất")
                 job["parcels"], job["complete"] = getattr(exc, "partial", []), False
                 _step(job, "parcels", "error",
                       f"Cổng quy hoạch chậm: dừng đo sau {PARCEL_BUDGET_S:.0f} giây, đã đo {len(job['parcels'])} "
                       "đường; các đường chưa đo vẫn là chưa rõ")
-            except parcels.Blocked:
+            except (parcels.Blocked, parcels.Unavailable):
                 job["complete"] = False
                 _step(job, "parcels", "error", "Cổng quy hoạch tạm chặn truy vấn; thử lại sau")
-            write_json(cache_path, cache)
+            _save_parcel_cache(cache_path, cache, original_cache)
         else:
             _step(job, "parcels", "skipped", "Đã tắt")
+
+        job["parcels"] = _merge_city(g, job["parcels"])
 
         _step(job, "listings", "running")
         ds = nearest_districts(lat, lon, deadline=job["deadline"])

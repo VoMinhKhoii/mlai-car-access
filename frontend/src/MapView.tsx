@@ -3,6 +3,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef, useState } from 'react'
 import { floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type ManeuverState, type Plan } from './api'
+import { featurePlace, type MapContext, type MapPlace } from './mapSearch'
 import { floodPresentation, floodTimeLabel } from './components/Result'
 
 export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean }
@@ -39,6 +40,8 @@ interface Props {
   onPick: (lat: number, lon: number, x: number, y: number) => void
   onWayClick: (wayId: number, lat: number, lon: number) => void
   onStopClick: (index: number) => void
+  onFeatures: (context: MapContext) => void
+  onPlaceClick: (place: MapPlace) => void
 }
 
 const EMPTY: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] }
@@ -121,6 +124,27 @@ export function MapView(p: Props) {
       attributionControl: { compact: true },
     })
     map.current = m
+    let featureTimer: number | undefined
+    const labelLayers = () => (m.getStyle().layers ?? []).filter((l) => l.type === 'symbol' && l.layout?.['text-field'] && 'source-layer' in l && typeof l.source === 'string' && m.getStyle().sources[l.source]?.type === 'vector')
+    const publishFeatures = () => {
+      const c = m.getCenter(), center = { lat: c.lat, lon: c.lng }, bounds = m.getBounds()
+      const candidates: MapPlace[] = []
+      const seen = new Set<string>()
+      for (const l of labelLayers()) {
+        if (!('source' in l) || typeof l.source !== 'string' || !('source-layer' in l) || !l['source-layer']) continue
+        const key = `${l.source}/${l['source-layer']}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        for (const f of m.querySourceFeatures(l.source, { sourceLayer: l['source-layer'] })) {
+          const place = featurePlace(f, l['source-layer'], center)
+          if (place && bounds.contains([place.lon, place.lat])) candidates.push(place)
+        }
+      }
+      cb.current.onFeatures({ center, zoom: m.getZoom(), candidates })
+    }
+    const scheduleFeatures = () => { window.clearTimeout(featureTimer); featureTimer = window.setTimeout(publishFeatures, 150) }
+    m.on('idle', scheduleFeatures)
+    m.on('moveend', scheduleFeatures)
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
@@ -228,6 +252,12 @@ export function MapView(p: Props) {
           return
         }
       }
+      const labels = labelLayers().map((l) => l.id)
+      const features = labels.length ? m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: labels }) : []
+      for (const f of features) {
+        const place = featurePlace(f, f.sourceLayer ?? f.layer.id, { lat: e.lngLat.lat, lon: e.lngLat.lng })
+        if (place) { cb.current.onPlaceClick(place); return }
+      }
       const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
     })
@@ -243,6 +273,7 @@ export function MapView(p: Props) {
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
     return () => {
+      window.clearTimeout(featureTimer)
       if (animationTimer.current != null) window.clearInterval(animationTimer.current)
       animationTimer.current = null
       floodPopup.current?.remove()
@@ -330,6 +361,12 @@ export function MapView(p: Props) {
   }
 
   useEffect(sync, [p.plan, p.selected, p.toggles, p.floodMoment, p.destination, p.origin, p.frame, p.corridor, p.routeSel, p.cams, p.maneuver])
+  // The dock and the inspector change how much map is free: keep what is framed inside the visible part.
+  useEffect(() => {
+    const m = map.current
+    if (!m || !ready.current) return
+    m.easeTo({ padding: p.padding, duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300 })
+  }, [p.padding.bottom, p.padding.right]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     const m = map.current
     const overlay = p.maneuver

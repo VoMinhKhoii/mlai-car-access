@@ -114,7 +114,7 @@ for w in g.ways.values():
         continue
     candidate_lat = (g.nodes[w.nodes[0]][0] + g.nodes[w.nodes[-1]][0]) / 2
     candidate_lon = (g.nodes[w.nodes[0]][1] + g.nodes[w.nodes[-1]][1]) / 2
-    if parcels.path_into(g, candidate_lat, candidate_lon) and parcels.path_out(g, candidate_lat, candidate_lon):
+    if main.cached_graph(candidate_lat, candidate_lon) is not None and parcels.path_into(g, candidate_lat, candidate_lon) and parcels.path_out(g, candidate_lat, candidate_lon):
         alley_point = (w, candidate_lat, candidate_lon)
         break
 if alley_point is None:
@@ -156,7 +156,9 @@ out["pending_after_non_alley"] = len(reports._load()["reports"])
 
 off_way_stop = None
 for dlat, dlon in ((.0001, 0), (-.0001, 0), (0, .0001), (0, -.0001),
-                   (.0002, 0), (-.0002, 0), (0, .0002), (0, -.0002)):
+                   (.0002, 0), (-.0002, 0), (0, .0002), (0, -.0002),
+                   (.0004, 0), (-.0004, 0), (0, .0004), (0, -.0004),
+                   (.0008, 0), (-.0008, 0), (0, .0008), (0, -.0008)):
     candidate = (stop_lat + dlat, stop_lon + dlon)
     if main.cached_graph(*candidate) is None:
         continue

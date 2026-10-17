@@ -1,0 +1,62 @@
+/* AlleyAI: a transcript in the inspector, not a chat toy. The question in bold, the answer in full ink,
+   the machine's steps as quiet lines. Position and glass come from index.css (.agent, .agent-launch). */
+.agent-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 18px 12px 8px 20px; }
+.agent-head h2 { margin: 0; font-size: var(--fs-22); font-weight: 700; letter-spacing: -0.02em; }
+.agent-head p { margin: 4px 0 0; color: var(--text-2); font-size: var(--fs-12); }
+.agent-log { min-height: 0; flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 8px 20px 16px; overflow-wrap: anywhere; }
+.agent-empty { padding: 8px 0; }
+.agent-empty svg { display: none; }
+.agent-empty h3 { font-size: var(--fs-17); font-weight: 600; margin: 0 0 4px; }
+.agent-empty p { font-size: var(--fs-15); color: var(--text); }
+.agent-turn + .agent-turn { margin-top: 28px; }
+.agent-question { margin: 0 0 10px; font-size: var(--fs-17); font-weight: 600; line-height: 1.35; white-space: pre-wrap; }
+.agent-bubble { margin-top: 10px; font-size: var(--fs-15); line-height: 1.5; }
+.agent-bubble b { font-size: var(--fs-12); font-weight: 600; color: var(--text-2); }
+.agent-bubble p { margin: 4px 0 0; white-space: pre-wrap; }
+.agent-blind { background: var(--surface-sunk); padding: 10px 12px; border-radius: var(--r-md); margin-bottom: 12px; }
+.agent-steps { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-direction: column; gap: 6px; }
+.agent-steps li { display: flex; align-items: flex-start; gap: 8px; font-size: var(--fs-12); color: var(--text-2); }
+.agent-steps li > svg:first-child { display: none; }
+.agent-steps li > svg:last-child { flex-shrink: 0; margin-top: 2px; color: var(--fit-fits); }
+.agent-steps li > div { flex: 1; min-width: 0; }
+.agent-steps b { font-weight: 600; color: var(--text); }
+.agent-steps small { display: inline; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.agent-steps small:empty { display: none; }
+.agent-steps p { margin: 2px 0 0; }
+.agent-pending { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: var(--fs-12); margin-top: 12px; }
+.agent-suggestions { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px; }
+.agent-suggestions button {
+  text-align: left; border: 0; background: var(--surface-sunk); border-radius: var(--r-md); padding: 10px 12px; min-height: 44px;
+  font-size: var(--fs-15); color: var(--text); cursor: pointer; transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.agent-suggestions button:hover { background: rgb(0 0 0 / .08); }
+.agent-suggestions button:active { transform: scale(.98); }
+.agent-suggestions button:disabled { display: none; }
+/* before the first question the suggestions sit right under the prompt, not at the bottom of an empty log */
+.agent-log:has(.agent-empty) { flex: 0 0 auto; }
+.agent-compose { margin-top: auto; padding-top: 8px; }
+/* before the first question the panel hugs its content instead of standing as an empty slab */
+.agent:has(.agent-empty) { bottom: auto; }
+.agent-compose { padding: 0 16px 16px; }
+.agent-compare { display: flex; align-items: center; gap: 8px; font-size: var(--fs-12); color: var(--text-2); margin-bottom: 8px; min-height: 32px; cursor: pointer; }
+.agent-compare input { accent-color: var(--brand); }
+.agent-input { display: flex; align-items: flex-end; gap: 2px; border-radius: var(--r-lg); background: var(--surface-sunk); padding: 4px; }
+.agent-input:focus-within { box-shadow: 0 0 0 2px var(--brand); background: var(--n-0); } /* taste-skill-ignore: focus ring on a form field */
+.agent-input textarea { flex: 1; min-width: 0; resize: none; border: 0; outline: 0; background: transparent; color: var(--text); font: inherit; font-size: 16px; line-height: 1.45; padding: 8px 10px; }
+.agent-input .agent-send { background: var(--brand); color: var(--on-dark); }
+.agent-input .agent-send:disabled { background: transparent; color: var(--text-2); }
+.agent-input .is-listening { color: #8f1f1f; background: var(--fit-no-tint); }
+.agent button:disabled { opacity: .45; cursor: default; }
+.agent .icon-btn, .agent-stop { min-width: 40px; min-height: 40px; }
+.agent-evidence-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.agent-evidence-chips button {
+  min-height: 36px; border: 0; border-radius: var(--r-pill); padding: 0 12px; background: var(--surface-sunk);
+  color: var(--brand-600); font: inherit; font-size: var(--fs-12); font-weight: 600; cursor: pointer;
+}
+.agent-evidence-chips button:hover { background: rgb(0 0 0 / .08); }
+.agent-evidence-panel .evidence { z-index: 30; }
+@media (max-width: 760px) {
+  .agent-compose { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .agent-suggestions { flex-direction: row; overflow-x: auto; }
+  .agent-suggestions button { flex-shrink: 0; max-width: 80vw; background: var(--surface-sunk); }
+}

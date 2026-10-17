@@ -1,0 +1,3149 @@
+{
+  "summary": {
+    "stage": "after",
+    "mode": "live",
+    "count": 46,
+    "passed": 8,
+    "pass_rate": 0.17391304347826086,
+    "latency_p50_s": 0.001,
+    "latency_p90_s": 4.506,
+    "free_calls": 30,
+    "paid_calls": 1,
+    "spent_usd": 0.0,
+    "completed_plans": 2,
+    "clarifications": 6
+  },
+  "cases": [
+    {
+      "id": "pickup-01",
+      "district": "Quận 1",
+      "query": "VF3 đón khách tại 135 Nam Kỳ Khởi Nghĩa, Quận 1 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 8.521,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+          }
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.7770374,
+                "lon": 106.69535,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": false,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "tool_call",
+          "name": "lap_ke_hoach",
+          "args": {
+            "dwell_min": 10,
+            "lat": 10.7770374,
+            "arrive_at": "2026-10-18T08:00:00+07:00",
+            "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+            "vehicle_id": "vinfast-vf-3",
+            "lon": 106.69535,
+            "intent": "pickup"
+          }
+        },
+        {
+          "type": "ui",
+          "plan": {
+            "lat": 10.7770374,
+            "lon": 106.69535,
+            "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+            "vehicle_id": "vinfast-vf-3",
+            "intent": "pickup",
+            "arrive_at": "2026-10-18T08:00:00+07:00",
+            "dwell_min": 10,
+            "rain": []
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "lap_ke_hoach",
+          "summary": "Dừng đón/trả tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+          "result": {
+            "destination": {
+              "lat": 10.7770374,
+              "lon": 106.69535,
+              "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh"
+            },
+            "vehicle": {
+              "id": "vinfast-vf-3",
+              "label": "VinFast VF 3",
+              "mirror_width": 1.748
+            },
+            "window": {
+              "arrive": "2026-10-18T08:00:00+07:00",
+              "depart": "2026-10-18T08:10:00+07:00",
+              "dwell_min": 10,
+              "tide_arrive": {
+                "level_m": 0.98,
+                "alarm": null
+              },
+              "tide_depart": {
+                "level_m": 0.98,
+                "alarm": null
+              },
+              "rain": []
+            },
+            "tide_source": {
+              "station": "Phú An (sông Sài Gòn)",
+              "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+              "issued_at": "2026-10-16T09:08:00+07:00",
+              "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+              "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu."
+            },
+            "tide_note": null,
+            "verdict": {
+              "code": "nearby",
+              "headline": "Dừng đón/trả tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+              "detail": ""
+            },
+            "timing": null,
+            "stop_points": [
+              {
+                "name": "Bãi đỗ ô tô",
+                "kind": "lot",
+                "way_id": null,
+                "lat": 10.7771916,
+                "lon": 106.6962032,
+                "walk": {
+                  "meters": 111,
+                  "minutes": 2
+                },
+                "fit": "lot",
+                "width": {
+                  "lo": null,
+                  "hi": null,
+                  "label": null,
+                  "top_tier": null,
+                  "source": null,
+                  "detail": null,
+                  "evidence": []
+                },
+                "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Permitted",
+                  "rule": {
+                    "code": "lot",
+                    "status": "Permitted",
+                    "text": "Bãi đỗ xe",
+                    "citation": "OpenStreetMap amenity=parking"
+                  }
+                },
+                "lot": "Bãi đỗ ô tô",
+                "fail_reasons": []
+              },
+              {
+                "name": "Trước cửa nhà",
+                "kind": "door",
+                "way_id": 287137240,
+                "lat": 10.777244160536252,
+                "lon": 106.69554072063677,
+                "walk": {
+                  "meters": 31,
+                  "minutes": 1
+                },
+                "fit": "tight",
+                "width": {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "label": "Chưa rõ bề rộng",
+                  "top_tier": "Inferred",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=service parking_aisle",
+                  "evidence": [
+                    {
+                      "lo": 2.0,
+                      "hi": 8.0,
+                      "tier": "Inferred",
+                      "tier_vi": "Suy luận",
+                      "source": "OSM phân loại đường",
+                      "detail": "highway=service parking_aisle",
+                      "observed_on": "",
+                      "url": "https://www.openstreetmap.org/way/287137240",
+                      "ai_feature": null
+                    }
+                  ]
+                },
+                "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Unverified",
+                  "rule": {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                },
+                "lot": null,
+                "fail_reasons": []
+              },
+              {
+                "name": "Đường nhánh không tên",
+                "kind": "street",
+                "way_id": 290222654,
+                "lat": 10.777701350000001,
+                "lon": 106.6954678,
+                "walk": {
+                  "meters": 93,
+                  "minutes": 1
+                },
+                "fit": "tight",
+                "width": {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "label": "Chưa rõ bề rộng",
+                  "top_tier": "Inferred",
+                  "source": "OSM phân loại đường",
+                  "detail": "highway=service",
+                  "evidence": [
+                    {
+                      "lo": 2.0,
+                      "hi": 8.0,
+                      "tier": "Inferred",
+                      "tier_vi": "Suy luận",
+                      "source": "OSM phân loại đường",
+                      "detail": "highway=service",
+                      "observed_on": "",
+                      "url": "https://www.openstreetmap.org/way/290222654",
+                      "ai_feature": null
+                    }
+                  ]
+                },
+                "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Unverified",
+                  "rule": {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                },
+                "lot": null,
+                "fail_reasons": []
+              }
+            ],
+            "door": {
+              "name": "Trước cửa nhà",
+              "kind": "door",
+              "way_id": 287137240,
+              "lat": 10.777244160536252,
+              "lon": 106.69554072063677,
+              "walk": {
+                "meters": 31,
+                "minutes": 1
+              },
+              "fit": "tight",
+              "width": {
+                "lo": 2.0,
+                "hi": 8.0,
+                "label": "Chưa rõ bề rộng",
+                "top_tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service parking_aisle",
+                "evidence": [
+                  {
+                    "lo": 2.0,
+                    "hi": 8.0,
+                    "tier": "Inferred",
+                    "tier_vi": "Suy luận",
+                    "source": "OSM phân loại đường",
+                    "detail": "highway=service parking_aisle",
+                    "observed_on": "",
+                    "url": "https://www.openstreetmap.org/way/287137240",
+                    "ai_feature": null
+                  }
+                ]
+              },
+              "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "at": null
+              },
+              "legality": {
+                "status": "Unverified",
+                "rule": {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              },
+              "lot": null,
+              "fail_reasons": []
+            },
+            "standard_route": {
+              "unfit_ways": []
+            },
+            "request": {
+              "lat": 10.7770374,
+              "lon": 106.69535,
+              "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+              "vehicle_id": "vinfast-vf-3",
+              "intent": "pickup",
+              "arrive_at": "2026-10-18T08:00:00+07:00",
+              "dwell_min": 10,
+              "rain": []
+            },
+            "evidence_note": "Bằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Xe VinFast VF 3 có thể dừng đón khách tại Bãi đỗ ô tô, cách 135 Nam Kỳ Khởi Nghĩa 111 m (đi bộ khoảng 2 phút). Theo OSM phân loại đường, hẻm trước cửa nhà chưa rõ bề rộng, từ 2 m đến 8 m.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn.",
+          "evidence": [
+            {
+              "way_id": 287137240,
+              "lat": 10.777244160536252,
+              "lon": 106.69554072063677,
+              "label": "Trước cửa nhà",
+              "source": "OSM phân loại đường"
+            },
+            {
+              "way_id": 290222654,
+              "lat": 10.777701350000001,
+              "lon": 106.6954678,
+              "label": "Đường nhánh không tên",
+              "source": "OSM phân loại đường"
+            }
+          ]
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "VF3 đón khách tại 135 Nam Kỳ Khởi Nghĩa, Quận 1 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.7770374,
+                          "lon": 106.69535,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": false,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "lap_ke_hoach",
+                    "args": {
+                      "dwell_min": 10,
+                      "lat": 10.7770374,
+                      "arrive_at": "2026-10-18T08:00:00+07:00",
+                      "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                      "vehicle_id": "vinfast-vf-3",
+                      "lon": 106.69535,
+                      "intent": "pickup"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "lap_ke_hoach",
+                    "response": {
+                      "destination": {
+                        "lat": 10.7770374,
+                        "lon": 106.69535,
+                        "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh"
+                      },
+                      "vehicle": {
+                        "id": "vinfast-vf-3",
+                        "label": "VinFast VF 3",
+                        "mirror_width": 1.748
+                      },
+                      "window": {
+                        "arrive": "2026-10-18T08:00:00+07:00",
+                        "depart": "2026-10-18T08:10:00+07:00",
+                        "dwell_min": 10,
+                        "tide_arrive": {
+                          "level_m": 0.98,
+                          "alarm": null
+                        },
+                        "tide_depart": {
+                          "level_m": 0.98,
+                          "alarm": null
+                        },
+                        "rain": []
+                      },
+                      "tide_source": {
+                        "station": "Phú An (sông Sài Gòn)",
+                        "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+                        "issued_at": "2026-10-16T09:08:00+07:00",
+                        "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+                        "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu."
+                      },
+                      "tide_note": null,
+                      "verdict": {
+                        "code": "nearby",
+                        "headline": "Dừng đón/trả tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+                        "detail": ""
+                      },
+                      "timing": null,
+                      "stop_points": [
+                        {
+                          "name": "Bãi đỗ ô tô",
+                          "kind": "lot",
+                          "way_id": null,
+                          "lat": 10.7771916,
+                          "lon": 106.6962032,
+                          "walk": {
+                            "meters": 111,
+                            "minutes": 2
+                          },
+                          "fit": "lot",
+                          "width": {
+                            "lo": null,
+                            "hi": null,
+                            "label": null,
+                            "top_tier": null,
+                            "source": null,
+                            "detail": null,
+                            "evidence": []
+                          },
+                          "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Permitted",
+                            "rule": {
+                              "code": "lot",
+                              "status": "Permitted",
+                              "text": "Bãi đỗ xe",
+                              "citation": "OpenStreetMap amenity=parking"
+                            }
+                          },
+                          "lot": "Bãi đỗ ô tô",
+                          "fail_reasons": []
+                        },
+                        {
+                          "name": "Trước cửa nhà",
+                          "kind": "door",
+                          "way_id": 287137240,
+                          "lat": 10.777244160536252,
+                          "lon": 106.69554072063677,
+                          "walk": {
+                            "meters": 31,
+                            "minutes": 1
+                          },
+                          "fit": "tight",
+                          "width": {
+                            "lo": 2.0,
+                            "hi": 8.0,
+                            "label": "Chưa rõ bề rộng",
+                            "top_tier": "Inferred",
+                            "source": "OSM phân loại đường",
+                            "detail": "highway=service parking_aisle",
+                            "evidence": [
+                              {
+                                "lo": 2.0,
+                                "hi": 8.0,
+                                "tier": "Inferred",
+                                "tier_vi": "Suy luận",
+                                "source": "OSM phân loại đường",
+                                "detail": "highway=service parking_aisle",
+                                "observed_on": "",
+                                "url": "https://www.openstreetmap.org/way/287137240",
+                                "ai_feature": null
+                              }
+                            ]
+                          },
+                          "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Unverified",
+                            "rule": {
+                              "code": "lane-unknown",
+                              "status": "Unverified",
+                              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                            }
+                          },
+                          "lot": null,
+                          "fail_reasons": []
+                        },
+                        {
+                          "name": "Đường nhánh không tên",
+                          "kind": "street",
+                          "way_id": 290222654,
+                          "lat": 10.777701350000001,
+                          "lon": 106.6954678,
+                          "walk": {
+                            "meters": 93,
+                            "minutes": 1
+                          },
+                          "fit": "tight",
+                          "width": {
+                            "lo": 2.0,
+                            "hi": 8.0,
+                            "label": "Chưa rõ bề rộng",
+                            "top_tier": "Inferred",
+                            "source": "OSM phân loại đường",
+                            "detail": "highway=service",
+                            "evidence": [
+                              {
+                                "lo": 2.0,
+                                "hi": 8.0,
+                                "tier": "Inferred",
+                                "tier_vi": "Suy luận",
+                                "source": "OSM phân loại đường",
+                                "detail": "highway=service",
+                                "observed_on": "",
+                                "url": "https://www.openstreetmap.org/way/290222654",
+                                "ai_feature": null
+                              }
+                            ]
+                          },
+                          "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Unverified",
+                            "rule": {
+                              "code": "lane-unknown",
+                              "status": "Unverified",
+                              "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                            }
+                          },
+                          "lot": null,
+                          "fail_reasons": []
+                        }
+                      ],
+                      "door": {
+                        "name": "Trước cửa nhà",
+                        "kind": "door",
+                        "way_id": 287137240,
+                        "lat": 10.777244160536252,
+                        "lon": 106.69554072063677,
+                        "walk": {
+                          "meters": 31,
+                          "minutes": 1
+                        },
+                        "fit": "tight",
+                        "width": {
+                          "lo": 2.0,
+                          "hi": 8.0,
+                          "label": "Chưa rõ bề rộng",
+                          "top_tier": "Inferred",
+                          "source": "OSM phân loại đường",
+                          "detail": "highway=service parking_aisle",
+                          "evidence": [
+                            {
+                              "lo": 2.0,
+                              "hi": 8.0,
+                              "tier": "Inferred",
+                              "tier_vi": "Suy luận",
+                              "source": "OSM phân loại đường",
+                              "detail": "highway=service parking_aisle",
+                              "observed_on": "",
+                              "url": "https://www.openstreetmap.org/way/287137240",
+                              "ai_feature": null
+                            }
+                          ]
+                        },
+                        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                        "flood": {
+                          "status": "passable",
+                          "depth": null,
+                          "at": null
+                        },
+                        "legality": {
+                          "status": "Unverified",
+                          "rule": {
+                            "code": "lane-unknown",
+                            "status": "Unverified",
+                            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                          }
+                        },
+                        "lot": null,
+                        "fail_reasons": []
+                      },
+                      "standard_route": {
+                        "unfit_ways": []
+                      },
+                      "request": {
+                        "lat": 10.7770374,
+                        "lon": 106.69535,
+                        "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                        "vehicle_id": "vinfast-vf-3",
+                        "intent": "pickup",
+                        "arrive_at": "2026-10-18T08:00:00+07:00",
+                        "dwell_min": 10,
+                        "rain": []
+                      },
+                      "evidence_note": "Bằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Xe VinFast VF 3 có thể dừng đón khách tại Bãi đỗ ô tô, cách 135 Nam Kỳ Khởi Nghĩa 111 m (đi bộ khoảng 2 phút). Theo OSM phân loại đường, hẻm trước cửa nhà chưa rõ bề rộng, từ 2 m đến 8 m.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-01",
+      "district": "Quận 1",
+      "query": "Tôi lái VF3 tới 135 Nam Kỳ Khởi Nghĩa, Quận 1, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 10.317,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                "lat": 10.7770374,
+                "lon": 106.69535,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": false,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "tool_call",
+          "name": "lap_ke_hoach",
+          "args": {
+            "intent": "park",
+            "lon": 106.69535,
+            "dwell_min": 120,
+            "arrive_at": "2026-10-17T19:00:00+07:00",
+            "lat": 10.7770374,
+            "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+            "vehicle_id": "vinfast-vf-3"
+          }
+        },
+        {
+          "type": "ui",
+          "plan": {
+            "lat": 10.7770374,
+            "lon": 106.69535,
+            "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+            "vehicle_id": "vinfast-vf-3",
+            "intent": "park",
+            "arrive_at": "2026-10-17T19:00:00+07:00",
+            "dwell_min": 120,
+            "rain": []
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "lap_ke_hoach",
+          "summary": "Đỗ tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+          "result": {
+            "destination": {
+              "lat": 10.7770374,
+              "lon": 106.69535,
+              "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh"
+            },
+            "vehicle": {
+              "id": "vinfast-vf-3",
+              "label": "VinFast VF 3",
+              "mirror_width": 1.748
+            },
+            "window": {
+              "arrive": "2026-10-17T19:00:00+07:00",
+              "depart": "2026-10-17T21:00:00+07:00",
+              "dwell_min": 120,
+              "tide_arrive": {
+                "level_m": 0.16,
+                "alarm": null
+              },
+              "tide_depart": {
+                "level_m": 1.07,
+                "alarm": null
+              },
+              "rain": []
+            },
+            "tide_source": {
+              "station": "Phú An (sông Sài Gòn)",
+              "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+              "issued_at": "2026-10-16T09:08:00+07:00",
+              "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+              "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu."
+            },
+            "tide_note": null,
+            "verdict": {
+              "code": "nearby",
+              "headline": "Đỗ tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+              "detail": ""
+            },
+            "timing": null,
+            "stop_points": [
+              {
+                "name": "Bãi đỗ ô tô",
+                "kind": "lot",
+                "way_id": null,
+                "lat": 10.7771916,
+                "lon": 106.6962032,
+                "walk": {
+                  "meters": 111,
+                  "minutes": 2
+                },
+                "fit": "lot",
+                "width": {
+                  "lo": null,
+                  "hi": null,
+                  "label": null,
+                  "top_tier": null,
+                  "source": null,
+                  "detail": null,
+                  "evidence": []
+                },
+                "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Permitted",
+                  "rule": {
+                    "code": "lot",
+                    "status": "Permitted",
+                    "text": "Bãi đỗ xe",
+                    "citation": "OpenStreetMap amenity=parking"
+                  }
+                },
+                "lot": "Bãi đỗ ô tô",
+                "fail_reasons": []
+              },
+              {
+                "name": "Nguyễn Du",
+                "kind": "street",
+                "way_id": 329878185,
+                "lat": 10.776390033516185,
+                "lon": 106.6976026668719,
+                "walk": {
+                  "meters": 330,
+                  "minutes": 5
+                },
+                "fit": "fits",
+                "width": {
+                  "lo": 5.5,
+                  "hi": 10.0,
+                  "label": "Chưa rõ bề rộng",
+                  "top_tier": "Inferred",
+                  "source": "OSM số làn xe",
+                  "detail": "highway=tertiary, lanes=2",
+                  "evidence": [
+                    {
+                      "lo": 5.5,
+                      "hi": 10.0,
+                      "tier": "Inferred",
+                      "tier_vi": "Suy luận",
+                      "source": "OSM số làn xe",
+                      "detail": "highway=tertiary, lanes=2",
+                      "observed_on": "",
+                      "url": "https://www.openstreetmap.org/way/329878185",
+                      "ai_feature": null
+                    }
+                  ]
+                },
+                "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Permitted",
+                  "rule": {
+                    "code": "no-rule",
+                    "status": "Permitted",
+                    "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                },
+                "lot": null,
+                "fail_reasons": []
+              },
+              {
+                "name": "Điểm đỗ ô tô TNXP_Huyền Trân Công Chúa",
+                "kind": "lot",
+                "way_id": null,
+                "lat": 10.776082805027897,
+                "lon": 106.69456871141833,
+                "walk": {
+                  "meters": 340,
+                  "minutes": 5
+                },
+                "fit": "lot",
+                "width": {
+                  "lo": null,
+                  "hi": null,
+                  "label": null,
+                  "top_tier": null,
+                  "source": null,
+                  "detail": null,
+                  "evidence": []
+                },
+                "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "at": null
+                },
+                "legality": {
+                  "status": "Permitted",
+                  "rule": {
+                    "code": "lot",
+                    "status": "Permitted",
+                    "text": "Bãi đỗ có thanh toán điện tử VETC",
+                    "citation": "Danh sách bãi đỗ thanh toán điện tử VETC 2026"
+                  }
+                },
+                "lot": "Điểm đỗ ô tô TNXP_Huyền Trân Công Chúa",
+                "fail_reasons": []
+              }
+            ],
+            "door": {
+              "name": "Trước cửa nhà",
+              "kind": "door",
+              "way_id": 287137240,
+              "lat": 10.777244160536252,
+              "lon": 106.69554072063677,
+              "walk": {
+                "meters": 31,
+                "minutes": 1
+              },
+              "fit": "tight",
+              "width": {
+                "lo": 2.0,
+                "hi": 8.0,
+                "label": "Chưa rõ bề rộng",
+                "top_tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service parking_aisle",
+                "evidence": [
+                  {
+                    "lo": 2.0,
+                    "hi": 8.0,
+                    "tier": "Inferred",
+                    "tier_vi": "Suy luận",
+                    "source": "OSM phân loại đường",
+                    "detail": "highway=service parking_aisle",
+                    "observed_on": "",
+                    "url": "https://www.openstreetmap.org/way/287137240",
+                    "ai_feature": null
+                  }
+                ]
+              },
+              "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "at": null
+              },
+              "legality": {
+                "status": "Unverified",
+                "rule": {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              },
+              "lot": null,
+              "fail_reasons": []
+            },
+            "standard_route": {
+              "unfit_ways": []
+            },
+            "request": {
+              "lat": 10.7770374,
+              "lon": 106.69535,
+              "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+              "vehicle_id": "vinfast-vf-3",
+              "intent": "park",
+              "arrive_at": "2026-10-17T19:00:00+07:00",
+              "dwell_min": 120,
+              "rain": []
+            },
+            "evidence_note": "Bằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Xe VinFast VF 3 của bạn có thể đỗ tại Bãi đỗ ô tô, cách 135 Nam Kỳ Khởi Nghĩa 111 m (khoảng 2 phút đi bộ). Bạn nên rời đi trước 21:00.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn.",
+          "evidence": [
+            {
+              "way_id": 287137240,
+              "lat": 10.777244160536252,
+              "lon": 106.69554072063677,
+              "label": "Trước cửa nhà",
+              "source": "OSM phân loại đường"
+            },
+            {
+              "way_id": 329878185,
+              "lat": 10.776390033516185,
+              "lon": 106.6976026668719,
+              "label": "Nguyễn Du",
+              "source": "OSM số làn xe"
+            }
+          ]
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái VF3 tới 135 Nam Kỳ Khởi Nghĩa, Quận 1, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "135 Nam Kỳ Khởi Nghĩa, Quận 1"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                          "lat": 10.7770374,
+                          "lon": 106.69535,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": false,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "lap_ke_hoach",
+                    "args": {
+                      "intent": "park",
+                      "lon": 106.69535,
+                      "dwell_min": 120,
+                      "arrive_at": "2026-10-17T19:00:00+07:00",
+                      "lat": 10.7770374,
+                      "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                      "vehicle_id": "vinfast-vf-3"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "lap_ke_hoach",
+                    "response": {
+                      "destination": {
+                        "lat": 10.7770374,
+                        "lon": 106.69535,
+                        "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh"
+                      },
+                      "vehicle": {
+                        "id": "vinfast-vf-3",
+                        "label": "VinFast VF 3",
+                        "mirror_width": 1.748
+                      },
+                      "window": {
+                        "arrive": "2026-10-17T19:00:00+07:00",
+                        "depart": "2026-10-17T21:00:00+07:00",
+                        "dwell_min": 120,
+                        "tide_arrive": {
+                          "level_m": 0.16,
+                          "alarm": null
+                        },
+                        "tide_depart": {
+                          "level_m": 1.07,
+                          "alarm": null
+                        },
+                        "rain": []
+                      },
+                      "tide_source": {
+                        "station": "Phú An (sông Sài Gòn)",
+                        "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+                        "issued_at": "2026-10-16T09:08:00+07:00",
+                        "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+                        "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu."
+                      },
+                      "tide_note": null,
+                      "verdict": {
+                        "code": "nearby",
+                        "headline": "Đỗ tại Bãi đỗ ô tô, đi bộ 111 m (~2 phút)",
+                        "detail": ""
+                      },
+                      "timing": null,
+                      "stop_points": [
+                        {
+                          "name": "Bãi đỗ ô tô",
+                          "kind": "lot",
+                          "way_id": null,
+                          "lat": 10.7771916,
+                          "lon": 106.6962032,
+                          "walk": {
+                            "meters": 111,
+                            "minutes": 2
+                          },
+                          "fit": "lot",
+                          "width": {
+                            "lo": null,
+                            "hi": null,
+                            "label": null,
+                            "top_tier": null,
+                            "source": null,
+                            "detail": null,
+                            "evidence": []
+                          },
+                          "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Permitted",
+                            "rule": {
+                              "code": "lot",
+                              "status": "Permitted",
+                              "text": "Bãi đỗ xe",
+                              "citation": "OpenStreetMap amenity=parking"
+                            }
+                          },
+                          "lot": "Bãi đỗ ô tô",
+                          "fail_reasons": []
+                        },
+                        {
+                          "name": "Nguyễn Du",
+                          "kind": "street",
+                          "way_id": 329878185,
+                          "lat": 10.776390033516185,
+                          "lon": 106.6976026668719,
+                          "walk": {
+                            "meters": 330,
+                            "minutes": 5
+                          },
+                          "fit": "fits",
+                          "width": {
+                            "lo": 5.5,
+                            "hi": 10.0,
+                            "label": "Chưa rõ bề rộng",
+                            "top_tier": "Inferred",
+                            "source": "OSM số làn xe",
+                            "detail": "highway=tertiary, lanes=2",
+                            "evidence": [
+                              {
+                                "lo": 5.5,
+                                "hi": 10.0,
+                                "tier": "Inferred",
+                                "tier_vi": "Suy luận",
+                                "source": "OSM số làn xe",
+                                "detail": "highway=tertiary, lanes=2",
+                                "observed_on": "",
+                                "url": "https://www.openstreetmap.org/way/329878185",
+                                "ai_feature": null
+                              }
+                            ]
+                          },
+                          "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Permitted",
+                            "rule": {
+                              "code": "no-rule",
+                              "status": "Permitted",
+                              "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+                              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                            }
+                          },
+                          "lot": null,
+                          "fail_reasons": []
+                        },
+                        {
+                          "name": "Điểm đỗ ô tô TNXP_Huyền Trân Công Chúa",
+                          "kind": "lot",
+                          "way_id": null,
+                          "lat": 10.776082805027897,
+                          "lon": 106.69456871141833,
+                          "walk": {
+                            "meters": 340,
+                            "minutes": 5
+                          },
+                          "fit": "lot",
+                          "width": {
+                            "lo": null,
+                            "hi": null,
+                            "label": null,
+                            "top_tier": null,
+                            "source": null,
+                            "detail": null,
+                            "evidence": []
+                          },
+                          "way_out": "Quay đầu trong bãi rồi ra theo đường vào",
+                          "flood": {
+                            "status": "passable",
+                            "depth": null,
+                            "at": null
+                          },
+                          "legality": {
+                            "status": "Permitted",
+                            "rule": {
+                              "code": "lot",
+                              "status": "Permitted",
+                              "text": "Bãi đỗ có thanh toán điện tử VETC",
+                              "citation": "Danh sách bãi đỗ thanh toán điện tử VETC 2026"
+                            }
+                          },
+                          "lot": "Điểm đỗ ô tô TNXP_Huyền Trân Công Chúa",
+                          "fail_reasons": []
+                        }
+                      ],
+                      "door": {
+                        "name": "Trước cửa nhà",
+                        "kind": "door",
+                        "way_id": 287137240,
+                        "lat": 10.777244160536252,
+                        "lon": 106.69554072063677,
+                        "walk": {
+                          "meters": 31,
+                          "minutes": 1
+                        },
+                        "fit": "tight",
+                        "width": {
+                          "lo": 2.0,
+                          "hi": 8.0,
+                          "label": "Chưa rõ bề rộng",
+                          "top_tier": "Inferred",
+                          "source": "OSM phân loại đường",
+                          "detail": "highway=service parking_aisle",
+                          "evidence": [
+                            {
+                              "lo": 2.0,
+                              "hi": 8.0,
+                              "tier": "Inferred",
+                              "tier_vi": "Suy luận",
+                              "source": "OSM phân loại đường",
+                              "detail": "highway=service parking_aisle",
+                              "observed_on": "",
+                              "url": "https://www.openstreetmap.org/way/287137240",
+                              "ai_feature": null
+                            }
+                          ]
+                        },
+                        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+                        "flood": {
+                          "status": "passable",
+                          "depth": null,
+                          "at": null
+                        },
+                        "legality": {
+                          "status": "Unverified",
+                          "rule": {
+                            "code": "lane-unknown",
+                            "status": "Unverified",
+                            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+                            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                          }
+                        },
+                        "lot": null,
+                        "fail_reasons": []
+                      },
+                      "standard_route": {
+                        "unfit_ways": []
+                      },
+                      "request": {
+                        "lat": 10.7770374,
+                        "lon": 106.69535,
+                        "label": "135 Nam Kỳ Khởi Nghĩa, Bến Thành, Hồ Chí Minh",
+                        "vehicle_id": "vinfast-vf-3",
+                        "intent": "park",
+                        "arrive_at": "2026-10-17T19:00:00+07:00",
+                        "dwell_min": 120,
+                        "rain": []
+                      },
+                      "evidence_note": "Bằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Xe VinFast VF 3 của bạn có thể đỗ tại Bãi đỗ ô tô, cách 135 Nam Kỳ Khởi Nghĩa 111 m (khoảng 2 phút đi bộ). Bạn nên rời đi trước 21:00.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn."
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickup-02",
+      "district": "Quận 3",
+      "query": "Fortuner đón khách tại hẻm 12/3 Cao Thắng, Quận 3 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 2.988,
+      "success": true,
+      "failures": [],
+      "number_violations": [
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        }
+      ],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "hẻm 12/3 Cao Thắng, Quận 3"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7702949,
+                "lon": 106.6818005,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.76986307900006,
+                "lon": 106.68132937700005,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": [],
+            "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+          }
+        },
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        },
+        {
+          "type": "answer",
+          "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Fortuner đón khách tại hẻm 12/3 Cao Thắng, Quận 3 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "hẻm 12/3 Cao Thắng, Quận 3"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7702949,
+                          "lon": 106.6818005,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.76986307900006,
+                          "lon": 106.68132937700005,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": [],
+                      "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-02",
+      "district": "Quận 3",
+      "query": "Tôi lái Fortuner tới hẻm 12/3 Cao Thắng, Quận 3, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 5.495,
+      "success": true,
+      "failures": [],
+      "number_violations": [
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        }
+      ],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "hẻm 12/3 Cao Thắng, Quận 3"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7702949,
+                "lon": 106.6818005,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.76986307900006,
+                "lon": 106.68132937700005,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": [],
+            "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+          }
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "validation",
+          "violations": [
+            "3"
+          ],
+          "action": "replace_unsupported_answer"
+        },
+        {
+          "type": "answer",
+          "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái Fortuner tới hẻm 12/3 Cao Thắng, Quận 3, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "hẻm 12/3 Cao Thắng, Quận 3"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7702949,
+                          "lon": 106.6818005,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "12 Hẻm 51 Cao Thắng, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.76986307900006,
+                          "lon": 106.68132937700005,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": [],
+                      "note": "Chỉ tìm thấy đường hoặc hẻm lớn, chưa xác minh được số nhà nhánh. Bạn gửi ghim vị trí nhé?"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Chưa đủ bằng chứng để nêu số liệu. Bạn xác nhận địa chỉ hoặc gửi ghim vị trí nhé?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pickup-03",
+      "district": "Quận 4",
+      "query": "Vios đón khách tại 132 Bến Vân Đồn, Quận 4 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 3.871,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "132 Bến Vân Đồn, Quận 4"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+                "lat": 10.763597867000044,
+                "lon": 106.69955979200006,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh",
+                "lat": 10.763127,
+                "lon": 106.6997365,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7757739,
+                "lon": 106.6838182,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Bạn muốn đến địa chỉ 132 Bến Vân Đồn, Khánh Hội, Quận 4 hay Saigon Times Travel ở 132 Bến Vân Đồn, Quận 4?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Vios đón khách tại 132 Bến Vân Đồn, Quận 4 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "132 Bến Vân Đồn, Quận 4"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+                          "lat": 10.763597867000044,
+                          "lon": 106.69955979200006,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh",
+                          "lat": 10.763127,
+                          "lon": 106.6997365,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7757739,
+                          "lon": 106.6838182,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Bạn muốn đến địa chỉ 132 Bến Vân Đồn, Khánh Hội, Quận 4 hay Saigon Times Travel ở 132 Bến Vân Đồn, Quận 4?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-03",
+      "district": "Quận 4",
+      "query": "Tôi lái Vios tới 132 Bến Vân Đồn, Quận 4, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 5.285,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "132 Bến Vân Đồn, Quận 4"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+                "lat": 10.763597867000044,
+                "lon": 106.69955979200006,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh",
+                "lat": 10.763127,
+                "lon": 106.6997365,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh",
+                "lat": 10.7757739,
+                "lon": 106.6838182,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "progress",
+          "text": "Đang chờ nguồn dữ liệu; chưa kết luận khi thiếu bằng chứng."
+        },
+        {
+          "type": "answer",
+          "text": "Bạn muốn đến địa chỉ nào: \"132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh\" hay \"Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh\" hay \"132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh\"?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái Vios tới 132 Bến Vân Đồn, Quận 4, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "132 Bến Vân Đồn, Quận 4"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh",
+                          "lat": 10.763597867000044,
+                          "lon": 106.69955979200006,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh",
+                          "lat": 10.763127,
+                          "lon": 106.6997365,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh",
+                          "lat": 10.7757739,
+                          "lon": 106.6838182,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Bạn muốn đến địa chỉ nào: \"132 Bến Vân Đồn, Khánh Hội, Hồ Chí Minh\" hay \"Saigon Times Travel - Masteri Millennium, 132 Đường Bến Vân Đồn, Quận 4, Hồ Chí Minh, Khánh Hội, Hồ Chí Minh\" hay \"132 Bến Vân Đồn, Bàn Cờ, Hồ Chí Minh\"?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-04",
+      "district": "Quận 5",
+      "query": "Tôi lái xe 7 chỗ tới bệnh viện Chợ Rẫy, Quận 5, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "class-m",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 4.342,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "Bệnh viện Chợ Rẫy, Quận 5"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+                "lat": 10.6630417,
+                "lon": 106.5672462,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh",
+                "lat": 10.7578646,
+                "lon": 106.6595131,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "Bệnh viện chợ rẫy cổng 6, Bà Triệu, Chợ Lớn, Hồ Chí Minh",
+                "lat": 10.756889069701893,
+                "lon": 106.66085608791326,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Bạn muốn đến Bệnh viện Chợ Rẫy ở địa chỉ nào? Có phải 201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh không?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "Tôi lái xe 7 chỗ tới bệnh viện Chợ Rẫy, Quận 5, đỗ xe 2 tiếng tối nay 7h. Vào được không?"
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "Bệnh viện Chợ Rẫy, Quận 5"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+                          "lat": 10.6630417,
+                          "lon": 106.5672462,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh",
+                          "lat": 10.7578646,
+                          "lon": 106.6595131,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "Bệnh viện chợ rẫy cổng 6, Bà Triệu, Chợ Lớn, Hồ Chí Minh",
+                          "lat": 10.756889069701893,
+                          "lon": 106.66085608791326,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Bạn muốn đến Bệnh viện Chợ Rẫy ở địa chỉ nào? Có phải 201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh không?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address-05",
+      "district": "Quận 6",
+      "query": "Tôi lái VF5 tới chợ Bình Tây, Quận 6, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-5",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.508,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-05",
+      "district": "Quận 6",
+      "query": "VF5 đón khách tại chợ Bình Tây, Quận 6 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "vinfast-vf-5",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.007,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-06",
+      "district": "Quận 7",
+      "query": "Tôi lái Xpander tới 105 Tôn Dật Tiên, Quận 7, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "mitsubishi-xpander",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.001,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-06",
+      "district": "Quận 7",
+      "query": "Xpander đón khách tại 105 Tôn Dật Tiên, Quận 7 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "mitsubishi-xpander",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.001,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-07",
+      "district": "Quận 8",
+      "query": "Tôi lái xe cỡ nhỏ tới hẻm 41 Phạm Thế Hiển, Quận 8, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "class-xs",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.005,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-07",
+      "district": "Quận 8",
+      "query": "xe cỡ nhỏ đón khách tại hẻm 41 Phạm Thế Hiển, Quận 8 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "class-xs",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-08",
+      "district": "Quận 10",
+      "query": "Tôi lái Vios tới bệnh viện Nhi Đồng 1, Quận 10, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.004,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-08",
+      "district": "Quận 10",
+      "query": "Vios đón khách tại bệnh viện Nhi Đồng 1, Quận 10 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-09",
+      "district": "Quận 11",
+      "query": "Tôi lái Fortuner tới công viên Đầm Sen, Quận 11, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.001,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-09",
+      "district": "Quận 11",
+      "query": "Fortuner đón khách tại công viên Đầm Sen, Quận 11 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-10",
+      "district": "Quận 12",
+      "query": "Tôi lái VF3 tới công viên phần mềm Quang Trung, Quận 12, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.004,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-10",
+      "district": "Quận 12",
+      "query": "VF3 đón khách tại công viên phần mềm Quang Trung, Quận 12 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-11",
+      "district": "Bình Thạnh",
+      "query": "Tôi lái Fortuner tới hẻm 113/4 Võ Duy Ninh, Bình Thạnh, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-11",
+      "district": "Bình Thạnh",
+      "query": "Fortuner đón khách tại hẻm 113/4 Võ Duy Ninh, Bình Thạnh sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-12",
+      "district": "Bình Tân",
+      "query": "Tôi lái VF5 tới bến xe Miền Tây, Bình Tân, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-5",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.003,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-12",
+      "district": "Bình Tân",
+      "query": "VF5 đón khách tại bến xe Miền Tây, Bình Tân sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "vinfast-vf-5",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-13",
+      "district": "Gò Vấp",
+      "query": "Tôi lái xe 7 chỗ tới 12 Quang Trung, Gò Vấp, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "class-m",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-13",
+      "district": "Gò Vấp",
+      "query": "xe 7 chỗ đón khách tại 12 Quang Trung, Gò Vấp sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "class-m",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.003,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-14",
+      "district": "Phú Nhuận",
+      "query": "Tôi lái Vios tới hẻm 96 Phan Đình Phùng, Phú Nhuận, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-14",
+      "district": "Phú Nhuận",
+      "query": "Vios đón khách tại hẻm 96 Phan Đình Phùng, Phú Nhuận sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-15",
+      "district": "Tân Bình",
+      "query": "Tôi lái Fortuner tới sân bay Tân Sơn Nhất, Tân Bình, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.003,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-15",
+      "district": "Tân Bình",
+      "query": "Fortuner đón khách tại sân bay Tân Sơn Nhất, Tân Bình sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-16",
+      "district": "Tân Phú",
+      "query": "Tôi lái VF3 tới 30 Bờ Bao Tân Thắng, Tân Phú, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-17",
+      "district": "Thủ Đức",
+      "query": "Tôi lái VF5 tới 1 Võ Văn Ngân, Thủ Đức, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-5",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.003,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-18",
+      "district": "Thủ Đức / Q2",
+      "query": "Tôi lái Vios tới Vincom Mega Mall Thảo Điền, Thủ Đức, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "address-19",
+      "district": "Thủ Đức / Q9",
+      "query": "Tôi lái Fortuner tới khu công nghệ cao, Thủ Đức, đỗ xe 2 tiếng tối nay 7h. Vào được không?",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "query": "Can my VF3 park for 90 minutes at 65 Le Loi, District 1, HCMC tomorrow at 9am?",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 90,
+        "hour": 9,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "poi-ambiguous",
+      "query": "Tôi đi Vios tới quán cà phê Highlands ở TP.HCM, đỗ 1 tiếng",
+      "expect": {
+        "ambiguous": true
+      },
+      "latency_s": 0.002,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "poi-unknown",
+      "query": "Tôi đi VF3 đến quán cà phê X ở TP.HCM",
+      "expect": {
+        "ambiguous": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "outside-hanoi",
+      "query": "Lái Fortuner tới 1 Tràng Tiền, Hà Nội, đỗ 2 tiếng",
+      "expect": {
+        "outside": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "outside-danang",
+      "query": "Đón khách ở cầu Rồng Đà Nẵng bằng VF5",
+      "expect": {
+        "outside": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "nonsense",
+      "query": "asdfgh zxcvbn @@@ ???",
+      "expect": {
+        "clarify": true
+      },
+      "latency_s": 0.002,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "no-address",
+      "query": "Xe tôi có vào được không?",
+      "expect": {
+        "clarify": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "rain",
+      "query": "Vios đỗ ở hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh, tối nay 20h trong 2 tiếng, nếu mưa 30 mm/h thì sao?",
+      "expect": {
+        "vehicle_id": "toyota-vios",
+        "rain": 30,
+        "hour": 20,
+        "dwell_min": 120,
+        "intent": "park",
+        "geocode": true
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan",
+        "missing_geocode"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "pickup-04",
+      "district": "Quận 5",
+      "query": "xe 7 chỗ đón khách tại bệnh viện Chợ Rẫy, Quận 5 sáng mai 8 giờ, dừng 10 phút.",
+      "expect": {
+        "vehicle_id": "class-m",
+        "intent": "pickup",
+        "dwell_min": 10,
+        "hour": 8,
+        "tomorrow": true,
+        "geocode": true
+      },
+      "latency_s": 4.506,
+      "success": true,
+      "failures": [],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "bệnh viện Chợ Rẫy, Quận 5"
+          }
+        },
+        {
+          "type": "tool_result",
+          "name": "tim_dia_diem",
+          "summary": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+          "result": {
+            "results": [
+              {
+                "label": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+                "lat": 10.6630417,
+                "lon": 106.5672462,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh",
+                "lat": 10.7578646,
+                "lon": 106.6595131,
+                "source": "Goong",
+                "precision": "place"
+              },
+              {
+                "label": "Bệnh viện chợ rẫy cổng 6, Bà Triệu, Chợ Lớn, Hồ Chí Minh",
+                "lat": 10.756889069701893,
+                "lon": 106.66085608791326,
+                "source": "Goong",
+                "precision": "place"
+              }
+            ],
+            "requires_clarification": true,
+            "source_warnings": []
+          }
+        },
+        {
+          "type": "answer",
+          "text": "Bạn muốn đến Bệnh viện Chợ Rẫy ở địa chỉ nào? Có phải 201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh không?",
+          "evidence": []
+        },
+        {
+          "type": "done",
+          "contents": [
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "text": "xe 7 chỗ đón khách tại bệnh viện Chợ Rẫy, Quận 5 sáng mai 8 giờ, dừng 10 phút."
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "functionCall": {
+                    "name": "tim_dia_diem",
+                    "args": {
+                      "query": "bệnh viện Chợ Rẫy, Quận 5"
+                    }
+                  }
+                }
+              ],
+              "role": "model"
+            },
+            {
+              "role": "user",
+              "parts": [
+                {
+                  "functionResponse": {
+                    "name": "tim_dia_diem",
+                    "response": {
+                      "results": [
+                        {
+                          "label": "MH78+6V9, Bình Chánh, Hồ Chí Minh",
+                          "lat": 10.6630417,
+                          "lon": 106.5672462,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh",
+                          "lat": 10.7578646,
+                          "lon": 106.6595131,
+                          "source": "Goong",
+                          "precision": "place"
+                        },
+                        {
+                          "label": "Bệnh viện chợ rẫy cổng 6, Bà Triệu, Chợ Lớn, Hồ Chí Minh",
+                          "lat": 10.756889069701893,
+                          "lon": 106.66085608791326,
+                          "source": "Goong",
+                          "precision": "place"
+                        }
+                      ],
+                      "requires_clarification": true,
+                      "source_warnings": []
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "parts": [
+                {
+                  "text": "Bạn muốn đến Bệnh viện Chợ Rẫy ở địa chỉ nào? Có phải 201B Nguyễn Chí Thanh, Chợ Lớn, Hồ Chí Minh không?"
+                }
+              ],
+              "role": "model"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "follow-car",
+      "query": "Đổi sang VF3 của vợ tôi thì sao?",
+      "parent": "address-11",
+      "expect": {
+        "vehicle_id": "vinfast-vf-3",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 19,
+        "followup": true
+      },
+      "latency_s": 0.001,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "follow-time",
+      "query": "Đổi sang sáng mai lúc 8h nhé",
+      "parent": "address-11",
+      "expect": {
+        "vehicle_id": "toyota-fortuner",
+        "intent": "park",
+        "dwell_min": 120,
+        "hour": 8,
+        "tomorrow": true,
+        "followup": true
+      },
+      "latency_s": 0.001,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "follow-nearer",
+      "query": "Còn chỗ nào gần hơn?",
+      "parent": "address-11",
+      "expect": {
+        "followup": true,
+        "vehicle_id": "toyota-fortuner"
+      },
+      "latency_s": 0.0,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    },
+    {
+      "id": "follow-rain",
+      "query": "Nếu mưa 45 mm/h thì sao?",
+      "parent": "address-11",
+      "expect": {
+        "followup": true,
+        "rain": 45,
+        "vehicle_id": "toyota-fortuner"
+      },
+      "latency_s": 0.014,
+      "success": false,
+      "failures": [
+        "runtime: Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau.",
+        "missing_answer",
+        "missing_plan"
+      ],
+      "number_violations": [],
+      "events": [
+        {
+          "type": "error",
+          "text": "Các khóa Gemini miễn phí đang bận hoặc hết hạn mức. Khóa trả phí đang tắt; thử lại sau."
+        }
+      ]
+    }
+  ]
+}

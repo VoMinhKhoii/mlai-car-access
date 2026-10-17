@@ -1,0 +1,1 @@
+{"pid":20860,"started_at":"2026-10-16T18:40:56+00:00","loop":true,"command":"run","free_llm_budget_per_cycle":0,"paid_calls":0,"portal_calls":0,"state":"sleeping","cycle_started_at":"2026-10-16T18:40:56+00:00","last_success_at":"2026-10-16T18:41:06+00:00","last_error":null,"next_run_at":"2026-10-17T06:41:06+00:00"}

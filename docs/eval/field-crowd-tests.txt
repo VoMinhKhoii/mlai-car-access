@@ -1,0 +1,19 @@
+test_anonymous_requires_issued_cookie_but_not_login (test_crowd_field.CrowdTests.test_anonymous_requires_issued_cookie_but_not_login) ... /Users/khoivo/Library/Python/3.11/lib/python/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+  warnings.warn(message, DeprecationWarning)
+ok
+test_device_hourly_limit_across_different_ways (test_crowd_field.CrowdTests.test_device_hourly_limit_across_different_ways) ... ok
+test_disagreeing_reviewed_samples_widen_range_and_mark_review (test_crowd_field.CrowdTests.test_disagreeing_reviewed_samples_widen_range_and_mark_review) ... ok
+test_invalid_photo_method_range_location_and_confirmation (test_crowd_field.CrowdTests.test_invalid_photo_method_range_location_and_confirmation) ... ok
+test_limits_ten_per_ip_hour_and_three_per_device_way (test_crowd_field.CrowdTests.test_limits_ten_per_ip_hour_and_three_per_device_way) ... ok
+test_official_bound_keyed_by_name_also_blocks_consensus (test_crowd_field.CrowdTests.test_official_bound_keyed_by_name_also_blocks_consensus) ... ok
+test_official_needs_explicit_review_even_after_two_devices (test_crowd_field.CrowdTests.test_official_needs_explicit_review_even_after_two_devices) ... ok
+test_pending_is_not_evidence_and_review_is_token_protected (test_crowd_field.CrowdTests.test_pending_is_not_evidence_and_review_is_token_protected) ... ok
+test_photo_strips_identifiers_but_retains_gps_time (test_crowd_field.CrowdTests.test_photo_strips_identifiers_but_retains_gps_time) ... ok
+test_qr_url_stats_privacy_and_daily_distinct_way_count (test_crowd_field.CrowdTests.test_qr_url_stats_privacy_and_daily_distinct_way_count) ... ok
+test_same_device_same_ip_or_same_photo_cannot_create_consensus (test_crowd_field.CrowdTests.test_same_device_same_ip_or_same_photo_cannot_create_consensus) ... ok
+test_two_independent_devices_agree_and_duplicate_does_not_count (test_crowd_field.CrowdTests.test_two_independent_devices_agree_and_duplicate_does_not_count) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 23.310s
+
+OK
