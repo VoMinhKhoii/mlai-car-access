@@ -93,12 +93,13 @@ export function Transparency({ plan, stop, comparison, fleet, onVehicle, disable
   const out = stop.way_out
   const needsTurning = out.mode === 'reverse' || out.mode === 'turn_here'
   const exitStatus: Status = !out.available || out.mode === 'none' ? 'fail' : out.route_verified !== true || needsTurning && out.turn_verified !== true || out.turn_verified === false ? 'unknown' : out.tight_exit ? 'tight' : 'pass'
-  const widthStatus: Status = stop.fit.class === 'lot' ? 'unknown' : answerStatus(stop.fit.class)
+  const widthStatus: Status = stop.fit.class === 'lot' ? 'unknown' : stop.fit.class === 'unknown' && estimate?.answer ? answerStatus(estimate.answer) : answerStatus(stop.fit.class)
+  const estWidth = estimate?.limiting_width?.value_m ?? null
   const floodStatus: Status = flood.status === 'blocked' ? 'fail' : flood.knowledge !== 'known' ? 'unknown' : flood.status === 'risky' ? 'tight' : 'pass'
   const legalStatus: Status = stop.legality.status === 'Permitted' ? 'pass' : stop.legality.status === 'Prohibited' ? 'fail' : stop.legality.status === 'Restricted' ? 'tight' : 'unknown'
   const walkStatus: Status = stop.walk.connection?.mapped === false ? 'unknown' : stop.walk.wade ? 'tight' : stop.walk.meters === 0 || stop.walk.connection?.mapped === true ? 'pass' : 'unknown'
   const checks = [
-    { id: 'width', label: 'Width', status: widthStatus, reason: `${wr ? range(wr.lo, wr.hi) : 'No width range'}; needs ${m(needed)} for comfortable clearance`, source: estimate?.limiting_width?.source || wr?.evidence.find((b) => b.estimate_m != null)?.source || wr?.evidence.find((b) => b.tier === wr.top_tier)?.source || 'Width evidence unavailable' },
+    { id: 'width', label: 'Width', status: widthStatus, reason: `${estWidth != null ? `≈${m(estWidth)} sampled (range ${wr ? range(wr.lo, wr.hi) : 'unknown'})` : wr ? range(wr.lo, wr.hi) : 'No width range'}; needs ${m(needed)} for comfortable clearance`, source: estimate?.limiting_width?.source || wr?.evidence.find((b) => b.estimate_m != null)?.source || wr?.evidence.find((b) => b.tier === wr.top_tier)?.source || 'Width evidence unavailable' },
     { id: 'exit', label: 'Turning / way out', status: exitStatus, reason: out.text || 'Way out not verified', source: out.observed?.[0]?.source || 'OSM route geometry' },
     { id: 'flood', label: 'Flood during stay', status: floodStatus, reason: flood.reason || (floodStatus === 'pass' ? 'Forecast within vehicle limits for the stay window' : 'Cannot confirm water stays within vehicle limits'), source: flood.source || flood.freshness?.source || 'Flood evidence unavailable' },
     { id: 'law', label: 'Stopping law', status: legalStatus, reason: stop.legality.rules[0]?.text || 'Stopping permission unverified', source: stop.legality.rules[0]?.citation || 'No applicable rule evidence' },
@@ -115,8 +116,8 @@ export function Transparency({ plan, stop, comparison, fleet, onVehicle, disable
     : estimate?.basis?.replace(/\b(observed|measured|official)(?=\s*(?:≈|\d))/gi, 'assumed')
   const coverage = estimate?.coverage
   const routeWays = groupedProfile(profile)
-  const measured = routeWays.filter((s) => hasSamples(s) && displayedTier(s) === 'Measured').length
-  const drivers = [routeWays.length ? `${measured}/${routeWays.length} segments measured` : coverage ? `${coverage.sampled_segments}/${coverage.total_segments} segments with strong width samples` : 'Route width coverage unavailable',
+  const measured = routeWays.filter((s) => hasSamples(s)).length
+  const drivers = [coverage ? `${coverage.sampled_segments}/${coverage.total_segments} segments with width samples` : routeWays.length ? `${measured}/${routeWays.length} segments with width samples` : 'Route width coverage unavailable',
     exitStatus === 'unknown' ? 'way out not verified' : exitStatus === 'fail' ? 'no suitable way out' : exitStatus === 'tight' ? 'tight exit' : 'exit route checked',
     floodStatus === 'pass' ? 'flood forecast covers stay' : 'flood evidence incomplete']
   const vehicles = top ? comparison?.vehicles ?? [] : []

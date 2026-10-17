@@ -157,7 +157,7 @@ def compact_plan(raw, stops_only=False):
         if not stops_only:
             result['door'] = _stop(raw.get('door'), evidence_limit)
         result = _omit_optional_nulls(_without_geometry(result))
-        if len(protocol.dumps(result).encode()) < 20_000:
+        if len(protocol.dumps(result).encode()) < 60_000:
             return result
     # Never silently drop a safety field to fit the budget.
     return {'error': 'compact_result_too_large',

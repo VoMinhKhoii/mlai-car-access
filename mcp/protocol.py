@@ -14,7 +14,7 @@ from datetime import datetime
 VERSIONS = ('2025-11-25', '2025-06-18', '2025-03-26')
 HTTP_VERSIONS = VERSIONS[:3]
 TOOL_ALIASES = {'tim_dia_diem': 'find_place', 'lap_ke_hoach': 'plan_arrival', 'kiem_tra_xe_vao_hem': 'check_alley_fit', 'tim_cho_do_gan': 'find_nearby_stops', 'danh_sach_xe': 'list_vehicles', 'muc_trieu': 'tide_levels'}
-MAX_RESULT_BYTES = 24_000  # includes content + structuredContent + JSON-RPC envelope
+MAX_RESULT_BYTES = 64_000  # includes content + structuredContent + JSON-RPC envelope
 
 
 class RPCError(Exception):
