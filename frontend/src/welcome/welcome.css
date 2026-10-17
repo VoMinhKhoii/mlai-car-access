@@ -209,6 +209,7 @@ button, input, select { font: inherit; color: inherit; }
 .tile-wide { grid-column: span 2; }
 .tile { aspect-ratio: 4 / 5; overflow: hidden; display: grid; place-items: center; }
 .tile-wide .tile { aspect-ratio: 8 / 5; }
+.tile-wide .tile-photo { padding: 0 30%; }
 .tile-f1 { background: var(--surface); }
 .tile-f2 { background: var(--field-2); }
 .tile-f3 { background: var(--field-3); }
@@ -236,7 +237,7 @@ button, input, select { font: inherit; color: inherit; }
 /* ---------- Agents ---------- */
 .agents { padding: 0 var(--m) var(--gap-section); }
 .agents .display-2 { text-indent: 3vw; max-width: 16ch; }
-.agents-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--m); margin-top: 96px; align-items: end; }
+.agents-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--m); margin-top: 72px; align-items: end; }
 .agents-photo { grid-column: 1 / 5; margin: 0; }
 .agents-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .agents-copy { grid-column: 7 / 13; display: grid; grid-template-columns: 1fr 5fr; gap: 0 var(--m); align-content: start; }
@@ -258,7 +259,7 @@ code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: var(--
 .dialog {
   grid-column: 7 / 12; align-self: center; justify-self: start; width: min(440px, 100%);
   background: var(--paper); color: var(--ink); padding: 28px; display: grid; gap: 20px;
-  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55); /* taste-skill-ignore: the product dialog (data-ui) floats above the page */
   border-radius: 12px;
 }
 .dialog-title { margin: 0; font-size: var(--step-lead); font-weight: 500; }
@@ -305,6 +306,7 @@ code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: var(--
   .spec-intro { grid-column: 1 / -1; }
   .tiles { grid-column: 1 / -1; grid-template-columns: repeat(2, 1fr); }
   .tile-wide { grid-column: 1 / -1; order: -1; }
+  .tile-last { order: 0; }
   .agents-photo { grid-column: 1 / 6; }
   .agents-copy { grid-column: 6 / 13; }
   .cta-copy { grid-column: 1 / 7; }
