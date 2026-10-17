@@ -1,0 +1,19 @@
+{
+  "map_context": {
+    "center": {
+      "lat": 10.7617,
+      "lon": 106.6864
+    },
+    "zoom": 17.8,
+    "candidates": [
+      {
+        "name": "Cong Ty Cp Vuong Pham",
+        "lon": 106.68749883770943,
+        "lat": 10.761741026189696,
+        "layer": "point_map"
+      }
+    ]
+  },
+  "message": "Vios tới công ty Vương Phạm",
+  "agentText": "AlleyAI\n\nAsk a question, see the plan on the map.\n\nVios tới công ty Vương Phạm\n\nUnderstand request\n\nRequest understood\n\nFind destination\ncông ty Vương Phạm\n\nCong Ty Cp Vuong Pham\n\nCheck alley width and plan\nCong Ty Cp Vuong Pham · toyota-vios · 10:56 · 120 min\n\nPlan checked; Low confidence\n\nAlleyAI · Low confidence\n\nEstimate: access appears possible. Low confidence.\nBasis: limiting width approximately 3.7 m at Hẻm 137 Trần Ðình Xu (OpenStreetMap); 0/2 route segments have width samples.\nSuggested stop: Hẻm 137 Trần Ðình Xu; walk 115 m; source: OpenStreetMap.\nCheck on site: Arrival route includes unverified width or flood conditions; Width unverified (2.2–4.5 m; vehicle needs ≥ 2.18 m); Door-opening space unverified (needs 2.88 m); Must reverse 50 m (over the 30 m reverse limit); turning space is unverified; No flood history or current observations for this segment; Stopping permission unverified: Junction boundary unknown; the 5 m setback is unverified; Complete clear-width measurements are missing; motor-vehicle lane count is unverified; The nearest connector has no mapped OSM footpath; only the mapped walking portion is drawn; Stopping legality has not been verified; Flooding has not been verified.\n\nEvidence · Hẻm 137 Trần Ðình Xu\nEvidence · Hẻm 115 Trần Đình Xu\nEvidence · Nguyễn Cư Trinh\nI drive a Fortuner to Hẻm 113/4 Võ Duy Ninh for 2 hours. Where can I park?\nWhat about my wife's VF 3?\nVios to Hẻm 220/9 Xô Viết Nghệ Tĩnh at 20:00, for 2 hours\nVF 5 pickup at Hẻm 328 Xô Viết Nghệ Tĩnh\nCompare: AI without Ngõ Ngách"
+}

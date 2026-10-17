@@ -50,7 +50,7 @@ def device_id(request):
         if hmac.compare_digest(signature,crowd.digest('device:'+device)):
             return crowd.digest('stored-device:'+device)
     except ValueError: pass
-    raise HTTPException(401,'Mở lại bước GPS để khởi tạo thiết bị. Không cần đăng nhập.')
+    raise HTTPException(401,'Reopen the GPS step to initialise this device. No sign-in required.')
 
 
 @router.post('/api/crowd/session')
@@ -83,7 +83,7 @@ def crowd_snap(request: Request, lat: float, lon: float):
 class CrowdMeasurement(Measurement):
     width_m: float = Field(ge=.8,le=12,allow_inf_nan=False)
     method: Literal['tape','lidar']
-    measured_by: str = Field(default='Ẩn danh',max_length=80)
+    measured_by: str = Field(default='Anonymous',max_length=80)
     photo_base64: str = Field(min_length=10,max_length=4*((8*1024*1024+2)//3))
     confirmed_way: Literal[True]
     photo_attestation: Literal[True]
@@ -95,7 +95,7 @@ def clean_photo(encoded):
     try:
         with Image.open(io.BytesIO(raw)) as source:
             if source.width*source.height>20_000_000:
-                raise HTTPException(422,'Ảnh tối đa 20 megapixel. Chọn ảnh nhỏ hơn.')
+                raise HTTPException(422,'Photo must be at most 20 megapixels. Choose a smaller photo.')
             original = source.getexif()
             keep = Image.Exif()
             # Copy only GPS and capture time; drop make/model/serial/owner/comments.
@@ -110,7 +110,7 @@ def clean_photo(encoded):
             image.save(out,format='JPEG',quality=90,exif=keep)
             return out.getvalue()
     except (UnidentifiedImageError,OSError,ValueError,TypeError,SyntaxError,OverflowError,struct.error,Image.DecompressionBombError):
-        raise HTTPException(422,'Không đọc được ảnh. Chọn ảnh JPEG/PNG/WebP; với HEIC hãy xuất JPEG tương thích.')
+        raise HTTPException(422,'Could not read photo. Choose JPEG/PNG/WebP; export HEIC as a compatible JPEG.')
 
 
 @router.post('/api/crowd/measure')
@@ -126,13 +126,13 @@ def save(m,device,ip):
     try:
         existing = con.execute('SELECT status,reason,device FROM submissions WHERE id=?',(str(m.submission_id),)).fetchone()
         if existing:
-            if existing['device']!=device: raise HTTPException(409,'Mã bản ghi đã dùng trên thiết bị khác.')
+            if existing['device']!=device: raise HTTPException(409,'Record ID already used on another device.')
             return {'ok':True,'id':str(m.submission_id),'status':existing['status'],'reason':existing['reason']}
     finally: con.close()
     row,_ = way_record(m.way_id,m.lat,m.lon)
     w = Way(m.way_id,row.get('tags',{}),[])
     if w.kind not in ('alley','residential','service','foot'):
-        raise HTTPException(422,'Chọn một đoạn hẻm trên bản đồ.')
+        raise HTTPException(422,'Select an alley segment on the map.')
     crowd.reserve(device,ip,m.way_id)
     raw = clean_photo(m.photo_base64)
     official = crowd.has_official(m.way_id)
@@ -144,10 +144,10 @@ def save(m,device,ip):
         # Enforce lifetime cap again inside the insertion transaction for concurrent requests.
         existing = con.execute('SELECT * FROM submissions WHERE id=?',(str(m.submission_id),)).fetchone()
         if existing:
-            if existing['device']!=device: raise HTTPException(409,'Mã bản ghi đã dùng.')
+            if existing['device']!=device: raise HTTPException(409,'Record ID already used.')
             return {'ok':True,'id':existing['id'],'status':existing['status'],'reason':existing['reason']}
         if con.execute('SELECT count(*) FROM submissions WHERE device=? AND way_id=?',(device,m.way_id)).fetchone()[0]>=3:
-            raise HTTPException(429,'Tối đa 3 bản/đoạn/thiết bị.')
+            raise HTTPException(429,'Maximum 3 submissions per segment per device.')
         path.write_bytes(raw)
         at = crowd.now().isoformat(timespec='seconds')
         con.execute('''INSERT INTO submissions
@@ -155,7 +155,7 @@ def save(m,device,ip):
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'pending',?)''',
         (str(m.submission_id),device,ip,m.way_id,m.lat,m.lon,m.width_m,m.method,m.measured_by,
          path.name,hashlib.sha256(raw).hexdigest(),m.measured_at.isoformat() if m.measured_at else at,at,
-         'Có Official: cần đồng đội duyệt' if official else 'Chờ đồng đội duyệt hoặc thiết bị độc lập đồng ý'))
+         'Official evidence present: teammate review required' if official else 'Awaiting teammate review or independent device agreement'))
         crowd.consensus(con,m.way_id,official)
         result = dict(con.execute('SELECT id,status,reason FROM submissions WHERE id=?',(str(m.submission_id),)).fetchone())
         con.commit()
@@ -187,7 +187,7 @@ class Review(BaseModel):
     @model_validator(mode='after')
     def nonempty(self):
         if not self.reviewer.strip() or not self.note.strip():
-            raise ValueError('Cần tên người duyệt và kết luận.')
+            raise ValueError('Reviewer name and conclusion are required.')
         return self
 
 
@@ -199,7 +199,7 @@ def review(sid: UUID, r: Review):
         if not item: raise HTTPException(404)
         official = crowd.has_official(item['way_id'])
         if r.decision=='approved' and official and not r.official_override_ack:
-            raise HTTPException(422,'Đoạn có Official. Cần xác nhận đã đối chiếu địa chính trước khi duyệt.')
+            raise HTTPException(422,'Segment has Official evidence. Confirm cadastral comparison before approval.')
         con.execute('BEGIN IMMEDIATE')
         con.execute('UPDATE submissions SET status=?,reviewer=?,reason=?,reviewed_at=? WHERE id=?',
                     (r.decision,r.reviewer.strip(),r.note.strip(),crowd.now().isoformat(),str(sid)))
@@ -215,7 +215,7 @@ def public_url():
     raw = os.environ.get('FIELD_PUBLIC_URL','').strip()
     parsed = urlsplit(raw)
     if parsed.scheme not in ('https','http') or not parsed.netloc or parsed.username or parsed.password:
-        raise HTTPException(503,'Chưa đặt FIELD_PUBLIC_URL. Chưa có URL công khai để tạo QR.')
+        raise HTTPException(503,'FIELD_PUBLIC_URL is unset. No public URL available for the QR code.')
     # Always point the stage QR at the anonymous crowd flow, never the review page/token.
     query = {'crowd':'1'}
     return urlunsplit((parsed.scheme,parsed.netloc,'/field',urlencode(query),''))

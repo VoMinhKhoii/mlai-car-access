@@ -21,7 +21,7 @@ export async function api<T>(endpoint: string, token: string, body?: unknown): P
       ...(body ? { body: JSON.stringify(body) } : {}) })
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))
-      throw new ApiError(typeof error.detail === 'string' ? error.detail : `Lỗi ${response.status}. Kiểm tra dữ liệu và mã nhóm.`, response.status)
+      throw new ApiError(typeof error.detail === 'string' ? error.detail : `Error ${response.status}. Check the data and team code.`, response.status)
     }
     return await response.json() as T
   } finally { clearTimeout(timer) }

@@ -252,11 +252,11 @@ def alarm_label(level: float | None) -> str | None:
         return None
     a = tide_meta()["alarm_levels_m"]
     if level >= a["BD3"]:
-        return "BĐ3"
+        return "Alarm level 3"
     if level >= a["BD2"]:
-        return "BĐ2"
+        return "Alarm level 2"
     if level >= a["BD1"]:
-        return "BĐ1"
+        return "Alarm level 1"
     return None
 
 
@@ -500,7 +500,7 @@ def _assess_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], s
                          "source": source}
             if depth > 0:
                 lo, hi = max(lo, depth), max(hi, depth + 0.05)
-                drivers.append(f"Báo ngập {depth * 100:.0f} cm lúc {seen.strftime('%H:%M')} ({source})")
+                drivers.append(f"Flood report: {depth * 100:.0f} cm at {seen.strftime('%H:%M')} ({source})")
             else:
                 fresh_dry = True
 
@@ -524,8 +524,8 @@ def _assess_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], s
         low = _tide_depth(level - err, p, snapshot.tide_metadata)
         if high:
             lo, hi = max(lo, low[0] if low else 0.0), max(hi, high[1])
-            how = {"measured": "đo", "model": f"mô hình ±{err * 100:.0f} cm", "bulletin": "bản tin"}[kind]
-            drivers.append(f"Triều {level:.2f} m ({alarm_label(level) or 'dưới BĐ1'}, {how})")
+            how = {"measured": "measured", "model": f"model ±{err * 100:.0f} cm", "bulletin": "bulletin"}[kind]
+            drivers.append(f"Tide {level:.2f} m ({alarm_label(level) or 'below alarm level 1'}, {how})")
         if freshness is None:
             freshness = {"source": kind}
             source = kind
@@ -540,20 +540,20 @@ def _assess_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], s
             rlo, rhi = rlo + 0.1, rhi + 0.1
         lo, hi = max(lo, rlo), max(hi, rhi)
         rain_driven = True
-        drivers.append(f"Mưa {rain:g} mm/h")
+        drivers.append(f"Rain {rain:g} mm/h")
         source = source or "rain"
 
     depth = DepthRange(lo, hi, drivers, rain_driven, bool(p and p.inferred_from)) if hi > 0 else None
     status = flood_status(depth, safe_depth)
     if stale_positive:
         knowledge = "stale_positive_observation"
-        reason = "Báo ngập dương tính gần nhất đã hết hạn và chưa có quan sát khô mới hơn"
+        reason = "Latest positive flood report has expired without a newer dry observation"
     elif tide_needed and tp is None:
         knowledge = "missing_tide"
-        reason = "Không có dữ liệu triều hợp lệ tại thời điểm này"
+        reason = "No valid tide data at this time"
     elif p is None and not fresh_dry and depth is None:
         knowledge = "missing_history"
-        reason = "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường"
+        reason = "No flood history or current observations for this road segment"
     else:
         knowledge = "known"
         reason = None
@@ -575,13 +575,13 @@ def worst_over(p: FloodProfile | None, times: list[datetime], rain: list[dict], 
     snap = snapshot or FloodSnapshot(rain)
     assessments = [snap.assess(p, t, safe, name) for t in sorted(set(times))]
     if not assessments:
-        return FloodAssessment("risky", None, "missing_history", "Không có thời điểm để kiểm tra", None)
+        return FloodAssessment("risky", None, "missing_history", "No time provided for assessment", None)
     decisive = max(assessments, key=lambda a: (STATUS_ORDER[a.status],
                                                a.depth.hi if a.depth else -1.0))
     unknown = max(assessments, key=lambda a: KNOWLEDGE_ORDER[a.knowledge])
     if unknown.knowledge != "known" and unknown is not decisive:
         return FloodAssessment(
             decisive.status, decisive.depth, unknown.knowledge,
-            "Một hoặc nhiều thời điểm chưa có bằng chứng ngập đầy đủ",
+            "One or more times lack sufficient flood evidence",
             None, None, None)
     return decisive

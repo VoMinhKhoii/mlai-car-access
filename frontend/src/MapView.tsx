@@ -135,6 +135,7 @@ export function MapView(p: Props) {
         const key = `${l.source}/${l['source-layer']}`
         if (seen.has(key)) continue
         seen.add(key)
+        if (!m.isSourceLoaded(l.source)) continue
         for (const f of m.querySourceFeatures(l.source, { sourceLayer: l['source-layer'] })) {
           const place = featurePlace(f, l['source-layer'], center)
           if (place && bounds.contains([place.lon, place.lat])) candidates.push(place)
@@ -145,6 +146,7 @@ export function MapView(p: Props) {
     const scheduleFeatures = () => { window.clearTimeout(featureTimer); featureTimer = window.setTimeout(publishFeatures, 150) }
     m.on('idle', scheduleFeatures)
     m.on('moveend', scheduleFeatures)
+    m.on('sourcedata', (e) => { if (e.isSourceLoaded) scheduleFeatures() })
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right')
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
@@ -205,6 +207,13 @@ export function MapView(p: Props) {
     m.on('click', (e) => {
       const cam = m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: ['cams'] })
       if (cam.length) return cb.current.onCameraClick(String(cam[0].properties?.id))
+      const labels = labelLayers().map((l) => l.id)
+      const features = labels.length ? m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: labels }) : []
+      features.sort((a, b) => Number(b.geometry.type === 'Point') - Number(a.geometry.type === 'Point'))
+      for (const f of features) {
+        const place = featurePlace(f, f.sourceLayer ?? f.layer.id, { lat: e.lngLat.lat, lon: e.lngLat.lng })
+        if (place) { cb.current.onPlaceClick(place); return }
+      }
       if (cb.current.toggles.flood && cb.current.plan) {
         const waterHit = m.queryRenderedFeatures(e.point, { layers: ['flood'] })[0]
         const feature = waterHit && cb.current.plan.layers.flood.features.find((f) => f.properties?.way_id === Number(waterHit.properties?.way_id))
@@ -220,20 +229,20 @@ export function MapView(p: Props) {
           const content = document.createElement('div')
           content.className = 'flood-popup'
           const title = document.createElement('b')
-          title.textContent = props.name || `Đoạn đường ${props.way_id}`
+          title.textContent = props.name || `Road segment ${props.way_id}`
           content.append(title)
           const messages = [
-            `${moment === 'arrive' ? 'Lúc đến' : 'Lúc rời'}: ${floodTimeLabel(at)}.`,
+            `${moment === 'arrive' ? 'At arrival' : 'At departure'}: ${floodTimeLabel(at)}.`,
             floodPresentation({ status, depth, knowledge, reason, freshness, at }).label,
             depth != null && Number.isFinite(depth.lo) && Number.isFinite(depth.hi)
-              ? `Ước lượng nước ${Math.round(depth.lo * 100)}–${Math.round(depth.hi * 100)} cm.`
-              : 'Chưa xác định độ sâu nước; không thể kết luận trong ngưỡng xe.',
+              ? `Estimated water depth ${Math.round(depth.lo * 100)}–${Math.round(depth.hi * 100)} cm.`
+              : 'Water depth is unknown; the vehicle limit cannot be checked.',
             floodKnowledgeLabel(knowledge),
             reason,
-            freshness?.source && `Nguồn: ${freshness.source}.`,
-            freshness?.observed_at && `Ghi nhận: ${floodTimeLabel(freshness.observed_at)}.`,
-            freshness?.valid_until && `Hiệu lực tới: ${floodTimeLabel(freshness.valid_until)}.`,
-            depth?.drivers.length ? `Căn cứ: ${depth.drivers.join('; ')}.` : null,
+            freshness?.source && `Source: ${freshness.source}.`,
+            freshness?.observed_at && `Observed: ${floodTimeLabel(freshness.observed_at)}.`,
+            freshness?.valid_until && `Valid until: ${floodTimeLabel(freshness.valid_until)}.`,
+            depth?.drivers.length ? `Basis: ${depth.drivers.join('; ')}.` : null,
           ]
           for (const message of messages) {
             if (!message) continue
@@ -244,19 +253,13 @@ export function MapView(p: Props) {
           const evidence = document.createElement('button')
           evidence.type = 'button'
           evidence.className = 'btn btn-outline btn-sm'
-          evidence.textContent = 'Xem bằng chứng'
+          evidence.textContent = 'View evidence'
           evidence.addEventListener('click', () => cb.current.onWayClick(props.way_id, e.lngLat.lat, e.lngLat.lng))
           content.append(evidence)
           floodPopup.current?.remove()
           floodPopup.current = new maplibregl.Popup({ maxWidth: '320px' }).setLngLat(e.lngLat).setDOMContent(content).addTo(m)
           return
         }
-      }
-      const labels = labelLayers().map((l) => l.id)
-      const features = labels.length ? m.queryRenderedFeatures([[e.point.x - 6, e.point.y - 6], [e.point.x + 6, e.point.y + 6]], { layers: labels }) : []
-      for (const f of features) {
-        const place = featurePlace(f, f.sourceLayer ?? f.layer.id, { lat: e.lngLat.lat, lon: e.lngLat.lng })
-        if (place) { cb.current.onPlaceClick(place); return }
       }
       const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
@@ -332,7 +335,7 @@ export function MapView(p: Props) {
       el.type = 'button'
       el.className = `mk-stop ${i === selected ? 'on' : ''} ${s.verified ? '' : 'unverified'}`
       el.textContent = String(i + 1)
-      el.setAttribute('aria-label', `Điểm dừng ${i + 1}: ${s.name}`)
+      el.setAttribute('aria-label', `Stop ${i + 1}: ${s.name}`)
       el.addEventListener('click', (ev) => { ev.stopPropagation(); cb.current.onStopClick(i) })
       add(el, s)
     })
@@ -399,5 +402,5 @@ export function MapView(p: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.destination])
 
-  return <div ref={box} className="map" role="region" aria-label={`Bản đồ chuyến đi${p.toggles.standard && p.plan?.standard_route ? `, tuyến tham chiếu ${routeSourceLabel(p.plan.standard_route.source)}` : ''}`} />
+  return <div ref={box} className="map" role="region" aria-label={`Trip map${p.toggles.standard && p.plan?.standard_route ? `, reference route ${routeSourceLabel(p.plan.standard_route.source)}` : ''}`} />
 }

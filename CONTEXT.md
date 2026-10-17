@@ -4,6 +4,8 @@ A map layer for Vietnamese cities that tells a driver whether their specific veh
 
 ## Language
 
+All user-facing copy is English. Keep the product name **Ngõ Ngách**, assistant name **AlleyAI**, tagline **the alley layer for T-Maps**, Vietnamese place/street/ward/district names, and legal citations as written. Preserve Vietnamese input parsing and search. Display numbers with decimal points and dates/times in en-GB style (24-hour time); use **m** and **min**.
+
 ### People
 
 **Private Driver**:
@@ -59,7 +61,7 @@ Physical measured or observed Clear Width with stated uncertainty, complete endp
 _Avoid_: inferred fit, parcel width
 
 **Alley Label**:
-The familiar Vietnamese name shown for a Width Range: hẻm xe máy, hẻm ba gác, hẻm xe hơi, or ô tô tránh.
+The English label shown for a Width Range: motorbike alley, three-wheeler alley, car-accessible alley, or two cars can pass. Vietnamese input terms remain recognised.
 _Avoid_: alley class, alley type
 
 **Evidence**:
@@ -93,7 +95,7 @@ A candidate location evaluated for route-in, Stop Legality, Walk Leg, and Way Ou
 _Avoid_: guaranteed parking spot, handoff point, drop point
 
 **Stop Intent**:
-Whether the vehicle will be left there (Park, *đỗ xe*) or stop briefly with the driver aboard to let people or goods on or off (Pickup/Drop-off, *dừng xe*). The Vietnamese terms match the legal split between đỗ and dừng.
+Whether the vehicle will be left there (Park) or stop briefly with the driver aboard to let people or goods on or off (Pickup/Drop-off). These English labels preserve the legal distinction between parking and stopping.
 _Avoid_: trip type, mode
 
 **Way Out**:

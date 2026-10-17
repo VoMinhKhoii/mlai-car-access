@@ -1,0 +1,3978 @@
+{
+  "source_head": "8775ef4",
+  "seed": 171026,
+  "cases": [
+    {
+      "point": {
+        "i": 200,
+        "key": "10.788_106.696",
+        "lat": 10.7889312,
+        "lon": 106.697545,
+        "district": "QUẬN 1",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Ministop Trần Doãn Khanh"
+      },
+      "door_way_id": 35115025,
+      "elements": [
+        {
+          "type": "node",
+          "id": 10172694568,
+          "lat": 10.788803,
+          "lon": 106.696596
+        },
+        {
+          "type": "node",
+          "id": 10172694570,
+          "lat": 10.7883542,
+          "lon": 106.6966696
+        },
+        {
+          "type": "node",
+          "id": 10172694571,
+          "lat": 10.7893425,
+          "lon": 106.6973948
+        },
+        {
+          "type": "node",
+          "id": 411926585,
+          "lat": 10.7883778,
+          "lon": 106.6955568
+        },
+        {
+          "type": "node",
+          "id": 411926704,
+          "lat": 10.7894352,
+          "lon": 106.6985385,
+          "tags": {
+            "highway": "traffic_signals",
+            "traffic_signals": "signal"
+          }
+        },
+        {
+          "type": "node",
+          "id": 2231207282,
+          "lat": 10.7885495,
+          "lon": 106.6972338
+        },
+        {
+          "type": "node",
+          "id": 12488050101,
+          "lat": 10.7886616,
+          "lon": 106.6978066
+        },
+        {
+          "type": "node",
+          "id": 10973319772,
+          "lat": 10.7883225,
+          "lon": 106.6987334
+        },
+        {
+          "type": "node",
+          "id": 11364145942,
+          "lat": 10.7883012,
+          "lon": 106.6956391,
+          "tags": {
+            "crossing": "marked",
+            "crossing:markings": "zebra",
+            "highway": "crossing"
+          }
+        },
+        {
+          "type": "node",
+          "id": 11364145943,
+          "lat": 10.7887842,
+          "lon": 106.6959541,
+          "tags": {
+            "crossing": "marked",
+            "crossing:markings": "zebra",
+            "highway": "crossing"
+          }
+        },
+        {
+          "type": "node",
+          "id": 9194904772,
+          "lat": 10.7903035,
+          "lon": 106.6975851,
+          "tags": {
+            "button_operated": "no",
+            "crossing": "traffic_signals",
+            "crossing:markings": "zebra",
+            "highway": "traffic_signals",
+            "traffic_signals": "signal",
+            "traffic_signals:direction": "forward",
+            "traffic_signals:sound": "no",
+            "traffic_signals:vibration": "no"
+          }
+        },
+        {
+          "type": "node",
+          "id": 2231213553,
+          "lat": 10.7882272,
+          "lon": 106.6974079
+        },
+        {
+          "type": "node",
+          "id": 13075589602,
+          "lat": 10.7865155,
+          "lon": 106.6937362
+        },
+        {
+          "type": "node",
+          "id": 12468366994,
+          "lat": 10.7900148,
+          "lon": 106.6978967
+        },
+        {
+          "type": "node",
+          "id": 12468367000,
+          "lat": 10.7900653,
+          "lon": 106.6978422
+        },
+        {
+          "type": "node",
+          "id": 12006636062,
+          "lat": 10.789349,
+          "lon": 106.6975468
+        },
+        {
+          "type": "node",
+          "id": 12006636063,
+          "lat": 10.7889375,
+          "lon": 106.697993
+        },
+        {
+          "type": "node",
+          "id": 2230401788,
+          "lat": 10.7896616,
+          "lon": 106.6982817
+        },
+        {
+          "type": "node",
+          "id": 2297774609,
+          "lat": 10.7893042,
+          "lon": 106.6974385
+        },
+        {
+          "type": "node",
+          "id": 2297774611,
+          "lat": 10.7894801,
+          "lon": 106.697238
+        },
+        {
+          "type": "node",
+          "id": 2231192590,
+          "lat": 10.7879666,
+          "lon": 106.6951548
+        },
+        {
+          "type": "node",
+          "id": 2231192596,
+          "lat": 10.7880848,
+          "lon": 106.6958761
+        },
+        {
+          "type": "node",
+          "id": 14268222926,
+          "lat": 10.7896463,
+          "lon": 106.6972905
+        },
+        {
+          "type": "node",
+          "id": 10289893321,
+          "lat": 10.7877219,
+          "lon": 106.6962734
+        },
+        {
+          "type": "node",
+          "id": 10289893322,
+          "lat": 10.7877756,
+          "lon": 106.6962132
+        },
+        {
+          "type": "node",
+          "id": 411925360,
+          "lat": 10.7878429,
+          "lon": 106.6961375
+        },
+        {
+          "type": "node",
+          "id": 2231194895,
+          "lat": 10.7871976,
+          "lon": 106.6964384
+        },
+        {
+          "type": "node",
+          "id": 411917824,
+          "lat": 10.7887919,
+          "lon": 106.6969623
+        },
+        {
+          "type": "node",
+          "id": 411918497,
+          "lat": 10.7888398,
+          "lon": 106.6960085
+        },
+        {
+          "type": "node",
+          "id": 411918519,
+          "lat": 10.7878612,
+          "lon": 106.6978038
+        },
+        {
+          "type": "node",
+          "id": 411918853,
+          "lat": 10.7875402,
+          "lon": 106.6947379
+        },
+        {
+          "type": "node",
+          "id": 2231198262,
+          "lat": 10.7877391,
+          "lon": 106.6962543
+        },
+        {
+          "type": "node",
+          "id": 2231198266,
+          "lat": 10.7876152,
+          "lon": 106.6968462
+        },
+        {
+          "type": "node",
+          "id": 411918911,
+          "lat": 10.7879778,
+          "lon": 106.6991234
+        },
+        {
+          "type": "node",
+          "id": 411918912,
+          "lat": 10.7864515,
+          "lon": 106.6976719,
+          "tags": {
+            "highway": "traffic_signals",
+            "traffic_signals": "signal",
+            "traffic_signals:direction": "forward"
+          }
+        },
+        {
+          "type": "node",
+          "id": 411918913,
+          "lat": 10.7889195,
+          "lon": 106.6980433
+        },
+        {
+          "type": "node",
+          "id": 411918914,
+          "lat": 10.7898831,
+          "lon": 106.6970284
+        },
+        {
+          "type": "node",
+          "id": 411918916,
+          "lat": 10.7894041,
+          "lon": 106.6975233
+        },
+        {
+          "type": "node",
+          "id": 411919278,
+          "lat": 10.7899274,
+          "lon": 106.6979911
+        },
+        {
+          "type": "node",
+          "id": 10291112014,
+          "lat": 10.7867446,
+          "lon": 106.6939602
+        },
+        {
+          "type": "node",
+          "id": 12609121278,
+          "lat": 10.7885461,
+          "lon": 106.6957214
+        },
+        {
+          "type": "node",
+          "id": 13513813101,
+          "lat": 10.7894018,
+          "lon": 106.6985065,
+          "tags": {
+            "button_operated": "no",
+            "crossing:island": "no",
+            "crossing:signals": "yes",
+            "highway": "crossing",
+            "traffic_signals:sound": "no",
+            "traffic_signals:vibration": "no"
+          }
+        },
+        {
+          "type": "node",
+          "id": 12181401159,
+          "lat": 10.7888952,
+          "lon": 106.6981013
+        },
+        {
+          "type": "node",
+          "id": 411922209,
+          "lat": 10.7883853,
+          "lon": 106.6966328
+        },
+        {
+          "type": "node",
+          "id": 411922211,
+          "lat": 10.7882611,
+          "lon": 106.6967595
+        },
+        {
+          "type": "node",
+          "id": 411922212,
+          "lat": 10.7889865,
+          "lon": 106.6961518
+        },
+        {
+          "type": "node",
+          "id": 411922309,
+          "lat": 10.788207,
+          "lon": 106.696802
+        },
+        {
+          "type": "node",
+          "id": 411922310,
+          "lat": 10.7879318,
+          "lon": 106.6971377
+        },
+        {
+          "type": "node",
+          "id": 13513781593,
+          "lat": 10.7902569,
+          "lon": 106.6974554
+        },
+        {
+          "type": "node",
+          "id": 13513781594,
+          "lat": 10.790289,
+          "lon": 106.6974252,
+          "tags": {
+            "crossing:markings": "yes",
+            "crossing:signals": "no",
+            "highway": "crossing"
+          }
+        },
+        {
+          "type": "node",
+          "id": 13513781595,
+          "lat": 10.790291,
+          "lon": 106.6974931
+        },
+        {
+          "type": "node",
+          "id": 13513781596,
+          "lat": 10.7902956,
+          "lon": 106.6975398
+        },
+        {
+          "type": "node",
+          "id": 13513781597,
+          "lat": 10.7902646,
+          "lon": 106.6975841
+        },
+        {
+          "type": "node",
+          "id": 13513781598,
+          "lat": 10.7885142,
+          "lon": 106.6994553
+        },
+        {
+          "type": "node",
+          "id": 13513781599,
+          "lat": 10.7884813,
+          "lon": 106.6994635
+        },
+        {
+          "type": "node",
+          "id": 13513781600,
+          "lat": 10.7899037,
+          "lon": 106.6979699,
+          "tags": {
+            "crossing:signals": "no",
+            "highway": "crossing"
+          }
+        },
+        {
+          "type": "node",
+          "id": 12304021072,
+          "lat": 10.7894795,
+          "lon": 106.6974751
+        },
+        {
+          "type": "node",
+          "id": 5772015884,
+          "lat": 10.7902968,
+          "lon": 106.6974328,
+          "tags": {
+            "button_operated": "no",
+            "crossing": "traffic_signals",
+            "crossing:markings": "zebra",
+            "highway": "traffic_signals",
+            "traffic_signals": "signal",
+            "traffic_signals:direction": "forward",
+            "traffic_signals:sound": "no",
+            "traffic_signals:vibration": "no"
+          }
+        },
+        {
+          "type": "node",
+          "id": 411925450,
+          "lat": 10.7874572,
+          "lon": 106.6969974
+        },
+        {
+          "type": "node",
+          "id": 411925552,
+          "lat": 10.7877852,
+          "lon": 106.6972739
+        },
+        {
+          "type": "node",
+          "id": 411925979,
+          "lat": 10.7894816,
+          "lon": 106.6966359
+        },
+        {
+          "type": "node",
+          "id": 411925982,
+          "lat": 10.7903362,
+          "lon": 106.6965272
+        },
+        {
+          "type": "node",
+          "id": 411925988,
+          "lat": 10.7885752,
+          "lon": 106.6977273
+        },
+        {
+          "type": "node",
+          "id": 411925992,
+          "lat": 10.7890472,
+          "lon": 106.6972026
+        },
+        {
+          "type": "node",
+          "id": 411926446,
+          "lat": 10.7873909,
+          "lon": 106.6966403,
+          "tags": {
+            "highway": "traffic_signals",
+            "traffic_signals": "signal"
+          }
+        },
+        {
+          "type": "node",
+          "id": 411926457,
+          "lat": 10.7865655,
+          "lon": 106.6957919
+        },
+        {
+          "type": "way",
+          "id": 599651251,
+          "nodes": [
+            411926446,
+            411918912
+          ],
+          "tags": {
+            "highway": "tertiary",
+            "lanes": "2",
+            "name": "Mạc Đĩnh Chi",
+            "name:en": "Mac Dinh Chi Street",
+            "name:vi": "Đường Mạc Đĩnh Chi",
+            "old_name:1871-1920": "Rue de Bangkok",
+            "old_name:1920-1955": "Rue de Massiges",
+            "oneway": "yes",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35114007,
+          "nodes": [
+            2231198266,
+            411925450,
+            411925552
+          ],
+          "tags": {
+            "bicycle": "yes",
+            "foot": "yes",
+            "highway": "service",
+            "motorcar": "no",
+            "motorcycle": "yes",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35112829,
+          "nodes": [
+            411922310,
+            411925552
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "destination",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1173851472,
+          "nodes": [
+            411926446,
+            2231198266,
+            411922310,
+            2231213553,
+            411925988
+          ],
+          "tags": {
+            "highway": "residential",
+            "lanes": "2",
+            "name": "Nguyễn Văn Thủ",
+            "name:zh": "阮文守街",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35113486,
+          "nodes": [
+            2231213553,
+            411918519
+          ],
+          "tags": {
+            "alt_name": "Hẻm 94 Nguyễn Đình Chiểu",
+            "bicycle": "yes",
+            "foot": "yes",
+            "highway": "service",
+            "motorcar": "no",
+            "motorcycle": "yes",
+            "name": "Hẻm 161A Nguyễn Văn Thủ",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1349944981,
+          "nodes": [
+            411926446,
+            2231194895,
+            411926457
+          ],
+          "tags": {
+            "highway": "tertiary",
+            "lane_markings": "yes",
+            "lanes": "2",
+            "name": "Nguyễn Văn Thủ",
+            "name:en": "Nguyen Van Thu Street",
+            "name:zh": "阮文守街",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35114617,
+          "nodes": [
+            411926585,
+            11364145942,
+            2231192596,
+            411925360,
+            10289893322,
+            2231198262,
+            10289893321,
+            411926446
+          ],
+          "tags": {
+            "highway": "tertiary",
+            "lanes": "2",
+            "name": "Mạc Đĩnh Chi",
+            "name:en": "Mac Dinh Chi Street",
+            "name:vi": "Đường Mạc Đĩnh Chi",
+            "old_name:1871-1920": "Rue de Bangkok",
+            "old_name:1920-1955": "Rue de Massiges",
+            "oneway": "yes",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 408153725,
+          "nodes": [
+            13075589602,
+            10291112014,
+            411918853,
+            2231192590,
+            411926585,
+            12609121278,
+            11364145943,
+            411918497,
+            411922212,
+            411925979,
+            411918914
+          ],
+          "tags": {
+            "destination": "Hàng Xanh",
+            "highway": "primary",
+            "lanes": "3",
+            "motor_vehicle:lanes": "yes|yes|no",
+            "motorcycle:lanes": "no|yes|designated",
+            "name": "Điện Biên Phủ",
+            "name:en": "Dien Bien Phu Street",
+            "name:th": "ถนนเดียนเบียนฟู",
+            "name:vi": "Đường Ðiện Biên Phủ",
+            "old_name:1871-1897": "Rue de Baria",
+            "old_name:1897-1955": "Rue Legrand de la Liraye",
+            "old_name:1955-1975": "Đường Phan Thanh Giản",
+            "oneway": "yes",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 220686061,
+          "nodes": [
+            411918913,
+            12181401159,
+            10973319772,
+            411918911
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Cây Điệp",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1349944007,
+          "nodes": [
+            411925988,
+            12488050101,
+            411918913
+          ],
+          "tags": {
+            "highway": "residential",
+            "lane_markings": "yes",
+            "lanes": "2",
+            "name": "Nguyễn Văn Thủ",
+            "name:zh": "阮文守街",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1125235943,
+          "nodes": [
+            411918916,
+            12006636062,
+            12006636063,
+            411918913
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Cây Điệp"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1173852318,
+          "nodes": [
+            411918913,
+            13513813101,
+            411926704
+          ],
+          "tags": {
+            "highway": "residential",
+            "lanes": "2",
+            "name": "Nguyễn Văn Thủ",
+            "name:zh": "阮文守街",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1472887444,
+          "nodes": [
+            13513781593,
+            13513781595,
+            13513781596,
+            13513781597,
+            13513781600,
+            13513813101,
+            13513781598,
+            13513781599
+          ],
+          "tags": {
+            "footway": "sidewalk",
+            "highway": "footway",
+            "smoothness": "intermediate",
+            "surface": "paving_stones"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1185234384,
+          "nodes": [
+            411919278,
+            13513781600,
+            411918916
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Nguyễn Thành Ý",
+            "name:zh": "Nguyen Thanh Y Street"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1125223703,
+          "nodes": [
+            411922310,
+            411922309,
+            411922211,
+            10172694570,
+            411922209
+          ],
+          "tags": {
+            "bicycle": "yes",
+            "foot": "yes",
+            "highway": "service",
+            "motorcar": "no",
+            "name": "Hẻm 146 Nguyễn Văn Thủ",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35113647,
+          "nodes": [
+            411925992,
+            411917824,
+            2231207282
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Nguyễn Thành Ý",
+            "name:zh": "Nguyen Thanh Y Street",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35115025,
+          "nodes": [
+            411925988,
+            411925992
+          ],
+          "tags": {
+            "highway": "residential",
+            "lane_markings": "no",
+            "name": "Đường Trần Doãn Khanh",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 220686062,
+          "nodes": [
+            10172694568,
+            2297774611,
+            10172694571,
+            2297774609
+          ],
+          "tags": {
+            "access": "permissive",
+            "highway": "service"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1185234990,
+          "nodes": [
+            411918916,
+            2297774609,
+            411925992
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Nguyễn Thành Ý",
+            "name:zh": "Nguyen Thanh Y Street",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35113132,
+          "nodes": [
+            411918914,
+            14268222926,
+            12304021072,
+            411918916
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Cây Điệp",
+            "oneway:conditional": "yes @ (06:00-08:30,16:00-18:30)"
+          }
+        },
+        {
+          "type": "way",
+          "id": 408246548,
+          "nodes": [
+            411918914,
+            13513781594,
+            5772015884
+          ],
+          "tags": {
+            "highway": "primary",
+            "lanes": "4",
+            "name": "Điện Biên Phủ",
+            "name:en": "Dien Bien Phu Street",
+            "name:th": "ถนนเดียนเบียนฟู",
+            "name:vi": "Đường Ðiện Biên Phủ",
+            "old_name:1871-1897": "Rue de Baria",
+            "old_name:1897-1955": "Rue Legrand de la Liraye",
+            "old_name:1955-1975": "Đường Phan Thanh Giản",
+            "oneway": "yes",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 35113641,
+          "nodes": [
+            411918914,
+            411925982
+          ],
+          "tags": {
+            "highway": "residential",
+            "lane_markings": "no",
+            "name": "Đường Phan Ngữ",
+            "name:en": "Phan Ngu St.",
+            "name:zh": "潘语路",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1173852317,
+          "nodes": [
+            411926704,
+            2230401788,
+            411919278,
+            12468366994,
+            12468367000,
+            9194904772
+          ],
+          "tags": {
+            "alt_name:vi": "Đại lộ Đinh Tiên Hoàng",
+            "highway": "primary",
+            "lanes": "3",
+            "name": "Đinh Tiên Hoàng",
+            "name:en": "Dinh Tien Hoang Boulevard",
+            "name:vi": "Đường Đinh Tiên Hoàng",
+            "name:zh": "丁先皇街",
+            "old_name:1865-1901": "Boulevard de la Citadelle",
+            "old_name:1901-1920": "Boulevard Luro",
+            "old_name:1920-1955": "Boulevard Albert 1er",
+            "oneway": "yes",
+            "smoothness": "good",
+            "surface": "asphalt"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 35113132,
+          "samples": [
+            4.07,
+            3.81,
+            3.73,
+            3.65,
+            3.58,
+            3.86,
+            3.87,
+            3.9,
+            3.92,
+            3.93
+          ],
+          "cuts": [
+            {
+              "lat": 10.7898069,
+              "lon": 106.6971128,
+              "at_m": 12.5,
+              "gap_m": 5.07,
+              "width_m": 4.07,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7897764,
+              "lon": 106.6971465,
+              "at_m": 17.5,
+              "gap_m": 4.81,
+              "width_m": 3.81,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7897459,
+              "lon": 106.6971803,
+              "at_m": 22.5,
+              "gap_m": 4.73,
+              "width_m": 3.73,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7897154,
+              "lon": 106.697214,
+              "at_m": 27.5,
+              "gap_m": 4.65,
+              "width_m": 3.65,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7896849,
+              "lon": 106.6972478,
+              "at_m": 32.5,
+              "gap_m": 4.58,
+              "width_m": 3.58,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7896544,
+              "lon": 106.6972816,
+              "at_m": 37.5,
+              "gap_m": 4.86,
+              "width_m": 3.86,
+              "valid": true,
+              "heading_deg": -42.39,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7896239,
+              "lon": 106.6973153,
+              "at_m": 42.5,
+              "gap_m": 4.87,
+              "width_m": 3.87,
+              "valid": true,
+              "heading_deg": -42.4,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7895934,
+              "lon": 106.6973491,
+              "at_m": 47.5,
+              "gap_m": 4.9,
+              "width_m": 3.9,
+              "valid": true,
+              "heading_deg": -42.4,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7895629,
+              "lon": 106.6973828,
+              "at_m": 52.5,
+              "gap_m": 4.92,
+              "width_m": 3.92,
+              "valid": true,
+              "heading_deg": -42.4,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7895324,
+              "lon": 106.6974166,
+              "at_m": 57.5,
+              "gap_m": 4.93,
+              "width_m": 3.93,
+              "valid": true,
+              "heading_deg": -42.4,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 15,
+          "attempts": [
+            {
+              "at_m": 2.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 7.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 12.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 17.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 22.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 27.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 32.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 37.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 42.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 47.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 52.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 57.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 62.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 67.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 72.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            }
+          ],
+          "coverage": {
+            "length_m": 76.03,
+            "sampled_from_m": 2.5,
+            "sampled_to_m": 72.5,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": true
+        },
+        {
+          "way_id": 1185234990,
+          "samples": [],
+          "cuts": [],
+          "schema": "parcel-usable-v2",
+          "attempted": 11,
+          "attempts": [
+            {
+              "at_m": 2.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 7.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 12.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 17.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 22.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 27.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 32.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 37.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 42.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 47.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 51.8,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            }
+          ],
+          "coverage": {
+            "length_m": 52.8,
+            "sampled_from_m": 2.5,
+            "sampled_to_m": 51.803381142671526,
+            "all_valid": false,
+            "complete": false
+          },
+          "deep": true
+        },
+        {
+          "way_id": 35115025,
+          "samples": [
+            5.65,
+            5.56,
+            5.56,
+            5.59,
+            5.58
+          ],
+          "cuts": [
+            {
+              "lat": 10.7890016,
+              "lon": 106.6972533,
+              "at_m": 7.5,
+              "gap_m": 6.65,
+              "width_m": 5.65,
+              "valid": true,
+              "heading_deg": -42.27,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7889711,
+              "lon": 106.6972872,
+              "at_m": 12.5,
+              "gap_m": 6.56,
+              "width_m": 5.56,
+              "valid": true,
+              "heading_deg": -42.27,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7889407,
+              "lon": 106.697321,
+              "at_m": 17.5,
+              "gap_m": 6.56,
+              "width_m": 5.56,
+              "valid": true,
+              "heading_deg": -42.27,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7889103,
+              "lon": 106.6973548,
+              "at_m": 22.5,
+              "gap_m": 6.59,
+              "width_m": 5.59,
+              "valid": true,
+              "heading_deg": -42.27,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7888799,
+              "lon": 106.6973886,
+              "at_m": 27.5,
+              "gap_m": 6.58,
+              "width_m": 5.58,
+              "valid": true,
+              "heading_deg": -42.27,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 6,
+          "attempts": [
+            {
+              "at_m": 2.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 7.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 12.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 17.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 22.5,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 27.5,
+              "valid": true,
+              "reason": null
+            }
+          ],
+          "coverage": {
+            "length_m": 32.08,
+            "sampled_from_m": 2.5,
+            "sampled_to_m": 27.5,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": true
+        },
+        {
+          "way_id": 35113647,
+          "samples": [],
+          "cuts": [],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 26.2,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            },
+            {
+              "at_m": 52.4,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            }
+          ],
+          "coverage": {
+            "length_m": 78.57,
+            "sampled_from_m": 26.190211389642258,
+            "sampled_to_m": 52.380422779284515,
+            "all_valid": false,
+            "complete": false
+          },
+          "deep": false
+        },
+        {
+          "way_id": 220686062,
+          "samples": [
+            4.19,
+            3.7
+          ],
+          "cuts": [
+            {
+              "lat": 10.7890932,
+              "lon": 106.6968711,
+              "at_m": 44.0,
+              "gap_m": 5.19,
+              "width_m": 4.19,
+              "valid": true,
+              "heading_deg": 46.82,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7893833,
+              "lon": 106.6971462,
+              "at_m": 88.0,
+              "gap_m": 4.7,
+              "width_m": 3.7,
+              "valid": true,
+              "heading_deg": 46.82,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 44.0,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 88.0,
+              "valid": true,
+              "reason": null
+            }
+          ],
+          "coverage": {
+            "length_m": 131.95,
+            "sampled_from_m": 43.98399749879122,
+            "sampled_to_m": 87.96799499758244,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": false
+        },
+        {
+          "way_id": 1349944007,
+          "samples": [
+            4.06,
+            4.08
+          ],
+          "cuts": [
+            {
+              "lat": 10.78869,
+              "lon": 106.6978326,
+              "at_m": 17.1,
+              "gap_m": 5.06,
+              "width_m": 4.06,
+              "valid": true,
+              "heading_deg": 47.75,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7888047,
+              "lon": 106.697938,
+              "at_m": 34.3,
+              "gap_m": 5.08,
+              "width_m": 4.08,
+              "valid": true,
+              "heading_deg": 47.75,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 17.1,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 34.3,
+              "valid": true,
+              "reason": null
+            }
+          ],
+          "coverage": {
+            "length_m": 51.42,
+            "sampled_from_m": 17.138631152554865,
+            "sampled_to_m": 34.27726230510973,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": false
+        },
+        {
+          "way_id": 1173851472,
+          "samples": [
+            4.49,
+            4.1
+          ],
+          "cuts": [
+            {
+              "lat": 10.7877854,
+              "lon": 106.6970029,
+              "at_m": 59.0,
+              "gap_m": 5.49,
+              "width_m": 4.49,
+              "valid": true,
+              "heading_deg": 47.66,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7881804,
+              "lon": 106.6973651,
+              "at_m": 117.9,
+              "gap_m": 5.1,
+              "width_m": 4.1,
+              "valid": true,
+              "heading_deg": 47.85,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 59.0,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 117.9,
+              "valid": true,
+              "reason": null
+            }
+          ],
+          "coverage": {
+            "length_m": 176.86,
+            "sampled_from_m": 58.953441837188805,
+            "sampled_to_m": 117.90688367437761,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": false
+        },
+        {
+          "way_id": 1125235943,
+          "samples": [
+            4.62,
+            4.85
+          ],
+          "cuts": [
+            {
+              "lat": 10.789227,
+              "lon": 106.6976791,
+              "at_m": 26.4,
+              "gap_m": 5.62,
+              "width_m": 4.62,
+              "valid": true,
+              "heading_deg": -42.98,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            },
+            {
+              "lat": 10.7890642,
+              "lon": 106.6978556,
+              "at_m": 52.8,
+              "gap_m": 5.85,
+              "width_m": 4.85,
+              "valid": true,
+              "heading_deg": -42.98,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 26.4,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 52.8,
+              "valid": true,
+              "reason": null
+            }
+          ],
+          "coverage": {
+            "length_m": 79.19,
+            "sampled_from_m": 26.395106904758894,
+            "sampled_to_m": 52.79021380951779,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": false
+        },
+        {
+          "way_id": 1185234384,
+          "samples": [
+            7.91
+          ],
+          "cuts": [
+            {
+              "lat": 10.789753,
+              "lon": 106.6978352,
+              "at_m": 25.7,
+              "gap_m": 8.91,
+              "width_m": 7.91,
+              "valid": true,
+              "heading_deg": -131.5,
+              "schema": "parcel-usable-v2",
+              "usable_margin_m": 1.0
+            }
+          ],
+          "schema": "parcel-usable-v2",
+          "attempted": 2,
+          "attempts": [
+            {
+              "at_m": 25.7,
+              "valid": true,
+              "reason": null
+            },
+            {
+              "at_m": 51.5,
+              "valid": false,
+              "reason": "geometry_invalid_or_no_opposing_frontage"
+            }
+          ],
+          "coverage": {
+            "length_m": 77.23,
+            "sampled_from_m": 25.744965997296394,
+            "sampled_to_m": 51.48993199459279,
+            "all_valid": true,
+            "complete": false
+          },
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 5.56,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 212,
+        "key": "10.820_106.720",
+        "lat": 10.8186706,
+        "lon": 106.7194545,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251722"
+      },
+      "door_way_id": 610251722,
+      "elements": [
+        {
+          "type": "node",
+          "id": 5779523218,
+          "lat": 10.8180057,
+          "lon": 106.7193656
+        },
+        {
+          "type": "node",
+          "id": 5779523219,
+          "lat": 10.8181599,
+          "lon": 106.7198278
+        },
+        {
+          "type": "node",
+          "id": 5779523221,
+          "lat": 10.818986,
+          "lon": 106.7193997
+        },
+        {
+          "type": "node",
+          "id": 5779523220,
+          "lat": 10.8191996,
+          "lon": 106.7192879
+        },
+        {
+          "type": "node",
+          "id": 5779523223,
+          "lat": 10.8191503,
+          "lon": 106.7190771
+        },
+        {
+          "type": "node",
+          "id": 5779523224,
+          "lat": 10.8187048,
+          "lon": 106.7195454
+        },
+        {
+          "type": "node",
+          "id": 5779523225,
+          "lat": 10.8186558,
+          "lon": 106.7194152
+        },
+        {
+          "type": "node",
+          "id": 5779523226,
+          "lat": 10.8187676,
+          "lon": 106.7193522
+        },
+        {
+          "type": "node",
+          "id": 5779523227,
+          "lat": 10.8186298,
+          "lon": 106.7193502
+        },
+        {
+          "type": "node",
+          "id": 5779523228,
+          "lat": 10.8185559,
+          "lon": 106.7193847
+        },
+        {
+          "type": "node",
+          "id": 5779523229,
+          "lat": 10.8184078,
+          "lon": 106.7196993
+        },
+        {
+          "type": "node",
+          "id": 5779523232,
+          "lat": 10.8181247,
+          "lon": 106.7197224
+        },
+        {
+          "type": "way",
+          "id": 610251717,
+          "nodes": [
+            5779523218,
+            5779523232,
+            5779523219,
+            5779523229,
+            5779523224,
+            5779523221,
+            5779523220,
+            5779523223
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 28 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251722,
+          "nodes": [
+            5779523224,
+            5779523225,
+            5779523227,
+            5779523228
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 28/33 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251726,
+          "nodes": [
+            5779523225,
+            5779523226
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 28/33 Thanh Đa"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 610251717,
+          "samples": [
+            1.32,
+            3.75
+          ],
+          "cuts": [
+            {
+              "lat": 10.8182838,
+              "lon": 106.7197636,
+              "at_m": 68.8,
+              "gap_m": 2.32,
+              "width_m": 1.32
+            },
+            {
+              "lat": 10.8188373,
+              "lon": 106.7194767,
+              "at_m": 137.5,
+              "gap_m": 4.75,
+              "width_m": 3.75
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251722,
+          "samples": [
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.8186706,
+              "lon": 106.7194545,
+              "at_m": 10.6,
+              "gap_m": 1.28,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": null,
+      "expected_rejection_reasons": [
+        "within_5m_of_junction"
+      ]
+    },
+    {
+      "point": {
+        "i": 206,
+        "key": "10.816_106.720",
+        "lat": 10.8160195,
+        "lon": 106.7185231,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251596"
+      },
+      "door_way_id": 610251596,
+      "elements": [
+        {
+          "type": "node",
+          "id": 5779522919,
+          "lat": 10.815795,
+          "lon": 106.7183624
+        },
+        {
+          "type": "node",
+          "id": 5779522920,
+          "lat": 10.8161098,
+          "lon": 106.7181283
+        },
+        {
+          "type": "node",
+          "id": 5779522921,
+          "lat": 10.8163084,
+          "lon": 106.7180152
+        },
+        {
+          "type": "node",
+          "id": 5779522924,
+          "lat": 10.8161219,
+          "lon": 106.7187254
+        },
+        {
+          "type": "node",
+          "id": 5779522925,
+          "lat": 10.8159771,
+          "lon": 106.7185645
+        },
+        {
+          "type": "node",
+          "id": 5779522926,
+          "lat": 10.8161044,
+          "lon": 106.7184403
+        },
+        {
+          "type": "node",
+          "id": 5779522927,
+          "lat": 10.8158982,
+          "lon": 106.718477
+        },
+        {
+          "type": "node",
+          "id": 5779522929,
+          "lat": 10.8160253,
+          "lon": 106.7186181
+        },
+        {
+          "type": "node",
+          "id": 1852879359,
+          "lat": 10.8160644,
+          "lon": 106.7191379
+        },
+        {
+          "type": "node",
+          "id": 5779522918,
+          "lat": 10.816296,
+          "lon": 106.7189186
+        },
+        {
+          "type": "way",
+          "id": 610251588,
+          "nodes": [
+            1852879359,
+            5779522918,
+            5779522924,
+            5779522929,
+            5779522925,
+            5779522927,
+            5779522919,
+            5779522920,
+            5779522921
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251596,
+          "nodes": [
+            5779522925,
+            5779522926
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63/30 Bình Quới"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 610251588,
+          "samples": [
+            1.93,
+            1.13
+          ],
+          "cuts": [
+            {
+              "lat": 10.8161325,
+              "lon": 106.7187372,
+              "at_m": 61.9,
+              "gap_m": 2.93,
+              "width_m": 1.93
+            },
+            {
+              "lat": 10.8158422,
+              "lon": 106.7183273,
+              "at_m": 123.8,
+              "gap_m": 2.13,
+              "width_m": 1.13
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251596,
+          "samples": [
+            0.5,
+            1.47
+          ],
+          "cuts": [
+            {
+              "lat": 10.8160195,
+              "lon": 106.7185231,
+              "at_m": 6.5,
+              "gap_m": 1.44,
+              "width_m": 0.5
+            },
+            {
+              "lat": 10.816062,
+              "lon": 106.7184817,
+              "at_m": 13.0,
+              "gap_m": 2.47,
+              "width_m": 1.47
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.5,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 205,
+        "key": "10.816_106.720",
+        "lat": 10.816069,
+        "lon": 106.7185824,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251601"
+      },
+      "door_way_id": 610251601,
+      "elements": [
+        {
+          "type": "node",
+          "id": 5779522919,
+          "lat": 10.815795,
+          "lon": 106.7183624
+        },
+        {
+          "type": "node",
+          "id": 5779522920,
+          "lat": 10.8161098,
+          "lon": 106.7181283
+        },
+        {
+          "type": "node",
+          "id": 5779522921,
+          "lat": 10.8163084,
+          "lon": 106.7180152
+        },
+        {
+          "type": "node",
+          "id": 5779522924,
+          "lat": 10.8161219,
+          "lon": 106.7187254
+        },
+        {
+          "type": "node",
+          "id": 5779522925,
+          "lat": 10.8159771,
+          "lon": 106.7185645
+        },
+        {
+          "type": "node",
+          "id": 5779522927,
+          "lat": 10.8158982,
+          "lon": 106.718477
+        },
+        {
+          "type": "node",
+          "id": 5779522929,
+          "lat": 10.8160253,
+          "lon": 106.7186181
+        },
+        {
+          "type": "node",
+          "id": 5779522930,
+          "lat": 10.8161565,
+          "lon": 106.7185111
+        },
+        {
+          "type": "node",
+          "id": 1852879359,
+          "lat": 10.8160644,
+          "lon": 106.7191379
+        },
+        {
+          "type": "node",
+          "id": 5779522918,
+          "lat": 10.816296,
+          "lon": 106.7189186
+        },
+        {
+          "type": "way",
+          "id": 610251588,
+          "nodes": [
+            1852879359,
+            5779522918,
+            5779522924,
+            5779522929,
+            5779522925,
+            5779522927,
+            5779522919,
+            5779522920,
+            5779522921
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251601,
+          "nodes": [
+            5779522929,
+            5779522930
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63/28 Bình Quới"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 610251588,
+          "samples": [
+            1.93,
+            1.13
+          ],
+          "cuts": [
+            {
+              "lat": 10.8161325,
+              "lon": 106.7187372,
+              "at_m": 61.9,
+              "gap_m": 2.93,
+              "width_m": 1.93
+            },
+            {
+              "lat": 10.8158422,
+              "lon": 106.7183273,
+              "at_m": 123.8,
+              "gap_m": 2.13,
+              "width_m": 1.13
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251601,
+          "samples": [
+            0.5,
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.816069,
+              "lon": 106.7185824,
+              "at_m": 6.2,
+              "gap_m": 1.46,
+              "width_m": 0.5
+            },
+            {
+              "lat": 10.8161128,
+              "lon": 106.7185468,
+              "at_m": 12.4,
+              "gap_m": 1.41,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.5,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 207,
+        "key": "10.816_106.708",
+        "lat": 10.8157151,
+        "lon": 106.7096545,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610240397"
+      },
+      "door_way_id": 610240397,
+      "elements": [
+        {
+          "type": "node",
+          "id": 1797562618,
+          "lat": 10.8158456,
+          "lon": 106.7107595
+        },
+        {
+          "type": "node",
+          "id": 5737799811,
+          "lat": 10.8160475,
+          "lon": 106.7098671
+        },
+        {
+          "type": "node",
+          "id": 5737799812,
+          "lat": 10.8160633,
+          "lon": 106.7100012
+        },
+        {
+          "type": "node",
+          "id": 5737799813,
+          "lat": 10.8159764,
+          "lon": 106.7103311
+        },
+        {
+          "type": "node",
+          "id": 5737826553,
+          "lat": 10.8156892,
+          "lon": 106.7094085
+        },
+        {
+          "type": "node",
+          "id": 5737826554,
+          "lat": 10.8155018,
+          "lon": 106.7098887
+        },
+        {
+          "type": "node",
+          "id": 5761247548,
+          "lat": 10.8159295,
+          "lon": 106.7097301
+        },
+        {
+          "type": "node",
+          "id": 5761247549,
+          "lat": 10.8159242,
+          "lon": 106.7096819
+        },
+        {
+          "type": "node",
+          "id": 5761247550,
+          "lat": 10.8159743,
+          "lon": 106.7095558
+        },
+        {
+          "type": "node",
+          "id": 5761247551,
+          "lat": 10.8159321,
+          "lon": 106.7094807
+        },
+        {
+          "type": "node",
+          "id": 5761247552,
+          "lat": 10.8154861,
+          "lon": 106.7093323
+        },
+        {
+          "type": "node",
+          "id": 5779433382,
+          "lat": 10.816036,
+          "lon": 106.710105
+        },
+        {
+          "type": "node",
+          "id": 5779433384,
+          "lat": 10.8156079,
+          "lon": 106.7096167
+        },
+        {
+          "type": "node",
+          "id": 5779433385,
+          "lat": 10.8157344,
+          "lon": 106.7092736
+        },
+        {
+          "type": "way",
+          "id": 604778406,
+          "nodes": [
+            1797562618,
+            5737799813,
+            5779433382,
+            5737799812,
+            5737799811,
+            5761247548,
+            5761247549,
+            5761247550,
+            5761247551,
+            5737826553,
+            5761247552
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 377 Đinh Bộ Lĩnh",
+            "service": "alley",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 604781149,
+          "nodes": [
+            5737826554,
+            5779433384,
+            5737826553,
+            5779433385
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 367 Đinh Bộ Lĩnh",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610240397,
+          "nodes": [
+            5779433384,
+            5761247548
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "destination",
+            "service": "alley"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 604778406,
+          "samples": [
+            1.69
+          ],
+          "cuts": [
+            {
+              "lat": 10.8159536,
+              "lon": 106.7096079,
+              "at_m": 135.1,
+              "gap_m": 2.69,
+              "width_m": 1.69
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 604781149,
+          "samples": [
+            2.5,
+            4.01
+          ],
+          "cuts": [
+            {
+              "lat": 10.8155815,
+              "lon": 106.7096845,
+              "at_m": 24.0,
+              "gap_m": 3.5,
+              "width_m": 2.5
+            },
+            {
+              "lat": 10.8156612,
+              "lon": 106.7094802,
+              "at_m": 48.0,
+              "gap_m": 5.01,
+              "width_m": 4.01
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610240397,
+          "samples": [
+            0.5,
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.8157151,
+              "lon": 106.7096545,
+              "at_m": 12.6,
+              "gap_m": 1.32,
+              "width_m": 0.5
+            },
+            {
+              "lat": 10.8158223,
+              "lon": 106.7096923,
+              "at_m": 25.1,
+              "gap_m": 1.03,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.5,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 208,
+        "key": "10.816_106.708",
+        "lat": 10.8142474,
+        "lon": 106.7074794,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610240389"
+      },
+      "door_way_id": 610240389,
+      "elements": [
+        {
+          "type": "node",
+          "id": 5738182746,
+          "lat": 10.81438,
+          "lon": 106.7073657
+        },
+        {
+          "type": "node",
+          "id": 5779433358,
+          "lat": 10.8145553,
+          "lon": 106.7071791
+        },
+        {
+          "type": "node",
+          "id": 5779433360,
+          "lat": 10.8138244,
+          "lon": 106.706888
+        },
+        {
+          "type": "node",
+          "id": 5779433363,
+          "lat": 10.8141455,
+          "lon": 106.707168
+        },
+        {
+          "type": "node",
+          "id": 5779433364,
+          "lat": 10.8139776,
+          "lon": 106.7070137
+        },
+        {
+          "type": "node",
+          "id": 5779433365,
+          "lat": 10.8139172,
+          "lon": 106.7070873
+        },
+        {
+          "type": "node",
+          "id": 5779433366,
+          "lat": 10.8140754,
+          "lon": 106.7072382
+        },
+        {
+          "type": "node",
+          "id": 5779433367,
+          "lat": 10.814262,
+          "lon": 106.7074677
+        },
+        {
+          "type": "node",
+          "id": 5779433368,
+          "lat": 10.814125,
+          "lon": 106.7075777
+        },
+        {
+          "type": "node",
+          "id": 12484105145,
+          "lat": 10.8139313,
+          "lon": 106.7070701
+        },
+        {
+          "type": "way",
+          "id": 610240387,
+          "nodes": [
+            5779433358,
+            5738182746,
+            5779433363,
+            5779433366,
+            5779433365,
+            12484105145,
+            5779433364,
+            5779433360
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 201/13/1 Đường Nguyễn Xí",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610240389,
+          "nodes": [
+            5779433366,
+            5779433367,
+            5779433368
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "destination",
+            "service": "alley"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 610240387,
+          "samples": [
+            3.41,
+            3.95
+          ],
+          "cuts": [
+            {
+              "lat": 10.8142765,
+              "lon": 106.7072784,
+              "at_m": 43.0,
+              "gap_m": 4.41,
+              "width_m": 3.41
+            },
+            {
+              "lat": 10.8139881,
+              "lon": 106.7071549,
+              "at_m": 86.1,
+              "gap_m": 4.95,
+              "width_m": 3.95
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610240389,
+          "samples": [
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.8142474,
+              "lon": 106.7074794,
+              "at_m": 34.6,
+              "gap_m": 1.06,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": null,
+      "expected_rejection_reasons": [
+        "within_5m_of_bend_over_15deg"
+      ]
+    },
+    {
+      "point": {
+        "i": 213,
+        "key": "10.812_106.720",
+        "lat": 10.8127597,
+        "lon": 106.7198899,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251628"
+      },
+      "door_way_id": 610251628,
+      "elements": [
+        {
+          "type": "node",
+          "id": 366448084,
+          "lat": 10.8141154,
+          "lon": 106.7199331
+        },
+        {
+          "type": "node",
+          "id": 366476483,
+          "lat": 10.8122138,
+          "lon": 106.7213016
+        },
+        {
+          "type": "node",
+          "id": 5735973843,
+          "lat": 10.8135137,
+          "lon": 106.7207716
+        },
+        {
+          "type": "node",
+          "id": 5735973845,
+          "lat": 10.8138634,
+          "lon": 106.7201078
+        },
+        {
+          "type": "node",
+          "id": 5735973846,
+          "lat": 10.8137964,
+          "lon": 106.7217897
+        },
+        {
+          "type": "node",
+          "id": 5735973847,
+          "lat": 10.8130419,
+          "lon": 106.7206717
+        },
+        {
+          "type": "node",
+          "id": 5735973848,
+          "lat": 10.8140745,
+          "lon": 106.7216371
+        },
+        {
+          "type": "node",
+          "id": 5735973849,
+          "lat": 10.8133286,
+          "lon": 106.720486
+        },
+        {
+          "type": "node",
+          "id": 5737751083,
+          "lat": 10.8127586,
+          "lon": 106.7208668
+        },
+        {
+          "type": "node",
+          "id": 5779523154,
+          "lat": 10.8136403,
+          "lon": 106.7215584
+        },
+        {
+          "type": "node",
+          "id": 5779523155,
+          "lat": 10.812432,
+          "lon": 106.7210918
+        },
+        {
+          "type": "node",
+          "id": 5779523156,
+          "lat": 10.8130382,
+          "lon": 106.7202595
+        },
+        {
+          "type": "node",
+          "id": 5779523157,
+          "lat": 10.8128274,
+          "lon": 106.720171
+        },
+        {
+          "type": "node",
+          "id": 5779523158,
+          "lat": 10.8130487,
+          "lon": 106.7200577
+        },
+        {
+          "type": "node",
+          "id": 5779523159,
+          "lat": 10.8125251,
+          "lon": 106.719756
+        },
+        {
+          "type": "node",
+          "id": 5779523160,
+          "lat": 10.8123726,
+          "lon": 106.7196583
+        },
+        {
+          "type": "node",
+          "id": 5779523161,
+          "lat": 10.8130336,
+          "lon": 106.719817
+        },
+        {
+          "type": "node",
+          "id": 5779523163,
+          "lat": 10.8129175,
+          "lon": 106.71998
+        },
+        {
+          "type": "node",
+          "id": 5779523164,
+          "lat": 10.8130619,
+          "lon": 106.7196855
+        },
+        {
+          "type": "node",
+          "id": 5779523165,
+          "lat": 10.8134061,
+          "lon": 106.7194054
+        },
+        {
+          "type": "node",
+          "id": 5779523168,
+          "lat": 10.8131443,
+          "lon": 106.7190157
+        },
+        {
+          "type": "node",
+          "id": 5779523169,
+          "lat": 10.8129302,
+          "lon": 106.7191759
+        },
+        {
+          "type": "node",
+          "id": 5779523170,
+          "lat": 10.8125903,
+          "lon": 106.7194441
+        },
+        {
+          "type": "node",
+          "id": 5779523171,
+          "lat": 10.8132165,
+          "lon": 106.7195598
+        },
+        {
+          "type": "node",
+          "id": 5779523175,
+          "lat": 10.813111,
+          "lon": 106.7196456
+        },
+        {
+          "type": "node",
+          "id": 11394378861,
+          "lat": 10.8124434,
+          "lon": 106.7195834
+        },
+        {
+          "type": "node",
+          "id": 11394378862,
+          "lat": 10.8122247,
+          "lon": 106.7197893
+        },
+        {
+          "type": "node",
+          "id": 13048802716,
+          "lat": 10.8122423,
+          "lon": 106.7212189
+        },
+        {
+          "type": "way",
+          "id": 32579853,
+          "nodes": [
+            366448084,
+            5735973845,
+            5735973849,
+            5735973847,
+            5737751083,
+            5779523155,
+            13048802716,
+            366476483
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 604535051,
+          "nodes": [
+            5779523160,
+            5735973847,
+            5779523154,
+            5735973846
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 604535052,
+          "nodes": [
+            5735973849,
+            5735973843,
+            5735973848
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1G Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251628,
+          "nodes": [
+            5735973849,
+            5779523156,
+            5779523158,
+            5779523163,
+            5779523159,
+            5779523160
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1/50 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251632,
+          "nodes": [
+            5779523156,
+            5779523157
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1/50/1 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251635,
+          "nodes": [
+            5779523158,
+            5779523161,
+            5779523164,
+            5779523175,
+            5779523171,
+            5779523165
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1/50 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251639,
+          "nodes": [
+            5779523157,
+            5779523163
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1/50/5 Thanh Đa"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1228681593,
+          "nodes": [
+            5779523160,
+            11394378862
+          ],
+          "tags": {
+            "highway": "residential"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1394458680,
+          "nodes": [
+            5779523168,
+            5779523169,
+            5779523170,
+            11394378861,
+            5779523160
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 1/40 Thanh Đa"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 604535051,
+          "samples": [
+            6.8
+          ],
+          "cuts": [
+            {
+              "lat": 10.8128435,
+              "lon": 106.7203713,
+              "at_m": 93.8,
+              "gap_m": 7.8,
+              "width_m": 6.8
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251628,
+          "samples": [
+            1.46,
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.8130426,
+              "lon": 106.7201755,
+              "at_m": 49.7,
+              "gap_m": 2.46,
+              "width_m": 1.46
+            },
+            {
+              "lat": 10.8127597,
+              "lon": 106.7198899,
+              "at_m": 99.5,
+              "gap_m": 1.03,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251632,
+          "samples": [
+            1.21,
+            2.01
+          ],
+          "cuts": [
+            {
+              "lat": 10.8129679,
+              "lon": 106.72023,
+              "at_m": 8.4,
+              "gap_m": 2.21,
+              "width_m": 1.21
+            },
+            {
+              "lat": 10.8128977,
+              "lon": 106.7202005,
+              "at_m": 16.8,
+              "gap_m": 3.01,
+              "width_m": 2.01
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251635,
+          "samples": [
+            2.91
+          ],
+          "cuts": [
+            {
+              "lat": 10.8130405,
+              "lon": 106.7197848,
+              "at_m": 30.0,
+              "gap_m": 3.91,
+              "width_m": 2.91
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.5,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 214,
+        "key": "10.816_106.724",
+        "lat": 10.8160044,
+        "lon": 106.7229913,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251676"
+      },
+      "door_way_id": 610251676,
+      "elements": [
+        {
+          "type": "node",
+          "id": 1852879350,
+          "lat": 10.8155458,
+          "lon": 106.7229577
+        },
+        {
+          "type": "node",
+          "id": 1852879354,
+          "lat": 10.8156976,
+          "lon": 106.7230617
+        },
+        {
+          "type": "node",
+          "id": 1852879358,
+          "lat": 10.8159682,
+          "lon": 106.7227561
+        },
+        {
+          "type": "node",
+          "id": 1852879374,
+          "lat": 10.8162011,
+          "lon": 106.7234067
+        },
+        {
+          "type": "node",
+          "id": 1852879386,
+          "lat": 10.8164774,
+          "lon": 106.7236732
+        },
+        {
+          "type": "node",
+          "id": 1852879396,
+          "lat": 10.8165825,
+          "lon": 106.722444
+        },
+        {
+          "type": "node",
+          "id": 1852879399,
+          "lat": 10.8166527,
+          "lon": 106.7237222
+        },
+        {
+          "type": "node",
+          "id": 1852879404,
+          "lat": 10.8166851,
+          "lon": 106.722386
+        },
+        {
+          "type": "node",
+          "id": 5779523191,
+          "lat": 10.8160678,
+          "lon": 106.7233153
+        },
+        {
+          "type": "node",
+          "id": 5779523192,
+          "lat": 10.8161554,
+          "lon": 106.7232189
+        },
+        {
+          "type": "node",
+          "id": 5779523193,
+          "lat": 10.8160706,
+          "lon": 106.7231115
+        },
+        {
+          "type": "node",
+          "id": 5779523194,
+          "lat": 10.8159651,
+          "lon": 106.72292
+        },
+        {
+          "type": "node",
+          "id": 5779523195,
+          "lat": 10.8159144,
+          "lon": 106.72281
+        },
+        {
+          "type": "node",
+          "id": 5779523196,
+          "lat": 10.8161125,
+          "lon": 106.7231646
+        },
+        {
+          "type": "node",
+          "id": 5779523197,
+          "lat": 10.8164444,
+          "lon": 106.7229784
+        },
+        {
+          "type": "node",
+          "id": 5779523198,
+          "lat": 10.8164455,
+          "lon": 106.7225136
+        },
+        {
+          "type": "node",
+          "id": 5779523199,
+          "lat": 10.8160738,
+          "lon": 106.7227024
+        },
+        {
+          "type": "node",
+          "id": 5779523205,
+          "lat": 10.8167172,
+          "lon": 106.7237171
+        },
+        {
+          "type": "node",
+          "id": 1852879410,
+          "lat": 10.8168401,
+          "lon": 106.7237075
+        },
+        {
+          "type": "node",
+          "id": 1852879417,
+          "lat": 10.8169246,
+          "lon": 106.7222506
+        },
+        {
+          "type": "node",
+          "id": 1852879421,
+          "lat": 10.8170419,
+          "lon": 106.7236243
+        },
+        {
+          "type": "node",
+          "id": 1852879430,
+          "lat": 10.8172772,
+          "lon": 106.7234987
+        },
+        {
+          "type": "node",
+          "id": 1852879432,
+          "lat": 10.8172791,
+          "lon": 106.7220502
+        },
+        {
+          "type": "node",
+          "id": 1852879437,
+          "lat": 10.8175027,
+          "lon": 106.7233784
+        },
+        {
+          "type": "node",
+          "id": 1852879444,
+          "lat": 10.8178664,
+          "lon": 106.7231843
+        },
+        {
+          "type": "node",
+          "id": 1852879496,
+          "lat": 10.8181032,
+          "lon": 106.7230579
+        },
+        {
+          "type": "node",
+          "id": 1852879500,
+          "lat": 10.8183218,
+          "lon": 106.7229412
+        },
+        {
+          "type": "node",
+          "id": 5779523208,
+          "lat": 10.8172425,
+          "lon": 106.7235172
+        },
+        {
+          "type": "way",
+          "id": 32583238,
+          "nodes": [
+            1852879350,
+            1852879354,
+            5779523191,
+            1852879374,
+            1852879386,
+            1852879399,
+            5779523205,
+            1852879410,
+            1852879421,
+            5779523208,
+            1852879430,
+            1852879437,
+            1852879444,
+            1852879496,
+            1852879500
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 140 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251676,
+          "nodes": [
+            5779523191,
+            5779523192,
+            5779523196,
+            5779523193,
+            5779523194,
+            5779523195
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 140/66 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251697,
+          "nodes": [
+            5779523195,
+            1852879358,
+            5779523199,
+            5779523198,
+            1852879396,
+            1852879404,
+            1852879417,
+            1852879432
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 140/66 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 1159597599,
+          "nodes": [
+            5779523196,
+            5779523197
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 140/66 Bình Quới"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 32583238,
+          "samples": [
+            5.98
+          ],
+          "cuts": [
+            {
+              "lat": 10.8164021,
+              "lon": 106.7236006,
+              "at_m": 118.2,
+              "gap_m": 6.98,
+              "width_m": 5.98
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251676,
+          "samples": [
+            3.48,
+            0.5
+          ],
+          "cuts": [
+            {
+              "lat": 10.8161109,
+              "lon": 106.7231626,
+              "at_m": 22.2,
+              "gap_m": 4.48,
+              "width_m": 3.48
+            },
+            {
+              "lat": 10.8160044,
+              "lon": 106.7229913,
+              "at_m": 44.4,
+              "gap_m": 1.45,
+              "width_m": 0.5
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251697,
+          "samples": [
+            3.44,
+            1.43
+          ],
+          "cuts": [
+            {
+              "lat": 10.8163655,
+              "lon": 106.7225542,
+              "at_m": 57.5,
+              "gap_m": 4.44,
+              "width_m": 3.44
+            },
+            {
+              "lat": 10.8168248,
+              "lon": 106.722307,
+              "at_m": 115.1,
+              "gap_m": 2.43,
+              "width_m": 1.43
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 1159597599,
+          "samples": [
+            1.07,
+            1.31
+          ],
+          "cuts": [
+            {
+              "lat": 10.8162231,
+              "lon": 106.7231025,
+              "at_m": 14.0,
+              "gap_m": 2.07,
+              "width_m": 1.07
+            },
+            {
+              "lat": 10.8163338,
+              "lon": 106.7230405,
+              "at_m": 28.0,
+              "gap_m": 2.31,
+              "width_m": 1.31
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.5,
+      "expected_rejection_reasons": [
+        "within_5m_of_junction"
+      ]
+    },
+    {
+      "point": {
+        "i": 217,
+        "key": "10.816_106.720",
+        "lat": 10.8163736,
+        "lon": 106.7188374,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610251591"
+      },
+      "door_way_id": 610251591,
+      "elements": [
+        {
+          "type": "node",
+          "id": 5779522917,
+          "lat": 10.8164124,
+          "lon": 106.7187968
+        },
+        {
+          "type": "node",
+          "id": 5779522919,
+          "lat": 10.815795,
+          "lon": 106.7183624
+        },
+        {
+          "type": "node",
+          "id": 5779522920,
+          "lat": 10.8161098,
+          "lon": 106.7181283
+        },
+        {
+          "type": "node",
+          "id": 5779522921,
+          "lat": 10.8163084,
+          "lon": 106.7180152
+        },
+        {
+          "type": "node",
+          "id": 5779522924,
+          "lat": 10.8161219,
+          "lon": 106.7187254
+        },
+        {
+          "type": "node",
+          "id": 5779522925,
+          "lat": 10.8159771,
+          "lon": 106.7185645
+        },
+        {
+          "type": "node",
+          "id": 5779522927,
+          "lat": 10.8158982,
+          "lon": 106.718477
+        },
+        {
+          "type": "node",
+          "id": 5779522929,
+          "lat": 10.8160253,
+          "lon": 106.7186181
+        },
+        {
+          "type": "node",
+          "id": 1852879359,
+          "lat": 10.8160644,
+          "lon": 106.7191379
+        },
+        {
+          "type": "node",
+          "id": 5779522918,
+          "lat": 10.816296,
+          "lon": 106.7189186
+        },
+        {
+          "type": "way",
+          "id": 610251588,
+          "nodes": [
+            1852879359,
+            5779522918,
+            5779522924,
+            5779522929,
+            5779522925,
+            5779522927,
+            5779522919,
+            5779522920,
+            5779522921
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63 Bình Quới"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610251591,
+          "nodes": [
+            5779522918,
+            5779522917
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 63/2 Bình Quới"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 610251588,
+          "samples": [
+            1.93,
+            1.13
+          ],
+          "cuts": [
+            {
+              "lat": 10.8161325,
+              "lon": 106.7187372,
+              "at_m": 61.9,
+              "gap_m": 2.93,
+              "width_m": 1.93
+            },
+            {
+              "lat": 10.8158422,
+              "lon": 106.7183273,
+              "at_m": 123.8,
+              "gap_m": 2.13,
+              "width_m": 1.13
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610251591,
+          "samples": [
+            3.55,
+            0.53
+          ],
+          "cuts": [
+            {
+              "lat": 10.8163348,
+              "lon": 106.718878,
+              "at_m": 6.2,
+              "gap_m": 4.55,
+              "width_m": 3.55
+            },
+            {
+              "lat": 10.8163736,
+              "lon": 106.7188374,
+              "at_m": 12.3,
+              "gap_m": 1.53,
+              "width_m": 0.53
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.53,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 218,
+        "key": "10.812_106.708",
+        "lat": 10.8131163,
+        "lon": 106.7089315,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 55451574"
+      },
+      "door_way_id": 55451574,
+      "elements": [
+        {
+          "type": "node",
+          "id": 13441692419,
+          "lat": 10.8107131,
+          "lon": 106.7091769,
+          "tags": {
+            "highway": "traffic_signals",
+            "traffic_signals": "signal",
+            "traffic_signals:direction": "forward"
+          }
+        },
+        {
+          "type": "node",
+          "id": 366402259,
+          "lat": 10.8105801,
+          "lon": 106.7091825
+        },
+        {
+          "type": "node",
+          "id": 366446489,
+          "lat": 10.8115667,
+          "lon": 106.7091408
+        },
+        {
+          "type": "node",
+          "id": 366479091,
+          "lat": 10.8120623,
+          "lon": 106.7091507
+        },
+        {
+          "type": "node",
+          "id": 696860129,
+          "lat": 10.8112015,
+          "lon": 106.7076716
+        },
+        {
+          "type": "node",
+          "id": 696860132,
+          "lat": 10.8107042,
+          "lon": 106.7076393
+        },
+        {
+          "type": "node",
+          "id": 696860133,
+          "lat": 10.8116403,
+          "lon": 106.7077134
+        },
+        {
+          "type": "node",
+          "id": 696860137,
+          "lat": 10.8118086,
+          "lon": 106.7091464
+        },
+        {
+          "type": "node",
+          "id": 696860140,
+          "lat": 10.8124997,
+          "lon": 106.7077921
+        },
+        {
+          "type": "node",
+          "id": 696860142,
+          "lat": 10.8120799,
+          "lon": 106.7077613
+        },
+        {
+          "type": "node",
+          "id": 696860145,
+          "lat": 10.8127528,
+          "lon": 106.707816
+        },
+        {
+          "type": "node",
+          "id": 696860146,
+          "lat": 10.8128001,
+          "lon": 106.707882
+        },
+        {
+          "type": "node",
+          "id": 696860148,
+          "lat": 10.8123416,
+          "lon": 106.7091995
+        },
+        {
+          "type": "node",
+          "id": 696860150,
+          "lat": 10.8126388,
+          "lon": 106.709282
+        },
+        {
+          "type": "node",
+          "id": 696860152,
+          "lat": 10.8128205,
+          "lon": 106.7093383
+        },
+        {
+          "type": "node",
+          "id": 696860153,
+          "lat": 10.8133163,
+          "lon": 106.7095349
+        },
+        {
+          "type": "node",
+          "id": 5738182736,
+          "lat": 10.8136385,
+          "lon": 106.7084777
+        },
+        {
+          "type": "node",
+          "id": 5738182737,
+          "lat": 10.8133102,
+          "lon": 106.708644
+        },
+        {
+          "type": "node",
+          "id": 5738182738,
+          "lat": 10.8133312,
+          "lon": 106.7087004
+        },
+        {
+          "type": "node",
+          "id": 5738182739,
+          "lat": 10.8130757,
+          "lon": 106.7087889
+        },
+        {
+          "type": "node",
+          "id": 5779433371,
+          "lat": 10.8129131,
+          "lon": 106.7082937
+        },
+        {
+          "type": "node",
+          "id": 5779433372,
+          "lat": 10.8133425,
+          "lon": 106.7081436
+        },
+        {
+          "type": "node",
+          "id": 5779433373,
+          "lat": 10.8133946,
+          "lon": 106.7081375
+        },
+        {
+          "type": "node",
+          "id": 5779433374,
+          "lat": 10.8135457,
+          "lon": 106.7082193
+        },
+        {
+          "type": "node",
+          "id": 5779433375,
+          "lat": 10.8136731,
+          "lon": 106.7083057
+        },
+        {
+          "type": "node",
+          "id": 8382622132,
+          "lat": 10.8132395,
+          "lon": 106.7095024
+        },
+        {
+          "type": "node",
+          "id": 8382622133,
+          "lat": 10.8132451,
+          "lon": 106.7093834
+        },
+        {
+          "type": "node",
+          "id": 10970819412,
+          "lat": 10.8136221,
+          "lon": 106.7084373
+        },
+        {
+          "type": "node",
+          "id": 10970819413,
+          "lat": 10.8136352,
+          "lon": 106.7084252
+        },
+        {
+          "type": "node",
+          "id": 13441692419,
+          "lat": 10.8107131,
+          "lon": 106.7091769
+        },
+        {
+          "type": "way",
+          "id": 55451561,
+          "nodes": [
+            696860153,
+            8382622132,
+            696860152,
+            696860150,
+            696860148,
+            366479091,
+            696860137,
+            366446489,
+            13441692419,
+            366402259
+          ],
+          "tags": {
+            "highway": "primary",
+            "lanes": "4",
+            "name": "Đinh Bộ Lĩnh",
+            "oneway": "yes",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 55451573,
+          "nodes": [
+            696860145,
+            696860140,
+            696860142,
+            696860133,
+            696860129,
+            696860132
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Đường Số 4",
+            "oneway": "no",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 55451574,
+          "nodes": [
+            696860145,
+            696860146,
+            5779433371,
+            5738182739,
+            8382622133,
+            8382622132
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "destination",
+            "name": "Hẻm 123 Đường Nguyễn Xí",
+            "service": "alley",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 604834162,
+          "nodes": [
+            5738182739,
+            5738182738,
+            5738182737,
+            5738182736,
+            10970819412,
+            10970819413
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 123/12 Đường Nguyễn Xí",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610240391,
+          "nodes": [
+            5779433371,
+            5779433372,
+            5779433373,
+            5779433374,
+            5779433375
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "no",
+            "motorcycle": "yes",
+            "name": "Hẻm 123/28 Nguyễn Xí",
+            "service": "alley"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 55451574,
+          "samples": [
+            3.6,
+            0.54
+          ],
+          "cuts": [
+            {
+              "lat": 10.8129382,
+              "lon": 106.7083703,
+              "at_m": 64.5,
+              "gap_m": 4.6,
+              "width_m": 3.6
+            },
+            {
+              "lat": 10.8131163,
+              "lon": 106.7089315,
+              "at_m": 129.0,
+              "gap_m": 1.54,
+              "width_m": 0.54
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 604834162,
+          "samples": [
+            1.78,
+            1.54
+          ],
+          "cuts": [
+            {
+              "lat": 10.8133147,
+              "lon": 106.7087061,
+              "at_m": 27.9,
+              "gap_m": 2.78,
+              "width_m": 1.78
+            },
+            {
+              "lat": 10.8134671,
+              "lon": 106.7085645,
+              "at_m": 55.9,
+              "gap_m": 2.54,
+              "width_m": 1.54
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.54,
+      "expected_rejection_reasons": []
+    },
+    {
+      "point": {
+        "i": 221,
+        "key": "10.816_106.708",
+        "lat": 10.8153727,
+        "lon": 106.7092796,
+        "district": "QUẬN BÌNH THẠNH",
+        "district_method": "2021 district polygon",
+        "sampling": "targeted",
+        "sampled_way_id": null,
+        "cohort": "targeted",
+        "label": "Official narrow-cut probe 610240396"
+      },
+      "door_way_id": 610240396,
+      "elements": [
+        {
+          "type": "node",
+          "id": 1797562618,
+          "lat": 10.8158456,
+          "lon": 106.7107595
+        },
+        {
+          "type": "node",
+          "id": 3066409686,
+          "lat": 10.8156936,
+          "lon": 106.7087923
+        },
+        {
+          "type": "node",
+          "id": 3066409687,
+          "lat": 10.8150578,
+          "lon": 106.7103879
+        },
+        {
+          "type": "node",
+          "id": 3066409688,
+          "lat": 10.8152945,
+          "lon": 106.7098076
+        },
+        {
+          "type": "node",
+          "id": 5737799811,
+          "lat": 10.8160475,
+          "lon": 106.7098671
+        },
+        {
+          "type": "node",
+          "id": 5737799812,
+          "lat": 10.8160633,
+          "lon": 106.7100012
+        },
+        {
+          "type": "node",
+          "id": 5737799813,
+          "lat": 10.8159764,
+          "lon": 106.7103311
+        },
+        {
+          "type": "node",
+          "id": 5737826553,
+          "lat": 10.8156892,
+          "lon": 106.7094085
+        },
+        {
+          "type": "node",
+          "id": 5761247548,
+          "lat": 10.8159295,
+          "lon": 106.7097301
+        },
+        {
+          "type": "node",
+          "id": 5761247549,
+          "lat": 10.8159242,
+          "lon": 106.7096819
+        },
+        {
+          "type": "node",
+          "id": 5761247550,
+          "lat": 10.8159743,
+          "lon": 106.7095558
+        },
+        {
+          "type": "node",
+          "id": 5761247551,
+          "lat": 10.8159321,
+          "lon": 106.7094807
+        },
+        {
+          "type": "node",
+          "id": 5761247552,
+          "lat": 10.8154861,
+          "lon": 106.7093323
+        },
+        {
+          "type": "node",
+          "id": 5779433380,
+          "lat": 10.8151128,
+          "lon": 106.7097149
+        },
+        {
+          "type": "node",
+          "id": 5779433381,
+          "lat": 10.8153995,
+          "lon": 106.7090635
+        },
+        {
+          "type": "node",
+          "id": 5779433382,
+          "lat": 10.816036,
+          "lon": 106.710105
+        },
+        {
+          "type": "node",
+          "id": 5779433383,
+          "lat": 10.815316,
+          "lon": 106.7092532
+        },
+        {
+          "type": "node",
+          "id": 12965590886,
+          "lat": 10.8151906,
+          "lon": 106.7095381
+        },
+        {
+          "type": "way",
+          "id": 302382921,
+          "nodes": [
+            3066409686,
+            5761247552,
+            3066409688,
+            3066409687
+          ],
+          "tags": {
+            "highway": "residential",
+            "name": "Hẻm 363 Đinh Bộ Lĩnh",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 604778406,
+          "nodes": [
+            1797562618,
+            5737799813,
+            5779433382,
+            5737799812,
+            5737799811,
+            5761247548,
+            5761247549,
+            5761247550,
+            5761247551,
+            5737826553,
+            5761247552
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 377 Đinh Bộ Lĩnh",
+            "service": "alley",
+            "surface": "asphalt"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610240394,
+          "nodes": [
+            3066409688,
+            5779433380,
+            12965590886,
+            5779433383,
+            5779433381
+          ],
+          "tags": {
+            "highway": "service",
+            "name": "Hẻm 363/27 Đinh Bộ Lĩnh",
+            "service": "alley"
+          }
+        },
+        {
+          "type": "way",
+          "id": 610240396,
+          "nodes": [
+            5761247552,
+            5779433383
+          ],
+          "tags": {
+            "highway": "service",
+            "motorcar": "destination",
+            "service": "alley"
+          }
+        }
+      ],
+      "parcels": [
+        {
+          "way_id": 302382921,
+          "samples": [
+            3.26
+          ],
+          "cuts": [
+            {
+              "lat": 10.815274,
+              "lon": 106.7098578,
+              "at_m": 125.5,
+              "gap_m": 4.26,
+              "width_m": 3.26
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 604778406,
+          "samples": [
+            1.69
+          ],
+          "cuts": [
+            {
+              "lat": 10.8159536,
+              "lon": 106.7096079,
+              "at_m": 135.1,
+              "gap_m": 2.69,
+              "width_m": 1.69
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610240394,
+          "samples": [
+            1.92,
+            1.49
+          ],
+          "cuts": [
+            {
+              "lat": 10.8151532,
+              "lon": 106.709623,
+              "at_m": 33.5,
+              "gap_m": 2.92,
+              "width_m": 1.92
+            },
+            {
+              "lat": 10.8152764,
+              "lon": 106.7093433,
+              "at_m": 67.0,
+              "gap_m": 2.49,
+              "width_m": 1.49
+            }
+          ],
+          "deep": false
+        },
+        {
+          "way_id": 610240396,
+          "samples": [
+            0.62,
+            0.57
+          ],
+          "cuts": [
+            {
+              "lat": 10.8154294,
+              "lon": 106.7093059,
+              "at_m": 6.9,
+              "gap_m": 1.62,
+              "width_m": 0.62
+            },
+            {
+              "lat": 10.8153727,
+              "lon": 106.7092796,
+              "at_m": 13.8,
+              "gap_m": 1.57,
+              "width_m": 0.57
+            }
+          ],
+          "deep": false
+        }
+      ],
+      "expected_sample_m": 0.57,
+      "expected_rejection_reasons": []
+    }
+  ]
+}

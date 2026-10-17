@@ -29,3 +29,4 @@ backend/cache/osm/city_batches/
 backend/cache/flood/
 backend/cache/live/parcels.lock
 backend/cache/live/areas/*.lock
+.operator-secret

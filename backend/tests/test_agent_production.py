@@ -15,6 +15,13 @@ from app import agent, agent_budget, geocoding, main
 
 
 class AgentProductionTests(unittest.TestCase):
+    def setUp(self):
+        # A disabled primary key no longer disables the numbered rotation pool.
+        # These boundary tests must remain offline regardless of local env keys.
+        pool = patch.object(geocoding, '_goong_keys', return_value=[])
+        pool.start()
+        self.addCleanup(pool.stop)
+
     def test_fallback_keeps_destination_and_does_not_confuse_tonight_or_don(self):
         args,question=agent.driver_request(agent.AgentRequest(message='Tôi lái Vios tới 132 Bến Vân Đồn, Quận 4, đỗ xe 2 tiếng tối nay 7h. Vào được không?'))
         self.assertIsNone(question)
@@ -41,7 +48,7 @@ class AgentProductionTests(unittest.TestCase):
         release=threading.Event()
         runner=agent.bounded(lambda:release.wait(5),.02)
         try:
-            with self.assertRaisesRegex(ValueError,'thời gian'):list(runner)
+            with self.assertRaisesRegex(ValueError,'timed out'):list(runner)
         finally:release.set()
         with patch.object(agent.queue.Queue,'get',side_effect=[agent.queue.Empty,(True,'done')]), patch.object(agent.threading.Thread,'start'):
             runner=agent.bounded(lambda:None,5)
@@ -63,7 +70,7 @@ class AgentProductionTests(unittest.TestCase):
             self.assertTrue(r['requires_clarification'])
             r=agent.resolve_place('Highlands',(10.89,106.7))
             self.assertFalse(r['requires_clarification']);self.assertEqual(r['results'][0]['label'],'Highlands B')
-            self.assertIn('gần',r['selection_reason'])
+            self.assertIn('closest',r['selection_reason'])
 
     def test_number_guard_repairs_answer_and_history(self):
         call={'role':'model','parts':[{'functionCall':{'name':'lap_ke_hoach','args':{}}}]}
@@ -111,7 +118,7 @@ class AgentProductionTests(unittest.TestCase):
         r=rpc('initialize',{'protocolVersion':'2025-11-25'})
         self.assertEqual(r.json()['result']['protocolVersion'],'2025-11-25')
         r=rpc('tools/list'); names={t['name'] for t in r.json()['result']['tools']}
-        self.assertTrue({'kiem_tra_xe_vao_hem','tim_cho_do_gan','danh_sach_xe'}<=names)
+        self.assertTrue({'check_alley_fit','find_nearby_stops','list_vehicles'}<=names)
         r=rpc('tools/call',{'name':'danh_sach_xe','arguments':{}})
         self.assertFalse(r.json()['result']['isError']);self.assertTrue(r.json()['result']['structuredContent']['vehicles'])
         self.assertEqual(rpc('tools/call',{'name':'lap_ke_hoach','arguments':{}}).json()['error']['code'],-32602)
@@ -130,7 +137,7 @@ class AgentProductionTests(unittest.TestCase):
             result,_=agent.execute('kiem_tra_xe_vao_hem',{'lat':10.8,'lon':106.7,'way_id':123,'vehicle_id':'VF3'})
         self.assertEqual(result['fit'],'no');self.assertTrue(result['evidence'])
         compact={'destination':{},'vehicle':{},'window':{},'stop_points':[],'door':{},'standard_route':{}}
-        with patch.object(main,'make_plan',return_value={}),patch.object(agent,'compact_plan',return_value=compact):
+        with patch.object(main.plan,'plan',return_value={}),patch.object(agent,'compact_plan',return_value=compact):
             result,_=agent.execute('tim_cho_do_gan',{'lat':10.8,'lon':106.7,'label':'fixture','vehicle_id':'VF3','arrive_at':'2026-10-17T08:00:00+07:00','dwell_min':15,'intent':'pickup'})
         self.assertNotIn('door',result);self.assertNotIn('standard_route',result)
 

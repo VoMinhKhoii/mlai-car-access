@@ -1,0 +1,178 @@
+{
+  "total": 395,
+  "passed": 179,
+  "groups": {
+    "kind": {
+      "resolver": {
+        "total": 273,
+        "passed": 138
+      },
+      "driver": {
+        "total": 76,
+        "passed": 27
+      },
+      "decline": {
+        "total": 3,
+        "passed": 0
+      },
+      "poi": {
+        "total": 2,
+        "passed": 2
+      },
+      "followup": {
+        "total": 19,
+        "passed": 9
+      },
+      "unknown": {
+        "total": 3,
+        "passed": 3
+      },
+      "journey": {
+        "total": 19,
+        "passed": 0
+      }
+    },
+    "pattern": {
+      "exact": {
+        "total": 24,
+        "passed": 22
+      },
+      "bare": {
+        "total": 24,
+        "passed": 22
+      },
+      "ascii": {
+        "total": 24,
+        "passed": 22
+      },
+      "ward-old": {
+        "total": 24,
+        "passed": 22
+      },
+      "ward-new": {
+        "total": 24,
+        "passed": 22
+      },
+      "ngo": {
+        "total": 24,
+        "passed": 2
+      },
+      "kiet": {
+        "total": 24,
+        "passed": 2
+      },
+      "ngach": {
+        "total": 24,
+        "passed": 2
+      },
+      "english": {
+        "total": 24,
+        "passed": 2
+      },
+      "typo": {
+        "total": 24,
+        "passed": 2
+      },
+      "house-parent": {
+        "total": 15,
+        "passed": 0
+      },
+      "to": {
+        "total": 19,
+        "passed": 9
+      },
+      "address-first": {
+        "total": 19,
+        "passed": 0
+      },
+      "pickup": {
+        "total": 19,
+        "passed": 9
+      },
+      "timed": {
+        "total": 19,
+        "passed": 9
+      },
+      "street-only": {
+        "total": 8,
+        "passed": 8
+      },
+      "motorbike": {
+        "total": 3,
+        "passed": 0
+      },
+      "wrong-match": {
+        "total": 2,
+        "passed": 2
+      },
+      "followup": {
+        "total": 19,
+        "passed": 9
+      },
+      "unknown-vehicle": {
+        "total": 3,
+        "passed": 3
+      },
+      "plan-policy": {
+        "total": 19,
+        "passed": 0
+      },
+      "poi-name": {
+        "total": 10,
+        "passed": 10
+      }
+    },
+    "depth": {
+      "1": {
+        "total": 60,
+        "passed": 20
+      },
+      "2": {
+        "total": 149,
+        "passed": 65
+      },
+      "3": {
+        "total": 95,
+        "passed": 40
+      },
+      "4": {
+        "total": 65,
+        "passed": 31
+      },
+      "0": {
+        "total": 26,
+        "passed": 23
+      }
+    },
+    "diacritics": {
+      "True": {
+        "total": 370,
+        "passed": 156
+      },
+      "False": {
+        "total": 25,
+        "passed": 23
+      }
+    },
+    "catalogue": {
+      "n/a": {
+        "total": 300,
+        "passed": 152
+      },
+      "outside": {
+        "total": 35,
+        "passed": 0
+      },
+      "catalogue": {
+        "total": 45,
+        "passed": 21
+      },
+      "class": {
+        "total": 15,
+        "passed": 6
+      }
+    }
+  },
+  "network_calls": 0,
+  "models": "deterministic"
+}

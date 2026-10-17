@@ -1,8 +1,8 @@
 import { ArrowUpDown, Car, Clock, Crosshair, MapPin, ParkingSquare, Search, UserRound, X } from 'lucide-react'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { api, type Intent, type SearchResult, type Vehicle } from '../api'
-import { ChipMenu, Segmented, metres, minutes, vn } from '../ds/ui'
-import { matchMapPlaces, type MapContext } from '../mapSearch'
+import { api, matchVisiblePlaces, type Intent, type SearchResult, type Vehicle } from '../api'
+import { ChipMenu, Segmented, metres, vn } from '../ds/ui'
+import { type MapContext } from '../mapSearch'
 import { fromLocal } from '../datetime'
 
 export interface Place { lat: number; lon: number; label: string }
@@ -56,21 +56,24 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
     const gen = generation.current
     const request = new AbortController()
     controller.current = request
-    setStatus('loading')
-    setMessage('Đang tìm địa chỉ…')
+    const local: SearchResult[] = mapContext ? matchVisiblePlaces(v, mapContext.candidates, mapContext.center, 6)
+      .map((p) => ({ label: p.name, lat: p.lat, lon: p.lon, source: 'On the map' })) : []
+    setResults(local)
+    setStatus(local.length ? 'idle' : 'loading')
+    setMessage('Finding places…')
     timer.current = window.setTimeout(async () => {
       try {
-        const r = await api.search(v, near, request.signal)
+        const r = await api.search(v, kind === 'dest' ? mapContext?.center ?? near : near, request.signal)
         if (gen !== generation.current || request.signal.aborted) return
-        const local = mapContext ? matchMapPlaces(v, mapContext.candidates, mapContext.center, 6)
-          .map((p) => ({ label: p.name, lat: p.lat, lon: p.lon, source: 'Trên bản đồ' })) : []
-        setResults([...local, ...r.results].slice(0, 6))
+        const remote = r.results.filter((p) => !local.some((x) => x.label === p.label && p.lat != null && p.lon != null && Math.abs(x.lat! - p.lat) < .0002 && Math.abs(x.lon! - p.lon) < .0002))
+        setResults([...local, ...remote].slice(0, 6))
         setStatus((local.length + r.results.length) ? 'idle' : 'empty')
-        setMessage('Không tìm thấy địa chỉ. Thử tên đường hoặc địa chỉ khác.')
+        setMessage('Could not find that place. Try a street name or tap the map.')
       } catch {
         if (gen !== generation.current || request.signal.aborted) return
-        setStatus('error')
-        setMessage('Không tìm được địa chỉ do lỗi kết nối. Hãy nhập lại để thử.')
+        setResults(local)
+        setStatus(local.length ? 'idle' : 'error')
+        setMessage('Search is unavailable. Choose a map result or try again.')
       }
     }, 250)
   }
@@ -83,20 +86,20 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
     setActive(-1)
     setQ(r.label)
     setStatus('loading')
-    setMessage('Đang lấy vị trí địa chỉ…')
+    setMessage('Getting the location…')
     input.current?.focus()
     try {
       let place: Place | null = r.lat != null && r.lon != null ? { lat: r.lat, lon: r.lon, label: r.label } : null
       if (!place && r.place_id) place = await api.place(r.place_id, request.signal)
       if (gen !== generation.current || request.signal.aborted) return
-      if (!place) throw new Error('Không có vị trí')
+      if (!place) throw new Error('Location unavailable')
       setStatus('idle')
       setQ(null)
       onPick(place)
     } catch {
       if (gen !== generation.current || request.signal.aborted) return
       setStatus('error')
-      setMessage('Không lấy được vị trí địa chỉ. Hãy tìm và chọn lại; điểm đã chọn chưa thay đổi.')
+      setMessage('Could not get that location. Search and select again; your previous destination is still selected.')
     }
   }
   function key(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -116,16 +119,16 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
     <div className="place">
       <span className={`place-mark ${kind}`} aria-hidden>{kind === 'dest' ? <MapPin size={16} strokeWidth={2.4} /> : <i />}</span>
       <div className="field">
-        <input ref={input} value={text} placeholder={placeholder} aria-label={kind === 'origin' ? 'Điểm đi' : 'Điểm đến'}
+        <input ref={input} value={text} placeholder={placeholder} aria-label={kind === 'origin' ? 'Starting point' : 'Destination'}
           role="combobox" aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-list`}
           aria-activedescendant={expanded && active >= 0 ? `${id}-${active}` : undefined} aria-describedby={`${id}-status`} aria-busy={status === 'loading'}
           onChange={(e) => type(e.target.value)} onFocus={(e) => e.target.select()}
           onKeyDown={key} onBlur={dismiss} />
-        {text && <button type="button" className="icon-btn sm" aria-label="Xoá" onPointerDown={(e) => e.preventDefault()}
+        {text && <button type="button" className="icon-btn sm" aria-label="Clear" onPointerDown={(e) => e.preventDefault()}
           onClick={() => { dismiss(); setQ(''); onPick(null); input.current?.focus() }}><X size={15} /></button>}
         {extra}
       </div>
-      <ul id={`${id}-list`} className="results card" role="listbox" aria-label={kind === 'origin' ? 'Gợi ý điểm đi' : 'Gợi ý điểm đến'} hidden={!expanded}>
+      <ul id={`${id}-list`} className="results card" role="listbox" aria-label={kind === 'origin' ? 'Starting point suggestions' : 'Destination suggestions'} hidden={!expanded}>
         {results.map((r, i) => (
           <li key={r.place_id ?? `${r.label}-${i}`} id={`${id}-${i}`} role="option" aria-selected={active === i}
             onPointerDown={(e) => e.preventDefault()} onClick={() => void pick(r)} onPointerMove={() => setActive(i)}>
@@ -134,7 +137,7 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
         ))}
       </ul>
       <div id={`${id}-status`} aria-live="polite" className={status === 'idle' ? 'sr-only' : `results card search-status ${status === 'error' ? 'error-line' : 'note'}`}>
-        {status !== 'idle' ? message : expanded ? `${results.length} địa chỉ gợi ý. Dùng phím lên, xuống và Enter để chọn.` : ''}
+        {status !== 'idle' ? message : expanded ? `${results.length} suggestions. Use arrow keys and Enter to select.` : ''}
       </div>
     </div>
   )
@@ -152,70 +155,70 @@ export function Directions(p: {
 }) {
   const v = p.vehicle
   const today = new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10)
-  const timeLabel = p.arriveNow ? 'Đi ngay' : `Đến ${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
-  const shortTimeLabel = p.arriveNow ? 'Ngay' : `${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
+  const timeLabel = p.arriveNow ? 'Leave now' : `Arrive ${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
+  const shortTimeLabel = p.arriveNow ? 'Now' : `${p.arrive.slice(11, 16)}${p.arrive.slice(0, 10) === today ? '' : ` ${Number(p.arrive.slice(8, 10))}/${Number(p.arrive.slice(5, 7))}`}`
   const shortDwell = p.dwell % 60 === 0 ? `${p.dwell / 60}h` : `${p.dwell}′`
   return (
     <div className="directions">
       <div className="places">
-        <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} near={p.dest ?? p.origin} placeholder="Điểm đi: vị trí của bạn"
-          extra={<button type="button" className="icon-btn sm" aria-label="Dùng vị trí hiện tại" title="Dùng vị trí hiện tại" onClick={p.onLocate}>
+        <PlaceField kind="origin" value={p.origin} onPick={p.setOrigin} near={p.dest ?? p.origin} placeholder="Starting point or your location"
+          extra={<button type="button" className="icon-btn sm" aria-label="Use current location" title="Use current location" onClick={p.onLocate}>
             <Crosshair size={16} className={p.locating ? 'spin' : ''} /></button>} />
-        <PlaceField mapContext={p.mapContext} kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Đến địa chỉ, hẻm…" />
+        <PlaceField mapContext={p.mapContext} kind="dest" value={p.dest} onPick={p.setDest} near={p.origin ?? p.dest} placeholder="Destination, address or alley…" />
         <span className="places-rail" aria-hidden />
-        <button type="button" className="icon-btn swap" aria-label="Đổi điểm đi và điểm đến" onClick={() => { const o = p.origin; p.setOrigin(p.dest); p.setDest(o) }}>
+        <button type="button" className="icon-btn swap" aria-label="Swap start and destination" onClick={() => { const o = p.origin; p.setOrigin(p.dest); p.setDest(o) }}>
           <ArrowUpDown size={16} />
         </button>
       </div>
 
       <div className="chips">
-        <ChipMenu icon={<Car size={15} />} label={v ? shortName(v) : 'Chọn xe'}>
+        <ChipMenu icon={<Car size={15} />} label={v ? shortName(v) : 'Choose car'}>
           {() => (
             <div className="menu vehicle-menu">
-              <Segmented label="Cách chọn xe" value={p.vMode} onChange={p.setVMode}
-                options={[{ value: 'class', label: 'Nhóm xe' }, { value: 'model', label: 'Mẫu xe' }, { value: 'vetc', label: 'Từ VETC' }]} />
+              <Segmented label="Choose vehicle by" value={p.vMode} onChange={p.setVMode}
+                options={[{ value: 'class', label: 'Size class' }, { value: 'model', label: 'Model' }, { value: 'vetc', label: 'From VETC' }]} />
               {p.vMode === 'class' && (
-                <select className="select" value={p.classId} onChange={(e) => p.setClassId(e.target.value)} aria-label="Nhóm xe">
-                  {p.fleet.classes.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                <select className="select" value={p.classId} onChange={(e) => p.setClassId(e.target.value)} aria-label="Size class">
+                  {p.fleet.classes.map((c) => <option key={c.id} value={c.id}>{vehicleLabel(c)}</option>)}
                 </select>
               )}
               {p.vMode === 'model' && (
-                <select className="select" value={p.modelId} onChange={(e) => p.setModelId(e.target.value)} aria-label="Mẫu xe">
-                  {p.fleet.models.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                <select className="select" value={p.modelId} onChange={(e) => p.setModelId(e.target.value)} aria-label="Model">
+                  {p.fleet.models.map((c) => <option key={c.id} value={c.id}>{vehicleLabel(c)}</option>)}
                 </select>
               )}
               {p.vMode === 'vetc' && (p.vetcLinked
-                ? <p className="vetc-row"><span className="tag brand">Mô phỏng</span> 51K-***.68 · Toyota Fortuner <button type="button" className="btn btn-ghost btn-sm" onClick={p.unlinkVetc}>Huỷ liên kết</button></p>
-                : <button type="button" className="btn btn-tonal" onClick={p.openVetc}>Liên kết tài khoản VETC</button>)}
+                ? <p className="vetc-row"><span className="tag brand">Demo</span> 51K-***.68 · Toyota Fortuner <button type="button" className="btn btn-ghost btn-sm" onClick={p.unlinkVetc}>Unlink</button></p>
+                : <button type="button" className="btn btn-tonal" onClick={p.openVetc}>Link VETC account</button>)}
               {v && (
                 <dl className="specs">
-                  <div><dt>Rộng cả gương</dt><dd>{metres(v.mirror_width, 2)}{v.mirror_estimated ? '*' : ''}</dd></div>
-                  <div><dt>Bán kính quay</dt><dd>{metres(v.turning_radius)}</dd></div>
-                  <div><dt>Lội nước an toàn</dt><dd>{Math.round(v.safe_water_depth * 100)} cm</dd></div>
-                  <div><dt>Quay đầu 3 điểm</dt><dd>≥ {metres(v.three_point_width)}</dd></div>
+                  <div><dt>Width with mirrors</dt><dd>{metres(v.mirror_width, 2)}{v.mirror_estimated ? '*' : ''}</dd></div>
+                  <div><dt>Turning radius</dt><dd>{metres(v.turning_radius)}</dd></div>
+                  <div><dt>Water depth limit</dt><dd>{Math.round(v.safe_water_depth * 100)} cm</dd></div>
+                  <div><dt>Three-point turn</dt><dd>≥ {metres(v.three_point_width)}</dd></div>
                 </dl>
               )}
-              {v?.kind === 'class' && <p className="note">Đang tính theo xe lớn nhất trong nhóm. Chọn đúng mẫu xe để kết quả sát hơn.</p>}
-              {v?.mirror_estimated && <p className="note">* Hãng không công bố: lấy thân xe + 0,25 m.</p>}
+              {v?.kind === 'class' && <p className="note">Uses a conservative envelope for the largest vehicles in this class. Choose a model for a closer estimate.</p>}
+              {v?.mirror_estimated && <p className="note">* Not published by the manufacturer: body width plus 0.25 m.</p>}
             </div>
           )}
         </ChipMenu>
 
         <ChipMenu icon={p.intent === 'park' ? <ParkingSquare size={15} /> : <UserRound size={15} />}
           label={p.intent === 'park'
-            ? <><span className="chip-full">Đỗ xe · {minutes(p.dwell)}</span><span className="chip-compact">Đỗ · {shortDwell}</span></>
-            : <><span className="chip-full">Dừng đón/trả · kiểm tra 15 phút</span><span className="chip-compact">Đón · 15′</span></>}>
+            ? <><span className="chip-full">Parking · {minutes(p.dwell)}</span><span className="chip-compact">Park · {shortDwell}</span></>
+            : <><span className="chip-full">Pickup/drop-off · 15-minute check</span><span className="chip-compact">Pickup · 15 min</span></>}>
           {() => (
             <div className="menu">
-              <Segmented label="Bạn sẽ" value={p.intent} onChange={p.setIntent}
-                options={[{ value: 'park', label: 'Đỗ xe' }, { value: 'pickup', label: 'Dừng đón/trả' }]} />
+              <Segmented label="Trip purpose" value={p.intent} onChange={p.setIntent}
+                options={[{ value: 'park', label: 'Parking' }, { value: 'pickup', label: 'Pickup/drop-off' }]} />
               {p.intent === 'park' ? (
-                <label className="menu-row">Ở lại
+                <label className="menu-row">Stay for
                   <select className="select" value={p.dwell} onChange={(e) => p.setDwell(Number(e.target.value))}>
                     {[...new Set([30, 60, 120, 180, 240, p.dwell])].sort((a, b) => a - b).map((d) => <option key={d} value={d}>{minutes(d)}</option>)}
                   </select>
                 </label>
-              ) : <p className="note">Thời gian kiểm tra dự kiến: 15 phút. Đây không phải thời gian được luật cho phép dừng; cần kiểm tra biển báo và quy định tại điểm dừng.</p>}
+              ) : <p className="note">The planning window is 15 minutes. This is not a legal stopping allowance; check signs and local restrictions.</p>}
             </div>
           )}
         </ChipMenu>
@@ -239,7 +242,7 @@ function TimeMenu({ arrive, arriveNow, close, onCommit }: {
   const id = useId()
   function validate() {
     const valid = now || (!!fromLocal(draft) && !!input.current?.validity.valid)
-    setError(valid ? '' : 'Nhập đầy đủ ngày và giờ đến hợp lệ (giờ Việt Nam, UTC+07:00). Chuyến đi chưa cập nhật; vẫn giữ giờ đã chọn trước đó.')
+    setError(valid ? '' : 'Enter a valid arrival date and time (Vietnam time, UTC+07:00). Your previous time is still selected.')
     return valid
   }
   function commit() {
@@ -252,21 +255,25 @@ function TimeMenu({ arrive, arriveNow, close, onCommit }: {
   }
   return (
     <div className="menu">
-      <Segmented label="Thời gian" value={now ? 'now' : 'at'} onChange={(x) => { setNow(x === 'now'); setError('') }}
-        options={[{ value: 'now', label: 'Đi ngay' }, { value: 'at', label: 'Đặt giờ đến' }]} />
+      <Segmented label="Time" value={now ? 'now' : 'at'} onChange={(x) => { setNow(x === 'now'); setError('') }}
+        options={[{ value: 'now', label: 'Leave now' }, { value: 'at', label: 'Set arrival time' }]} />
       {!now && <>
-        <label htmlFor={`${id}-arrival`} className="note">Giờ đến tại Việt Nam (UTC+07:00)</label>
+        <label htmlFor={`${id}-arrival`} className="note">Arrival in Vietnam (UTC+07:00)</label>
         <input ref={input} id={`${id}-arrival`} className="input" type="datetime-local" required value={draft}
           onChange={(e) => setDraft(e.target.value)} onBlur={validate} aria-invalid={!!error} aria-describedby={`${id}-error`} />
       </>}
       <p id={`${id}-error`} className="error-line" aria-live="polite">{error}</p>
-      <button type="button" className="btn btn-primary btn-sm" onClick={commit}>Xong</button>
+      <button type="button" className="btn btn-primary btn-sm" onClick={commit}>Done</button>
     </div>
   )
 }
 
+const minutes = (n: number) => n % 60 === 0 ? `${n / 60} ${n === 60 ? 'hour' : 'hours'}` : `${n} min`
+const classLabels: Record<string, string> = { XS: 'Small car', S: 'B/C sedan or crossover', M: '7-seat SUV/MPV or D sedan', L: 'Large car or pickup', XL: '16-seat van or minibus' }
+const vehicleLabel = (v: Vehicle) => v.kind === 'class' ? `${v.size_class} · ${classLabels[v.size_class] ?? 'Size class'}` : v.label
+
 function shortName(v: Vehicle) {
-  if (v.kind === 'class') return v.label.replace(/\s*\(.*\)/, '')
+  if (v.kind === 'class') return vehicleLabel(v)
   return v.label
 }
 

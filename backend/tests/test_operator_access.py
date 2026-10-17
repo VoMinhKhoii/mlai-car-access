@@ -225,12 +225,12 @@ confirm_file.write_text("".join(l + "\n" for l in confirm_file.read_text().split
 reports.reconcile(); reports.reconcile()
 out["projected_after_crash_reconcile"] = count()
 out["evidence_has_confirmation"] = any(
-    "Xác nhận sau khi đến" == bound.source
+    "Arrival confirmation" == bound.source
     for way_id in confirm_payload["way_ids"]
     for bound in evidence.STORE_EVIDENCE.snapshot.by_way.get(way_id, [])
 )
 out["evidence_has_exit_claim"] = any(
-    "quay đầu ra" in bound.detail
+    "turn around and exit" in bound.detail
     for way_id in confirm_payload["way_out_ids"]
     for bound in evidence.STORE_EVIDENCE.snapshot.way_out_by_way.get(way_id, [])
 )
@@ -380,15 +380,15 @@ class OperatorAccess(unittest.TestCase):
         self.assertEqual(self.status("confirm_bad_exit"), 422)
         self.assertEqual(
             self.r["confirm_main_road"]["json"]["detail"],
-            "Xác nhận chỉ dành cho hẻm được máy chủ ánh xạ. Để báo cáo vật cản, vui lòng chọn loại báo cáo khác.",
+            "Confirmations apply only to alleys mapped by the server. Choose a blockage report to report obstructions.",
         )
         self.assertEqual(self.r["pending_count_before_main_road"], self.r["pending_count_after_main_road"])
         self.assertEqual(self.status("confirm_main_road"), 422)
         self.assertEqual(self.status("confirm_non_alley"), 422)
-        self.assertIn("ánh xạ trực tiếp lên hẻm", self.r["confirm_non_alley"]["json"]["detail"])
+        self.assertIn("mapped directly to an alley", self.r["confirm_non_alley"]["json"]["detail"])
         self.assertEqual(self.r["pending_before_non_alley"], self.r["pending_after_non_alley"])
         self.assertEqual(self.status("confirm_off_way_stop"), 422)
-        self.assertIn("ánh xạ trực tiếp lên hẻm", self.r["confirm_off_way_stop"]["json"]["detail"])
+        self.assertIn("mapped directly to an alley", self.r["confirm_off_way_stop"]["json"]["detail"])
         self.assertEqual(self.r["pending_before_off_way"], self.r["pending_after_off_way"])
         self.assertEqual(self.status("confirm_guest"), 202)
         self.assertEqual(self.r["confirm_guest"]["json"]["status"], "pending")

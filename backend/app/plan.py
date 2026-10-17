@@ -11,7 +11,8 @@ from . import flags, hydro, parking_data
 from .config import (ALLEY_SPEED_MPS, FLOOD_TIMING_HORIZON_H, FLOOD_TIMING_STEP_MIN,
                      FLOOD_TRAVERSAL_MARGIN_MIN, GOONG_API_KEY, CACHED_ONLY, PICKUP_DWELL_MIN,
                      REVERSE_LIMIT_M, WALK_CAP_M, WALK_WADE_M)
-from .evidence import STORE_EVIDENCE, WidthRange, blocked_ways_today, width_ranges
+from .evidence import (STORE_EVIDENCE, WidthRange, blocked_ways_today, english_payload,
+                       english_text, width_ranges)
 from .flood import (KNOWLEDGE_ORDER, STATUS_ORDER, FloodAssessment, FloodSnapshot, _street_key,
                     alarm_label, evidence_generation, flood_profiles, worst_over)
 from .legality import ORDER as LEGAL_ORDER
@@ -91,7 +92,7 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
                     continue
                 if not wrs[pid].decisive_clearance:
                     fit[wid] = "unknown"
-                    notes[wid] = "Chưa có đo clear width đầy đủ tại nút rẽ"
+                    notes[wid] = "Complete clear-width measurements are missing at the turn"
                     break
                 if wrs[pid].lo <= wrs[wid].lo:
                     continue
@@ -99,11 +100,11 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
                 need = turn_in_width(p.id, street)
                 if wrs[wid].lo < need:
                     fit[wid] = "tight"
-                    notes[wid] = f"Rẽ vào từ {g.ways[pid].name or 'đường chính'} cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ {need:.1f} m)"
+                    notes[wid] = f"Turning in from {g.ways[pid].name or 'main road'} may require multiple moves (one-turn entry needs width ≥ {need:.1f} m)"
     for wid, b in blocked_ways_today().items():
         if wid in fit:
             fit[wid] = "blocked"
-            notes[wid] = f"Tạm thời bị chặn hôm nay: {b.get('reason', 'vật cản')} ({b.get('source', 'tài xế báo')})"
+            notes[wid] = f"Temporarily blocked today: {b.get('reason', 'obstruction')} ({b.get('source', 'driver report')})"
     return fit, notes
 
 
@@ -279,7 +280,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         la, lo = _interp(g, de.u, de.v, doff, de.length)
         access = walk_access(la, lo, de, doff)
         if access is not None and access[1] <= cap:
-            candidates.append(Candidate("door", la, lo, "Trước cửa nhà", de.way_id, de.idx, doff,
+            candidates.append(Candidate("door", la, lo, "At the door", de.way_id, de.idx, doff,
                                         walk_m=access[1], data=access[0]))
             walk_candidate_count += 1
         else:
@@ -330,7 +331,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         if _street_key(g.display_name(way_id)) in report_keys)
     static_unknown_flood = FloodAssessment(
         "risky", None, "missing_history",
-        "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường", None)
+        "No flood history or current observations for this segment", None)
 
     class LazyFloodMap:
         """Resolve only ways reached by Dijkstra; share results for one temporal interval."""
@@ -572,11 +573,16 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
                       and (walk_connection_missing or walk_connection_rejected) else None)
     verdict = _verdict(chosen, door_eval, intent, cap)
     if no_stop_reason:
-        verdict["detail"] = "Không tìm thấy lối đi bộ được nối với điểm dừng trong phạm vi 35 m."
+        verdict["detail"] = "No mapped walking connection to a stop within 35 m."
     if chosen:
         verdict["estimate"] = chosen[0].get("estimate")
     elif door_eval:
         verdict["estimate"] = door_eval.get("estimate")
+    else:
+        verdict['estimate'] = {
+            'answer': 'unknown' if no_stop_reason else 'no', 'confidence': 'low',
+            'basis': ('Insufficient walking connections or road network for an estimate' if no_stop_reason else
+                      'No stop passed the checks in the cached road network')}
     timing = None
     flood_timing_needed = _needs_flood_timing(chosen, rejected)
     if flood_timing_needed:
@@ -607,7 +613,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     synthetic_demo_data = synthetic_demo_file is not None
     displayed_demo_scenario = synthetic_demo_scenario if synthetic_demo_data else None
 
-    return {
+    return english_payload({
         "destination": {"lat": dest_lat, "lon": dest_lon, "label": dest_label},
         "vehicle": vehicle.to_json(), "intent": intent,
         "window": {"arrive": arrive.isoformat(), "depart": depart.isoformat(), "dwell_min": dwell,
@@ -623,7 +629,7 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         "area_source": g.source,
         "counts": {"candidates": len(candidates), "passed": len(results), "rejected": len(rejected),
                    "dijkstra": network_dijkstra_calls + 1 + int(de is not None)},
-    }
+    })
 
 
 def _choose(results: list[dict]) -> list[dict]:
@@ -676,7 +682,7 @@ def _flood_timing(intent: str, arrive: datetime, depart: datetime, qualifies,
     if intent == "pickup":
         # Pickup: user controls arrival; return honest reason without sweep
         return {"leave_before_at": None, "or_after_at": None, "approximate": False,
-                "reason": "Để đón xe an toàn, bạn có thể chọn giờ đến khác.",
+                "reason": "Try another arrival time for pickup.",
                 "failure_codes": failure_codes}
 
     # Park: sweep for earliest safe departure
@@ -698,7 +704,7 @@ def _flood_timing(intent: str, arrive: datetime, depart: datetime, qualifies,
         t += step
 
     reason = (None if before or after else
-              "Không tìm thấy giờ rời đã vượt qua toàn bộ kiểm tra trong cửa sổ 12 giờ; dữ liệu ngập có thể thiếu hoặc đã cũ.")
+              "No departure time passed every check within 12 hours; flood evidence may be missing or stale.")
     return {"leave_before_at": before.isoformat() if before else None,
             "or_after_at": after.isoformat() if after else None,
             "reason": reason, "approximate": True, "failure_codes": failure_codes}
@@ -736,14 +742,14 @@ def _aggregate_flood(ctx: PlanContext, way_ids: list[int], times: list[datetime]
         legs.append(leg)
     if not assessments:
         aggregate = FloodAssessment("risky", None, "missing_history",
-                                    "Không tìm thấy đoạn đường kết nối để kiểm tra ngập", None)
+                                    "No connected route segments available for a flood check", None)
     else:
         decisive = max(assessments, key=lambda item: (
             STATUS_ORDER[item.status], item.depth.hi if item.depth else -1.0))
         unknown = max(assessments, key=lambda item: KNOWLEDGE_ORDER[item.knowledge])
         aggregate = (FloodAssessment(
             decisive.status, decisive.depth, unknown.knowledge,
-            "Một hoặc nhiều đoạn hoặc thời điểm chưa có bằng chứng ngập đầy đủ",
+            "Flood evidence is incomplete for one or more segments or times",
             None, None, None)
             if unknown.knowledge != "known" and unknown is not decisive else decisive)
     out = _assessment_json(aggregate)
@@ -760,7 +766,7 @@ def _route_flood(ctx: PlanContext, route: dict, times: list[datetime]) -> dict:
 
 def _public_route(route: dict) -> dict:
     return {key: value for key, value in route.items()
-            if key not in ("strict", "edge_ids", "way_ids")}
+            if key not in ("strict", "edge_ids", "way_ids", "_segments")}
 
 
 def _public_way_out_claims(route: dict, wrs: dict[int, WidthRange]) -> list[dict]:
@@ -844,7 +850,7 @@ def _candidate_timing_qualified(c: Candidate, ctx: PlanContext, arrive: datetime
     )
 
 
-CONFIDENCE_VI = {"high": "cao", "medium": "trung bình", "low": "thấp"}
+CONFIDENCE_VI = {"high": "high", "medium": "medium", "low": "low"}
 
 
 def _width_hypothesis(wr):
@@ -857,7 +863,9 @@ def _width_hypothesis(wr):
     if wr.review or wr.top_tier is None:
         return None
     from .evidence import TIERS
-    active = [b for b in wr.evidence if b not in wr.overruled and
+    unresolved = any(b.measurement_schema == 'parcel-survey-unresolved-v2' for b in wr.evidence)
+    active = [b for b in wr.evidence if (b not in wr.overruled or (unresolved and
+              b.tier == 'Inferred' and b.source in ('OSM road class', 'OSM lane count'))) and
               b.measurement_schema != 'parcel-survey-unresolved-v2']
     for tier in TIERS[TIERS.index(wr.top_tier):]:
         bounds = [b for b in active if b.tier == tier and (b.estimate_m is not None or b.lo > 0)]
@@ -873,15 +881,16 @@ def _width_hypothesis(wr):
                 return None
             b = min(bounds, key=lambda b: b.hi)
             value = (lo + min(hi, lo+3)) / 2
-        return {'value_m': value, 'tier': tier, 'source': b.source,
+        return {'value_m': value, 'tier': tier, 'source': english_text(b.source),
                 'sampled': bool(samples), 'sample_count': b.sample_count,
+                'sampled_range': wr.sampled_estimate() if samples else None,
                 'bottleneck_support': b.sample_quality.get('bottleneck_support'),
                 'isolated_low_outlier': b.sample_quality.get('isolated_low_outlier', False),
-                'fallback_from_unresolved': tier != wr.top_tier}
+                'fallback_from_unresolved': tier != wr.top_tier or unresolved}
     # Diagnostic callers can supply an interval without individual bounds.
     if not wr.evidence and wr.lo > 0:
         return {'value_m': (wr.lo+min(wr.hi,wr.lo+3))/2, 'tier': wr.top_tier,
-                'source': 'Khoảng bề rộng', 'sampled': False, 'sample_count': None,
+                'source': 'Width interval', 'sampled': False, 'sample_count': None,
                 'bottleneck_support': None, 'isolated_low_outlier': False,
                 'fallback_from_unresolved': False}
     return None
@@ -905,7 +914,8 @@ def _estimate(c, g, wrs, p, checks, failures):
     hypotheses = [_width_hypothesis(wr) for wr in widths]
     values = [h['value_m'] if h else None for h in hypotheses]
     strong_m = quantitative_m = 0.0
-    measured = 0
+    measured = all_sampled = 0
+    all_sample_m = 0.0
     for (ei, length), wr in zip(segments.items(), widths):
         numeric = [b for b in wr.evidence if b.tier in ('Measured', 'Official', 'Observed')
                    and b not in wr.overruled and (b.estimate_m is not None or (b.hi < 40 and b.hi > 0 and
@@ -913,15 +923,22 @@ def _estimate(c, g, wrs, p, checks, failures):
         if numeric:
             measured += 1
             quantitative_m += length
+        if numeric or any(b.estimate_m is not None and b.sample_count and b not in wr.overruled
+                          for b in wr.evidence):
+            all_sampled += 1
+            all_sample_m += length
         if wr.top_tier in ('Measured', 'Official') and wr.lo > 0 and not wr.review and (
                 not wr.evidence or any(b.tier == wr.top_tier and b.coverage_complete for b in wr.evidence)):
             strong_m += length
     coverage = {'sampled_segments': measured, 'total_segments': len(segments),
                 'sample_supported_fraction': round(quantitative_m / total, 3) if total else 0,
                 'complete_strong_fraction': round(strong_m / total, 3) if total else 0,
-                'scope': 'Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn'}
+                'all_sampled_segments': all_sampled,
+                'all_sample_supported_fraction': round(all_sample_m / total, 3) if total else 0,
+                'scope': 'Arrival/exit segments with width samples; isolated samples do not establish continuous clearance'}
     # Passage uses tight_min; opening the door uses the separate stop threshold.
-    stop_value = _width_estimate(wrs[c.way_id]) if c.way_id is not None else None
+    stop_hypothesis = _width_hypothesis(wrs[c.way_id]) if c.way_id is not None else None
+    stop_value = stop_hypothesis['value_m'] if stop_hypothesis else None
     if not widths or any(v is None for v in values):
         answer = 'unknown'
     elif min(values) >= p.fits_min and (stop_value is None or stop_value >= p.door_min):
@@ -942,12 +959,14 @@ def _estimate(c, g, wrs, p, checks, failures):
             and wo.get('strict') and flood == 'passable' and legal['status'] == 'Permitted'
             and not c.data.get('walk_path', {}).get('unverified', True)):
         confidence = 'high'
-    if answer == 'unknown' or wo['mode'] in ('unknown', 'none') or any(w.review for w in widths):
+    if (answer == 'unknown' or wo['mode'] in ('unknown', 'none') or any(w.review for w in widths)
+            or any(h and h['fallback_from_unresolved'] for h in hypotheses)):
         confidence = 'low'
     hard_legal = legal['status'] in ('Prohibited', 'Restricted')
     hard_width = any(not wr.review and any(
         b.tier in ('Measured', 'Official') and b.tier == wr.top_tier and b not in wr.overruled and
-        (b.feature != 'parcel_widths' or b.sample_quality.get('bottleneck_support', b.sample_count or 0) >= 2) and
+        ((b.feature != 'parcel_widths' and b.measurement_schema != 'legacy-raw-gap-converted-v2') or
+         b.sample_quality.get('bottleneck_support', 0) >= 2) and
         b.hi < (p.door_min if g.edges[ei].way_id == c.way_id else p.tight_min)
         for b in wr.evidence) for ei, wr in zip(segments, widths))
     if hard_legal or hard_width or flood == 'blocked':
@@ -958,44 +977,56 @@ def _estimate(c, g, wrs, p, checks, failures):
             # A missing directed path in this cached graph does not measure a
             # narrow street. Keep the failed Hard Check, but say what is unknown.
             answer = 'unknown'
+    # Every automatic cut that determines a negative needs corroboration, not
+    # just the numerically smallest path value. In particular, a stop's door
+    # threshold can fail while a different segment is the path bottleneck.
+    if answer == 'no' and not (hard_legal or hard_width or flood == 'blocked'):
+        limiting_hypotheses = [(h, p.tight_min) for h in hypotheses]
+        limiting_hypotheses.append((stop_hypothesis, p.door_min))
+        if any(h and h['value_m'] < need and (h['fallback_from_unresolved'] or
+               h['isolated_low_outlier'] or (h['sample_count'] is not None and
+               (h['bottleneck_support'] or 0) < 2)) for h, need in limiting_hypotheses):
+            confidence = 'low'
     if c.kind == 'lot' and not failures:
         answer = 'unknown'  # no measured entrance / internal manoeuvre envelope
-    tier_names = {'Measured':'đo thực tế', 'Official':'địa chính / chính thức', 'Observed':'quan sát',
-                  'Declared':'tin rao / tự khai', 'Inferred':'suy luận'}
+    tier_names = {'Measured':'measured', 'Official':'cadastral / official', 'Observed':'observed',
+                  'Declared':'declared', 'Inferred':'inferred'}
     finite = [(v, wr, ei, h) for v, wr, ei, h in zip(values, widths, segments, hypotheses) if v is not None]
     limiting_json = None
     if finite:
         value, limiting, ei, hypothesis = min(finite, key=lambda x: x[0])
         way = g.ways[g.edges[ei].way_id]
-        limiting_json = {**hypothesis, 'way_id': way.id, 'way_name': g.display_name(way.id),
+        limiting_json = {**hypothesis, 'way_id': way.id, 'way_name': way.name or english_text(g.display_name(way.id)),
                          'osm_url': f'https://www.openstreetmap.org/way/{way.id}'}
-        basis = [f"{tier_names.get(hypothesis['tier'], 'thiếu nguồn')} ≈{value:.2f} m".replace('.', ',')
-                 + f" ({g.display_name(way.id)}; OSM {way.id})"]
+        basis = [f"{tier_names.get(hypothesis['tier'], 'source unknown')} ≈{value:.2f} m"
+                 + f" ({way.name or english_text(g.display_name(way.id))}; OSM {way.id})"]
         if hypothesis['fallback_from_unresolved']:
-            basis.append('khảo sát chưa có mẫu hợp lệ; dùng nguồn yếu hơn để ước tính')
+            basis.append('survey has no valid samples; estimate uses a weaker source')
         if (answer == 'no' and not (hard_legal or hard_width or flood == 'blocked') and
                 (hypothesis['fallback_from_unresolved'] or hypothesis['isolated_low_outlier'] or
                  (hypothesis['sample_count'] is not None and (hypothesis['bottleneck_support'] or 0) < 2))):
             confidence = 'low'
-            basis.append('nút thắt chưa có hai mặt cắt nhất quán')
+            basis.append('bottleneck lacks two consistent independent cuts')
+        if stop_hypothesis and way.id != c.way_id:
+            basis.append(f"at the door ≈{stop_value:.2f} m ({g.ways[c.way_id].name or english_text(g.display_name(c.way_id))})")
     else:
-        basis = ['chưa có bề rộng đủ để ước lượng']
-    basis.append(f"{measured}/{len(segments)} đoạn có mẫu đo ({coverage['sample_supported_fraction']:.0%} chiều dài có mẫu)")
+        basis = ['insufficient width evidence for an estimate']
+    basis.append(f"{all_sampled}/{len(segments)} segments sampled ({coverage['all_sample_supported_fraction']:.0%} of route length with samples)")
     if strong_m < total:
-        basis.append('chưa đo kín tuyến')
+        basis.append('incomplete route survey')
     if wo['mode'] == 'unknown' or wo.get('manoeuvre_status') == 'unknown':
-        basis.append('chưa rõ đường ra / thao tác rẽ')
+        basis.append('exit / manoeuvres unverified')
     if flood in ('unknown', 'risky'):
-        basis.append('chưa rõ ngập' if flood == 'unknown' else 'có thể ngập')
+        basis.append('flood conditions unknown' if flood == 'unknown' else 'possible flooding')
     if legal['status'] == 'Unverified':
-        basis.append('chưa xác minh pháp lý')
+        basis.append('stopping permission unverified')
     if hard_legal:
-        basis.extend(r['text'] + ' (' + r['citation'] + ')' for r in legal['rules']
+        basis.extend(english_text(r['text']) + ' (' + r['citation'] + ')' for r in legal['rules']
                      if r['status'] in ('Prohibited', 'Restricted'))
     elif failures:
-        basis.append(failures[0])
+        basis.append(english_text(failures[0]))
     return {'answer': answer, 'confidence': confidence, 'basis': ' · '.join(basis), 'coverage': coverage,
-            'limiting_width': limiting_json}
+            'limiting_width': limiting_json, 'stop_width': stop_hypothesis}
 
 
 
@@ -1012,18 +1043,18 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
     if route is None:
         if fit_route is not None:
             failure_codes.append("flood_arrival")
-            reasons_fail.append("Đường vào bị ngập trong khoảng xe đi vào")
+            reasons_fail.append("Arrival route is flooded during entry")
             fit_route["flood"] = _route_flood(ctx, fit_route, arr_times)
             route_output = {"available": False, **_public_route(fit_route)}
         else:
             failure_codes.append("no_fit")
-            reasons_fail.append("Không có đường vào phù hợp với kích thước xe")
+            reasons_fail.append("No arrival route fits the vehicle dimensions")
             route_output = {"available": False, "meters": None, "geometry": [], "flood": None}
     else:
         route["flood"] = _route_flood(ctx, route, arr_times)
         route_output = {"available": True, **_public_route(route)}
         if not route["strict"]:
-            unverified.append("Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)")
+            unverified.append("Arrival route includes unverified width or flood conditions")
     checks["route_in"] = route_output
 
     if way_id is not None:
@@ -1035,18 +1066,18 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         if fit_class_at_stop in ("no", "blocked"):
             failure_codes.append("no_fit")
             reasons_fail.append(fit_notes.get(way_id) or
-                                f"{wr.label} {wr.lo:.1f}–{min(wr.hi, 40):.1f} m, xe cần ≥ {p.tight_min:.2f} m")
+                                f"{wr.label} {wr.lo:.1f}–{min(wr.hi, 40):.1f} m; vehicle needs ≥ {p.tight_min:.2f} m")
         elif fit_class_at_stop == "unknown":
-            unverified.append(f"Chưa đủ bằng chứng bề rộng ({wr.lo:.1f}–{min(wr.hi, 40):.1f} m; "
-                              f"xe cần ≥ {p.tight_min:.2f} m)")
+            unverified.append(f"Width unverified ({wr.lo:.1f}–{min(wr.hi, 40):.1f} m; "
+                              f"vehicle needs ≥ {p.tight_min:.2f} m)")
         if wr.hi < p.door_min:
             failure_codes.append("no_fit")
-            reasons_fail.append(f"Không đủ chỗ mở cửa xe (cần {p.door_min:.2f} m)")
+            reasons_fail.append(f"Insufficient door-opening space (needs {p.door_min:.2f} m)")
         elif wr.lo < p.door_min and fit_class_at_stop != "no":
-            unverified.append(f"Chưa chắc đủ chỗ mở cửa xe (cần {p.door_min:.2f} m)")
+            unverified.append(f"Door-opening space unverified (needs {p.door_min:.2f} m)")
         checks["fit"] = fitj
     else:
-        checks["fit"] = {"class": "lot", "note": "Bãi đỗ ngoài đường"}
+        checks["fit"] = {"class": "lot", "note": "Off-street parking"}
 
     way_out = _way_out(c, g, wrs, fit, p, ext, route)
     fit_way_out = _way_out(c, g, wrs, fit, p, fit_ext, fit_route)
@@ -1055,14 +1086,14 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         if way_out["mode"] == "none":
             if fit_way_out["mode"] != "none":
                 failure_codes.append("flood_exit")
-                reasons_fail.append("Đường ra bị ngập trong khoảng xe rời điểm dừng")
+                reasons_fail.append("Exit route is flooded during departure")
                 fit_way_out["flood"] = _route_flood(ctx, fit_way_out, exit_times)
                 way_out_output = {"available": False, **_public_route(fit_way_out),
                                   "route_verified": fit_way_out["strict"],
                                   "observed": _public_way_out_claims(fit_way_out, wrs)}
             else:
                 failure_codes.append("dead_end")
-                reasons_fail.append("Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)")
+                reasons_fail.append("No suitable exit (dead end or excessive reversing)")
                 way_out_output = {"available": False, **_public_route(way_out), "flood": None,
                                   "route_verified": False, "observed": _public_way_out_claims(way_out, wrs)}
         else:
@@ -1071,7 +1102,7 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
                               "route_verified": way_out["strict"],
                               "observed": _public_way_out_claims(way_out, wrs)}
             if not way_out["strict"]:
-                unverified.append(way_out.get("text") or "Đường ra chưa đủ bằng chứng")
+                unverified.append(way_out.get("text") or "Exit unverified")
             if way_out.get("tight_exit"):
                 tier_bump = 1
     else:
@@ -1086,31 +1117,31 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         failure_codes.append("flood_stay")
         depth = stay["depth"]
         detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
-                  if depth else "không rõ độ sâu")
-        reasons_fail.append(f"Điểm dừng ngập {detail}, quá mức an toàn "
-                            f"{p.safe_water_depth * 100:.0f} cm của xe")
+                  if depth else "depth unknown")
+        reasons_fail.append(f"Water at the stop: {detail}, exceeding the vehicle safe depth of "
+                            f"{p.safe_water_depth * 100:.0f} cm")
     elif stay["status"] == "risky":
         depth = stay["depth"]
-        unverified.append((f"Có thể ngập {depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
-                           if depth else stay["reason"] or "Chưa đủ dữ liệu ngập"))
+        unverified.append((f"Possible flooding {depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
+                           if depth else stay["reason"] or "Flood evidence incomplete"))
     flood = {"stay": stay}
     checks["flood"] = flood
 
     legality_status, rules = _candidate_legality(c, ctx, arrive, depart)
-    checks["legality"] = {"status": legality_status, "rules": [rule.to_json() for rule in rules]}
+    checks["legality"] = {"status": legality_status, "rules": [english_payload(rule.to_json()) for rule in rules]}
     if legality_status == "Prohibited" or (intent == "park" and legality_status == "Restricted"):
         failure_codes.append("legality")
-        reasons_fail.append("; ".join(rule.text for rule in rules
+        reasons_fail.append("; ".join(english_text(rule.text) for rule in rules
                                       if rule.status in ("Prohibited", "Restricted")))
     elif legality_status == "Unverified":
-        unverified.append("Chưa đủ dữ liệu pháp lý: " +
-                          "; ".join(rule.text for rule in rules if rule.status == "Unverified"))
+        unverified.append("Stopping permission unverified: " +
+                          "; ".join(english_text(rule.text) for rule in rules if rule.status == "Unverified"))
 
     stop_walk_connector = c.data.get("walk_connector_m", 0.0)
     destination_walk_connector = c.data.get("walk_destination_connector_m", 0.0)
     walk_connection_unverified = stop_walk_connector > WALK_SNAP_M or destination_walk_connector > WALK_SNAP_M
     if walk_connection_unverified:
-        unverified.append("Đoạn nối gần nhất chưa có lối đi bộ OSM; bản đồ chỉ vẽ phần đường đi bộ đã lập bản đồ")
+        unverified.append("The nearest connector has no mapped OSM footpath; only the mapped walking portion is drawn")
     tier = 2 if (legality_status == "Restricted" or unverified) else tier_bump
     ok = not reasons_fail
     walk_min = c.walk_m / WALK_SPEED / 60
@@ -1119,13 +1150,11 @@ def _evaluate(c: Candidate, ctx: PlanContext, arrive, depart, stay_times,
         "destination_to_walk_m": round(destination_walk_connector, 1),
         "mapped": not walk_connection_unverified,
         "reason": None if not walk_connection_unverified else
-        "Khoảng cách nối gần nhất chỉ là ước tính; đoạn chưa có lối đi bộ OSM không được vẽ",
+        "Connector distance is estimated; unmapped walking portions are not drawn",
     }
-    def estimate_route(value):
-        value = dict(value or {})
-        value["_segments"] = [(ei, g.edges[ei].length) for ei in value.get("edge_ids", [])]
-        return value
-    estimate_checks = {**checks, "route_in": estimate_route(route_output), "way_out": estimate_route(way_out_output)}
+    # Public serialization deliberately removes edge IDs. Estimate from the
+    # original selected routes, retaining partial-edge lengths and strictness.
+    estimate_checks = {**checks, "route_in": route, "way_out": way_out}
     estimate = _estimate(c, g, wrs, p, estimate_checks, reasons_fail)
     # Confidence can never imply verification beyond the canonical hard checks.
     if not (ok and tier <= 1) and estimate["confidence"] == "high" and estimate["answer"] != "no":
@@ -1159,9 +1188,11 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
             if node in dist:
                 nodes = _path_nodes(pred, node)[::-1]
                 edge_ids = _pred_edge_ids(pred, node)[::-1]
+                segments = [(idx, g.edges[idx].length) for idx in edge_ids]
                 access_ways = list(c.data.get("access_way_ids", []))
                 way_ids = [g.edges[idx].way_id for idx in edge_ids] + access_ways
-                return {"strict": False, "meters": round(dist[node] + c.data.get("entrance_d", 0)),
+                return {"strict": False, "meters": round(sum(length for _, length in segments) + c.data.get("entrance_d", 0)),
+                        "_segments": segments,
                         "geometry": _coords(g, nodes), "flood": None,
                         "edge_ids": edge_ids, "way_ids": way_ids}
             continue
@@ -1176,8 +1207,11 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
             dmin, node, side = min(opts)
             nodes = _path_nodes(pred, node)[::-1]
             edge_ids = _pred_edge_ids(pred, node)[::-1] + [edge.idx]
+            partial = c.offset if side == 'u' else edge.length-c.offset
+            segments = [(idx, g.edges[idx].length) for idx in edge_ids[:-1]] + [(edge.idx, partial)]
             way_ids = [g.edges[idx].way_id for idx in edge_ids]
-            return {"strict": strict, "meters": round(dmin), "side": side,
+            return {"strict": strict, "meters": round(sum(length for _, length in segments)), "side": side,
+                    "_segments": segments,
                     "geometry": _coords(g, nodes) + [[c.lon, c.lat]], "flood": None,
                     "edge_ids": edge_ids, "way_ids": way_ids}
     return None
@@ -1185,7 +1219,7 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
 
 def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route) -> dict:
     if route is None:
-        return {"mode": "none", "text": "Không vào được nên không xét đường ra", "strict": False,
+        return {"mode": "none", "text": "No arrival route; exit cannot be assessed", "strict": False,
                 "turn_verified": False, "edge_ids": [], "way_ids": []}
     for strict in (True, False):
         dist, pred = ext[strict]
@@ -1197,8 +1231,9 @@ def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route
                 way_ids = access_ways + [g.edges[idx].way_id for idx in edge_ids]
                 return {"mode": "lot", "strict": False, "turn_verified": False, "reverse_m": 0,
                         "tight_exit": False,
-                        "text": "Lối vào, vùng quay đầu và lối ra của bãi chưa được xác minh bằng hình học",
+                        "text": "Parking-lot entrance, manoeuvre space and exit geometry are unverified",
                         "geometry": _coords(g, _path_nodes(pred, node)),
+                        "_segments": [(idx, g.edges[idx].length) for idx in edge_ids],
                         "edge_ids": edge_ids, "way_ids": way_ids}
             continue
         edge = g.edges[c.edge_idx]
@@ -1210,16 +1245,18 @@ def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route
             edge_ids = [edge.idx] + _pred_edge_ids(pred, b)
             return {"mode": "through", "strict": strict,
                     "reverse_m": 0, "tight_exit": False,
-                    "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+                    "text": "Continue to the main road in the permitted direction",
                     "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, b)),
+                    "_segments": [(edge.idx, edge.length-s_a)] + [(idx, g.edges[idx].length) for idx in edge_ids[1:]],
                     "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
         if (way.oneway == 0 and wrs[way.id].decisive_clearance
                 and wrs[way.id].lo >= three_point_width(p.id) and a in dist):
             edge_ids = [edge.idx] + _pred_edge_ids(pred, a)
             return {"mode": "turn_here", "strict": False, "turn_verified": False,
                     "reverse_m": 0, "tight_exit": False,
-                    "text": "Bề rộng gợi ý có thể quay đầu; chưa có bằng chứng vùng quét quay xe",
+                    "text": "Width suggests a possible turnaround; swept manoeuvre space is unverified",
                     "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, a)),
+                    "_segments": [(edge.idx, s_a)] + [(idx, g.edges[idx].length) for idx in edge_ids[1:]],
                     "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
         if way.oneway != 0 or a not in dist:
             continue
@@ -1249,47 +1286,48 @@ def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route
         if not reversible or turn_at is None or reverse_m > 2 * REVERSE_LIMIT_M:
             continue
         tight = reverse_m > REVERSE_LIMIT_M
-        text = (f"Lùi {reverse_m:.0f} m đến nút giao; vùng quay đầu chưa được xác minh"
+        text = (f"Reverse {reverse_m:.0f} m to a junction; turning space is unverified"
                 if not tight else
-                f"Phải lùi {reverse_m:.0f} m (quá giới hạn {REVERSE_LIMIT_M:.0f} m); vùng quay đầu chưa được xác minh")
+                f"Must reverse {reverse_m:.0f} m (over the {REVERSE_LIMIT_M:.0f} m reverse limit); turning space is unverified")
         edge_ids = [edge.idx] + _pred_edge_ids(pred, a)
         return {"mode": "reverse", "strict": False, "turn_verified": False,
                 "reverse_m": round(reverse_m), "tight_exit": tight,
                 "text": text, "geometry": [[c.lon, c.lat]] + _coords(g, path),
+                "_segments": [(edge.idx, s_a)] + [(idx, g.edges[idx].length) for idx in edge_ids[1:]],
                 "edge_ids": edge_ids, "way_ids": [g.edges[idx].way_id for idx in edge_ids]}
     return {"mode": "none", "strict": False, "turn_verified": False,
-            "text": "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
+            "text": "No suitable exit (dead end or excessive reversing)",
             "edge_ids": [], "way_ids": []}
 
 
 def _badges(checks, tier, lstatus) -> list[str]:
     out = []
     fc = checks["fit"]["class"]
-    out.append({"fits": "Vừa xe", "tight": "Chật", "unknown": "Chưa rõ bề rộng", "lot": "Bãi đỗ"}.get(fc, fc))
+    out.append({"fits": "Fits", "tight": "Tight", "unknown": "Width unknown", "lot": "Parking lot"}.get(fc, fc))
     wo = checks["way_out"]
     way_out_label = {
-        "through": "Đi thẳng ra",
-        "turn_here": "Quay đầu chưa xác minh",
-        "lot": "Lối ra bãi chưa xác minh",
+        "through": "Through exit",
+        "turn_here": "Turnaround unverified",
+        "lot": "Parking-lot exit unverified",
     }.get(wo["mode"])
     if way_out_label is None:
-        way_out_label = (f"Lùi {wo.get('reverse_m', 0)} m; quay đầu chưa xác minh"
-                         if wo["mode"] == "reverse" else "Không có đường ra")
+        way_out_label = (f"Reverse {wo.get('reverse_m', 0)} m; turnaround unverified"
+                         if wo["mode"] == "reverse" else "No exit")
     if wo["mode"] == "through" and not wo.get("route_verified", False):
-        way_out_label = "Lối ra chưa xác minh"
+        way_out_label = "Exit unverified"
     out.append(way_out_label)
-    out.append({"passable": "Không ngập", "risky": "Có thể ngập", "blocked": "Ngập"}[checks["flood"]["stay"]["status"]])
+    out.append({"passable": "No flooding predicted", "risky": "Possible flooding", "blocked": "Flooded"}[checks["flood"]["stay"]["status"]])
     if lstatus == "Unverified":
         codes = {rule["code"] for rule in checks["legality"]["rules"] if rule["status"] == "Unverified"}
         labels = (
-            ("lane-unknown", "Chưa rõ số làn"),
-            ("junction-5m", "Chưa rõ mép nút giao"),
-            ("no-rule", "Chưa rõ biển báo"),
-            ("main-road-signs", "Chưa rõ biển báo"),
+            ("lane-unknown", "Lane count unknown"),
+            ("junction-5m", "Junction boundary unknown"),
+            ("no-rule", "Signs unverified"),
+            ("main-road-signs", "Signs unverified"),
         )
-        out.append(next((label for code, label in labels if code in codes), "Chưa xác minh luật"))
+        out.append(next((label for code, label in labels if code in codes), "Stopping permission unverified"))
     else:
-        out.append({"Permitted": "Được phép", "Restricted": "Hạn chế theo luật", "Prohibited": "Cấm"}[lstatus])
+        out.append({"Permitted": "Permitted", "Restricted": "Restricted by law", "Prohibited": "Prohibited"}[lstatus])
     return out
 
 
@@ -1344,26 +1382,34 @@ def _walk_wade(g: AreaGraph, fps, c: Candidate, wpred, wdist, arrive: datetime, 
         depth = assessment.depth
         if depth and depth.hi > WALK_WADE_M and (worst is None or depth.hi > worst["hi"]):
             worst = {"lo": round(depth.lo, 2), "hi": round(depth.hi, 2), "street": g.display_name(way_id),
-                     "label": "Lội nước"}
+                     "label": "Walk through floodwater"}
     return worst
 
 
 def _verdict(chosen, door_eval, intent, cap) -> dict:
     if not chosen:
-        return {"code": "none", "headline": f"Không có điểm dừng phù hợp trong {cap:.0f} m đi bộ",
-                "detail": "Thử đổi giờ đến, thời gian ở lại hoặc chọn xe nhỏ hơn."}
+        return {"code": "none", "headline": f"No suitable stop within {cap:.0f} m walk — low confidence",
+                "detail": "Try a different arrival time, stay duration or smaller vehicle."}
     best = chosen[0]
-    verb = "đỗ" if intent == "park" else "dừng đón/trả"
-    if best["kind"] == "door" and best["verified"]:
-        return {"code": "door", "headline": "Xe vào tận cửa được", "detail": best["way_out"]["text"]}
-    if not best["verified"]:
-        head = ("Chỉ có điểm dừng hạn chế theo luật" if best["legality"]["status"] == "Restricted"
-                else "Chưa đủ bằng chứng để khẳng định")
-        return {"code": "unverified", "headline": head,
-                "detail": f"Gợi ý: {verb} tại {best['name']}, đi bộ {best['walk']['meters']} m"}
-    return {"code": "nearby", "headline": f"{verb.capitalize()} tại {best['name']}, đi bộ {best['walk']['meters']} m"
-                                          f" (~{best['walk']['minutes']} phút)",
-            "detail": "Xe không nên vào tận cửa" if door_eval and not door_eval["ok"] else ""}
+    estimate = best.get('estimate') or {'answer': 'unknown', 'confidence': 'low'}
+    confidence = estimate['confidence']
+    code = ('door' if best['kind'] == 'door' else 'nearby') if best['verified'] else 'unverified'
+    if best['legality']['status'] == 'Restricted':
+        return {'code': code, 'headline': f"Stopping prohibited at {best['name']} — {confidence} confidence",
+                'detail': ' · '.join(english_text(r['text'])+' ('+r['citation']+')'
+                                   for r in best['legality']['rules'] if r['status'] == 'Restricted')}
+    if best['kind'] == 'door':
+        action = {'fits': 'Can reach the door', 'tight': 'Tight access to the door',
+                  'no': 'Door access unlikely', 'unknown': 'Door access unverified'}[estimate['answer']]
+    else:
+        verb = 'Park' if intent == 'park' else 'Stop for pickup/drop-off'
+        action = f"{verb} {'at' if best['kind'] == 'lot' else 'on'} {best['name']}, {best['walk']['meters']} m walk"
+        if estimate['answer'] == 'no':
+            action = f"Access to {best['name']} may not fit the vehicle, {best['walk']['meters']} m walk"
+    detail = english_text(best['way_out']['text'])
+    if best.get('unverified_reasons'):
+        detail += ' · ' + ' · '.join(english_text(r) for r in best['unverified_reasons'])
+    return {'code': code, 'headline': f'{action} — {confidence} confidence', 'detail': detail}
 
 
 def _decode_polyline(s: str) -> list[list[float]]:
@@ -1458,7 +1504,7 @@ def goong_standard_route(g, origin, dest, fit, wrs, key: str) -> dict | None:
                         "lo": round(wr.lo, 2), "hi": None if wr.hi >= 40 else round(wr.hi, 2)})
     return {"geometry": coords, "unfit_ways": bad, "source": "goong",
             "distance_m": leg["distance_m"], "duration_s": leg["duration_s"],
-            "note": "Tuyến ô tô của Goong: không tính bề rộng hẻm và ngập"}
+            "note": "Goong car route: alley widths and flooding are not considered"}
 
 
 def _densify(coords: list[list[float]], step_m: float) -> list[list[float]]:
@@ -1501,7 +1547,7 @@ def _standard_route(g, de, doff, fit, wrs):
             bad.append({"way_id": wid, "name": g.display_name(wid), "label": wr.label, "fit": fit[wid],
                         "lo": round(wr.lo, 2), "hi": None if wr.hi >= 40 else round(wr.hi, 2)})
     return {"geometry": _coords(g, nodes), "unfit_ways": bad, "source": "osm",
-            "note": "Tuyến bản đồ thông thường: đường ngắn nhất cho ô tô, không tính bề rộng hẻm và ngập"}
+            "note": "Standard map route: shortest car route without alley-width or flood checks"}
 
 
 def _layers(g: AreaGraph, wrs, fit, fit_notes, fps, lat, lon, arrive, depart, rain, p,

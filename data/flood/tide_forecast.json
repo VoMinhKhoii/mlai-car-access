@@ -1,6 +1,6 @@
 {
   "station": "Phú An (sông Sài Gòn)",
-  "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+  "bulletin": "Five-day tide forecast bulletin 289/2026 — Southern Regional Hydro-Meteorological Centre",
   "issued_at": "2026-10-16T09:08:00+07:00",
   "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
   "alarm_levels_m": {
@@ -8,7 +8,7 @@
     "BD2": 1.5,
     "BD3": 1.6
   },
-  "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu.",
+  "note": "Phú An high and low tides transcribed from official bulletin 289/2026, issued at 09:08 on 16/10/2026. Values for 15/10 are measured; 16–20/10 are forecasts. Levels between extrema use cosine interpolation; they are not measurements or road flood forecasts. The unreported high tide on 18/10 is not filled in. Data spans 00:00 15/10 to 18:00 20/10 (+07:00); times outside that range return missing data.",
   "highs": [
     {
       "t": "2026-10-15T06:00:00+07:00",

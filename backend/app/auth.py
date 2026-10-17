@@ -70,20 +70,20 @@ def _client(request: Request) -> str:
 def login(request: Request, response: Response, secret: str) -> None:
     expected = _secret()
     if expected is None:
-        raise HTTPException(503, "Chưa cấu hình mật khẩu điều hành (OPERATOR_SECRET)")
+        raise HTTPException(503, "Operator password (OPERATOR_SECRET) is not configured")
     now = time.monotonic()
     who = _client(request)
     with _lock:
         recent = [t for t in _fails.get(who, []) if now - t < LOGIN_WINDOW_S]
         if len(recent) >= MAX_LOGIN_FAILS:
-            raise HTTPException(429, "Đăng nhập sai quá nhiều lần, thử lại sau")
+            raise HTTPException(429, "Too many failed sign-in attempts; retry later")
         if not hmac.compare_digest(secret.encode(), expected.encode()):
             recent.append(now)
             _fails[who] = recent
             if len(_fails) > 1024:  # bounded: drop the oldest clients
                 for k in list(_fails)[:256]:
                     _fails.pop(k, None)
-            raise HTTPException(401, "Sai mật khẩu điều hành")
+            raise HTTPException(401, "Incorrect operator password")
         _fails.pop(who, None)
         for sid in [s for s, exp in _sessions.items() if exp <= now]:
             del _sessions[sid]
@@ -122,7 +122,7 @@ def is_operator(request: Request) -> bool:
 def require_operator(request: Request) -> str:
     """FastAPI dependency: the reviewer label for an operator request, else 503/401."""
     if not available():
-        raise HTTPException(503, "Chức năng điều hành chưa được bật trên máy chủ này")
+        raise HTTPException(503, "Operator features are disabled on this server")
     if not is_operator(request):
-        raise HTTPException(401, "Cần đăng nhập điều hành")
+        raise HTTPException(401, "Operator sign-in required")
     return "operator"

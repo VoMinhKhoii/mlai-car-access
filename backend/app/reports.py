@@ -145,9 +145,9 @@ def decide(report_id: str, approve: bool, reviewer: str, revision: int | None = 
         if r["status"] == target:
             return r  # idempotent
         if _effective(r, now)["status"] != "pending":
-            raise Conflict(f"báo cáo đang ở trạng thái {_effective(r, now)['status']}")
+            raise Conflict(f"report is in status {_effective(r, now)['status']}")
         if revision is not None and revision != r["revision"]:
-            raise Conflict("báo cáo đã thay đổi, tải lại danh sách")
+            raise Conflict("report has changed; reload the list")
         r.update(status=target, reviewer=reviewer, reviewed_at=now.isoformat(timespec="seconds"),
                  revision=r["revision"] + 1)
         _save(data)  # the decision is durable before any projection is written
@@ -238,16 +238,16 @@ def migrate_legacy() -> dict:
     counts = {"confirmation": 0, "blockage": 0, "ai": 0}
     for obj in _quarantine(CONFIRM_FILE, lambda o: bool(o.get("report_id"))):
         if "_unparsed" not in obj:
-            submit("confirmation", obj, "Tài xế báo (dữ liệu cũ, chưa duyệt)", _legacy_id(obj), legacy=True)
+            submit("confirmation", obj, "Driver report (legacy data, unreviewed)", _legacy_id(obj), legacy=True)
             counts["confirmation"] += 1
     for obj in _quarantine(BLOCKAGE_FILE, lambda o: bool(o.get("report_id"))):
         if "_unparsed" not in obj and obj.get("date") != "demo":
-            submit("blockage", obj, "Tài xế báo (dữ liệu cũ, chưa duyệt)", _legacy_id(obj), legacy=True)
+            submit("blockage", obj, "Driver report (legacy data, unreviewed)", _legacy_id(obj), legacy=True)
             counts["blockage"] += 1
     # AI flood reports that were auto-published by the old model gate (no report_id, not from a camera).
     for obj in _quarantine(LIVE_FLOOD_FILE, lambda o: bool(o.get("report_id")) or o.get("source") == "camera"):
         if "_unparsed" not in obj:
-            submit("flood_report", obj, "AI trích xuất (dữ liệu cũ, chưa duyệt)", _legacy_id(obj), legacy=True)
+            submit("flood_report", obj, "AI extraction (legacy data, unreviewed)", _legacy_id(obj), legacy=True)
             counts["ai"] += 1
     return counts
 

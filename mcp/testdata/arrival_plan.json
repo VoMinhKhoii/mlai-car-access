@@ -1,0 +1,1189 @@
+{
+  "destination": {
+    "lat": 10.792106,
+    "lon": 106.716661,
+    "label": "Hẻm 113/4 Võ Duy Ninh"
+  },
+  "vehicle": {
+    "id": "toyota-fortuner",
+    "label": "Toyota Fortuner",
+    "kind": "model",
+    "size_class": "M",
+    "powertrain": "ICE",
+    "body_width": 1.855,
+    "mirror_width": 2.105,
+    "mirror_estimated": true,
+    "length": 4.795,
+    "turning_radius": 5.8,
+    "turning_radius_estimated": false,
+    "ground_clearance": 0.279,
+    "safe_water_depth": 0.35,
+    "safe_water_basis": "50% độ lội nước công bố (700 mm, nước tĩnh, 7 km/h) (tham chiếu Fortuner diesel Australia; chưa xác minh biến thể petrol VN)",
+    "members": [],
+    "fits_min": 3.41,
+    "tight_min": 2.31,
+    "three_point_width": 7.84,
+    "three_point_length": 16.39,
+    "source_url": "https://www.toyota.com.vn/fortuner",
+    "door_min": 3.0,
+    "assumptions": "L/W/H/wheelbase/ground clearance from Toyota VN (API https://www.toyota.com.vn/api/carDetail/BigGroupDetail?bigGroupId=1070&modelId=319&gradeId=534). Toyota VN does NOT publish turning radius for Fortuner: 5.8 m = half of 11.6 m turning circle published by Toyota Australia (spec sheet says 'kerb to kerb' https://www.toyota.com.au/-/media/toyota/main-site/vehicle-hubs/fortuner/files/20231201_fortuner_spec-sheet-v2.pdf ; 2020 press release says '(tyre)'). Wading depth 700 mm and track 1540/1555 are Toyota Australia figures for the same-generation (2020 facelift) 2.8 diesel Fortuner (press release 13-08-2020 https://pressroom.toyota.com.au/PressRelease?pr-code=49399769-f533-4871-8a2a-b649da04676e ; also approach 29 deg, departure 25 deg, ramp-over 23.5 deg, running clearance 216 mm); not published for the VN petrol variant. VN ground clearance 279 mm vs Toyota AU running clearance 216 mm: large gap, measurement basis not stated. A new lower grade 'FORTUNER 2.7AT 4x2' (265/65R17) is listed on toyota.com.vn with dimensions 'Chưa có thông tin' (not yet available)"
+  },
+  "window": {
+    "arrive": "2026-10-17T18:00:00+07:00",
+    "depart": "2026-10-17T20:00:00+07:00",
+    "dwell_min": 120,
+    "tide_arrive": {
+      "level_m": -0.43,
+      "alarm": null,
+      "kind": "bulletin"
+    },
+    "tide_depart": {
+      "level_m": 0.7,
+      "alarm": null,
+      "kind": "bulletin"
+    },
+    "rain": []
+  },
+  "intent": "park",
+  "verdict": {
+    "code": "unverified",
+    "headline": "Chưa đủ bằng chứng để khẳng định",
+    "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m",
+    "estimate": {
+      "answer": "tight",
+      "confidence": "low",
+      "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+      "coverage": {
+        "sampled_segments": 0,
+        "total_segments": 15,
+        "sample_supported_fraction": 0.0,
+        "complete_strong_fraction": 0.0,
+        "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+      },
+      "limiting_width": {
+        "value_m": 3.0,
+        "tier": "Inferred",
+        "source": "OSM phân loại đường",
+        "sampled": false,
+        "sample_count": null,
+        "sampled_range": null,
+        "bottleneck_support": null,
+        "isolated_low_outlier": false,
+        "fallback_from_unresolved": false,
+        "way_id": 464839550,
+        "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+        "osm_url": "https://www.openstreetmap.org/way/464839550"
+      },
+      "stop_width": {
+        "value_m": 3.5,
+        "tier": "Inferred",
+        "source": "OSM phân loại đường",
+        "sampled": false,
+        "sample_count": null,
+        "sampled_range": null,
+        "bottleneck_support": null,
+        "isolated_low_outlier": false,
+        "fallback_from_unresolved": false
+      }
+    }
+  },
+  "timing": null,
+  "no_stop_reason": null,
+  "stop_points": [
+    {
+      "estimate": {
+        "answer": "tight",
+        "confidence": "low",
+        "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 15,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 3.0,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 464839550,
+          "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+          "osm_url": "https://www.openstreetmap.org/way/464839550"
+        },
+        "stop_width": {
+          "value_m": 3.5,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false
+        }
+      },
+      "ok": true,
+      "kind": "street",
+      "name": "Đường Võ Duy Ninh",
+      "lat": 10.791805007531996,
+      "lon": 106.7166424858583,
+      "way_id": 193085738,
+      "tier": 2,
+      "verified": false,
+      "badges": [
+        "Chưa rõ bề rộng",
+        "Lối ra chưa xác minh",
+        "Không ngập",
+        "Chưa rõ số làn"
+      ],
+      "walk": {
+        "meters": 39,
+        "minutes": 1,
+        "connection": {
+          "stop_to_walk_m": 0.0,
+          "destination_to_walk_m": 0.0,
+          "mapped": true,
+          "reason": null
+        },
+        "wade": null
+      },
+      "route_in": {
+        "available": true,
+        "meters": 195,
+        "side": "u",
+        "flood": {
+          "status": "risky",
+          "depth": null,
+          "knowledge": "missing_history",
+          "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+          "freshness": null,
+          "at": "2026-10-17T17:45:00+07:00",
+          "source": null,
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            },
+            {
+              "status": "risky",
+              "depth": null,
+              "knowledge": "missing_history",
+              "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+              "freshness": null,
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": null,
+              "way_id": 464839531,
+              "name": "Hẻm 113/4 Võ Duy Ninh"
+            },
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 464839550,
+              "name": "Hẻm 113 Đường Võ Duy Ninh"
+            },
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 193085738,
+              "name": "Đường Võ Duy Ninh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T17:45:00+07:00",
+            "end": "2026-10-17T18:00:00+07:00",
+            "approximate": true
+          }
+        }
+      },
+      "fit": {
+        "class": "unknown",
+        "width_range": {
+          "lo": 2.0,
+          "hi": 8.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "review": false,
+          "evidence": [
+            {
+              "lo": 2.0,
+              "hi": 8.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=service",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/193085738",
+              "ai_feature": null,
+              "width_basis": "inferred",
+              "uncertainty_m": null,
+              "coverage": null,
+              "coverage_complete": false,
+              "measurement_schema": "",
+              "estimate_m": null,
+              "sample_count": null,
+              "sample_quality": {}
+            }
+          ],
+          "overruled": [],
+          "way_out_claims": [],
+          "width_basis": "inferred",
+          "coverage": {
+            "cut_count": 0,
+            "start_covered": false,
+            "end_covered": false,
+            "max_spacing_m": null,
+            "truncated": false,
+            "complete": false,
+            "reason": "Không có dữ liệu phủ theo chiều dài"
+          },
+          "decisive_clearance": false,
+          "sampled_estimate": null,
+          "official_width_records": []
+        },
+        "note": null,
+        "needed": {
+          "fits_min": 3.41,
+          "tight_min": 2.31,
+          "door_min": 3.0
+        }
+      },
+      "way_out": {
+        "available": true,
+        "mode": "through",
+        "reverse_m": 0,
+        "tight_exit": false,
+        "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T20:00:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 193085738,
+              "name": "Đường Võ Duy Ninh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T20:00:00+07:00",
+            "end": "2026-10-17T20:15:00+07:00",
+            "approximate": true
+          }
+        },
+        "route_verified": false,
+        "observed": []
+      },
+      "flood": {
+        "stay": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T18:00:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T18:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 193085738,
+              "name": "Đường Võ Duy Ninh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T18:00:00+07:00",
+            "end": "2026-10-17T20:00:00+07:00",
+            "approximate": false
+          }
+        }
+      },
+      "legality": {
+        "status": "Unverified",
+        "rules": [
+          {
+            "code": "junction-5m",
+            "status": "Unverified",
+            "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          },
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      "failure_codes": [],
+      "fail_reasons": [],
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Đi thẳng ra đường lớn theo chiều xe được phép",
+        "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+      ],
+      "lot": null,
+      "rank": 1
+    },
+    {
+      "estimate": {
+        "answer": "no",
+        "confidence": "low",
+        "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · 0/8 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 8,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 3.0,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 464839550,
+          "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+          "osm_url": "https://www.openstreetmap.org/way/464839550"
+        },
+        "stop_width": {
+          "value_m": 3.0,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false
+        }
+      },
+      "ok": true,
+      "kind": "street",
+      "name": "Hẻm 113 Đường Võ Duy Ninh",
+      "lat": 10.792518146316894,
+      "lon": 106.71661516616807,
+      "way_id": 464839550,
+      "tier": 2,
+      "verified": false,
+      "badges": [
+        "Chưa rõ bề rộng",
+        "Lối ra chưa xác minh",
+        "Không ngập",
+        "Chưa rõ số làn"
+      ],
+      "walk": {
+        "meters": 46,
+        "minutes": 1,
+        "connection": {
+          "stop_to_walk_m": 0.0,
+          "destination_to_walk_m": 0.0,
+          "mapped": true,
+          "reason": null
+        },
+        "wade": null
+      },
+      "route_in": {
+        "available": true,
+        "meters": 202,
+        "side": "u",
+        "flood": {
+          "status": "risky",
+          "depth": null,
+          "knowledge": "missing_history",
+          "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+          "freshness": null,
+          "at": "2026-10-17T17:45:00+07:00",
+          "source": null,
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            },
+            {
+              "status": "risky",
+              "depth": null,
+              "knowledge": "missing_history",
+              "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+              "freshness": null,
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": null,
+              "way_id": 464839531,
+              "name": "Hẻm 113/4 Võ Duy Ninh"
+            },
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 464839550,
+              "name": "Hẻm 113 Đường Võ Duy Ninh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T17:45:00+07:00",
+            "end": "2026-10-17T18:00:00+07:00",
+            "approximate": true
+          }
+        }
+      },
+      "fit": {
+        "class": "unknown",
+        "width_range": {
+          "lo": 1.5,
+          "hi": 4.5,
+          "label": "Hẻm xe hơi",
+          "top_tier": "Inferred",
+          "review": false,
+          "evidence": [
+            {
+              "lo": 1.5,
+              "hi": 4.5,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/464839550",
+              "ai_feature": null,
+              "width_basis": "inferred",
+              "uncertainty_m": null,
+              "coverage": null,
+              "coverage_complete": false,
+              "measurement_schema": "",
+              "estimate_m": null,
+              "sample_count": null,
+              "sample_quality": {}
+            }
+          ],
+          "overruled": [],
+          "way_out_claims": [],
+          "width_basis": "inferred",
+          "coverage": {
+            "cut_count": 0,
+            "start_covered": false,
+            "end_covered": false,
+            "max_spacing_m": null,
+            "truncated": false,
+            "complete": false,
+            "reason": "Không có dữ liệu phủ theo chiều dài"
+          },
+          "decisive_clearance": false,
+          "sampled_estimate": null,
+          "official_width_records": []
+        },
+        "note": null,
+        "needed": {
+          "fits_min": 3.41,
+          "tight_min": 2.31,
+          "door_min": 3.0
+        }
+      },
+      "way_out": {
+        "available": true,
+        "mode": "through",
+        "reverse_m": 0,
+        "tight_exit": false,
+        "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+        "flood": {
+          "status": "risky",
+          "depth": null,
+          "knowledge": "missing_history",
+          "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+          "freshness": null,
+          "at": "2026-10-17T20:00:00+07:00",
+          "source": null,
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 464839550,
+              "name": "Hẻm 113 Đường Võ Duy Ninh"
+            },
+            {
+              "status": "risky",
+              "depth": null,
+              "knowledge": "missing_history",
+              "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+              "freshness": null,
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": null,
+              "way_id": 609967179,
+              "name": "Hẻm 113/34 Võ Duy Ninh"
+            },
+            {
+              "status": "risky",
+              "depth": null,
+              "knowledge": "missing_history",
+              "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+              "freshness": null,
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": null,
+              "way_id": 464839531,
+              "name": "Hẻm 113/4 Võ Duy Ninh"
+            },
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T20:00:00+07:00",
+            "end": "2026-10-17T20:15:00+07:00",
+            "approximate": true
+          }
+        },
+        "route_verified": false,
+        "observed": []
+      },
+      "flood": {
+        "stay": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T18:00:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T18:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 464839550,
+              "name": "Hẻm 113 Đường Võ Duy Ninh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T18:00:00+07:00",
+            "end": "2026-10-17T20:00:00+07:00",
+            "approximate": false
+          }
+        }
+      },
+      "legality": {
+        "status": "Unverified",
+        "rules": [
+          {
+            "code": "junction-5m",
+            "status": "Unverified",
+            "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          },
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      "failure_codes": [],
+      "fail_reasons": [],
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (1.5–4.5 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Đi thẳng ra đường lớn theo chiều xe được phép",
+        "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+      ],
+      "lot": null,
+      "rank": 2
+    },
+    {
+      "estimate": {
+        "answer": "fits",
+        "confidence": "low",
+        "basis": "suy luận ≈4,00 m (Hẻm 75 Nguyễn Hữu Cảnh; OSM 604837651) · 0/2 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 2,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 4.0,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 604837651,
+          "way_name": "Hẻm 75 Nguyễn Hữu Cảnh",
+          "osm_url": "https://www.openstreetmap.org/way/604837651"
+        },
+        "stop_width": {
+          "value_m": 4.0,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "sample_count": null,
+          "sampled_range": null,
+          "bottleneck_support": null,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false
+        }
+      },
+      "ok": true,
+      "kind": "street",
+      "name": "Hẻm 75 Nguyễn Hữu Cảnh",
+      "lat": 10.7922859,
+      "lon": 106.71753509999999,
+      "way_id": 604837651,
+      "tier": 2,
+      "verified": false,
+      "badges": [
+        "Chưa rõ bề rộng",
+        "Lùi 59 m; quay đầu chưa xác minh",
+        "Không ngập",
+        "Chưa rõ số làn"
+      ],
+      "walk": {
+        "meters": 98,
+        "minutes": 1,
+        "connection": {
+          "stop_to_walk_m": 0.0,
+          "destination_to_walk_m": 0.0,
+          "mapped": true,
+          "reason": null
+        },
+        "wade": null
+      },
+      "route_in": {
+        "available": true,
+        "meters": 59,
+        "side": "v",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T17:45:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T17:45:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T17:45:00+07:00",
+            "end": "2026-10-17T18:00:00+07:00",
+            "approximate": true
+          }
+        }
+      },
+      "fit": {
+        "class": "unknown",
+        "width_range": {
+          "lo": 2.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "review": false,
+          "evidence": [
+            {
+              "lo": 2.5,
+              "hi": 15.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=residential",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/604837651",
+              "ai_feature": null,
+              "width_basis": "inferred",
+              "uncertainty_m": null,
+              "coverage": null,
+              "coverage_complete": false,
+              "measurement_schema": "",
+              "estimate_m": null,
+              "sample_count": null,
+              "sample_quality": {}
+            }
+          ],
+          "overruled": [],
+          "way_out_claims": [],
+          "width_basis": "inferred",
+          "coverage": {
+            "cut_count": 0,
+            "start_covered": false,
+            "end_covered": false,
+            "max_spacing_m": null,
+            "truncated": false,
+            "complete": false,
+            "reason": "Không có dữ liệu phủ theo chiều dài"
+          },
+          "decisive_clearance": false,
+          "sampled_estimate": null,
+          "official_width_records": []
+        },
+        "note": null,
+        "needed": {
+          "fits_min": 3.41,
+          "tight_min": 2.31,
+          "door_min": 3.0
+        }
+      },
+      "way_out": {
+        "available": true,
+        "mode": "reverse",
+        "turn_verified": false,
+        "reverse_m": 59,
+        "tight_exit": true,
+        "text": "Phải lùi 59 m (quá giới hạn 30 m); vùng quay đầu chưa được xác minh",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T20:00:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T20:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T20:00:00+07:00",
+            "end": "2026-10-17T20:15:00+07:00",
+            "approximate": true
+          }
+        },
+        "route_verified": false,
+        "observed": []
+      },
+      "flood": {
+        "stay": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "reason": null,
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T18:00:00+07:00",
+          "source": "bulletin",
+          "legs": [
+            {
+              "status": "passable",
+              "depth": null,
+              "knowledge": "known",
+              "reason": null,
+              "freshness": {
+                "source": "bulletin"
+              },
+              "at": "2026-10-17T18:00:00+07:00",
+              "source": "bulletin",
+              "way_id": 604837651,
+              "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+            }
+          ],
+          "interval": {
+            "start": "2026-10-17T18:00:00+07:00",
+            "end": "2026-10-17T20:00:00+07:00",
+            "approximate": false
+          }
+        }
+      },
+      "legality": {
+        "status": "Unverified",
+        "rules": [
+          {
+            "code": "junction-5m",
+            "status": "Unverified",
+            "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          },
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      "failure_codes": [],
+      "fail_reasons": [],
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (2.5–15.0 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Phải lùi 59 m (quá giới hạn 30 m); vùng quay đầu chưa được xác minh",
+        "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+      ],
+      "lot": null,
+      "rank": 3
+    }
+  ],
+  "door": {
+    "estimate": {
+      "answer": "unknown",
+      "confidence": "low",
+      "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · 0/5 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý · Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
+      "coverage": {
+        "sampled_segments": 0,
+        "total_segments": 5,
+        "sample_supported_fraction": 0.0,
+        "complete_strong_fraction": 0.0,
+        "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+      },
+      "limiting_width": {
+        "value_m": 3.0,
+        "tier": "Inferred",
+        "source": "OSM phân loại đường",
+        "sampled": false,
+        "sample_count": null,
+        "sampled_range": null,
+        "bottleneck_support": null,
+        "isolated_low_outlier": false,
+        "fallback_from_unresolved": false,
+        "way_id": 464839550,
+        "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+        "osm_url": "https://www.openstreetmap.org/way/464839550"
+      },
+      "stop_width": {
+        "value_m": 3.0,
+        "tier": "Inferred",
+        "source": "OSM phân loại đường",
+        "sampled": false,
+        "sample_count": null,
+        "sampled_range": null,
+        "bottleneck_support": null,
+        "isolated_low_outlier": false,
+        "fallback_from_unresolved": false
+      }
+    },
+    "ok": false,
+    "kind": "door",
+    "name": "Trước cửa nhà",
+    "lat": 10.792105888393326,
+    "lon": 106.71666136514123,
+    "way_id": 464839550,
+    "tier": 2,
+    "verified": false,
+    "badges": [
+      "Chưa rõ bề rộng",
+      "Không có đường ra",
+      "Không ngập",
+      "Chưa rõ số làn"
+    ],
+    "walk": {
+      "meters": 0,
+      "minutes": 0,
+      "connection": {
+        "stop_to_walk_m": 0.0,
+        "destination_to_walk_m": 0.0,
+        "mapped": true,
+        "reason": null
+      }
+    },
+    "route_in": {
+      "available": true,
+      "meters": 156,
+      "side": "v",
+      "flood": {
+        "status": "risky",
+        "depth": null,
+        "knowledge": "missing_history",
+        "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+        "freshness": null,
+        "at": "2026-10-17T17:45:00+07:00",
+        "source": null,
+        "legs": [
+          {
+            "status": "passable",
+            "depth": null,
+            "knowledge": "known",
+            "reason": null,
+            "freshness": {
+              "source": "bulletin"
+            },
+            "at": "2026-10-17T17:45:00+07:00",
+            "source": "bulletin",
+            "way_id": 604837651,
+            "name": "Hẻm 75 Nguyễn Hữu Cảnh"
+          },
+          {
+            "status": "risky",
+            "depth": null,
+            "knowledge": "missing_history",
+            "reason": "Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường",
+            "freshness": null,
+            "at": "2026-10-17T17:45:00+07:00",
+            "source": null,
+            "way_id": 464839531,
+            "name": "Hẻm 113/4 Võ Duy Ninh"
+          },
+          {
+            "status": "passable",
+            "depth": null,
+            "knowledge": "known",
+            "reason": null,
+            "freshness": {
+              "source": "bulletin"
+            },
+            "at": "2026-10-17T17:45:00+07:00",
+            "source": "bulletin",
+            "way_id": 464839550,
+            "name": "Hẻm 113 Đường Võ Duy Ninh"
+          }
+        ],
+        "interval": {
+          "start": "2026-10-17T17:45:00+07:00",
+          "end": "2026-10-17T18:00:00+07:00",
+          "approximate": true
+        }
+      }
+    },
+    "fit": {
+      "class": "unknown",
+      "width_range": {
+        "lo": 1.5,
+        "hi": 4.5,
+        "label": "Hẻm xe hơi",
+        "top_tier": "Inferred",
+        "review": false,
+        "evidence": [
+          {
+            "lo": 1.5,
+            "hi": 4.5,
+            "tier": "Inferred",
+            "tier_vi": "Suy luận",
+            "source": "OSM phân loại đường",
+            "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+            "observed_on": "",
+            "url": "https://www.openstreetmap.org/way/464839550",
+            "ai_feature": null,
+            "width_basis": "inferred",
+            "uncertainty_m": null,
+            "coverage": null,
+            "coverage_complete": false,
+            "measurement_schema": "",
+            "estimate_m": null,
+            "sample_count": null,
+            "sample_quality": {}
+          }
+        ],
+        "overruled": [],
+        "way_out_claims": [],
+        "width_basis": "inferred",
+        "coverage": {
+          "cut_count": 0,
+          "start_covered": false,
+          "end_covered": false,
+          "max_spacing_m": null,
+          "truncated": false,
+          "complete": false,
+          "reason": "Không có dữ liệu phủ theo chiều dài"
+        },
+        "decisive_clearance": false,
+        "sampled_estimate": null,
+        "official_width_records": []
+      },
+      "note": null,
+      "needed": {
+        "fits_min": 3.41,
+        "tight_min": 2.31,
+        "door_min": 3.0
+      }
+    },
+    "way_out": {
+      "available": false,
+      "mode": "none",
+      "turn_verified": false,
+      "text": "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
+      "flood": null,
+      "route_verified": false,
+      "observed": []
+    },
+    "flood": {
+      "stay": {
+        "status": "passable",
+        "depth": null,
+        "knowledge": "known",
+        "reason": null,
+        "freshness": {
+          "source": "bulletin"
+        },
+        "at": "2026-10-17T18:00:00+07:00",
+        "source": "bulletin",
+        "legs": [
+          {
+            "status": "passable",
+            "depth": null,
+            "knowledge": "known",
+            "reason": null,
+            "freshness": {
+              "source": "bulletin"
+            },
+            "at": "2026-10-17T18:00:00+07:00",
+            "source": "bulletin",
+            "way_id": 464839550,
+            "name": "Hẻm 113 Đường Võ Duy Ninh"
+          }
+        ],
+        "interval": {
+          "start": "2026-10-17T18:00:00+07:00",
+          "end": "2026-10-17T20:00:00+07:00",
+          "approximate": false
+        }
+      }
+    },
+    "legality": {
+      "status": "Unverified",
+      "rules": [
+        {
+          "code": "junction-5m",
+          "status": "Unverified",
+          "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        },
+        {
+          "code": "lane-unknown",
+          "status": "Unverified",
+          "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      ]
+    },
+    "failure_codes": [
+      "dead_end"
+    ],
+    "fail_reasons": [
+      "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)"
+    ],
+    "unverified_reasons": [
+      "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+      "Chưa đủ bằng chứng bề rộng (1.5–4.5 m; xe cần ≥ 2.31 m)",
+      "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+      "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+    ],
+    "lot": null
+  }
+}

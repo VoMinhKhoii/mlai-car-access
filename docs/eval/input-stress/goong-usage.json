@@ -1,0 +1,13 @@
+{
+  "calls": 10,
+  "allowed_key_name": "GOONG_API_KEY_3",
+  "incidental_regression_calls": 6,
+  "calls_total": 18,
+  "regression_note": "Legacy primary-key-only disable allowed numbered pool; 2 autocomplete and 4 uncached detail responses. Test fixture now mocks the pool.",
+  "unintended_legacy_test_calls": 2,
+  "unintended_key_names": [
+    "GOONG_API_KEY",
+    "GOONG_API_KEY_2"
+  ],
+  "note": "16 key-3 requests including 6 early boundary-test lookups; 2 later unintended legacy-test requests used the exhausted primary key then key 2. All tests now mock the provider pool."
+}

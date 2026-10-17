@@ -1,0 +1,18 @@
+......................................... [ 10%]
+............................ [ 16%]
+...........................................ssssssssssss...... [ 31%]
+..............ssssssssssssssssssssssss..........................ssssssss [ 49%]
+sssssssssssssssssssss....................ssssssssssss................... [ 67%]
+....................................................................................................... [ 92%]
+..............................                                [100%]
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+330 passed, 77 skipped, 2 warnings, 210 subtests passed in 192.16s (0:03:12)

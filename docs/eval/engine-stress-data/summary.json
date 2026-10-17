@@ -1,0 +1,180 @@
+{
+  "input_head": "8775ef43ca3d0e16b079b95b3757e77164962fc7",
+  "destinations": 235,
+  "random_mix": {
+    "street": 50,
+    "alley": 120,
+    "block": 30
+  },
+  "selected_cells": 185,
+  "clusters": [
+    {
+      "cluster": "missing_route_scope",
+      "before": 3791,
+      "after": 0
+    },
+    {
+      "cluster": "missing_verdict_estimate",
+      "before": 138,
+      "after": 0
+    },
+    {
+      "cluster": "junction_cut",
+      "before": 60,
+      "after": 0
+    },
+    {
+      "cluster": "bend_cut",
+      "before": 48,
+      "after": 0
+    },
+    {
+      "cluster": "sample_prior_conflict",
+      "before": 14,
+      "after": 124
+    },
+    {
+      "cluster": "cited_stop_prohibition",
+      "before": 12,
+      "after": 28
+    },
+    {
+      "cluster": "different_route_bottleneck",
+      "before": 0,
+      "after": 6
+    },
+    {
+      "cluster": "narrow_cut_requires_field_check",
+      "before": 0,
+      "after": 192
+    }
+  ],
+  "validation": {
+    "before": {
+      "plans": 2820,
+      "exceptions": 0,
+      "invariants": {
+        "missing_verdict_estimate": 138
+      },
+      "flag_counts": {
+        "estimate_scope_missing": 3893,
+        "street_sedan_no": 28,
+        "missing_verdict_estimate": 138,
+        "sample_prior_conflict": 484,
+        "unfiltered_bend_cut": 48,
+        "unfiltered_junction_cut": 60,
+        "official_submetre": 0,
+        "official_basis_without_sample": 0,
+        "single_cut_confidence": 0,
+        "basis_not_sample": 0,
+        "vehicle_monotonicity": 0,
+        "estimate_monotonicity": 0,
+        "walk_over_cap": 0,
+        "walk_geometry_mismatch": 0,
+        "unsafe_offered_stop": 0,
+        "door_stop_inconsistent": 0,
+        "crash": 0,
+        "unfiltered_misaligned_cut": 0
+      },
+      "flagged_plans": 2536,
+      "latency_s": {
+        "p50": 0.29515008299495094,
+        "p95": 2.127803915995173,
+        "max": 12.325259583012667
+      },
+      "answers": {
+        "unknown": 423,
+        "fits": 1682,
+        "tight": 371,
+        "no": 206,
+        "missing_estimate": 138
+      }
+    },
+    "after": {
+      "plans": 2820,
+      "exceptions": 0,
+      "invariants": {},
+      "flag_counts": {
+        "street_sedan_no": 48,
+        "automatic_submetre": 192,
+        "sample_prior_conflict": 124,
+        "destination_sample_contradiction": 6,
+        "official_submetre": 0,
+        "official_basis_without_sample": 0,
+        "single_cut_confidence": 0,
+        "basis_not_sample": 0,
+        "vehicle_monotonicity": 0,
+        "estimate_monotonicity": 0,
+        "walk_over_cap": 0,
+        "walk_geometry_mismatch": 0,
+        "unsafe_offered_stop": 0,
+        "door_stop_inconsistent": 0,
+        "crash": 0,
+        "unfiltered_misaligned_cut": 0
+      },
+      "flagged_plans": 322,
+      "latency_s": {
+        "p50": 0.2770360420108773,
+        "p95": 1.4789377499837428,
+        "max": 3.9437397500150837
+      },
+      "answers": {
+        "unknown": 472,
+        "fits": 1586,
+        "tight": 506,
+        "no": 256
+      }
+    }
+  },
+  "frozen_inputs_unchanged": true,
+  "static_inputs_sha256": {
+    "field/README.md": "0607b3c91332193ae4c5fa455c4e0a60287287d310db6162adc295ff859d7140",
+    "field/egress.csv": "851b494cf7ebde73758dec52d5cf2e62fb9fc66f3f7b2d40072a1b3b8e78a589",
+    "field/measurements.csv": "673317dbd310dcc5c9898bcdbf0428b141c938373097a259e5243543e0f0b4e4",
+    "flood/ird-hcmc/Flood_event_locations.tsv": "818aecb53c23964fcf62d353899fd4bf266221241cc223cbb4f144e50c0b824f",
+    "flood/ird-hcmc/HCMC_Floods_BDD.gpkg": "e0ea50ababae30cd93ac52fb3e42f0b28a8c8da946ed7129d263372883a698ee",
+    "flood/ird-hcmc/HCMC_Roads.gpkg": "9340effba6ce5b16025453f0294f3359948a5c3d3509cb907e0a3e333e7d0677",
+    "flood/ird-hcmc/Metadata-form-HCMC-floods.pdf": "03f921974b9df49feb1865310dea8cb3f52bbdef1e3d19a0fc57ce70c4206ca9",
+    "flood/ird-hcmc/ReadMe.txt": "4975d75f2f3af387a1140d3f79d2dc0e4507e95a90c3f5fd11b738f96c15b0ca",
+    "flood/ird-hcmc/Sources_floods_HCMC.tsv": "98f8d7dbde0f660dcfd09f165b2eccf9228a4739668ed6630623240cbf3fcfb6",
+    "flood/ird-hcmc/dataset.json": "f63f0b5542aa48efdc023968f7a1f00c91acff98346ac9a2ee96c4313e5000d2",
+    "flood/ird-hcmc/flood_points.geojson": "585da0342112b0d92c2e7f8e8ef6aec222f2468c7c8167eaf5ae580d82883568",
+    "flood/ird-hcmc/flood_roads.geojson": "c13f812eadfb897baf3af47cdc5058d077e19c5d8b000c244aa7b07fdfcce5ac",
+    "flood/ird-hcmc/gpkg2geojson.py": "b6ff0bbfd2952e949298b1471c8fe93106a637a7eb8976b05a5aea0958a011dd",
+    "flood/snapshots-2026-09-28/HOCM_TBTC_20260928_0900.pdf": "93c5405a94c2a88e830da7920346be9dbc4b8c3ffca6041bb473aef5651d2857",
+    "flood/snapshots-2026-09-28/NHB_latest.png": "ed7d5b0390cacec98e936ae3f457cfc7c68ee6f8af4777c891ce282686d6aad1",
+    "flood/snapshots-2026-09-28/cam_test.jpg": "0ec7093d4875411022ed83bc3da8816b3d6d37a25986ccfd685d5ff096724176",
+    "flood/snapshots-2026-09-28/hn_getflood.json": "eeaf9c77782460b02af3a400ff1801930952d7a1b29c68548a389e7d93fbe78a",
+    "flood/snapshots-2026-09-28/hn_map_all.json": "e5321dd1eaba3ab3cdbee2c55dba464fdc9eb6c914a9da9f897ff632a22b6cb2",
+    "flood/snapshots-2026-09-28/hn_wt_all.json": "8cfa824e9af76727258d10d11183943aa407f65823b72f83026bfeaf3396ae04",
+    "flood/snapshots-2026-09-28/om_hanoi.json": "4a83a14d305f71297c5740472bfe3f778fb0abfe0a60be66691d54492ac4b18b",
+    "flood/snapshots-2026-09-28/om_hcmc.json": "8477e95a31bc36e37e1ed4ee9e7a29a1bf8cc75c29622496b1c088a339cbb133",
+    "flood/snapshots-2026-09-28/vrain_20.json": "fd8472f31a8b60108e775b87422ae3a1e1a4aa79ae1013c72ab10be8a7bed58a",
+    "flood/snapshots-2026-09-28/vrain_56.json": "bbcd2fd12ae35bdadf66cff67c66565d879dcdd12a0a49e071eaeb6e0bdadb76",
+    "flood/snapshots-2026-09-28/vrain_all.json": "8df3c834e3f968ac0b8b4d5d0caef11d3aed30f87b73280f26a6866e3403ba0a",
+    "flood/snapshots-2026-10-16/HCMC_TVHN_20261016.pdf": "7ca99f764bfdeaa380e4142b9755fcef6fb0454817f855243975c7e83007cc96",
+    "flood/snapshots-2026-10-16/HCMC_TVHN_20261016.txt": "8085d60d27a0d80b34dc2377cf5dcd6791d3161a22495f7346b0fe16db30012d",
+    "flood/snapshots-2026-10-16/HOCM_TBTC_20261016_0900.pdf": "aacfe528580dba9ef3ac01de445d10b6a8569987e656b55dc37d68bab55e084e",
+    "flood/snapshots-2026-10-16/HOCM_TBTC_20261016_0900.txt": "8a7b81473bc688c0dc2a06c0b430d184a8fa7da4169b379e7590a6e7cc3899d3",
+    "flood/snapshots-2026-10-16/README.md": "826f4f237bc490a165a9b5c207158330c52b9ca12b752c3e8312da4be1d9b102",
+    "flood/tide_forecast.json": "8205d9adb3ed9cd80e2bcbb7e0d9d19d9ab27395caae4224836a3573045e2bfd",
+    "official/alley_widths_q9_2009.json": "6145819a33aa1638375870d54e8fdf8233f748013461fffb37253e199e253e60",
+    "official/fire_access_4582.json": "462dd3f06eaa2aab44e556e2a55a9292bd84b41033958233df3bbcddc4ed219f",
+    "official/hcmc_urban_districts_2021.geojson": "edd19d5c5d4ffd4b836290263f3e90ec2cbe7eacbd7e202c9f5d581765d8ad16",
+    "official/official-bulk-downloads.json": "52df20992d09c51a070ffc305806447e4c177df30a3b4e7dd312fa666f406e45",
+    "official/parcel_gaps.csv": "411df2417cd8cce715c462e8bda459246cde03470af87e20590fd3809f89d2db",
+    "processed/building_gaps_hcmc.json": "396bdec3a365fcdc981e0c8ac664d59e68602ada1ea880c56c59c1331b74edb8",
+    "processed/geocode_unmatched.json": "75b3c3e0dd9e5a66afba30da3511591eff608e809723a4b9a78fd3db488505ce",
+    "processed/listings_evidence_binhthanh.json": "69ed13b89a1b0415c92c318687c98cecd1d849157b6dd8c5b491419afa5e97d8",
+    "processed/vetc_lots_hcmc.geojson": "9730cdd85461f09174c98bf7479b179d60ff582b09278055b624211924c35145",
+    "processed/vetc_street_parking_hcmc.geojson": "9f3bbc3d68aac76e83de72a1b4f91c5dd69406d61c3a501144054bded5946744",
+    "vehicles/_geometry_out.txt": "e88dee5a96601a5950651ef664fb89422e0335597c32064342a6eeeecc033d7d",
+    "vehicles/geometry.py": "9536092f2abc8cdfe6c44c08beeecc9070b5388bed5322eb64a28fa9f35cf2fa",
+    "vehicles/vn_car_profiles.csv": "a3fcef3f4755862027ff17b36226fcb742b0987861af4e4da35335b206d4c7b0"
+  },
+  "test_results": {
+    "core": "69 passed, 1 skipped, 1 warning in 9.06s",
+    "backend": "330 passed, 77 skipped, 2 warnings, 210 subtests passed in 192.16s (0:03:12)",
+    "regressions_before": "19 failed, 5 passed in 3.86s"
+  }
+}

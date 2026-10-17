@@ -1,0 +1,4956 @@
+[
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "HEM 1165",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 144 duong so 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 144 Đường Số 7, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 144 Đường Số 7, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngõ 144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "kiệt 144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngách 144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "alley 144 Đường Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 144 Đườn Số 7",
+    "expected": {
+      "label": "Hẻm 144 Đường Số 7",
+      "lat": 10.810947,
+      "lon": 106.6810694,
+      "way_id": 611082256
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 215 phan van tri",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 215 Phan Văn Trị, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 215 Phan Văn Trị, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngõ 215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "kiệt 215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngách 215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "alley 215 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 215 Pha Văn Trị",
+    "expected": {
+      "label": "Hẻm 215 Phan Văn Trị",
+      "lat": 10.8112734,
+      "lon": 106.6949073,
+      "way_id": 608961499
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 32 trinh dinh trong",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 32 Trịnh Đình Trọng, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 32 Trịnh Đình Trọng, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngõ 32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "kiệt 32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngách 32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "alley 32 Trịnh Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 32 Trịn Đình Trọng",
+    "expected": {
+      "label": "Hẻm 32 Trịnh Đình Trọng",
+      "lat": 10.7754595,
+      "lon": 106.6463386,
+      "way_id": 639429119
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 465 phan van tri",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 465 Phan Văn Trị, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 465 Phan Văn Trị, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngõ 465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "kiệt 465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngách 465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "alley 465 Phan Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 465 Pha Văn Trị",
+    "expected": {
+      "label": "Hẻm 465 Phan Văn Trị",
+      "lat": 10.8221585,
+      "lon": 106.6919339,
+      "way_id": 604897318
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 1,
+    "diacritics": true,
+    "query": "137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 1,
+    "diacritics": false,
+    "query": "hem 137/3a31 cao xuan duc",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 137/3A31 Cao Xuân Dục, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 137/3A31 Cao Xuân Dục, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngõ 137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 1,
+    "diacritics": true,
+    "query": "kiệt 137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 1,
+    "diacritics": true,
+    "query": "ngách 137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 1,
+    "diacritics": true,
+    "query": "alley 137/3A31 Cao Xuân Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 1,
+    "diacritics": true,
+    "query": "Hẻm 137/3A31 Cao Xuâ Dục",
+    "expected": {
+      "label": "Hẻm 137/3A31 Cao Xuân Dục",
+      "lat": 10.7443087,
+      "lon": 106.6585579,
+      "way_id": 687993293
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 1135/61 duong huynh tan phat",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 1135/61 Đườn Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 149/43 banh van tran",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 149/43 Bành Văn Trân, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 149/43 Bành Văn Trân, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngõ 149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "kiệt 149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngách 149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "alley 149/43 Bành Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 149/43 Bàn Văn Trân",
+    "expected": {
+      "label": "Hẻm 149/43 Bành Văn Trân",
+      "lat": 10.7895374,
+      "lon": 106.6544044,
+      "way_id": 642606146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 230/28 ma lo",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 230/28 Mã Lò, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 230/28 Mã Lò, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngõ 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "kiệt 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngách 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "alley 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 230/28 Mã Lò",
+    "expected": {
+      "label": "Hẻm 230/28 Mã Lò",
+      "lat": 10.7695428,
+      "lon": 106.6044412,
+      "way_id": 513828697
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 338/41 no trang long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 338/41 Nơ Trang Long, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 338/41 Nơ Trang Long, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngõ 338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "kiệt 338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngách 338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "alley 338/41 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 338/41 Nơ Tran Long",
+    "expected": {
+      "label": "Hẻm 338/41 Nơ Trang Long",
+      "lat": 10.8179103,
+      "lon": 106.7003624,
+      "way_id": 609374146
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 49/11 nhat tao",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 49/11 Nhật Tảo, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 49/11 Nhật Tảo, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngõ 49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "kiệt 49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngách 49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "alley 49/11 Nhật Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 49/11 Nhậ Tảo",
+    "expected": {
+      "label": "Hẻm 49/11 Nhật Tảo",
+      "lat": 10.7645976,
+      "lon": 106.6693426,
+      "way_id": 516946849
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 2,
+    "diacritics": true,
+    "query": "101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 2,
+    "diacritics": false,
+    "query": "hem 101/35a pham dinh ho",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 101/35A Phạm Đình Hổ, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 101/35A Phạm Đình Hổ, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngõ 101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 2,
+    "diacritics": true,
+    "query": "kiệt 101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 2,
+    "diacritics": true,
+    "query": "ngách 101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 2,
+    "diacritics": true,
+    "query": "alley 101/35A Phạm Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hẻm 101/35A Phạ Đình Hổ",
+    "expected": {
+      "label": "Hẻm 101/35A Phạm Đình Hổ",
+      "lat": 10.7517713,
+      "lon": 106.6481256,
+      "way_id": 420287745
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 127/2/61 le thuc hoach",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hèm 127/2/61 Lê Thú Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 163/21/23 to hien thanh",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 163/21/23 Tô Hiến Thành, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 163/21/23 Tô Hiến Thành, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngõ 163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "kiệt 163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngách 163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "alley 163/21/23 Tô Hiến Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 163/21/23 Tô Hiế Thành",
+    "expected": {
+      "label": "Hẻm 163/21/23 Tô Hiến Thành",
+      "lat": 10.7799296,
+      "lon": 106.6699576,
+      "way_id": 519268030
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 270/4/3 phan dinh phung",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 270/4/3 Phan Đình Phùng, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 270/4/3 Phan Đình Phùng, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngõ 270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "kiệt 270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngách 270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "alley 270/4/3 Phan Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 270/4/3 Pha Đình Phùng",
+    "expected": {
+      "label": "Hẻm 270/4/3 Phan Đình Phùng",
+      "lat": 10.797691,
+      "lon": 106.6821116,
+      "way_id": 675945667
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 373/1/44 ly thuong kiet",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 373/1/44 Lý Thường Kiệt, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 373/1/44 Lý Thường Kiệt, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngõ 373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "kiệt 373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngách 373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "alley 373/1/44 Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 373/1/44 Lý Thườn Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/44 Lý Thường Kiệt",
+      "lat": 10.7792725,
+      "lon": 106.6538475,
+      "way_id": 669633550
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 50/18/4 nguyen dinh chieu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 50/18/4 Nguyễn Đình Chiểu, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 50/18/4 Nguyễn Đình Chiểu, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngõ 50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "kiệt 50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngách 50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "alley 50/18/4 Nguyễn Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 50/18/4 Nguyễ Đình Chiểu",
+    "expected": {
+      "label": "Hẻm 50/18/4 Nguyễn Đình Chiểu",
+      "lat": 10.8026696,
+      "lon": 106.6803023,
+      "way_id": 676185535
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 3,
+    "diacritics": true,
+    "query": "120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 3,
+    "diacritics": false,
+    "query": "hem 120/29/19a thich quang duc",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 120/29/19A Thích Quảng Đức, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 120/29/19A Thích Quảng Đức, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngõ 120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 3,
+    "diacritics": true,
+    "query": "kiệt 120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 3,
+    "diacritics": true,
+    "query": "ngách 120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 3,
+    "diacritics": true,
+    "query": "alley 120/29/19A Thích Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hẻm 120/29/19A Thíc Quảng Đức",
+    "expected": {
+      "label": "Hẻm 120/29/19A Thích Quảng Đức",
+      "lat": 10.810073,
+      "lon": 106.6806852,
+      "way_id": 676474327
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 1041/62/59/29 duong tran xuan soan",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 1041/62/59/29 Đường Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1041/62/59/29 Đườn Trần Xuân Soạn",
+    "expected": {
+      "label": "Hẻm 1041/62/59/29 Đường Trần Xuân Soạn",
+      "lat": 10.7478883,
+      "lon": 106.6947137,
+      "way_id": 205650587
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 17/2/47/15 lien khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 17/2/47/15 Liên khu 5-6, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 17/2/47/15 Liên khu 5-6, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 17/2/47/15 Liên khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 17/2/47/15 Liê khu 5-6",
+    "expected": {
+      "label": "Hẻm 17/2/47/15 Liên khu 5-6",
+      "lat": 10.7882132,
+      "lon": 106.5913633,
+      "way_id": 514174242
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 266/40/9/16 ton dan",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 266/40/9/16 Tôn Đản, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 266/40/9/16 Tôn Đản, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 266/40/9/16 Tôn Đản",
+    "expected": {
+      "label": "Hẻm 266/40/9/16 Tôn Đản",
+      "lat": 10.758335,
+      "lon": 106.7049575,
+      "way_id": 1339752273
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 290/56/13/7 no trang long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 290/56/13/7 Nơ Trang Long, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 290/56/13/7 Nơ Trang Long, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 290/56/13/7 Nơ Trang Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 290/56/13/7 Nơ Tran Long",
+    "expected": {
+      "label": "Hẻm 290/56/13/7 Nơ Trang Long",
+      "lat": 10.815208,
+      "lon": 106.7006019,
+      "way_id": 604817233
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 480/31/1/15 binh quoi",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 480/31/1/15 Bình Quới, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 480/31/1/15 Bình Quới, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 480/31/1/15 Bình Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 480/31/1/15 Bìn Quới",
+    "expected": {
+      "label": "Hẻm 480/31/1/15 Bình Quới",
+      "lat": 10.8265184,
+      "lon": 106.7425358,
+      "way_id": 605187890
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "exact",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "bare",
+    "depth": 4,
+    "diacritics": true,
+    "query": "373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ascii",
+    "depth": 4,
+    "diacritics": false,
+    "query": "hem 373/1/142/1a ly thuong kiet",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-old",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 373/1/142/1A Lý Thường Kiệt, Phường 1, Quận 1, Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ward-new",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 373/1/142/1A Lý Thường Kiệt, phường Cầu Ông Lãnh, TP Hồ Chí Minh",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngõ 373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "kiet",
+    "depth": 4,
+    "diacritics": true,
+    "query": "kiệt 373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "ngach",
+    "depth": 4,
+    "diacritics": true,
+    "query": "ngách 373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "english",
+    "depth": 4,
+    "diacritics": true,
+    "query": "alley 373/1/142/1A Lý Thường Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "typo",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 373/1/142/1A Lý Thườn Kiệt",
+    "expected": {
+      "label": "Hẻm 373/1/142/1A Lý Thường Kiệt",
+      "lat": 10.7776698,
+      "lon": 106.6525225,
+      "way_id": 669633569
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 2,
+    "diacritics": true,
+    "query": "HEM 1165/18",
+    "expected": {
+      "label": "HEM 1165",
+      "lat": 10.7899899,
+      "lon": 106.6662815,
+      "way_id": 35114725
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 12/18 Duong 6 Dinh Phong Phu",
+    "expected": {
+      "label": "Hem 12 Duong 6 Dinh Phong Phu",
+      "lat": 10.837154,
+      "lon": 106.7805267,
+      "way_id": 306183173
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 142/18",
+    "expected": {
+      "label": "Hem 142",
+      "lat": 10.8498629,
+      "lon": 106.7613085,
+      "way_id": 506964501
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 156/18",
+    "expected": {
+      "label": "Hem 156",
+      "lat": 10.8498504,
+      "lon": 106.7617844,
+      "way_id": 506964505
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 2,
+    "diacritics": true,
+    "query": "Hem 209/18 DVB",
+    "expected": {
+      "label": "Hem 209 DVB",
+      "lat": 10.8475485,
+      "lon": 106.7597754,
+      "way_id": 507331609
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hem 1135/61/18 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/61 Đường Huỳnh Tấn Phát",
+      "lat": 10.7239063,
+      "lon": 106.7381957,
+      "way_id": 225204393
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hem 1135/83/18 Đường Huỳnh Tấn Phát",
+    "expected": {
+      "label": "Hem 1135/83 Đường Huỳnh Tấn Phát",
+      "lat": 10.7240686,
+      "lon": 106.7390408,
+      "way_id": 225204397
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hem 381/16/18 Tân Hòa Đông",
+    "expected": {
+      "label": "Hem 381/16 Tân Hòa Đông",
+      "lat": 10.7639917,
+      "lon": 106.6178453,
+      "way_id": 520932949
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hem 61/4/18 Đường Nguyễn Thượng Hiền",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 3,
+    "diacritics": true,
+    "query": "Hem 76/37/18 Đường Số 74",
+    "expected": {
+      "label": "Hem 76/37 Đường Số 74",
+      "lat": 10.721966,
+      "lon": 106.6247064,
+      "way_id": 606250239
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hèm 127/2/61/18 Lê Thúc Hoạch",
+    "expected": {
+      "label": "Hèm 127/2/61 Lê Thúc Hoạch",
+      "lat": 10.7874825,
+      "lon": 106.61835,
+      "way_id": 511517463
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1/10/44/18 Đường Số 53",
+    "expected": {
+      "label": "Hẻm 1/10/44 Đường Số 53",
+      "lat": 10.8433343,
+      "lon": 106.7326668,
+      "way_id": 306868291
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1/50/1/18 Thanh Đa",
+    "expected": {
+      "label": "Hẻm 1/50/1 Thanh Đa",
+      "lat": 10.8128274,
+      "lon": 106.720171,
+      "way_id": 610251632
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1/50/11/18 Thanh Đa",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "house-parent",
+    "depth": 4,
+    "diacritics": true,
+    "query": "Hẻm 1/50/13/18 Thanh Đa",
+    "expected": {
+      "label": "Hẻm 1/50/13 Thanh Đa",
+      "lat": 10.8130888,
+      "lon": 106.7194918,
+      "way_id": 610251651
+    }
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Merc GLC 200 đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - Merc GLC 200",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Merc GLC 200 đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Merc GLC 200 tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Mercedes GLC 300 đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - Mercedes GLC 300",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Mercedes GLC 300 đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Mercedes GLC 300 tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái Mercedes C200 đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "mercedes-benz-c-class",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - Mercedes C200",
+    "expected_vehicle": "mercedes-benz-c-class",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Mercedes C200 đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "mercedes-benz-c-class",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Mercedes C200 tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "mercedes-benz-c-class",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Mercedes E300 đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - Mercedes E300",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Mercedes E300 đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Mercedes E300 tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái BMW X3 đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - BMW X3",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "BMW X3 đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "BMW X3 tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Kia Sorento đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - Kia Sorento",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Kia Sorento đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Kia Sorento tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Honda CR-V đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - Honda CR-V",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Honda CR-V đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Honda CR-V tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái Honda City đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "honda-city",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - Honda City",
+    "expected_vehicle": "honda-city",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Honda City đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "honda-city",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Honda City tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "honda-city",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Tôi lái Hyundai Tucson đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - Hyundai Tucson",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hyundai Tucson đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hyundai Tucson tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái Ford Ranger đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "ford-ranger",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - Ford Ranger",
+    "expected_vehicle": "ford-ranger",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Ford Ranger đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "ford-ranger",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Ford Ranger tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "ford-ranger",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF3 đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "vinfast-vf-3",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - VinFast VF3",
+    "expected_vehicle": "vinfast-vf-3",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF3 đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-3",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF3 tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-3",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF5 đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "vinfast-vf-5",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - VinFast VF5",
+    "expected_vehicle": "vinfast-vf-5",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF5 đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-5",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF5 tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-5",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF6 đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "vinfast-vf-6",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - VinFast VF6",
+    "expected_vehicle": "vinfast-vf-6",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF6 đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-6",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF6 tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-6",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF7 đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "vinfast-vf-7",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - VinFast VF7",
+    "expected_vehicle": "vinfast-vf-7",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF7 đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-7",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF7 tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-7",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF8 đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - VinFast VF8",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF8 đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF8 tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Tôi lái VinFast VF9 đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "vinfast-vf-9",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - VinFast VF9",
+    "expected_vehicle": "vinfast-vf-9",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF9 đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "vinfast-vf-9",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "VinFast VF9 tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "vinfast-vf-9",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Tôi lái xe 7 chỗ đến Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền, Hồ Chí Minh, Vietnam - xe 7 chỗ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "xe 7 chỗ đón khách tại Hem 61/4 Đường Nguyễn Thượng Hiền, dừng 10 phút",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "xe 7 chỗ tới Hem 61/4 Đường Nguyễn Thượng Hiền lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-m",
+    "expected_query": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Tôi lái bán tải đến Hẻm 1/50/11 Thanh Đa",
+    "expected_vehicle": "class-l",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hẻm 1/50/11 Thanh Đa, Hồ Chí Minh, Vietnam - bán tải",
+    "expected_vehicle": "class-l",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "bán tải đón khách tại Hẻm 1/50/11 Thanh Đa, dừng 10 phút",
+    "expected_vehicle": "class-l",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "bán tải tới Hẻm 1/50/11 Thanh Đa lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-l",
+    "expected_query": "Hẻm 1/50/11 Thanh Đa",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "driver",
+    "pattern": "to",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Tôi lái 16 chỗ đến Hẻm 113/4 Võ Duy Ninh",
+    "expected_vehicle": "class-xl",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "address-first",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hẻm 113/4 Võ Duy Ninh, Hồ Chí Minh, Vietnam - 16 chỗ",
+    "expected_vehicle": "class-xl",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "pickup",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "16 chỗ đón khách tại Hẻm 113/4 Võ Duy Ninh, dừng 10 phút",
+    "expected_vehicle": "class-xl",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "pickup",
+    "expected_hour": null
+  },
+  {
+    "kind": "driver",
+    "pattern": "timed",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "16 chỗ tới Hẻm 113/4 Võ Duy Ninh lúc 7h tối nay, đỗ 2 giờ",
+    "expected_vehicle": "class-xl",
+    "expected_query": "Hẻm 113/4 Võ Duy Ninh",
+    "expected_intent": "park",
+    "expected_hour": 19
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Đường Giao Thông Hào",
+    "expected": {
+      "label": "Đường Giao Thông Hào",
+      "lat": 10.6762253,
+      "lon": 106.5917781,
+      "way_id": 264100095
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Dự án mở rộng Quốc lộ 1",
+    "expected": {
+      "label": "Dự án mở rộng Quốc lộ 1",
+      "lat": 10.6755187,
+      "lon": 106.5824467,
+      "way_id": 1553547486
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Dự án mở rộng Quốc lộ 1",
+    "expected": {
+      "label": "Dự án mở rộng Quốc lộ 1",
+      "lat": 10.6725894,
+      "lon": 106.5789376,
+      "way_id": 1553547487
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Lê Khả Phiêu",
+    "expected": {
+      "label": "Lê Khả Phiêu",
+      "lat": 10.6811125,
+      "lon": 106.5888083,
+      "way_id": 1008072829
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Lê Khả Phiêu",
+    "expected": {
+      "label": "Lê Khả Phiêu",
+      "lat": 10.6807941,
+      "lon": 106.5882993,
+      "way_id": 136700451
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Đường T11",
+    "expected": {
+      "label": "Đường T11",
+      "lat": 10.6826778,
+      "lon": 106.5910434,
+      "way_id": 1184169855
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Đường T11",
+    "expected": {
+      "label": "Đường T11",
+      "lat": 10.6824345,
+      "lon": 106.5937292,
+      "way_id": 262844414
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "street-only",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Tân Liễu",
+    "expected": {
+      "label": "Tân Liễu",
+      "lat": 10.6811414,
+      "lon": 106.5954669,
+      "way_id": 608519577
+    }
+  },
+  {
+    "kind": "decline",
+    "pattern": "motorbike",
+    "depth": 0,
+    "diacritics": true,
+    "message": "xe máy đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "decline",
+    "pattern": "motorbike",
+    "depth": 0,
+    "diacritics": true,
+    "message": "motorbike đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "decline",
+    "pattern": "motorbike",
+    "depth": 0,
+    "diacritics": true,
+    "message": "Honda Wave đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "poi",
+    "pattern": "wrong-match",
+    "depth": 0,
+    "diacritics": false,
+    "query": "Cong ty CP Vuong Pham"
+  },
+  {
+    "kind": "poi",
+    "pattern": "wrong-match",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Vương Phạm"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Merc GLC 200 thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Mercedes GLC 300 thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Mercedes C200 thì sao?",
+    "expected_vehicle": "mercedes-benz-c-class"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Mercedes E300 thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn BMW X3 thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Kia Sorento thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Honda CR-V thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Honda City thì sao?",
+    "expected_vehicle": "honda-city"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Hyundai Tucson thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn Ford Ranger thì sao?",
+    "expected_vehicle": "ford-ranger"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF3 thì sao?",
+    "expected_vehicle": "vinfast-vf-3"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF5 thì sao?",
+    "expected_vehicle": "vinfast-vf-5"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF6 thì sao?",
+    "expected_vehicle": "vinfast-vf-6"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF7 thì sao?",
+    "expected_vehicle": "vinfast-vf-7"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF8 thì sao?",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn VinFast VF9 thì sao?",
+    "expected_vehicle": "vinfast-vf-9"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn xe 7 chỗ thì sao?",
+    "expected_vehicle": "class-m"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn bán tải thì sao?",
+    "expected_vehicle": "class-l"
+  },
+  {
+    "kind": "followup",
+    "pattern": "followup",
+    "depth": 2,
+    "diacritics": true,
+    "message": "Còn 16 chỗ thì sao?",
+    "expected_vehicle": "class-xl"
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Hầm giữ xe Tòa D,E",
+    "expected": {
+      "label": "Hầm giữ xe Tòa D,E",
+      "lat": 10.7325115,
+      "lon": 106.69865,
+      "way_id": 10633803088
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Hầm giữ xe Nhà thi đấu",
+    "expected": {
+      "label": "Hầm giữ xe Nhà thi đấu",
+      "lat": 10.7318775,
+      "lon": 106.6981606,
+      "way_id": 10743482325
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Hầm giữ xe Tòa A",
+    "expected": {
+      "label": "Hầm giữ xe Tòa A",
+      "lat": 10.7318249,
+      "lon": 106.6986723,
+      "way_id": 10656028753
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Hầm giữ xe Tòa F,G",
+    "expected": {
+      "label": "Hầm giữ xe Tòa F,G",
+      "lat": 10.7308861,
+      "lon": 106.6987677,
+      "way_id": 10648714964
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "RMIT Temporary Car Park",
+    "expected": {
+      "label": "RMIT Temporary Car Park",
+      "lat": 10.7291837,
+      "lon": 106.6985414,
+      "way_id": 1153393295
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Bãi Xe Yến Vũ",
+    "expected": {
+      "label": "Bãi Xe Yến Vũ",
+      "lat": 10.7357276,
+      "lon": 106.6036866,
+      "way_id": 1560066215
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "BÃI GỬI XE Ô TÔ MŨI TÀU",
+    "expected": {
+      "label": "BÃI GỬI XE Ô TÔ MŨI TÀU",
+      "lat": 10.7452197,
+      "lon": 106.6239815,
+      "way_id": 12995891155
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Bãi đỗ xe 635 Nguyễn Trãi",
+    "expected": {
+      "label": "Bãi đỗ xe 635 Nguyễn Trãi",
+      "lat": 10.7531632,
+      "lon": 106.6649235,
+      "way_id": 1469350447
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Bãi đỗ xe 606 Trần Hưng Đạo",
+    "expected": {
+      "label": "Bãi đỗ xe 606 Trần Hưng Đạo",
+      "lat": 10.7554678,
+      "lon": 106.6794191,
+      "way_id": 1463054001
+    }
+  },
+  {
+    "kind": "resolver",
+    "pattern": "poi-name",
+    "depth": 0,
+    "diacritics": true,
+    "query": "Bãi đậu xe buýt Kho Muối",
+    "expected": {
+      "label": "Bãi đậu xe buýt Kho Muối",
+      "lat": 10.7528425,
+      "lon": 106.7018704,
+      "way_id": 188641283
+    }
+  },
+  {
+    "kind": "unknown",
+    "pattern": "unknown-vehicle",
+    "depth": 0,
+    "diacritics": true,
+    "message": "VinFast VF4 đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "unknown",
+    "pattern": "unknown-vehicle",
+    "depth": 0,
+    "diacritics": true,
+    "message": "Lamborghini Huracan đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "unknown",
+    "pattern": "unknown-vehicle",
+    "depth": 0,
+    "diacritics": true,
+    "message": "xe 4 chỗ đến Hẻm 113/4 Võ Duy Ninh"
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh - Merc GLC 200",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - Mercedes GLC 300",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa - Mercedes C200",
+    "expected_vehicle": "mercedes-benz-c-class",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh - Mercedes E300",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - BMW X3",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 1/50/11 Thanh Đa - Kia Sorento",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 113/4 Võ Duy Ninh - Honda CR-V",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - Honda City",
+    "expected_vehicle": "honda-city",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "outside",
+    "message": "Hẻm 1/50/11 Thanh Đa - Hyundai Tucson",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh - Ford Ranger",
+    "expected_vehicle": "ford-ranger",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - VinFast VF3",
+    "expected_vehicle": "vinfast-vf-3",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa - VinFast VF5",
+    "expected_vehicle": "vinfast-vf-5",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh - VinFast VF6",
+    "expected_vehicle": "vinfast-vf-6",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - VinFast VF7",
+    "expected_vehicle": "vinfast-vf-7",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 1/50/11 Thanh Đa - VinFast VF8",
+    "expected_vehicle": "vinfast-vf-8-the-all-new-2026",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "catalogue",
+    "message": "Hẻm 113/4 Võ Duy Ninh - VinFast VF9",
+    "expected_vehicle": "vinfast-vf-9",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hem 61/4 Đường Nguyễn Thượng Hiền - xe 7 chỗ",
+    "expected_vehicle": "class-m",
+    "expected": {
+      "label": "Hem 61/4 Đường Nguyễn Thượng Hiền",
+      "lat": 10.8138129,
+      "lon": 106.6854087,
+      "way_id": 1059732872
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 3,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hẻm 1/50/11 Thanh Đa - bán tải",
+    "expected_vehicle": "class-l",
+    "expected": {
+      "label": "Hẻm 1/50/11 Thanh Đa",
+      "lat": 10.812933,
+      "lon": 106.7195264,
+      "way_id": 610251654
+    }
+  },
+  {
+    "kind": "journey",
+    "pattern": "plan-policy",
+    "depth": 2,
+    "diacritics": true,
+    "catalogue": "class",
+    "message": "Hẻm 113/4 Võ Duy Ninh - 16 chỗ",
+    "expected_vehicle": "class-xl",
+    "expected": {
+      "label": "Hẻm 113/4 Võ Duy Ninh",
+      "lat": 10.7934553,
+      "lon": 106.7168818,
+      "way_id": 464839531
+    }
+  }
+]

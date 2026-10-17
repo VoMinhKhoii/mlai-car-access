@@ -68,6 +68,6 @@ def for_way(way_id):
         out.append({**deepcopy(row), 'tier':'Official', 'affects_clear_width':False,
                     'source_title':source['title'], 'reuse':source['reuse'],
                     'attribution':source.get('attribution',''),
-                    'detail':'Số liệu nền đường / lộ giới theo hồ sơ có ngày; chưa xác minh hiện trạng thông thủy. '
-                             'Không dùng để kết luận xe vào được hoặc không vào được.'})
+                    'detail':'Dated roadbed / planned-width records; current clear width is unverified. '
+                             'Not used to conclude whether a vehicle can enter.'})
     return out

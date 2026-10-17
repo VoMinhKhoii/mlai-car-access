@@ -72,8 +72,8 @@ class Corridor(unittest.TestCase):
     def test_jam_on_the_short_route_switches(self):
         self.readings = {"x": reading(CAM_X, "ket_cung"), "y": reading(CAM_Y)}
         out, best = self.run_corridor()
-        self.assertEqual(best["label"], "qua Đường B")
-        self.assertIn("kẹt cứng", out["summary"])
+        self.assertEqual(best["label"], "via Đường B")
+        self.assertIn("gridlocked", out["summary"])
         self.assertGreaterEqual(out["routes"][0]["delay_min"], corridor.TRAFFIC_QUEUE_MIN["ket_cung"])
 
     def test_slow_traffic_is_not_worth_a_longer_detour(self):
@@ -93,7 +93,7 @@ class Corridor(unittest.TestCase):
         out, _ = self.run_corridor()
         self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
         self.assertTrue(all(route["delay_min"] == 0 for route in out["routes"]))
-        self.assertIn("ETA không thể loại trừ ùn tắc", out["summary"])
+        self.assertIn("ETA cannot rule out congestion", out["summary"])
 
     def test_route_payload_counts_traffic_unknown_for_route_rows(self):
         out, _ = self.run_corridor()
@@ -104,7 +104,7 @@ class Corridor(unittest.TestCase):
         out, best = self.run_corridor()
         self.assertEqual(out["routes"][0]["status"], "blocked")
         self.assertFalse(best["is_goong"])
-        self.assertIn("ngập", out["summary"])
+        self.assertIn("flood", out["summary"])
 
     def test_unreadable_cameras_change_nothing(self):
         self.readings = {"x": {**reading(CAM_X, "ket_cung"), "state": "stale"},
@@ -117,7 +117,7 @@ class Corridor(unittest.TestCase):
         out, best = self.run_corridor(depart_at=datetime.now(VN) + timedelta(hours=3))
         self.assertFalse(out["live"])
         self.assertTrue(best["is_goong"])
-        self.assertIn("dự báo ngập", out["live_note"])
+        self.assertIn("flood forecasts", out["live_note"])
 
     def test_flood_forecast_on_route_counts_without_cameras(self):
         # A rain-flooding street on route A, with 45 mm/h of rain while driving.

@@ -167,10 +167,10 @@ def city_state():
                 if any(b.tier in ("Measured", "Official") for b in active):
                     active = [b for b in active if b not in fp]
                 else:
-                    active = [b for b in active if not (b.tier == "Inferred" and b.source in ("OSM phân loại đường", "OSM số làn xe"))]
+                    active = [b for b in active if not (b.tier == "Inferred" and b.source in ("OSM road class", "OSM lane count", "OSM phân loại đường", "OSM số làn xe"))]
             lo, hi, top, conflict, _, _ = _combine(active)
             # Coverage credits sourced bounds, never generic road/lanes priors.
-            source_bounds = [b for b in bounds if b.source not in ("OSM phân loại đường", "OSM số làn xe")]
+            source_bounds = [b for b in bounds if b.source not in ("OSM road class", "OSM lane count", "OSM phân loại đường", "OSM số làn xe")]
             present = {b.tier for b in source_bounds}
             for tier in present:
                 tiers[tier].add(wid)

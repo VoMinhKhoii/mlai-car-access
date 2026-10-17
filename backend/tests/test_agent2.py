@@ -60,7 +60,7 @@ class AgentRoundTwoTests(unittest.TestCase):
              patch.object(agent, 'execute', return_value=(result, None)):
             events = list(agent.events(agent.AgentRequest(message='Đỗ hai tiếng')))
         answer = next(e['text'] for e in events if e['type'] == 'answer')
-        self.assertIn('rời trước 17:45', answer)
+        self.assertIn('leave before 17:45', answer)
         self.assertEqual(''.join(p.get('text', '') for p in events[-1]['contents'][-1]['parts']), answer)
 
 

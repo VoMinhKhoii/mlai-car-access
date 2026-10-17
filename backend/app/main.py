@@ -65,8 +65,9 @@ app.add_middleware(CORSMiddleware, allow_origins=sorted(auth.allowed_origins()),
 @app.middleware("http")
 async def origin_guard(request: Request, call_next):
     """CSRF guard: a browser may only change state from this server's own origin or an APP_ORIGINS entry."""
-    if request.method not in ("GET", "HEAD", "OPTIONS") and not auth.origin_ok(request):
-        return JSONResponse(status_code=403, content={"detail": "Nguồn yêu cầu không được phép"})
+    # /mcp performs its own explicit Origin validation (including MCP_ALLOWED_ORIGINS).
+    if request.url.path != "/mcp" and request.method not in ("GET", "HEAD", "OPTIONS") and not auth.origin_ok(request):
+        return JSONResponse(status_code=403, content={"detail": "Request origin is not allowed"})
     return await call_next(request)
 
 
@@ -82,7 +83,7 @@ def validation_error(_request, exc: RequestValidationError):
 @app.exception_handler(CorruptState)
 def corrupt_state(_request, exc: CorruptState):
     # Review state that cannot be read is never guessed: the action stops, nothing is published.
-    return JSONResponse(status_code=503, content={"detail": f"Dữ liệu trạng thái bị hỏng, cần kiểm tra: {exc}"})
+    return JSONResponse(status_code=503, content={"detail": f"State data is corrupt and needs inspection: {exc}"})
 
 
 # Startup (one process): unreviewed legacy community lines move to the review queue, approved reports are
@@ -109,23 +110,23 @@ def _way_mid(way_id: int):
 
 
 PRESETS = [
-    {"id": "friend-house", "title": "Nhà bạn trong hẻm, giờ triều cường", "way_id": 32584409,
+    {"id": "friend-house", "title": "A friend in an alley at high tide", "way_id": 32584409,
      "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh", "intent": "park", "vehicle_id": "toyota-vios",
      "arrive_at": "2026-09-29T16:30:00+07:00", "dwell_min": 120,
-     "story": "Vios đến 16:30, ở 2 tiếng. Đỉnh triều 18:10 (1,66 m) làm ngập đường ra. Đổi sang Fortuner để so sánh."},
-    {"id": "cafe-ngo-tat-to", "title": "Quán cà phê gần đường hay ngập", "way_id": 544982029,
+     "story": "Vios arrives at 16:30 for 2 hours. The 18:10 tide peak (1.66 m) floods the exit. Switch to Fortuner to compare."},
+    {"id": "cafe-ngo-tat-to", "title": "Cafe near a flood-prone road", "way_id": 544982029,
      "label": "Hẻm 160 Ngô Tất Tố, Bình Thạnh", "intent": "park", "vehicle_id": "class-s",
      "arrive_at": "2026-09-29T14:00:00+07:00", "dwell_min": 90,
      "rain": [{"start": "2026-09-29T14:30:00+07:00", "end": "2026-09-29T15:30:00+07:00", "mm_per_h": 45}],
-     "story": "Mưa 45 mm/h lúc 14:30 trên nền triều lên. Ngô Tất Tố có 6 lần ngập trong lịch sử IRD."},
-    {"id": "pickup-narrow", "title": "Đón khách trong hẻm không vào được ô tô", "way_id": 136507381,
+     "story": "Rain at 45 mm/h at 14:30 with a rising tide. Ngô Tất Tố has 6 flood events in IRD records."},
+    {"id": "pickup-narrow", "title": "Pickup in an alley closed to cars", "way_id": 136507381,
      "label": "Hẻm 328 Xô Viết Nghệ Tĩnh, Bình Thạnh", "intent": "pickup", "vehicle_id": "vinfast-vf-5",
      "arrive_at": "2026-09-29T10:00:00+07:00", "dwell_min": 15,
-     "story": "Tài xế xe công nghệ. Hẻm được đánh dấu không vào được ô tô: điểm đón gần nhất và quãng khách phải đi bộ."},
-    {"id": "nguyen-huu-canh", "title": "Hẻm gần Nguyễn Hữu Cảnh", "way_id": 193085696,
+     "story": "Ride-hailing trip. Alley marked inaccessible to cars: find the nearest pickup point and passenger walk."},
+    {"id": "nguyen-huu-canh", "title": "Alley near Nguyễn Hữu Cảnh", "way_id": 193085696,
      "label": "Hẻm 91 Nguyễn Hữu Cảnh, Bình Thạnh", "intent": "park", "vehicle_id": "class-m",
      "arrive_at": "2026-09-30T17:00:00+07:00", "dwell_min": 120,
-     "story": "Đường ngập nhiều năm nhất trong dữ liệu (10 năm). Triều 30/09 dự báo 1,67 m lúc 18:50."},
+     "story": "Road with the most years of flooding in the data (10 years). Tide forecast for 30/09: 1.67 m at 18:50."},
 ]
 
 
@@ -170,9 +171,9 @@ def config(request: Request):
         "synthetic_demo_data": bool(getattr(app.state, "synthetic_demo_data", False)),
         "presets": [{**p, "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
         "personas": [
-            {"id": "park", "label": "Tự lái, cần chỗ đỗ", "enabled": True},
-            {"id": "pickup", "label": "Xe công nghệ đón/trả khách", "enabled": True},
-            {"id": "emergency", "label": "Xe cứu hỏa / cứu thương", "enabled": False, "note": "Sắp có"},
+            {"id": "park", "label": "Private driver, parking needed", "enabled": True},
+            {"id": "pickup", "label": "Ride-hailing pickup/drop-off", "enabled": True},
+            {"id": "emergency", "label": "Fire engine / ambulance", "enabled": False, "note": "Coming soon"},
         ],
         # Booleans only: never the secret or a session id.
         "operator": {"available": auth.available(), "signed_in": auth.is_operator(request)},
@@ -235,7 +236,7 @@ def place(place_id: Annotated[str, ApiPath(max_length=300)]):
     result = geocoding.resolve_id(place_id)
     if result:
         return result
-    raise HTTPException(424, "Nguồn địa điểm tạm gián đoạn. Hãy tìm lại để dùng kết quả có tọa độ.")
+    raise HTTPException(424, "Place provider temporarily unavailable. Search again for a result with coordinates.")
 
 
 def _require_iso_datetime_string(value: object) -> object:
@@ -300,14 +301,14 @@ def _synthetic_demo_input(request: Request, scenario: str | None, lat: float, lo
 @app.post("/api/plan")
 def make_plan(req: PlanRequest, request: Request):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports destinations in HCMC only.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {req.vehicle_id}")
     origin = tuple(req.origin) if req.origin else None
     if origin and not in_hcmc(*origin):
-        raise HTTPException(422, "Điểm đi phải ở TP.HCM.")
+        raise HTTPException(422, "Origin must be in HCMC.")
     live_area, area = live.area_status(req.lat, req.lon)
     synthetic_demo_scenario, synthetic_demo_file = _synthetic_demo_input(
         request, req.demo_scenario, req.lat, req.lon,
@@ -353,7 +354,7 @@ class WayQuery(Strict):
 @app.post("/api/evidence/way/{way_id}")
 def evidence_for_way(way_id: Annotated[int, ApiPath(gt=0)], req: WayQuery, request: Request):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports HCMC only.")
     live_area, _ = live.area_status(req.lat, req.lon)
     _, demo_file = _synthetic_demo_input(
         request, req.demo_scenario, req.lat, req.lon, way_id=way_id,
@@ -377,13 +378,13 @@ class Point(Strict):
 @app.post("/api/area/build", status_code=202)
 def area_build(req: Point, _op: Operator):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports HCMC only.")
     if not flags.enabled("live_crawl"):
-        raise HTTPException(409, "Thu thập dữ liệu trực tiếp đang tắt")
+        raise HTTPException(409, "Live data collection is disabled")
     try:
         return live.schedule(req.lat, req.lon)
     except live.Busy as exc:
-        raise HTTPException(429, "Đang có quá nhiều lần thu thập, thử lại sau",
+        raise HTTPException(429, "Too many collections running; retry later",
                             headers={"Retry-After": str(exc.retry_after)})
 
 
@@ -393,7 +394,7 @@ def area_build_status(key: str):
         raise HTTPException(422, "invalid area key")
     job = live.job_status(key)
     if job is None:
-        raise HTTPException(404, "Không có lần thu thập nào đang chạy cho khu vực này")
+        raise HTTPException(404, "No active collection for this area")
     return job
 
 
@@ -421,13 +422,13 @@ def reload_evidence(_op: Operator):
 
 def _graph_with(lat: float, lon: float, way_ids: list[int]):
     if not in_hcmc(lat, lon):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports HCMC only.")
     g = cached_graph(lat, lon)
     if g is None:
-        raise HTTPException(422, "Khu vực này chưa có bản đồ trên máy chủ")
+        raise HTTPException(422, "No map for this area on the server")
     missing = [w for w in way_ids if w not in g.ways]
     if missing:
-        raise HTTPException(422, f"Đoạn đường không thuộc khu vực: {missing[:3]}")
+        raise HTTPException(422, f"Road segment is outside the area: {missing[:3]}")
     return g
 
 
@@ -435,7 +436,7 @@ def _guest_limit(request: Request, bucket: str = "reports") -> None:
     try:
         reports.allow_guest(request.client.host if request.client else "?", bucket=bucket)
     except reports.RateLimited:
-        raise HTTPException(429, "Bạn đã gửi quá nhiều báo cáo, thử lại sau", headers={"Retry-After": "600"})
+        raise HTTPException(429, "Too many reports submitted; retry later", headers={"Retry-After": "600"})
 
 
 class Confirmation(Strict):
@@ -453,18 +454,18 @@ def confirm(c: Confirmation, request: Request):
     except KeyError:
         raise HTTPException(404, f"unknown vehicle {c.vehicle_id}")
     if not in_hcmc(c.stop_lat, c.stop_lon):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports HCMC only.")
     _guest_limit(request)
     g = cached_graph(c.stop_lat, c.stop_lon)
     if g is None:
-        raise HTTPException(422, "Khu vực này chưa có bản đồ trên máy chủ")
+        raise HTTPException(422, "No map for this area on the server")
     ingress_path = parcels.path_into(g, c.stop_lat, c.stop_lon)
     if not ingress_path:
-        raise HTTPException(422, "Xác nhận chỉ dành cho hẻm được máy chủ ánh xạ. Để báo cáo vật cản, vui lòng chọn loại báo cáo khác.")
+        raise HTTPException(422, "Confirmations apply only to alleys mapped by the server. Choose a blockage report to report obstructions.")
     stop_way_id = ingress_path[-1][0]
     stop_projection = ingress_path[-1][1][-1]
     if not g.ways[stop_way_id].is_alley or haversine(c.stop_lat, c.stop_lon, *stop_projection) > plan.WALK_SNAP_M:
-        raise HTTPException(422, "Chỉ xác nhận điểm dừng được ánh xạ trực tiếp lên hẻm (cách đường ≤ 5 m); bãi đỗ hoặc đường không phải hẻm không tạo bằng chứng.")
+        raise HTTPException(422, "Confirm only stops mapped directly to an alley (within 5 m); car parks and non-alley roads do not provide evidence.")
     way_out_ids = list(dict.fromkeys(way_id for way_id, _ in parcels.path_out(g, c.stop_lat, c.stop_lon)))
     way_ids = [stop_way_id]
     payload = {
@@ -473,7 +474,7 @@ def confirm(c: Confirmation, request: Request):
         "result": c.result, "exit": c.exit, "way_ids": way_ids, "way_out_ids": way_out_ids,
         "stop_lat": c.stop_lat, "stop_lon": c.stop_lon,
     }
-    rec = reports.submit("confirmation", payload, "Tài xế xác nhận sau khi đến")
+    rec = reports.submit("confirmation", payload, "Driver arrival confirmation")
     return {"status": "pending", "report_id": rec["report_id"]}
 
 
@@ -489,9 +490,9 @@ def parse_voice_report(body: VoiceParse, request: Request):
     try:
         return ai.parse_voice_report(body.text, deadline=deadline)
     except ai.FeatureOff as exc:
-        raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
+        raise HTTPException(403, f"AI feature '{exc}' is disabled")
     except (ai.NoModel, budget.OverBudget, Expired, httpx.HTTPError, ValueError, TypeError, KeyError, IndexError, AttributeError):
-        return {"kind": "unclear", "question": "Không nhận diện được. Hãy chọn loại báo cáo thủ công."}
+        return {"kind": "unclear", "question": "Could not recognise report. Select a report type manually."}
 
 
 class Blockage(Strict):
@@ -505,8 +506,8 @@ class Blockage(Strict):
 def blockage(b: Blockage, request: Request):
     _guest_limit(request)
     _graph_with(b.lat, b.lon, [b.way_id])
-    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Tài xế báo", "date": date.today().isoformat()}
-    rec = reports.submit("blockage", payload, "Tài xế báo vật cản")
+    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Driver report", "date": date.today().isoformat()}
+    rec = reports.submit("blockage", payload, "Driver blockage report")
     return {"status": "pending", "report_id": rec["report_id"]}
 
 
@@ -530,7 +531,7 @@ def decide_report(report_id: str, d: Decision, reviewer: Operator):
     try:
         rec = reports.decide(report_id, d.approve, reviewer, d.revision)
     except KeyError:
-        raise HTTPException(404, "Không có báo cáo này")
+        raise HTTPException(404, "Report not found")
     except reports.Conflict as exc:
         raise HTTPException(409, str(exc))
     if d.approve:
@@ -564,11 +565,11 @@ def _ai_guard(fn, *args):
     try:
         return fn(*args)
     except ai.FeatureOff as exc:
-        raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
+        raise HTTPException(403, f"AI feature '{exc}' is disabled")
     except ai.NoModel as exc:
         raise HTTPException(424, str(exc))
     except budget.OverBudget as exc:
-        raise HTTPException(429, f"Dừng để không tốn phí: {exc}")
+        raise HTTPException(429, f"Stopped to avoid charges: {exc}")
 
 
 class TextIn(Strict):
@@ -597,10 +598,10 @@ async def ai_photo(_op: Operator, file: UploadFile = File(...),
                    way_id: Annotated[int | None, Form(gt=0)] = None):
     data = await file.read(MAX_PHOTO_BYTES + 1)  # capped read: never pull an unbounded upload into memory
     if len(data) > MAX_PHOTO_BYTES:
-        raise HTTPException(413, "Ảnh lớn hơn 8 MiB")
+        raise HTTPException(413, "Photo exceeds 8 MiB")
     mime = _sniff(data[:16])
     if mime is None:
-        raise HTTPException(415, "Chỉ nhận ảnh JPEG, PNG hoặc WebP")
+        raise HTTPException(415, "Only JPEG, PNG or WebP photos are accepted")
     # The model call is blocking network I/O: run it off the event loop.
     return await run_in_threadpool(_ai_guard, ai.read_photo, data, mime, lat, lon, way_id)
 
@@ -621,7 +622,7 @@ def camera_image(cam_id: str):
         raise HTTPException(404, "unknown camera")
     img = cameras.snapshot(cam_id)
     if img is None:
-        raise HTTPException(404, "Camera đang mất tín hiệu")
+        raise HTTPException(404, "Camera is offline")
     return Response(img, media_type="image/jpeg", headers={"Cache-Control": "no-store"})
 
 
@@ -637,9 +638,9 @@ def camera_read(cam_id: str, request: Request, response: Response):
     try:
         job = cameras.schedule([cam_id])
     except cameras.FeatureOff as exc:
-        raise HTTPException(403, f"Tính năng AI '{exc}' đang tắt")
+        raise HTTPException(403, f"AI feature '{exc}' is disabled")
     except cameras.Busy as exc:
-        raise HTTPException(429, "Hàng đợi đọc camera đang đầy", headers={"Retry-After": str(exc.retry_after)})
+        raise HTTPException(429, "Camera reading queue is full", headers={"Retry-After": str(exc.retry_after)})
     response.status_code = 202
     return {"state": job["state"], "reading": None, "job": job}
 
@@ -650,7 +651,7 @@ def camera_job(job_id: str):
         raise HTTPException(422, "invalid job id")
     job = cameras.job_view(job_id)
     if job is None:
-        raise HTTPException(404, "Không có lượt đọc camera này (đã hết hạn)")
+        raise HTTPException(404, "Camera reading job not found (expired)")
     return job
 
 
@@ -672,7 +673,7 @@ def route_corridor(req: CorridorRequest, request: Request):
     """Large-road route choice from A to B: flood forecast plus cached camera readings, answered immediately.
     An operator request also queues the most relevant unread cameras (see `camera_job` in the answer)."""
     if not (in_hcmc(*req.origin) and in_hcmc(*req.destination)):
-        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách currently supports HCMC only.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
@@ -687,11 +688,11 @@ def _lookup_guard(fn, *args):
     try:
         return fn(*args)
     except google_lookup.LookupOff as exc:
-        raise HTTPException(403, f"Tra cứu Google đang tắt hoặc thiếu khóa: {exc}")
+        raise HTTPException(403, f"Google lookup is disabled or missing a key: {exc}")
     except budget.OverBudget as exc:
-        raise HTTPException(429, f"Dừng để không tốn phí: {exc}")
+        raise HTTPException(429, f"Stopped to avoid charges: {exc}")
     except httpx.HTTPStatusError as exc:
-        raise HTTPException(502, f"Google từ chối yêu cầu ({exc.response.status_code}). Kiểm tra API đã bật cho khóa.")
+        raise HTTPException(502, f"Google rejected the request ({exc.response.status_code}). Check the APIs enabled for this key.")
 
 
 def _bearing(lat1, lon1, lat2, lon2):
@@ -770,7 +771,7 @@ def agent_tool(name: str, args: dict):
     protocol = module_from_spec(spec)
     spec.loader.exec_module(protocol)
     schema = next((t["parameters"] for t in agent.TOOLS if t["name"] == name), None)
-    if schema is None: raise HTTPException(404, "Công cụ không tồn tại.")
+    if schema is None: raise HTTPException(404, "Tool does not exist.")
     try:
         protocol.schema_args(schema, args)
         result, _ = agent.call_tool(name, args)
@@ -779,44 +780,65 @@ def agent_tool(name: str, args: dict):
     except Exception as exc: raise HTTPException(422, agent.safe_error(exc))
 
 
-# MCP Streamable HTTP, stable 2025-11-25, stateless JSON response mode.
-# GET is explicitly 405 (no unsolicited SSE stream); no dependency on the MCP SDK.
-from fastapi import Request as MCPRequest
+# ---- MCP owned block: Streamable HTTP 2025-11-25, stateless JSON response mode ----
+# Load once: rate-limit state must survive requests. No global sys.path mutations.
+from importlib.util import module_from_spec as _mcp_module, spec_from_file_location as _mcp_spec
+_mcp_definition = _mcp_spec("ngo_ngach_mcp_server", Path(__file__).resolve().parents[2] / "mcp" / "server.py")
+mcp_server = _mcp_module(_mcp_definition)
+_mcp_definition.loader.exec_module(mcp_server)
 
 
 @app.api_route("/mcp", methods=["POST", "GET", "DELETE"])
-async def mcp_http(request: MCPRequest):
+async def mcp_http(request: Request):
     import hmac
     import os
-    from importlib.util import module_from_spec, spec_from_file_location
-    from pathlib import Path
-    from fastapi.responses import JSONResponse
-    from starlette.concurrency import run_in_threadpool
-    origins = {"http://localhost:8787", "http://127.0.0.1:8787", "http://localhost:5173", "http://127.0.0.1:5173"}
+    protocol = mcp_server.protocol
+    origins = {mcp_server.PUBLIC_ORIGIN,
+               "http://localhost:8787", "http://127.0.0.1:8787",
+               "http://localhost:8797", "http://127.0.0.1:8797",
+               "http://localhost:5173", "http://127.0.0.1:5173"}
     origins.update(x.strip() for x in os.environ.get("MCP_ALLOWED_ORIGINS", "").split(",") if x.strip())
-    if request.headers.get("origin") and request.headers["origin"] not in origins:
-        return JSONResponse({"error":"Origin not allowed"},status_code=403)
-    token=os.environ.get("MCP_AUTH_TOKEN")
-    if token and not hmac.compare_digest(request.headers.get("authorization", ""), "Bearer "+token):
-        return JSONResponse({"error":"Unauthorized"},status_code=401)
-    if request.method != "POST": return Response(status_code=405,headers={"Allow":"POST"})
-    if "application/json" not in request.headers.get("content-type", ""):
-        return JSONResponse({"error":"Content-Type must be application/json"},status_code=415)
-    accept=request.headers.get("accept", "")
-    if not all(t in accept for t in ("application/json","text/event-stream")):
-        return JSONResponse({"error":"Accept must include application/json and text/event-stream"},status_code=406)
-    spec=spec_from_file_location("ngo_ngach_mcp",Path(__file__).resolve().parents[2]/"mcp"/"protocol.py")
-    protocol=module_from_spec(spec);spec.loader.exec_module(protocol)
-    version=request.headers.get("mcp-protocol-version", "2025-03-26")
-    if version not in protocol.VERSIONS[0:3]: return JSONResponse({"error":"Unsupported MCP protocol version"},status_code=400)
-    raw=await request.body()
-    if len(raw)>64_000: return JSONResponse({"error":"Request too large"},status_code=413)
-    try: body=json.loads(raw)
-    except (ValueError,UnicodeDecodeError):
-        return JSONResponse({"jsonrpc":"2.0","id":None,"error":{"code":-32700,"message":"Parse error"}},status_code=400)
-    response=await run_in_threadpool(protocol.dispatch,body,agent_tools,lambda name,args:agent_tool(name,args))
-    if response is None: return Response(status_code=202)
-    return JSONResponse(response,headers={"Cache-Control":"no-store"})
+    origin = request.headers.get("origin")
+    if origin is not None and origin not in origins:
+        return JSONResponse({"error": "Origin not allowed"}, status_code=403)
+    token = os.environ.get("MCP_AUTH_TOKEN")
+    if token and not hmac.compare_digest(request.headers.get("authorization", "").encode(), ("Bearer " + token).encode()):
+        return JSONResponse({"error": "Unauthorized"}, status_code=401)
+    client = request.client.host if request.client else "unknown"
+    if not mcp_server.RATE_LIMITER.allow(client):
+        return JSONResponse({"error": "MCP rate limit: 60 requests per minute"}, status_code=429,
+                            headers={"Retry-After": "60"})
+    # Stateless mode never issues or requires Mcp-Session-Id. Well-formed supplied
+    # IDs are ignored, not reflected or used as authorization. DELETE is unsupported.
+    session = request.headers.get("mcp-session-id")
+    if session is not None and (not 1 <= len(session) <= 256 or any(not 0x21 <= ord(c) <= 0x7e for c in session)):
+        return JSONResponse({"error": "Invalid Mcp-Session-Id"}, status_code=400)
+    if request.method != "POST":
+        return Response(status_code=405, headers={"Allow": "POST"})
+    if request.headers.get("content-type", "").split(";", 1)[0].strip().lower() != "application/json":
+        return JSONResponse({"error": "Content-Type must be application/json"}, status_code=415)
+    accepted = {part.split(";", 1)[0].strip().lower() for part in request.headers.get("accept", "").split(",")
+                if not any(v.strip() in ("q=0", "q=0.0", "q=0.00", "q=0.000") for v in part.split(";")[1:])}
+    if not {"application/json", "text/event-stream"} <= accepted:
+        return JSONResponse({"error": "Accept must include application/json and text/event-stream"}, status_code=406)
+    version = request.headers.get("mcp-protocol-version", "2025-03-26")
+    if version not in protocol.HTTP_VERSIONS:
+        return JSONResponse({"error": "Unsupported MCP protocol version"}, status_code=400)
+    # Bound memory even for chunked transfer (Content-Length is not trusted).
+    raw = bytearray()
+    async for chunk in request.stream():
+        raw.extend(chunk)
+        if len(raw) > 64_000:
+            return JSONResponse({"error": "Request too large"}, status_code=413)
+    try:
+        body = protocol.loads(raw)
+    except (ValueError, UnicodeDecodeError, RecursionError):
+        return JSONResponse(protocol.error(None, -32700, "Parse error"), status_code=400)
+    response = await run_in_threadpool(protocol.dispatch, body, mcp_server.list_tools, mcp_server.call_tool)
+    if response is None:
+        return Response(status_code=202)
+    return JSONResponse(response, headers={"Cache-Control": "no-store"})
+# ---- end MCP owned block ----
 
 
 @app.get("/api/budget")
@@ -829,7 +851,7 @@ def spend_report(_op: Operator):
 
 @app.api_route("/api/{rest:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def unknown_api(rest: str):
-    return JSONResponse(status_code=404, content={"detail": "Không có API này"})
+    return JSONResponse(status_code=404, content={"detail": "API endpoint not found"})
 
 
 if FRONTEND_DIST.exists():

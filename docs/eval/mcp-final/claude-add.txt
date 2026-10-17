@@ -1,0 +1,2 @@
+Added HTTP MCP server ngo-ngach with URL: http://127.0.0.1:8797/mcp to local config
+File modified: /Users/khoivo/.claude.json [project: /Users/khoivo/Developer/mlai-car-access]

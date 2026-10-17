@@ -6,15 +6,15 @@ export type ConfirmationResult = 'in' | 'tight' | 'no'
 export type ExitMethod = 'through' | 'turned' | 'reversed' | 'unknown'
 
 const RESULT_OPTIONS: { value: ConfirmationResult; label: string }[] = [
-  { value: 'in', label: 'Vào được' },
-  { value: 'tight', label: 'Hơi chật' },
-  { value: 'no', label: 'Không vào được' },
+  { value: 'in', label: 'Can enter' },
+  { value: 'tight', label: 'Tight fit' },
+  { value: 'no', label: 'Cannot enter' },
 ]
 const EXIT_OPTIONS: { value: ExitMethod; label: string }[] = [
-  { value: 'through', label: 'Đi thẳng' },
-  { value: 'turned', label: 'Quay đầu' },
-  { value: 'reversed', label: 'Lùi ra' },
-  { value: 'unknown', label: 'Chưa rõ' },
+  { value: 'through', label: 'Exit forwards' },
+  { value: 'turned', label: 'Turn around' },
+  { value: 'reversed', label: 'Reverse to exit' },
+  { value: 'unknown', label: 'Unknown' },
 ]
 
 type RecognitionAlternative = { transcript: string }
@@ -73,8 +73,8 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
       setReason(parsed.reason || fallbackText.trim())
     } else if (!clarificationUsed) {
       setClarificationUsed(true)
-      setError(parsed.question || 'Chưa hiểu báo cáo. Hãy chọn kết quả và cách ra bằng tay.')
-    } else setError('Chưa hiểu báo cáo. Hãy hoàn tất các lựa chọn bằng tay.')
+      setError(parsed.question || 'Report not understood. Select the access result and exit method manually.')
+    } else setError('Report not understood. Complete the choices manually.')
   }
 
   async function parseText() {
@@ -85,18 +85,18 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
     try { applyParse(await api.parseVoice(text.trim())) }
     catch (e) {
       setParse({ kind: 'unclear', reason: e instanceof Error ? e.message : String(e) })
-      setError('Không phân tích được. Hãy nhập báo cáo hoặc dùng các lựa chọn bên dưới.')
+      setError('Could not parse report. Type a report or use the choices below.')
     } finally { setBusy(false) }
   }
 
   function startListening() {
     if (!Speech) {
-      setError('Trình duyệt này chưa hỗ trợ nhận dạng giọng nói. Bạn vẫn có thể nhập nội dung hoặc chọn bằng tay.')
+      setError('This browser does not support speech recognition. Type your report or choose manually.')
       return
     }
     recognition.current?.stop()
     const instance = new Speech()
-    instance.lang = 'vi-VN'
+    instance.lang = 'en-GB'
     instance.interimResults = false
     instance.onresult = (event) => {
       const transcript = event.results[0]?.[0]?.transcript
@@ -107,14 +107,14 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
           setBusy(true)
           void api.parseVoice(transcript).then((parsed) => applyParse(parsed, transcript)).catch(() => {
             setParse({ kind: 'unclear' })
-            setError('Không phân tích được. Hãy kiểm tra nội dung và chọn bằng tay.')
+            setError('Could not parse report. Review the text and choose manually.')
           }).finally(() => setBusy(false))
         }
       }
     }
     instance.onerror = () => {
       setListening(false)
-      setError('Không nhận được giọng nói. Hãy nhập nội dung hoặc chọn bằng tay.')
+      setError('No speech received. Type your report or choose manually.')
     }
     instance.onend = () => setListening(false)
     recognition.current = instance
@@ -122,7 +122,7 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
     setListening(true)
     try { instance.start() } catch {
       setListening(false)
-      setError('Không thể bắt đầu nhận dạng. Hãy nhập nội dung hoặc chọn bằng tay.')
+      setError('Could not start speech recognition. Type your report or choose manually.')
     }
   }
 
@@ -133,29 +133,29 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
     setSubmitted('')
     try {
       if (mode === 'confirm') {
-        if (!result || !exit) { setError('Chọn xe vào được thế nào và đã ra bằng cách nào.'); return }
+        if (!result || !exit) { setError('Select how the vehicle entered and exited.'); return }
         await onConfirm(result, exit)
-        setSubmitted('Đã gửi xác nhận, đang chờ người điều hành duyệt.')
+        setSubmitted('Confirmation submitted; awaiting operator review.')
       } else {
         const finalReason = reason.trim() || text.trim()
-        if (!finalReason) { setError('Mô tả vật cản trước khi gửi.'); return }
+        if (!finalReason) { setError('Describe the blockage before submitting.'); return }
         await onBlockage(finalReason)
-        setSubmitted('Đã gửi báo cáo vật cản, đang chờ người điều hành duyệt.')
+        setSubmitted('Blockage report submitted; awaiting operator review.')
       }
     } catch (e) { setError(e instanceof Error ? e.message : String(e)) }
     finally { setBusy(false) }
   }
 
   return (
-    <section className="voice-report" aria-label="Báo cáo sau khi đến">
+    <section className="voice-report" aria-label="Report after arrival">
       <header className="voice-report-head">
-        <div><h3>Báo cáo điểm dừng</h3><p>{stop.name} · chỉ gửi sau khi bạn xác nhận</p></div>
+        <div><h3>Stop report</h3><p>{stop.name} · sent only after your confirmation</p></div>
       </header>
-      <div className="voice-mode" role="group" aria-label="Loại báo cáo">
-        <button type="button" disabled={busy} className={mode === 'confirm' ? 'is-active' : ''} onClick={() => { setMode('confirm'); setError(''); setSubmitted('') }}>Xác nhận vào/ra</button>
-        <button type="button" disabled={busy} className={mode === 'blockage' ? 'is-active' : ''} onClick={() => { setMode('blockage'); setError(''); setSubmitted('') }}>Báo vật cản</button>
+      <div className="voice-mode" role="group" aria-label="Report type">
+        <button type="button" disabled={busy} className={mode === 'confirm' ? 'is-active' : ''} onClick={() => { setMode('confirm'); setError(''); setSubmitted('') }}>Confirm entry/exit</button>
+        <button type="button" disabled={busy} className={mode === 'blockage' ? 'is-active' : ''} onClick={() => { setMode('blockage'); setError(''); setSubmitted('') }}>Report blockage</button>
       </div>
-      <label className="voice-field-label" htmlFor="voice-report-text">Nói hoặc nhập nội dung</label>
+      <label className="voice-field-label" htmlFor="voice-report-text">Speak or type your report</label>
       <div className="voice-input-row">
         <textarea id="voice-report-text" value={text} disabled={busy} onChange={(event) => {
           setText(event.target.value)
@@ -166,36 +166,36 @@ export function VoiceReport({ stop, vehicleId, destination, voiceEnabled, onConf
           }
           setSubmitted('')
         }} rows={2}
-          placeholder="Ví dụ: xe vào được, đi thẳng ra" aria-describedby="voice-report-help" />
-        <button type="button" className="icon-btn" disabled={busy} aria-label={listening ? 'Dừng ghi âm' : 'Nói báo cáo'} onClick={() => listening ? recognition.current?.stop() : startListening()}>
+          placeholder="Example: car entered, exited forwards" aria-describedby="voice-report-help" />
+        <button type="button" className="icon-btn" disabled={busy} aria-label={listening ? 'Stop recording' : 'Speak report'} onClick={() => listening ? recognition.current?.stop() : startListening()}>
           {listening ? <MicOff size={18} /> : <Mic size={18} />}
         </button>
       </div>
       <small id="voice-report-help" className="voice-help">
-        {voiceEnabled ? 'Nhận dạng tiếng Việt. Nội dung được xem lại trước khi gửi.' : 'Báo cáo giọng nói chưa bật. Bạn có thể nhập nội dung và chọn bên dưới.'}
+        {voiceEnabled ? 'Vietnamese speech recognition. Review the text before submitting.' : 'Voice reporting is disabled. Type your report and use the choices below.'}
       </small>
       {voiceEnabled && <button type="button" className="btn btn-ghost voice-parse" onClick={() => void parseText()} disabled={busy || !text.trim()}>
-        {busy ? <LoaderCircle size={15} className="spin" /> : null} Phân tích nội dung
+        {busy ? <LoaderCircle size={15} className="spin" /> : null} Parse report
       </button>}
       {mode === 'confirm' ? <>
-        <fieldset className="voice-choice"><legend>Xe vào điểm dừng thế nào?</legend><div className="voice-chips">
+        <fieldset className="voice-choice"><legend>How did the vehicle enter the stop?</legend><div className="voice-chips">
           {RESULT_OPTIONS.map((option) => <button key={option.value} type="button" aria-pressed={result === option.value}
             className={`chip ${result === option.value ? 'selected' : ''}`} disabled={busy} onClick={() => setResult(option.value)}>{option.label}</button>)}
         </div></fieldset>
-        <fieldset className="voice-choice"><legend>Xe ra bằng cách nào?</legend><div className="voice-chips">
+        <fieldset className="voice-choice"><legend>How did the vehicle exit?</legend><div className="voice-chips">
           {EXIT_OPTIONS.map((option) => <button key={option.value} type="button" aria-pressed={exit === option.value}
             className={`chip ${exit === option.value ? 'selected' : ''}`} disabled={busy} onClick={() => setExit(option.value)}>{option.label}</button>)}
         </div></fieldset>
-        <details className="voice-caveat"><summary>Điểm gửi báo cáo</summary><p>Xe {vehicleId}. Điểm đỗ {stop.lat.toFixed(5)}, {stop.lon.toFixed(5)}; điểm đến {destination.lat.toFixed(5)}, {destination.lon.toFixed(5)}. Báo cáo không đổi kết luận phù hợp hoặc an toàn.</p></details>
+        <details className="voice-caveat"><summary>Report location</summary><p>Vehicle {vehicleId}. Stop {stop.lat.toFixed(5)}, {stop.lon.toFixed(5)}; destination {destination.lat.toFixed(5)}, {destination.lon.toFixed(5)}. Reports do not change fit or safety conclusions.</p></details>
       </> : <>
-        <label className="voice-field-label" htmlFor="blockage-reason">Mô tả vật cản</label>
-        <textarea id="blockage-reason" value={reason} disabled={busy} onChange={(event) => setReason(event.target.value)} rows={2} placeholder="Ví dụ: xe tải chắn lối ra" />
-        {stop.way_id == null && <p className="voice-status">Điểm dừng này chưa có mã đường để gửi báo cáo vật cản.</p>}
+        <label className="voice-field-label" htmlFor="blockage-reason">Describe the blockage</label>
+        <textarea id="blockage-reason" value={reason} disabled={busy} onChange={(event) => setReason(event.target.value)} rows={2} placeholder="Example: truck blocking the exit" />
+        {stop.way_id == null && <p className="voice-status">This stop has no road ID for a blockage report.</p>}
       </>}
       {error && <p className="error-line" role="alert">{error}</p>}
       {submitted && <p className="ok-line" role="status">{submitted}</p>}
       <button type="button" className="btn btn-primary voice-submit" disabled={busy || (mode === 'blockage' && stop.way_id == null)} onClick={() => void submit()}>
-        {busy ? <LoaderCircle size={16} className="spin" /> : <Send size={15} />} Gửi báo cáo
+        {busy ? <LoaderCircle size={16} className="spin" /> : <Send size={15} />} Submit report
       </button>
     </section>
   )

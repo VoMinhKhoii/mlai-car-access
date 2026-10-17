@@ -165,8 +165,8 @@ class AreaGraph:
         for n in (w.nodes[0], w.nodes[-1]):
             for other in self.node_ways.get(n, ()):
                 if other != way_id and self.ways[other].name:
-                    return f"Nhánh cạnh {self.ways[other].name}"
-        return "Đường nhánh không tên"
+                    return f"Branch beside {self.ways[other].name}"
+        return "Unnamed side road"
 
     def nearest_node(self, lat: float, lon: float, predicate=None) -> tuple[int | None, float]:
         best, best_d = None, float("inf")
@@ -236,7 +236,7 @@ out skel qt;"""
         if attempt < 2:
             delay = 8 * (attempt + 1)
             if deadline is not None and deadline - time.monotonic() <= delay + 0.5:
-                raise Expired("hết thời hạn tải bản đồ OSM")
+                raise Expired("OSM map download deadline exceeded")
             time.sleep(delay)
     raise RuntimeError(f"Overpass unavailable: {errors}")
 
@@ -261,7 +261,7 @@ def load_elements(lat: float, lon: float, deadline: float | None = None, polite:
             return _load_elements(lat, lon, key, polite=polite)
     wait = deadline - time.monotonic() - 0.5
     if wait <= 0 or not lock.acquire(timeout=wait):
-        raise Expired("hết thời hạn chờ tải bản đồ OSM")
+        raise Expired("OSM map download wait deadline exceeded")
     try:
         return _load_elements(lat, lon, key, deadline, polite)
     finally:

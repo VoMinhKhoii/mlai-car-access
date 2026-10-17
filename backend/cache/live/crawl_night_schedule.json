@@ -1,9 +1,9 @@
 {
-  "pid": 69173,
-  "state": "waiting",
-  "start_at": "2026-10-17T21:00:00+07:00",
-  "stop_at": "2026-10-18T07:00:00+07:00",
-  "nice": 10,
+  "pid": 25987,
+  "state": "started",
+  "start_at": "2026-10-17T10:30:00+07:00",
+  "stop_at": "2026-10-17T13:00:00+07:00",
+  "nice": 15,
   "recurring": false,
   "portal_requests_before_start": 0,
   "command": [
@@ -12,6 +12,7 @@
     "--portal-interval",
     "180",
     "--stop-at",
-    "2026-10-18T07:00:00+07:00"
-  ]
+    "2026-10-17T13:00:00+07:00"
+  ],
+  "started_at": "2026-10-17T10:30:04.945991+07:00"
 }

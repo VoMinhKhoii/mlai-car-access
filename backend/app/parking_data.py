@@ -21,9 +21,9 @@ def _vetc_lots() -> list[dict]:
         if not f.get("geometry") or p.get("vehicle") == "motorbike":
             continue
         lon, lat = f["geometry"]["coordinates"][:2]
-        out.append({"id": f"vetc:{p.get('name')}", "lat": lat, "lon": lon, "name": p.get("name") or "Bãi đỗ VETC",
+        out.append({"id": f"vetc:{p.get('name')}", "lat": lat, "lon": lon, "name": p.get("name") or "VETC car park",
                     "address": p.get("address", ""), "source": "VETC",
-                    "source_label": "Danh sách bãi đỗ thanh toán điện tử VETC 2026", "source_url": p.get("source_url", ""),
+                    "source_label": "VETC electronic-payment car park list 2026", "source_url": p.get("source_url", ""),
                     "live_spaces": None})
     return out
 
@@ -45,7 +45,7 @@ def lots_near(g: AreaGraph, lat: float, lon: float, radius: float) -> list[dict]
             continue  # motorbike parking
         if haversine(lat, lon, lot["lat"], lot["lon"]) > radius:
             continue
-        kind = {"underground": "Hầm đỗ ô tô", "multi-storey": "Bãi đỗ ô tô nhiều tầng"}.get(t.get("parking", ""), "Bãi đỗ ô tô")
+        kind = {"underground": "Underground car park", "multi-storey": "Multi-storey car park"}.get(t.get("parking", ""), "Car park")
         out.append({"id": f"osm:{lot['id']}", "lat": lot["lat"], "lon": lot["lon"],
                     "name": t.get("name") or kind, "access": t.get("access", ""),
                     "fee": t.get("fee"), "capacity": t.get("capacity"), "source": "OSM",

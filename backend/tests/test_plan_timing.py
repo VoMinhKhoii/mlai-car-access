@@ -176,7 +176,7 @@ class PlanTimingAndSafetyTests(unittest.TestCase):
         self.assertIsNone(timing["leave_before_at"])
         self.assertIsNone(timing["or_after_at"])
         self.assertEqual(
-            timing["reason"], "Để đón xe an toàn, bạn có thể chọn giờ đến khác.")
+            timing["reason"], "Try another arrival time for pickup.")
         self.assertEqual(timing["failure_codes"], ["flood_stay"])
 
     def test_flood_timing_no_qualified_slot_returns_reason_without_clocks(self):

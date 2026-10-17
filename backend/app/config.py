@@ -28,7 +28,7 @@ _load_env_file(ROOT / ".env.local")
 # One continuously running process owns operator sessions, review state, quotas and background jobs. A serverless
 # platform gives each instance its own throwaway copy of that state, so it is refused rather than silently wrong.
 if os.environ.get("VERCEL"):
-    raise RuntimeError("Vào Được backend needs one persistent process; run it with uvicorn --workers 1, not serverless")
+    raise RuntimeError("Ngõ Ngách backend needs one persistent process; run it with uvicorn --workers 1, not serverless")
 
 CACHE = _path_override("VAODUOC_CACHE", ROOT / "backend" / "cache")
 STORE = _path_override("VAODUOC_STORE", ROOT / "backend" / "store")

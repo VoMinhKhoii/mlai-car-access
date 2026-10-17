@@ -106,9 +106,9 @@ def ask_maps(lat: float, lon: float, alley: str) -> dict:
         raise LookupOff("GEMINI_API_KEY")
     budget.spend("gemini_maps_grounding")
     prompt = (f"I am driving a car to an address in {alley}, Ho Chi Minh City, Vietnam. Using Google Maps places and "
-              "reviews near this alley only, answer briefly in Vietnamese: (1) do reviews or place details indicate "
+              "reviews near this alley only, answer briefly in English: (1) do reviews or place details indicate "
               "cars can enter this alley or park nearby? (2) any mention of narrow access, flooding, or where drivers "
-              "park? Say 'không có thông tin' when Maps has nothing. Do not guess.")
+              "park? Say 'No information available' when Maps has nothing. Do not guess.")
     body = {"contents": [{"parts": [{"text": prompt}]}], "tools": [{"googleMaps": {}}],
             "toolConfig": {"retrievalConfig": {"latLng": {"latitude": lat, "longitude": lon}}}}
     last = None
@@ -127,4 +127,4 @@ def ask_maps(lat: float, lon: float, alley: str) -> dict:
             if m:
                 sources.append({"title": m.get("title"), "uri": m.get("uri")})
         return {"text": text, "sources": sources, "attribution": "Google Maps"}
-    raise LookupOff(f"Tất cả khóa Gemini đang bị giới hạn: {last}")
+    raise LookupOff(f"All Gemini keys are rate-limited: {last}")

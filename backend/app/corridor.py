@@ -199,7 +199,7 @@ def _label(route) -> str:
             by[s["name"]] = by.get(s["name"], 0) + s["m"]
     top = sorted(by.items(), key=lambda x: -x[1])[:3]
     order = [s["name"] for s in route["steps"] if s["name"] in dict(top)]
-    return "qua " + ", ".join(dict.fromkeys(order)) if order else "tuyến trực tiếp"
+    return "via " + ", ".join(dict.fromkeys(order)) if order else "direct route"
 
 
 # ---- scoring --------------------------------------------------------------------
@@ -212,7 +212,7 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
     With schedule_cameras (operator only), the unread cameras most relevant to the routes are queued as one bounded
     background job (`camera_job`); the client polls it and asks again once it is ready."""
     if not GOONG_API_KEY:
-        return {"available": False, "reason": "Cần GOONG_API_KEY để tìm tuyến đường lớn"}
+        return {"available": False, "reason": "GOONG_API_KEY is required for main-road routes"}
     p = get_profile(vehicle_id)
     now = datetime.now(VN_TZ)
     depart = (depart_at or now).astimezone(VN_TZ)
@@ -221,7 +221,7 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
 
     base = goong_route(origin, dest)
     if not base:
-        return {"available": False, "reason": "Goong không trả về tuyến"}
+        return {"available": False, "reason": "Goong returned no routes"}
     base_pts = _samples(base)
     with ThreadPoolExecutor(4) as pool:
         alts = [r for r in pool.map(lambda v: goong_route(origin, dest, v),
@@ -247,9 +247,9 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
                 camera_job = {"id": job["id"], "state": job["state"], "dropped": dropped}
             except cameras.Busy as exc:
                 camera_job = {"id": None, "state": "busy", "retry_after": exc.retry_after, "dropped": dropped,
-                              "reason": "Hàng đợi đọc camera đang đầy"}
+                              "reason": "Camera reading queue is full"}
         camera_job = camera_job or {"id": None, "state": "not_scheduled", "dropped": dropped,
-                                    "reason": None if not chosen else "Cần đăng nhập điều hành để đọc camera mới"}
+                                    "reason": None if not chosen else "Operator sign-in required for new camera readings"}
         camera_job.update(cameras_requested=len(set(cam_ids) - set(readings)),
                           cameras_scheduled=len(chosen) if camera_job["id"] else 0)
         scheduled = set(chosen) if camera_job["id"] else set()
@@ -269,7 +269,7 @@ def corridor(origin: tuple[float, float], dest: tuple[float, float], vehicle_id:
     summary = _summary(best, out[0], out)
     if use_cams and best["status"] != "blocked" and best["traffic_unknown"] > 0:
         count = best["traffic_unknown"]
-        summary += f" {count} đoạn giao thông chưa được camera xác nhận; ETA không thể loại trừ ùn tắc tại các đoạn đó."
+        summary += f" {count} segments lack camera traffic confirmation; ETA cannot rule out congestion there."
     return {"available": True, "depart_at": depart.isoformat(timespec="minutes"), "checked_at": now.isoformat(timespec="seconds"),
             "live": use_cams, "live_note": None if use_cams else _why_not_live(lead),
             "vehicle": {"id": p.id, "label": p.label, "safe_water_depth": p.safe_water_depth},
@@ -297,18 +297,18 @@ def _camera_subset(clusters, readings) -> tuple[list[str], list[dict]]:
             for c in cl:
                 if c["id"] in readings or c["id"] in chosen or c["id"] in {d["id"] for d in dropped}:
                     continue
-                why = ("camera báo mất tín hiệu" if c.get("status") == "NOT_IMAGE"
-                       else "đoạn này đã có camera khác trong lượt đọc" if any(x["id"] in chosen for x in cl)
-                       else f"vượt giới hạn {cameras.MAX_JOB_CAMERAS} camera mỗi lượt")
+                why = ("camera is offline" if c.get("status") == "NOT_IMAGE"
+                       else "another camera already covers this segment in this reading" if any(x["id"] in chosen for x in cl)
+                       else f"exceeds the limit of {cameras.MAX_JOB_CAMERAS} cameras per reading")
                 dropped.append({"id": c["id"], "name": c["name"], "reason": why})
     return chosen, dropped
 
 
 def _why_not_live(lead: float) -> str:
     if not flags.enabled("ai_camera_flood"):
-        return "Đang tắt AI đọc camera: chỉ dùng dự báo ngập (triều, mưa, lịch sử)."
-    when = "đã qua" if lead < 0 else f"còn {lead / 60:.0f} giờ nữa" if lead < 24 * 60 else f"còn {lead / 1440:.0f} ngày nữa"
-    return f"Giờ đi {when}: camera chỉ cho biết lúc này, nên tuyến được chọn theo dự báo ngập (triều, mưa, lịch sử)."
+        return "AI camera reading is disabled: using flood forecasts only (tides, rain, history)."
+    when = "is in the past" if lead < 0 else f"is in {lead / 60:.0f} hours" if lead < 24 * 60 else f"is in {lead / 1440:.0f} days"
+    return f"Departure {when}: cameras show current conditions only, so routes use flood forecasts (tides, rain, history)."
 
 
 def _observe(cls, readings, p, scheduled: set[str] = frozenset()) -> list[dict]:
@@ -354,33 +354,33 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapsho
             + TRAFFIC_QUEUE_MIN.get(h["traffic"], 0)
         h["delay_min"] = round(d)
         if h["traffic"] in ("un_u", "ket_cung"):
-            reasons.append((d, f"Camera {h['name']} lúc {h['at']}: {h['traffic_vi'].lower()} (+{d:.0f} phút)"))
+            reasons.append((d, f"Camera {h['name']} at {h['at']}: {h['traffic_vi'].lower()} (+{d:.0f} min)"))
     rest = base_min * max(0.0, length - covered) / length * (typical - 1)
     delay = sum(h["delay_min"] for h in seen) + rest
     if rest >= 1:
-        reasons.append((rest, f"Đoạn không có camera: tính theo mức chung ×{typical:.1f} (+{rest:.0f} phút)"))
+        reasons.append((rest, f"Segments without cameras: general multiplier ×{typical:.1f} (+{rest:.0f} min)"))
     for h in hotspots:
         if h["flood_status"] == "blocked":
             blocked = True
-            reasons.append((999, f"Camera {h['name']} lúc {h['at']}: ngập ~{h['depth_cm']} cm, quá mức an toàn "
-                                 f"{p.safe_water_depth * 100:.0f} cm của xe"))
+            reasons.append((999, f"Camera {h['name']} at {h['at']}: flooding ~{h['depth_cm']} cm, exceeds vehicle limit "
+                                 f"{p.safe_water_depth * 100:.0f} cm"))
         elif h["flood_status"] == "risky":
             risky += 1
-            reasons.append((RISKY_FLOOD_MIN, f"Camera {h['name']} lúc {h['at']}: ngập ~{h['depth_cm']} cm"))
+            reasons.append((RISKY_FLOOD_MIN, f"Camera {h['name']} at {h['at']}: flooding ~{h['depth_cm']} cm"))
     forecast = _forecast_flood(pts, r, depart, rain, p.safe_water_depth, snapshot)
     for f in forecast:
         depth = f["depth"]
         if f["status"] == "blocked":
             blocked = True
             detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
-                      if depth else "không rõ độ sâu")
-            reasons.append((999, f"Dự báo ngập {detail} ở {f['street']} lúc {_fmt(datetime.fromisoformat(f['at']))}: "
-                                 "quá mức an toàn của xe"))
+                      if depth else "unknown depth")
+            reasons.append((999, f"Forecast flooding {detail} at {f['street']} at {_fmt(datetime.fromisoformat(f['at']))}: "
+                                 "exceeds the vehicle limit"))
         elif f["status"] == "risky":
             risky += 1
             detail = (f"{depth['lo'] * 100:.0f}–{depth['hi'] * 100:.0f} cm"
-                      if depth else f"chưa đủ dữ liệu ({f['reason']})")
-            reasons.append((RISKY_FLOOD_MIN, f"Dự báo {detail} ở {f['street']} lúc "
+                      if depth else f"insufficient data ({f['reason']})")
+            reasons.append((RISKY_FLOOD_MIN, f"Forecast {detail} at {f['street']} at "
                                              f"{_fmt(datetime.fromisoformat(f['at']))}"))
     alleys, at = [], 0.0
     for s in r["steps"]:  # alleys at either end are the arrival plan's (or the start's) business
@@ -388,7 +388,7 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapsho
             alleys.append(s["name"])
         at += s["m"]
     for a in alleys:
-        reasons.append((ALLEY_MIN, f"Đi qua {a}: chưa kiểm tra bề rộng cho xe này"))
+        reasons.append((ALLEY_MIN, f"Via {a}: width not checked for this vehicle"))
     eta = base_min + delay + RISKY_FLOOD_MIN * risky + ALLEY_MIN * len(alleys)
     status = "blocked" if blocked else "risky" if risky else "ok"
     return {"id": i, "label": _label(r), "via": r["via"] and {"name": r["via"]["name"], "lat": r["via"]["lat"],
@@ -403,16 +403,16 @@ def _score(i, r, pts, hotspots, typical, p, depart, rain, snapshot: FloodSnapsho
 
 def _summary(best: dict, goong: dict, routes: list[dict]) -> str:
     if best["status"] == "blocked":
-        return "Mọi tuyến đều có đoạn ngập quá mức an toàn của xe. Cân nhắc đổi giờ đi."
+        return "All routes have flooding above the vehicle limit. Consider changing departure time."
     if best is goong:
         others = [x for x in routes if x is not best]
         gap = min((x["eta_min"] for x in others), default=best["eta_min"]) - best["eta_min"]
-        tail = f" Các tuyến khác chậm hơn {gap} phút trở lên." if gap > 0 else \
-            " Có tuyến khác nhanh tương đương." if others else ""
-        return f"Đi tuyến Goong gợi ý ({best['label']}), khoảng {best['eta_min']} phút.{tail}"
-    why = goong["top_reason"] or "tuyến này nhanh hơn"
+        tail = f" Other routes are at least {gap} min slower." if gap > 0 else \
+            " Another route is equally fast." if others else ""
+        return f"Take the Goong suggestion ({best['label']}), about {best['eta_min']} min.{tail}"
+    why = goong["top_reason"] or "this route is faster"
     gain = goong["eta_min"] - best["eta_min"]
-    lead = f"nhanh hơn tuyến Goong gợi ý ~{gain} phút" if gain > 0 else "tránh được điểm xấu trên tuyến Goong"
+    lead = f"about {gain} min faster than the Goong suggestion" if gain > 0 else "avoids adverse conditions on the Goong route"
     if goong["status"] == "blocked":
-        lead = "tuyến Goong gợi ý bị ngập"
-    return f"Nên đi {best['label']} (~{best['eta_min']} phút), {lead}. Lý do: {why}."
+        lead = "the Goong suggestion is flooded"
+    return f"Recommended: {best['label']} (~{best['eta_min']} min), {lead}. Reason: {why}."

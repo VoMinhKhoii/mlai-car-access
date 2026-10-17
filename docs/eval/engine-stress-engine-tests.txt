@@ -1,0 +1,181 @@
+F.............s......................................................... [ 58%]
+....................................F...............          [100%]
+=================================== FAILURES ===================================
+_ EstimateTests.test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer _
+
+self = <tests.test_engine_estimate.EstimateTests testMethod=test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer>
+
+    def test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer(self):
+        s={'name':'Stop','kind':'street','way_id':20,'walk':{'meters':39,'minutes':1},
+           'fit':{'class':'unknown','width_range':self.widths()[20].to_json()},
+           'way_out':{'mode':'unknown','text':'Exit unverified','manoeuvre_status':'unknown'},
+           'legality':{'status':'Unverified','rules':[]},'flood':{},'verified':False,
+           'unverified_reasons':['Exit unverified'],'estimate':self.estimate()}
+        compact=agent.compact_stop(s)
+        self.assertEqual(compact['unverified_reasons'],s['unverified_reasons'])
+        self.assertEqual(compact['way_out_status']['mode'],'unknown')
+        p={'verdict':{'headline':'Park near the door — low confidence','estimate':compact['estimate'],
+                       'unverified_reasons':s['unverified_reasons']},'stop_points':[compact]}
+>       answer=agent.grounded_answer(p)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_engine_estimate.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+p = {'stop_points': [{'estimate': {'answer': 'fits', 'basis': 'measured ≈5.10 m (Unnamed side road; OSM 10) · at the door ...ction': 1.0, ...}, ...}, 'headline': 'Park near the door — low confidence', 'unverified_reasons': ['Exit unverified']}}
+
+    def grounded_answer(p):
+        verdict = p.get('verdict', {})
+        estimate = verdict.get('estimate') or {}
+        parts = []
+        if estimate:
+            answers = {'fits':'access appears possible', 'tight':'access appears tight', 'no':'vehicle access is not suitable', 'unknown':'access is uncertain'}
+            confidence = {'high':'High', 'medium':'Medium', 'low':'Low'}.get(estimate.get('confidence'), 'Low')
+            parts.append('Estimate: ' + answers.get(estimate.get('answer'), 'access is uncertain') + '. ' + confidence + ' confidence.')
+            limiting = estimate.get('limiting_width') or {}
+            basis = []
+            if limiting.get('value_m') is not None:
+                item = 'limiting width approximately ' + str(limiting['value_m']) + ' m'
+                if limiting.get('way_name'): item += ' at ' + limiting['way_name']
+                if limiting.get('source'): item += ' (' + _english_source(limiting['source']) + ')'
+                basis.append(item)
+            coverage = estimate.get('coverage') or {}
+            if coverage.get('sampled_segments') is not None and coverage.get('total_segments') is not None:
+                basis.append(str(coverage['sampled_segments']) + '/' + str(coverage['total_segments']) + ' route segments have width samples')
+            if not basis:
+                raw = estimate.get('basis') or ''
+                if raw and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', raw, re.I):
+                    basis.append(raw)
+                else:
+                    basis.append('available sourced road and route evidence')
+                    if 'osm' in strip_accents(raw).lower(): basis.append('OpenStreetMap')
+            parts.append('Basis: ' + '; '.join(basis) + '.')
+        else:
+            headline = verdict.get('headline', '')
+            parts.append(headline if headline and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', headline, re.I) else 'Vehicle entry and exit remain unverified.')
+        if p.get('vehicle_note'):
+            parts.append(p['vehicle_note'])
+        for stop in p.get('stop_points', [])[:1]:
+            rules = stop.get('legal_rules') or [stop.get('legality', {}).get('rule') or {}]
+            restricted = [r for r in rules if r.get('status') in ('Restricted', 'Prohibited')]
+            if restricted:
+                for rule in restricted:
+                    text = rule.get('text', '')
+                    restriction = 'Do not stop here' if rule.get('status') == 'Prohibited' else 'Stopping restrictions apply here'
+                    if text and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I): restriction += ': ' + text
+                    parts.append(restriction + (' (' + rule['citation'] + ')' if rule.get('citation') else '') + '.')
+                continue
+            sentence = 'Suggested stop: ' + (stop.get('name') or 'mapped stop')
+            walk = stop.get('walk') or {}
+            if walk.get('meters') is not None: sentence += '; walk ' + str(walk['meters']) + ' m'
+            if stop.get('width', {}).get('source'): sentence += '; source: ' + _english_source(stop['width']['source'])
+            parts.append(sentence + '.')
+        timing = p.get('timing') or {}
+        if timing.get('leave_before'): parts.append('Please leave before ' + timing['leave_before'] + '.')
+        elif timing.get('or_after'): parts.append('Wait until after ' + timing['or_after'] + '.')
+        if p.get('tide_note'): parts.append(p['tide_note'])
+        raw_caveats = list(verdict.get('unverified_reasons') or [])
+        for stop in p.get('stop_points', [])[:1]:
+            raw_caveats.extend(stop.get('unverified_reasons') or [])
+            if stop.get('legality', {}).get('status') == 'Unverified':
+                raw_caveats.append('Stopping legality has not been verified')
+>           if stop.get('flood', {}).get('depth') is None and stop.get('flood'):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'NoneType' object has no attribute 'get'
+
+backend/app/agent.py:685: AttributeError
+____________________ test_job_cap_restart_and_live_reserve _____________________
+
+tmp_path = PosixPath('/private/var/folders/4b/18tv83z972lfxrd5kw3_44lm0000gn/T/pytest-of-khoivo/pytest-75/test_job_cap_restart_and_live_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106608550>
+
+    def test_job_cap_restart_and_live_reserve(tmp_path, monkeypatch):
+        monkeypatch.setattr(ab, 'STORE', tmp_path)
+        monkeypatch.setattr(ab, 'FILE', tmp_path / 'paid.json')
+        monkeypatch.delenv('AGENT_PAID_LIMIT_USD', raising=False)
+        monkeypatch.delenv('AGENT_PAID_CALL_LIMIT', raising=False)
+        body = {'generationConfig': {'maxOutputTokens': 2048}}
+        with ab.ledger() as data:
+            data['spent_usd'] = .01
+        rid = ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        ab.finish(rid, {'promptTokenCount': 100, 'candidatesTokenCount': 20, 'thoughtsTokenCount': 30})
+        assert ab.report()['jobs']['imagery']['spent_usd'] == pytest.approx(.0006)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = .999
+        with pytest.raises(ValueError, match='paid ceiling'):
+            ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = 0
+            data['spent_usd'] = 1.09
+        with pytest.raises(ValueError, match='3 USD'):
+>           ab.reserve(body, job_id='imagery', leave_usd=1.9)
+
+backend/tests/test_imagery_evidence.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+body = {'generationConfig': {'maxOutputTokens': 2048}}
+
+    def reserve(body: dict, *, job_id: str | None = None, job_limit_usd: float = 1.0,
+                leave_usd: float = 0.0) -> str:
+        # UTF-8 bytes bound input tokens conservatively; reserve the entire output allowance too.
+        import uuid
+        ceiling = (len(json.dumps(body, ensure_ascii=False).encode()) + 4096) * INPUT_USD_PER_M / 1e6
+        ceiling += max(AGENT_OUTPUT_TOKENS, body.get("generationConfig", {}).get(
+            "maxOutputTokens", AGENT_OUTPUT_TOKENS)) * OUTPUT_USD_PER_M / 1e6
+        with ledger() as u:
+            call_limit = int(os.environ.get("AGENT_PAID_CALL_LIMIT", "0"))
+            if call_limit and u["paid_calls"] >= call_limit:
+                raise ValueError("Paid Gemini request limit reached; retry later.")
+            limit = min(LIMIT, float(os.environ.get("AGENT_PAID_LIMIT_USD", str(LIMIT))))
+            if job_id:
+                # Job and global reservations share ONE flock/transaction. Restarting
+                # a worker cannot reset its allowance, or race the live demo agent.
+                job = u.setdefault("jobs", {}).setdefault(job_id, {"spent_usd": 0.0, "reservations": {}})
+                if job["spent_usd"] + sum(job["reservations"].values()) + ceiling > min(1.0, job_limit_usd):
+                    raise ValueError("Imagery job reached its paid ceiling (at most 1 USD).")
+                limit = min(limit, LIMIT - max(0.0, leave_usd))
+            if u["spent_usd"] + sum(u["reservations"].values()) + ceiling >= limit:
+>               raise ValueError("USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.")
+E               ValueError: USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.
+
+backend/app/agent_budget.py:98: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/4b/18tv83z972lfxrd5kw3_44lm0000gn/T/pytest-of-khoivo/pytest-75/test_job_cap_restart_and_live_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106608550>
+
+    def test_job_cap_restart_and_live_reserve(tmp_path, monkeypatch):
+        monkeypatch.setattr(ab, 'STORE', tmp_path)
+        monkeypatch.setattr(ab, 'FILE', tmp_path / 'paid.json')
+        monkeypatch.delenv('AGENT_PAID_LIMIT_USD', raising=False)
+        monkeypatch.delenv('AGENT_PAID_CALL_LIMIT', raising=False)
+        body = {'generationConfig': {'maxOutputTokens': 2048}}
+        with ab.ledger() as data:
+            data['spent_usd'] = .01
+        rid = ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        ab.finish(rid, {'promptTokenCount': 100, 'candidatesTokenCount': 20, 'thoughtsTokenCount': 30})
+        assert ab.report()['jobs']['imagery']['spent_usd'] == pytest.approx(.0006)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = .999
+        with pytest.raises(ValueError, match='paid ceiling'):
+            ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = 0
+            data['spent_usd'] = 1.09
+>       with pytest.raises(ValueError, match='3 USD'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: '3 USD'
+E         Actual message: 'USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.'
+
+backend/tests/test_imagery_evidence.py:38: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/test_engine_estimate.py::EstimateTests::test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer
+FAILED backend/tests/test_imagery_evidence.py::test_job_cap_restart_and_live_reserve
+2 failed, 121 passed, 1 skipped, 1 warning, 11 subtests passed in 16.76s

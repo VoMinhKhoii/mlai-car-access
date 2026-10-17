@@ -5,10 +5,16 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from app import agent, agent_budget
+from app import agent, agent_budget, geocoding
 
 
 class AgentTests(unittest.TestCase):
+    def setUp(self):
+        for mock in (patch.object(geocoding, '_goong_keys', return_value=[]),
+                     patch.object(agent, '_nominatim', return_value=[])):
+            mock.start()
+            self.addCleanup(mock.stop)
+
     def test_signed_parts_survive_followup(self):
         signed = {"role": "model", "parts": [{"functionCall": {"name": "tim_dia_diem", "args": {"query": "hẻm"}},
                                              "thoughtSignature": "signed-exactly"}]}
@@ -52,7 +58,7 @@ class AgentTests(unittest.TestCase):
             self.assertAlmostEqual(agent_budget.report()["spent_usd"], .0006)
             with agent_budget.ledger() as u:
                 u["spent_usd"] = 2.999
-            with self.assertRaisesRegex(ValueError, "3 USD"):
+            with self.assertRaisesRegex(ValueError, r"(?:3 USD|USD 3)"):
                 agent_budget.reserve(body)
             self.assertEqual(agent_budget.report()["paid_calls"], 1)
             self.assertFalse(agent_budget.report()["reservations"])
@@ -69,7 +75,7 @@ class AgentTests(unittest.TestCase):
         with patch.object(agent.ai, "gemini_keys", return_value=[]), \
                 patch.dict(agent.os.environ, {"AGENT_ALLOW_PAID": "0", "PROD_GEMINI_API_KEY": "test-only"}), \
                 patch.object(agent.httpx, "post") as post:
-            with self.assertRaisesRegex(ValueError, "trả phí đang tắt"):
+            with self.assertRaisesRegex(ValueError, "Paid access is disabled"):
                 agent.generate({}, allow_paid=True)
             post.assert_not_called()
         with patch.object(agent.ai, "gemini_keys", return_value=[]), \

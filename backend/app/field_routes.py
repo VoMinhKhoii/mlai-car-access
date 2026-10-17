@@ -34,9 +34,9 @@ MAX_PHOTO = 8 * 1024 * 1024
 def require_token(authorization: str = Header('')):
     token = os.environ.get('FIELD_TOKEN', '')
     if not token:
-        raise HTTPException(503, 'Chưa cấu hình FIELD_TOKEN trên máy chủ.')
+        raise HTTPException(503, 'FIELD_TOKEN is not configured on the server.')
     if not hmac.compare_digest(authorization.encode(), ('Bearer '+token).encode()):
-        raise HTTPException(401, 'Mã nhóm không đúng hoặc đã đổi.')
+        raise HTTPException(401, 'Team code is incorrect or has changed.')
 
 
 router = APIRouter(dependencies=[Depends(require_token)])
@@ -50,7 +50,7 @@ class Position(BaseModel):
     @model_validator(mode='after')
     def hcmc(self):
         if not in_hcmc(self.lat, self.lon):
-            raise ValueError('Vị trí phải trong TP.HCM.')
+            raise ValueError('Location must be within HCMC.')
         return self
 
 
@@ -75,10 +75,10 @@ class Measurement(Position):
     def name_present(self):
         self.measured_by = self.measured_by.strip()
         if not self.measured_by:
-            raise ValueError('Cần tên người đo.')
+            raise ValueError('Name of measurer is required.')
         if self.measured_at is not None:
             if self.measured_at.tzinfo is None or self.measured_at.timestamp() > datetime.now(timezone.utc).timestamp()+600:
-                raise ValueError('Thời điểm đo cần múi giờ và không nằm trong tương lai.')
+                raise ValueError('Measurement time must include a timezone and cannot be in the future.')
         return self
 
 
@@ -93,20 +93,20 @@ class Arrival(Position):
 def inventory():
     data = evidence_queue.read(evidence_queue.INVENTORY)
     if not data.get('ways'):
-        raise HTTPException(503, 'Chưa có kho đoạn đường offline. Chuẩn bị evidence_inventory.json trước.')
+        raise HTTPException(503, 'Offline road inventory is unavailable. Prepare evidence_inventory.json first.')
     return data['ways']
 
 
 def way_record(wid: int, lat: float, lon: float, ways=None):
     row = (ways if ways is not None else inventory()).get(str(wid))
     if not row or not row.get('coords'):
-        raise HTTPException(422, 'Way chưa có trong kho OSM offline.')
+        raise HTTPException(422, 'Way is not in the offline OSM inventory.')
     # Require the measurement to lie near the selected geometry, not its midpoint.
     coords = [(x*109400, y*110574) for x,y in row['coords']]
     geom = LineString(coords) if len(coords)>1 else Point(coords[0])
     distance = geom.distance(Point(lon*109400, lat*110574))
     if distance > 150:
-        raise HTTPException(422, 'Vị trí cách đoạn đường quá 150 m. Kiểm tra GPS và Way ID.')
+        raise HTTPException(422, 'Location is over 150 m from the road segment. Check GPS and Way ID.')
     return row, round(distance, 1)
 
 
@@ -158,9 +158,9 @@ def photo_bytes(encoded):
     try:
         raw = base64.b64decode(encoded, validate=True)
     except (ValueError, binascii.Error):
-        raise HTTPException(422, 'Ảnh base64 không hợp lệ.')
+        raise HTTPException(422, 'Invalid base64 photo.')
     if len(raw) > MAX_PHOTO:
-        raise HTTPException(413, 'Ảnh tối đa 8 MB.')
+        raise HTTPException(413, 'Photo must be at most 8 MB.')
     if raw.startswith(b'\xff\xd8\xff'):
         ext = '.jpg'
     elif raw.startswith(b'\x89PNG\r\n\x1a\n'):
@@ -170,7 +170,7 @@ def photo_bytes(encoded):
     elif raw[4:8] == b'ftyp' and raw[8:12] in (b'heic', b'heix', b'hevc', b'mif1'):
         ext = '.heic'
     else:
-        raise HTTPException(422, 'Chỉ nhận ảnh JPEG, PNG, WebP hoặc HEIC gốc.')
+        raise HTTPException(422, 'Only original JPEG, PNG, WebP or HEIC photos are accepted.')
     # Keep original bytes, including EXIF GPS. Do not resize or re-encode.
     return raw, ext
 
@@ -191,7 +191,7 @@ def field_queue(limit: int = Query(30, ge=1, le=100), bbox: str | None = None):
 @router.get('/api/field/snap')
 def snap(lat: float, lon: float):
     if not all(math.isfinite(x) for x in (lat,lon)) or not in_hcmc(lat, lon):
-        raise HTTPException(422, 'Vị trí phải trong TP.HCM.')
+        raise HTTPException(422, 'Location must be within HCMC.')
     nearby = []
     for wid, row in inventory().items():
         cs = row.get('coords', [])
@@ -203,7 +203,7 @@ def snap(lat: float, lon: float):
             _, distance = way_record(int(wid),lat,lon,{wid: row})
         except HTTPException:
             continue
-        nearby.append({'way_id':int(wid),'name':row.get('tags',{}).get('name','Đoạn không tên'),'distance_m':distance})
+        nearby.append({'way_id':int(wid),'name':row.get('tags',{}).get('name','Unnamed segment'),'distance_m':distance})
     nearby.sort(key=lambda r:r['distance_m'])
     return {'items':nearby[:5]}
 
@@ -213,11 +213,11 @@ async def bounded_model(request, model):
     async for chunk in request.stream():
         body.extend(chunk)
         if len(body)>12*1024*1024:
-            raise HTTPException(413, 'Bản gửi tối đa 12 MB.')
+            raise HTTPException(413, 'Submission must be at most 12 MB.')
     try:
         return model.model_validate_json(bytes(body))
     except ValidationError:
-        raise HTTPException(422, 'Dữ liệu không hợp lệ. Kiểm tra GPS, Way ID, tên, phương pháp và bề rộng 0,5–15 m.')
+        raise HTTPException(422, 'Invalid data. Check GPS, Way ID, name, method and width (0.5–15 m).')
 
 
 @router.post('/api/field/measure')
@@ -244,14 +244,14 @@ def save_measurement(m):
         except FileExistsError:
             pass
         photo_url = '/api/field/photos/'+filename
-    method_vi = {'tape':'thước dây','lidar':'LiDAR','pacing':'bước chân'}[m.method]
+    method_vi = {'tape':'tape measure','lidar':'LiDAR','pacing':'pacing'}[m.method]
     recorded_at = datetime.now(timezone.utc).isoformat(timespec='seconds')
     row = {'osm_way_id':m.way_id,'alley_name':way.get('tags',{}).get('name',''),
            'width_m':m.width_m,'date':m.measured_at.isoformat(timespec='seconds') if m.measured_at else recorded_at,
            'recorded_at':recorded_at,
            'measured_by':m.measured_by,'note':'; '.join(x for x in [m.note,m.position_note,
-             'Vật cản: '+', '.join(m.obstructions) if m.obstructions else ''] if x),
-           'photo_url':photo_url,'submission_id':str(m.submission_id),'source':'Nhóm đo hiện trường ('+method_vi+')',
+             'Obstructions: '+', '.join(m.obstructions) if m.obstructions else ''] if x),
+           'photo_url':photo_url,'submission_id':str(m.submission_id),'source':'Field team ('+method_vi+')',
            'method':m.method,'lat':m.lat,'lon':m.lon,'accuracy_m':m.accuracy_m,
            'position_note':m.position_note,'obstructions':','.join(m.obstructions),'turn_space':m.turn_space,
            'turn_width_m':m.turn_width_m,'turn_length_m':m.turn_length_m,
@@ -288,7 +288,7 @@ def confirm(c: Arrival):
     try:
         p = vehicles.get_profile(c.vehicle_id)
     except KeyError:
-        raise HTTPException(422, 'Mẫu xe không tồn tại.')
+        raise HTTPException(422, 'Vehicle model does not exist.')
     ways = inventory()
     for wid in c.way_ids:
         way_record(wid,c.lat,c.lon,ways)
@@ -324,7 +324,7 @@ def confirm(c: Arrival):
 def field_page():
     path = FRONTEND_DIST/'field.html'
     if not path.exists():
-        raise HTTPException(503, 'Chạy cd frontend && npm run build trước.')
+        raise HTTPException(503, 'Run cd frontend && npm run build first.')
     return FileResponse(path,headers={'Cache-Control':'no-cache'})
 
 

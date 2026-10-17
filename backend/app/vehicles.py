@@ -19,17 +19,17 @@ CSV_PATH = DATA / "vehicles" / "vn_car_profiles.csv"
 MIRROR_ALLOWANCE_M = 0.25  # added to body width when mirror width isn't published
 
 SIZE_CLASSES = {
-    "XS": ("Xe cỡ nhỏ", ["VinFast VF 3", "Kia Morning", "Hyundai Grand i10"]),
-    "S": ("Sedan & crossover cỡ B/C", ["Toyota Vios", "Honda City", "Hyundai Accent", "Mazda Mazda3",
+    "XS": ("Mini car", ["VinFast VF 3", "Kia Morning", "Hyundai Grand i10"]),
+    "S": ("4-seat sedan & compact crossover", ["Toyota Vios", "Honda City", "Hyundai Accent", "Mazda Mazda3",
                                        "VinFast VF 5", "VinFast VF 6", "Toyota Yaris Cross", "Hyundai Creta",
                                        "Kia Seltos", "Mitsubishi Xforce", "Toyota Corolla Cross",
                                        "Mitsubishi Xpander", "Mazda CX-5"]),
-    "M": ("SUV/MPV 7 chỗ & sedan cỡ D", ["Toyota Camry", "Mercedes-Benz C-Class", "VinFast VF 7", "VinFast VF 8",
+    "M": ("7-seat SUV/MPV & large sedan", ["Toyota Camry", "Mercedes-Benz C-Class", "VinFast VF 7", "VinFast VF 8",
                                          "VinFast Limo Green", "Ford Territory", "Toyota Innova Cross",
                                          "Toyota Fortuner", "Hyundai Santa Fe", "Ford Everest"]),
-    "L": ("Xe lớn, bán tải, tải nhẹ", ["VinFast VF 9", "Kia Carnival", "Ford Ranger", "Hyundai New Porter H150",
+    "L": ("Large car, pickup & light truck", ["VinFast VF 9", "Kia Carnival", "Ford Ranger", "Hyundai New Porter H150",
                                         "Isuzu QKR"]),
-    "XL": ("Xe khách 16 chỗ, van", ["Ford Transit", "Hyundai Solati"]),
+    "XL": ("16-seat minibus & van", ["Ford Transit", "Hyundai Solati"]),
 }
 
 
@@ -97,10 +97,10 @@ class VehicleProfile:
 def _safe_water(row: dict, gc: float) -> tuple[float, str]:
     wading = _num(row.get("wading_depth_mm"))
     if "EV" in row.get("powertrain", "") and "HEV" not in row.get("powertrain", ""):
-        return gc, "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm"
+        return gc, "Manufacturer (VinFast): water must not exceed ground clearance"
     if wading and wading / 1000 > gc + 1e-6:
-        return 0.5 * wading / 1000, f"50% độ lội nước công bố ({int(wading)} mm, nước tĩnh, 7 km/h)"
-    return min(gc, 0.25), "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm"
+        return 0.5 * wading / 1000, f"50% of published wading depth ({int(wading)} mm, still water, 7 km/h)"
+    return min(gc, 0.25), "Toyota VN: do not exceed 25 cm of water; limited by ground clearance"
 
 
 def _class_of(name: str) -> str:
@@ -127,7 +127,7 @@ def _load_models() -> dict[str, VehicleProfile]:
         if name == 'Mitsubishi Xpander' and '5.2/5.5' in notes:
             R = 5.5
         if name == 'Toyota Fortuner':
-            basis += ' (tham chiếu Fortuner diesel Australia; chưa xác minh biến thể petrol VN)'
+            basis += ' (Australian diesel Fortuner reference; Vietnamese petrol variant unverified)'
         T = _num(row.get("track_front_mm"))
         p = VehicleProfile(
             id=_slug(name), label=name, kind="model", size_class=_class_of(name),
@@ -136,7 +136,7 @@ def _load_models() -> dict[str, VehicleProfile]:
             length=_num(row["length_mm"]) / 1000, wheelbase=_num(row["wheelbase_mm"]) / 1000,
             turning_radius=R or 0.0, turning_radius_estimated=R is None or "DERIVED" in notes, track=(T / 1000) if T else None,
             ground_clearance=gc, safe_water_depth=safe, safe_water_basis=basis, source_url=row.get("source_url", ""),
-            assumptions=notes + ("; khoảng sáng gầm giả định 150 mm" if not _num(row.get("ground_clearance_mm")) else ""),
+            assumptions=notes + ("; assumed ground clearance 150 mm" if not _num(row.get("ground_clearance_mm")) else ""),
         )
         models[p.id] = p
         if R is None:
@@ -165,8 +165,8 @@ def _load_classes() -> dict[str, VehicleProfile]:
             turning_radius=max(m.turning_radius for m in members), turning_radius_estimated=True,
             track=None, ground_clearance=min(m.ground_clearance for m in members),
             safe_water_depth=lowest.safe_water_depth,
-            safe_water_basis=f"Thấp nhất trong nhóm ({lowest.label}): {lowest.safe_water_basis}",
-            members=[m.label for m in members], assumptions="Bao kích thước bảo thủ của nhóm; bán kính/vệt bánh và các biến thể có bất định",
+            safe_water_basis=f"Lowest in class ({lowest.label}): {lowest.safe_water_basis}",
+            members=[m.label for m in members], assumptions="Conservative class dimensions; turning radius, wheel track and variants have uncertainty",
         )
     return out
 

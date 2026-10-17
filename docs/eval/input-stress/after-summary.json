@@ -1,0 +1,178 @@
+{
+  "total": 395,
+  "passed": 395,
+  "groups": {
+    "kind": {
+      "resolver": {
+        "total": 273,
+        "passed": 273
+      },
+      "driver": {
+        "total": 76,
+        "passed": 76
+      },
+      "decline": {
+        "total": 3,
+        "passed": 3
+      },
+      "poi": {
+        "total": 2,
+        "passed": 2
+      },
+      "followup": {
+        "total": 19,
+        "passed": 19
+      },
+      "unknown": {
+        "total": 3,
+        "passed": 3
+      },
+      "journey": {
+        "total": 19,
+        "passed": 19
+      }
+    },
+    "pattern": {
+      "exact": {
+        "total": 24,
+        "passed": 24
+      },
+      "bare": {
+        "total": 24,
+        "passed": 24
+      },
+      "ascii": {
+        "total": 24,
+        "passed": 24
+      },
+      "ward-old": {
+        "total": 24,
+        "passed": 24
+      },
+      "ward-new": {
+        "total": 24,
+        "passed": 24
+      },
+      "ngo": {
+        "total": 24,
+        "passed": 24
+      },
+      "kiet": {
+        "total": 24,
+        "passed": 24
+      },
+      "ngach": {
+        "total": 24,
+        "passed": 24
+      },
+      "english": {
+        "total": 24,
+        "passed": 24
+      },
+      "typo": {
+        "total": 24,
+        "passed": 24
+      },
+      "house-parent": {
+        "total": 15,
+        "passed": 15
+      },
+      "to": {
+        "total": 19,
+        "passed": 19
+      },
+      "address-first": {
+        "total": 19,
+        "passed": 19
+      },
+      "pickup": {
+        "total": 19,
+        "passed": 19
+      },
+      "timed": {
+        "total": 19,
+        "passed": 19
+      },
+      "street-only": {
+        "total": 8,
+        "passed": 8
+      },
+      "motorbike": {
+        "total": 3,
+        "passed": 3
+      },
+      "wrong-match": {
+        "total": 2,
+        "passed": 2
+      },
+      "followup": {
+        "total": 19,
+        "passed": 19
+      },
+      "poi-name": {
+        "total": 10,
+        "passed": 10
+      },
+      "unknown-vehicle": {
+        "total": 3,
+        "passed": 3
+      },
+      "plan-policy": {
+        "total": 19,
+        "passed": 19
+      }
+    },
+    "depth": {
+      "1": {
+        "total": 60,
+        "passed": 60
+      },
+      "2": {
+        "total": 149,
+        "passed": 149
+      },
+      "3": {
+        "total": 95,
+        "passed": 95
+      },
+      "4": {
+        "total": 65,
+        "passed": 65
+      },
+      "0": {
+        "total": 26,
+        "passed": 26
+      }
+    },
+    "diacritics": {
+      "True": {
+        "total": 370,
+        "passed": 370
+      },
+      "False": {
+        "total": 25,
+        "passed": 25
+      }
+    },
+    "catalogue": {
+      "n/a": {
+        "total": 300,
+        "passed": 300
+      },
+      "outside": {
+        "total": 35,
+        "passed": 35
+      },
+      "catalogue": {
+        "total": 45,
+        "passed": 45
+      },
+      "class": {
+        "total": 15,
+        "passed": 15
+      }
+    }
+  },
+  "network_calls": 0,
+  "models": "deterministic"
+}

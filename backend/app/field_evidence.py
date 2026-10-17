@@ -47,13 +47,13 @@ def load_into(store):
             tier, pad = ('Observed', .5) if method == 'pacing' else ('Measured', .1)
             complete = not row.get('submission_id') or row.get('coverage_complete', '').lower() == 'true'
             lo = max(.5, width-pad) if complete else 0.
-            method_vi = {'tape': 'thước dây', 'lidar': 'LiDAR', 'pacing': 'bước chân'}[method]
+            method_vi = {'tape': 'tape measure', 'lidar': 'LiDAR', 'pacing': 'pacing'}[method]
             detail = f"{width:g} m; {method_vi}; {row.get('measured_by', '')}. "
-            detail += 'Đã kiểm tra cả đoạn và đo chỗ hẹp nhất.' if complete else 'Mẫu tại một vị trí, chưa chứng nhận toàn đoạn.'
+            detail += 'Entire segment checked and narrowest point measured.' if complete else 'Sample at one location; does not certify the entire segment.'
             if row.get('note'):
                 detail += ' ' + row['note']
             store._add(evidence.Bound(lo, width+pad, tier,
-                       row.get('source') or f'Nhóm đo hiện trường ({method_vi})', detail,
+                       row.get('source') or f'Field team ({method_vi})', detail,
                        observed_on=row.get('date', ''), url=row.get('photo_url', ''),
                        coverage_complete=complete, measurement_schema='field-clear-width-v1',
                        estimate_m=width), wid)

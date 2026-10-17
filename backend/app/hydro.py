@@ -35,7 +35,7 @@ FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 DEFAULT_FIT = (2.5, 1.13, -0.68)
 TIDE_MODEL_ERR_M = 0.15
 TIDE_PIN_FADE_H = 6
-RAIN_GAUGE_TYPES = {3: "VRAIN", 4: "Đo mưa nhân dân"}  # hourly networks; KTTV/TV stations report daily
+RAIN_GAUGE_TYPES = {3: "VRAIN", 4: "Community rain gauges"}  # hourly networks; KTTV/TV stations report daily
 RAIN_GAUGE_M = 5000
 DRAIN_H = 1
 HCMC = (10.35, 106.30, 11.20, 107.10)
@@ -185,7 +185,7 @@ def tide_status() -> dict:
     tm = _tide_model()
     obs = tide_readings()
     last = obs[-1] if obs else None
-    return {"station": "Phú An (sông Sài Gòn)", "source": "Hệ thống giám sát thiên tai Việt Nam (vndms.gov.vn)",
+    return {"station": "Phú An (sông Sài Gòn)", "source": "Vietnam Disaster Monitoring System (vndms.gov.vn)",
             "source_url": PORTAL, "live": bool(obs),
             "last_reading": {"t": last[0].isoformat(), "level_m": last[1]} if last else None,
             "readings": [{"t": t.isoformat(), "level_m": v} for t, v in obs],
@@ -239,15 +239,15 @@ def rain_spells(lat: float, lon: float) -> list[dict]:
     for g in near:
         for t, v in gauge_hours(g):
             if v > measured.get(t, (-1, ""))[0]:
-                measured[t] = (v, f"đo tại {g['name']}")
+                measured[t] = (v, f"measured at {g['name']}")
     last = max(measured) if measured else datetime.now(VN_TZ).replace(minute=0, second=0, microsecond=0)
     hours = {t: mv for t, mv in measured.items()}
     for t, v in _forecast_hours(lat, lon):
         if t > last:
-            hours[t] = (v, "dự báo Open-Meteo")
+            hours[t] = (v, "Open-Meteo forecast")
     spells = []
     for t, (mm, src) in sorted(hours.items()):
         if mm > 0:
             spells.append({"start": (t - timedelta(hours=1)).isoformat(), "end": (t + timedelta(hours=DRAIN_H)).isoformat(),
-                           "mm_per_h": mm, "source": src, "measured": src.startswith("đo")})
+                           "mm_per_h": mm, "source": src, "measured": src.startswith("measured")})
     return spells

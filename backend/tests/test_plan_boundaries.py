@@ -46,7 +46,7 @@ class PlanBoundaryTests(unittest.TestCase):
         self.assertEqual(measured["mode"], "turn_here")
         self.assertFalse(measured["strict"])
         self.assertFalse(measured["turn_verified"])
-        self.assertIn("chưa có bằng chứng vùng quét quay xe", measured["text"])
+        self.assertIn("swept manoeuvre space is unverified", measured["text"])
 
     def test_lot_in_and_out_remain_unverified_without_mapped_entrance_geometry(self):
         graph = AreaGraph(center=(10.0, 106.0))
@@ -65,7 +65,7 @@ class PlanBoundaryTests(unittest.TestCase):
         self.assertEqual(route_out["mode"], "lot")
         self.assertFalse(route_out["strict"])
         self.assertFalse(route_out["turn_verified"])
-        self.assertIn("chưa được xác minh", route_out["text"])
+        self.assertIn("are unverified", route_out["text"])
 
     def test_unmapped_walk_endpoint_connectors_are_not_drawn_as_shortcuts(self):
         graph = AreaGraph(center=(10.0, 106.0))

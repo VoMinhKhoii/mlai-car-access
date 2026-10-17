@@ -68,10 +68,10 @@ def report():
 def free_call():
     with ledger() as u:
         if u.get("free_project_cooldown_until", 0) > datetime.now(timezone.utc).timestamp():
-            raise ValueError("Hạn mức Gemini miễn phí của dự án đã hết; chờ đến nửa đêm giờ Thái Bình Dương.")
+            raise ValueError("Free Gemini project allowance exhausted; wait until midnight Pacific time.")
         limit = int(os.environ.get("AGENT_FREE_CALL_LIMIT", "0"))
         if limit and u["free_calls"] >= limit:
-            raise ValueError("Đã chạm hạn mức lượt Gemini miễn phí; hãy thử lại sau.")
+            raise ValueError("Free Gemini request limit reached; retry later.")
         u["free_calls"] += 1
 
 
@@ -85,7 +85,7 @@ def reserve(body: dict, *, job_id: str | None = None, job_limit_usd: float = 1.0
     with ledger() as u:
         call_limit = int(os.environ.get("AGENT_PAID_CALL_LIMIT", "0"))
         if call_limit and u["paid_calls"] >= call_limit:
-            raise ValueError("Đã chạm hạn mức lượt Gemini trả phí; hãy thử lại sau.")
+            raise ValueError("Paid Gemini request limit reached; retry later.")
         limit = min(LIMIT, float(os.environ.get("AGENT_PAID_LIMIT_USD", str(LIMIT))))
         if job_id:
             # Job and global reservations share ONE flock/transaction. Restarting
@@ -95,7 +95,7 @@ def reserve(body: dict, *, job_id: str | None = None, job_limit_usd: float = 1.0
                 raise ValueError("Imagery job reached its paid ceiling (at most 1 USD).")
             limit = min(limit, LIMIT - max(0.0, leave_usd))
         if u["spent_usd"] + sum(u["reservations"].values()) + ceiling >= limit:
-            raise ValueError("Đã chạm ngân sách Gemini 3 USD; không thể bảo đảm lượt tiếp theo nằm trong hạn mức.")
+            raise ValueError("Gemini budget reached (3 USD); the next request cannot be guaranteed within budget.")
         rid = uuid.uuid4().hex
         u["reservations"][rid] = ceiling
         if job_id:

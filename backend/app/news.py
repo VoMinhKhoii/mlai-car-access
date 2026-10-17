@@ -26,7 +26,7 @@ KIND = [("flood", re.compile(r"ngap|trieu cuong|nuoc dang")), ("works", re.compi
         ("ban", re.compile(r"cam o to|cam xe|cam dung|cam do|cam luu thong"))]
 PROMPT = """Dưới đây là các tiêu đề báo (đánh số). Với mỗi tiêu đề, xác định nó có nói về chính tuyến đường được nêu
 ở TP.HCM hay không. Trả về JSON {"items":[{"i":số,"relevant":true|false,"kind":"flood|works|ban|other",
-"depth_cm":số hoặc null,"summary":"tóm tắt ≤ 15 từ"}]}. Không suy đoán; tiêu đề về tỉnh khác là relevant=false.
+"depth_cm":số hoặc null,"summary":"English summary, at most 15 words; preserve place names"}]}. Không suy đoán; tiêu đề về tỉnh khác là relevant=false.
 """
 
 
@@ -55,7 +55,7 @@ def _keyword(item: dict) -> dict | None:
         if not re.search(r"tuoi tre|thanh nien|sggp|nguoi lao dong|vnexpress|plo|hcm", strip_accents(item["source"])):
             return None
     kind = next((k for k, rx in KIND if rx.search(t)), None)
-    return {**item, "kind": kind, "depth_cm": None, "summary": item["title"]} if kind else None
+    return {**item, "kind": kind, "depth_cm": None, "summary": {"flood": "Flooding reported on ", "works": "Roadworks reported on ", "ban": "Vehicle restriction reported on "}[kind] + item["street"]} if kind else None
 
 
 def news_for(streets: list[str], deadline: float | None = None) -> list[dict]:

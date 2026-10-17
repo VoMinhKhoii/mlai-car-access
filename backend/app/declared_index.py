@@ -53,11 +53,11 @@ def load_into(store):
     store._declared_stamp, product = snapshot()
     for wid, r in product.get("ways", {}).items():
         claims = r.get("claims", [])
-        b = Bound(r["lo"], r["hi"], "Declared", "Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)",
-                  f"{r.get('independent_listings', 0)} tin độc lập ước tính / {r.get('n_listings', 0)} tin; "
-                  f"đồng thuận {r.get('agreement', 0):.0%}. Khoảng hợp các lời khai; "
-                  "bề rộng tin rao là giới hạn trên, không phải đo thông thủy. "
-                  + ("Lời khai khác nhau: cần kiểm tra." if r.get("review") else "Chưa đo thực tế.")
+        b = Bound(r["lo"], r["hi"], "Declared", "HCMC listings (alley address chain)",
+                  f"{r.get('independent_listings', 0)} estimated independent listings / {r.get('n_listings', 0)} listings; "
+                  f"agreement {r.get('agreement', 0):.0%}. Union of declared ranges; "
+                  "listing width is an upper bound, not measured clear width. "
+                  + ("Conflicting declarations: review required." if r.get("review") else "Not measured on site.")
                   + (' ' + '; '.join(dict.fromkeys(c['provenance'] for c in claims if c.get('provenance')))
                      if any(c.get('provenance') for c in claims) else ''),
                   observed_on=r.get("last_posted", ""), url=claims[0].get("url", "") if claims else "",
@@ -80,5 +80,5 @@ def prepare(way_id, bounds):
     review = bool(product.get("ways", {}).get(str(way_id), {}).get("review"))
     ignored = [b for b in bounds if b not in city and
                ((b.tier == "Declared" and (b.feature == "ai_listings" or review)) or
-                (b.tier == "Inferred" and b.source in ("OSM phân loại đường", "OSM số làn xe")))]
+                (b.tier == "Inferred" and b.source in ("OSM road class", "OSM lane count", "OSM phân loại đường", "OSM số làn xe")))]
     return [b for b in bounds if b not in ignored], ignored, review

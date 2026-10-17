@@ -131,12 +131,12 @@ def parse_pdf(content: bytes, source_url: str) -> dict:
     if len({x["t"] for x in highs + lows}) != len(highs + lows):
         raise ValueError("Conflicting extremum times")
     return {"station": "Phú An (sông Sài Gòn)",
-            "bulletin": f"Bản tin dự báo đặc trưng thủy triều 5 ngày, số {number[1]} — Đài KTTV Nam Bộ",
+            "bulletin": f"Five-day tide forecast bulletin {number[1]} — Southern Regional Hydro-Meteorological Centre",
             "issued_at": issued_at.isoformat(), "source_url": source_url,
             "alarm_levels_m": alarms,
-            "note": f"Đỉnh và chân triều Phú An từ bản tin chính thức {number[1]}, phát {hour:02d}:{minute:02d} ngày {day:02d}/{month:02d}/{year}. "
-                    "Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. "
-                    "Ô ct không được tự thêm; ngoài phạm vi bản tin trả thiếu dữ liệu.",
+            "note": f"Phú An high and low tides from official bulletin {number[1]}, issued at {hour:02d}:{minute:02d} on {day:02d}/{month:02d}/{year}. "
+                    "Levels between extrema use cosine interpolation; they are not measurements or road flood forecasts. "
+                    "Unreported cells are not filled in; times outside the bulletin return missing data.",
             "highs": highs, "low_level_m": min(x["level_m"] for x in lows), "lows": lows}
 
 

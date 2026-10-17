@@ -13,9 +13,9 @@ async function get<T>(url: string, init?: RequestInit): Promise<T> {
 }
 
 const PARKING_VI: Record<string, string> = {
-  freeParkingLot: 'Bãi đỗ miễn phí', paidParkingLot: 'Bãi đỗ có phí', freeStreetParking: 'Đỗ lề đường miễn phí',
-  paidStreetParking: 'Đỗ lề đường có phí', valetParking: 'Có người giữ xe', freeGarageParking: 'Hầm xe miễn phí',
-  paidGarageParking: 'Hầm xe có phí',
+  freeParkingLot: 'Free car park', paidParkingLot: 'Paid car park', freeStreetParking: 'Free street parking',
+  paidStreetParking: 'Paid street parking', valetParking: 'Valet parking', freeGarageParking: 'Free garage parking',
+  paidGarageParking: 'Paid garage parking',
 }
 
 function highlight(text: string, words: string[]) {
@@ -40,23 +40,23 @@ export function LookupPanel({ lat, lon, wayId, alley, google, grounding }: Props
   if (!google && !grounding) return null
   return (
     <section className="lookup">
-      <h4>Tra cứu thêm <span className="live">trực tiếp · không lưu</span></h4>
+      <h4>Look up more <span className="live">live · not stored</span></h4>
       <div className="lookup-actions">
         {google && <button disabled={!!busy} onClick={() => run('sv', async () => setSv(await get(`/api/lookup/streetview?lat=${lat}&lon=${lon}&way_id=${wayId}`)))}>Street View</button>}
-        {google && <button disabled={!!busy} onClick={() => run('places', async () => { setDetail(null); setPlaces((await get<{ places: Place[] }>(`/api/lookup/places?lat=${lat}&lon=${lon}`)).places) })}>Quán trong hẻm</button>}
-        {grounding && <button disabled={!!busy} onClick={() => run('ask', async () => setAsk(await get('/api/lookup/ask', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ lat, lon, alley }) })))}>Hỏi Gemini</button>}
+        {google && <button disabled={!!busy} onClick={() => run('places', async () => { setDetail(null); setPlaces((await get<{ places: Place[] }>(`/api/lookup/places?lat=${lat}&lon=${lon}`)).places) })}>Places in the alley</button>}
+        {grounding && <button disabled={!!busy} onClick={() => run('ask', async () => setAsk(await get('/api/lookup/ask', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ lat, lon, alley }) })))}>Ask Gemini</button>}
       </div>
-      {busy && <p className="hint">Đang tra cứu…</p>}
+      {busy && <p className="hint">Looking up…</p>}
       {err && <p className="error">{err}</p>}
       {sv && (sv.available ? (
         <figure className="sv">
-          <img src={sv.image} alt={`Street View gần ${alley}`} />
-          <figcaption>Ảnh {sv.date} · {sv.copyright ?? '© Google'} · <a href={sv.maps_url} target="_blank" rel="noreferrer">Mở 360°</a></figcaption>
+          <img src={sv.image} alt={`Street View near ${alley}`} />
+          <figcaption>Photo {sv.date} · {sv.copyright ?? '© Google'} · <a href={sv.maps_url} target="_blank" rel="noreferrer">Open 360°</a></figcaption>
         </figure>
-      ) : <p className="hint">Không có ảnh Street View trong 40 m ({sv.status}).</p>)}
+      ) : <p className="hint">No Street View imagery within 40 m ({sv.status}).</p>)}
       {places && !detail && (
         <ul className="places">
-          {places.length === 0 && <li className="hint">Google không có quán nào trong 80 m.</li>}
+          {places.length === 0 && <li className="hint">Google has no places within 80 m.</li>}
           {places.map((p) => (
             <li key={p.id}><button className="link" onClick={() => run('detail', async () => setDetail(await get(`/api/lookup/place/${p.id}`)))}>{p.name}</button> <small>{p.type} · {p.address}</small></li>
           ))}
@@ -64,7 +64,7 @@ export function LookupPanel({ lat, lon, wayId, alley, google, grounding }: Props
       )}
       {detail && (
         <div className="place">
-          <button className="link" onClick={() => setDetail(null)}>← Danh sách</button>
+          <button className="link" onClick={() => setDetail(null)}>← Back to list</button>
           <b>{detail.name}</b> {detail.rating && <small>★ {detail.rating} ({detail.ratings})</small>}
           {detail.parking && <p className="chips">{Object.entries(detail.parking).filter(([, v]) => v).map(([k]) => <span key={k} className="badge">{PARKING_VI[k] ?? k}</span>)}</p>}
           <ul className="reviews">
@@ -72,16 +72,16 @@ export function LookupPanel({ lat, lon, wayId, alley, google, grounding }: Props
               <li key={i}><small>★{r.rating} · {r.when} · <a href={r.author_url} target="_blank" rel="noreferrer">{r.author}</a></small><p>{highlight(r.text, r.keywords)}</p></li>
             ))}
           </ul>
-          <a href={detail.maps_url} target="_blank" rel="noreferrer">Xem trên Google Maps</a>
+          <a href={detail.maps_url} target="_blank" rel="noreferrer">View on Google Maps</a>
         </div>
       )}
       {ask && (
         <div className="ask">
           <p>{ask.text}</p>
-          <p className="attrib">Nguồn: Google Maps{ask.sources.length > 0 && ' · '}{ask.sources.slice(0, 5).map((s, i) => <a key={i} href={s.uri} target="_blank" rel="noreferrer">{s.title?.replace(' - Google Maps', '')}</a>)}</p>
+          <p className="attrib">Source: Google Maps{ask.sources.length > 0 && ' · '}{ask.sources.slice(0, 5).map((s, i) => <a key={i} href={s.uri} target="_blank" rel="noreferrer">{s.title?.replace(' - Google Maps', '')}</a>)}</p>
         </div>
       )}
-      <p className="hint">Nội dung Google chỉ để bạn tự xem trước khi quyết định; không được lưu hay dùng làm bằng chứng bề rộng.</p>
+      <p className="hint">Google content is for your own review before deciding; it is not stored or used as width evidence.</p>
     </section>
   )
 }

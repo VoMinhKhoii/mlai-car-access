@@ -1,0 +1,27 @@
+{
+  "tool_uses": [
+    {
+      "name": "mcp__ngo-ngach__lap_ke_hoach",
+      "input": {
+        "lat": 10.792106,
+        "lon": 106.716661,
+        "label": "Hẻm 113/4 Võ Duy Ninh",
+        "vehicle_id": "toyota-fortuner",
+        "arrive_at": "2026-10-17T18:00:00+07:00",
+        "dwell_min": 120,
+        "intent": "park"
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "is_error": false,
+      "tool_use_id": "toolu_01M5ASvDt8z4tLcPLSnCeRAZ"
+    }
+  ],
+  "result": "I called `lap_ke_hoach` once with your parameters and it worked. No other tools were called.\n\n**Verdict estimate** (top-level `verdict.estimate`)\n- **answer:** `tight`\n- **confidence:** `low`\n- Overall verdict code: `unverified` (\"Chưa đủ bằng chứng để khẳng định\", meaning there isn't enough evidence to confirm). The tool suggests parking on Đường Võ Duy Ninh and walking 39 m.\n\n**Caveat:** No part of the route has a measured width (0/15 segments sampled, 0% of the length). The narrowest point, about 3.00 m on Hẻm 113 Đường Võ Duy Ninh (OSM way 464839550), is only inferred from the OSM road type. The Fortuner needs at least 2.31 m with mirrors and 3.00 m to open its doors. Parking legality is also unverified, so the suggested stop point is not confirmed as a legal place to park.",
+  "is_error": false,
+  "subtype": "success",
+  "num_turns": 2,
+  "client_cost_usd": 0.0982091
+}

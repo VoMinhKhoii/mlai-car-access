@@ -1,0 +1,61 @@
+{
+  "tools": [
+    "tim_dia_diem",
+    "lap_ke_hoach"
+  ],
+  "geocoding": {
+    "results": [
+      {
+        "label": "Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh",
+        "lat": 10.76193523007979,
+        "lon": 106.68747716896263,
+        "source": "Goong",
+        "precision": "alley"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": [],
+    "house_unpinned": true,
+    "requested_address": "137/41/18 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh, Vietnam",
+    "selection_reason": "Located at Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh; house 18 is not pinned within address 137/41/18. The estimate applies to the mapped alley; the final branch to the house has not been checked.",
+    "note": "Located at Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh; house 18 is not pinned within address 137/41/18. The estimate applies to the mapped alley; the final branch to the house has not been checked."
+  },
+  "answer": "Located at Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh; house 18 is not pinned within address 137/41/18. The estimate applies to the mapped alley; the final branch to the house has not been checked.\nEstimate: access appears possible. Low confidence.\nBasis: limiting width approximately 3.7 m at Hẻm 137 Trần Ðình Xu (OpenStreetMap); 0/2 route segments have width samples.\nMercedes GLC has no dedicated catalogue specs; temporarily using size class M with a conservative size envelope. The exact variant has not been verified.\nSuggested stop: Hẻm 137 Trần Ðình Xu; walk 87 m; source: OpenStreetMap.\nCheck on site: Arrival route includes unverified width or flood conditions; Width unverified (2.2–4.5 m; vehicle needs ≥ 2.41 m); Door-opening space unverified (needs 3.11 m); Must reverse 50 m (over the 30 m reverse limit); turning space is unverified; No flood history or current observations for this segment; Stopping permission unverified: Junction boundary unknown; the 5 m setback is unverified; Complete clear-width measurements are missing; motor-vehicle lane count is unverified; Stopping legality has not been verified; Flooding has not been verified.",
+  "estimate": {
+    "answer": "fits",
+    "confidence": "low",
+    "basis": "observed ≈3.70 m (Hẻm 137 Trần Ðình Xu; OSM 1329001159) · 0/2 segments sampled (0% of route length sampled) · incomplete route survey · possible flooding · stopping permission unverified",
+    "coverage": {
+      "sampled_segments": 0,
+      "total_segments": 2,
+      "sample_supported_fraction": 0.0,
+      "complete_strong_fraction": 0.0,
+      "scope": "Arrival/exit segments with width samples; isolated samples do not establish continuous clearance"
+    },
+    "limiting_width": {
+      "value_m": 3.7,
+      "tier": "Observed",
+      "source": "OSM: motorcars permitted",
+      "sampled": false,
+      "sample_count": null,
+      "sampled_range": null,
+      "bottleneck_support": null,
+      "isolated_low_outlier": false,
+      "fallback_from_unresolved": false,
+      "way_id": 1329001159,
+      "way_name": "Hẻm 137 Trần Ðình Xu",
+      "osm_url": "https://www.openstreetmap.org/way/1329001159"
+    },
+    "stop_width": {
+      "value_m": 3.7,
+      "tier": "Observed",
+      "source": "OSM: motorcars permitted",
+      "sampled": false,
+      "sample_count": null,
+      "sampled_range": null,
+      "bottleneck_support": null,
+      "isolated_low_outlier": false,
+      "fallback_from_unresolved": false
+    }
+  }
+}

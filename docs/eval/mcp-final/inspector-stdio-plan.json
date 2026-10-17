@@ -1,0 +1,311 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Chưa đủ bằng chứng để khẳng định"
+    }
+  ],
+  "structuredContent": {
+    "destination": {
+      "lat": 10.792106,
+      "lon": 106.716661,
+      "label": "Hẻm 113/4 Võ Duy Ninh"
+    },
+    "window": {
+      "arrive": "2026-10-17T18:00:00+07:00",
+      "depart": "2026-10-17T20:00:00+07:00",
+      "dwell_min": 120,
+      "tide_arrive": {
+        "level_m": -0.43,
+        "kind": "bulletin"
+      },
+      "tide_depart": {
+        "level_m": 0.7,
+        "kind": "bulletin"
+      },
+      "rain": []
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Chưa đủ bằng chứng để khẳng định",
+      "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m",
+      "estimate": {
+        "answer": "tight",
+        "confidence": "low",
+        "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 15,
+          "sample_supported_fraction": 0,
+          "complete_strong_fraction": 0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        },
+        "limiting_width": {
+          "value_m": 3,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false,
+          "way_id": 464839550,
+          "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+          "osm_url": "https://www.openstreetmap.org/way/464839550"
+        },
+        "stop_width": {
+          "value_m": 3.5,
+          "tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "sampled": false,
+          "isolated_low_outlier": false,
+          "fallback_from_unresolved": false
+        }
+      }
+    },
+    "intent": "park",
+    "vehicle": {
+      "id": "toyota-fortuner",
+      "label": "Toyota Fortuner",
+      "mirror_width": 2.105
+    },
+    "tide_source": {
+      "station": "Phú An (sông Sài Gòn)",
+      "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+      "issued_at": "2026-10-16T09:08:00+07:00",
+      "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+    },
+    "stop_points": [
+      {
+        "name": "Đường Võ Duy Ninh",
+        "kind": "street",
+        "way_id": 193085738,
+        "lat": 10.791805007531996,
+        "lon": 106.7166424858583,
+        "ok": true,
+        "tier": 2,
+        "verified": false,
+        "estimate": {
+          "answer": "tight",
+          "confidence": "low",
+          "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý"
+        },
+        "failure_codes": [],
+        "fail_reasons": [],
+        "unverified_reasons": [
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+          "Đi thẳng ra đường lớn theo chiều xe được phép",
+          "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+        ],
+        "fit": {
+          "class": "unknown",
+          "width_range": {
+            "lo": 2,
+            "hi": 8,
+            "label": "Chưa rõ bề rộng",
+            "top_tier": "Inferred",
+            "review": false,
+            "width_basis": "inferred",
+            "coverage": {
+              "cut_count": 0,
+              "start_covered": false,
+              "end_covered": false,
+              "truncated": false,
+              "complete": false,
+              "reason": "Không có dữ liệu phủ theo chiều dài"
+            },
+            "decisive_clearance": false,
+            "evidence": [
+              {
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "detail": "highway=service",
+                "url": "https://www.openstreetmap.org/way/193085738",
+                "lo": 2,
+                "hi": 8,
+                "width_basis": "inferred"
+              }
+            ]
+          }
+        },
+        "walk": {
+          "meters": 39,
+          "minutes": 1,
+          "connection": {
+            "mapped": true
+          }
+        },
+        "way_out": {
+          "available": true,
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+          "route_verified": false,
+          "flood": {
+            "status": "passable",
+            "depth": null,
+            "knowledge": "known",
+            "freshness": {
+              "source": "bulletin"
+            },
+            "at": "2026-10-17T20:00:00+07:00",
+            "source": "bulletin",
+            "interval": {
+              "start": "2026-10-17T20:00:00+07:00",
+              "end": "2026-10-17T20:15:00+07:00",
+              "approximate": true
+            }
+          }
+        },
+        "flood": {
+          "stay": {
+            "status": "passable",
+            "depth": null,
+            "knowledge": "known",
+            "freshness": {
+              "source": "bulletin"
+            },
+            "at": "2026-10-17T18:00:00+07:00",
+            "source": "bulletin",
+            "interval": {
+              "start": "2026-10-17T18:00:00+07:00",
+              "end": "2026-10-17T20:00:00+07:00",
+              "approximate": false
+            }
+          }
+        },
+        "legality": {
+          "status": "Unverified",
+          "rules": [
+            {
+              "code": "junction-5m",
+              "status": "Unverified",
+              "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            },
+            {
+              "code": "lane-unknown",
+              "status": "Unverified",
+              "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+              "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+            }
+          ]
+        },
+        "route_in": {
+          "meters": 195
+        }
+      }
+    ],
+    "omitted_stop_points_count": 2,
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "way_id": 464839550,
+      "lat": 10.792105888393326,
+      "lon": 106.71666136514123,
+      "ok": false,
+      "tier": 2,
+      "verified": false,
+      "estimate": {
+        "answer": "unknown",
+        "confidence": "low",
+        "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · 0/5 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý · Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)"
+      },
+      "failure_codes": [
+        "dead_end"
+      ],
+      "fail_reasons": [
+        "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)"
+      ],
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (1.5–4.5 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+      ],
+      "fit": {
+        "class": "unknown",
+        "width_range": {
+          "lo": 1.5,
+          "hi": 4.5,
+          "label": "Hẻm xe hơi",
+          "top_tier": "Inferred",
+          "review": false,
+          "width_basis": "inferred",
+          "coverage": {
+            "cut_count": 0,
+            "start_covered": false,
+            "end_covered": false,
+            "truncated": false,
+            "complete": false,
+            "reason": "Không có dữ liệu phủ theo chiều dài"
+          },
+          "decisive_clearance": false,
+          "evidence": [
+            {
+              "tier": "Inferred",
+              "source": "OSM phân loại đường",
+              "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+              "url": "https://www.openstreetmap.org/way/464839550",
+              "lo": 1.5,
+              "hi": 4.5,
+              "width_basis": "inferred"
+            }
+          ]
+        }
+      },
+      "walk": {
+        "meters": 0,
+        "minutes": 0,
+        "connection": {
+          "mapped": true
+        }
+      },
+      "way_out": {
+        "available": false,
+        "mode": "none",
+        "text": "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
+        "route_verified": false
+      },
+      "flood": {
+        "stay": {
+          "status": "passable",
+          "depth": null,
+          "knowledge": "known",
+          "freshness": {
+            "source": "bulletin"
+          },
+          "at": "2026-10-17T18:00:00+07:00",
+          "source": "bulletin",
+          "interval": {
+            "start": "2026-10-17T18:00:00+07:00",
+            "end": "2026-10-17T20:00:00+07:00",
+            "approximate": false
+          }
+        }
+      },
+      "legality": {
+        "status": "Unverified",
+        "rules": [
+          {
+            "code": "junction-5m",
+            "status": "Unverified",
+            "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          },
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      "route_in": {
+        "meters": 156
+      }
+    }
+  },
+  "isError": false
+}

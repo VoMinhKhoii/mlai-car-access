@@ -45,7 +45,7 @@ def _load(path) -> dict:
     try:
         return read_json(path, {})
     except CorruptState as exc:
-        raise OverBudget(f"không đọc được bộ đếm chi phí ({exc}); dừng để không tốn phí") from exc
+        raise OverBudget(f"could not read cost counter ({exc}); stopped to avoid charges") from exc
 
 
 def spend(sku: str) -> None:
@@ -61,9 +61,9 @@ def spend(sku: str) -> None:
         m = u.setdefault(month, {}).setdefault(sku, 0)
         d = u.setdefault(day, {}).setdefault(sku, 0)
         if m >= CAPS[sku][0]:
-            raise OverBudget(f"{sku}: đã chạm hạn mức tháng ({CAPS[sku][0]})")
+            raise OverBudget(f"{sku}: monthly limit reached ({CAPS[sku][0]})")
         if d >= DAILY_CAP.get(sku, 10**9):
-            raise OverBudget(f"{sku}: đã chạm hạn mức ngày ({DAILY_CAP[sku]})")
+            raise OverBudget(f"{sku}: daily limit reached ({DAILY_CAP[sku]})")
         u[month][sku] = m + 1
         u[day][sku] = d + 1
         write_json(USAGE_FILE, u, indent=1)
@@ -82,9 +82,9 @@ def reserve_ai(provider: str, model: str, key: str) -> None:
         u = _load(AI_USAGE_FILE)
         today = u.setdefault(day, {"keys": {}, "models": {}})
         if today["keys"].get(key_id, 0) >= AI_DAILY_CAP_PER_KEY:
-            raise OverBudget(f"{key_id}: đã chạm hạn mức ngày ({AI_DAILY_CAP_PER_KEY} lần gọi)")
+            raise OverBudget(f"{key_id}: daily limit reached ({AI_DAILY_CAP_PER_KEY} calls)")
         if today["models"].get(model_id, 0) >= AI_DAILY_CAP_PER_MODEL:
-            raise OverBudget(f"{model_id}: đã chạm hạn mức ngày ({AI_DAILY_CAP_PER_MODEL} lần gọi)")
+            raise OverBudget(f"{model_id}: daily limit reached ({AI_DAILY_CAP_PER_MODEL} calls)")
         today["keys"][key_id] = today["keys"].get(key_id, 0) + 1
         today["models"][model_id] = today["models"].get(model_id, 0) + 1
         for old in sorted(k for k in u if k < day)[:-30]:  # keep a month of history

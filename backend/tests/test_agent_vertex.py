@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import httpx
 
-from app import agent, agent_budget, ai
+from app import agent, agent_budget, ai, geocoding
 
 
 DAILY = {'error': {'code': 429, 'status': 'RESOURCE_EXHAUSTED', 'details': [
@@ -26,6 +26,8 @@ class VertexTests(unittest.TestCase):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
         for mock in (
+            patch.object(geocoding, '_goong_keys', return_value=[]),
+            patch.object(agent, '_nominatim', return_value=[]),
             patch.object(agent_budget, 'STORE', Path(temp.name)),
             patch.object(agent_budget, 'FILE', Path(temp.name) / 'ledger.json'),
             patch.object(agent, '_key_cooldowns', {}),
@@ -183,7 +185,7 @@ class VertexTests(unittest.TestCase):
                      patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
                      patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
                          'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
-                    with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+                    with self.assertRaisesRegex(ValueError, 'retry'):
                         agent.generate({'generationConfig': {'maxOutputTokens': 4096}}, paid)
                     self.assertEqual(post.call_count, 2)
                     self.assertEqual([c.kwargs['json']['generationConfig']['maxOutputTokens']
@@ -209,7 +211,7 @@ class VertexTests(unittest.TestCase):
                 if success:
                     self.assertEqual(ai._call('test'), {'items': []})
                 else:
-                    with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+                    with self.assertRaisesRegex(ValueError, 'retry'):
                         ai._call('test')
                 self.assertEqual([c.kwargs['json']['generationConfig']['maxOutputTokens']
                                   for c in post.call_args_list], [2048, 4096])
@@ -227,7 +229,7 @@ class VertexTests(unittest.TestCase):
              patch.object(agent, 'fallback_events') as fallback:
             events = list(agent.events(agent.AgentRequest(message='Tới hẻm')))
         self.assertEqual(events[-1]['type'], 'error')
-        self.assertIn('sau khi tự thử lại', events[-1]['text'])
+        self.assertIn('retry', events[-1]['text'])
         self.assertEqual(post.call_count, 2)
         fallback.assert_not_called()
 
@@ -236,7 +238,7 @@ class VertexTests(unittest.TestCase):
         def request(body):
             sent.append(copy.deepcopy(body))
             return {'candidates': []}
-        with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+        with self.assertRaisesRegex(ValueError, 'retry'):
             ai.gemini_generate(request, {'generationConfig': {'maxOutputTokens': 8192}})
         self.assertEqual([b['generationConfig']['maxOutputTokens'] for b in sent], [8192, 8192])
         rid = agent_budget.reserve(BODY)
@@ -252,7 +254,7 @@ class VertexTests(unittest.TestCase):
              patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
                  'candidates': [{'finishReason': 'MAX_TOKENS'}],
                  'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
-            with self.assertRaisesRegex(ValueError, 'hạn mức lượt Gemini trả phí'):
+            with self.assertRaisesRegex(ValueError, 'Paid Gemini request limit'):
                 agent.generate(BODY, True)
         self.assertEqual(post.call_count, 1)
         self.assertEqual(agent_budget.report()['reservations'], {})

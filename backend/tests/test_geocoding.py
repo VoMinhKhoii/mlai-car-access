@@ -46,6 +46,9 @@ class GeocodingTests(unittest.TestCase):
             p = patch.object(geo, target, value)
             p.start()
             self.addCleanup(p.stop)
+        pool = patch.object(geo, '_goong_keys', return_value=['mock-key-only'])
+        pool.start()
+        self.addCleanup(pool.stop)
         p = patch.object(geo.config, 'GOONG_API_KEY', 'mock-key-only')
         p.start()
         self.addCleanup(p.stop)
@@ -110,7 +113,7 @@ class GeocodingTests(unittest.TestCase):
                 self.http.return_value = value
                 r = self.client.get('/api/search', params={'q': 'Hẻm 220/9 Xô Viết Nghệ Tĩnh'}).json()
                 self.assertTrue(r['results'])
-                self.assertIn('demo', r['results'][0]['source'])
+                self.assertIn('Demo', r['results'][0]['source'])
                 self.assertEqual(geo.goong_blocked_until(), 0)
                 # Don't let an empty-result disk cache mask the next failure.
                 with geo._db() as db:
@@ -226,7 +229,7 @@ class GeocodingTests(unittest.TestCase):
         geo.block_goong()
         r = geo.resolve_place('99 Đường Fixture Xa')
         self.assertTrue(r['requires_clarification'])
-        self.assertIn('số nhà', r['note'])
+        self.assertIn('house', r['note'])
 
 
 if __name__ == '__main__':

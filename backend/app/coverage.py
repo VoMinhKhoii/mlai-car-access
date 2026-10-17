@@ -99,7 +99,7 @@ def summary():
                 except (OSError, ValueError):
                     return {}
             state, refresh = map(read, paths)
-            _summary = {"label": "Dữ liệu", "scope": state.get("scope", "TP.HCM"),
+            _summary = {"label": "Data", "scope": state.get("scope", "TP.HCM"),
                         "ways_measured": state.get("ways_measured", 0),
                         "ways_with_cadastral_width": state.get("ways_with_data", 0),
                         "ways_deep_with_cadastral_width": state.get("ways_deep_with_data", 0),
@@ -117,7 +117,7 @@ def summary():
                         "campuses": state.get("campuses", {}),
                         "all_results_deep": False, "tide_refresh_state": refresh.get("state", "pending"),
                         "tide_checked_at": refresh.get("checked_at"),
-                        "note": "Bề rộng suy từ ranh thửa tại các mặt cắt đã lấy mẫu; thời gian cập nhật là lúc truy vấn, không phải ngày đo đạc địa chính."}
+                        "note": "Width inferred from parcel boundaries at sampled cross-sections; update time is the query time, not the cadastral survey date."}
             _stamp = key
         # tide_meta is independently invalidated after an atomic bulletin update.
         return {**_summary, **width_summary(), "tide_bulletin_issued_at": tide_meta().get("issued_at")}

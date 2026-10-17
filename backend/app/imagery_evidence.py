@@ -147,9 +147,9 @@ def load_into(store):
         if row.get('status') != 'approved' or not row.get('reviewer') or not valid_reading(row):
             continue
         # Keep the local interval in detail; whole-way lower guarantee is zero.
-        detail = (f"Ảnh: khoảng thông thủy nhìn thấy {row['width_lo']:g}–{row['width_hi']:g} m; "
-                  f"người duyệt: {row['reviewer']}; chưa khảo sát toàn đoạn. " + str(row.get('notes', '')))
-        store._add(Bound(0., row['width_hi'], 'Observed', 'Ảnh hẻm (đã duyệt)', detail,
+        detail = (f"Photo: visible clear-width range {row['width_lo']:g}–{row['width_hi']:g} m; "
+                  f"reviewer: {row['reviewer']}; entire segment not surveyed. " + str(row.get('notes', '')))
+        store._add(Bound(0., row['width_hi'], 'Observed', 'Alley photo (reviewed)', detail,
                          observed_on=row.get('image_date') or '', url=row.get('source_url', ''),
                          coverage_complete=False, measurement_schema='imagery-visible-bottleneck-v1'), row['way_id'])
 

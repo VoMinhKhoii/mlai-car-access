@@ -30,23 +30,23 @@ DEMO_OPERATOR_SECRET = secrets.token_urlsafe(24)
 
 _STORIES = {
     "cafe-ngo-tat-to": (
-        "Tình huống khô tại Hẻm 160, xe Vios đến lúc 14:00 và ở lại 90 phút. "
-        "Xem lối vào, điểm dừng, đường ra và tình trạng nước trong khoảng ở lại."
+        "Dry scenario at Hẻm 160: Vios arrives at 14:00 and stays 90 min. "
+        "Review entry, stop, exit and water conditions during the stay."
     ),
     "pickup-narrow": (
-        "Ca đối chiếu dùng dữ liệu hiện có của repo. Không có hàng đo bề rộng thực địa; "
-        "giữ nguyên trạng thái fit và các cảnh báo do nguồn hiện có cung cấp."
+        "Comparison using existing repository data. No field width measurements; "
+        "retains the fit status and warnings from existing sources."
     ),
     "friend-house": (
-        "Ca đối chiếu triều dùng dữ liệu hiện có của repo. Không nạp fixture bề rộng; "
-        "không suy từ dữ liệu thiếu thành xe vào được."
+        "Tide comparison using existing repository data. No width fixture is loaded; "
+        "missing data does not establish vehicle access."
     ),
     "nguyen-huu-canh": (
-        "Ca đối chiếu dùng dữ liệu hiện có của repo. Không có hàng đo bề rộng thực địa; "
-        "giữ nguyên trạng thái chưa xác minh."
+        "Comparison using existing repository data. No field width measurements; "
+        "retains the unverified status."
     ),
     "cafe-ngo-tat-to-rain": (
-        "Mưa 45 mm/h trong thời gian ở lại; xem mức nước ước tính và khả năng rời khỏi hẻm."
+        "Rain at 45 mm/h during the stay; review estimated water depth and alley exit options."
     ),
 }
 
@@ -127,7 +127,7 @@ def _customize_presets(main_module) -> None:
     rain_case = dict(dry_case)
     rain_case.update({
         "id": "cafe-ngo-tat-to-rain",
-        "title": "Mưa 45 mm/h · Hẻm 160",
+        "title": "Rain 45 mm/h · Hẻm 160",
         "rain": [{
             "start": "2026-09-29T14:30:00+07:00",
             "end": "2026-09-29T15:30:00+07:00",
@@ -178,7 +178,7 @@ def run() -> None:
         app = _build_fixture_app(fixture_path)
 
         print(
-            "\nDữ liệu mô phỏng · không phải đo thực địa.\n"
+            "\nSynthetic data · not field measurements.\n"
             f"Local synthetic demo: {LOCAL_URL}\n"
             f"Loopback-only demo operator password: {DEMO_OPERATOR_SECRET}\n"
             f"Temporary isolated state: {root}\n",

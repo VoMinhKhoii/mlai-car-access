@@ -171,10 +171,10 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
       const match = next.stop_points.find((stop) => distanceMeters(stop, active.stop) <= 15)
       if (!match) {
         const key = 'stop-missing'
-        const message = `Không tìm thấy lại điểm dừng ${active.stopName} trong phạm vi 15 m. Hãy kiểm tra trước khi rời.`
+        const message = `Could not find ${active.stopName} within 15 m. Check before leaving.`
         if (!active.alerts.includes(key)) setBanner(message)
         if (!active.alerts.includes(key) && 'Notification' in window && Notification.permission === 'granted') {
-          try { new Notification('Không tìm thấy điểm dừng', { body: message }) } catch { /* in-app banner remains */ }
+          try { new Notification('Stop not found', { body: message }) } catch { /* in-app banner remains */ }
         }
         setSession((current) => current === active ? {
           ...current, request: currentRequest, lastCheckedAt: Date.now(),
@@ -197,15 +197,15 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
       const reasons: { key: string; text: string }[] = []
       if (floodRank(floodStatus) > floodRank(active.baseline.exitFlood)
         && floodRank(floodStatus) > 0) {
-        reasons.push({ key: `flood:${floodStatus}`, text: `Ngập đường ra xấu hơn tại ${active.stopName}.` })
+        reasons.push({ key: `flood:${floodStatus}`, text: `Exit flooding has worsened at ${active.stopName}.` })
       }
       const oldLeave = active.baseline.leaveBeforeAt ? Date.parse(active.baseline.leaveBeforeAt) : NaN
       const newLeave = leaveBeforeAt ? Date.parse(leaveBeforeAt) : NaN
       if (Number.isFinite(oldLeave) && Number.isFinite(newLeave) && newLeave < oldLeave) {
-        reasons.push({ key: `leave:${leaveBeforeAt}`, text: 'Giờ cần rời đi đã sớm hơn.' })
+        reasons.push({ key: `leave:${leaveBeforeAt}`, text: 'The leave-by time is now earlier.' })
       }
       if (active.baseline.verified && !match.verified) {
-        reasons.push({ key: 'unverified', text: 'Điểm dừng đã chọn hiện chưa xác minh.' })
+        reasons.push({ key: 'unverified', text: 'The selected stop is now unverified.' })
       }
 
       const unseen = reasons.filter(({ key }) => !activeAlerts.includes(key))
@@ -214,7 +214,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
         const message = unseen.map(({ text }) => text).join(' ')
         setBanner(message)
         if ('Notification' in window && Notification.permission === 'granted') {
-          try { new Notification('Cập nhật điểm đỗ', { body: message }) } catch { /* in-app banner remains available */ }
+          try { new Notification('Parking update', { body: message }) } catch { /* in-app banner remains available */ }
         }
       }
       setSession((current) => current === active ? {
@@ -226,7 +226,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
       } : current)
     } catch (e) {
       if (ctl.signal.aborted || seqId !== seq.current) return
-      setError(e instanceof Error ? e.message : 'Không thể kiểm tra lại lúc này. Cần kết nối mạng để tiếp tục theo dõi.')
+      setError(e instanceof Error ? e.message : 'Cannot recheck now. An internet connection is required to continue watching.')
     } finally {
       if (seqId === seq.current) setChecking(false)
     }
@@ -250,7 +250,7 @@ export function useParkingWatch({ request, plan, selectedIndex, enabled, demo }:
     }
   }, [active, check, demo])
 
-  const lastCheckLabel = session?.lastCheckedAt ? new Date(session.lastCheckedAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : ''
+  const lastCheckLabel = session?.lastCheckedAt ? new Date(session.lastCheckedAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : ''
   return {
     active, session, banner, error, checking, lastCheckLabel, start, end, check, clearBanner, requestNotifications,
     contextMatches: sameTrip && matchedSelected,

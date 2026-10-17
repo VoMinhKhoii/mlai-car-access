@@ -241,7 +241,7 @@ class CameraJobs(unittest.TestCase):
 
         self.assertIsNone(public["frames"])
         self.assertEqual(public["traffic"], "khong_ro")
-        self.assertEqual(public["traffic_vi"], "Không rõ")
+        self.assertEqual(public["traffic_vi"], "Unknown")
 
 
 
@@ -345,7 +345,7 @@ class CameraRegistryRefresh(unittest.TestCase):
             published = cameras.registry(deadline=1.0)
             index = cameras.by_id(deadline=1.0)
 
-        self.assertEqual(published["source"], "Cổng thông tin giao thông TP.HCM (camera layer, live)")
+        self.assertEqual(published["source"], "HCMC Traffic Portal (camera layer, live)")
         self.assertEqual(published["cameras"], [CAMS["c1"]])
         self.assertEqual(index, {"c1": CAMS["c1"]})
 
@@ -488,7 +488,7 @@ class CameraDeadlineBoundaries(unittest.TestCase):
                          datetime.now(cameras.VN_TZ))
 
         self.assertEqual(len(prompts), 1)
-        self.assertEqual([part for part in prompts[0][1] if isinstance(part, str)], ["Camera 1: Cam 1 (1 ảnh)"])
+        self.assertEqual([part for part in prompts[0][1] if isinstance(part, str)], ["Camera 1: Cam 1 (1 frame)"])
         self.assertEqual([reading["id"] for reading in stored], ["c1"])
 
     def test_one_frame_cannot_contribute_a_corridor_traffic_score(self):

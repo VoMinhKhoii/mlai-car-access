@@ -1,0 +1,1397 @@
+[
+  {
+    "method": "initialize",
+    "tool": null,
+    "status": 200,
+    "bytes": 528,
+    "latency_s": 0.123,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "serverInfo": {
+          "name": "ngo-ngach",
+          "title": "Ngõ Ngách",
+          "version": "1.1.0"
+        },
+        "instructions": "HCMC only; Asia/Ho_Chi_Minh. Resolve ambiguous addresses before planning. Preserve verdict.estimate, access versus legality, evidence tiers, citations and caveats. Unknown exit/flood is not a pass; Unverified legality is not permission. Read-only cached-area engine tools, no LLM or crawl. No transport sessions are issued."
+      }
+    }
+  },
+  {
+    "method": "tools/list",
+    "tool": null,
+    "status": 200,
+    "bytes": 6205,
+    "latency_s": 0.007,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "name": "tim_dia_diem",
+            "description": "Tìm địa chỉ/địa điểm TP.HCM; phải hỏi lại khi có nhiều kết quả. Search HCMC addresses/POIs, up to three coordinate candidates; resolve ambiguity before planning. Example: {\"query\":\"Hẻm 113/4 Võ Duy Ninh, Bình Thạnh\"}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 200
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          },
+          {
+            "name": "lap_ke_hoach",
+            "description": "Lập kế hoạch đến đầy đủ: ước tính xe vào, độ tin cậy, dừng/đỗ, đi bộ, đường ra, ngập, luật và nguồn. Full arrival plan: preserve verdict.estimate, access versus legal status, stop points, walking, exit, flood, citations, evidence tiers and caveats. Unknown is not safe; physical access does not authorize stopping. Uses existing cached areas only; cannot build or crawl. Example: {\"lat\":10.792106,\"lon\":106.716661,\"label\":\"Hẻm 113/4 Võ Duy Ninh\",\"vehicle_id\":\"toyota-fortuner\",\"arrive_at\":\"2026-10-17T18:00:00+07:00\",\"dwell_min\":120,\"intent\":\"park\"}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": 10.35,
+                  "maximum": 11.2,
+                  "description": "HCMC service-area latitude; use coordinates returned by tim_dia_diem."
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": 106.3,
+                  "maximum": 107.1,
+                  "description": "HCMC service-area longitude."
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "vehicle_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "description": "Catalogue ID or recognized model alias, e.g. toyota-fortuner, Fortuner, class-m."
+                },
+                "arrive_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 20,
+                  "maxLength": 40,
+                  "description": "ISO 8601 timestamp with timezone, e.g. 2026-10-17T18:00:00+07:00. No forecast beyond source coverage."
+                },
+                "dwell_min": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2160
+                },
+                "intent": {
+                  "type": "string",
+                  "enum": [
+                    "park",
+                    "pickup"
+                  ]
+                },
+                "rain_mm_per_h": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 300
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "label",
+                "vehicle_id",
+                "arrive_at",
+                "dwell_min",
+                "intent"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          },
+          {
+            "name": "kiem_tra_xe_vao_hem",
+            "description": "Kiểm tra bề rộng một đoạn hẻm theo xe, kèm nguồn và mức bằng chứng. Single-alley fit only; not whole-route, exit, flood or legal certification. Cached areas only. Example: {\"lat\":10.792106,\"lon\":106.716661,\"way_id\":464839531,\"vehicle_id\":\"Fortuner\"}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": 10.35,
+                  "maximum": 11.2,
+                  "description": "HCMC service-area latitude; use coordinates returned by tim_dia_diem."
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": 106.3,
+                  "maximum": 107.1,
+                  "description": "HCMC service-area longitude."
+                },
+                "way_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "vehicle_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "description": "Catalogue ID or recognized model alias, e.g. toyota-fortuner, Fortuner, class-m."
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "way_id",
+                "vehicle_id"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          },
+          {
+            "name": "tim_cho_do_gan",
+            "description": "Tìm điểm dừng/đỗ gần đích, kèm quãng đi bộ, luật và nguồn; chỉ trả điểm dừng. Nearby stop points only; no door/standard-route payload. Preserve legal restrictions and unverified evidence. Cached areas only. Example: {\"lat\":10.792106,\"lon\":106.716661,\"label\":\"Hẻm 113/4 Võ Duy Ninh\",\"vehicle_id\":\"toyota-fortuner\",\"arrive_at\":\"2026-10-17T18:00:00+07:00\",\"dwell_min\":120,\"intent\":\"park\"}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": 10.35,
+                  "maximum": 11.2,
+                  "description": "HCMC service-area latitude; use coordinates returned by tim_dia_diem."
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": 106.3,
+                  "maximum": 107.1,
+                  "description": "HCMC service-area longitude."
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "vehicle_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "description": "Catalogue ID or recognized model alias, e.g. toyota-fortuner, Fortuner, class-m."
+                },
+                "arrive_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 20,
+                  "maxLength": 40,
+                  "description": "ISO 8601 timestamp with timezone, e.g. 2026-10-17T18:00:00+07:00. No forecast beyond source coverage."
+                },
+                "dwell_min": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2160
+                },
+                "intent": {
+                  "type": "string",
+                  "enum": [
+                    "park",
+                    "pickup"
+                  ]
+                },
+                "rain_mm_per_h": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 300
+                }
+              },
+              "required": [
+                "lat",
+                "lon",
+                "label",
+                "vehicle_id",
+                "arrive_at",
+                "dwell_min",
+                "intent"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          },
+          {
+            "name": "danh_sach_xe",
+            "description": "Danh mục mẫu xe và nhóm kích thước XS–XL; kích thước mét và nguồn tra cứu. Vehicle catalogue and conservative size classes; dimensions in metres. Source references resolve in sources. Mirror estimates and class envelopes are assumptions, not surveyed clearance. Example: {}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          },
+          {
+            "name": "muc_trieu",
+            "description": "Xem triều Phú An trong tối đa 36 giờ, có nguồn; không ngoại suy khi thiếu bản tin. Tide extrema and alarm thresholds, at most 36 hours; missing_points means unknown, not no flood. Example: {\"start\":\"2026-10-17T12:00:00+07:00\",\"hours\":24}.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "format": "date-time",
+                  "minLength": 20,
+                  "maxLength": 40,
+                  "description": "ISO 8601 timestamp with timezone, e.g. 2026-10-17T18:00:00+07:00. No forecast beyond source coverage."
+                },
+                "hours": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 36
+                }
+              },
+              "required": [
+                "start"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "method": "ping",
+    "tool": null,
+    "status": 200,
+    "bytes": 36,
+    "latency_s": 0.004,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {}
+    }
+  },
+  {
+    "method": "tools/call",
+    "tool": "lap_ke_hoach",
+    "status": 200,
+    "bytes": 7607,
+    "latency_s": 2.674,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Chưa đủ bằng chứng để khẳng định"
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.792106,
+            "lon": 106.716661,
+            "label": "Hẻm 113/4 Võ Duy Ninh"
+          },
+          "window": {
+            "arrive": "2026-10-17T18:00:00+07:00",
+            "depart": "2026-10-17T20:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -0.43,
+              "kind": "bulletin"
+            },
+            "tide_depart": {
+              "level_m": 0.7,
+              "kind": "bulletin"
+            },
+            "rain": []
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Chưa đủ bằng chứng để khẳng định",
+            "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m",
+            "estimate": {
+              "answer": "tight",
+              "confidence": "low",
+              "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 15,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+              },
+              "limiting_width": {
+                "value_m": 3.0,
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 464839550,
+                "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+                "osm_url": "https://www.openstreetmap.org/way/464839550"
+              },
+              "stop_width": {
+                "value_m": 3.5,
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "park",
+          "vehicle": {
+            "id": "toyota-fortuner",
+            "label": "Toyota Fortuner",
+            "mirror_width": 2.105
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "Đường Võ Duy Ninh",
+              "kind": "street",
+              "way_id": 193085738,
+              "lat": 10.791805007531996,
+              "lon": 106.7166424858583,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "tight",
+                "confidence": "low",
+                "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+                "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+                "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+                "Đi thẳng ra đường lớn theo chiều xe được phép",
+                "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "label": "Chưa rõ bề rộng",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Không có dữ liệu phủ theo chiều dài"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM phân loại đường",
+                      "detail": "highway=service",
+                      "url": "https://www.openstreetmap.org/way/193085738",
+                      "lo": 2.0,
+                      "hi": 8.0,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 39,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "bulletin"
+                  },
+                  "at": "2026-10-17T20:00:00+07:00",
+                  "source": "bulletin",
+                  "interval": {
+                    "start": "2026-10-17T20:00:00+07:00",
+                    "end": "2026-10-17T20:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "bulletin"
+                  },
+                  "at": "2026-10-17T18:00:00+07:00",
+                  "source": "bulletin",
+                  "interval": {
+                    "start": "2026-10-17T18:00:00+07:00",
+                    "end": "2026-10-17T20:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 195
+              }
+            }
+          ],
+          "omitted_stop_points_count": 2,
+          "door": {
+            "name": "Trước cửa nhà",
+            "kind": "door",
+            "way_id": 464839550,
+            "lat": 10.792105888393326,
+            "lon": 106.71666136514123,
+            "ok": false,
+            "tier": 2,
+            "verified": false,
+            "estimate": {
+              "answer": "unknown",
+              "confidence": "low",
+              "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · 0/5 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý · Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)"
+            },
+            "failure_codes": [
+              "dead_end"
+            ],
+            "fail_reasons": [
+              "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)"
+            ],
+            "unverified_reasons": [
+              "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+              "Chưa đủ bằng chứng bề rộng (1.5–4.5 m; xe cần ≥ 2.31 m)",
+              "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+              "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+            ],
+            "fit": {
+              "class": "unknown",
+              "width_range": {
+                "lo": 1.5,
+                "hi": 4.5,
+                "label": "Hẻm xe hơi",
+                "top_tier": "Inferred",
+                "review": false,
+                "width_basis": "inferred",
+                "coverage": {
+                  "cut_count": 0,
+                  "start_covered": false,
+                  "end_covered": false,
+                  "truncated": false,
+                  "complete": false,
+                  "reason": "Không có dữ liệu phủ theo chiều dài"
+                },
+                "decisive_clearance": false,
+                "evidence": [
+                  {
+                    "tier": "Inferred",
+                    "source": "OSM phân loại đường",
+                    "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                    "url": "https://www.openstreetmap.org/way/464839550",
+                    "lo": 1.5,
+                    "hi": 4.5,
+                    "width_basis": "inferred"
+                  }
+                ]
+              }
+            },
+            "walk": {
+              "meters": 0,
+              "minutes": 0,
+              "connection": {
+                "mapped": true
+              }
+            },
+            "way_out": {
+              "available": false,
+              "mode": "none",
+              "text": "Không có đường ra phù hợp (hẻm cụt hoặc quãng lùi quá dài)",
+              "route_verified": false
+            },
+            "flood": {
+              "stay": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "bulletin"
+                },
+                "at": "2026-10-17T18:00:00+07:00",
+                "source": "bulletin",
+                "interval": {
+                  "start": "2026-10-17T18:00:00+07:00",
+                  "end": "2026-10-17T20:00:00+07:00",
+                  "approximate": false
+                }
+              }
+            },
+            "legality": {
+              "status": "Unverified",
+              "rules": [
+                {
+                  "code": "junction-5m",
+                  "status": "Unverified",
+                  "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                },
+                {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              ]
+            },
+            "route_in": {
+              "meters": 156
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "tool": "tim_cho_do_gan",
+    "status": 200,
+    "bytes": 4912,
+    "latency_s": 2.196,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Chưa đủ bằng chứng để khẳng định"
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.792106,
+            "lon": 106.716661,
+            "label": "Hẻm 113/4 Võ Duy Ninh"
+          },
+          "window": {
+            "arrive": "2026-10-17T18:00:00+07:00",
+            "depart": "2026-10-17T20:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -0.43,
+              "kind": "bulletin"
+            },
+            "tide_depart": {
+              "level_m": 0.7,
+              "kind": "bulletin"
+            },
+            "rain": []
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Chưa đủ bằng chứng để khẳng định",
+            "detail": "Gợi ý: đỗ tại Đường Võ Duy Ninh, đi bộ 39 m",
+            "estimate": {
+              "answer": "tight",
+              "confidence": "low",
+              "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 15,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+              },
+              "limiting_width": {
+                "value_m": 3.0,
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 464839550,
+                "way_name": "Hẻm 113 Đường Võ Duy Ninh",
+                "osm_url": "https://www.openstreetmap.org/way/464839550"
+              },
+              "stop_width": {
+                "value_m": 3.5,
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "park",
+          "vehicle": {
+            "id": "toyota-fortuner",
+            "label": "Toyota Fortuner",
+            "mirror_width": 2.105
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "Đường Võ Duy Ninh",
+              "kind": "street",
+              "way_id": 193085738,
+              "lat": 10.791805007531996,
+              "lon": 106.7166424858583,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "tight",
+                "confidence": "low",
+                "basis": "suy luận ≈3,00 m (Hẻm 113 Đường Võ Duy Ninh; OSM 464839550) · trước cửa ≈3,50 m (Đường Võ Duy Ninh) · 0/15 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+                "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+                "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+                "Đi thẳng ra đường lớn theo chiều xe được phép",
+                "Chưa đủ dữ liệu pháp lý: Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m; Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 2.0,
+                  "hi": 8.0,
+                  "label": "Chưa rõ bề rộng",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Không có dữ liệu phủ theo chiều dài"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM phân loại đường",
+                      "detail": "highway=service",
+                      "url": "https://www.openstreetmap.org/way/193085738",
+                      "lo": 2.0,
+                      "hi": 8.0,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 39,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Đi thẳng ra đường lớn theo chiều xe được phép",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "bulletin"
+                  },
+                  "at": "2026-10-17T20:00:00+07:00",
+                  "source": "bulletin",
+                  "interval": {
+                    "start": "2026-10-17T20:00:00+07:00",
+                    "end": "2026-10-17T20:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "bulletin"
+                  },
+                  "at": "2026-10-17T18:00:00+07:00",
+                  "source": "bulletin",
+                  "interval": {
+                    "start": "2026-10-17T18:00:00+07:00",
+                    "end": "2026-10-17T20:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 195
+              }
+            }
+          ],
+          "omitted_stop_points_count": 2
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "tool": "kiem_tra_xe_vao_hem",
+    "status": 200,
+    "bytes": 1492,
+    "latency_s": 0.036,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Ngõ Ngách: kiem_tra_xe_vao_hem"
+          }
+        ],
+        "structuredContent": {
+          "way_id": 464839531,
+          "vehicle": {
+            "id": "toyota-fortuner",
+            "label": "Toyota Fortuner",
+            "mirror_width": 2.105
+          },
+          "fit": "unknown",
+          "note": null,
+          "width_range": {
+            "lo": 2.2,
+            "hi": null,
+            "label": "Hẻm xe hơi",
+            "top_tier": "Declared",
+            "review": false,
+            "width_basis": "declared_width",
+            "coverage": {
+              "cut_count": 0,
+              "start_covered": false,
+              "end_covered": false,
+              "max_spacing_m": null,
+              "truncated": false,
+              "complete": false,
+              "reason": "Không có dữ liệu phủ theo chiều dài"
+            },
+            "decisive_clearance": false,
+            "evidence": [
+              {
+                "tier": "Declared",
+                "source": "Tin rao toàn TP.HCM (chuỗi địa chỉ hẻm)",
+                "detail": "1 tin độc lập ước tính / 1 tin; đồng thuận 100%. Khoảng hợp các lời khai; bề rộng tin rao là giới hạn trên, không phải đo thông thủy. Chưa đo thực tế.",
+                "url": "https://www.nhatot.com/132243131.htm",
+                "lo": 2.2,
+                "hi": null,
+                "width_basis": "declared_width",
+                "uncertainty_m": null
+              },
+              {
+                "tier": "Inferred",
+                "source": "OSM phân loại đường",
+                "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+                "url": "https://www.openstreetmap.org/way/464839531",
+                "lo": 1.5,
+                "hi": 4.5,
+                "width_basis": "inferred",
+                "uncertainty_m": null
+              }
+            ]
+          },
+          "estimate": {
+            "answer": "fits",
+            "confidence": "low",
+            "basis": "Chỉ ước tính một đoạn; chưa kiểm tra toàn tuyến, đường ra, ngập và luật."
+          },
+          "scope": "Single segment width only; not a full-route, exit, flood or legal check."
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "tool": "danh_sach_xe",
+    "status": 200,
+    "bytes": 7758,
+    "latency_s": 0.004,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Ngõ Ngách: danh_sach_xe"
+          }
+        ],
+        "structuredContent": {
+          "vehicles": [
+            {
+              "id": "class-xs",
+              "label": "XS · Xe cỡ nhỏ",
+              "size_class": "XS",
+              "mirror_width": 1.93,
+              "length": 3.815,
+              "kind": "class"
+            },
+            {
+              "id": "class-s",
+              "label": "S · Sedan & crossover cỡ B/C",
+              "size_class": "S",
+              "mirror_width": 2.095,
+              "length": 4.66,
+              "kind": "class"
+            },
+            {
+              "id": "class-m",
+              "label": "M · SUV/MPV 7 chỗ & sedan cỡ D",
+              "size_class": "M",
+              "mirror_width": 2.207,
+              "length": 4.92,
+              "kind": "class",
+              "mirror_estimated": false
+            },
+            {
+              "id": "class-l",
+              "label": "L · Xe lớn, bán tải, tải nhẹ",
+              "size_class": "L",
+              "mirror_width": 2.26,
+              "length": 5.362,
+              "kind": "class"
+            },
+            {
+              "id": "class-xl",
+              "label": "XL · Xe khách 16 chỗ, van",
+              "size_class": "XL",
+              "mirror_width": 2.474,
+              "length": 6.195,
+              "kind": "class",
+              "mirror_estimated": false
+            },
+            {
+              "id": "vinfast-vf-3",
+              "label": "VinFast VF 3",
+              "size_class": "XS",
+              "mirror_width": 1.748,
+              "length": 3.19,
+              "mirror_estimated": false,
+              "source_ref": 0
+            },
+            {
+              "id": "kia-morning",
+              "label": "Kia Morning",
+              "size_class": "XS",
+              "mirror_width": 1.845,
+              "length": 3.595,
+              "source_ref": 1
+            },
+            {
+              "id": "hyundai-grand-i10",
+              "label": "Hyundai Grand i10",
+              "size_class": "XS",
+              "mirror_width": 1.93,
+              "length": 3.815,
+              "source_ref": 2
+            },
+            {
+              "id": "toyota-vios",
+              "label": "Toyota Vios",
+              "size_class": "S",
+              "mirror_width": 1.98,
+              "length": 4.425,
+              "source_ref": 3
+            },
+            {
+              "id": "honda-city",
+              "label": "Honda City",
+              "size_class": "S",
+              "mirror_width": 1.998,
+              "length": 4.589,
+              "source_ref": 4
+            },
+            {
+              "id": "hyundai-accent",
+              "label": "Hyundai Accent",
+              "size_class": "S",
+              "mirror_width": 2.015,
+              "length": 4.535,
+              "source_ref": 5
+            },
+            {
+              "id": "mazda-mazda3",
+              "label": "Mazda Mazda3",
+              "size_class": "S",
+              "mirror_width": 2.045,
+              "length": 4.66,
+              "source_ref": 6
+            },
+            {
+              "id": "toyota-camry",
+              "label": "Toyota Camry",
+              "size_class": "M",
+              "mirror_width": 2.09,
+              "length": 4.92,
+              "source_ref": 7
+            },
+            {
+              "id": "mercedes-benz-c-class",
+              "label": "Mercedes-Benz C-Class",
+              "size_class": "M",
+              "mirror_width": 2.033,
+              "length": 4.751,
+              "mirror_estimated": false,
+              "source_ref": 8
+            },
+            {
+              "id": "vinfast-vf-5",
+              "label": "VinFast VF 5",
+              "size_class": "S",
+              "mirror_width": 1.973,
+              "length": 3.967,
+              "source_ref": 9
+            },
+            {
+              "id": "toyota-yaris-cross",
+              "label": "Toyota Yaris Cross",
+              "size_class": "S",
+              "mirror_width": 2.02,
+              "length": 4.31,
+              "source_ref": 10
+            },
+            {
+              "id": "hyundai-creta",
+              "label": "Hyundai Creta",
+              "size_class": "S",
+              "mirror_width": 2.04,
+              "length": 4.33,
+              "source_ref": 11
+            },
+            {
+              "id": "kia-seltos",
+              "label": "Kia Seltos",
+              "size_class": "S",
+              "mirror_width": 2.05,
+              "length": 4.365,
+              "source_ref": 12
+            },
+            {
+              "id": "mitsubishi-xforce",
+              "label": "Mitsubishi Xforce",
+              "size_class": "S",
+              "mirror_width": 2.06,
+              "length": 4.39,
+              "source_ref": 13
+            },
+            {
+              "id": "vinfast-vf-6",
+              "label": "VinFast VF 6",
+              "size_class": "S",
+              "mirror_width": 2.084,
+              "length": 4.241,
+              "source_ref": 14
+            },
+            {
+              "id": "toyota-corolla-cross",
+              "label": "Toyota Corolla Cross",
+              "size_class": "S",
+              "mirror_width": 2.075,
+              "length": 4.46,
+              "source_ref": 15
+            },
+            {
+              "id": "mazda-cx-5",
+              "label": "Mazda CX-5",
+              "size_class": "S",
+              "mirror_width": 2.095,
+              "length": 4.59,
+              "source_ref": 16
+            },
+            {
+              "id": "vinfast-vf-7",
+              "label": "VinFast VF 7",
+              "size_class": "M",
+              "mirror_width": 2.143,
+              "length": 4.55,
+              "source_ref": 17
+            },
+            {
+              "id": "ford-territory",
+              "label": "Ford Territory",
+              "size_class": "M",
+              "mirror_width": 2.185,
+              "length": 4.685,
+              "source_ref": 18
+            },
+            {
+              "id": "vinfast-vf-8-the-all-new-2026",
+              "label": "VinFast VF 8 The All New (2026)",
+              "size_class": "M",
+              "mirror_width": 2.123,
+              "length": 4.701,
+              "mirror_estimated": false,
+              "source_ref": 19
+            },
+            {
+              "id": "vinfast-vf-8-2022-2025-generation",
+              "label": "VinFast VF 8 (2022-2025 generation)",
+              "size_class": "M",
+              "mirror_width": 2.184,
+              "length": 4.75,
+              "source_ref": 20
+            },
+            {
+              "id": "toyota-fortuner",
+              "label": "Toyota Fortuner",
+              "size_class": "M",
+              "mirror_width": 2.105,
+              "length": 4.795,
+              "source_ref": 21
+            },
+            {
+              "id": "hyundai-santa-fe",
+              "label": "Hyundai Santa Fe",
+              "size_class": "M",
+              "mirror_width": 2.15,
+              "length": 4.83,
+              "source_ref": 22
+            },
+            {
+              "id": "ford-everest",
+              "label": "Ford Everest",
+              "size_class": "M",
+              "mirror_width": 2.207,
+              "length": 4.914,
+              "mirror_estimated": false,
+              "source_ref": 23
+            },
+            {
+              "id": "vinfast-vf-9",
+              "label": "VinFast VF 9",
+              "size_class": "L",
+              "mirror_width": 2.254,
+              "length": 5.119,
+              "mirror_estimated": false,
+              "source_ref": 24
+            },
+            {
+              "id": "mitsubishi-xpander",
+              "label": "Mitsubishi Xpander",
+              "size_class": "S",
+              "mirror_width": 2.0,
+              "length": 4.595,
+              "source_ref": 25
+            },
+            {
+              "id": "toyota-innova-cross",
+              "label": "Toyota Innova Cross",
+              "size_class": "M",
+              "mirror_width": 2.095,
+              "length": 4.755,
+              "source_ref": 26
+            },
+            {
+              "id": "vinfast-limo-green",
+              "label": "VinFast Limo Green",
+              "size_class": "M",
+              "mirror_width": 2.123,
+              "length": 4.74,
+              "mirror_estimated": false,
+              "source_ref": 27
+            },
+            {
+              "id": "kia-carnival",
+              "label": "Kia Carnival",
+              "size_class": "L",
+              "mirror_width": 2.26,
+              "length": 5.155,
+              "source_ref": 28
+            },
+            {
+              "id": "ford-ranger",
+              "label": "Ford Ranger",
+              "size_class": "L",
+              "mirror_width": 2.208,
+              "length": 5.362,
+              "mirror_estimated": false,
+              "source_ref": 29
+            },
+            {
+              "id": "hyundai-solati",
+              "label": "Hyundai Solati",
+              "size_class": "XL",
+              "mirror_width": 2.288,
+              "length": 6.195,
+              "source_ref": 30
+            },
+            {
+              "id": "ford-transit",
+              "label": "Ford Transit",
+              "size_class": "XL",
+              "mirror_width": 2.474,
+              "length": 5.998,
+              "mirror_estimated": false,
+              "source_ref": 31
+            },
+            {
+              "id": "hyundai-new-porter-h150",
+              "label": "Hyundai New Porter H150",
+              "size_class": "L",
+              "mirror_width": 1.99,
+              "length": 5.12,
+              "source_ref": 32
+            },
+            {
+              "id": "isuzu-qkr",
+              "label": "Isuzu QKR",
+              "size_class": "L",
+              "mirror_width": 2.11,
+              "length": 5.165,
+              "source_ref": 33
+            }
+          ],
+          "sources": [
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF3&year=2026&lv1=1272213&lv2=1272256",
+            "https://kiavietnam.com.vn/storage/new-sorento-new-morning-2025/e-brochure-new-morning-2025.pdf",
+            "https://hyundai.thanhcong.vn/new-grand-i10?attr=thong-so",
+            "https://www.toyota.com.vn/vios",
+            "https://www.honda.com.vn/o-to/chi-tiet/2",
+            "https://hyundai.thanhcong.vn/all-new-accent?attr=thong-so",
+            "https://mazdamotors.vn/media/bv5f24gc/e-brochure-mazda3-sedan-230625.pdf",
+            "https://www.toyota.com.vn/camry",
+            "https://www.mercedes-benz.com.vn/content/dam/vietnam/passengercars/price-brochure/sedan/C-Class%20Brochure.pdf",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF5&year=2026&lv1=1276822&lv2=1276869",
+            "https://www.toyota.com.vn/yaris-cross",
+            "https://hyundai.thanhcong.vn/san-pham/new-creta?attr=thong-so",
+            "https://kiavietnam.com.vn/storage/thang-10/e-brochure-new-seltos.pdf",
+            "https://www.mitsubishi-motors.com.vn/new-xforce",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF6&year=2026&lv1=1280996&lv2=1281048",
+            "https://www.toyota.com.vn/corolla-cross",
+            "https://mazdamotors.vn/media/nyonsmri/e-brochure-mazda-cx-5-230625.pdf",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF7&year=2026&lv1=1282214&lv2=1282266",
+            "https://tuoitre.vn/chi-tiet-ford-territory-2025-ra-mat-viet-nam-gia-tu-762-trieu-thay-doi-tien-nghi-dau-mazda-cx-5-20250816001731191.htm",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF8NP&year=2026&lv1=1313352&lv2=1313404",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF8&year=2026&lv1=1266329&lv2=1266381",
+            "https://www.toyota.com.vn/fortuner",
+            "https://hyundai.thanhcong.vn/san-pham/santa-fe?attr=thong-so",
+            "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-everest-2026-active-2-0-at-4x2-1234",
+            "https://om.vinfastauto.com/vi_vn/detail?car=VF9&year=2026&lv1=1312174&lv2=1312400",
+            "https://www.mitsubishi-motors.com.vn/newxpander",
+            "https://www.toyota.com.vn/innova-cross",
+            "https://om.vinfastauto.com/vi_vn/detail?car=Limo%20Green&year=2026&lv1=1327954&lv2=1327999",
+            "https://kiavietnam.com.vn/storage/e-brochure/e-brochure-new-carnival-hybrid-v8-2-1.pdf",
+            "https://vnexpress.net/oto-xe-may/v-car/phien-ban-xe/ford-ranger-2026-wildtrak-2-0-4x4-at-1294",
+            "https://hyundai.thanhcong.vn/solati-2",
+            "https://www.binhtanford.com/so-sanh-cac-phien-ban-ford-transit-2025/",
+            "https://hyundai.thanhcong.vn/new-porter-h150",
+            "https://isuzu-vietnam.com/xetai-vn/qkr-vn/xe-tai-isuzu-qkr-qlr77fe5b-cabin-sat-xi/"
+          ],
+          "units": "metres",
+          "defaults": {
+            "kind": "model",
+            "mirror_estimated": true
+          },
+          "caveats": "mirror_estimated uses body width + allowance; classes are conservative envelopes, not a specific model. Catalogue dimensions do not certify alley clearance, manoeuvres or safe flood depth."
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "tools/call",
+    "tool": "muc_trieu",
+    "status": 200,
+    "bytes": 1210,
+    "latency_s": 0.023,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 8,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Ngõ Ngách: muc_trieu"
+          }
+        ],
+        "structuredContent": {
+          "extrema": [
+            {
+              "t": "2026-10-17T22:00:00+07:00",
+              "level_m": 1.2,
+              "kind": "đỉnh"
+            },
+            {
+              "t": "2026-10-18T03:00:00+07:00",
+              "level_m": 0.74,
+              "kind": "chân"
+            },
+            {
+              "t": "2026-10-18T08:00:00+07:00",
+              "level_m": 0.98,
+              "kind": "đỉnh"
+            },
+            {
+              "t": "2026-10-18T16:00:00+07:00",
+              "level_m": -1.37,
+              "kind": "chân"
+            }
+          ],
+          "highest": {
+            "t": "2026-10-17T22:00:00+07:00",
+            "level_m": 1.2,
+            "kind": "bulletin"
+          },
+          "lowest": {
+            "t": "2026-10-18T16:00:00+07:00",
+            "level_m": -1.37,
+            "kind": "bulletin"
+          },
+          "alarm_levels_m": {
+            "BD1": 1.4,
+            "BD2": 1.5,
+            "BD3": 1.6
+          },
+          "station": "Phú An (sông Sài Gòn)",
+          "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+          "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu.",
+          "missing_points": 0
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "method": "notifications/initialized",
+    "status": 202,
+    "bytes": 0
+  },
+  {
+    "method": "GET",
+    "status": 405,
+    "origin_rejected": false
+  },
+  {
+    "method": "DELETE",
+    "status": 405,
+    "origin_rejected": false
+  },
+  {
+    "method": "GET",
+    "status": 403,
+    "origin_rejected": true
+  }
+]

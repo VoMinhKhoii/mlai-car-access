@@ -1,5 +1,21 @@
-import type { MapContext } from './mapSearch'
+import { matchMapPlaces, type MapContext, type MapPlace } from './mapSearch'
 import type * as GeoJSON from 'geojson'
+
+/** Keep address chains intact before applying the shared POI token gate. */
+export function matchVisiblePlaces(query: string, places: MapPlace[], center: MapContext['center'], limit = 20, inMessage = false): MapPlace[] {
+  const norm = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐðÐ]/g, 'd').toLowerCase()
+  const chainOf = (s: string) => norm(s).match(/^(?:(?:hem|ngo|kiet|ngach|alley|lane)\s+)?(\d+[a-z0-9]*(?:\/\d+[a-z0-9]*)*)\b/)?.[1]
+  const named = norm(query).match(/\b(?:hem|ngo|kiet|ngach|alley|lane)\s+\d+[a-z0-9]*(?:\/\d+[a-z0-9]*)*/)?.[0]
+  const chain = chainOf(named ?? query)
+  let eligible = places
+  if (chain) {
+    eligible = places.filter((p) => { const n = chainOf(p.name); return n && (n === chain || chain.startsWith(n + '/')) })
+    const depth = Math.max(0, ...eligible.map((p) => chainOf(p.name)!.split('/').length))
+    eligible = eligible.filter((p) => chainOf(p.name)!.split('/').length === depth)
+  }
+  return matchMapPlaces(query, eligible, center, limit, inMessage)
+}
+
 export type Intent = 'park' | 'pickup'
 export type FitClass = 'fits' | 'tight' | 'no' | 'unknown' | 'blocked' | 'lot'
 export type FloodStatus = 'passable' | 'risky' | 'blocked'
@@ -291,7 +307,7 @@ export const api = {
   async agent(body: { contents: Record<string, unknown>[]; message: string; origin: [number, number] | null; tools: boolean; request_id?: string; map_context?: MapContext }, onEvent: (e: AgentEvent) => void, signal?: AbortSignal) {
     const res = await fetch('/api/agent', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal })
     if (!res.ok) { await j(res); return }
-    if (!res.body) throw new Error('Không đọc được câu trả lời.')
+    if (!res.body) throw new Error('Could not read the response.')
     const reader = res.body.getReader()
     const dec = new TextDecoder()
     let buf = ''
@@ -313,7 +329,7 @@ export const api = {
         }
         if (done) { line(buf); break }
       }
-      if (!finished) throw new Error('Kết nối gián đoạn. Vui lòng thử lại.')
+      if (!finished) throw new Error('Connection interrupted. Please try again.')
     } finally { await reader.cancel().catch(() => {}); reader.releaseLock() }
   },
 

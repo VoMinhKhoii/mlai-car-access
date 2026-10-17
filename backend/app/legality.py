@@ -46,13 +46,13 @@ def _sign_rules(g: AreaGraph, w: Way, lat: float, lon: float, intent: str, when:
             continue
         s = sign.upper().replace(" ", "")
         if "P.130" in s or "P130" in s:
-            out.append(StopRule("sign-P130", "Prohibited", "Biển P.130 cấm dừng và đỗ xe", "QCVN 41:2024/BGTVT, biển P.130"))
+            out.append(StopRule("sign-P130", "Prohibited", "Sign P.130 prohibits stopping and parking", "QCVN 41:2024/BGTVT, biển P.130"))
         elif intent == "park" and ("P.131A" in s or "P131A" in s):
-            out.append(StopRule("sign-P131a", "Prohibited", "Biển P.131a cấm đỗ xe", "QCVN 41:2024/BGTVT, biển P.131a"))
+            out.append(StopRule("sign-P131a", "Prohibited", "Sign P.131a prohibits parking", "QCVN 41:2024/BGTVT, biển P.131a"))
         elif intent == "park" and ("P.131B" in s or "P131B" in s) and when.day % 2 == 1:
-            out.append(StopRule("sign-P131b", "Prohibited", "Biển P.131b cấm đỗ xe ngày lẻ (hôm nay là ngày lẻ)", "QCVN 41:2024/BGTVT, biển P.131b"))
+            out.append(StopRule("sign-P131b", "Prohibited", "Sign P.131b prohibits parking on odd dates (today is odd)", "QCVN 41:2024/BGTVT, biển P.131b"))
         elif intent == "park" and ("P.131C" in s or "P131C" in s) and when.day % 2 == 0:
-            out.append(StopRule("sign-P131c", "Prohibited", "Biển P.131c cấm đỗ xe ngày chẵn (hôm nay là ngày chẵn)", "QCVN 41:2024/BGTVT, biển P.131c"))
+            out.append(StopRule("sign-P131c", "Prohibited", "Sign P.131c prohibits parking on even dates (today is even)", "QCVN 41:2024/BGTVT, biển P.131c"))
     return out
 
 
@@ -60,9 +60,9 @@ def _osm_parking_tags(w: Way, intent: str) -> list[StopRule]:
     out = []
     vals = [v for k, v in w.tags.items() if k.startswith("parking:") and not k.endswith(":reason")]
     if any(v in ("no_stopping", "no_standing") for v in vals):
-        out.append(StopRule("osm-no-stopping", "Prohibited", "Đoạn đường được đánh dấu cấm dừng xe", "Dữ liệu biển báo OSM"))
+        out.append(StopRule("osm-no-stopping", "Prohibited", "Road segment marked no stopping", "OSM sign data"))
     elif intent == "park" and any(v in ("no", "no_parking") for v in vals):
-        out.append(StopRule("osm-no-parking", "Prohibited", "Đoạn đường được đánh dấu cấm đỗ xe", "Dữ liệu biển báo OSM"))
+        out.append(StopRule("osm-no-parking", "Prohibited", "Road segment marked no parking", "OSM sign data"))
     return out
 
 
@@ -72,9 +72,9 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
     rules: list[StopRule] = []
     if dist_to_junction is None:
         rules.append(StopRule("junction-5m", "Unverified",
-                              "Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m", LAW))
+                              "Junction edge is unknown; cannot check the 5 m setback", LAW))
     elif dist_to_junction < 5.0:
-        rules.append(StopRule("junction-5m", "Prohibited", "Trong phạm vi 5 m tính từ mép đường giao nhau", LAW))
+        rules.append(StopRule("junction-5m", "Prohibited", "Within 5 m of the intersecting road edge", LAW))
     for nid, tags in g.node_tags.items():
         hw = tags.get("highway")
         if hw not in ("crossing", "bus_stop"):
@@ -82,47 +82,47 @@ def legality_on_street(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: fl
         la, lo = g.nodes[nid]
         d = haversine(lat, lon, la, lo)
         if hw == "crossing" and d < 6:
-            rules.append(StopRule("crosswalk", "Prohibited", "Trên phần đường dành cho người đi bộ qua đường", LAW))
+            rules.append(StopRule("crosswalk", "Prohibited", "On a pedestrian crossing", LAW))
         if hw == "bus_stop" and d < 20:
-            rules.append(StopRule("bus-stop", "Prohibited", "Tại nơi dừng của xe buýt", LAW))
+            rules.append(StopRule("bus-stop", "Prohibited", "At a bus stop", LAW))
     tunnel = w.tags.get("tunnel", "no") not in ("no", "") or w.tags.get("covered") == "yes" \
         or w.name.lower().startswith(("hầm", "cầu "))
     if w.tags.get("bridge", "no") not in ("no", "") or tunnel:
-        rules.append(StopRule("bridge", "Prohibited", "Trên cầu, trong hầm đường bộ", LAW))
+        rules.append(StopRule("bridge", "Prohibited", "On a bridge or inside a road tunnel", LAW))
     if w.highway.endswith("_link"):
-        rules.append(StopRule("ramp", "Prohibited", "Trên đường dẫn lên, xuống cầu vượt / nút giao", LAW))
+        rules.append(StopRule("ramp", "Prohibited", "On an approach or exit ramp to a flyover or junction", LAW))
     if w.highway in ("motorway", "trunk"):
-        rules.append(StopRule("expressway", "Prohibited", "Đường trục chính tốc độ cao, không dừng đỗ tùy tiện", LAW))
+        rules.append(StopRule("expressway", "Prohibited", "High-speed arterial road; stopping and parking restricted", LAW))
     rules += _sign_rules(g, w, lat, lon, intent, when) + _osm_parking_tags(w, intent)
 
     # A measured, complete clear-width range is required to infer legal lane count.
     if not supports_legal_lane_count(wr):
         rules.append(StopRule("lane-unknown", "Unverified",
-                              "Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới", LAW))
+                              "Insufficient clear-width measurements to determine the number of motor-vehicle lanes", LAW))
     elif wr.hi < TWO_LANE_MIN_M:
         if intent == "park":
             rules.append(StopRule("single-lane", "Prohibited",
-                                  "Phần đường chỉ đủ một làn xe cơ giới: không được đỗ", LAW))
+                                  "Roadway fits only one motor-vehicle lane: parking prohibited", LAW))
         else:
             rules.append(StopRule("single-lane", "Restricted",
-                                  "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới", LAW))
+                                  "No stopping or parking where the roadway fits only one motor-vehicle lane", LAW))
     elif wr.lo < TWO_LANE_MIN_M:
         rules.append(StopRule("lane-unknown", "Unverified",
-                              f"Chưa đủ bằng chứng hẻm rộng hơn {TWO_LANE_MIN_M:g} m (đủ hai làn xe)", LAW))
+                              f"Insufficient evidence that the alley exceeds {TWO_LANE_MIN_M:g} m (two lanes)", LAW))
 
     if intent == "park" and paid_street:
         rules.append(StopRule("vetc-street", "Permitted",
-                              f"Điểm đỗ ô tô dưới lòng đường có thu phí ({paid_street.get('fee_note') or 'thanh toán VETC'})",
-                              "Danh sách 20 tuyến đường thu phí đỗ xe ô tô, TP.HCM (VETC)"))
+                              f"Paid on-street parking ({paid_street.get('fee_note') or 'VETC payment'})",
+                              "List of 20 paid on-street parking roads, HCMC (VETC)"))
     elif intent == "park" and w.kind == "main" and w.highway in ("primary", "secondary"):
         rules.append(StopRule("main-road-signs", "Unverified",
-                              "Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này", "Dữ liệu biển báo chưa đầy đủ"))
+                              "Main road: no parking-sign data for this segment", "Incomplete sign data"))
 
     status = max((rule.status for rule in rules), key=lambda value: ORDER[value], default="Permitted")
     if status == "Permitted" and not rules:
         status = "Unverified"
         rules.append(StopRule("no-rule", "Unverified",
-                              "Chưa có dữ liệu biển báo đầy đủ tại vị trí này", "Dữ liệu biển báo chưa đầy đủ"))
+                              "Incomplete sign data at this location", "Incomplete sign data"))
     return status, rules
 
 
@@ -145,7 +145,7 @@ def legality_over_window(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: 
         for rule in rules:
             # For parity rules (P.131b/c) across multiple days, suffix the day
             if multi_day and rule.code in ("sign-P131b", "sign-P131c"):
-                day_label = f" (ngày {when.strftime('%a %d/%m')})"
+                day_label = f" (on {when.strftime('%a %d/%m')})"
                 rule = StopRule(rule.code, rule.status, rule.text + day_label, rule.citation)
             by_key[(rule.code, rule.status, rule.text)] = rule
     return status, list(by_key.values())
@@ -153,7 +153,7 @@ def legality_over_window(g: AreaGraph, w: Way, wr: WidthRange, lat: float, lon: 
 
 def legality_for_lot(lot: dict, intent: str) -> tuple[str, list[StopRule]]:
     access = lot.get("access", "")
-    note = "Bãi đỗ xe" + (" dành cho khách" if access == "customers" else "")
+    note = "Car park" + (" for customers" if access == "customers" else "")
     if lot.get("source") == "VETC":
-        note = "Bãi đỗ có thanh toán điện tử VETC"
-    return "Permitted", [StopRule("lot", "Permitted", note, lot.get("source_label", "Bãi đỗ ngoài đường"))]
+        note = "Car park with VETC electronic payment"
+    return "Permitted", [StopRule("lot", "Permitted", note, lot.get("source_label", "Off-street car park"))]

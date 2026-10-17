@@ -1,0 +1,14 @@
+{
+  "list_vehicles": {
+    "status": 200,
+    "bytes": 7836,
+    "text": "Vehicle catalogue: 39 models and size classes. Dimensions are in metres; check assumptions and sources.",
+    "vehicle_count": 39
+  },
+  "danh_sach_xe": {
+    "status": 200,
+    "bytes": 7836,
+    "text": "Vehicle catalogue: 39 models and size classes. Dimensions are in metres; check assumptions and sources.",
+    "vehicle_count": 39
+  }
+}

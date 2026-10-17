@@ -1,0 +1,106 @@
+frontend/src/api.ts:6:  const norm = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐðÐ]/g, 'd').toLowerCase()
+frontend/src/api.ts:120:    case 'known': return 'Có dữ liệu cho thời điểm kiểm tra'
+frontend/src/api.ts:121:    case 'missing_tide': return 'Thiếu dữ liệu triều cho thời điểm kiểm tra'
+frontend/src/api.ts:122:    case 'missing_history': return 'Thiếu lịch sử ngập để ước lượng'
+frontend/src/api.ts:123:    case 'stale_positive_observation': return 'Ghi nhận ngập đã cũ; chưa có quan sát mới xác nhận nước rút'
+frontend/src/api.ts:124:    default: return 'Chưa đủ dữ liệu ngập'
+backend/app/geocoding.py:30:    return _strip_accents(str(value).replace('Ð', 'Đ').replace('ð', 'đ'))
+backend/app/geocoding.py:313:    # A dropped last character in Đường is harmless when the remaining street matches exactly.
+backend/app/geocoding.py:523:            parent_query = f'Hẻm {parent} {street}'.strip()
+frontend/src/components/Agent.tsx:10:  'I drive a Fortuner to Hẻm 113/4 Võ Duy Ninh for 2 hours. Where can I park?',
+frontend/src/components/Agent.tsx:12:  'Vios to Hẻm 220/9 Xô Viết Nghệ Tĩnh at 20:00, for 2 hours',
+frontend/src/components/Agent.tsx:13:  'VF 5 pickup at Hẻm 328 Xô Viết Nghệ Tĩnh',
+frontend/src/components/Agent.tsx:128:    // Keep the baseline's own history; it never receives tool evidence from Ngõ Ngách.
+frontend/src/components/Agent.tsx:169:          {(t.blind || t.blindError) && <div className="agent-bubble agent-blind"><b>AI without Ngõ Ngách</b><p>{plain(t.blind || t.blindError || '')}</p></div>}
+frontend/src/components/Agent.tsx:188:        <label className="agent-compare"><input type="checkbox" checked={compare} disabled={busy} onChange={(e) => setCompare(e.target.checked)} />Compare: AI without Ngõ Ngách</label>
+backend/app/agent.py:27:# House-end of OSM way 464839531, not its mouth on Ngô Tất Tố.
+backend/app/agent.py:28:DEMO_PLACES = [{"label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh",
+backend/app/agent.py:144:    return {"name": "At destination" if s["name"] == "Trước cửa nhà" else s["name"], "kind": s["kind"], "way_id": s.get("way_id"), "lat": s.get("lat"), "lon": s.get("lon"), "walk": s["walk"] and
+backend/app/agent.py:243:    return f"""You are AlleyAI, the Ngõ Ngách assistant for Ho Chi Minh City drivers. Current local time (Asia/Ho_Chi_Minh): {now}.
+backend/app/agent.py:244:Always answer in ENGLISH, even when the user writes Vietnamese. Preserve proper names, addresses and complete alley chains exactly. Understand accented and unaccented Vietnamese, hẻm/ngõ/kiệt/ngách, old/new wards, English, and vehicle abbreviations.
+backend/app/agent.py:245:Catalogue: {fleet}. VF3/VF 3 = vinfast-vf-3; Fortuner = toyota-fortuner. Mercedes C180/C200/C300 use mercedes-benz-c-class. Merc/Mercedes GLC, E-Class, BMW X3, Kia Sorento, Honda CR-V and Hyundai Tucson use class-m with an explicit conservative size-class substitution note. Xe 7 chỗ = class-m, bán tải = class-l, 16 chỗ = class-xl. Motorcycles are unsupported; politely decline. Ask about genuinely unknown vehicles.
+backend/app/agent.py:248:Default to arrival now, parking for 120 minutes, or pickup for 15 minutes. Dates and clocks use +07:00. "tối nay 7h" means 19:00 today; "sáng mai" is tomorrow morning. Follow-ups retain the previous point, arrival time, duration and intent unless explicitly changed.
+backend/app/agent.py:353:                if req.tools and round_no == 0 and any(t in str(exc) for t in ("miễn phí", "hạn mức", "Gemini chưa", "Free Gemini", "Gemini is unavailable")):
+backend/app/agent.py:497:                   re.search(r'\btối\b', str(value).lower()) or
+backend/app/agent.py:513:        if 'sau khi tự thử lại' in text:
+backend/app/agent.py:515:        if re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I):
+backend/app/agent.py:620:    if re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I):
+backend/app/agent.py:631:    return text if not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I) else 'recorded road evidence'
+backend/app/agent.py:654:            if raw and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', raw, re.I):
+backend/app/agent.py:662:        parts.append(headline if headline and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', headline, re.I) else 'Vehicle entry and exit remain unverified.')
+backend/app/agent.py:672:                if text and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I): restriction += ': ' + text
+backend/app/evidence.py:49:ENGLISH_TEXT = {'Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4': 'Road Traffic Order '
+backend/app/evidence.py:53: 'Biển P.130 cấm dừng và đỗ xe': 'Sign P.130 prohibits stopping and parking',
+backend/app/evidence.py:54: 'Biển P.131a cấm đỗ xe': 'Sign P.131a prohibits parking',
+backend/app/evidence.py:55: 'Biển P.131b cấm đỗ xe ngày lẻ (hôm nay là ngày lẻ)': 'Sign P.131b prohibits odd-day parking (today is odd)',
+backend/app/evidence.py:56: 'Biển P.131c cấm đỗ xe ngày chẵn (hôm nay là ngày chẵn)': 'Sign P.131c prohibits even-day parking (today is '
+backend/app/evidence.py:58: 'Đoạn đường được đánh dấu cấm dừng xe': 'This segment is marked no stopping',
+backend/app/evidence.py:59: 'Đoạn đường được đánh dấu cấm đỗ xe': 'This segment is marked no parking',
+backend/app/evidence.py:60: 'Dữ liệu biển báo OSM': 'OSM traffic-sign data',
+backend/app/evidence.py:61: 'Chưa xác định được ranh giới mép nút giao để kiểm tra khoảng cách 5 m': 'Junction boundary unknown; the 5 '
+backend/app/evidence.py:63: 'Trong phạm vi 5 m tính từ mép đường giao nhau': 'Within 5 m of the intersecting road boundary',
+backend/app/evidence.py:64: 'Trên phần đường dành cho người đi bộ qua đường': 'On a pedestrian crossing',
+backend/app/evidence.py:65: 'Tại nơi dừng của xe buýt': 'At a bus stop',
+backend/app/evidence.py:66: 'Trên cầu, trong hầm đường bộ': 'On a bridge or inside a road tunnel',
+backend/app/evidence.py:67: 'Trên đường dẫn lên, xuống cầu vượt / nút giao': 'On an overpass or interchange ramp',
+backend/app/evidence.py:68: 'Đường trục chính tốc độ cao, không dừng đỗ tùy tiện': 'High-speed arterial; stopping and parking are '
+backend/app/evidence.py:70: 'Chưa có phép đo clear width đầy đủ để xác định số làn xe cơ giới': 'Complete clear-width measurements are '
+backend/app/evidence.py:73: 'Danh sách 20 tuyến đường thu phí đỗ xe ô tô, TP.HCM (VETC)': 'HCMC list of 20 streets with paid car '
+backend/app/evidence.py:75: 'Chưa có dữ liệu biển báo đầy đủ tại vị trí này': 'Traffic-sign coverage is incomplete at this location',
+backend/app/evidence.py:76: 'Dữ liệu biển báo chưa đầy đủ': 'Traffic-sign data is incomplete',
+backend/app/evidence.py:77: 'Đường chính: chưa có dữ liệu biển cấm đỗ tại đoạn này': 'Main road: no parking-sign coverage for this '
+backend/app/evidence.py:79: 'Phần đường chỉ đủ một làn xe cơ giới: không được đỗ': 'The roadway fits only one motor-vehicle lane: '
+backend/app/evidence.py:81: 'Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới': 'Stopping and parking are prohibited where '
+backend/app/evidence.py:83: 'Bãi đỗ ngoài đường': 'Off-street parking',
+backend/app/evidence.py:84: 'Bãi đỗ xe': 'Parking lot',
+backend/app/evidence.py:85: 'Bãi đỗ có thanh toán điện tử VETC': 'Parking lot with VETC payment',
+backend/app/evidence.py:86: 'thanh toán VETC': 'VETC payment',
+backend/app/evidence.py:87: 'Báo ngập dương tính gần nhất đã hết hạn và chưa có quan sát khô mới hơn': 'The last positive flood report '
+backend/app/evidence.py:90: 'Không có dữ liệu triều hợp lệ tại thời điểm này': 'No valid tide data at this time',
+backend/app/evidence.py:91: 'Không có thời điểm để kiểm tra': 'No time available for a flood check',
+backend/app/evidence.py:92: 'Một hoặc nhiều thời điểm chưa có bằng chứng ngập đầy đủ': 'Flood evidence is incomplete at one or more '
+backend/app/evidence.py:94: 'Không có lịch sử ngập hoặc quan sát hiện thời cho đoạn đường': 'No flood history or current observations '
+backend/app/evidence.py:96: 'BĐ1': 'Alert 1',
+backend/app/evidence.py:97: 'BĐ2': 'Alert 2',
+backend/app/evidence.py:98: 'BĐ3': 'Alert 3',
+backend/app/evidence.py:99: 'OSM phân loại đường': 'OSM road class',
+backend/app/evidence.py:100: 'OSM số làn xe': 'OSM lane count',
+backend/app/evidence.py:101: 'Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)': 'Opposing cadastral parcels (HCMC Planning '
+backend/app/evidence.py:103: 'Khoảng trống hình học giữa hai thửa đất': 'Cadastral parcel-gap estimate',
+backend/app/evidence.py:104: 'Tin rao Chợ Tốt (thu thập trực tiếp)': 'Chợ Tốt listings (collected)',
+backend/app/evidence.py:105: 'Tin rao Alonhadat (trường “Đường trước nhà”)': 'Alonhadat listings (frontage-road field)',
+backend/app/evidence.py:106: 'Cấm dừng': 'No stopping',
+backend/app/evidence.py:107: 'Luật Điều 18': 'Law Article 18',
+backend/app/evidence.py:108: 'Đường nhánh không tên': 'Unnamed local road',
+backend/app/evidence.py:109: 'Đường chính không tên': 'Unnamed main road',
+backend/app/evidence.py:110: 'Hẻm không tên': 'Unnamed alley',
+backend/app/evidence.py:111: 'Lối đi bộ không tên': 'Unnamed footpath',
+backend/app/evidence.py:112: 'Trước cửa nhà': 'At the door'}
+backend/app/evidence.py:113:ENGLISH_PREFIXES = {'QCVN 41:2024/BGTVT, biển ': 'QCVN 41:2024/BGTVT, sign ',
+backend/app/evidence.py:114: 'Chưa đủ bằng chứng hẻm rộng hơn ': 'Width unverified above ',
+backend/app/evidence.py:115: 'Điểm đỗ ô tô dưới lòng đường có thu phí (': 'Paid on-street car parking (',
+backend/app/evidence.py:116: 'Mưa ': 'Rain ',
+backend/app/evidence.py:117: 'Triều ': 'Tide ',
+backend/app/evidence.py:118: 'Báo ngập ': 'Flood report: ',
+backend/app/evidence.py:119: 'Tin rao Chợ Tốt': 'Chợ Tốt listings',
+backend/app/evidence.py:121: 'Khảo sát chưa có mặt cắt hợp lệ': 'Survey has no valid cuts',
+backend/app/evidence.py:122: 'Chưa đủ dữ liệu pháp lý: ': 'Stopping permission unverified: ',
+backend/app/evidence.py:123: 'Chưa đủ dữ liệu ngập: ': 'Flood evidence incomplete: '}
+backend/app/evidence.py:124:ENGLISH_FRAGMENTS = {' m (đủ hai làn xe)': ' m (two motor-vehicle lanes)',
+backend/app/evidence.py:125: ' (ngày ': ' (date ',
+backend/app/evidence.py:126: ' cm lúc ': ' cm at ',
+backend/app/evidence.py:127: 'dưới BĐ1': 'below Alert 1',
+backend/app/evidence.py:128: 'BĐ1': 'Alert 1',
+backend/app/evidence.py:129: 'BĐ2': 'Alert 2',
+backend/app/evidence.py:130: 'BĐ3': 'Alert 3',
+backend/app/evidence.py:131: ', đo)': ', measured)',
+backend/app/evidence.py:132: ', bản tin)': ', bulletin)',
+backend/app/evidence.py:133: 'mô hình ±': 'model ±',
+backend/app/evidence.py:134: ' dành cho khách': ' for customers'}
+backend/app/evidence.py:152:_GENERIC_NAMES = frozenset({'Đường nhánh không tên', 'Đường chính không tên', 'Hẻm không tên',
+backend/app/evidence.py:153:                           'Lối đi bộ không tên', 'Trước cửa nhà'})
+backend/app/evidence.py:472:            self._add_listing(it, "Chợ Tốt listings (extracted)")
+backend/app/evidence.py:478:                self._add_listing(it, it.get("source") or "Chợ Tốt listings (collected)")
+backend/app/evidence.py:578:        # Chợ Tốt shifts coordinates ~90 m, so only alley-name matches are trusted.
+backend/app/evidence.py:608:        """QĐ 4582: alleys fire trucks cannot enter. Usually narrower than 3.5 m, but long dead ends, bends and low
+backend/app/evidence.py:614:            b = Bound(0.5, FIRE_TRUCK_MIN, "Declared", "HCMC Decision 4582/QĐ-UBND (24 July 2026)",

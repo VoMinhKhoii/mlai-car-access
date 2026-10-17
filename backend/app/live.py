@@ -188,7 +188,7 @@ def _listings(g, ads: list[dict], job: dict) -> list[dict]:
             "listing_id": a["ad_id"], "url": a["url"] if aln else f"https://www.nhatot.com/{a['list_id']}.htm",
             "posted_at": a.get("posted_at", "") if aln else
             (datetime.fromtimestamp(a["list_time"] / 1000, VN_TZ).isoformat(timespec="seconds") if a.get("list_time") else ""),
-            "source": "Tin rao Alonhadat (trường “Đường trước nhà”)" if aln else "Tin rao Chợ Tốt (thu thập trực tiếp)",
+            "source": "Alonhadat listing (road-in-front field)" if aln else "Chợ Tốt listing (live collection)",
             "title": a.get("subject", ""), "street": street, "alley_chain": chain,
             "osm_way_id": way.id, "osm_name": way.name, "match_method": method,
             "width_m": width, "width_at_mouth": at_mouth, "width_text": ex["width_text"],
@@ -233,7 +233,7 @@ def _photos(key: str, rows: list[dict], job: dict) -> list[dict]:
                                                  "cars_visible", "confidence", "notes", "gate", "model")})
             rec["width_m"] = out.get("alley_width_m")
         except Expired:
-            rec.update({"gate": "ERROR", "notes": "hết thời hạn thu thập"})
+            rec.update({"gate": "ERROR", "notes": "collection deadline exceeded"})
         except Exception as exc:  # one bad photo must not stop the build
             rec.update({"gate": "ERROR", "notes": str(exc)[:200]})
         job["counts"]["photos_read"] += 1
@@ -385,13 +385,13 @@ def area_status(lat: float, lon: float) -> tuple[dict | None, dict]:
     building = bool(job and job["state"] in ("queued", "running"))
     if not rec:
         return None, {"key": key, "state": "missing", "revision": None, "collected_at": None, "expires_at": None,
-                      "building": building, "reason": "Chưa thu thập dữ liệu trực tiếp cho khu vực này"}
+                      "building": building, "reason": "No live data collected for this area yet"}
     status = {"key": key, "revision": rec["revision"], "collected_at": rec["collected_at"],
               "expires_at": rec["expires_at"], "building": building}
     if datetime.fromisoformat(rec["expires_at"]) <= datetime.now(VN_TZ):
-        return None, {**status, "state": "stale", "reason": "Dữ liệu khu vực đã quá hạn 12 giờ nên không được dùng"}
+        return None, {**status, "state": "stale", "reason": "Area data is older than 12 hours and is not used"}
     if not rec.get("complete"):
-        status.update(state="partial", reason="Lần thu thập gần nhất thiếu một bước (xem chi tiết bước)")
+        status.update(state="partial", reason="Latest collection is missing a step (see step details)")
     else:
         status.update(state="fresh", reason=None)
     reviews = _photo_reviews()
@@ -434,8 +434,8 @@ def _run(job: dict, lat: float, lon: float) -> None:
     try:
         _step(job, "map", "running")
         g = build_graph(lat, lon, deadline=job["deadline"])
-        origin = {"demo-cache": "bản tải sẵn", "cache": "cache"}.get(g.source.split(":")[0], "Overpass trực tiếp")
-        _step(job, "map", "done", f"{len(g.ways)} đoạn đường OSM ({origin})")
+        origin = {"demo-cache": "prefetched data", "cache": "cache"}.get(g.source.split(":")[0], "live Overpass")
+        _step(job, "map", "done", f"{len(g.ways)} OSM road segments ({origin})")
 
         if flags.enabled("parcel_widths"):
             _step(job, "parcels", "running")
@@ -453,22 +453,22 @@ def _run(job: dict, lat: float, lon: float) -> None:
                 job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, deep=deep,
                                                       deadline=parcel_deadline, city_cache=city_parcels())
                 _step(job, "parcels", "done",
-                      f"{len(job['parcels'])} đường có ước tính khoảng trống từ hình học thửa đất"
-                      + ("; lối vào/ra lấy mẫu sâu mỗi 5 m trong giới hạn" if deep else ""))
+                      f"{len(job['parcels'])} roads with gaps estimated from parcel geometry"
+                      + ("; entry/exit sampled every 5 m within limits" if deep else ""))
             except parcels.DeadlineExceeded as exc:
                 _save_parcel_cache(cache_path, cache, original_cache)
                 if time.monotonic() >= job["deadline"] - 0.5:
-                    raise Expired("hết thời hạn 300 giây khi đo thửa đất")
+                    raise Expired("300-second parcel measurement deadline exceeded")
                 job["parcels"], job["complete"] = getattr(exc, "partial", []), False
                 _step(job, "parcels", "error",
-                      f"Cổng quy hoạch chậm: dừng đo sau {PARCEL_BUDGET_S:.0f} giây, đã đo {len(job['parcels'])} "
-                      "đường; các đường chưa đo vẫn là chưa rõ")
+                      f"Planning portal is slow: stopped after {PARCEL_BUDGET_S:.0f} seconds, measured {len(job['parcels'])} "
+                      "roads; unmeasured roads remain unknown")
             except (parcels.Blocked, parcels.Unavailable):
                 job["complete"] = False
-                _step(job, "parcels", "error", "Cổng quy hoạch tạm chặn truy vấn; thử lại sau")
+                _step(job, "parcels", "error", "Planning portal temporarily blocked queries; retry later")
             _save_parcel_cache(cache_path, cache, original_cache)
         else:
-            _step(job, "parcels", "skipped", "Đã tắt")
+            _step(job, "parcels", "skipped", "Disabled")
 
         job["parcels"] = _merge_city(g, job["parcels"])
 
@@ -491,32 +491,32 @@ def _run(job: dict, lat: float, lon: float) -> None:
         n_aln = len(ads) - n_chotot
         ads = _dedupe(ads)
         job["counts"]["unique"] = len(ads)
-        _step(job, "listings", "done", f"{n_chotot} tin Chợ Tốt + {n_aln} tin Alonhadat ở {', '.join(d['name'] for d in ds)}")
+        _step(job, "listings", "done", f"{n_chotot} Chợ Tốt + {n_aln} Alonhadat listings in {', '.join(d['name'] for d in ds)}")
 
         _step(job, "match", "running")
         rows = _listings(g, ads, job)
         job["listings"] = rows
         c = job["counts"]
-        _step(job, "match", "done", f"{c['in_area']} tin trong khu vực → {c['matched']} tin khớp {c['alleys']} hẻm")
+        _step(job, "match", "done", f"{c['in_area']} area listings → {c['matched']} listings matched to {c['alleys']} alleys")
 
         _left(job, 1)
         _step(job, "news", "running")
         streets = _streets_near(g, lat, lon)
         job["news"] = news.news_for(streets, job["deadline"])
-        _step(job, "news", "done", f"{len(job['news'])} tin về {', '.join(streets[:3])}" if streets else "không có tên đường gần")
+        _step(job, "news", "done", f"{len(job['news'])} stories about {', '.join(streets[:3])}" if streets else "no nearby named roads")
 
         if flags.enabled("ai_photo_evidence") and ai.provider():
             _step(job, "photos", "running")
             job["photos"] = _photos(key, rows, job)
             useful = [p for p in job["photos"] if p.get("width_m")]
-            _step(job, "photos", "done", f"{len(job['photos'])} ảnh đã đọc, {len(useful)} ảnh có bề rộng (chờ duyệt)")
+            _step(job, "photos", "done", f"{len(job['photos'])} photos read, {len(useful)} with width estimates (pending review)")
         else:
-            _step(job, "photos", "skipped", "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao")
+            _step(job, "photos", "skipped", "Enable “AI reads driver photos” to read listing photos")
         _left(job, 1)
         rec = _publish(job)
         job["state"], job["revision"] = "done", rec["revision"]
     except Expired as exc:
-        job["state"], job["error"] = "error", f"hết thời hạn {BUILD_DEADLINE_S:.0f} giây ({exc})"
+        job["state"], job["error"] = "error", f"{BUILD_DEADLINE_S:.0f}-second deadline exceeded ({exc})"
     except Exception as exc:
         job["state"], job["error"] = "error", str(exc)[:300]
     job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")

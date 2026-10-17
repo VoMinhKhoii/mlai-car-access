@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
-/** Number formatting for Vietnamese: decimal comma, metres/km/minutes. */
-export const vn = (n: number, digits = 1) => n.toFixed(digits).replace('.', ',')
+/** English display formatting: decimal point, metres/km/minutes. */
+export const vn = (n: number, digits = 1) => n.toLocaleString('en-GB', { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: false })
 export const metres = (n: number, digits = 1) => `${vn(n, digits)} m`
 export const distance = (m: number) => (m >= 1000 ? `${vn(m / 1000, 1)} km` : `${Math.round(m)} m`)
-export const minutes = (min: number) => (min >= 60 ? `${Math.floor(min / 60)} giờ ${min % 60 ? `${min % 60} phút` : ''}`.trim() : `${min} phút`)
+export const minutes = (min: number) => (min >= 60 ? `${Math.floor(min / 60)} h ${min % 60 ? `${min % 60} min` : ''}`.trim() : `${min} min`)
 
-/** Decimal points → Vietnamese commas inside server-written sentences ("5.5 m" → "5,5 m"). */
-export const vnt = (s: string) => s.replace(/(\d)\.(\d)/g, '$1,$2')
+/** Server-written sentences already use English decimal points. */
+export const vnt = (s: string) => s
 
 export type Tone = 'ok' | 'warn' | 'bad' | 'muted' | 'water' | 'brand'
 

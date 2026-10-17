@@ -35,7 +35,7 @@ class MapSearchTests(unittest.TestCase):
         with patch.object(geo, 'resolve_place', side_effect=AssertionError('must use tiles first')):
             found, _ = agent.execute('tim_dia_diem', {'query': 'Công ty CP Vương Phạm'}, None, self.context())
         self.assertEqual(found['results'][0]['label'], 'Cong Ty Cp Vuong Pham')
-        self.assertEqual(found['results'][0]['source'], 'Trên bản đồ')
+        self.assertEqual(found['results'][0]['source'], 'On the map')
         self.assertFalse(found['requires_clarification'])
 
     def test_map_lookalike_falls_through_and_asks_for_tap(self):

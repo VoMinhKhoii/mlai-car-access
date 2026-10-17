@@ -187,7 +187,7 @@ class BuildDeadline(unittest.TestCase):
             live._run(job, 10.70, 106.60)
         self.assertEqual(map_deadlines, [job["deadline"]])
         self.assertEqual(job["state"], "error")
-        self.assertIn("hết thời hạn", job["error"])
+        self.assertIn("deadline", job["error"])
         self.assertFalse(live.AREAS_DIR.exists())
 
     def test_alonhadat_expiry_is_not_swallowed_as_a_source_failure(self):

@@ -138,7 +138,7 @@ class FieldKitTests(unittest.TestCase):
             r = self.client.post('/api/confirm',json=p,headers=self.headers)
             self.assertEqual(r.status_code,200,r.text)
         self.assertEqual(len(ev.CONFIRM_FILE.read_text().splitlines()),1)
-        b = next(b for b in ev.STORE_EVIDENCE.by_way[self.wid] if b.source=='Xác nhận sau khi đến')
+        b = next(b for b in ev.STORE_EVIDENCE.by_way[self.wid] if b.source=='Arrival confirmation')
         self.assertEqual(b.tier,'Observed')
         self.assertAlmostEqual(b.lo,r.json()['recorded']['body_width'])
         for update in ({'result':'whatever'},{'vehicle_id':'missing'},{'way_ids':[]},{'way_ids':[999999999999]}):

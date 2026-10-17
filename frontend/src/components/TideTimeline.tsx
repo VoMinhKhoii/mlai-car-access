@@ -26,7 +26,7 @@ export function TideTimeline(props: Props) {
   const a0 = timestamp(props.arrive)
   const departAt = timestamp(props.depart)
   if (a0 == null || departAt == null || departAt < a0) {
-    return <p className="error-line" role="status">Không thể hiển thị triều: giờ đến hoặc giờ rời không hợp lệ. Hãy chọn lại giờ đến.</p>
+    return <p className="error-line" role="status">Cannot display tides: arrival or departure time is invalid. Select the arrival time again.</p>
   }
   return <TideChart {...props} a0={a0} departAt={departAt} />
 }
@@ -97,13 +97,13 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
   const lastRead = windowReadings.reduce<{ t: number; v: number } | null>((last, r) => !last || r.t > last.t ? r : last, null)
   const bars = rain.filter((r) => r.mm_per_h > 0).map((r) => {
     const s = new Date(r.start).getTime()
-    return { s, e: s + 3600e3, mm: r.mm_per_h, measured: !!r.measured, source: r.source ?? 'giả định' }
+    return { s, e: s + 3600e3, mm: r.mm_per_h, measured: !!r.measured, source: r.source ?? 'simulated' }
   }).filter((b) => b.e > t0 && b.s < t0 + span)
   const wet = bars.filter((b) => b.measured).sort((p, q) => q.s - p.s)[0]
   const peak = series.reduce<(typeof series)[number] | null>((m, s) => s.t >= a && s.t <= a + dwell && (!m || s.v > m.v) ? s : m, null)
   const lb = leaveBeforeAt ? timestamp(leaveBeforeAt) : null
   const oa = orAfterAt ? timestamp(orAfterAt) : null
-  const marks = ([{ t: lb, label: 'rời sớm', side: 'before' }, { t: oa, label: 'rời muộn', side: 'after' }] as const)
+  const marks = ([{ t: lb, label: 'leave earlier', side: 'before' }, { t: oa, label: 'leave later', side: 'after' }] as const)
     .filter((m): m is typeof m & { t: number } => m.t != null && m.t >= t0 && m.t <= t0 + span)
 
   function down(e: React.PointerEvent) {
@@ -130,34 +130,34 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
   }
 
   return (
-    <section className="timeline card" aria-label="Mực nước triều và thời gian ở lại">
+    <section className="timeline card" aria-label="Tide level and stay window">
       <header>
         <Waves size={15} />
-        <b>Triều · {station.replace(/\s*\(.*\)/, '')}</b>
-        <span className="faint tl-hint">· kéo khung để đổi giờ</span>
-        <span className="tl-peak num">{peak ? <>Cao nhất có dữ liệu lúc ở: <b>{vn(peak.v, 2)} m</b> · {floodTimeLabel(new Date(peak.t).toISOString())}
-          {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · báo động 3: {vn(alarms.BD3, 1)} m</span>}</> : loadState === 'loading' ? 'Đang lấy dữ liệu triều' : 'Chưa có dữ liệu triều trong lúc ở'}</span>
+        <b>Tide · {station.replace(/\s*\(.*\)/, '')}</b>
+        <span className="faint tl-hint">· drag the window to change time</span>
+        <span className="tl-peak num">{peak ? <>Highest available level during stay: <b>{vn(peak.v, 2)} m</b> · {floodTimeLabel(new Date(peak.t).toISOString())}
+          {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · alarm level 3: {vn(alarms.BD3, 1)} m</span>}</> : loadState === 'loading' ? 'Loading tide data' : 'No tide data for the stay window'}</span>
       </header>
-      <p className="tl-live num">Chuyến đi: {floodTimeLabel(arrive)} tới {floodTimeLabel(depart)}.</p>
+      <p className="tl-live num">Trip: {floodTimeLabel(arrive)} to {floodTimeLabel(depart)}.</p>
       <p className="tl-live num" role="status">
-        {loadState === 'loading' ? 'Đang lấy dữ liệu triều.'
-          : loadState === 'error' ? 'Không tải được dữ liệu triều; chưa thể đối chiếu chuyến đi.'
+        {loadState === 'loading' ? 'Loading tide data.'
+          : loadState === 'error' ? 'Could not load tide data; trip comparison unavailable.'
           : lastRead
-            ? <>Số đo trong khoảng: {floodTimeLabel(new Date(lastRead.t).toISOString())}, <b>{vn(lastRead.v, 2)} m</b>.</>
-            : 'Không có số đo triều xác nhận trong khoảng chuyến đi.'}
+            ? <>Reading in window: {floodTimeLabel(new Date(lastRead.t).toISOString())}, <b>{vn(lastRead.v, 2)} m</b>.</>
+            : 'No confirmed tide readings within the trip window.'}
       </p>
       <details className="why tl-details">
-        <summary>Chi tiết dữ liệu triều</summary>
+        <summary>Tide data details</summary>
         <p className="tl-live num">
-          {lastRead && dayStart(lastRead.t) !== dayStart(a0) && <>Số đo khác ngày đến; không xác nhận triều cho ngày đến. </>}
-          {latestReading && (!lastRead || latestReading.t !== lastRead.t) && <>Số đo gần nhất tại {station}: {floodTimeLabel(new Date(latestReading.t).toISOString())}, {vn(latestReading.v, 2)} m; không xác nhận triều cho ngày chuyến đi. </>}
-          {model.length > 0 && <>Nét đứt: mô hình{err != null && Number.isFinite(err) ? `, sai số ±${Math.round(err * 100)} cm` : ''}. </>}
-          {wet && <>Mưa đo {hhmm(wet.s).slice(0, 2)}–{hhmm(wet.e).slice(0, 2)}h: <b>{vn(wet.mm, 1)} mm</b> ({wet.source.replace(/^đo tại /, '')}).</>}
-          {!lastRead && !latestReading && loadState === 'ready' && 'Không có số đo triều cho thời gian này.'}
+          {lastRead && dayStart(lastRead.t) !== dayStart(a0) && <>Reading is from a different day; it does not confirm tides for the arrival date. </>}
+          {latestReading && (!lastRead || latestReading.t !== lastRead.t) && <>Latest reading at {station}: {floodTimeLabel(new Date(latestReading.t).toISOString())}, {vn(latestReading.v, 2)} m; does not confirm tides for the trip date. </>}
+          {model.length > 0 && <>Dashed: model{err != null && Number.isFinite(err) ? `, error ±${Math.round(err * 100)} cm` : ''}. </>}
+          {wet && <>Measured rain {hhmm(wet.s)}–{hhmm(wet.e)}: <b>{vn(wet.mm, 1)} mm</b> ({wet.source.replace(/^(?:measured at|đo tại) /, '')}).</>}
+          {!lastRead && !latestReading && loadState === 'ready' && 'No tide readings for this time.'}
         </p>
-        {bulletin && series.some((p) => p.kind === 'bulletin') && <p className="tl-live" title={bulletin.note}><a href={bulletin.source_url} target="_blank" rel="noreferrer">{bulletin.bulletin}</a> · nội suy đỉnh/chân triều, không phải số đo tại đường.</p>}
+        {bulletin && series.some((p) => p.kind === 'bulletin') && <p className="tl-live" title={bulletin.note}><a href={bulletin.source_url} target="_blank" rel="noreferrer">{bulletin.bulletin}</a> · interpolated high/low tides, not road-level measurements.</p>}
         {timingReason && <p className="tl-live">{timingReason}</p>}
-        {timingApproximate && <p className="tl-live">Khoảng di chuyển và giờ rời là ước lượng, không bảo đảm điều kiện thực tế liên tục.</p>}
+        {timingApproximate && <p className="tl-live">Travel windows and departure times are estimates; they do not guarantee continuous real-world conditions.</p>}
       </details>
       <div className="tl-track" ref={track} onClick={(e) => { if (e.target === e.currentTarget || (e.target as Element).tagName === 'svg' || (e.target as Element).tagName === 'path') change(snap(tAt(e.clientX))) }}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
@@ -180,11 +180,11 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
           ))}
         </svg>
         {windowReadings.map((r) => (
-          <span key={r.t} className="tl-reading" style={{ left: `${pct(r.t)}%`, top: `${y(r.v)}%` }} title={`Đo ${floodTimeLabel(new Date(r.t).toISOString())}: ${vn(r.v, 2)} m`} />
+          <span key={r.t} className="tl-reading" style={{ left: `${pct(r.t)}%`, top: `${y(r.v)}%` }} title={`Measured ${floodTimeLabel(new Date(r.t).toISOString())}: ${vn(r.v, 2)} m`} />
         ))}
         {marks.map((mark) => <span key={mark.side} className="tl-line" style={{ left: `${pct(mark.t)}%` }} />)}
         <div className={`tl-band ${exitFloods ? 'floods' : ''} ${drag != null ? 'dragging' : ''}`} role="slider" tabIndex={0}
-          aria-label="Thời gian ở lại" aria-valuetext={`Đến ${floodTimeLabel(new Date(a).toISOString())}, rời ${floodTimeLabel(new Date(a + dwell).toISOString())}`}
+          aria-label="Stay window" aria-valuetext={`Arrive ${floodTimeLabel(new Date(a).toISOString())}, leave ${floodTimeLabel(new Date(a + dwell).toISOString())}`}
           aria-valuemin={t0} aria-valuemax={t0 + span} aria-valuenow={a}
           style={{ left: `${pct(a)}%`, width: `${Math.max(1.5, pct(a + dwell) - pct(a))}%` }}
           onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onKeyDown={key}>
@@ -199,7 +199,7 @@ function TideChart({ a0, departAt, arrive, depart, leaveBeforeAt, orAfterAt, tim
       )}
       <div className="tl-axis num" aria-hidden>
         {Array.from({ length: HOURS / 3 + 1 }, (_, i) => t0 + i * 3 * 3600e3).map((t) => (
-          <span key={t} style={{ left: `${pct(t)}%` }}>{hhmm(t).slice(0, 2)}h{t > t0 && dayStart(t) === t && <> · {toLocal(new Date(t).toISOString())?.slice(5, 10).split('-').reverse().join('/')}</>}</span>
+          <span key={t} style={{ left: `${pct(t)}%` }}>{hhmm(t)}{t > t0 && dayStart(t) === t && <> · {toLocal(new Date(t).toISOString())?.slice(5, 10).split('-').reverse().join('/')}</>}</span>
         ))}
       </div>
     </section>

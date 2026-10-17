@@ -64,7 +64,7 @@ class Tide(unittest.TestCase):
         d = assessment.depth
         self.assertIsNotNone(d)
         self.assertEqual((d.lo, d.hi), (0.0, 0.20))  # 1.45 ± 0.15 spans below BĐ1 to above BĐ2
-        self.assertIn("mô hình", d.drivers[0])
+        self.assertIn("model", d.drivers[0])
         with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
                 mock.patch.object(hydro, "tide_point", lambda _: (1.45, "measured")):
             assessment = flood.depth_at(prof, t, [])

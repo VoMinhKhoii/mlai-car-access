@@ -1,0 +1,103 @@
+......................................... [ 10%]
+............................ [ 17%]
+...........................................ssssssssssss...... [ 32%]
+F.............ssssssssssssssssssssssss........................ssssssssss [ 49%]
+sssssssssssssssssss....................ssssssssssss............................................................................................................................ [ 93%]
+............................                                  [100%]
+=================================== FAILURES ===================================
+_ EstimateTests.test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer _
+
+self = <tests.test_engine_estimate.EstimateTests testMethod=test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer>
+
+    def test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer(self):
+        s={'name':'Stop','kind':'street','way_id':20,'walk':{'meters':39,'minutes':1},
+           'fit':{'class':'unknown','width_range':self.widths()[20].to_json()},
+           'way_out':{'mode':'unknown','text':'Exit unverified','manoeuvre_status':'unknown'},
+           'legality':{'status':'Unverified','rules':[]},'flood':{},'verified':False,
+           'unverified_reasons':['Exit unverified'],'estimate':self.estimate()}
+        compact=agent.compact_stop(s)
+        self.assertEqual(compact['unverified_reasons'],s['unverified_reasons'])
+        self.assertEqual(compact['way_out_status']['mode'],'unknown')
+        p={'verdict':{'headline':'Park near the door — low confidence','estimate':compact['estimate'],
+                       'unverified_reasons':s['unverified_reasons']},'stop_points':[compact]}
+>       answer=agent.grounded_answer(p)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_engine_estimate.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+p = {'stop_points': [{'estimate': {'answer': 'fits', 'basis': 'measured ≈5.10 m (Unnamed side road; OSM 10) · at the door ...ction': 1.0, ...}, ...}, 'headline': 'Park near the door — low confidence', 'unverified_reasons': ['Exit unverified']}}
+
+    def grounded_answer(p):
+        verdict = p.get('verdict', {})
+        estimate = verdict.get('estimate') or {}
+        parts = []
+        if estimate:
+            answers = {'fits':'access appears possible', 'tight':'access appears tight', 'no':'vehicle access is not suitable', 'unknown':'access is uncertain'}
+            confidence = {'high':'High', 'medium':'Medium', 'low':'Low'}.get(estimate.get('confidence'), 'Low')
+            parts.append('Estimate: ' + answers.get(estimate.get('answer'), 'access is uncertain') + '. ' + confidence + ' confidence.')
+            limiting = estimate.get('limiting_width') or {}
+            basis = []
+            if limiting.get('value_m') is not None:
+                item = 'limiting width approximately ' + str(limiting['value_m']) + ' m'
+                if limiting.get('way_name'): item += ' at ' + limiting['way_name']
+                if limiting.get('source'): item += ' (' + _english_source(limiting['source']) + ')'
+                basis.append(item)
+            coverage = estimate.get('coverage') or {}
+            if coverage.get('sampled_segments') is not None and coverage.get('total_segments') is not None:
+                basis.append(str(coverage['sampled_segments']) + '/' + str(coverage['total_segments']) + ' route segments have width samples')
+            if not basis:
+                raw = estimate.get('basis') or ''
+                if raw and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', raw, re.I):
+                    basis.append(raw)
+                else:
+                    basis.append('available sourced road and route evidence')
+                    if 'osm' in strip_accents(raw).lower(): basis.append('OpenStreetMap')
+            parts.append('Basis: ' + '; '.join(basis) + '.')
+        else:
+            headline = verdict.get('headline', '')
+            parts.append(headline if headline and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', headline, re.I) else 'Vehicle entry and exit remain unverified.')
+        if p.get('vehicle_note'):
+            parts.append(p['vehicle_note'])
+        for stop in p.get('stop_points', [])[:1]:
+            rules = stop.get('legal_rules') or [stop.get('legality', {}).get('rule') or {}]
+            restricted = [r for r in rules if r.get('status') in ('Restricted', 'Prohibited')]
+            if restricted:
+                for rule in restricted:
+                    text = rule.get('text', '')
+                    restriction = 'Do not stop here' if rule.get('status') == 'Prohibited' else 'Stopping restrictions apply here'
+                    if text and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I): restriction += ': ' + text
+                    parts.append(restriction + (' (' + rule['citation'] + ')' if rule.get('citation') else '') + '.')
+                continue
+            sentence = 'Suggested stop: ' + (stop.get('name') or 'mapped stop')
+            walk = stop.get('walk') or {}
+            if walk.get('meters') is not None: sentence += '; walk ' + str(walk['meters']) + ' m'
+            if stop.get('width', {}).get('source'): sentence += '; source: ' + _english_source(stop['width']['source'])
+            parts.append(sentence + '.')
+        timing = p.get('timing') or {}
+        if timing.get('leave_before'): parts.append('Please leave before ' + timing['leave_before'] + '.')
+        elif timing.get('or_after'): parts.append('Wait until after ' + timing['or_after'] + '.')
+        if p.get('tide_note'): parts.append(p['tide_note'])
+        raw_caveats = list(verdict.get('unverified_reasons') or [])
+        for stop in p.get('stop_points', [])[:1]:
+            raw_caveats.extend(stop.get('unverified_reasons') or [])
+            if stop.get('legality', {}).get('status') == 'Unverified':
+                raw_caveats.append('Stopping legality has not been verified')
+>           if stop.get('flood', {}).get('depth') is None and stop.get('flood'):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'NoneType' object has no attribute 'get'
+
+backend/app/agent.py:689: AttributeError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/test_engine_estimate.py::EstimateTests::test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer
+1 failed, 327 passed, 77 skipped, 2 warnings, 210 subtests passed in 79.04s (0:01:19)

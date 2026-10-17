@@ -24,7 +24,7 @@ def secret():
     value = os.environ.get('FIELD_TOKEN','')
     if not value:
         from fastapi import HTTPException
-        raise HTTPException(503,'Máy chủ chưa cấu hình FIELD_TOKEN cho bộ đo và duyệt.')
+        raise HTTPException(503,'FIELD_TOKEN is not configured for the field kit and review.')
     return value.encode()
 
 
@@ -88,7 +88,7 @@ def reserve(device, ip, wid):
         ip_n = con.execute('SELECT count(*) FROM attempts WHERE ip=?',(ip,)).fetchone()[0]
         way_n = con.execute('SELECT count(*) FROM submissions WHERE device=? AND way_id=?',(device,wid)).fetchone()[0]
         if device_n>=10 or ip_n>=10 or way_n>=3:
-            raise HTTPException(429,'Đã đạt giới hạn: 10 lượt/giờ cho thiết bị hoặc IP, tối đa 3 bản/đoạn/thiết bị.',headers={'Retry-After':'3600'})
+            raise HTTPException(429,'Limit reached: 10 requests/hour per device or IP, maximum 3 submissions per segment per device.',headers={'Retry-After':'3600'})
         con.execute('INSERT INTO attempts VALUES (?,?,?,?)',(device,ip,wid,now().timestamp()))
         con.commit()
     finally:
@@ -106,9 +106,9 @@ def consensus(con, wid, official):
             if (a['id']!=b['id'] and a['device']!=b['device'] and a['ip']!=b['ip'] and
                 a['photo_hash']!=b['photo_hash'] and abs(a['width']-b['width'])<=.3+1e-8):
                 if official:
-                    con.execute("UPDATE submissions SET reason='Có Official: cần đồng đội duyệt' WHERE id=? AND status='pending'",(a['id'],))
+                    con.execute("UPDATE submissions SET reason='Official evidence present: teammate review required' WHERE id=? AND status='pending'",(a['id'],))
                 else:
-                    con.execute("UPDATE submissions SET status='consensus',reason='Hai thiết bị độc lập đồng ý trong 0,3 m' WHERE id=? AND status='pending'",(a['id'],))
+                    con.execute("UPDATE submissions SET status='consensus',reason='Two independent devices agree within 0.3 m' WHERE id=? AND status='pending'",(a['id'],))
                 break
 
 
@@ -138,9 +138,9 @@ def load_into(store):
         # Point observations cap the bottleneck, never guarantee the unseen remainder.
         disagree = max(widths)-min(widths)>.3+1e-8
         hi = max(widths)+.15 if disagree else min(widths)+.15
-        reason = 'Các số đo khác nhau quá 0,3 m: giữ khoảng rộng và REVIEW.' if disagree else 'Chưa khảo sát liên tục toàn đoạn.'
-        b = Bound(0,hi,'Measured','Đo cộng đồng đã duyệt / đồng thuận',
-                  f"{len(items)} số đo {min(widths):g}–{max(widths):g} m; {reason}",
+        reason = 'Measurements differ by over 0.3 m: retain the wider range and REVIEW.' if disagree else 'No continuous survey of the entire segment.'
+        b = Bound(0,hi,'Measured','Community measurement, reviewed / corroborated',
+                  f"{len(items)} measurements {min(widths):g}–{max(widths):g} m; {reason}",
                   observed_on=max(r['measured_at'] for r in items),
                   url='/api/field/crowd/photo/'+items[0]['id'],coverage_complete=False,
                   measurement_schema='crowd-point-width-v1',estimate_m=min(widths))

@@ -1,0 +1,5 @@
+
+⚠️  @modelcontextprotocol/inspector v1 is deprecated.
+    Upgrade:  npx @modelcontextprotocol/inspector@latest
+    v1 receives security fixes only.
+

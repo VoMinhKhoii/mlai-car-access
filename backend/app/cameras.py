@@ -50,8 +50,8 @@ _resting: dict[str, float] = {}
 
 DEPTH_CM = {"kho": 0, "uot": 0, "duoi_15cm": 10, "15_30cm": 25, "30_50cm": 40, "tren_50cm": 60}
 TRAFFIC = ("thong_thoang", "dong", "un_u", "ket_cung")
-TRAFFIC_VI = {"thong_thoang": "Thông thoáng", "dong": "Đông, vẫn chạy", "un_u": "Ùn ứ",
-              "ket_cung": "Kẹt cứng", "khong_ro": "Không rõ"}
+TRAFFIC_VI = {"thong_thoang": "Free-flowing", "dong": "Busy, moving", "un_u": "Congested",
+              "ket_cung": "Gridlocked", "khong_ro": "Unknown"}
 
 PROMPT = """Ảnh tĩnh từ {n} camera giao thông TP.HCM. Mỗi camera có 1 hoặc 2 ảnh; 2 ảnh là cùng camera chụp cách
 nhau ~13 giây: so sánh vị trí xe giữa hai ảnh để biết xe đang chạy hay đứng yên. Đọc từng camera độc lập.
@@ -62,7 +62,7 @@ Trả về JSON {"cameras":[...]}, mỗi camera một phần tử:
  "flooded":true|false,
  "depth_class":"kho|uot|duoi_15cm|15_30cm|30_50cm|tren_50cm|khong_ro",
  "traffic":"thong_thoang|dong|un_u|ket_cung|khong_ro",
- "evidence":"ngắn gọn, tiếng Việt: dựa vào đâu",
+ "evidence":"brief English explanation of the visible evidence",
  "confidence":0-1}
 usable=false khi ảnh lỗi, mất tín hiệu, bị che, hoặc quá tối/mờ để thấy mặt đường.
 Ngập: chỉ khi thấy nước đọng phủ mặt đường. Mặt đường ướt do mưa là "uot", không phải ngập. Ước lượng độ sâu
@@ -119,7 +119,7 @@ def _set_registry_locked(data: dict) -> None:
 def _refresh_registry() -> None:
     try:
         cameras = fetch_official()
-        data = {"source": "Cổng thông tin giao thông TP.HCM (camera layer, live)",
+        data = {"source": "HCMC Traffic Portal (camera layer, live)",
                 "fetched_at": datetime.now(VN_TZ).isoformat(timespec="seconds"),
                 "cameras": cameras}
         with _reg_lock:
@@ -310,7 +310,7 @@ def _restore() -> None:
         saved = {}
     for jid, job in saved.items():
         if job.get("state") in ("queued", "running"):
-            job.update(state="interrupted", error="Máy chủ khởi động lại khi đang đọc camera")
+            job.update(state="interrupted", error="Server restarted during camera reading")
         _jobs[jid] = job
 
 
@@ -369,7 +369,7 @@ def _expire(now: datetime) -> bool:
         job = _jobs[jid]
         if datetime.fromisoformat(job["expires_at"]) <= now:
             if job["state"] in ("queued", "running"):
-                job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+                job["state"], job["error"] = "expired", "Camera reading deadline exceeded"
                 changed = True
             elif job["state"] in ("ready", "error", "interrupted", "expired"):
                 if (now - datetime.fromisoformat(job["expires_at"])).total_seconds() > JOB_TTL_S \
@@ -389,7 +389,7 @@ def _run_job(jid: str) -> None:
         deadline = job["_deadline"]
         already_expired = job["state"] == "expired" or time.monotonic() >= deadline
         if already_expired:
-            job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+            job["state"], job["error"] = "expired", "Camera reading deadline exceeded"
             mine, theirs = [], []
         else:
             job["state"] = "running"
@@ -405,7 +405,7 @@ def _run_job(jid: str) -> None:
         try:
             _persist()
         except Exception as exc:
-            job["state"], job["error"] = "error", f"Không lưu được trạng thái camera ({type(exc).__name__})"
+            job["state"], job["error"] = "error", f"Could not save camera state ({type(exc).__name__})"
             job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
             job["_worker_pending"] = False
             job["_finished"] = time.monotonic()
@@ -437,10 +437,10 @@ def _run_job(jid: str) -> None:
         expired = expired or job["state"] == "expired" or time.monotonic() >= deadline
         read = [c for c in job["cameras"] if latest(c)]
         if expired:
-            job["state"], job["error"] = "expired", "Hết thời hạn đọc camera"
+            job["state"], job["error"] = "expired", "Camera reading deadline exceeded"
         else:
             job["state"] = "ready" if read else "error"
-            job["error"] = failure or (None if read else "Không đọc được camera nào (mất tín hiệu, hết hạn mức AI)")
+            job["error"] = failure or (None if read else "No cameras could be read (offline or AI quota exhausted)")
         job["finished_at"] = datetime.now(VN_TZ).isoformat(timespec="seconds")
         job["_worker_pending"] = False
         _persist()
@@ -520,7 +520,7 @@ def _ask(group: list[str], first: dict, second: dict, now: datetime, *,
             [second[camera_id]] if second.get(camera_id) and second[camera_id] != first[camera_id] else []
         )
         frames[camera_id] = len(fs)
-        parts += [f"Camera {i}: {cameras[camera_id]['name']} ({len(fs)} ảnh)"] + fs
+        parts += [f"Camera {i}: {cameras[camera_id]['name']} ({len(fs)} frame{'s' if len(fs) != 1 else ''})"] + fs
     out, model = None, None
     for model in CAMERA_MODELS:
         if _resting.get(model, 0) > time.time():

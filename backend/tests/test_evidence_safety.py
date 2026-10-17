@@ -150,7 +150,7 @@ class EvidenceSafetyTests(unittest.TestCase):
                 )
                 self.assertEqual(synthetic_bound.tier, SYNTHETIC_DEMO_TIER)
                 self.assertEqual(synthetic_bound.source, "Synthetic demo fixture")
-                self.assertEqual(synthetic_bound.to_json()["tier_vi"], "Mock · giả lập")
+                self.assertEqual(synthetic_bound.to_json()["tier_vi"], "Synthetic demo")
                 self.assertIn("SYNTHETIC DEMO ONLY", synthetic_bound.detail)
                 self.assertTrue(ranges[544982029].decisive_clearance)
                 self.assertFalse(supports_legal_lane_count(ranges[544982029]))
@@ -228,7 +228,7 @@ class EvidenceSafetyTests(unittest.TestCase):
             exit_claim = index.way_out_by_way[920002][0]
             self.assertEqual(exit_claim.tier, "Observed")
             self.assertEqual(exit_claim.width_basis, "unknown")
-            self.assertIn("quay đầu ra", exit_claim.detail)
+            self.assertIn("turn around and exit", exit_claim.detail)
 
     def test_legacy_confirmation_without_exit_fields_still_loads(self):
         with TemporaryDirectory() as directory:

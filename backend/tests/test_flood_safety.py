@@ -36,7 +36,7 @@ class FloodSafetyKnowledgeTests(unittest.TestCase):
         self.assertEqual(assessment.status, "risky")
         self.assertEqual(assessment.knowledge, "missing_tide")
         self.assertIsNone(assessment.depth)
-        self.assertIn("triều", assessment.reason or "")
+        self.assertIn("tide", assessment.reason or "")
 
     def test_stale_positive_observation_does_not_expire_to_passable(self):
         observed = T0 - timedelta(hours=2, minutes=15)

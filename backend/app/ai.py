@@ -86,8 +86,8 @@ def gemini_generate(request, body: dict) -> dict:
             config = body["generationConfig"]
             config["maxOutputTokens"] = min(config["maxOutputTokens"] * 2,
                                              agent_budget.MAX_OUTPUT_TOKENS)
-    raise ValueError("Mô hình đã hết giới hạn sinh câu trả lời hoặc trả về nội dung rỗng sau khi tự thử lại. "
-                     "Vui lòng rút gọn câu hỏi rồi thử lại.")
+    raise ValueError("Gemini returned no usable answer after one automatic retry. "
+                     "Please try again.")
 
 
 def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str = "image/jpeg",
@@ -95,7 +95,7 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
     """One model call, bounded by an optional absolute monotonic deadline."""
     prov = provider()
     if not prov:
-        raise NoModel("Cần GEMINI_API_KEY, OPENAI_API_KEY hoặc ANTHROPIC_API_KEY trong .env.local")
+        raise NoModel("GEMINI_API_KEY, OPENAI_API_KEY or ANTHROPIC_API_KEY is required in .env.local")
     explicit_model = model is not None
     name, model = prov[0], (model if prov[0] == "gemini" and model else prov[1])
     items = image if isinstance(image, list) else [image] if image else []
@@ -108,7 +108,7 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
         def request(body):
             r, over = None, None
             if not explicit_model and not agent_budget.free_project_available():
-                raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết.")
+                raise NoModel("Free Gemini project allowance exhausted.")
             for key in gemini_keys():  # rotate past rate limits, spent quota and keys that cannot serve this model
                 timeout(deadline, 60)  # do not reserve quota for an attempt that cannot start
                 try:
@@ -121,12 +121,12 @@ def _call(prompt: str, image: bytes | list[bytes | str] | None = None, mime: str
                                params={"key": key}, json=body, timeout=call_timeout)
                 if not explicit_model and agent_budget.daily_quota_error(r.status_code, r.text):
                     agent_budget.cool_down_free_project()
-                    raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết.")
+                    raise NoModel("Free Gemini project allowance exhausted.")
                 bad_key = r.status_code == 400 and "API key" in r.text
                 if r.status_code not in (429, 503, 403, 404) and not bad_key:
                     break
             if r is None:
-                raise over or NoModel("Không có khóa Gemini")
+                raise over or NoModel("No Gemini key")
             r.raise_for_status()
             data = r.json()
             agent_budget.free_usage(data.get("usageMetadata"))
@@ -175,7 +175,8 @@ def _gate(item: dict, needed: list[str]) -> str:
 
 
 
-VOICE_REPORT_PROMPT = """Phân loại một câu báo cáo ngắn của tài xế TP.HCM thành JSON:
+VOICE_REPORT_PROMPT = """Return all free-text reason/question fields in English. Preserve Vietnamese input understanding and place names.
+Phân loại một câu báo cáo ngắn của tài xế TP.HCM thành JSON:
 {"kind":"confirmation|blockage|unclear","result":"in|tight|no|null",
  "exit":"through|turned|reversed|unknown","reason":"mô tả vật cản tối đa 200 ký tự|null",
  "confidence":0-1}
@@ -191,24 +192,24 @@ def parse_voice_report(text: str, *, deadline: float | None = None) -> dict:
     _require("ai_voice_report")
     result = _call(VOICE_REPORT_PROMPT + text, deadline=deadline)
     if not isinstance(result, dict):
-        return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+        return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
     confidence = result.get("confidence")
     if isinstance(confidence, bool) or not isinstance(confidence, (int, float)) or not math.isfinite(confidence):
-        return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+        return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
     kind = result.get("kind")
     if kind == "confirmation":
         if _gate(result, ["kind", "result"]) != "ACCEPT" or result.get("result") not in ("in", "tight", "no"):
-            return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+            return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
         exit_action = result.get("exit", "unknown")
         if exit_action not in ("through", "turned", "reversed", "unknown"):
-            return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+            return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
         return {"kind": "confirmation", "result": result["result"], "exit": exit_action}
     if kind == "blockage":
         reason = result.get("reason")
         if _gate(result, ["kind", "reason"]) != "ACCEPT" or not isinstance(reason, str) or len(reason) > 200:
-            return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+            return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
         return {"kind": "blockage", "reason": reason}
-    return {"kind": "unclear", "question": "Bạn đang xác nhận xe đã vào hẻm hay báo vật cản?"}
+    return {"kind": "unclear", "question": "Are you confirming vehicle entry or reporting a blockage?"}
 
 def _append(path, obj) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -216,7 +217,8 @@ def _append(path, obj) -> None:
         f.write(json.dumps(obj, ensure_ascii=False) + "\n")
 
 
-TEXT_PROMPT = """Bạn trích xuất dữ liệu có cấu trúc từ văn bản tiếng Việt về giao thông đô thị TP.HCM.
+TEXT_PROMPT = """Return display explanations in English. Keep street/place names, structured enum values and verbatim source_quote in the original language.
+Bạn trích xuất dữ liệu có cấu trúc từ văn bản tiếng Việt về giao thông đô thị TP.HCM.
 Trả về JSON {"items": [...]}. Mỗi item là một trong hai loại:
 1) {"kind":"stop_rule","street":"tên đường/hẻm","segment":"đoạn từ ... đến ... hoặc null","rule":"cam_dung_do|cam_do|cam_do_ngay_le|cam_do_ngay_chan|duoc_do_co_thu_phi","hours":"HH:MM-HH:MM hoặc null","vehicle":"o_to|tat_ca|null","source_quote":"trích nguyên văn","confidence":0-1}
 2) {"kind":"flood_report","street":"tên đường/hẻm","place_detail":"đoạn/số nhà hoặc null","depth_cm":số hoặc null,"cause":"mua|trieu|ca_hai|null","observed_at":"ISO datetime hoặc null","source_quote":"trích nguyên văn","confidence":0-1}
@@ -237,12 +239,13 @@ def extract_text(text: str, source: str = "") -> dict:
                "model": "/".join(provider() or ())}
         _append(REVIEW_FILE, rec)
         if gate != "INSUFFICIENT_INFORMATION":  # the model never publishes: an operator decides
-            rec["report_id"] = reports.submit(kind, rec, f"AI đọc văn bản ({source or 'không rõ nguồn'})")["report_id"]
+            rec["report_id"] = reports.submit(kind, rec, f"AI text extraction ({source or 'unknown source'})")["report_id"]
         results.append(rec)
     return {"items": results}
 
 
-PHOTO_PROMPT = """Ảnh do tài xế gửi tại TP.HCM. Xác định loại ảnh và trả về JSON:
+PHOTO_PROMPT = """Return notes and reference explanations in English; preserve sign text and place names.
+Ảnh do tài xế gửi tại TP.HCM. Xác định loại ảnh và trả về JSON:
 {"type":"sign|alley|flood|other",
  "sign_code":"P.130|P.131a|P.131b|P.131c|khác|null","sign_text":"chữ trên biển/biển phụ hoặc null",
  "alley_width_m":số hoặc null,"width_reference":"vật tham chiếu dùng để ước lượng (xe máy dài ~1.9 m, cửa ~0.9 m...) hoặc null",
@@ -264,13 +267,14 @@ def read_photo(image: bytes, mime: str, lat: float | None, lon: float | None, wa
         if out.get("type") == "flood":
             payload = {**rec, "kind": "flood_report", "depth_cm": out.get("flood_depth_cm"),
                        "observed_at": rec["extracted_at"]}
-            rec["report_id"] = reports.submit("flood_report", payload, "AI đọc ảnh tài xế gửi")["report_id"]
+            rec["report_id"] = reports.submit("flood_report", payload, "AI reads driver photos")["report_id"]
         else:
-            rec["report_id"] = reports.submit("photo_reading", rec, "AI đọc ảnh tài xế gửi")["report_id"]
+            rec["report_id"] = reports.submit("photo_reading", rec, "AI reads driver photos")["report_id"]
     return rec
 
 
-LISTING_PHOTO_PROMPT = """Ảnh lấy từ tin rao bán/cho thuê nhà trong hẻm ở TP.HCM. Trả về JSON:
+LISTING_PHOTO_PROMPT = """Return notes and reference explanations in English; preserve place names.
+Ảnh lấy từ tin rao bán/cho thuê nhà trong hẻm ở TP.HCM. Trả về JSON:
 {"shows_alley":true|false,"view":"hem_truoc_nha|mat_tien|trong_nha|khac",
  "alley_width_m":số hoặc null,"reference":"vật tham chiếu dùng để ước lượng (xe máy dài ~1.9 m, rộng ~0.7 m; ô tô rộng ~1.8 m; cửa ~0.9 m; gạch lát ~0.6 m) hoặc null",
  "cars_visible":true|false,"confidence":0-1,"notes":"ngắn gọn"}

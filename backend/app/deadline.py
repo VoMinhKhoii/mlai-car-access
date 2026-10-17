@@ -14,5 +14,5 @@ def timeout(deadline: float | None, limit: float, exc: type[Exception] = Expired
         return limit
     left = deadline - time.monotonic()
     if left <= 0.5:
-        raise exc("hết thời hạn của lần thu thập")
+        raise exc("collection deadline exceeded")
     return min(limit, left)

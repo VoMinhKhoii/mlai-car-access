@@ -29,7 +29,7 @@ class EstimateTests(unittest.TestCase):
         self.assertEqual((r['answer'],r['confidence']),('fits','high'))
         self.assertEqual(r['coverage']['sample_supported_fraction'],1)
         self.assertEqual(r['coverage']['total_segments'],2)
-        self.assertIn('2/2 đoạn',r['basis'])
+        self.assertIn('2/2 segments',r['basis'])
 
     def test_partial_survey_is_an_estimate_never_a_verified_width_floor(self):
         ws=self.widths(0,7.3,'Official',False)
@@ -77,7 +77,7 @@ class EstimateTests(unittest.TestCase):
         ch=copy.deepcopy(self.checks);ch['flood']['stay']['status']='unknown';ch['legality']['status']='Unverified'
         r=self.estimate(checks=ch)
         self.assertEqual((r['answer'],r['confidence']),('fits','medium'))
-        self.assertIn('chưa rõ ngập',r['basis'])
+        self.assertIn('flood conditions unknown',r['basis'])
         ch['way_out']['mode']='unknown'
         self.assertEqual(self.estimate(checks=ch)['confidence'],'low')
 
@@ -91,25 +91,30 @@ class EstimateTests(unittest.TestCase):
         ch=copy.deepcopy(self.checks);ch['flood']['stay']['status']='blocked'
         self.assertEqual(self.estimate(checks=ch)['answer'],'no')
         ch['flood']['stay']['status']='unknown';ch['legality']={'status':'Restricted','rules':[
-            {'status':'Restricted','text':'Cấm dừng','citation':'Luật Điều 18'}]}
+            {'status':'Restricted','text':'No stopping','citation':'Luật Điều 18'}]}
         r=self.estimate(checks=ch)
         self.assertEqual((r['answer'],r['confidence']),('no','high'))
         self.assertIn('Luật Điều 18',r['basis'])
 
     def test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer(self):
-        s={'name':'điểm','kind':'street','way_id':20,'walk':{'meters':39,'minutes':1},
+        s={'name':'Stop','kind':'street','way_id':20,'walk':{'meters':39,'minutes':1},
            'fit':{'class':'unknown','width_range':self.widths()[20].to_json()},
-           'way_out':{'mode':'unknown','text':'Chưa rõ đường ra','manoeuvre_status':'unknown'},
-           'legality':{'status':'Unverified','rules':[]},'flood':{},'verified':False,
-           'unverified_reasons':['Chưa rõ đường ra'],'estimate':self.estimate()}
+           'way_out':{'mode':'unknown','text':'Exit unverified','manoeuvre_status':'unknown'},
+           'legality':{'status':'Unverified','rules':[]},
+           'flood':{'stay':{'status':'unknown','depth':None}},'verified':False,
+           'unverified_reasons':['Exit unverified'],'estimate':self.estimate()}
         compact=agent.compact_stop(s)
         self.assertEqual(compact['unverified_reasons'],s['unverified_reasons'])
         self.assertEqual(compact['way_out_status']['mode'],'unknown')
-        p={'verdict':{'headline':'Nên đỗ gần cửa — độ tin cậy thấp','estimate':compact['estimate'],
+        p={'verdict':{'headline':'Park near the door — low confidence','estimate':compact['estimate'],
                        'unverified_reasons':s['unverified_reasons']},'stop_points':[compact]}
         answer=agent.grounded_answer(p)
-        self.assertIn('Vì sao:',answer);self.assertIn('Chưa rõ đường ra',answer)
-        self.assertNotIn('chưa xác minh cổng',answer)
+        self.assertIn('Basis:',answer)
+        self.assertIn('Exit unverified',answer)
+        self.assertIn('Stopping legality has not been verified',answer)
+        self.assertIn('Flooding has not been verified',answer)
+        self.assertIn('A suitable exit manoeuvre has not been verified',answer)
+        self.assertNotRegex(answer.lower(),r'\b(?:portal|entrance|cadastral)\b')
 
     def test_estimate_does_not_mutate_input_ranges_or_verification(self):
         ws=self.widths();snapshot=copy.deepcopy(ws)

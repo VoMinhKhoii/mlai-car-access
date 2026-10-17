@@ -1,0 +1,734 @@
+.F.......................................F.F..F...................... [ 17%]
+........F.....F..F.....F...FF....F.......ssssssssssss......F. [ 32%]
+............ssssssssssssssssssssssss........................ssssssssssss [ 50%]
+sssssssssssssssss........F...........ssssssssssss....F................ [ 67%]
+...................F.....F.....................F.......................................................F.......................F...                                    [100%]
+=================================== FAILURES ===================================
+_____ AgentTests.test_budget_reserves_thought_tokens_and_refuses_next_call _____
+ValueError: USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent.AgentTests testMethod=test_budget_reserves_thought_tokens_and_refuses_next_call>
+
+    def test_budget_reserves_thought_tokens_and_refuses_next_call(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(agent_budget, "STORE", Path(d)), patch.object(agent_budget, "FILE", Path(d) / "usage.json"):
+            body = {"contents": [], "generationConfig": {"maxOutputTokens": 2048}}
+            rid = agent_budget.reserve(body)
+            self.assertGreater(agent_budget.report()["reserved_usd"], 0)
+            agent_budget.finish(rid, {"promptTokenCount": 100, "candidatesTokenCount": 20, "thoughtsTokenCount": 30})
+            self.assertAlmostEqual(agent_budget.report()["spent_usd"], .0006)
+            with agent_budget.ledger() as u:
+                u["spent_usd"] = 2.999
+>           with self.assertRaisesRegex(ValueError, "3 USD"):
+E           AssertionError: "3 USD" does not match "USD 3 Gemini budget reached; the next request cannot be guaranteed within budget."
+
+backend/tests/test_agent.py:55: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=False, candidate={'finishReason': 'MAX_TOKENS'}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=False, candidate={}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=False, candidate={'content': {'parts': []}}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=False, candidate={'content': {'parts': [{'text': 'Đã kiểm tra.'}], 'role': 'model'}, 'finishReason': 'MAX_TOKENS'}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=True, candidate={'finishReason': 'MAX_TOKENS'}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=True, candidate={}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=True, candidate={'content': {'parts': []}}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+_ VertexTests.test_empty_or_truncated_free_and_paid_retry_once_then_clear_error (paid=True, candidate={'content': {'parts': [{'text': 'Đã kiểm tra.'}], 'role': 'model'}, 'finishReason': 'MAX_TOKENS'}) _
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_empty_or_truncated_free_and_paid_retry_once_then_clear_error>
+
+    def test_empty_or_truncated_free_and_paid_retry_once_then_clear_error(self):
+        for paid in (False, True):
+            for candidate in ({'finishReason': 'MAX_TOKENS'}, {},
+                              {'content': {'parts': []}},
+                              {'finishReason': 'MAX_TOKENS', 'content': REPLY['candidates'][0]['content']}):
+                with self.subTest(paid=paid, candidate=candidate), \
+                     patch.object(ai, 'gemini_keys', return_value=[] if paid else ['fake-free']), \
+                     patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                         'candidates': [candidate], 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:186: AssertionError
+__ VertexTests.test_generic_ai_studio_empty_retry_and_ceiling (success=False) __
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_generic_ai_studio_empty_retry_and_ceiling>
+
+    def test_generic_ai_studio_empty_retry_and_ceiling(self):
+        for success in (True, False):
+            empty = {'candidates': [{'finishReason': 'MAX_TOKENS'}],
+                     'usageMetadata': {'thoughtsTokenCount': 241}}
+            reply = {'candidates': [{'content': {'parts': [{'text': '{"items": []}'}]}}],
+                     'usageMetadata': {'candidatesTokenCount': 8}}
+            with self.subTest(success=success), \
+                 patch.object(ai, 'provider', return_value=('gemini', 'gemini-3.5-flash')), \
+                 patch.object(ai, 'gemini_keys', return_value=['fake-free']), \
+                 patch.object(ai.httpx, 'post', side_effect=[httpx.Response(200, json=empty, request=httpx.Request('POST', 'https://example.test')),
+                     httpx.Response(200, json=reply if success else empty,
+                                    request=httpx.Request('POST', 'https://example.test'))]) as post:
+                if success:
+                    self.assertEqual(ai._call('test'), {'items': []})
+                else:
+>                   with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E                   AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:212: AssertionError
+__ VertexTests.test_missing_candidates_retry_at_maximum_and_reservation_floor __
+ValueError: Model reached its response limit or returned empty content after retrying. Shorten your question and retry.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_missing_candidates_retry_at_maximum_and_reservation_floor>
+
+    def test_missing_candidates_retry_at_maximum_and_reservation_floor(self):
+        sent = []
+        def request(body):
+            sent.append(copy.deepcopy(body))
+            return {'candidates': []}
+>       with self.assertRaisesRegex(ValueError, 'sau khi tự thử lại'):
+E       AssertionError: "sau khi tự thử lại" does not match "Model reached its response limit or returned empty content after retrying. Shorten your question and retry."
+
+backend/tests/test_agent_vertex.py:239: AssertionError
+_________ VertexTests.test_paid_attempt_limit_includes_automatic_retry _________
+ValueError: Paid Gemini request limit reached; retry later.
+
+During handling of the above exception, another exception occurred:
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_paid_attempt_limit_includes_automatic_retry>
+
+    def test_paid_attempt_limit_includes_automatic_retry(self):
+        with patch.dict(os.environ, {'AGENT_PAID_CALL_LIMIT': '1'}), \
+             patch.object(ai, 'gemini_keys', return_value=[]), \
+             patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                 'candidates': [{'finishReason': 'MAX_TOKENS'}],
+                 'usageMetadata': {'thoughtsTokenCount': 241}})) as post:
+>           with self.assertRaisesRegex(ValueError, 'hạn mức lượt Gemini trả phí'):
+E           AssertionError: "hạn mức lượt Gemini trả phí" does not match "Paid Gemini request limit reached; retry later."
+
+backend/tests/test_agent_vertex.py:255: AssertionError
+__________ VertexTests.test_retry_error_reaches_api_without_fallback ___________
+
+self = <tests.test_agent_vertex.VertexTests testMethod=test_retry_error_reaches_api_without_fallback>
+
+    def test_retry_error_reaches_api_without_fallback(self):
+        with patch.object(ai, 'gemini_keys', return_value=[]), \
+             patch.object(agent.httpx, 'post', return_value=httpx.Response(200, json={
+                 'candidates': [{'finishReason': 'MAX_TOKENS'}],
+                 'usageMetadata': {'thoughtsTokenCount': 241}})) as post, \
+             patch.object(agent, 'fallback_events') as fallback:
+            events = list(agent.events(agent.AgentRequest(message='Tới hẻm')))
+        self.assertEqual(events[-1]['type'], 'error')
+>       self.assertIn('after one automatic retry', events[-1]['text'])
+E       AssertionError: 'after one automatic retry' not found in 'Model reached its response limit or returned empty content after retrying. Shorten your question and retry.'
+
+backend/tests/test_agent_vertex.py:230: AssertionError
+_ CameraJobs.test_restore_legacy_successful_readings_without_frame_count_as_unknown _
+
+self = <tests.test_camera_jobs.CameraJobs testMethod=test_restore_legacy_successful_readings_without_frame_count_as_unknown>
+
+    def test_restore_legacy_successful_readings_without_frame_count_as_unknown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            readings_path = Path(tmp) / "readings.jsonl"
+            jobs_path = Path(tmp) / "jobs.json"
+            at = datetime.now(cameras.VN_TZ).isoformat(timespec="seconds")
+            readings_path.write_text(json.dumps({
+                "id": "legacy", "name": "Legacy camera", "lat": 10.8, "lon": 106.7,
+                "at": at, "state": "ok", "traffic": "thong_thoang",
+            }) + "\n")
+            with mock.patch.object(cameras, "_restored", False), \
+                    mock.patch.object(cameras, "READINGS_FILE", readings_path), \
+                    mock.patch.object(cameras, "JOBS_FILE", jobs_path), \
+                    mock.patch.dict(cameras._reads, clear=True), \
+                    mock.patch.dict(cameras._jobs, clear=True):
+                cameras._restore()
+                public = cameras.public(cameras.latest("legacy"))
+    
+        self.assertIsNone(public["frames"])
+        self.assertEqual(public["traffic"], "khong_ro")
+>       self.assertEqual(public["traffic_vi"], "Không rõ")
+E       TypeError: 'bool' object is not callable
+
+backend/tests/test_camera_jobs.py:244: TypeError
+_ CameraRegistryRefresh.test_one_inflight_refresh_publishes_data_and_index_together _
+
+self = <tests.test_camera_jobs.CameraRegistryRefresh testMethod=test_one_inflight_refresh_publishes_data_and_index_together>
+
+    def test_one_inflight_refresh_publishes_data_and_index_together(self):
+        old = {"source": "cached", "cameras": [CAMS["c0"]]}
+        started, release = threading.Event(), threading.Event()
+    
+        def portal(deadline=None):
+            started.set()
+            release.wait(timeout=2)
+            return [CAMS["c1"]]
+    
+        with mock.patch.dict(cameras._reg, {
+                "t": 0.0, "data": old, "by_id": {"c0": CAMS["c0"]}, "pending": False}, clear=True), \
+                mock.patch.object(cameras, "fetch_official", side_effect=portal), \
+                mock.patch.object(cameras._registry_pool, "submit",
+                                  wraps=cameras._registry_pool.submit) as submit:
+            self.assertIs(cameras.registry(), old)
+            self.assertTrue(started.wait(timeout=0.5))
+            for _ in range(5):
+                self.assertIs(cameras.registry(), old)
+                self.assertEqual(cameras.by_id(), {"c0": CAMS["c0"]})
+            submit.assert_called_once()
+            release.set()
+            self.wait_refresh()
+            published = cameras.registry(deadline=1.0)
+            index = cameras.by_id(deadline=1.0)
+    
+>       self.assertEqual(published["source"], "Cổng thông tin giao thông TP.HCM (camera layer, live)")
+E       AssertionError: 'HCMC Traffic Portal (camera layer, live)' != 'Cổng thông tin giao thông TP.HCM (camera layer, live)'
+E       - HCMC Traffic Portal (camera layer, live)
+E       + Cổng thông tin giao thông TP.HCM (camera layer, live)
+
+backend/tests/test_camera_jobs.py:348: AssertionError
+_ CameraDeadlineBoundaries.test_camera_removed_during_refresh_is_skipped_without_failing_surviving_batch _
+
+self = <tests.test_camera_jobs.CameraDeadlineBoundaries testMethod=test_camera_removed_during_refresh_is_skipped_without_failing_surviving_batch>
+
+    def test_camera_removed_during_refresh_is_skipped_without_failing_surviving_batch(self):
+        available = {"c1": CAMS["c1"]}
+        stored, prompts = [], []
+        response = {"cameras": [{"camera": 1, "traffic": "dong", "usable": True, "confidence": 0.9}]}
+    
+        def model(prompt, parts, *, deadline=None, **_kwargs):
+            prompts.append((prompt, parts))
+            return response
+    
+        with mock.patch.object(cameras, "by_id", lambda deadline=None: available), \
+                mock.patch.object(cameras, "CAMERA_MODELS", ["model"]), \
+                mock.patch.object(cameras, "_resting", {}), \
+                mock.patch.object(cameras.ai, "_call", model), \
+                mock.patch.object(cameras.ai, "provider", return_value=("gemini", "test-model")), \
+                mock.patch.object(cameras, "_log"), \
+                mock.patch.object(cameras, "_store", stored.append):
+            cameras._ask(["c0", "c1"], {"c0": b"old", "c1": b"new"}, {},
+                         datetime.now(cameras.VN_TZ))
+    
+        self.assertEqual(len(prompts), 1)
+>       self.assertEqual([part for part in prompts[0][1] if isinstance(part, str)], ["Camera 1: Cam 1 (1 ảnh)"])
+E       AssertionError: Lists differ: ['Camera 1: Cam 1 (1 frames)'] != ['Camera 1: Cam 1 (1 ảnh)']
+E       
+E       First differing element 0:
+E       'Camera 1: Cam 1 (1 frames)'
+E       'Camera 1: Cam 1 (1 ảnh)'
+E       
+E       - ['Camera 1: Cam 1 (1 frames)']
+E       ?                      ^^^^^^
+E       
+E       + ['Camera 1: Cam 1 (1 ảnh)']
+E       ?                      ^^^
+
+backend/tests/test_camera_jobs.py:491: AssertionError
+___________ Corridor.test_cameras_are_ignored_for_a_later_departure ____________
+
+self = <tests.test_corridor.Corridor testMethod=test_cameras_are_ignored_for_a_later_departure>
+
+    def test_cameras_are_ignored_for_a_later_departure(self):
+        self.readings = {"x": reading(CAM_X, "ket_cung"), "y": reading(CAM_Y)}
+        out, best = self.run_corridor(depart_at=datetime.now(VN) + timedelta(hours=3))
+        self.assertFalse(out["live"])
+        self.assertTrue(best["is_goong"])
+>       self.assertIn("dự báo ngập", out["live_note"])
+E       AssertionError: 'dự báo ngập' not found in 'Departure is in 3 hours: cameras show current conditions only, so routes use flood forecasts (tides, rain, history).'
+
+backend/tests/test_corridor.py:120: AssertionError
+________________ Corridor.test_jam_on_the_short_route_switches _________________
+
+self = <tests.test_corridor.Corridor testMethod=test_jam_on_the_short_route_switches>
+
+    def test_jam_on_the_short_route_switches(self):
+        self.readings = {"x": reading(CAM_X, "ket_cung"), "y": reading(CAM_Y)}
+        out, best = self.run_corridor()
+>       self.assertEqual(best["label"], "qua Đường B")
+E       AssertionError: 'via Đường B' != 'qua Đường B'
+E       - via Đường B
+E       ? ^^
+E       + qua Đường B
+E       ? ^^
+
+backend/tests/test_corridor.py:75: AssertionError
+____ Corridor.test_one_frame_traffic_unknown_is_not_presented_as_free_flow _____
+
+self = <tests.test_corridor.Corridor testMethod=test_one_frame_traffic_unknown_is_not_presented_as_free_flow>
+
+    def test_one_frame_traffic_unknown_is_not_presented_as_free_flow(self):
+        self.readings = {"x": reading(CAM_X, "khong_ro"), "y": reading(CAM_Y, "khong_ro")}
+        out, _ = self.run_corridor()
+        self.assertTrue(all(route["traffic_unknown"] == 1 for route in out["routes"]))
+        self.assertTrue(all(route["delay_min"] == 0 for route in out["routes"]))
+>       self.assertIn("ETA không thể loại trừ ùn tắc", out["summary"])
+E       AssertionError: 'ETA không thể loại trừ ùn tắc' not found in 'Take the Goong suggestion (via Đường A), about 10 min. Other routes are at least 4 min slower. 1 segments lack camera traffic confirmation; ETA cannot rule out congestion there.'
+
+backend/tests/test_corridor.py:96: AssertionError
+______ Corridor.test_water_deeper_than_the_car_can_wade_blocks_the_route _______
+
+self = <tests.test_corridor.Corridor testMethod=test_water_deeper_than_the_car_can_wade_blocks_the_route>
+
+    def test_water_deeper_than_the_car_can_wade_blocks_the_route(self):
+        self.readings = {"x": reading(CAM_X, depth_cm=40), "y": reading(CAM_Y)}
+        out, best = self.run_corridor()
+        self.assertEqual(out["routes"][0]["status"], "blocked")
+        self.assertFalse(best["is_goong"])
+>       self.assertIn("ngập", out["summary"])
+E       AssertionError: 'ngập' not found in 'Recommended: via Đường B (~14 min), the Goong suggestion is flooded. Reason: Camera Đường A - Đường C at 10:58: flooding ~40 cm, exceeds vehicle limit 13 cm.'
+
+backend/tests/test_corridor.py:107: AssertionError
+_ EstimateTests.test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer _
+
+self = <tests.test_engine_estimate.EstimateTests testMethod=test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer>
+
+    def test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer(self):
+        s={'name':'Stop','kind':'street','way_id':20,'walk':{'meters':39,'minutes':1},
+           'fit':{'class':'unknown','width_range':self.widths()[20].to_json()},
+           'way_out':{'mode':'unknown','text':'Exit unverified','manoeuvre_status':'unknown'},
+           'legality':{'status':'Unverified','rules':[]},'flood':{},'verified':False,
+           'unverified_reasons':['Exit unverified'],'estimate':self.estimate()}
+        compact=agent.compact_stop(s)
+        self.assertEqual(compact['unverified_reasons'],s['unverified_reasons'])
+        self.assertEqual(compact['way_out_status']['mode'],'unknown')
+        p={'verdict':{'headline':'Park near the door — low confidence','estimate':compact['estimate'],
+                       'unverified_reasons':s['unverified_reasons']},'stop_points':[compact]}
+>       answer=agent.grounded_answer(p)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_engine_estimate.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+p = {'stop_points': [{'estimate': {'answer': 'fits', 'basis': 'measured ≈5.10 m (Unnamed side road; OSM 10) · at the door ...ction': 1.0, ...}, ...}, 'headline': 'Park near the door — low confidence', 'unverified_reasons': ['Exit unverified']}}
+
+    def grounded_answer(p):
+        verdict = p.get('verdict', {})
+        estimate = verdict.get('estimate') or {}
+        parts = []
+        if estimate:
+            answers = {'fits':'access appears possible', 'tight':'access appears tight', 'no':'vehicle access is not suitable', 'unknown':'access is uncertain'}
+            confidence = {'high':'High', 'medium':'Medium', 'low':'Low'}.get(estimate.get('confidence'), 'Low')
+            parts.append('Estimate: ' + answers.get(estimate.get('answer'), 'access is uncertain') + '. ' + confidence + ' confidence.')
+            limiting = estimate.get('limiting_width') or {}
+            basis = []
+            if limiting.get('value_m') is not None:
+                item = 'limiting width approximately ' + str(limiting['value_m']) + ' m'
+                if limiting.get('way_name'): item += ' at ' + limiting['way_name']
+                if limiting.get('source'): item += ' (' + _english_source(limiting['source']) + ')'
+                basis.append(item)
+            coverage = estimate.get('coverage') or {}
+            if coverage.get('sampled_segments') is not None and coverage.get('total_segments') is not None:
+                basis.append(str(coverage['sampled_segments']) + '/' + str(coverage['total_segments']) + ' route segments have width samples')
+            if not basis:
+                raw = estimate.get('basis') or ''
+                if raw and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', raw, re.I):
+                    basis.append(raw)
+                else:
+                    basis.append('available sourced road and route evidence')
+                    if 'osm' in strip_accents(raw).lower(): basis.append('OpenStreetMap')
+            parts.append('Basis: ' + '; '.join(basis) + '.')
+        else:
+            headline = verdict.get('headline', '')
+            parts.append(headline if headline and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', headline, re.I) else 'Vehicle entry and exit remain unverified.')
+        if p.get('vehicle_note'):
+            parts.append(p['vehicle_note'])
+        for stop in p.get('stop_points', [])[:1]:
+            rules = stop.get('legal_rules') or [stop.get('legality', {}).get('rule') or {}]
+            restricted = [r for r in rules if r.get('status') in ('Restricted', 'Prohibited')]
+            if restricted:
+                for rule in restricted:
+                    text = rule.get('text', '')
+                    restriction = 'Do not stop here' if rule.get('status') == 'Prohibited' else 'Stopping restrictions apply here'
+                    if text and not re.search(r'[àáảãạăâèéẻẽẹêìíỉĩịòóỏõọôơùúủũụưỳýỷỹỵđ]', text, re.I): restriction += ': ' + text
+                    parts.append(restriction + (' (' + rule['citation'] + ')' if rule.get('citation') else '') + '.')
+                continue
+            sentence = 'Suggested stop: ' + (stop.get('name') or 'mapped stop')
+            walk = stop.get('walk') or {}
+            if walk.get('meters') is not None: sentence += '; walk ' + str(walk['meters']) + ' m'
+            if stop.get('width', {}).get('source'): sentence += '; source: ' + _english_source(stop['width']['source'])
+            parts.append(sentence + '.')
+        timing = p.get('timing') or {}
+        if timing.get('leave_before'): parts.append('Please leave before ' + timing['leave_before'] + '.')
+        elif timing.get('or_after'): parts.append('Wait until after ' + timing['or_after'] + '.')
+        if p.get('tide_note'): parts.append(p['tide_note'])
+        raw_caveats = list(verdict.get('unverified_reasons') or [])
+        for stop in p.get('stop_points', [])[:1]:
+            raw_caveats.extend(stop.get('unverified_reasons') or [])
+            if stop.get('legality', {}).get('status') == 'Unverified':
+                raw_caveats.append('Stopping legality has not been verified')
+>           if stop.get('flood', {}).get('depth') is None and stop.get('flood'):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'NoneType' object has no attribute 'get'
+
+backend/app/agent.py:685: AttributeError
+___ BuildDeadline.test_build_past_its_deadline_errors_and_publishes_nothing ____
+
+self = <tests.test_evidence_isolation.BuildDeadline testMethod=test_build_past_its_deadline_errors_and_publishes_nothing>
+
+    def test_build_past_its_deadline_errors_and_publishes_nothing(self):
+        map_deadlines = []
+    
+        def map_graph(lat, lon, deadline=None):
+            map_deadlines.append(deadline)
+            return graph()
+    
+        with mock.patch.object(live, "BUILD_DEADLINE_S", 0.0), \
+                mock.patch.object(live, "build_graph", map_graph), \
+                mock.patch.object(live.flags, "enabled", lambda name: False), \
+                mock.patch.object(live.httpx, "get", lambda *a, **k: self.fail("no request after the deadline")):
+            job = new_job()
+            live._run(job, 10.70, 106.60)
+        self.assertEqual(map_deadlines, [job["deadline"]])
+        self.assertEqual(job["state"], "error")
+>       self.assertIn("hết thời hạn", job["error"])
+E       AssertionError: 'hết thời hạn' not found in '0-second deadline exceeded (collection deadline exceeded)'
+
+backend/tests/test_evidence_isolation.py:190: AssertionError
+_ FloodSafetyKnowledgeTests.test_missing_tide_at_requested_time_is_conservative_risky _
+
+self = <tests.test_flood_safety.FloodSafetyKnowledgeTests testMethod=test_missing_tide_at_requested_time_is_conservative_risky>
+
+    def test_missing_tide_at_requested_time_is_conservative_risky(self):
+        prof = FloodProfile([FloodRecord(10.7, 106.6, "Nguyễn Hữu Cảnh", 2024, "", "tide", 35, "high", "")])
+        out_of_bounds = datetime(2035, 1, 1, 0, 0, tzinfo=VN)
+        assessment = depth_at(prof, out_of_bounds, [], name="Nguyễn Hữu Cảnh", safe_depth=0.20)
+        self.assertEqual(assessment.status, "risky")
+        self.assertEqual(assessment.knowledge, "missing_tide")
+        self.assertIsNone(assessment.depth)
+>       self.assertIn("triều", assessment.reason or "")
+E       AssertionError: 'triều' not found in 'No valid tide data at this time'
+
+backend/tests/test_flood_safety.py:39: AssertionError
+_____________ Tide.test_model_hour_near_an_alarm_widens_the_depth ______________
+
+self = <tests.test_hydro.Tide testMethod=test_model_hour_near_an_alarm_widens_the_depth>
+
+    def test_model_hour_near_an_alarm_widens_the_depth(self):
+        prof = FloodProfile([FloodRecord(0, 0, "", None, "", "tide", None, "high", "")])
+        t = T0 + timedelta(days=3)
+        with mock.patch.object(flood.flags, "enabled", lambda name: name != "ai_flood_prior"), \
+                mock.patch.object(hydro, "tide_point", lambda _: (1.45, "model")):
+            assessment = flood.depth_at(prof, t, [])
+        d = assessment.depth
+        self.assertIsNotNone(d)
+        self.assertEqual((d.lo, d.hi), (0.0, 0.20))  # 1.45 ± 0.15 spans below BĐ1 to above BĐ2
+>       self.assertIn("model", d.drivers[0])
+E       AssertionError: 'mô hình' not found in 'Tide 1.45 m (BĐ1, model ±15 cm)'
+
+backend/tests/test_hydro.py:67: AssertionError
+____________________ test_job_cap_restart_and_live_reserve _____________________
+
+tmp_path = PosixPath('/private/var/folders/4b/18tv83z972lfxrd5kw3_44lm0000gn/T/pytest-of-khoivo/pytest-73/test_job_cap_restart_and_live_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x127aed510>
+
+    def test_job_cap_restart_and_live_reserve(tmp_path, monkeypatch):
+        monkeypatch.setattr(ab, 'STORE', tmp_path)
+        monkeypatch.setattr(ab, 'FILE', tmp_path / 'paid.json')
+        monkeypatch.delenv('AGENT_PAID_LIMIT_USD', raising=False)
+        monkeypatch.delenv('AGENT_PAID_CALL_LIMIT', raising=False)
+        body = {'generationConfig': {'maxOutputTokens': 2048}}
+        with ab.ledger() as data:
+            data['spent_usd'] = .01
+        rid = ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        ab.finish(rid, {'promptTokenCount': 100, 'candidatesTokenCount': 20, 'thoughtsTokenCount': 30})
+        assert ab.report()['jobs']['imagery']['spent_usd'] == pytest.approx(.0006)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = .999
+        with pytest.raises(ValueError, match='paid ceiling'):
+            ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = 0
+            data['spent_usd'] = 1.09
+        with pytest.raises(ValueError, match='3 USD'):
+>           ab.reserve(body, job_id='imagery', leave_usd=1.9)
+
+backend/tests/test_imagery_evidence.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+body = {'generationConfig': {'maxOutputTokens': 2048}}
+
+    def reserve(body: dict, *, job_id: str | None = None, job_limit_usd: float = 1.0,
+                leave_usd: float = 0.0) -> str:
+        # UTF-8 bytes bound input tokens conservatively; reserve the entire output allowance too.
+        import uuid
+        ceiling = (len(json.dumps(body, ensure_ascii=False).encode()) + 4096) * INPUT_USD_PER_M / 1e6
+        ceiling += max(AGENT_OUTPUT_TOKENS, body.get("generationConfig", {}).get(
+            "maxOutputTokens", AGENT_OUTPUT_TOKENS)) * OUTPUT_USD_PER_M / 1e6
+        with ledger() as u:
+            call_limit = int(os.environ.get("AGENT_PAID_CALL_LIMIT", "0"))
+            if call_limit and u["paid_calls"] >= call_limit:
+                raise ValueError("Paid Gemini request limit reached; retry later.")
+            limit = min(LIMIT, float(os.environ.get("AGENT_PAID_LIMIT_USD", str(LIMIT))))
+            if job_id:
+                # Job and global reservations share ONE flock/transaction. Restarting
+                # a worker cannot reset its allowance, or race the live demo agent.
+                job = u.setdefault("jobs", {}).setdefault(job_id, {"spent_usd": 0.0, "reservations": {}})
+                if job["spent_usd"] + sum(job["reservations"].values()) + ceiling > min(1.0, job_limit_usd):
+                    raise ValueError("Imagery job reached its paid ceiling (at most 1 USD).")
+                limit = min(limit, LIMIT - max(0.0, leave_usd))
+            if u["spent_usd"] + sum(u["reservations"].values()) + ceiling >= limit:
+>               raise ValueError("USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.")
+E               ValueError: USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.
+
+backend/app/agent_budget.py:98: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/private/var/folders/4b/18tv83z972lfxrd5kw3_44lm0000gn/T/pytest-of-khoivo/pytest-73/test_job_cap_restart_and_live_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x127aed510>
+
+    def test_job_cap_restart_and_live_reserve(tmp_path, monkeypatch):
+        monkeypatch.setattr(ab, 'STORE', tmp_path)
+        monkeypatch.setattr(ab, 'FILE', tmp_path / 'paid.json')
+        monkeypatch.delenv('AGENT_PAID_LIMIT_USD', raising=False)
+        monkeypatch.delenv('AGENT_PAID_CALL_LIMIT', raising=False)
+        body = {'generationConfig': {'maxOutputTokens': 2048}}
+        with ab.ledger() as data:
+            data['spent_usd'] = .01
+        rid = ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        ab.finish(rid, {'promptTokenCount': 100, 'candidatesTokenCount': 20, 'thoughtsTokenCount': 30})
+        assert ab.report()['jobs']['imagery']['spent_usd'] == pytest.approx(.0006)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = .999
+        with pytest.raises(ValueError, match='paid ceiling'):
+            ab.reserve(body, job_id='imagery', leave_usd=1.9)
+        with ab.ledger() as data:
+            data['jobs']['imagery']['spent_usd'] = 0
+            data['spent_usd'] = 1.09
+>       with pytest.raises(ValueError, match='3 USD'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: '3 USD'
+E         Actual message: 'USD 3 Gemini budget reached; the next request cannot be guaranteed within budget.'
+
+backend/tests/test_imagery_evidence.py:38: AssertionError
+___________ MapSearchTests.test_map_candidate_first_without_geocoder ___________
+
+self = <tests.test_map_search.MapSearchTests testMethod=test_map_candidate_first_without_geocoder>
+
+    def test_map_candidate_first_without_geocoder(self):
+        with patch.object(geo, 'resolve_place', side_effect=AssertionError('must use tiles first')):
+            found, _ = agent.execute('tim_dia_diem', {'query': 'Công ty CP Vương Phạm'}, None, self.context())
+        self.assertEqual(found['results'][0]['label'], 'Cong Ty Cp Vuong Pham')
+>       self.assertEqual(found['results'][0]['source'], 'Trên bản đồ')
+E       AssertionError: 'On the map' != 'Trên bản đồ'
+E       - On the map
+E       + Trên bản đồ
+
+backend/tests/test_map_search.py:38: AssertionError
+_ OperatorAccess.test_guest_report_waits_for_review_and_projects_exactly_once __
+
+self = <tests.test_operator_access.OperatorAccess testMethod=test_guest_report_waits_for_review_and_projects_exactly_once>
+
+    def test_guest_report_waits_for_review_and_projects_exactly_once(self):
+        self.assertEqual(self.status("confirm_rate_limited_before_graph"), 429)
+        self.assertEqual(self.status("blockage_rate_limited_before_graph"), 429)
+        self.assertEqual(self.status("confirm_extra_field"), 422)
+        self.assertEqual(self.status("confirm_unknown_stop"), 422)
+        self.assertEqual(self.status("confirm_bad_exit"), 422)
+        self.assertEqual(
+            self.r["confirm_main_road"]["json"]["detail"],
+            "Confirmations apply only to alleys mapped by the server. Choose a blockage report to report obstructions.",
+        )
+        self.assertEqual(self.r["pending_count_before_main_road"], self.r["pending_count_after_main_road"])
+        self.assertEqual(self.status("confirm_main_road"), 422)
+        self.assertEqual(self.status("confirm_non_alley"), 422)
+>       self.assertIn("mapped directly to an alley", self.r["confirm_non_alley"]["json"]["detail"])
+E       AssertionError: 'ánh xạ trực tiếp lên hẻm' not found in 'Confirm only stops mapped directly to an alley (within 5 m); car parks and non-alley roads do not provide evidence.'
+
+backend/tests/test_operator_access.py:388: AssertionError
+_ PlanTimingAndSafetyTests.test_pickup_timing_reports_arrival_adjustment_without_claiming_a_sweep _
+
+self = <tests.test_plan_timing.PlanTimingAndSafetyTests testMethod=test_pickup_timing_reports_arrival_adjustment_without_claiming_a_sweep>
+
+    def test_pickup_timing_reports_arrival_adjustment_without_claiming_a_sweep(self):
+        """Pickup cannot be rescheduled by stretching the requested arrival window."""
+        def must_not_probe(_arrive, _depart):
+            self.fail("pickup timing must not evaluate departure windows")
+    
+        timing = _flood_timing(
+            "pickup", T0, T0 + timedelta(minutes=120), must_not_probe,
+            ["flood_stay"])
+        self.assertIsNone(timing["leave_before_at"])
+        self.assertIsNone(timing["or_after_at"])
+>       self.assertEqual(
+            timing["reason"], "Để đón xe an toàn, bạn có thể chọn giờ đến khác.")
+E       AssertionError: 'Try another arrival time for pickup.' != 'Để đón xe an toàn, bạn có thể chọn giờ đến khác.'
+E       - Try another arrival time for pickup.
+E       + Để đón xe an toàn, bạn có thể chọn giờ đến khác.
+
+backend/tests/test_plan_timing.py:178: AssertionError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/test_agent.py::AgentTests::test_budget_reserves_thought_tokens_and_refuses_next_call
+SUBFAILED(paid=False, candidate={'finishReason': 'MAX_TOKENS'}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=False, candidate={}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=False, candidate={'content': {'parts': []}}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=False, candidate={'content': {'parts': [{'text': 'Đã kiểm tra.'}], 'role': 'model'}, 'finishReason': 'MAX_TOKENS'}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=True, candidate={'finishReason': 'MAX_TOKENS'}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=True, candidate={}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=True, candidate={'content': {'parts': []}}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(paid=True, candidate={'content': {'parts': [{'text': 'Đã kiểm tra.'}], 'role': 'model'}, 'finishReason': 'MAX_TOKENS'}) backend/tests/test_agent_vertex.py::VertexTests::test_empty_or_truncated_free_and_paid_retry_once_then_clear_error
+SUBFAILED(success=False) backend/tests/test_agent_vertex.py::VertexTests::test_generic_ai_studio_empty_retry_and_ceiling
+FAILED backend/tests/test_agent_vertex.py::VertexTests::test_missing_candidates_retry_at_maximum_and_reservation_floor
+FAILED backend/tests/test_agent_vertex.py::VertexTests::test_paid_attempt_limit_includes_automatic_retry
+FAILED backend/tests/test_agent_vertex.py::VertexTests::test_retry_error_reaches_api_without_fallback
+FAILED backend/tests/test_camera_jobs.py::CameraJobs::test_restore_legacy_successful_readings_without_frame_count_as_unknown
+FAILED backend/tests/test_camera_jobs.py::CameraRegistryRefresh::test_one_inflight_refresh_publishes_data_and_index_together
+FAILED backend/tests/test_camera_jobs.py::CameraDeadlineBoundaries::test_camera_removed_during_refresh_is_skipped_without_failing_surviving_batch
+FAILED backend/tests/test_corridor.py::Corridor::test_cameras_are_ignored_for_a_later_departure
+FAILED backend/tests/test_corridor.py::Corridor::test_jam_on_the_short_route_switches
+FAILED backend/tests/test_corridor.py::Corridor::test_one_frame_traffic_unknown_is_not_presented_as_free_flow
+FAILED backend/tests/test_corridor.py::Corridor::test_water_deeper_than_the_car_can_wade_blocks_the_route
+FAILED backend/tests/test_engine_estimate.py::EstimateTests::test_agent_compact_preserves_actual_caveats_and_never_invents_portal_disclaimer
+FAILED backend/tests/test_evidence_isolation.py::BuildDeadline::test_build_past_its_deadline_errors_and_publishes_nothing
+FAILED backend/tests/test_flood_safety.py::FloodSafetyKnowledgeTests::test_missing_tide_at_requested_time_is_conservative_risky
+FAILED backend/tests/test_hydro.py::Tide::test_model_hour_near_an_alarm_widens_the_depth
+FAILED backend/tests/test_imagery_evidence.py::test_job_cap_restart_and_live_reserve
+FAILED backend/tests/test_map_search.py::MapSearchTests::test_map_candidate_first_without_geocoder
+FAILED backend/tests/test_operator_access.py::OperatorAccess::test_guest_report_waits_for_review_and_projects_exactly_once
+FAILED backend/tests/test_plan_timing.py::PlanTimingAndSafetyTests::test_pickup_timing_reports_arrival_adjustment_without_claiming_a_sweep
+28 failed, 307 passed, 77 skipped, 2 warnings, 201 subtests passed in 233.11s (0:03:53)
