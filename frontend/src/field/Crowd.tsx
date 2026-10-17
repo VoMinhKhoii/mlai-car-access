@@ -35,8 +35,9 @@ export function Crowd() {
   }
   async function file(file?:File) {
     if(!file)return
+    setAttest(false);setPhoto('');setPhotoName('');setError('')
     if(file.size>8*1024*1024){setError('Ảnh tối đa 8 MB. Chọn ảnh JPEG/PNG/WebP nhỏ hơn.');return}
-    setPhoto(await new Promise<string>((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result).split(',')[1]);r.onerror=reject;r.readAsDataURL(file)}).catch(()=>''));setPhotoName(file.name)
+    setPhoto(await new Promise<string>((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result).split(',')[1]);r.onerror=reject;r.readAsDataURL(file)}).catch(()=>{setError('Không đọc được ảnh. Chọn lại ảnh JPEG/PNG/WebP.');return ''}));setPhotoName(file.name)
   }
   async function submit() {
     setBusy(true);setError('')

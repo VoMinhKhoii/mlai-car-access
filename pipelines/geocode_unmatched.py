@@ -17,7 +17,6 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 import fcntl
 import hashlib
-import itertools
 import json
 import math
 import os
@@ -75,7 +74,7 @@ class Goong:
         self.client = client or httpx.Client(timeout=15, headers={'User-Agent': USER_AGENT})
         self.delay = max(.5, delay)
         self.calls = self.cache_hits = 0
-        self.stop_reason = None
+        self.stop_reason = read(self.directory/'STOP.json').get('reason')
 
     def close(self):
         self.client.close()
@@ -150,7 +149,8 @@ class Goong:
         atomic(path, {'endpoint': endpoint, 'query': params, 'fetched_at': now(),
                       'http_status': status, 'body': body, 'blocked': blocked})
         with self.db:
-            self.db.execute('UPDATE calls SET status=? WHERE rowid=?', (str(status or reason), rowid))
+            ledger_status = f'blocked_{status}' if blocked and status not in (403, 429) else str(status or reason)
+            self.db.execute('UPDATE calls SET status=? WHERE rowid=?', (ledger_status, rowid))
         if blocked:
             self.stop_reason = f'goong_blocked_{status}_{api_status}'
             atomic(self.directory / 'STOP.json', {'reason': self.stop_reason, 'at': now()})
@@ -558,7 +558,11 @@ def run(args):
     previous_report = read(REPORT)
     inv = inventory()
     entries, known = source_entries(inv)
+    index = SnapIndex(inv['ways'])
+    entries = prioritize(entries, index)
     atomic(RAW / 'entries.json', entries)
+    atomic(RAW / 'priority.json', {'generated_at': now(), 'queue_source': 'GET /api/evidence/queue?limit=1000',
+        'campuses_source': 'docs/eval/hutech-campuses.json', 'items': [{'id': e['id'], 'source': e['source'], **e['priority']} for e in entries]})
     eligible = sorted((e for e in known if any(chain(n) for n in e['names'])), key=lambda e: e['id'])
     # Fixed seed, without replacement; selected before any Goong result is known.
     sample = random.Random(4582).sample(eligible, min(args.sample_size, len(eligible)))
@@ -570,32 +574,25 @@ def run(args):
     from app.evidence_queue import city_state
     before = city_state()
     before_ids = {wid for wid, r in before['ways'].items() if r['top_tier']}
-    index = SnapIndex(inv['ways'])
     api = Goong(network=args.network, max_calls=args.max_calls, already_used=args.already_used)
     results, checks, accepted = [], [], []
     try:
+        for e in entries:
+            if e.get('excluded_reason'):
+                result = {'reason': e['excluded_reason'], 'attempts': []}
+            else:
+                result = locate(e, api, index)
+            results.append({'id': e['id'], 'source': e['source'], **result})
+            if result['reason'] == 'accepted':
+                accepted.append({**e, 'match': result})
+            if len(results) % 100 == 0:
+                print(json.dumps({'processed': len(results), 'accepted': len(accepted), 'calls': api.calls}), flush=True)
         for i, e in enumerate(sample):
             result = locate(e, api, index, validation_only=True)
             checks.append({'id': e['id'], 'expected_way_ids': e['record']['way_ids'], **result,
                            'same_way': result.get('way_id') in [int(w) for w in e['record']['way_ids']]})
             if (i+1) % 20 == 0:
                 print(json.dumps({'validation': i+1, 'calls': api.calls}), flush=True)
-        # Fair source round-robin; stable hash order avoids source-page geography bias.
-        queues = [[e for e in entries if e['source'] == source] for source in ('fire', 'q9', 'listing')]
-        queues = [sorted(q, key=lambda e: (not any(chain(n) in index.by_chain for n in e['names']), digest(e['id']))) for q in queues]
-        for batch in itertools.zip_longest(*queues):
-            for e in batch:
-                if e is None:
-                    continue
-                if e.get('excluded_reason'):
-                    result = {'reason': e['excluded_reason'], 'attempts': []}
-                else:
-                    result = locate(e, api, index)
-                results.append({'id': e['id'], 'source': e['source'], **result})
-                if result['reason'] == 'accepted':
-                    accepted.append({**e, 'match': result})
-                if len(results) % 100 == 0:
-                    print(json.dumps({'processed': len(results), 'accepted': len(accepted), 'calls': api.calls}), flush=True)
         # Prior accepted recoveries survive budget exhaustion and cache-only runs.
         prior = {e['id']: e for e in read(ACCEPTED).get('records', [])}
         prior.update({e['id']: e for e in accepted})
@@ -614,8 +611,8 @@ def run(args):
         from official_bulk import validate, cadastral_snapshot
         metadata = merge_official({'ways': {}}, list(prior.values()))
         report = {'generated_at': now(), 'quota': {'documented_free_daily': 1000, 'source': QUOTA_URL,
-                  'actual_key_plan': 'unverified; conservative Free ceiling', 'max_task_calls_rolling_24h': api.cap,
-                  'requests_per_second_max': 4, 'calls_this_run': api.calls, 'calls_rolling_24h': api.usage(),
+                  'actual_key_plan': 'unknown; user-specified job cap, shared with live demo', 'max_task_calls_rolling_24h': api.cap,
+                  'requests_per_second_max': 2, 'calls_this_run': api.calls, 'calls_rolling_24h': api.usage(),
                   'cache_hits': api.cache_hits, 'other_key_traffic': 'unknown unless supplied through --already-used',
                   'stop_reason': api.stop_reason}, 'inventory_fingerprint': inv['fingerprint'],
                   'entries': dict(Counter(e['source'] for e in entries)),
@@ -648,11 +645,25 @@ def run(args):
             http_status_counts=dict(api.db.execute('SELECT status,COUNT(*) FROM calls GROUP BY status')),
             minimum_request_start_spacing_s=round(min(b-a for a,b in zip(times,times[1:])), 6) if len(times)>1 else None,
             maximum_starts_in_one_second=max((sum(t<=v<t+1 for v in times) for t in times), default=0),
-            documented_daily_fraction_used=len(times)/1000, api_calls_after_429=0)
+            documented_daily_fraction_used=len(times)/1000,
+            job_cap_fraction_used=api.usage()/api.cap if api.cap else None,
+            job_cap_unspent=max(0, api.cap-api.usage()), unspent_budget_usable=not bool(api.stop_reason))
+        refusals = [r[0] for r in api.db.execute("SELECT rowid FROM calls WHERE status IN ('403','429') OR status LIKE 'blocked_%'")]
+        report['quota']['api_calls_after_429'] = (api.db.execute('SELECT COUNT(*) FROM calls WHERE rowid>?', (min(refusals),)).fetchone()[0] if refusals else None)
         report['entries_with_geocode_response'] = {s: sum(r['source']==s and any(a.get('geocoded') for a in r['attempts'])
             for r in results) for s in ('fire', 'q9', 'listing')}
+        responded = {r['id'] for r in results if any(a.get('geocoded') for a in r['attempts'])}
+        report['remaining_unprocessed'] = len(entries)-len(responded)
+        report['remaining_unresolved'] = len(entries)-len(prior)
+        report['remaining_eligible_unprocessed'] = sum(e['id'] not in responded and not e['priority']['preflight_reason'] for e in entries)
+        report['priority'] = {'high_value_fire_entries': sum(e['priority']['high_value_fire'] for e in entries),
+            'high_value_fire_pending': sum(e['priority']['high_value_fire'] and e['id'] not in prior for e in entries),
+            'order': 'Fire candidates in saved live queue or within 2 km of a documented HUTECH campus; then district density',
+            'preflight_skips': dict(Counter(e['priority']['preflight_reason'] for e in entries if e['priority']['preflight_reason'])),
+            'fresh_query_strategy': 'one autocomplete per entry; detail only for one strict prediction missing coordinates',
+            'historical_run': '421 geocode requests under original <=5/s brief; updated <=2/s policy applied after 429, with zero further requests'}
         # Live verification is deliberately a separate, read-only request.
-        for field in ('live_verification', 'credential_scan', 'q9_metadata_new_ways'):
+        for field in ('live_verification', 'credential_scan', 'q9_metadata_new_ways', 'validation_checks'):
             if field in previous_report:
                 report[field] = previous_report[field]
         atomic(REPORT, report)
@@ -665,7 +676,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('command', choices=('prepare', 'run'))
     p.add_argument('--network', action='store_true')
-    p.add_argument('--max-calls', type=int, default=499)
+    p.add_argument('--max-requests', '--max-calls', dest='max_calls', type=int,
+                   default=int(os.environ.get('GOONG_JOB_MAX_REQUESTS', '2000')))
     p.add_argument('--already-used', type=int, default=0, help='Other Goong calls used in the last day, deducted from the half-quota cap')
     p.add_argument('--sample-size', type=int, default=100)
     args = p.parse_args()

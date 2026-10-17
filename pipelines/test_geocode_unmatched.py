@@ -115,7 +115,7 @@ def test_starts_are_rate_limited_and_other_traffic_reduces_budget(tmp_path, monk
     c = g.Goong(tmp_path, network=True, daily_quota=10, already_used=2, key='test', client=client(handle), delay=0)
     for i in range(2):
         c.get('/v2/geocode', address=f'{i} X')
-    assert starts[1] - starts[0] >= .25 and c.cap == 2
+    assert starts[1] - starts[0] >= .5 and c.cap == 2
     with pytest.raises(g.StopGoong, match='budget'):
         c.get('/v2/geocode', address='3 X')
     c.close()
@@ -143,12 +143,81 @@ def test_locate_rejects_wrong_city_number_and_conflicting_goong_candidates(tmp_p
         class API:
             def get(self, *args, **kwargs):
                 return {'results': [response]}
-        assert g.locate(entry(), API(), index, True)['reason'] == 'no_accepted_result'
+        assert g.locate_cached_geocode(entry(), API(), index, True)['reason'] == 'no_accepted_result'
     index = g.SnapIndex({'1': row(), '2': row(2, 100)})
     class API:
         def get(self, *args, **kwargs):
             return {'results': [result(), result(lat=10.8+100/111320)]}
-    assert g.locate(entry(), API(), index, True)['reason'] == 'multiple_goong_way_candidates'
+    assert g.locate_cached_geocode(entry(), API(), index, True)['reason'] == 'multiple_goong_way_candidates'
+
+
+@pytest.mark.parametrize('has_coordinates,expected_endpoints', [(True, ['autocomplete']), (False, ['autocomplete', 'detail'])])
+def test_one_autocomplete_and_detail_only_if_coordinates_are_missing(has_coordinates, expected_endpoints):
+    calls = []
+    class API:
+        def get(self, endpoint, **params):
+            calls.append(endpoint.rsplit('/', 1)[-1])
+            if endpoint.endswith('autocomplete'):
+                prediction = {'description': 'Hẻm 123 Nguyễn Văn Đậu, Hồ Chí Minh', 'place_id': 'id'}
+                if has_coordinates:
+                    prediction['geometry'] = result()['geometry']
+                return {'predictions': [prediction]}
+            return {'result': result()}
+    assert g.locate(entry(), API(), g.SnapIndex({'1': row()}))['reason'] == 'accepted'
+    assert calls == expected_endpoints
+
+
+def test_ambiguous_query_is_skipped_and_ambiguous_predictions_do_not_get_detail():
+    class Never:
+        def get(self, *a, **kw):
+            pytest.fail('ambiguous query made a request')
+    e = {**entry(), 'names': ['Hẻm 123 Nguyễn Văn Đậu', 'Hẻm 124 Nguyễn Văn Đậu']}
+    ix = g.SnapIndex({'1': row()})
+    assert g.locate(e, Never(), ix)['reason'] == 'ambiguous_source_address_before_call'
+    calls = []
+    class API:
+        def get(self, endpoint, **params):
+            calls.append(endpoint)
+            return {'predictions': [{'description': 'Hẻm 123 Nguyễn Văn Đậu, Hồ Chí Minh', 'place_id': pid} for pid in ('a', 'b')]}
+    assert g.locate(entry(), API(), ix)['reason'] == 'ambiguous_goong_predictions_before_detail'
+    assert calls == ['/v2/place/autocomplete']
+
+
+def test_job_cap_from_environment_is_shared_across_runs(tmp_path, monkeypatch):
+    monkeypatch.setenv('GOONG_JOB_MAX_REQUESTS', '2')
+    c = g.Goong(tmp_path, network=True, key='test', client=client(lambda _: httpx.Response(200, json={})))
+    assert c.cap == 2 and c.delay >= .5
+    c.get('/v2/place/autocomplete', input='first')
+    c.close()
+    c = g.Goong(tmp_path, network=True, key='test', client=client(lambda _: httpx.Response(200, json={})))
+    c.get('/v2/place/autocomplete', input='second')
+    with pytest.raises(g.StopGoong, match='budget'):
+        c.get('/v2/place/autocomplete', input='third')
+    assert c.usage() == 2
+    c.close()
+
+
+@pytest.mark.parametrize('body', [{'error': {'code': 'OVER_RATE_LIMIT'}}, {'status': 'OVER_QUERY_LIMIT'}, {'message': 'Daily quota exceeded'}])
+def test_quota_message_even_with_http_200_persists_stop(tmp_path, body):
+    c = g.Goong(tmp_path, network=True, key='test', client=client(lambda _: httpx.Response(200, json=body)))
+    with pytest.raises(g.StopGoong, match='blocked'):
+        c.get('/v2/place/autocomplete', input='first')
+    with pytest.raises(g.StopGoong, match='blocked'):
+        c.get('/v2/place/autocomplete', input='second')
+    assert c.calls == 1 and (tmp_path/'STOP.json').exists()
+    c.close()
+
+
+def test_queue_fire_candidates_come_before_other_sources_and_density():
+    ix = g.SnapIndex({'1': row(), '2': row(2, name='Hẻm 456 Nguyễn Văn Đậu')})
+    entries = [{**entry(), 'id': 'a', 'source': 'fire'},
+               {**entry(), 'id': 'b', 'source': 'fire', 'names': ['Hẻm 456 Nguyễn Văn Đậu']},
+               {**entry(), 'id': 'c', 'source': 'q9', 'names': ['Hẻm 456 Nguyễn Văn Đậu']}]
+    ranked = g.prioritize(entries, ix, queue_doc={'items': [{'way_id': 2, 'score': 6}]}, campuses=[])
+    assert ranked[0]['id'] == 'b' and ranked[0]['priority']['high_value_fire']
+    ranked = g.prioritize(entries, ix, queue_doc={'items': []}, campuses=[{'id': 'campus', 'lat': 10.8, 'lon': 106.7}])
+    assert all(e['source'] == 'fire' for e in ranked[:2])
+    assert all('campus' in e['priority']['near_campus_ids'] for e in ranked)
 
 
 def test_old_source_district_retained_in_query_variants():

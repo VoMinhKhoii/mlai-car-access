@@ -1,0 +1,24 @@
+{
+  "storage": "isolated temporary directory via /tmp/ngo_field_eval.py; no production ledger/CSV writes",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "browser": "Chromium (iPhone viewport, not physical Safari)"
+  },
+  "gps": "synthetic navigator.geolocation callback; actual local inventory way 192512446",
+  "checks": {
+    "crowd_no_login": true,
+    "gps_snap_and_geometry_confirmation": true,
+    "required_photo_and_attestation": true,
+    "crowd_post_pending": true,
+    "token_review_approve": true,
+    "stage_counter_after_review": 1,
+    "offline_post_saved_to_localStorage": true,
+    "retry_cleared_pending": true,
+    "quota_failure_kept_width": "2,50",
+    "quota_failure_explicit_not_saved_message": true,
+    "arrival_prompt_visible": true,
+    "horizontal_overflow": false
+  },
+  "public_tunnel_started": false
+}

@@ -149,7 +149,7 @@ Server cấp cookie thiết bị ngẫu nhiên có chữ ký HMAC, HttpOnly, Sam
 
 Mọi bản crowd được chèn PENDING trước. Chỉ thành Measured khi có người duyệt, hoặc có **hai cookie thiết bị do server cấp, hai IP/mạng khác nhau và ảnh khác nhau**, cùng Way, chênh số đo không quá 0,3 m. Máy dùng chung Wi-Fi hội trường sẽ giữ PENDING để đồng đội duyệt. Đây là kiểm soát lạm dụng thực dụng, không phải xác thực danh tính phần cứng. Cookie reset và nhiều mạng vẫn có thể bị lạm dụng; dùng trang duyệt khi cần tin cậy hơn.
 
-Không tự động dùng crowd để vượt một Bound Official địa chính, kể cả khi Official được nạp sau lúc đã có đồng thuận. Duyệt tay cần xác nhận rõ đã đối chiếu Official. Planned lộ giới chỉ là metadata theo D46, không được giả làm Bound Official. Từ chối một bản trong cặp sẽ tính lại đồng thuận, không để bản còn lại giữ Measured khi mất nguồn độc lập.
+Không tự động dùng crowd để vượt một Bound Official địa chính (khớp theo Way ID hoặc tên hẻm), kể cả khi Official được nạp sau lúc đã có đồng thuận. Duyệt tay cần xác nhận rõ đã đối chiếu Official. Planned lộ giới chỉ là metadata theo D46, không được giả làm Bound Official. Từ chối một bản trong cặp sẽ tính lại đồng thuận, không để bản còn lại giữ Measured khi mất nguồn độc lập.
 
 Giá trị crowd phải **0,8–12 m**, có GPS trong vùng TP.HCM, đúng Way trong kho offline, cách đoạn ≤150 m, xác nhận chọn đúng hẻm, ảnh JPEG/PNG/WebP đọc được (≤8 MB, ≤20 megapixel) và xác nhận ảnh thực sự cho thấy phép đo ngang hẻm. Ảnh HEIC chưa giải mã được phải xuất JPEG tương thích. Server không dùng AI để phán nội dung ảnh; người duyệt phải kiểm tra phép đo rõ, đúng hẻm và không đo chéo. Hai ảnh hoặc đồng thuận không phải chứng nhận toàn đoạn.
 

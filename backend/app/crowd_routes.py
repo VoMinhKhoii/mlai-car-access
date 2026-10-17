@@ -7,6 +7,7 @@ import hashlib
 import io
 import ipaddress
 import os
+import struct
 from typing import Literal
 from urllib.parse import urlencode, urlsplit, urlunsplit
 from uuid import UUID, uuid4
@@ -108,7 +109,7 @@ def clean_photo(encoded):
             out = io.BytesIO()
             image.save(out,format='JPEG',quality=90,exif=keep)
             return out.getvalue()
-    except (UnidentifiedImageError,OSError,ValueError,Image.DecompressionBombError):
+    except (UnidentifiedImageError,OSError,ValueError,TypeError,SyntaxError,OverflowError,struct.error,Image.DecompressionBombError):
         raise HTTPException(422,'Không đọc được ảnh. Chọn ảnh JPEG/PNG/WebP; với HEIC hãy xuất JPEG tương thích.')
 
 

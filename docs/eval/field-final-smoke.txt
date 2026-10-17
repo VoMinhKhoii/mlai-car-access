@@ -1,0 +1,9 @@
+test_photo_strips_identifiers_but_retains_gps_time (test_crowd_field.CrowdTests.test_photo_strips_identifiers_but_retains_gps_time) ... /Users/khoivo/Library/Python/3.11/lib/python/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+  warnings.warn(message, DeprecationWarning)
+ok
+test_qr_url_stats_privacy_and_daily_distinct_way_count (test_crowd_field.CrowdTests.test_qr_url_stats_privacy_and_daily_distinct_way_count) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.799s
+
+OK
