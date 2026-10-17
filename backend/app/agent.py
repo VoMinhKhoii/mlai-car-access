@@ -491,7 +491,9 @@ def parse_arrival(value, now=None):
     if not m:
         raise ValueError('Bạn muốn đến lúc mấy giờ, vào ngày nào?')
     hour, minute = int(m[1]), int(m[2] or m[3] or 0)
-    if hour < 12 and re.search(r'\b(toi|chieu|pm|tonight|evening)\b', text): hour += 12
+    # Accents are gone, so "toi" may be "tối" (evening) or the pronoun "tôi": only the evening forms count.
+    evening = re.search(r'\b(chieu|pm|tonight|evening)\b|\btoi\s+(?:nay|mai|qua|\d)|\d\s*(?:h|gio)\w*\s*(?:\d{1,2}\s*)?(?:phut\s*)?toi\b', text)
+    if hour < 12 and evening: hour += 12
     if hour == 12 and re.search(r'\bam\b', text): hour = 0
     return datetime.combine(day, datetime.min.time(), tzinfo=VN_TZ).replace(hour=hour, minute=minute)
 
@@ -615,12 +617,84 @@ def grounded_answer(p):
     return '\n'.join(parts)
 
 
+VEHICLE_Q = 'Bạn lái mẫu xe nào hoặc xe thuộc nhóm kích thước nào?'
+DEST_Q = 'Bạn muốn tới địa chỉ hoặc địa danh nào ở TP.HCM?'
+_PART_OF_DAY = {'sang': 'Sáng', 'trua': 'Trưa', 'chieu': 'Chiều', 'toi': 'Tối'}
+# Where a destination phrase ends: time words, conditions and the rest of the question.
+_ADDRESS_END = (r',?\s*(?:lúc|luc|tối nay|toi nay|sáng mai|sang mai|tomorrow|tonight|ở\s+\d|o\s+\d|đỗ xe|do xe|trong\s+\d|'
+                r'dừng\s+\d|dung\s+\d|nếu|neu|for\s+\d|sáng nay|trưa nay|chiều nay|tối mai|trưa mai|chiều mai|'
+                r'sang nay|trua nay|chieu nay|toi mai|trua mai|chieu mai|hôm nay|hom nay|ngày mai|ngay mai|bây giờ|'
+                r'bay gio|thì|để|rồi|khi trời|thì tôi|nên đi|nen di)\b')
+
+
+def _is_clarification(text):
+    return (text in (VEHICLE_Q, DEST_Q, TAP_PLACE) or text.startswith('Bạn muốn tới điểm nào:')
+            or text.endswith('bạn muốn đến lúc mấy giờ?'))
+
+
+def _pending_replies(contents):
+    """(question asked, user text) for every turn since the last plan while the fallback is still asking.
+
+    Without this each clarification answer ("Fortuner ấy", "cửa nam chợ Bến Thành") was read
+    alone, so the vehicle or destination given one turn earlier was forgotten and asked again.
+    """
+    collected, asked = [], None
+    for c in contents:
+        for p in c.get('parts', []):
+            if not isinstance(p, dict):
+                continue
+            fr = p.get('functionResponse')
+            if isinstance(fr, dict) and fr.get('name') == 'lap_ke_hoach':
+                collected, asked = [], None
+            elif isinstance(p.get('text'), str):
+                if c.get('role') == 'user':
+                    collected.append((asked, p['text']))
+                else:
+                    asked = p['text']
+                    if not _is_clarification(asked):
+                        collected = []  # a finished answer closes the request being gathered
+    return collected if asked and _is_clarification(asked) else []
+
+
+def _vehicle_in(text):
+    vehicle = None
+    compact = re.sub(r'[^a-z0-9]','',text)
+    for p in sorted(vehicles.all_profiles().values(),key=lambda p:len(p.label),reverse=True):
+        if p.kind!='model':continue
+        names=[re.sub(r'[^a-z0-9]','',strip_accents(p.label)), re.sub(r'[^a-z0-9]','',p.id.split('-',1)[-1])]
+        if any(len(n)>2 and n in compact for n in names): vehicle=p.id;break
+    for pattern,vid in ((r'\b(?:xe\s*)?7\s*cho\b|7.seater','class-m'),(r'\bxe co nho\b','class-xs'),(r'\bsedan\b','class-s'),(r'\bban tai\b','class-l')):
+        if re.search(pattern,text):vehicle=vid
+    return vehicle
+
+
+def _clean_address(candidate):
+    candidate=re.split(_ADDRESS_END,candidate,flags=re.I)[0]
+    return re.split(r'[?.!]',candidate)[0].strip(' ,')
+
+
+def _address_in(message, asked):
+    matches=[m for m in re.finditer(r'\b(?:tới|đến|tại|ở|at|to|den|tai|o|toi(?!\s+nay))\s+',message,re.I)
+             if not re.search(r'\bđang\s*$|\bdang\s*$',message[:m.start()],re.I)]  # "đang ở X" is where the driver is
+    for m in reversed(matches):
+        candidate=_clean_address(message[m.end():])
+        if len(candidate)>=5 and not re.fullmatch(r'\d+\s*(tieng|phut|tiếng|phút)',candidate):return candidate
+    # A bare reply to "where to?" ("cửa nam chợ Bến Thành") is the destination itself.
+    if asked == DEST_Q or (asked or '').startswith('Bạn muốn tới điểm nào:'):
+        candidate=_clean_address(message)
+        if len(candidate)>=3:return candidate
+    return None
+
+
 def driver_request(req):
     """Conservative Vietnamese/English fallback when the model is unavailable.
     Only handles explicit intents; unknown vehicle/destination/time asks for clarification.
+    Answers to its own clarifying questions are merged with the turns before them.
     Reuses the same tools and never supplies geographic coordinates itself.
     """
-    text = strip_accents(req.message).lower()
+    replies = _pending_replies(req.contents) + [(_last_model_text(req.contents), req.message)]
+    # Latest first, so the newest time/duration/rain wins when the driver changes it.
+    text = ' . '.join(strip_accents(m).lower() for _, m in reversed(replies))
     previous = None
     for c in req.contents:
         for p in c.get('parts', []):
@@ -631,25 +705,18 @@ def driver_request(req):
     args = dict(previous) if follow else {}
     old_rain = args.pop('rain',None) or []
     if old_rain: args['rain_mm_per_h'] = old_rain[0].get('mm_per_h',0)
-    vehicle = None
-    compact = re.sub(r'[^a-z0-9]','',text)
-    for p in sorted(vehicles.all_profiles().values(),key=lambda p:len(p.label),reverse=True):
-        if p.kind!='model':continue
-        names=[re.sub(r'[^a-z0-9]','',strip_accents(p.label)), re.sub(r'[^a-z0-9]','',p.id.split('-',1)[-1])]
-        if any(len(n)>2 and n in compact for n in names): vehicle=p.id;break
-    for pattern,vid in ((r'\b(?:xe\s*)?7\s*cho\b|7.seater','class-m'),(r'\bxe co nho\b','class-xs'),(r'\bsedan\b','class-s'),(r'\bban tai\b','class-l')):
-        if re.search(pattern,text):vehicle=vid
-    if vehicle:args['vehicle_id']=vehicle
-    if not args.get('vehicle_id'):return None,'Bạn lái mẫu xe nào hoặc xe thuộc nhóm kích thước nào?'
+    for _, message in replies:
+        vehicle = _vehicle_in(strip_accents(message).lower())
+        if vehicle:args['vehicle_id']=vehicle
+    if not args.get('vehicle_id'):return None,VEHICLE_Q
     if not follow:
-        matches=list(re.finditer(r'\b(?:tới|đến|tại|ở|at|to|den|tai|o|toi(?!\s+nay))\s+',req.message,re.I))
         address=None
-        for m in reversed(matches):
-            candidate=req.message[m.end():]
-            candidate=re.split(r',?\s*(?:lúc|luc|tối nay|toi nay|sáng mai|sang mai|tomorrow|tonight|ở\s+\d|o\s+\d|đỗ xe|do xe|trong\s+\d|dừng\s+\d|dung\s+\d|nếu|neu|for\s+\d)',candidate,flags=re.I)[0]
-            candidate=re.split(r'[?.!]',candidate)[0].strip(' ,')
-            if len(candidate)>=5 and not re.fullmatch(r'\d+\s*(tieng|phut|tiếng|phút)',candidate):address=candidate;break
-        if not address:return None,'Bạn muốn tới địa chỉ hoặc địa danh nào ở TP.HCM?'
+        for asked, message in replies:
+            address=_address_in(message, asked) or address
+            if not address and asked == VEHICLE_Q and not _vehicle_in(strip_accents(message).lower()):
+                # Answered "which car?" with the destination instead; keep it for when the car is known.
+                address=_address_in(message, DEST_Q)
+        if not address:return None,DEST_Q
         args['query']=address
     args['intent']='pickup' if re.search(r'\b(don\s+khach|tra\s+khach|pickup|pick.up|drop.off)\b',text) else args.get('intent','park')
     duration=re.search(r'(?:\bo\b|\btrong\b|\bdung\b|\bdo(?: xe)?\b|\bfor\b)\s*(\d+(?:[.,]\d+)?)\s*(tieng|gio|phut|hours?|minutes?)',text)
@@ -662,15 +729,36 @@ def driver_request(req):
         args['arrive_at']=parse_arrival(time_text).isoformat()
     elif re.search(r'\b(sang mai|tomorrow morning)\b',text):
         return None,'Sáng mai bạn muốn đến lúc mấy giờ?'
+    elif part := re.search(r'\b(sang|trua|chieu|toi) (nay|mai)\b',time_text):
+        # "chiều nay" names no hour; planning it as "now" would answer a different trip.
+        return None,f"{_PART_OF_DAY[part[1]]} {part[2]} bạn muốn đến lúc mấy giờ?"
     elif re.search(r'\b(mai|tomorrow)\b',text):
         old=parse_arrival(args.get('arrive_at'))
         args['arrive_at']=old.replace(year=datetime.now(VN_TZ).year,month=datetime.now(VN_TZ).month,day=datetime.now(VN_TZ).day).isoformat()
         args['arrive_at']=(datetime.fromisoformat(args['arrive_at'])+timedelta(days=1)).isoformat()
     else:args.setdefault('arrive_at',datetime.now(VN_TZ).isoformat())
     rain=re.search(r'(\d+(?:[.,]\d+)?)\s*mm\s*/\s*h',text)
+    raw=' '.join(m for _, m in replies).lower()
     if rain:args['rain_mm_per_h']=float(rain[1].replace(',','.'))
+    elif re.search(r'\bmưa\b',raw):
+        # "nếu trời mưa" without a rate: moderate rain, heavy when the driver says so (flood model bands 30/60).
+        args['rain_mm_per_h']=RAIN_HEAVY_MM_H if re.search(r'mưa\s+(?:to|lớn|rất to|bão|nặng hạt)',raw) else RAIN_ASSUMED_MM_H
+        args['_rain_assumed']=True
     else:args.setdefault('rain_mm_per_h',0)
     return args,None
+
+
+RAIN_ASSUMED_MM_H, RAIN_HEAVY_MM_H = 30.0, 60.0
+
+
+def _last_model_text(contents):
+    for c in reversed(contents):
+        if c.get('role') == 'model':
+            for p in c.get('parts', []):
+                if isinstance(p, dict) and isinstance(p.get('text'), str):
+                    return p['text']
+            return None
+    return None
 
 
 def fallback_events(req, contents):
@@ -682,6 +770,7 @@ def fallback_events(req, contents):
         yield {'type':'answer','text':'Hiện tôi chỉ có bằng chứng cho khu vực TP.HCM trước sáp nhập. Bạn chọn điểm đến trong khu vực này nhé?'}
         yield finish('Hiện chỉ hỗ trợ điểm đến trong khu vực TP.HCM trước sáp nhập.');return
     args,question=driver_request(req)
+    rain_assumed=bool(args and args.pop('_rain_assumed',False))
     if question:
         yield {'type':'answer','text':question};yield finish(question);return
     if args.get('query'):
@@ -716,6 +805,7 @@ def fallback_events(req, contents):
     if re.search(r'\b(gan hon|closer)\b',strip_accents(req.message).lower()):
         answer='Đây là các điểm gần nhất trong kế hoạch hiện có; chưa xác minh được điểm nào gần hơn.\n'+answer
     if reason:answer=reason+'\n'+answer
+    if rain_assumed:answer=f"Giả định trời mưa {args['rain_mm_per_h']:g} mm/h vì bạn hỏi lúc mưa.\n"+answer
     violations=number_violations(answer,results)
     if violations:
         yield {'type':'validation','violations':violations,'action':'replace_unsupported_answer'}
