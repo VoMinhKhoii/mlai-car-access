@@ -9,7 +9,8 @@ export const verdictOf = (plan: Plan) => plan.verdict as VerdictX
 
 export const m2 = (v: number) => `${v.toFixed(2)} m`
 
-export function answer(plan: Plan, stop: StopPoint | undefined): { word: string; tone: Tone } {
+/** The plan-level estimate describes the best stop only, so other stops fall back to their own fit class. */
+export function answer(plan: Plan, stop: StopPoint | undefined, best = true): { word: string; tone: Tone } {
   if (!stop || plan.verdict.code === 'none') return { word: 'No stop', tone: 'no' }
   switch (stop.fit.class) {
     case 'fits': return { word: 'Fits', tone: 'fits' }
@@ -17,7 +18,7 @@ export function answer(plan: Plan, stop: StopPoint | undefined): { word: string;
     case 'no': case 'blocked': return { word: "Won't fit", tone: 'no' }
     case 'lot': return { word: 'Use a lot', tone: 'fits' }
   }
-  const est = verdictOf(plan).estimate?.answer
+  const est = best ? verdictOf(plan).estimate?.answer : undefined
   if (est === 'fits') return { word: 'Likely fits', tone: 'fits' }
   if (est === 'tight') return { word: 'Likely tight', tone: 'tight' }
   if (est === 'no') return { word: "Likely won't fit", tone: 'no' }

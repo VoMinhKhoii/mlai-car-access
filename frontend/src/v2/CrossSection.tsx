@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WALL_H = 2.3
-const MAX_SCENE = 8
+const MAX_SCENE = 14
 
 /** A to-scale section through the narrowest cut: walls, clear width, the car from behind. Units are metres. */
 export function CrossSection({ cut, body, mirror, vehicleName, expanded, onToggle }: Props) {
@@ -75,6 +75,6 @@ export function CrossSection({ cut, body, mirror, vehicleName, expanded, onToggl
       <div className={short ? 'is-short' : ''}><dt>{short ? 'Short a side' : 'Spare a side'}</dt>
         <dd key={spareCm ?? 'x'} className="v2-num v2-xfade">{spareCm == null ? 'Unknown' : `${Math.abs(spareCm)} cm`}</dd></div>
     </dl>
-    <p className="v2-xs-foot">{cut.tier} width, drawn to scale</p>
+    <p className="v2-xs-foot">{cut.tier} width, drawn to scale{(cut.hi ?? lo ?? 0) > MAX_SCENE ? `, walls past ${MAX_SCENE} m not shown` : ''}</p>
   </div>
 }

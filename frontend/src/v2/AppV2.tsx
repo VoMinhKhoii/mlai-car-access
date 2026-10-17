@@ -56,7 +56,9 @@ export default function AppV2() {
       const first = c.presets[0]
       if (first) { setDwell(first.dwell_min); setDest({ lat: first.lat, lon: first.lon, label: first.label }) }
     }).catch(() => setError('Could not reach the server.'))
-    api.vehicles().then((v) => setModels(v.models)).catch(() => {})
+    const loadVehicles = (tries: number) => api.vehicles().then((v) => setModels(v.models))
+      .catch(() => { if (tries > 0) window.setTimeout(() => loadVehicles(tries - 1), 2000) })
+    loadVehicles(3)
   }, [])
 
   useEffect(() => { setXsOpen(!phone) }, [phone])
@@ -84,7 +86,7 @@ export default function AppV2() {
   const vehicle = models.find((v) => v.id === vehicleId) ?? (plan?.vehicle.id === vehicleId ? plan.vehicle : null) ?? plan?.vehicle ?? null
   const stop = plan?.stop_points[selected]
   const cut = useMemo(() => plan ? narrowestCut(plan, selected) : null, [plan, selected])
-  const ans = plan ? answer(plan, stop) : null
+  const ans = plan ? answer(plan, stop, selected === 0) : null
   const out = stop ? wayOut(stop) : null
 
   // Opening the cross-section on a small screen: pan just enough that the whole card sits in the free map area.
@@ -106,7 +108,7 @@ export default function AppV2() {
 
   const padding = phone ? { top: 300, left: 40, right: 40, bottom: 330 } : { top: 420, left: 460, right: 120, bottom: 120 }
   const support = plan && stop && cut?.lo != null
-    ? `Narrowest cut ${m2(cut.lo)}${cut.wayName ? ` on ${cut.wayName}` : ''}. ${stopLine(stop)}.`
+    ? `Narrowest cut ${m2(cut.lo)}${cut.wayName && cut.wayName === stop.name ? ' on the same alley' : cut.wayName ? ` on ${cut.wayName}` : ''}. ${stopLine(stop)}.`
     : plan && stop ? `${stopLine(stop)}. Width not measured on this route.`
       : plan ? 'No stop within walking distance for this car.' : ''
 
@@ -166,10 +168,10 @@ export default function AppV2() {
       {plan && details && <div id="v2-details" className="v2-details">
         <ul className="v2-stops" aria-label="Stops">
           {plan.stop_points.map((s, i) => {
-            const a = answer(plan, s)
+            const a = answer(plan, s, i === 0)
             return <li key={i}><button type="button" aria-pressed={i === selected} className={i === selected ? 'on' : ''} onClick={() => setSelected(i)}>
               <span className="v2-stop-name">{s.kind === 'door' ? 'At the door' : s.name}</span>
-              <span className={`v2-stop-fit tone-${a.tone}`}>{i === 0 ? a.word : fitWord(s.fit.class)}</span>
+              <span className={`v2-stop-fit tone-${a.tone}`}>{a.word}</span>
               <span className="v2-num v2-stop-walk">{Math.round(s.walk.meters)} m walk</span>
             </button></li>
           })}
@@ -189,8 +191,6 @@ export default function AppV2() {
     </div>
   </div>
 }
-
-const fitWord = (c: string) => ({ fits: 'Fits', tight: 'Tight', no: "Won't fit", blocked: "Won't fit", lot: 'Lot' } as Record<string, string>)[c] ?? 'Not verified'
 
 function Search({ presets, near, onChoose }: { presets: Preset[]; near: Place | null; onChoose: (p: Place) => void }) {
   const [q, setQ] = useState('')

@@ -48,6 +48,7 @@
 .v2-verdict { position: absolute; z-index: 20; left: 16px; bottom: 16px; width: 380px; box-sizing: border-box;
   background: var(--v2-paper); border-radius: var(--v2-r); box-shadow: var(--v2-lift); padding: 12px;
   display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 220px); overflow-y: auto; }
+.v2-verdict > * { flex-shrink: 0; }
 .v2-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .v2-seg button { min-height: 44px; border: 0; border-radius: var(--v2-r); background: var(--v2-paper-2); color: var(--v2-ink);
   font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 200ms var(--v2-ease), color 200ms var(--v2-ease); }
