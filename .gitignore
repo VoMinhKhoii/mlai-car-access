@@ -36,3 +36,5 @@ docs/qa/shots/
 docs/qa/mcp/client-configs/claude-state/
 docs/qa/mcp/before.jsonl
 docs/qa/mcp/public-certifi.jsonl
+docs/qa/mcp/after.jsonl
+docs/qa/mcp/final-core.jsonl

@@ -1,0 +1,59 @@
+{
+  "counts": {
+    "plan_arrival": 48,
+    "find_nearby_stops": 48,
+    "check_alley_fit": 48
+  },
+  "missing_estimate_confidence": [],
+  "alley_fit_answers": {
+    "610082013": {
+      "vinfast-vf-3": "no",
+      "toyota-vios": "no",
+      "toyota-fortuner": "no",
+      "class-xl": "no"
+    },
+    "610082009": {
+      "vinfast-vf-3": "tight",
+      "toyota-vios": "tight",
+      "toyota-fortuner": "tight",
+      "class-xl": "tight"
+    },
+    "610082030": {
+      "vinfast-vf-3": "fits",
+      "toyota-vios": "tight",
+      "toyota-fortuner": "tight",
+      "class-xl": "tight"
+    },
+    "32584409": {
+      "vinfast-vf-3": "fits",
+      "toyota-vios": "fits",
+      "toyota-fortuner": "fits",
+      "class-xl": "fits"
+    },
+    "192512284": {
+      "vinfast-vf-3": "fits",
+      "toyota-vios": "fits",
+      "toyota-fortuner": "fits",
+      "class-xl": "tight"
+    },
+    "268564010": {
+      "vinfast-vf-3": "unknown",
+      "toyota-vios": "unknown",
+      "toyota-fortuner": "unknown",
+      "class-xl": "unknown"
+    }
+  },
+  "alley_fit_inversions": [],
+  "english_text_summaries": [
+    "Arrival estimate: fits. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent.",
+    "Arrival estimate: no. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent.",
+    "Arrival estimate: tight. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent.",
+    "Arrival estimate: unknown. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent.",
+    "Place search returned 1 candidate(s).",
+    "Place search returned 3 candidate(s). Ask the user to select a candidate before planning.",
+    "Single-alley fit: no. This does not certify the full route, exit, flood conditions or stopping legality.",
+    "Single-alley fit: unknown. This does not certify the full route, exit, flood conditions or stopping legality.",
+    "Tide levels and source coverage are in structuredContent. Missing forecast points do not mean zero tide or no flood.",
+    "Vehicle catalogue: 39 models and size classes. Dimensions are in metres; check assumptions and sources."
+  ]
+}

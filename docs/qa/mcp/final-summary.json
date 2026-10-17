@@ -1,0 +1,10 @@
+{
+  "tool_calls": 12,
+  "tool_errors": 0,
+  "api_pairs": 4,
+  "api_matches": 4,
+  "max_tool_bytes": 27420,
+  "inspector_isError_false": true,
+  "claude_state_exists": false,
+  "codex_home_exists": false
+}

@@ -1,0 +1,108 @@
+[
+  {
+    "time": "2026-10-17T13:08:25.149397",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "plan_arrival",
+          "arguments": {
+            "lat": 10.7992432,
+            "lon": 106.7123911,
+            "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+            "vehicle_id": "toyota-fortuner",
+            "intent": "park",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 362,
+    "seconds": 1.678,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:08:22 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "362",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The result exceeds the compact response budget. No safety conclusion is available; request a single-alley check."
+          }
+        ],
+        "structuredContent": {
+          "error": "compact_result_too_large",
+          "note": "Result exceeds the compact response budget. No safety conclusion; request a single-alley check."
+        },
+        "isError": true
+      }
+    }
+  },
+  {
+    "time": "2026-10-17T13:08:29.541820",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "find_nearby_stops",
+          "arguments": {
+            "lat": 10.7992432,
+            "lon": 106.7123911,
+            "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+            "vehicle_id": "toyota-fortuner",
+            "intent": "park",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 362,
+    "seconds": 1.701,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:08:27 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "362",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "The result exceeds the compact response budget. No safety conclusion is available; request a single-alley check."
+          }
+        ],
+        "structuredContent": {
+          "error": "compact_result_too_large",
+          "note": "Result exceeds the compact response budget. No safety conclusion; request a single-alley check."
+        },
+        "isError": true
+      }
+    }
+  }
+]

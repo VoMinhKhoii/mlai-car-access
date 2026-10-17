@@ -1,0 +1,18 @@
+[
+  {
+    "test": "inspector-after-public-list",
+    "exit_code": 0
+  },
+  {
+    "test": "inspector-after-public-plan",
+    "exit_code": 0
+  },
+  {
+    "test": "inspector-after-stdio-list",
+    "exit_code": 0
+  },
+  {
+    "test": "inspector-after-stdio-plan",
+    "exit_code": 0
+  }
+]

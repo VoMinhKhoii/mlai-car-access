@@ -169,9 +169,9 @@
   "verdict": {
     "code": "unverified",
     "headline": "Stop for pickup/drop-off on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence",
-    "detail": "Must reverse 51 m (over the 30 m reverse limit); turning space is unverified · Arrival route includes unverified width or flood conditions · Width unverified (2.2–4.5 m; vehicle needs ≥ 1.95 m) · Door-opening space unverified (needs 2.65 m) · Must reverse 51 m (over the 30 m reverse limit); turning space is unverified · Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+    "detail": "Must reverse 51 m (over the 30 m reverse limit); turning space is unverified · Arrival route includes unverified width or flood conditions · Width unverified (2.2–4.5 m; vehicle needs ≥ 2.67 m) · Door-opening space unverified (needs 3.37 m) · Must reverse 51 m (over the 30 m reverse limit); turning space is unverified · Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
     "estimate": {
-      "answer": "fits",
+      "answer": "tight",
       "confidence": "low",
       "basis": "observed ≈3.70 m (Hẻm 356 Xô Viết Nghệ Tĩnh; OSM 1330786038) · 0/2 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified",
       "coverage": {
@@ -206,9 +206,9 @@
   },
   "intent": "pickup",
   "vehicle": {
-    "id": "vinfast-vf-3",
-    "label": "VinFast VF 3",
-    "mirror_width": 1.748
+    "id": "class-xl",
+    "label": "XL · 16-seat minibus & van",
+    "mirror_width": 2.474
   },
   "tide_source": {
     "station": "Phú An (sông Sài Gòn)",
@@ -227,7 +227,7 @@
       "tier": 2,
       "verified": false,
       "estimate": {
-        "answer": "fits",
+        "answer": "tight",
         "confidence": "low",
         "basis": "observed ≈3.70 m (Hẻm 356 Xô Viết Nghệ Tĩnh; OSM 1330786038) · 0/2 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
       },
@@ -235,8 +235,8 @@
       "fail_reasons": [],
       "unverified_reasons": [
         "Arrival route includes unverified width or flood conditions",
-        "Width unverified (2.2–4.5 m; vehicle needs ≥ 1.95 m)",
-        "Door-opening space unverified (needs 2.65 m)",
+        "Width unverified (2.2–4.5 m; vehicle needs ≥ 2.67 m)",
+        "Door-opening space unverified (needs 3.37 m)",
         "Must reverse 51 m (over the 30 m reverse limit); turning space is unverified",
         "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
       ],
@@ -352,15 +352,15 @@
       "tier": 2,
       "verified": false,
       "estimate": {
-        "answer": "fits",
+        "answer": "tight",
         "confidence": "low",
         "basis": "observed ≈3.70 m (Hẻm 341 Xô viết Nghệ Tĩnh; OSM 388370867) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
       },
       "failure_codes": [],
       "fail_reasons": [],
       "unverified_reasons": [
-        "Width unverified (2.2–4.5 m; vehicle needs ≥ 1.95 m)",
-        "Door-opening space unverified (needs 2.65 m)",
+        "Width unverified (2.2–4.5 m; vehicle needs ≥ 2.67 m)",
+        "Door-opening space unverified (needs 3.37 m)",
         "Reverse 5 m to a junction; turning space is unverified",
         "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
       ],
@@ -489,7 +489,7 @@
       "failure_codes": [],
       "fail_reasons": [],
       "unverified_reasons": [
-        "Width unverified (8.2–13.8 m; vehicle needs ≥ 1.95 m)",
+        "Width unverified (8.2–13.8 m; vehicle needs ≥ 2.67 m)",
         "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
       ],
       "fit": {
@@ -614,8 +614,8 @@
     ],
     "unverified_reasons": [
       "Arrival route includes unverified width or flood conditions",
-      "Width unverified (2.2–40.0 m; vehicle needs ≥ 1.95 m)",
-      "Door-opening space unverified (needs 2.65 m)",
+      "Width unverified (2.2–40.0 m; vehicle needs ≥ 2.67 m)",
+      "Door-opening space unverified (needs 3.37 m)",
       "No flood history or current observations for this road segment",
       "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
     ],
