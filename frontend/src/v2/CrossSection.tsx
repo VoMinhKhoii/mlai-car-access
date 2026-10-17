@@ -72,8 +72,8 @@ export function CrossSection({ cut, body, mirror, vehicleName, expanded, onToggl
     <dl className="v2-xs-nums">
       <div><dt>Alley</dt><dd className="v2-num">{lo != null ? width : 'Not measured'}</dd></div>
       <div><dt>Mirrors</dt><dd key={mirror} className="v2-num v2-xfade">{mirror.toFixed(2)} m</dd></div>
-      <div className={short ? 'is-short' : ''}><dt>{short ? 'Short' : 'Spare'}</dt>
-        <dd key={spareCm ?? 'x'} className="v2-num v2-xfade">{spareCm == null ? 'Unknown' : `${Math.abs(spareCm)} cm a side`}</dd></div>
+      <div className={short ? 'is-short' : ''}><dt>{short ? 'Short a side' : 'Spare a side'}</dt>
+        <dd key={spareCm ?? 'x'} className="v2-num v2-xfade">{spareCm == null ? 'Unknown' : `${Math.abs(spareCm)} cm`}</dd></div>
     </dl>
     <p className="v2-xs-foot">{cut.tier} width, drawn to scale</p>
   </div>

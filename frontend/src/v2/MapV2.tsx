@@ -17,6 +17,7 @@ interface Props {
   anchorEl: HTMLElement
   padding: { top: number; left: number; right: number; bottom: number }
   onFeatures: (c: MapContext) => void
+  onMap: (m: MLMap | null) => void
 }
 
 const EMPTY: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] }
@@ -47,6 +48,7 @@ export function MapV2(p: Props) {
       attributionControl: false,
     })
     map.current = m
+    cb.current.onMap(m)
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
     m.addControl(new maplibregl.AttributionControl({ compact: true }), 'top-right')
     let featureTimer: number | undefined
@@ -70,16 +72,20 @@ export function MapV2(p: Props) {
     }
     m.on('moveend', () => { window.clearTimeout(featureTimer); featureTimer = window.setTimeout(publish, 200) })
     m.on('load', () => {
-      for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
+      // Quiet the base map so the alley layer reads first: no 3D, softer POI icons.
+      for (const l of m.getStyle().layers ?? []) {
+        if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
+        if (l.type === 'symbol' && l.layout?.['icon-image']) m.setPaintProperty(l.id, 'icon-opacity', 0.45)
+      }
       for (const id of ['fit', 'route', 'walk']) m.addSource(id, { type: 'geojson', data: EMPTY })
       const notMain: maplibregl.FilterSpecification = ['!=', ['get', 'kind'], 'main']
       const width: maplibregl.DataDrivenPropertyValueSpecification<number> = ['interpolate', ['linear'], ['zoom'], 14, 1.6, 18, 5]
-      m.addLayer({ id: 'fit-casing', type: 'line', source: 'fit', filter: notMain, layout: { 'line-cap': 'round', 'line-join': 'round' },
+      m.addLayer({ id: 'fit-casing', type: 'line', source: 'fit', filter: ['all', notMain, ['!=', ['get', 'fit'], 'unknown']], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 3, 18, 8], 'line-opacity': 0.9 } })
       m.addLayer({ id: 'fit', type: 'line', source: 'fit', filter: ['all', notMain, ['!=', ['get', 'fit'], 'unknown']], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': ['match', ['get', 'fit'], 'fits', FIT.fits, 'tight', FIT.tight, 'no', FIT.no, 'blocked', FIT.blocked, FIT.unknown], 'line-width': width } })
       m.addLayer({ id: 'fit-unknown', type: 'line', source: 'fit', filter: ['all', notMain, ['==', ['get', 'fit'], 'unknown']],
-        paint: { 'line-color': FIT.unknown, 'line-width': width, 'line-dasharray': [1.2, 1.2], 'line-opacity': 0.85 } })
+        paint: { 'line-color': FIT.unknown, 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 1, 18, 3], 'line-dasharray': [2, 2], 'line-opacity': 0.55 } })
       m.addLayer({ id: 'route-casing', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 14, 6, 18, 12] } })
       m.addLayer({ id: 'route', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' },
@@ -88,7 +94,7 @@ export function MapV2(p: Props) {
         paint: { 'line-color': INK, 'line-width': 3.5, 'line-dasharray': [0.1, 1.8] } })
       setReady(true)
     })
-    return () => { window.clearTimeout(featureTimer); cutMarker.current?.remove(); m.remove(); map.current = null; setReady(false) }
+    return () => { window.clearTimeout(featureTimer); cutMarker.current?.remove(); m.remove(); map.current = null; cb.current.onMap(null); setReady(false) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [p.styleUrl])
 

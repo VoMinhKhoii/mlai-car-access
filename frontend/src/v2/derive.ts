@@ -32,7 +32,7 @@ export function tierWord(tier: string | null | undefined): string {
 
 export function wayOut(stop: StopPoint): { value: string; note: string | null } {
   const w = stop.way_out
-  const note = w.route_verified ? null : 'Route not driven yet'
+  const note = w.route_verified ? null : 'Not driven yet'
   switch (w.mode) {
     case 'through': return { value: 'Drive out forward', note }
     case 'turn_here': return { value: 'Turn around here', note }

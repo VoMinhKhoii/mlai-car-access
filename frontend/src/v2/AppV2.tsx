@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import type { Map as MLMap } from 'maplibre-gl'
 import { createPortal } from 'react-dom'
 import { api, type AgentPlan, type Config, type Plan, type PlanRequest, type Preset, type SearchResult, type Vehicle } from '../api'
 import type { MapContext } from '../mapSearch'
@@ -40,6 +41,7 @@ export default function AppV2() {
   const phone = useMedia('(max-width: 720px)')
   const [xsOpen, setXsOpen] = useState(!phone)
   const [anchorEl] = useState(() => { const el = document.createElement('div'); el.className = 'v2-anchor'; return el })
+  const mapRef = useRef<MLMap | null>(null)
   const planCtl = useRef<AbortController | null>(null)
   const askRef = useRef<HTMLButtonElement>(null)
   const extra = useRef<{ arrive_at: string | null; intent: PlanRequest['intent'] }>({ arrive_at: null, intent: 'park' })
@@ -85,6 +87,20 @@ export default function AppV2() {
   const ans = plan ? answer(plan, stop) : null
   const out = stop ? wayOut(stop) : null
 
+  // Opening the cross-section on a small screen: pan just enough that the whole card sits in the free map area.
+  function revealCard() {
+    window.setTimeout(() => {
+      const m = mapRef.current
+      if (!m) return
+      const r = anchorEl.getBoundingClientRect()
+      const top = (document.querySelector('.v2-search')?.getBoundingClientRect().bottom ?? 0) + 12
+      const bottom = (phone ? document.querySelector('.v2-verdict')?.getBoundingClientRect().top ?? innerHeight : innerHeight) - 12
+      const dx = r.left < 16 ? r.left - 16 : r.right > innerWidth - 16 ? r.right - innerWidth + 16 : 0
+      const dy = r.top < top ? r.top - top : r.bottom > bottom ? r.bottom - bottom : 0
+      if (dx || dy) m.panBy([dx, dy], { duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320 })
+    }, 30)
+  }
+
   const prevAgent = useRef(agentOpen)
   useEffect(() => { if (prevAgent.current && !agentOpen) askRef.current?.focus(); prevAgent.current = agentOpen }, [agentOpen])
 
@@ -96,10 +112,10 @@ export default function AppV2() {
 
   return <div className="v2">
     {cfg && <MapV2 styleUrl={cfg.map_style} center={cfg.demo_center} plan={plan} selected={selected} destination={dest}
-      anchor={cut ? { lat: cut.lat, lon: cut.lon } : null} anchorEl={anchorEl} padding={padding} onFeatures={setMapContext} />}
+      anchor={cut ? { lat: cut.lat, lon: cut.lon } : null} anchorEl={anchorEl} padding={padding} onFeatures={setMapContext} onMap={(m) => { mapRef.current = m }} />}
     {cut && vehicle && createPortal(<div className="v2-anchor-inner">
       <CrossSection cut={cut} body={vehicle.body_width} mirror={vehicle.mirror_width} vehicleName={vehicle.label}
-        expanded={xsOpen} onToggle={() => setXsOpen((o) => !o)} />
+        expanded={xsOpen} onToggle={() => { if (!xsOpen) revealCard(); setXsOpen(!xsOpen) }} />
       <span className="v2-stem" aria-hidden="true" />
     </div>, anchorEl)}
 
@@ -137,9 +153,12 @@ export default function AppV2() {
         <div><dt>Way out</dt><dd>{out.value}</dd>{out.note && <dd className="v2-note">{out.note}</dd>}</div>
       </dl>}
 
+      <div className="v2-actions">
       {plan && <button type="button" className="v2-link v2-details-toggle" aria-expanded={details} aria-controls="v2-details" onClick={() => setDetails((d) => !d)}>
         {details ? 'Fewer details' : `Details, ${plan.stop_points.length} ${plan.stop_points.length === 1 ? 'stop' : 'stops'}`}
       </button>}
+      <button ref={askRef} type="button" className="v2-ask" aria-expanded={agentOpen} aria-controls="agent-panel" onClick={() => setAgentOpen((o) => !o)}>Ask AlleyAI</button>
+      </div>
       {plan && details && <div id="v2-details" className="v2-details">
         <ul className="v2-stops" aria-label="Stops">
           {plan.stop_points.map((s, i) => {
@@ -159,8 +178,6 @@ export default function AppV2() {
           </select>
         </label>
       </div>}
-
-      <button ref={askRef} type="button" className="v2-ask" aria-expanded={agentOpen} aria-controls="agent-panel" onClick={() => setAgentOpen((o) => !o)}>Ask AlleyAI</button>
     </section>
 
     <div className={`v2-agent ${agentOpen ? 'open' : ''}`}>
