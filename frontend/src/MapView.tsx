@@ -310,8 +310,8 @@ export function MapView(p: Props) {
     })) } : EMPTY)
     set('flood', plan && toggles.flood ? plan.layers.flood : EMPTY)
     set('standard', line(toggles.standard ? plan?.standard_route?.geometry : undefined))
-    // With a corridor, its chosen large-road route replaces the stop's own approach.
-    set('approach', line(corridor ? undefined : sp?.approach?.geometry))
+    // Our own approach to the stop always shows; a camera corridor's large-road routes draw alongside it.
+    set('approach', line(sp?.approach?.geometry))
     set('corridor', corridor ? { type: 'FeatureCollection', features: corridor.routes.map((r) => ({
       type: 'Feature', properties: { id: r.id, sel: r.id === routeSel }, geometry: { type: 'LineString', coordinates: r.geometry } })) } : EMPTY)
     set('cams', toggles.cams ? { type: 'FeatureCollection', features: cams.map((c) => {
@@ -365,7 +365,7 @@ export function MapView(p: Props) {
       if (sp?.route_in) pts.push(...sp.route_in.geometry)
       if (frame === 'trip') {
         if (origin) pts.push([origin.lon, origin.lat])
-        if (sp?.approach && !corridor) pts.push(...sp.approach.geometry)
+        if (sp?.approach) pts.push(...sp.approach.geometry)
         const cr = corridor?.routes.find((r) => r.id === routeSel)
         if (cr) pts.push(...cr.geometry)
       }

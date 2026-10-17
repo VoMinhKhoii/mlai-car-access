@@ -239,7 +239,8 @@ def search(q: Annotated[str, Field(max_length=200)], lat: Lat | None = None, lon
     if len(q.strip()) < 3:
         return {"results": []}
     near = (lat, lon) if lat is not None and lon is not None else DEMO_CENTER
-    return geocoding.resolve_place(q, near, limit=10, select_nearest=False)
+    return geocoding.resolve_place(q, near, limit=10, select_nearest=False,
+                                   prefer_curated=bool(geocoding.address_parts(q)[0]))
 
 
 @app.get("/api/place/{place_id}")

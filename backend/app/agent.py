@@ -26,7 +26,16 @@ _preferred_free_key = None
 
 # House-end of OSM way 464839531, not its mouth on Ngô Tất Tố.
 DEMO_PLACES = [{"label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh",
-                "lat": 10.792106, "lon": 106.716661}]
+                "lat": 10.792106, "lon": 106.716661},
+               # Demo alleys whose whole arrival route carries dated cadastral samples; points are the
+               # OSM alley ends the engine was checked at, which Goong's house geocodes can miss by ~80 m.
+               {"label": "Hẻm 441/53 Điện Biên Phủ, Bình Thạnh", "lat": 10.8027513, "lon": 106.7128822},
+               {"label": "Hẻm 441 Điện Biên Phủ, Bình Thạnh", "lat": 10.8030011, "lon": 106.7130647},
+               {"label": "Hẻm 441/35 Điện Biên Phủ, Bình Thạnh", "lat": 10.8025602, "lon": 106.7134892},
+               {"label": "Hẻm 429 Điện Biên Phủ, Bình Thạnh", "lat": 10.802498, "lon": 106.713094},
+               {"label": "Hẻm 548 Điện Biên Phủ, Bình Thạnh", "lat": 10.8000326, "lon": 106.7155079},
+               {"label": "Hẻm 69/38 Đường D2, Bình Thạnh", "lat": 10.8036436, "lon": 106.7144154,
+                "aliases": ["Hẻm 69/38 Nguyễn Gia Trí, Bình Thạnh"]}]
 
 
 def tool(name, description, properties, required):
