@@ -75,7 +75,7 @@ export function MapV2(p: Props) {
       // Quiet the base map so the alley layer reads first: no 3D, softer POI icons.
       for (const l of m.getStyle().layers ?? []) {
         if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
-        if (l.type === 'symbol' && l.layout?.['icon-image']) m.setPaintProperty(l.id, 'icon-opacity', 0.45)
+        if (l.type === 'symbol' && l.layout?.['icon-image']) m.setPaintProperty(l.id, 'icon-opacity', 0.35)
       }
       for (const id of ['fit', 'route', 'walk']) m.addSource(id, { type: 'geojson', data: EMPTY })
       const notMain: maplibregl.FilterSpecification = ['!=', ['get', 'kind'], 'main']

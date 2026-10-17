@@ -1,0 +1,38 @@
+Inspector run through a test-only proxy on 127.0.0.1:5199 that strips the Origin header (the live backend CSRF guard returns 403 to /api/plan from origin 127.0.0.1:5179). Captured while the first plan was loading.
+
+TASTESKILL · INSPECT   http://127.0.0.1:5199/?ui=v2
+
+MEASURED (first viewport listed)
+  hero headline   "Checking…"  1 words · 1 line(s) · 52px (3.6vw) · Stack Sans Headline 300 · tracking -0.02em · leading 1.05
+  @768px          1 line(s) · 52px
+  @390px          1 line(s) · 40px
+  typefaces       Stack Sans Text 94%, Stack Sans Headline 6%
+  sizes in use    13 / 16 / 52 px   body 16px / 1.45
+  colour          page #eaedec · sections #f4f3ef · button #2c3620
+  page            1 screens · 28 words · 0 images · hero media 100% canvas
+  headings        1 · longest 1 line(s) · median - words
+
+FAIL — fix every one of these
+  [few-pictures] @1440px  Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.
+      → Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve.
+  [still-page] @1440px  Only 1 element(s) moved while the page loaded and scrolled.
+      → Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback.
+
+WARN — fix, or be able to defend
+  [palette-cream] @1440px (+768, 390)  Yellow-cream background (section #f4f3ef).
+      → Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.
+  [no-footage] @1440px  No video anywhere on the page.
+      → Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject.
+  [pinned-over-picture] @1440px (+768, 390)  Pinned large text slides across pictures while the page scrolls: "Checking…" (screen 1, 100% over a picture)
+      → Jurors read a pinned title crossing drawings or photographs as a collision. Keep the pictures in the column the title does not occupy, or unpin it.
+
+LOOK AT THE RENDER — open these with your image viewer / Read tool before saying anything about quality:
+  desktop 1440px  .taste-skill/v2/desktop-fold.jpg
+                  .taste-skill/v2/desktop-page-01.jpg
+  tablet 768px    .taste-skill/v2/tablet-fold.jpg
+                  .taste-skill/v2/tablet-page-01.jpg
+  mobile 390px    .taste-skill/v2/mobile-fold.jpg
+                  .taste-skill/v2/mobile-page-01.jpg
+
+report: .taste-skill/v2/report.json
+RESULT: 2 FAIL, 3 WARN — not done.

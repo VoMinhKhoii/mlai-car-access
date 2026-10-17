@@ -83,7 +83,7 @@
 .v2-select select { min-height: 44px; font-size: 16px; color: var(--v2-ink); background: #fff; border: 1px solid var(--v2-slate);
   border-radius: var(--v2-r); padding: 0 10px; }
 .v2-ask { position: fixed; z-index: 21; right: 16px; bottom: 16px; min-height: 48px; padding: 0 20px; border: 0; border-radius: var(--v2-r);
-  background: var(--v2-accent); color: var(--v2-accent-ink); font-size: 16px; font-weight: 500; cursor: pointer; box-shadow: var(--v2-lift); }
+  background: var(--v2-accent); color: var(--v2-accent-ink); font-size: 16px; font-weight: 500; cursor: pointer; }
 .v2-ask:hover { background: #3a4630; }
 
 /* Map markers */
@@ -116,14 +116,14 @@
 .v2-spare rect { fill: var(--v2-fits-line); }
 .v2-spare.is-short rect { fill: var(--v2-no); }
 .v2-anim { transform-box: view-box; transform-origin: 0 0; transition: transform 420ms var(--v2-ease); }
-.v2-xs-nums { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+.v2-xs-nums { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 4px; }
 .v2-xs-nums > div { min-width: 0; }
 .v2-xs-nums dt { font-size: 13px; color: var(--v2-muted); }
 .v2-xs-nums dd { font-size: 16px; font-weight: 500; }
 .v2-xs-nums .is-short dd, .v2-xs-nums .is-short dt { color: var(--v2-no); }
 .v2-xs-foot { font-size: 13px; color: var(--v2-muted); margin-top: 8px !important; }
 .v2-chip { min-height: 44px; display: flex; gap: 8px; align-items: center; padding: 0 14px; border: 0; border-radius: var(--v2-r);
-  background: var(--v2-paper); color: var(--v2-ink); box-shadow: var(--v2-lift); font-size: 16px; font-weight: 500; cursor: pointer; }
+  background: var(--v2-paper); color: var(--v2-ink); font-size: 16px; font-weight: 500; cursor: pointer; }
 .v2-chip span + span { color: var(--v2-fits-ink); font-weight: 400; }
 .v2-chip.is-short span + span { color: var(--v2-no); }
 .v2-xfade { animation: v2-fade 260ms var(--v2-ease); }
@@ -137,8 +137,10 @@
 
 /* Map chrome */
 .v2 .maplibregl-ctrl-top-right { top: 6px; right: 6px; }
-.v2 .maplibregl-ctrl-group { border-radius: var(--v2-r); box-shadow: var(--v2-lift); }
+.v2 .maplibregl-ctrl { font-family: var(--v2-font); }
+.v2 .maplibregl-ctrl-group { border-radius: var(--v2-r); box-shadow: none !important; background: var(--v2-paper); }
 .v2 .maplibregl-ctrl-group button { width: 44px; height: 44px; }
+.v2 .maplibregl-ctrl-attrib { font-size: 13px; }
 
 @media (max-width: 720px) {
   .v2-search { left: 16px; right: 16px; width: auto; padding: 8px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px; }

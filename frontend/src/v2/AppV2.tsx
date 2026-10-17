@@ -144,7 +144,11 @@ export default function AppV2() {
           <p className="v2-status">{loading ? 'Checking…' : vehicle ? `${vehicle.label}, mirrors ${vehicle.mirror_width.toFixed(2)} m` : ''}</p>
           <h1 key={`${ans.word}${plan?.vehicle.id}`} className={`v2-word tone-${ans.tone} v2-xfade`}>{ans.word}</h1>
           <p className="v2-support">{support}</p>
-        </> : <p className="v2-status">{loading ? 'Checking…' : error ? '' : 'Search for a destination.'}</p>}
+        </> : loading && dest ? <>
+          <p className="v2-status">{vehicle ? `${vehicle.label}, mirrors ${vehicle.mirror_width.toFixed(2)} m` : 'Your car'}</p>
+          <h1 className="v2-word tone-unknown">Checking…</h1>
+          <p className="v2-support">Measuring the alleys around {dest.label}.</p>
+        </> : <p className="v2-status">{error ? '' : 'Search for a destination.'}</p>}
       </div>
 
       {plan && stop && out && <dl className="v2-facts">
