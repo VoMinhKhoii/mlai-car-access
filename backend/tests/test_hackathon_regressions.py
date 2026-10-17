@@ -49,6 +49,26 @@ def test_same_edge_walk_geometry_uses_the_direct_subsegment():
     assert osm.haversine(coords[0][1], coords[0][0], coords[1][1], coords[1][0]) == pytest.approx(10)
 
 
+def test_same_edge_walk_counts_the_destination_connector_once():
+    g = straight_graph()
+    widths = {10: WidthRange(8, 9, 'Measured')}
+    # The stop is on the road, while the destination is 20 m off it.
+    destination = (10.8 + 20 / 110540, 106.713)
+    with (patch.object(plan, 'area', return_value=(g, widths, {})),
+          patch.object(plan.flags, 'enabled', return_value=False),
+          patch.object(plan.parking_data, 'paid_street_ways', return_value={}),
+          patch.object(plan.parking_data, 'lots_near', return_value=[]),
+          patch.object(plan, 'GOONG_API_KEY', ''),
+          patch.object(plan, '_layers', return_value={})):
+        result = plan.plan(*destination, 'toyota-vios', 'pickup', NOW, 15)
+    door = result['door']
+    assert door is not None
+    assert door['walk']['meters'] == 20
+    assert door['walk']['connection']['stop_to_walk_m'] == 0
+    assert door['walk']['connection']['destination_to_walk_m'] == pytest.approx(20)
+    assert door['walk']['connection']['mapped'] is False
+
+
 def test_walk_wading_includes_partial_edge_absent_from_predecessor_tree():
     g = straight_graph()
     edge = g.edges[0]
@@ -110,3 +130,15 @@ def test_invalid_goong_geometry_fails_as_unavailable_instead_of_crashing(legs):
     response = type('Response', (), {'json': lambda self: {'routes': [{'legs': legs}]}})()
     with patch.object(corridor, 'CACHED_ONLY', False), patch.object(corridor.httpx, 'get', return_value=response):
         assert corridor.goong_route((10.8, 106.7), (10.8, 106.72)) is None
+
+
+def test_valid_goong_geometry_passes_finite_coordinate_and_metric_checks():
+    legs = [{'steps': [{'polyline': {'points': '_p~iF~ps|U_ulLnnqC_mqNvxq`@'},
+                        'distance': {'value': 200}}],
+             'distance': {'value': 200}, 'duration': {'value': 30}}]
+    response = SimpleNamespace(json=lambda: {'routes': [{'legs': legs}]})
+    with patch.object(corridor, 'CACHED_ONLY', False), patch.object(corridor.httpx, 'get', return_value=response):
+        result = corridor.goong_route((10.8, 106.7), (10.8, 106.72))
+    assert len(result['geometry']) == 3
+    assert result['distance_m'] == 200
+    assert result['duration_s'] == 30
