@@ -229,6 +229,12 @@ if (!reduce && frames.length > 1) {
   }, 5600)
 }
 
+/* ---------- The street clip plays only while on screen, never under reduced motion ---------- */
+const clip = $<HTMLVideoElement>('.street-video')
+if (clip && !reduce) {
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) clip.play().catch(() => {}); else clip.pause() }, { threshold: 0.2 }).observe(clip)
+}
+
 /* ---------- Entrances: each section's parts, staggered ---------- */
 const io = new IntersectionObserver((entries) => {
   for (const e of entries) {

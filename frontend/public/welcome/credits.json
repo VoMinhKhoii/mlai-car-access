@@ -156,5 +156,31 @@
   "credit": "\"Su Van Hanh St\" by Blueconcorde, CC0, via Wikimedia Commons",
   "notes": [],
   "saved": "2026-10-17T04:16:36.168Z"
+ },
+ {
+  "file": "frontend/public/welcome/saigon-traffic-ovbn3helda0.webm",
+  "media": "video",
+  "poster": "frontend/public/welcome/saigon-traffic-ovbn3helda0-poster.jpg",
+  "ref": "commons:95730783",
+  "title": "Saigon traffic-oVbn3HeLDA0",
+  "creator": "Karel Bilek",
+  "creatorUrl": null,
+  "date": "2019-05-29",
+  "license": "CC BY-SA 4.0",
+  "licenseCode": "by-sa",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "creditRequired": true,
+  "page": "https://commons.wikimedia.org/wiki/File:Saigon_traffic-oVbn3HeLDA0.webm",
+  "via": "Wikimedia Commons",
+  "video": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c6/Saigon_traffic-oVbn3HeLDA0.webm/Saigon_traffic-oVbn3HeLDA0.webm.480p.vp9.webm",
+  "width": 854,
+  "height": 480,
+  "duration": 46.8,
+  "bytes": 8005081,
+  "credit": "\"Saigon traffic-oVbn3HeLDA0\" by Karel Bilek, CC BY-SA 4.0, via Wikimedia Commons",
+  "notes": [
+   "Share-alike: an altered version (recoloured, combined with other pictures) must be shared under the same licence."
+  ],
+  "saved": "2026-10-17T04:33:54.243Z"
  }
 ]

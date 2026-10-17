@@ -1,0 +1,1559 @@
+{
+ "url": "http://127.0.0.1:5179/welcome",
+ "at": "2026-10-17T04:36:32.010Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    0.78,
+    0.59,
+    0.86,
+    0.67,
+    0.59,
+    0.33,
+    0.54,
+    0.98,
+    1
+   ],
+   "motion": {
+    "elements": 44,
+    "css": 1,
+    "transitions": 43,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 7569,
+     "screens": 8.4,
+     "words": 874,
+     "img": 11,
+     "video": 1,
+     "canvas": 1,
+     "svg": 2,
+     "sections": 12,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 9,
+     "videoCount": 1,
+     "uiPictures": 3,
+     "pictureSamples": [
+      "alley-in-district-3-hcmc-38447694045.jpg",
+      "irejo-al-la-hotelo-little-saigon-ho.jpg",
+      "alley-40-bui-vien-saigon-27305914518.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "alley-40-bui-vien-saigon-27305914518.jpg",
+      "street-flood-in-saigon-10728739135.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "su-van-hanh-st.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "chars": 36,
+     "lines": 2,
+     "size": 53.9,
+     "vw": 3.7,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.022,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.41,
+     "top": 183,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "lines": 2,
+     "size": 53.9,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Will your car fit, and get back out?",
+      "words": 8,
+      "chars": 36,
+      "lines": 2,
+      "size": 53.9,
+      "vw": 3.7,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 183,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Saigon lives down its hẻm . Maps call them roads, so cars turn in, meet motorbikes or water and reverse out.",
+      "words": 21,
+      "chars": 108,
+      "lines": 2,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Stack Sans Text",
+      "weight": 500,
+      "tracking": -0.012,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 1073,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "The map, alley by alley",
+      "words": 5,
+      "chars": 23,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.47,
+      "top": 2171,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Five kinds of proof",
+      "words": 4,
+      "chars": 19,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 3021,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.5,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.57,
+      "top": 3199,
+      "tag": "button",
+      "kind": "heading"
+     },
+     {
+      "text": "Over your whole stay",
+      "words": 4,
+      "chars": 20,
+      "lines": 2,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.22,
+      "top": 3892,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Any agent can ask the alley",
+      "words": 6,
+      "chars": 27,
+      "lines": 2,
+      "size": 84,
+      "vw": 5.8,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.61,
+      "top": 4996,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measure your alley",
+      "words": 3,
+      "chars": 18,
+      "lines": 2,
+      "size": 84,
+      "vw": 5.8,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 6592,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "N G Õ N G Á C H",
+      "words": 8,
+      "chars": 15,
+      "lines": 1,
+      "size": 84,
+      "vw": 5.8,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": 0,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 6934,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 1,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.94,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.04,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0.02,
+       "mono": false
+      },
+      {
+       "family": "Helvetica Neue",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      13,
+      14,
+      17,
+      19,
+      26,
+      36,
+      54,
+      64,
+      84
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 19,
+      "leading": 1.45,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 13.1
+     },
+     "measureChars": 79,
+     "max": {
+      "size": 84,
+      "vw": 5.8,
+      "font": "Stack Sans Headline",
+      "text": "Any agent can ask the alley"
+     },
+     "monoShare": 0.02,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "ui-monospace"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.02,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#e3e2da",
+       "top": 32,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      },
+      {
+       "color": "#b2bdc5",
+       "top": 32,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.74
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 1953,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 3199,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 6902,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.64
+      },
+      {
+       "color": "#38424a",
+       "share": 0.2
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.14
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      },
+      {
+       "color": "#8f2119",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#e3e2da"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 3,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Check an alley",
+      "Toyota Fortuner"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 12,
+     "squareMedia": 8,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.48
+     },
+     {
+      "type": "img",
+      "ratio": 0.47
+     },
+     {
+      "type": "img",
+      "ratio": 0.47
+     },
+     {
+      "type": "img",
+      "ratio": 0.47
+     }
+    ],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 11,
+   "filled": [
+    0.96,
+    0.8,
+    0.86,
+    0.8,
+    0.77,
+    0.8,
+    0.88,
+    0.16,
+    0.77,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 45,
+    "css": 1,
+    "transitions": 44,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 10411,
+     "screens": 10.2,
+     "words": 874,
+     "img": 11,
+     "video": 1,
+     "canvas": 1,
+     "svg": 2,
+     "sections": 12,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 9,
+     "videoCount": 1,
+     "uiPictures": 5,
+     "pictureSamples": [
+      "alley-in-district-3-hcmc-38447694045.jpg",
+      "irejo-al-la-hotelo-little-saigon-ho.jpg",
+      "alley-40-bui-vien-saigon-27305914518.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "alley-40-bui-vien-saigon-27305914518.jpg",
+      "street-flood-in-saigon-10728739135.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "su-van-hanh-st.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "chars": 36,
+     "lines": 1,
+     "size": 45.4,
+     "vw": 5.9,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.022,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.86,
+     "top": 763,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "lines": 1,
+     "size": 45.4,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Will your car fit, and get back out?",
+      "words": 8,
+      "chars": 36,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 763,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Saigon lives down its hẻm . Maps call them roads, so cars turn in, meet motorbikes or water and reverse out.",
+      "words": 21,
+      "chars": 108,
+      "lines": 3,
+      "size": 29,
+      "vw": 3.8,
+      "font": "Stack Sans Text",
+      "weight": 500,
+      "tracking": -0.012,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 1460,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "The map, alley by alley",
+      "words": 5,
+      "chars": 23,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 3149,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Five kinds of proof",
+      "words": 4,
+      "chars": 19,
+      "lines": 2,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 3781,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.5,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.57,
+      "top": 4006,
+      "tag": "button",
+      "kind": "heading"
+     },
+     {
+      "text": "Over your whole stay",
+      "words": 4,
+      "chars": 20,
+      "lines": 1,
+      "size": 45.4,
+      "vw": 5.9,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 4622,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Any agent can ask the alley",
+      "words": 6,
+      "chars": 27,
+      "lines": 2,
+      "size": 49.5,
+      "vw": 6.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.68,
+      "top": 7227,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measure your alley",
+      "words": 3,
+      "chars": 18,
+      "lines": 2,
+      "size": 49.5,
+      "vw": 6.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.38,
+      "top": 9261,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "N G Õ N G Á C H",
+      "words": 8,
+      "chars": 15,
+      "lines": 1,
+      "size": 49.5,
+      "vw": 6.4,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": 0,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 9542,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 3,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 1,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.94,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.04,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0.02,
+       "mono": false
+      },
+      {
+       "family": "Helvetica Neue",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      13,
+      17,
+      18,
+      23,
+      29,
+      45,
+      50
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 17.9,
+      "leading": 1.45,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 13.1
+     },
+     "measureChars": 44,
+     "max": {
+      "size": 49.5,
+      "vw": 6.4,
+      "font": "Stack Sans Headline",
+      "text": "Any agent can ask the alley"
+     },
+     "monoShare": 0.02,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "ui-monospace"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.02,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#e3e2da",
+       "top": 607,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      },
+      {
+       "color": "#b2bdc5",
+       "top": 17,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.74
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 2297,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 8604,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 9525,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.64
+      },
+      {
+       "color": "#38424a",
+       "share": 0.2
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.14
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      },
+      {
+       "color": "#8f2119",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#e3e2da"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 3,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Check an alley",
+      "Toyota Fortuner"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 12,
+     "squareMedia": 10,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.58
+     },
+     {
+      "type": "img",
+      "ratio": 0.58
+     },
+     {
+      "type": "img",
+      "ratio": 0.58
+     },
+     {
+      "type": "img",
+      "ratio": 0.58
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 11,
+   "filled": [
+    0.89,
+    0.78,
+    0.84,
+    0.7,
+    0.65,
+    0.75,
+    0.69,
+    0.47,
+    0.75,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 1,
+    "transitions": 36,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 8539,
+     "screens": 10.1,
+     "words": 734,
+     "img": 11,
+     "video": 1,
+     "canvas": 1,
+     "svg": 2,
+     "sections": 12,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 5,
+     "uiAbuse": false,
+     "realPictures": 7,
+     "videoCount": 1,
+     "uiPictures": 3,
+     "pictureSamples": [
+      "alley-in-district-3-hcmc-38447694045.jpg",
+      "irejo-al-la-hotelo-little-saigon-ho.jpg",
+      "alley-40-bui-vien-saigon-27305914518.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "rundown-alley-in-chinatown-2328222631.jpg",
+      "su-van-hanh-st.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": []
+    },
+    "hero": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "chars": 36,
+     "lines": 2,
+     "size": 30,
+     "vw": 7.7,
+     "font": "Stack Sans Headline",
+     "weight": 300,
+     "tracking": -0.022,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.84,
+     "top": 551,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Will your car fit, and get back out?",
+     "words": 8,
+     "lines": 2,
+     "size": 30,
+     "font": "Stack Sans Headline"
+    },
+    "headings": [
+     {
+      "text": "Will your car fit, and get back out?",
+      "words": 8,
+      "chars": 36,
+      "lines": 2,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.84,
+      "top": 551,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Saigon lives down its hẻm . Maps call them roads, so cars turn in, meet motorbikes or water and reverse out.",
+      "words": 21,
+      "chars": 108,
+      "lines": 4,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Stack Sans Text",
+      "weight": 500,
+      "tracking": -0.012,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 1328,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "The map, alley by alley",
+      "words": 5,
+      "chars": 23,
+      "lines": 1,
+      "size": 33.3,
+      "vw": 8.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2544,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Five kinds of proof",
+      "words": 4,
+      "chars": 19,
+      "lines": 1,
+      "size": 33.3,
+      "vw": 8.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3192,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Over your whole stay",
+      "words": 4,
+      "chars": 20,
+      "lines": 1,
+      "size": 33.3,
+      "vw": 8.5,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 4051,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Any agent can ask the alley",
+      "words": 6,
+      "chars": 27,
+      "lines": 2,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 5819,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measure your alley",
+      "words": 3,
+      "chars": 18,
+      "lines": 2,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": -0.022,
+      "leading": 0.98,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.54,
+      "top": 7051,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "N G Õ N G Á C H",
+      "words": 8,
+      "chars": 15,
+      "lines": 1,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Stack Sans Headline",
+      "weight": 300,
+      "tracking": 0,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 7736,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 4,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Stack Sans Text",
+       "share": 0.94,
+       "mono": false
+      },
+      {
+       "family": "Stack Sans Headline",
+       "share": 0.04,
+       "mono": false
+      },
+      {
+       "family": "Helvetica Neue",
+       "share": 0.01,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      13,
+      17,
+      20,
+      24,
+      30,
+      33,
+      36
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Stack Sans Text",
+      "size": 17,
+      "leading": 1.45,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 13.1
+     },
+     "measureChars": 55,
+     "max": {
+      "size": 36,
+      "vw": 9.2,
+      "font": "Stack Sans Headline",
+      "text": "Any agent can ask the alley"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "ui-monospace"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.02,
+     "centerShare": 0.02,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#a6b3bc",
+     "bodyBgHsl": {
+      "h": 205,
+      "s": 0.14,
+      "l": 0.69
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#e3e2da",
+       "top": 359,
+       "hsl": {
+        "h": 53,
+        "s": 0.14,
+        "l": 0.87
+       }
+      },
+      {
+       "color": "#b2bdc5",
+       "top": 12,
+       "hsl": {
+        "h": 205,
+        "s": 0.14,
+        "l": 0.74
+       }
+      },
+      {
+       "color": "#b7c8be",
+       "top": 2070,
+       "hsl": {
+        "h": 145,
+        "s": 0.13,
+        "l": 0.75
+       }
+      },
+      {
+       "color": "#2c3620",
+       "top": 3414,
+       "hsl": {
+        "h": 87,
+        "s": 0.26,
+        "l": 0.17
+       }
+      },
+      {
+       "color": "#d6c4b8",
+       "top": 7720,
+       "hsl": {
+        "h": 24,
+        "s": 0.27,
+        "l": 0.78
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1c1c1c",
+       "share": 0.62
+      },
+      {
+       "color": "#38424a",
+       "share": 0.25
+      },
+      {
+       "color": "#e3e2da",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      },
+      {
+       "color": "#8f2119",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#2c3620",
+      "hsl": {
+       "h": 87,
+       "s": 0.26,
+       "l": 0.17
+      },
+      "fg": "#e3e2da"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 3,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Check an alley",
+      "Toyota Fortuner"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 12,
+     "squareMedia": 7,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.45
+     },
+     {
+      "type": "img",
+      "ratio": 0.45
+     },
+     {
+      "type": "img",
+      "ratio": 0.45
+     },
+     {
+      "type": "img",
+      "ratio": 0.45
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 124,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "stack sans headline",
+     "stack sans text"
+    ]
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "font-count",
+   "width": 1440,
+   "message": "3 typefaces in use (Stack Sans Text, Stack Sans Headline, ui-monospace).",
+   "fix": "Two at most.",
+   "alsoAt": [
+    768
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/desktop-fold.jpg",
+   "pages": [
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/desktop-page-01.jpg",
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/desktop-page-02.jpg",
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/desktop-page-03.jpg"
+   ]
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/tablet-fold.jpg",
+   "pages": [
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/tablet-page-01.jpg",
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/tablet-page-02.jpg"
+   ]
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/mobile-fold.jpg",
+   "pages": [
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/mobile-page-01.jpg",
+    "/Users/khoivo/Developer/mlai-design/.taste-skill/welcome/mobile-page-02.jpg"
+   ]
+  }
+ ]
+}
