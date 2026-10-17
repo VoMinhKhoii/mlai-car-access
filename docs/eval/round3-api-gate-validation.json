@@ -1,0 +1,13 @@
+{
+  "status": 200,
+  "latency_s": 0.5675,
+  "lease_pid": 93693,
+  "deadline_epoch": 1792211400.0,
+  "expired_lease_api_gate": {
+    "cooldown_until": 0.0,
+    "interval_s": 0.5
+  },
+  "campus_count": 6,
+  "stage": "interleaved_inner_ring_city",
+  "deadline_test_preserved_live_lease": true
+}

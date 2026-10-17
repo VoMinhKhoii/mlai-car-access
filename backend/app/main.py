@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from contextlib import asynccontextmanager
 from datetime import date, datetime, timedelta, timezone
 
 import httpx
@@ -11,7 +12,7 @@ from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ai, budget, flags, google_lookup, live, plan, vehicles
+from . import agent, agent_budget, ai, budget, coverage, evidence_routes, flags, google_lookup, live, plan, tide_refresh, vehicles
 from .config import FRONTEND_DIST, GOONG_API_KEY, GOONG_MAPTILES_KEY, STORE, in_hcmc
 from .evidence import BLOCKAGE_FILE, CONFIRM_FILE, STORE_EVIDENCE
 from .flood import tide_meta, tide_series
@@ -22,8 +23,20 @@ FALLBACK_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
 GOONG_STYLE = "https://tiles.goong.io/assets/goong_map_web.json?api_key={key}"
 DEMO_CENTER = (10.8, 106.71)
 
-app = FastAPI(title="Vào Được API")
+@asynccontextmanager
+async def lifespan(app):
+    stop, thread = tide_refresh.start_refresher()
+    try:
+        yield
+    finally:
+        stop.set()
+        thread.join(timeout=1)
+
+
+app = FastAPI(title="Ngõ Ngách API", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.include_router(evidence_routes.router_for(app))  # isolated evidence-engine routes and response hooks
+app.include_router(__import__("app.field_routes", fromlist=["router_for"]).router_for(app))  # isolated field kit
 
 
 def _way_mid(way_id: int):
@@ -75,6 +88,7 @@ def config():
         "ai_provider": ai.provider(),
         "flags": flags.describe(),
         "tide": {k: tide_meta()[k] for k in ("station", "bulletin", "issued_at", "source_url", "alarm_levels_m", "note")},
+        "coverage": coverage.summary(),
         "demo_center": DEMO_CENTER,
         "presets": [{**p, "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
         "personas": [
@@ -161,7 +175,7 @@ def make_plan(req: PlanRequest):
     if req.intent not in ("park", "pickup"):
         raise HTTPException(400, "intent must be park or pickup")
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ điểm đến trong TP.HCM.")
     try:
         vehicles.get_profile(req.vehicle_id)
     except KeyError:
@@ -223,7 +237,7 @@ class Point(BaseModel):
 @app.post("/api/area/build")
 def area_build(req: Point):
     if not in_hcmc(req.lat, req.lon):
-        raise HTTPException(422, "Vào Được hiện chỉ hỗ trợ TP.HCM.")
+        raise HTTPException(422, "Ngõ Ngách hiện chỉ hỗ trợ TP.HCM.")
     """Streams the Live Area Build as NDJSON; the last line carries the area evidence."""
     return StreamingResponse(live.build(req.lat, req.lon), media_type="application/x-ndjson",
                              headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
@@ -405,9 +419,83 @@ def lookup_ask(a: AskIn):
     return _lookup_guard(google_lookup.ask_maps, a.lat, a.lon, a.alley)
 
 
+@app.post("/api/agent")
+def arrival_agent(req: agent.AgentRequest):
+    return StreamingResponse(agent.stream(req), media_type="application/x-ndjson",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
+@app.post("/api/agent/cancel/{request_id}")
+def cancel_agent(request_id: str):
+    agent.cancel(request_id)
+    return {"cancelled": True}
+
+
+@app.get("/api/agent/tools")
+def agent_tools():
+    return [{"name": t["name"], "description": t["description"], "inputSchema": t["parameters"]} for t in agent.TOOLS]
+
+
+@app.post("/api/agent/tool/{name}")
+def agent_tool(name: str, args: dict):
+    from importlib.util import module_from_spec, spec_from_file_location
+    from pathlib import Path
+    spec = spec_from_file_location("ngo_ngach_mcp", Path(__file__).resolve().parents[2] / "mcp" / "protocol.py")
+    protocol = module_from_spec(spec)
+    spec.loader.exec_module(protocol)
+    schema = next((t["parameters"] for t in agent.TOOLS if t["name"] == name), None)
+    if schema is None: raise HTTPException(404, "Công cụ không tồn tại.")
+    try:
+        protocol.schema_args(schema, args)
+        result, _ = agent.call_tool(name, args)
+        return result
+    except protocol.RPCError as exc: raise HTTPException(422, exc.message)
+    except Exception as exc: raise HTTPException(422, agent.safe_error(exc))
+
+
+# MCP Streamable HTTP, stable 2025-11-25, stateless JSON response mode.
+# GET is explicitly 405 (no unsolicited SSE stream); no dependency on the MCP SDK.
+from fastapi import Request as MCPRequest
+
+
+@app.api_route("/mcp", methods=["POST", "GET", "DELETE"])
+async def mcp_http(request: MCPRequest):
+    import hmac
+    import os
+    from importlib.util import module_from_spec, spec_from_file_location
+    from pathlib import Path
+    from fastapi.responses import JSONResponse
+    from starlette.concurrency import run_in_threadpool
+    origins = {"http://localhost:8787", "http://127.0.0.1:8787", "http://localhost:5173", "http://127.0.0.1:5173"}
+    origins.update(x.strip() for x in os.environ.get("MCP_ALLOWED_ORIGINS", "").split(",") if x.strip())
+    if request.headers.get("origin") and request.headers["origin"] not in origins:
+        return JSONResponse({"error":"Origin not allowed"},status_code=403)
+    token=os.environ.get("MCP_AUTH_TOKEN")
+    if token and not hmac.compare_digest(request.headers.get("authorization", ""), "Bearer "+token):
+        return JSONResponse({"error":"Unauthorized"},status_code=401)
+    if request.method != "POST": return Response(status_code=405,headers={"Allow":"POST"})
+    if "application/json" not in request.headers.get("content-type", ""):
+        return JSONResponse({"error":"Content-Type must be application/json"},status_code=415)
+    accept=request.headers.get("accept", "")
+    if not all(t in accept for t in ("application/json","text/event-stream")):
+        return JSONResponse({"error":"Accept must include application/json and text/event-stream"},status_code=406)
+    spec=spec_from_file_location("ngo_ngach_mcp",Path(__file__).resolve().parents[2]/"mcp"/"protocol.py")
+    protocol=module_from_spec(spec);spec.loader.exec_module(protocol)
+    version=request.headers.get("mcp-protocol-version", "2025-03-26")
+    if version not in protocol.VERSIONS[0:3]: return JSONResponse({"error":"Unsupported MCP protocol version"},status_code=400)
+    raw=await request.body()
+    if len(raw)>64_000: return JSONResponse({"error":"Request too large"},status_code=413)
+    try: body=json.loads(raw)
+    except (ValueError,UnicodeDecodeError):
+        return JSONResponse({"jsonrpc":"2.0","id":None,"error":{"code":-32700,"message":"Parse error"}},status_code=400)
+    response=await run_in_threadpool(protocol.dispatch,body,agent_tools,lambda name,args:agent_tool(name,args))
+    if response is None: return Response(status_code=202)
+    return JSONResponse(response,headers={"Cache-Control":"no-store"})
+
+
 @app.get("/api/budget")
 def google_budget():
-    return {"usage": budget.report()}
+    return {"usage": budget.report(), "gemini_paid": agent_budget.report()}
 
 
 if FRONTEND_DIST.exists():

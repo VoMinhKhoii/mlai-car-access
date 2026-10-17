@@ -1,0 +1,101 @@
+{
+  "observed_at": "2026-10-17T00:33:38.561638+07:00",
+  "campuses": {
+    "binhthanh-dbp": {
+      "lat": 10.801617,
+      "lon": 106.714455,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:22:05.746375+07:00",
+        "finished_at": "2026-10-17T00:22:31.498670+07:00",
+        "elapsed_s": 25.8,
+        "key": "demo",
+        "listings": 56,
+        "news": 2,
+        "parcels": 166,
+        "photos": 50,
+        "error": false
+      }
+    },
+    "binhthanh-uvk": {
+      "lat": 10.8095728,
+      "lon": 106.7149885,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:22:31.499516+07:00",
+        "finished_at": "2026-10-17T00:23:06.980986+07:00",
+        "elapsed_s": 35.5,
+        "key": "demo",
+        "listings": 59,
+        "news": 4,
+        "parcels": 166,
+        "photos": 50,
+        "error": false
+      }
+    },
+    "thuduc-e1": {
+      "lat": 10.855145893000042,
+      "lon": 106.78536445000009,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:16:58.407807+07:00",
+        "finished_at": "2026-10-17T00:17:20.438656+07:00",
+        "elapsed_s": 21.5,
+        "key": "10.856_106.784",
+        "listings": 0,
+        "news": 1,
+        "parcels": 0,
+        "photos": 0,
+        "error": false
+      }
+    },
+    "thuduc-r": {
+      "lat": 10.840888842000027,
+      "lon": 106.80898043100007,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:17:20.593116+07:00",
+        "finished_at": "2026-10-17T00:17:21.382515+07:00",
+        "elapsed_s": 0.7,
+        "key": "10.840_106.808",
+        "listings": 0,
+        "news": 0,
+        "parcels": 0,
+        "photos": 0,
+        "error": false
+      }
+    },
+    "binhthanh-medical": {
+      "lat": 10.799468,
+      "lon": 106.7069006,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:23:06.981863+07:00",
+        "finished_at": "2026-10-17T00:23:31.170747+07:00",
+        "elapsed_s": 24.2,
+        "key": "demo",
+        "listings": 59,
+        "news": 4,
+        "parcels": 166,
+        "photos": 50,
+        "error": false
+      }
+    },
+    "thuduc-aidt": {
+      "lat": 10.8550176,
+      "lon": 106.7853313,
+      "build": {
+        "state": "done",
+        "started_at": "2026-10-17T00:20:08.533917+07:00",
+        "finished_at": "2026-10-17T00:20:27.382242+07:00",
+        "elapsed_s": 18.7,
+        "key": "10.856_106.784",
+        "listings": 0,
+        "news": 1,
+        "parcels": 0,
+        "photos": 0,
+        "error": false
+      }
+    }
+  }
+}

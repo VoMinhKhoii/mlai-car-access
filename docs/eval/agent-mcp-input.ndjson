@@ -1,0 +1,5 @@
+{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05"}}
+{"jsonrpc": "2.0", "method": "notifications/initialized"}
+{"jsonrpc": "2.0", "id": 2, "method": "tools/list"}
+{"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "lap_ke_hoach", "arguments": {"lat": 10.7992432, "lon": 106.7123911, "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh", "vehicle_id": "toyota-fortuner", "intent": "park", "arrive_at": "2026-10-17T17:00:00+07:00", "dwell_min": 120}}}
+{"jsonrpc": "2.0", "id": 4, "method": "ping"}

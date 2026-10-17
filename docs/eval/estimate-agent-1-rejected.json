@@ -1,0 +1,9 @@
+{
+  "question": "Còn xe VF 3 của vợ tôi?",
+  "events": [
+    {
+      "type": "error",
+      "text": "Gemini trả phí chưa trả lời được (HTTP 429)."
+    }
+  ]
+}

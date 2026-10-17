@@ -8,6 +8,8 @@ so the caps are set at ~40–80% of the free tier.
 from __future__ import annotations
 
 import json
+import fcntl
+import os
 import threading
 from datetime import datetime, timedelta, timezone
 
@@ -44,7 +46,9 @@ def spend(sku: str) -> None:
         raise OverBudget(f"{sku}: not an allowed Google SKU")
     now = datetime.now(VN_TZ)
     month, day = now.strftime("%Y-%m"), now.strftime("%Y-%m-%d")
-    with _lock:
+    STORE.mkdir(parents=True, exist_ok=True)
+    with _lock, open(STORE / "google_usage.lock", "a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
         u = _load()
         m = u.setdefault(month, {}).setdefault(sku, 0)
         d = u.setdefault(day, {}).setdefault(sku, 0)
@@ -55,7 +59,9 @@ def spend(sku: str) -> None:
         u[month][sku] = m + 1
         u[day][sku] = d + 1
         STORE.mkdir(parents=True, exist_ok=True)
-        USAGE_FILE.write_text(json.dumps(u, indent=1))
+        tmp = USAGE_FILE.with_suffix(f".{os.getpid()}.tmp")
+        tmp.write_text(json.dumps(u, indent=1))
+        tmp.replace(USAGE_FILE)
 
 
 def report() -> dict:

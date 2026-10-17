@@ -1,0 +1,17 @@
+{
+  "pid": 69173,
+  "state": "waiting",
+  "start_at": "2026-10-17T21:00:00+07:00",
+  "stop_at": "2026-10-18T07:00:00+07:00",
+  "nice": 10,
+  "recurring": false,
+  "portal_requests_before_start": 0,
+  "command": [
+    "pipelines/crawl_city.py",
+    "--ranked",
+    "--portal-interval",
+    "180",
+    "--stop-at",
+    "2026-10-18T07:00:00+07:00"
+  ]
+}

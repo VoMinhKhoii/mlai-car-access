@@ -20,9 +20,9 @@ const atHHMM = (t0: number, s: string, after: number) => {
 }
 
 /** The stay as a band over the tide curve. Drag it (or click the track) to change the arrival time. */
-export function TideTimeline({ arrive, depart, leaveBefore, orAfter, exitFloods, station, onChange }: {
+export function TideTimeline({ arrive, depart, leaveBefore, orAfter, exitFloods, station, source, onChange }: {
   arrive: string; depart: string; leaveBefore?: string | null; orAfter?: string | null; exitFloods: boolean
-  station: string; onChange: (iso: string) => void
+  station: string; source: { bulletin: string; source_url: string; note: string }; onChange: (iso: string) => void
 }) {
   const t0 = dayStart(arrive)
   const [series, setSeries] = useState<{ t: number; v: number }[]>([])
@@ -91,6 +91,7 @@ export function TideTimeline({ arrive, depart, leaveBefore, orAfter, exitFloods,
         <span className="tl-peak num">Đỉnh trong lúc ở: <b>{vn(peak.v, 2)} m</b> lúc {hhmm(peak.t)}
           {alarms.BD3 != null && <span className={peak.v >= alarms.BD3 ? 'over' : ''}> · báo động 3: {vn(alarms.BD3, 1)} m</span>}</span>
       </header>
+      <p className="faint tl-source" title={source.note}><a href={source.source_url} target="_blank" rel="noreferrer">{source.bulletin}</a> · nội suy giữa đỉnh/chân triều</p>
       <div className="tl-track" ref={track} onClick={(e) => { if (e.target === e.currentTarget || (e.target as Element).tagName === 'svg' || (e.target as Element).tagName === 'path') onChange(new Date(snap(tAt(e.clientX))).toISOString()) }}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
           <defs>

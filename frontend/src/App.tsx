@@ -1,10 +1,11 @@
 import { CloudRain, FlaskConical, Layers, MapPin, Navigation, Sparkles, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { api, type AreaBuild, type AreaData, type Config, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
+import { api, type AgentPlan, type AreaBuild, type AreaData, type Config, type Flag, type Intent, type Plan, type Preset, type RainSpell, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles } from './MapView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Directions, type Place, type VehicleMode } from './components/Directions'
 import { GoongContrast, LiveStrip, NewsList, StopRow, Verdict } from './components/Result'
+import { Agent } from './components/Agent'
 import { EvidencePanel } from './components/Evidence'
 import { TideTimeline } from './components/TideTimeline'
 import { Segmented, useOutside, vnt } from './ds/ui'
@@ -16,6 +17,7 @@ const DEMO_ORIGIN: Place = { lat: 10.7725, lon: 106.698, label: 'Chợ Bến Th�
 const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
 export default function App() {
+  const [agentOpen, setAgentOpen] = useState(false)
   const [cfg, setCfg] = useState<Config | null>(null)
   const [fleet, setFleet] = useState<{ classes: Vehicle[]; models: Vehicle[] }>({ classes: [], models: [] })
   const [origin, setOrigin] = useState<Place | null>(null)
@@ -29,6 +31,7 @@ export default function App() {
   const [dwell, setDwell] = useState(120)
   const [arriveNow, setArriveNow] = useState(true)
   const [arrive, setArrive] = useState(() => toLocal(new Date().toISOString()))
+  const [agentRain, setAgentRain] = useState<RainSpell[] | null>(null)
   const [rainOn, setRainOn] = useState(false)
   const [rainMm, setRainMm] = useState(45)
   const [plan, setPlan] = useState<Plan | null>(null)
@@ -65,10 +68,11 @@ export default function App() {
   // "Đi ngay" = the next 5-minute mark, so the plan only refreshes when that mark moves.
   const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString()) : arrive
   const rain: RainSpell[] = useMemo(() => {
+    if (agentRain !== null) return agentRain
     if (!rainOn) return []
     const start = new Date(new Date(fromLocal(arriveLocal)).getTime() + 30 * 60e3)
     return [{ start: start.toISOString(), end: new Date(start.getTime() + 3600e3).toISOString(), mm_per_h: rainMm }]
-  }, [rainOn, rainMm, arriveLocal])
+  }, [rainOn, rainMm, arriveLocal, agentRain])
 
   // One plan per committed input; newer requests always win.
   const run = useCallback(async () => {
@@ -79,7 +83,7 @@ export default function App() {
     try {
       const r = await api.plan({
         lat: dest.lat, lon: dest.lon, label: dest.label, vehicle_id: vehicleId, intent,
-        arrive_at: fromLocal(arriveLocal), dwell_min: intent === 'pickup' ? 15 : dwell, rain,
+        arrive_at: fromLocal(arriveLocal), dwell_min: dwell, rain,
         origin: origin ? [origin.lat, origin.lon] : null, area: areaRef.current,
       })
       if (id !== reqId.current) return
@@ -142,7 +146,25 @@ export default function App() {
     else chooseDest({ lat, lon, label: r.label })
   }
 
+  function applyAgent(p: AgentPlan) {
+    chooseDest({ lat: p.lat, lon: p.lon, label: p.label })
+    areaRef.current = null
+    setVMode(p.vehicle_id.startsWith('class-') ? 'class' : 'model')
+    if (p.vehicle_id.startsWith('class-')) setClassId(p.vehicle_id)
+    else setModelId(p.vehicle_id)
+    setIntent(p.intent)
+    setArriveNow(false)
+    setArrive(toLocal(p.arrive_at))
+    setDwell(p.dwell_min)
+    setAgentRain(p.rain)
+    setRainOn(p.rain.length > 0)
+    if (p.rain[0]) setRainMm(p.rain[0].mm_per_h)
+    setSelected(0)
+    setSheet('half')
+  }
+
   function loadPreset(p: Preset) {
+    setAgentRain(null)
     const isClass = p.vehicle_id.startsWith('class-')
     setVMode(isClass ? 'class' : 'model')
     if (isClass) setClassId(p.vehicle_id)
@@ -197,9 +219,9 @@ export default function App() {
     setConfirmed(result)
   }
 
-  const padding = isMobile() ? { top: 190, left: 24, right: 24, bottom: 320 } : { top: 60, left: 460, right: 80, bottom: 190 }
+  const padding = isMobile() ? { top: 190, left: 24, right: 24, bottom: 320 } : { top: 60, left: 460, right: agentOpen ? 470 : 80, bottom: 190 }
 
-  if (!cfg) return <div className="boot">{error ? `Không kết nối được máy chủ: ${error}` : <span className="boot-mark display">Vào Được</span>}</div>
+  if (!cfg) return <div className="boot">{error ? `Không kết nối được máy chủ: ${error}` : <span className="boot-mark display">Ngõ Ngách</span>}</div>
 
   const goongOn = cfg.goong.tiles
   return (
@@ -215,17 +237,17 @@ export default function App() {
       <div className="side">
         <section className="card top">
           <header className="brand">
-            <span className="logo" aria-hidden>VĐ</span>
-            <span className="brand-name display">Vào Được</span>
+            <span className="logo" aria-hidden>NN</span>
+            <span className="brand-name display">Ngõ Ngách</span>
             <span className="brand-sub">lớp hẻm cho T-Maps</span>
             <DemoMenu open={menu === 'demo'} onOpen={(o) => setMenu(o ? 'demo' : null)} cfg={cfg} loadPreset={loadPreset}
-              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm} setRainMm={setRainMm} setFlag={setFlag}
+              rainOn={rainOn} setRainOn={(on) => { setAgentRain(null); setRainOn(on) }} rainMm={rainMm} setRainMm={(mm) => { setAgentRain(null); setRainMm(mm) }} setFlag={setFlag}
               canArrive={!!plan} onArrive={() => { setArrived(true); setConfirmed(''); setMenu(null) }} />
           </header>
           <Directions origin={origin} dest={dest} setOrigin={setOrigin} setDest={chooseDest} locating={locating} onLocate={locate}
             vehicle={vehicle} fleet={fleet} vMode={vMode} setVMode={setVMode} classId={classId} setClassId={setClassId}
             modelId={modelId} setModelId={setModelId} vetcLinked={vetcLinked} openVetc={() => setVetcOpen(true)} unlinkVetc={() => setVetcLinked(false)}
-            intent={intent} setIntent={setIntent} dwell={dwell} setDwell={setDwell}
+            intent={intent} setIntent={(i) => { setIntent(i); setDwell(i === 'pickup' ? 15 : 120) }} dwell={dwell} setDwell={setDwell}
             arrive={arriveLocal} setArrive={setArrive} arriveNow={arriveNow} setArriveNow={setArriveNow} />
         </section>
 
@@ -242,7 +264,7 @@ export default function App() {
                 <Verdict plan={plan} onLeaveBefore={leaveBefore} stale={busy} />
                 {build && <LiveStrip build={build} />}
                 {areaRef.current?.key === plan.area_key && <NewsList items={areaRef.current.news ?? []} />}
-                <h3 className="section-title">Chỗ {plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý</h3>
+                <h3 className="section-title">{plan.stop_points.some((s) => s.legality.status === 'Restricted') ? 'Các vị trí đã kiểm tra' : `Chỗ ${plan.intent === 'park' ? 'đỗ' : 'dừng'} gợi ý`}</h3>
                 <div className="stops">
                   {plan.stop_points.map((s, i) => (
                     <StopRow key={`${s.lat},${s.lon}`} s={s} plan={plan} index={i} selected={i === selected}
@@ -270,6 +292,7 @@ export default function App() {
             options={[{ value: 'arrival', label: 'Đoạn cuối' }, { value: 'trip', label: 'Cả tuyến' }]} />
         </div>
       )}
+      <Agent origin={origin} onPlan={applyAgent} open={agentOpen} setOpen={setAgentOpen} />
       <div className="map-tools">
         <LayersMenu open={menu === 'layers'} onOpen={(o) => setMenu(o ? 'layers' : null)} toggles={toggles} setToggles={setToggles}
           floodMoment={floodMoment} setFloodMoment={setFloodMoment} />
@@ -278,7 +301,7 @@ export default function App() {
       {plan && (
         <div className="timeline-dock">
           <TideTimeline arrive={fromLocal(arriveLocal)} depart={plan.window.depart} leaveBefore={plan.timing?.leave_before} orAfter={plan.timing?.or_after}
-            exitFloods={!!plan.timing} station={cfg.tide.station}
+            exitFloods={!!plan.timing} station={cfg.tide.station} source={cfg.tide}
             onChange={(iso) => { setArriveNow(false); setArrive(toLocal(iso)) }} />
         </div>
       )}
@@ -310,7 +333,7 @@ export default function App() {
         <div className="scrim" onClick={() => setVetcOpen(false)}>
           <div className="modal card" role="dialog" aria-label="Liên kết VETC" onClick={(e) => e.stopPropagation()}>
             <span className="tag brand">Mô phỏng · chưa có API VETC</span>
-            <h3 className="display">Vào Được muốn đọc thông tin xe trong VETC</h3>
+            <h3 className="display">Ngõ Ngách muốn đọc thông tin xe trong VETC</h3>
             <p>Chỉ để tính xe có vừa hẻm và lội nước được không:</p>
             <ul><li>Danh sách xe (biển số đã che)</li><li>Mẫu xe và số chỗ</li></ul>
             <p className="faint">Không đọc vị trí hay lịch sử qua trạm. Theo Luật Bảo vệ dữ liệu cá nhân 91/2025, bạn có thể rút lại đồng ý bất cứ lúc nào.</p>
@@ -329,7 +352,7 @@ function Welcome({ presets, loadPreset }: { presets: Preset[]; loadPreset: (p: P
   return (
     <div className="welcome">
       <h2 className="display">Xe của bạn vào được, và ra được, không?</h2>
-      <p className="muted">Nhập điểm đến. Vào Được kiểm tra bề rộng hẻm theo đúng xe của bạn, triều và ngập trong lúc bạn ở lại, luật dừng đỗ, rồi chỉ chỗ dừng gần nhất kèm quãng đi bộ.</p>
+      <p className="muted">Nhập điểm đến. Ngõ Ngách kiểm tra bề rộng hẻm theo đúng xe của bạn, triều và ngập trong lúc bạn ở lại, luật dừng đỗ, rồi chỉ chỗ dừng gần nhất kèm quãng đi bộ.</p>
       <div className="legend-row" aria-hidden>
         <span><i style={{ background: 'var(--fit-fits)' }} />Vừa xe</span>
         <span><i style={{ background: 'var(--fit-tight)' }} />Chật</span>

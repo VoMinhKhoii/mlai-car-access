@@ -11,6 +11,7 @@ review gate (Trí's JEV): ACCEPT / REVIEW / INSUFFICIENT_INFORMATION.
 from __future__ import annotations
 
 import base64
+import copy
 import json
 import os
 import re
@@ -18,7 +19,7 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from . import flags
+from . import agent_budget, flags
 from .config import STORE
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -63,6 +64,30 @@ def provider() -> tuple[str, str] | None:
     return None
 
 
+def gemini_generate(request, body: dict) -> dict:
+    """Retry a truncated/empty generation once; request settles each attempt's usage."""
+    body = copy.deepcopy(body)
+    config = body.setdefault("generationConfig", {})
+    config["maxOutputTokens"] = min(agent_budget.MAX_OUTPUT_TOKENS, max(
+        agent_budget.AGENT_OUTPUT_TOKENS,
+        config.get("maxOutputTokens", agent_budget.AGENT_OUTPUT_TOKENS)))
+    for attempt in range(2):
+        data = request(body)
+        candidates = data.get("candidates") or []
+        candidate = candidates[0] if candidates else {}
+        parts = (candidate.get("content") or {}).get("parts")
+        if candidate.get("finishReason") != "MAX_TOKENS" and parts:
+            return data
+        if attempt == 0:
+            # Use a new body so the signed history and the previous request stay intact.
+            body = copy.deepcopy(body)
+            config = body["generationConfig"]
+            config["maxOutputTokens"] = min(config["maxOutputTokens"] * 2,
+                                             agent_budget.MAX_OUTPUT_TOKENS)
+    raise ValueError("Mô hình đã hết giới hạn sinh câu trả lời hoặc trả về nội dung rỗng sau khi tự thử lại. "
+                     "Vui lòng rút gọn câu hỏi rồi thử lại.")
+
+
 def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> dict:
     prov = provider()
     if not prov:
@@ -73,15 +98,27 @@ def _call(prompt: str, image: bytes | None = None, mime: str = "image/jpeg") -> 
         parts = [{"text": prompt}] + ([{"inline_data": {"mime_type": mime, "data": b64}}] if b64 else [])
         body = {"contents": [{"parts": parts}],
                 "generationConfig": {"responseMimeType": "application/json", "temperature": 0}}
-        r = None
-        for key in gemini_keys():  # rotate past rate limits and keys that cannot serve this model
-            r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-                           params={"key": key}, json=body, timeout=60)
-            bad_key = r.status_code == 400 and "API key" in r.text
-            if r.status_code not in (429, 503, 403, 404) and not bad_key:
-                break
-        r.raise_for_status()
-        text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+        def request(body):
+            for key in gemini_keys():  # rotate past rate limits and unavailable models
+                if not agent_budget.free_project_available():
+                    raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết; chờ đến nửa đêm giờ Thái Bình Dương.")
+                r = httpx.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                               params={"key": key}, json=body, timeout=60)
+                if agent_budget.daily_quota_error(r.status_code, r.text):
+                    agent_budget.cool_down_free_project()
+                    raise NoModel("Hạn mức Gemini miễn phí của dự án đã hết; chờ đến nửa đêm giờ Thái Bình Dương.")
+                bad_key = r.status_code == 400 and "API key" in r.text
+                if r.status_code not in (429, 503, 403, 404) and not bad_key:
+                    break
+            else:
+                raise NoModel("Các khóa Gemini miễn phí đang bận hoặc hết hạn mức.")
+            r.raise_for_status()
+            data = r.json()
+            agent_budget.free_usage(data.get("usageMetadata"))
+            return data
+        data = gemini_generate(request, body)
+        text = "".join(p.get("text", "") for p in data["candidates"][0]["content"]["parts"]
+                       if not p.get("thought"))
     elif name == "openai":
         content = [{"type": "text", "text": prompt}]
         if b64:

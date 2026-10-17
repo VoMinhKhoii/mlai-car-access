@@ -1,0 +1,23 @@
+{
+  "before": {
+    "spent_usd": 0.0,
+    "free_calls": 41,
+    "paid_calls": 0,
+    "reservations": {},
+    "limit_usd": 3.0,
+    "reserved_usd": 0,
+    "paid_enabled": false
+  },
+  "after": {
+    "spent_usd": 0.0,
+    "free_calls": 74,
+    "paid_calls": 0,
+    "reservations": {},
+    "limit_usd": 3.0,
+    "reserved_usd": 0,
+    "paid_enabled": false
+  },
+  "round2_free_attempts": 33,
+  "round2_paid_attempts": 0,
+  "round2_spent_usd": 0.0
+}

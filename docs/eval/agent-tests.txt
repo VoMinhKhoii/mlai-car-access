@@ -1,0 +1,17 @@
+/Users/khoivo/Developer/mlai-car-access/backend/app/vehicles.py:112: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/vehicles/vn_car_profiles.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(CSV_PATH, encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/formparsers.py:10: PendingDeprecationWarning: Please use `import python_multipart` instead.
+  import multipart
+/Users/khoivo/Developer/mlai-car-access/backend/app/evidence.py:298: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/field/measurements.csv' mode='r' encoding='utf-8'>
+  for row in csv.DictReader(open(path, encoding="utf-8")):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/khoivo/Developer/mlai-car-access/backend/app/evidence.py:298: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/official/parcel_gaps.csv' mode='r' encoding='utf-8'>
+  for row in csv.DictReader(open(path, encoding="utf-8")):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+  warnings.warn(
+----------------------------------------------------------------------
+Ran 6 tests in 0.432s
+
+OK

@@ -1,7 +1,7 @@
 import type * as GeoJSON from 'geojson'
 export type Intent = 'park' | 'pickup'
 export type FitClass = 'fits' | 'tight' | 'no' | 'unknown' | 'blocked' | 'lot'
-export type FloodStatus = 'passable' | 'risky' | 'blocked'
+export type FloodStatus = 'passable' | 'risky' | 'blocked' | 'unknown'
 export type Legal = 'Permitted' | 'Restricted' | 'Prohibited' | 'Unverified'
 
 export interface Flag { name: string; label: string; detail: string; enabled: boolean }
@@ -36,15 +36,19 @@ export interface WidthRange {
   lo: number; hi: number | null; label: string; top_tier: string | null; review: boolean
   evidence: Bound[]; overruled: Bound[]; way_out_claims: Bound[]
 }
-export interface Depth { lo: number; hi: number; drivers: string[]; rain_driven: boolean; inferred: boolean }
+export interface Estimate {
+  answer: 'fits' | 'tight' | 'no' | 'unknown'; confidence: 'high' | 'medium' | 'low'; basis: string
+}
+export interface Depth { lo: number | null; hi: number | null; drivers: string[]; rain_driven: boolean; inferred: boolean; unknown_reasons?: string[] }
 export interface Rule { code: string; status: Legal; text: string; citation: string }
 export interface StopPoint {
   rank?: number; ok: boolean; kind: 'door' | 'street' | 'lot'; name: string; lat: number; lon: number
   way_id: number | null; tier: number; verified: boolean; badges: string[]
+  estimate: Estimate
   walk: { meters: number; minutes: number; geometry?: number[][]; wade?: { lo: number; hi: number; street: string } | null }
   route_in: { meters: number; geometry: number[][] } | null
   fit: { class: FitClass; width_range?: WidthRange; note?: string | null; needed?: { fits_min: number; tight_min: number; door_min: number } }
-  way_out: { mode: string; text: string; reverse_m?: number; tight_exit?: boolean; geometry?: number[][] }
+  way_out: { mode: string; text: string; reverse_m?: number; tight_exit?: boolean; manoeuvre_status?: string; geometry?: number[][] }
   flood: { stay: { status: FloodStatus; depth: Depth | null; at: string | null } }
   legality: { status: Legal; rules: Rule[] }
   fail_reasons: string[]; unverified_reasons: string[]
@@ -57,7 +61,7 @@ export interface Plan {
   vehicle: Vehicle
   intent: Intent
   window: { arrive: string; depart: string; dwell_min: number; tide_arrive: { level_m: number | null; alarm: string | null }; tide_depart: { level_m: number | null; alarm: string | null }; rain: RainSpell[] }
-  verdict: { code: string; headline: string; detail: string; timing?: string }
+  verdict: { code: string; headline: string; detail: string; timing?: string; estimate: Estimate; verified: boolean; unverified_reasons: string[] }
   timing: { leave_before: string | null; or_after: string | null; if_leave_before?: { headline: string; code: string } } | null
   stop_points: StopPoint[]
   door: StopPoint | null
@@ -87,6 +91,20 @@ export interface WayEvidence {
   photos: ListingPhoto[]
   flood_history: { records: { street: string; year: number; date: string; cause: string; depth_max_cm: number | null; precision: string; url: string }[]; inferred_from: string }
 }
+export interface AgentPlan {
+  lat: number; lon: number; label: string; vehicle_id: string; intent: Intent
+  arrive_at: string; dwell_min: number; rain: RainSpell[]
+}
+export interface AgentEvidence { way_id: number; lat: number; lon: number; label: string; source?: string }
+export type AgentEvent =
+  | { type: 'tool_call'; name: string; args: Record<string, unknown> }
+  | { type: 'tool_result'; name: string; summary: string; result?: { verdict?: { estimate?: Estimate } } }
+  | { type: 'ui'; plan: AgentPlan }
+  | { type: 'answer'; text: string; evidence?: AgentEvidence[] }
+  | { type: 'progress'; text: string }
+  | { type: 'validation'; violations: string[]; action: string }
+  | { type: 'done'; contents: Record<string, unknown>[] }
+  | { type: 'error'; text: string }
 export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
 async function j<T>(res: Response): Promise<T> {
@@ -137,6 +155,35 @@ export const api = {
       }
       if (done) return area
     }
+  },
+  cancelAgent: (requestId: string) => post(`/api/agent/cancel/${encodeURIComponent(requestId)}`, {}).then(j<{ cancelled: boolean }>),
+  async agent(body: { contents: Record<string, unknown>[]; message: string; origin: [number, number] | null; tools: boolean; request_id?: string }, onEvent: (e: AgentEvent) => void, signal?: AbortSignal) {
+    const res = await fetch('/api/agent', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal })
+    if (!res.ok) { await j(res); return }
+    if (!res.body) throw new Error('Không đọc được câu trả lời.')
+    const reader = res.body.getReader()
+    const dec = new TextDecoder()
+    let buf = ''
+    let finished = false
+    const line = (s: string) => {
+      if (!s.trim()) return
+      const event = JSON.parse(s) as AgentEvent
+      if (event.type === 'done' || event.type === 'error') finished = true
+      onEvent(event)
+    }
+    try {
+      for (;;) {
+        const { done, value } = await reader.read()
+        buf += done ? dec.decode() : dec.decode(value, { stream: true })
+        let nl
+        while ((nl = buf.indexOf('\n')) >= 0) {
+          line(buf.slice(0, nl))
+          buf = buf.slice(nl + 1)
+        }
+        if (done) { line(buf); break }
+      }
+      if (!finished) throw new Error('Kết nối gián đoạn. Vui lòng thử lại.')
+    } finally { await reader.cancel().catch(() => {}); reader.releaseLock() }
   },
   aiText: (text: string, source: string) => post('/api/ai/text', { text, source }).then(j<{ items: Record<string, unknown>[] }>),
 }

@@ -1,0 +1,14 @@
+test_conflicting_measurements_cannot_be_resolved_by_listing (test_engine_width.WidthBottleneckTests.test_conflicting_measurements_cannot_be_resolved_by_listing) ... /Users/khoivo/Developer/mlai-car-access/backend/app/vehicles.py:115: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/khoivo/Developer/mlai-car-access/data/vehicles/vn_car_profiles.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(CSV_PATH, encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_corner_cut_rejected_before_lookup (test_engine_width.WidthBottleneckTests.test_corner_cut_rejected_before_lookup) ... ok
+test_harmless_lower_tier_conflict_does_not_poison_measurement (test_engine_width.WidthBottleneckTests.test_harmless_lower_tier_conflict_does_not_poison_measurement) ... ok
+test_invalid_junction_cut_is_not_reintroduced_from_samples (test_engine_width.WidthBottleneckTests.test_invalid_junction_cut_is_not_reintroduced_from_samples) ... ok
+test_one_cut_does_not_certify_whole_way_even_with_listing (test_engine_width.WidthBottleneckTests.test_one_cut_does_not_certify_whole_way_even_with_listing) ... ok
+test_real_bottleneck_is_never_discarded (test_engine_width.WidthBottleneckTests.test_real_bottleneck_is_never_discarded) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.007s
+
+OK

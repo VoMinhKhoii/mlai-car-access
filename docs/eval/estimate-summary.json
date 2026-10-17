@@ -1,0 +1,101 @@
+{
+  "backend": "123 passed, 3 warnings, 38 subtests passed in 20.72s",
+  "extended": "1 failed, 194 passed, 4 warnings, 59 subtests passed in 53.02s",
+  "audit": {
+    "plans_completed": 1500,
+    "stops_offered": 3750,
+    "monotonic_plan_pairs": 3000,
+    "monotonic_fit_pairs": 4005700
+  },
+  "invariants": {
+    "crashes": 0,
+    "plan_monotonicity": 0,
+    "door_monotonicity": 0,
+    "fit_monotonicity": 0,
+    "reported_walk_over_cap": 0,
+    "walk_geometry_over_cap": 0,
+    "walk_geometry_mismatch": 0,
+    "stop_not_ok": 0,
+    "stop_fit_no": 0,
+    "stop_exit_none": 0,
+    "stop_reverse_over_60": 0,
+    "verdict_inconsistent": 0
+  },
+  "stable_source_hashes": true,
+  "paid_attempts": 8,
+  "paid_usd": 0.08607900000000002,
+  "files": [
+    "CONTEXT.md",
+    "backend/app/plan.py",
+    "backend/app/evidence.py",
+    "backend/app/agent.py",
+    "backend/tests/test_engine_estimate.py",
+    "frontend/src/api.ts",
+    "frontend/src/components/Result.tsx",
+    "frontend/src/components/Agent.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/index.css",
+    "mcp/protocol.py",
+    "docs/decision-log.md",
+    "pipelines/serve_cached_estimate.py",
+    "pipelines/verify_estimate_sweep.py",
+    "frontend/dist/"
+  ],
+  "verdicts": [
+    {
+      "case": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh · toyota-fortuner",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Đường Võ Duy Ninh, đi bộ 39 m — độ tin cậy thấp"
+    },
+    {
+      "case": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh · vinfast-vf-3",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Đường Võ Duy Ninh, đi bộ 39 m — độ tin cậy thấp"
+    },
+    {
+      "case": "220/9 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m (khá chật) — độ tin cậy trung bình"
+    },
+    {
+      "case": "220/9 · toyota-fortuner",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m (khá chật) — độ tin cậy trung bình"
+    },
+    {
+      "case": "220/9 · vinfast-vf-3",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m (khá chật) — độ tin cậy trung bình"
+    },
+    {
+      "case": "328 · vinfast-vf-5",
+      "before": "Chỉ có điểm dừng hạn chế theo luật",
+      "after": "Luật cấm dừng tại Hẻm 306 Xô Viết Nghệ Tĩnh — độ tin cậy cao"
+    },
+    {
+      "case": "Điểm cache 10.812_106.692 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Có thể vào tận cửa — độ tin cậy thấp"
+    },
+    {
+      "case": "Điểm cache 10.764_106.668 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên dừng đón/trả ở Nguyễn Tiểu La, đi bộ 4 m — độ tin cậy thấp"
+    },
+    {
+      "case": "Điểm cache 10.792_106.660 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Ước tính vào tận cửa khá chật — độ tin cậy thấp"
+    },
+    {
+      "case": "Điểm cache 10.788_106.668 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Có thể vào tận cửa — độ tin cậy thấp"
+    },
+    {
+      "case": "Điểm cache 10.764_106.608 · toyota-vios",
+      "before": "Chưa đủ bằng chứng để khẳng định",
+      "after": "Nên đỗ ở Hẻm 132/21 Mã Lò, đi bộ 60 m — độ tin cậy thấp"
+    }
+  ]
+}

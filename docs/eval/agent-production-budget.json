@@ -1,0 +1,14 @@
+{
+  "free_calls": 186,
+  "paid_calls": 1,
+  "spent_usd": 0.0,
+  "reservations": {},
+  "paid_enabled": false,
+  "initial_free_calls": 74,
+  "initial_paid_calls": 0,
+  "initial_spent_usd": 0,
+  "task_free_attempts": 112,
+  "task_paid_attempts": 1,
+  "task_budget_free_attempts": 250,
+  "paid_smoke_status": 403
+}

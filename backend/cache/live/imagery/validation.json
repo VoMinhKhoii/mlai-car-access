@@ -1,0 +1,19 @@
+{
+ "at": "2026-10-17T00:16:45+00:00",
+ "n_ways": 0,
+ "n_images": 0,
+ "mae_m": null,
+ "bias_m": null,
+ "interval_coverage": null,
+ "auto_approve": false,
+ "decision": "REVIEW-only: no independent field truth or full-way coverage; cadastral gap minus 1 m is a proxy.",
+ "comparison": "visible clear-width midpoint vs nearest valid cadastral gap_m minus 1 m, within 15 m, way-weighted",
+ "matches": [],
+ "way_level_proxy": {
+  "n_ways": 0,
+  "mae_m": null,
+  "bias_m": null,
+  "note": "Unlocated views vs narrowest surveyed gap minus 1 m; location/date/obstructions may differ. Not independent truth.",
+  "matches": []
+ }
+}

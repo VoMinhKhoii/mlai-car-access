@@ -1,0 +1,555 @@
+{
+  "toyota-fortuner": {
+    "destination": {
+      "lat": 10.792106,
+      "lon": 106.716661,
+      "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+    },
+    "vehicle": {
+      "id": "toyota-fortuner",
+      "label": "Toyota Fortuner",
+      "mirror_width": 2.105
+    },
+    "window": {
+      "arrive": "2026-10-17T12:00:00+07:00",
+      "depart": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 120,
+      "tide_arrive": {
+        "level_m": null,
+        "alarm": null
+      },
+      "tide_depart": {
+        "level_m": null,
+        "alarm": null
+      },
+      "rain": []
+    },
+    "tide_note": "Chưa có dự báo triều cho thời gian này; chưa xác minh được ngập.",
+    "verdict": {
+      "code": "nearby",
+      "headline": "Đỗ tại Ngô Tất Tố, đi bộ 300 m (~4 phút)",
+      "detail": "Xe không nên vào tận cửa"
+    },
+    "timing": null,
+    "stop_points": [
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 300,
+          "minutes": 4
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 338,
+          "minutes": 5
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Đường Võ Duy Ninh",
+        "kind": "street",
+        "walk": {
+          "meters": 46,
+          "minutes": 1
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 3.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      }
+    ],
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 6.97,
+        "hi": 7.27,
+        "label": "Đường phố",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m)"
+      },
+      "way_out": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)",
+      "flood": {
+        "status": "passable",
+        "depth": null,
+        "at": null
+      },
+      "legality": {
+        "status": "Permitted",
+        "rule": {
+          "code": "no-rule",
+          "status": "Permitted",
+          "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": [
+        "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+      ]
+    },
+    "standard_route": {
+      "unfit_ways": [
+        {
+          "way_id": 464839531,
+          "name": "Hẻm 113/4 Võ Duy Ninh",
+          "label": "Hẻm ba gác",
+          "fit": "no",
+          "lo": 1.87,
+          "hi": 2.17
+        }
+      ]
+    }
+  },
+  "vinfast-vf-3": {
+    "destination": {
+      "lat": 10.792106,
+      "lon": 106.716661,
+      "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+    },
+    "vehicle": {
+      "id": "vinfast-vf-3",
+      "label": "VinFast VF 3",
+      "mirror_width": 1.748
+    },
+    "window": {
+      "arrive": "2026-10-17T12:00:00+07:00",
+      "depart": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 120,
+      "tide_arrive": {
+        "level_m": null,
+        "alarm": null
+      },
+      "tide_depart": {
+        "level_m": null,
+        "alarm": null
+      },
+      "rain": []
+    },
+    "tide_note": "Chưa có dự báo triều cho thời gian này; chưa xác minh được ngập.",
+    "verdict": {
+      "code": "door",
+      "headline": "Xe vào tận cửa được",
+      "detail": "Quay đầu tại chỗ (đường rộng ≥ 7.0 m)"
+    },
+    "timing": null,
+    "stop_points": [
+      {
+        "name": "Trước cửa nhà",
+        "kind": "door",
+        "walk": {
+          "meters": 0,
+          "minutes": 0
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.97,
+          "hi": 7.27,
+          "label": "Đường phố",
+          "top_tier": "Official",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m)"
+        },
+        "way_out": "Quay đầu tại chỗ (đường rộng ≥ 7.0 m)",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 300,
+          "minutes": 4
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Quay đầu tại chỗ (đường rộng ≥ 6.0 m)",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 338,
+          "minutes": 5
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Quay đầu tại chỗ (đường rộng ≥ 6.0 m)",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      }
+    ],
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 6.97,
+        "hi": 7.27,
+        "label": "Đường phố",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m)"
+      },
+      "way_out": "Quay đầu tại chỗ (đường rộng ≥ 7.0 m)",
+      "flood": {
+        "status": "passable",
+        "depth": null,
+        "at": null
+      },
+      "legality": {
+        "status": "Permitted",
+        "rule": {
+          "code": "no-rule",
+          "status": "Permitted",
+          "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": []
+    },
+    "standard_route": {
+      "unfit_ways": [
+        {
+          "way_id": 464839531,
+          "name": "Hẻm 113/4 Võ Duy Ninh",
+          "label": "Hẻm ba gác",
+          "fit": "unknown",
+          "lo": 1.87,
+          "hi": 2.17
+        }
+      ]
+    }
+  },
+  "toyota-vios": {
+    "destination": {
+      "lat": 10.792106,
+      "lon": 106.716661,
+      "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+    },
+    "vehicle": {
+      "id": "toyota-vios",
+      "label": "Toyota Vios",
+      "mirror_width": 1.98
+    },
+    "window": {
+      "arrive": "2026-10-17T12:00:00+07:00",
+      "depart": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 120,
+      "tide_arrive": {
+        "level_m": null,
+        "alarm": null
+      },
+      "tide_depart": {
+        "level_m": null,
+        "alarm": null
+      },
+      "rain": []
+    },
+    "tide_note": "Chưa có dự báo triều cho thời gian này; chưa xác minh được ngập.",
+    "verdict": {
+      "code": "nearby",
+      "headline": "Đỗ tại Ngô Tất Tố, đi bộ 300 m (~4 phút)",
+      "detail": "Xe không nên vào tận cửa"
+    },
+    "timing": null,
+    "stop_points": [
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 300,
+          "minutes": 4
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Ngô Tất Tố",
+        "kind": "street",
+        "walk": {
+          "meters": 338,
+          "minutes": 5
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 6.0,
+          "hi": null,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=tertiary"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Permitted",
+          "rule": {
+            "code": "no-rule",
+            "status": "Permitted",
+            "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      },
+      {
+        "name": "Đường Võ Duy Ninh",
+        "kind": "street",
+        "walk": {
+          "meters": 46,
+          "minutes": 1
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 3.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential"
+        },
+        "way_out": "Đi thẳng ra đường lớn, không phải lùi",
+        "flood": {
+          "status": "passable",
+          "depth": null,
+          "at": null
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": []
+      }
+    ],
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 6.97,
+        "hi": 7.27,
+        "label": "Đường phố",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m)"
+      },
+      "way_out": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)",
+      "flood": {
+        "status": "passable",
+        "depth": null,
+        "at": null
+      },
+      "legality": {
+        "status": "Permitted",
+        "rule": {
+          "code": "no-rule",
+          "status": "Permitted",
+          "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": [
+        "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+      ]
+    },
+    "standard_route": {
+      "unfit_ways": [
+        {
+          "way_id": 464839531,
+          "name": "Hẻm 113/4 Võ Duy Ninh",
+          "label": "Hẻm ba gác",
+          "fit": "no",
+          "lo": 1.87,
+          "hi": 2.17
+        }
+      ]
+    }
+  }
+}

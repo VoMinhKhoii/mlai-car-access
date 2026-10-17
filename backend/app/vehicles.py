@@ -64,6 +64,7 @@ class VehicleProfile:
     safe_water_basis: str
     members: list[str] = field(default_factory=list)
     source_url: str = ""
+    assumptions: str = ""
 
     # D15
     @property
@@ -76,7 +77,7 @@ class VehicleProfile:
 
     @property
     def door_min(self) -> float:
-        return self.body_width + SIDE_CLEARANCE_M + DOOR_OPEN_M
+        return self.mirror_width + SIDE_CLEARANCE_M + DOOR_OPEN_M
 
     def to_json(self) -> dict:
         return {
@@ -87,7 +88,9 @@ class VehicleProfile:
             "ground_clearance": self.ground_clearance, "safe_water_depth": round(self.safe_water_depth, 3),
             "safe_water_basis": self.safe_water_basis, "members": self.members,
             "fits_min": round(self.fits_min, 2), "tight_min": round(self.tight_min, 2),
-            "three_point_width": round(three_point_width(self.id), 2), "source_url": self.source_url,
+            "three_point_width": round(three_point_width(self.id), 2),
+            "three_point_length": round(three_point_envelope(self.id)[1], 2),
+            "source_url": self.source_url, "door_min": round(self.door_min, 2), "assumptions": self.assumptions,
         }
 
 
@@ -95,7 +98,7 @@ def _safe_water(row: dict, gc: float) -> tuple[float, str]:
     wading = _num(row.get("wading_depth_mm"))
     if "EV" in row.get("powertrain", "") and "HEV" not in row.get("powertrain", ""):
         return gc, "Nhà sản xuất (VinFast): nước không vượt khoảng sáng gầm"
-    if wading and wading > gc + 1e-6:
+    if wading and wading / 1000 > gc + 1e-6:
         return 0.5 * wading / 1000, f"50% độ lội nước công bố ({int(wading)} mm, nước tĩnh, 7 km/h)"
     return min(gc, 0.25), "Toyota VN: không lội quá 25 cm; giới hạn bởi khoảng sáng gầm"
 
@@ -120,14 +123,20 @@ def _load_models() -> dict[str, VehicleProfile]:
         gc = (_num(row.get("ground_clearance_mm")) or 150) / 1000
         safe, basis = _safe_water(row, gc)
         R = _num(row.get("min_turning_radius_m"))
+        notes = row.get('notes', '')
+        if name == 'Mitsubishi Xpander' and '5.2/5.5' in notes:
+            R = 5.5
+        if name == 'Toyota Fortuner':
+            basis += ' (tham chiếu Fortuner diesel Australia; chưa xác minh biến thể petrol VN)'
         T = _num(row.get("track_front_mm"))
         p = VehicleProfile(
             id=_slug(name), label=name, kind="model", size_class=_class_of(name),
             powertrain=row.get("powertrain", ""), body_width=W,
             mirror_width=(mw / 1000) if mw else W + MIRROR_ALLOWANCE_M, mirror_estimated=not mw,
             length=_num(row["length_mm"]) / 1000, wheelbase=_num(row["wheelbase_mm"]) / 1000,
-            turning_radius=R or 0.0, turning_radius_estimated=R is None, track=(T / 1000) if T else None,
+            turning_radius=R or 0.0, turning_radius_estimated=R is None or "DERIVED" in notes, track=(T / 1000) if T else None,
             ground_clearance=gc, safe_water_depth=safe, safe_water_basis=basis, source_url=row.get("source_url", ""),
+            assumptions=notes + ("; khoảng sáng gầm giả định 150 mm" if not _num(row.get("ground_clearance_mm")) else ""),
         )
         models[p.id] = p
         if R is None:
@@ -153,11 +162,11 @@ def _load_classes() -> dict[str, VehicleProfile]:
             powertrain="mixed", body_width=max(m.body_width for m in members),
             mirror_width=widest.mirror_width, mirror_estimated=widest.mirror_estimated,
             length=longest.length, wheelbase=longest.wheelbase,
-            turning_radius=max(m.turning_radius for m in members), turning_radius_estimated=False,
+            turning_radius=max(m.turning_radius for m in members), turning_radius_estimated=True,
             track=None, ground_clearance=min(m.ground_clearance for m in members),
             safe_water_depth=lowest.safe_water_depth,
             safe_water_basis=f"Thấp nhất trong nhóm ({lowest.label}): {lowest.safe_water_basis}",
-            members=[m.label for m in members],
+            members=[m.label for m in members], assumptions="Bao kích thước bảo thủ của nhóm; bán kính/vệt bánh và các biến thể có bất định",
         )
     return out
 
@@ -180,31 +189,44 @@ def _members(pid: str) -> list[VehicleProfile]:
     return [m for m in _load_models().values() if m.size_class == p.size_class]
 
 
-@lru_cache(maxsize=4096)
 def turn_in_width(pid: str, street_width: float) -> float:
+    return _turn_in_cached(_geometry_key(pid), street_width)
+
+
+@lru_cache(maxsize=4096)
+def _turn_in_cached(key, street_width):
     """Narrowest alley a vehicle can turn into in one forward arc from a street (D16)."""
     worst = 0.0
-    for m in _members(pid):
-        kw = dict(T=m.track)
-        worst = max(worst, geometry.min_alley_for_turn_in(m.body_width, m.length, m.wheelbase,
-                                                          m.turning_radius, street_width,
-                                                          c=SIDE_CLEARANCE_M, **kw))
+    for _, body, mirrors, length, wheelbase, radius, track in key[2]:
+        worst = max(worst, geometry.min_alley_for_turn_in(body, length, wheelbase,
+                         radius, street_width, c=SIDE_CLEARANCE_M, T=track))
     return worst
 
 
 _TP_CACHE = CACHE / "three_point.json"
-_tp: dict[str, float] = json.loads(_TP_CACHE.read_text()) if _TP_CACHE.exists() else {}
+_tp: dict = {}  # derived values are process-local and keyed by specs and solver revision
+
+
+def _geometry_key(pid):
+    return ("ackermann-v2", SIDE_CLEARANCE_M, tuple((m.id, m.body_width, m.mirror_width, m.length,
+            m.wheelbase, m.turning_radius, m.track) for m in _members(pid)))
+
+
+def three_point_envelope(pid: str) -> tuple[float, float]:
+    """Conservative ideal corridor width AND length; never infer area from one cut."""
+    key = _geometry_key(pid)
+    if key not in _tp:
+        width, length = 0.0, 0.0
+        for m in _members(pid):
+            w, used = geometry.min_width_for_moves(m.body_width, m.length, m.wheelbase, m.turning_radius, 3,
+                                                  c=SIDE_CLEARANCE_M, T=m.track)
+            width = max(width, w)
+            length = max(length, used or float('inf'), 2*m.turning_radius + m.length)
+        if len(_tp) >= 128:
+            _tp.clear()
+        _tp[key] = (width, length)
+    return _tp[key]
 
 
 def three_point_width(pid: str) -> float:
-    """Narrowest space for a 3-point turn (D16); the simulation is slow, so results are cached on disk."""
-    if pid not in _tp:
-        worst = 0.0
-        for m in _members(pid):
-            w, _ = geometry.min_width_for_moves(m.body_width, m.length, m.wheelbase, m.turning_radius, 3,
-                                                c=SIDE_CLEARANCE_M, T=m.track)
-            worst = max(worst, w)
-        _tp[pid] = worst
-        _TP_CACHE.parent.mkdir(parents=True, exist_ok=True)
-        _TP_CACHE.write_text(json.dumps(_tp, indent=1))
-    return _tp[pid]
+    return three_point_envelope(pid)[0]

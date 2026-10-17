@@ -21,6 +21,11 @@ AI_FEATURES = {
         "detail": "Khi lập kế hoạch, đo khoảng cách giữa hai thửa đất đối diện cho tối đa 12 hẻm gần điểm đến: bằng chứng mức Số liệu chính thức.",
         "default": True,
     },
+    "footprint_widths": {
+        "label": "Bề rộng suy luận từ mái nhà (đã hiệu chỉnh)",
+        "detail": "Thử nghiệm, tắt mặc định: hiệu chỉnh Overture bằng địa chính vẫn sai số ±11,4 m và chưa phân biệt được hẻm hẹp/rộng. Mức Suy luận; địa chính luôn ưu tiên.",
+        "default": False,
+    },
     "building_gaps": {
         "label": "Bề rộng từ khoảng cách giữa hai dãy nhà",
         "detail": "Thử nghiệm, tắt mặc định: khoảng cách giữa footprint nhà hai bên hẻm (Overture). Kiểm chứng cho thấy chưa phân biệt được hẻm hẹp và hẻm rộng (lệch ~2–4 m).",

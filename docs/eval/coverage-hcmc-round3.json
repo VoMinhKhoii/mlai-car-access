@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-10-17T01:11:14.145149+07:00",
+  "crawl_updated_at": "2026-10-17T01:11:03.239843+07:00",
+  "ways_measured": 299,
+  "ways_with_data": 211,
+  "ways_drawn": 299,
+  "with_data_drawn": 211,
+  "cells_visited": 11,
+  "osm_cells_cached": 2769,
+  "png": "docs/eval/coverage-hcmc-round3.png"
+}

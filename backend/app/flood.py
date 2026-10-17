@@ -9,7 +9,8 @@ import json
 import math
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from functools import lru_cache
+from functools import lru_cache, wraps
+from contextvars import ContextVar
 
 from . import flags
 from .config import DATA, MOVING_WATER_BLOCK_M
@@ -116,6 +117,35 @@ def flood_profiles(g: AreaGraph) -> dict[int, FloodProfile]:
     return profiles
 
 
+_REQUEST = ContextVar('engine_flood_request', default=None)
+
+
+def request_cache(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        if _REQUEST.get() is not None:
+            return function(*args, **kwargs)
+        token = _REQUEST.set({})
+        try:
+            return function(*args, **kwargs)
+        finally:
+            _REQUEST.reset(token)
+    return wrapped
+
+
+def _memo_depth(function):
+    @wraps(function)
+    def wrapped(p,t,rain_scenario,name=''):
+        cache=_REQUEST.get()
+        if cache is None:
+            return function(p,t,rain_scenario,name)
+        key=('depth',id(p),t,tuple((s['start'],s['end'],s['mm_per_h']) for s in rain_scenario),name)
+        if key not in cache:
+            cache[key]=function(p,t,rain_scenario,name)
+        return cache[key]
+    return wrapped
+
+
 # ---- tide -----------------------------------------------------------------------
 
 @lru_cache(maxsize=1)
@@ -127,6 +157,9 @@ def tide_meta() -> dict:
 def _extremes() -> list[tuple[datetime, float]]:
     meta = tide_meta()
     highs = [(datetime.fromisoformat(h["t"]), h["level_m"]) for h in meta["highs"]]
+    if meta.get("lows"):
+        # Official unequal lows and a missing high (ct) must not become invented -1.9 m troughs.
+        return sorted(highs + [(datetime.fromisoformat(h["t"]), h["level_m"]) for h in meta["lows"]])
     out = []
     for (t1, l1), (t2, _) in zip(highs, highs[1:]):
         out.append((t1, l1))
@@ -178,27 +211,65 @@ class DepthRange:
     drivers: list[str]
     rain_driven: bool
     inferred: bool
+    known: bool = True
+    unknown_reasons: list[str] = field(default_factory=list)
 
     def to_json(self) -> dict:
-        return {"lo": round(self.lo, 2), "hi": round(self.hi, 2), "drivers": self.drivers,
-                "rain_driven": self.rain_driven, "inferred": self.inferred}
+        return {"lo": round(self.lo, 2) if self.known else None,
+                "hi": round(self.hi, 2) if self.known else None, "drivers": self.drivers,
+                "rain_driven": self.rain_driven, "inferred": self.inferred,
+                "known": self.known, "unknown_reasons": self.unknown_reasons}
 
 
 def rain_rate(t: datetime, scenario: list[dict]) -> float:
+    rates = [0.0]
     for s in scenario or []:
         a, b = datetime.fromisoformat(s["start"]), datetime.fromisoformat(s["end"])
         if a.tzinfo is None and t.tzinfo is not None:
             a, b = a.replace(tzinfo=t.tzinfo), b.replace(tzinfo=t.tzinfo)
         if a <= t <= b:
-            return float(s["mm_per_h"])
-    return 0.0
+            rates.append(max(0.0, float(s["mm_per_h"])))
+    return max(rates)
+
+
+RAIN_RETENTION_MIN = 60  # explicit conservative scenario assumption; not a calibrated recession model
+
+
+def _retained_rain(t, scenario):
+    rates = [rain_rate(t, scenario)]
+    for s in scenario or []:
+        end = datetime.fromisoformat(s['end'])
+        if end.tzinfo is None:
+            end = end.replace(tzinfo=t.tzinfo)
+        if end < t <= end + timedelta(minutes=RAIN_RETENTION_MIN):
+            rates.append(max(0.0, float(s['mm_per_h'])))
+    return max(rates)
+
+
+def evaluation_times(start, end, rain):
+    """All discontinuities and tide extrema, plus a bounded grid for diagnostics."""
+    if end < start:
+        raise ValueError('Dwell end precedes arrival')
+    out = {start, end}
+    out.update(t for t, _ in _extremes() if start <= t <= end)
+    for s in rain or []:
+        a, b = datetime.fromisoformat(s['start']), datetime.fromisoformat(s['end'])
+        if a.tzinfo is None:
+            a, b = a.replace(tzinfo=start.tzinfo), b.replace(tzinfo=start.tzinfo)
+        if b < a or float(s['mm_per_h']) < 0:
+            raise ValueError('Invalid rain interval')
+        for t in (a, b, b+timedelta(minutes=RAIN_RETENTION_MIN)):
+            for candidate in (t-timedelta(microseconds=1),t,t+timedelta(microseconds=1)):
+                if start <= candidate <= end:
+                    out.add(candidate)
+    return sorted(out)
 
 
 LIVE_FILE = ROOT_STORE / "live_flood_reports.jsonl"
 _FEATURE_OF_SOURCE = {"photo": "ai_photo_evidence", "camera": "ai_camera_flood"}
 
 
-def live_reports() -> list[dict]:
+def _read_live_reports() -> list[dict]:
     """Accepted flood-now reports from the AI features, each honouring its own flag."""
     if not LIVE_FILE.exists():
         return []
@@ -210,6 +281,15 @@ def live_reports() -> list[dict]:
         if flags.enabled(_FEATURE_OF_SOURCE.get(r.get("source"), "ai_text_rules")) and r.get("observed_at"):
             out.append(r)
     return out
+
+
+def live_reports():
+    cache=_REQUEST.get()
+    if cache is None:
+        return _read_live_reports()
+    if 'live_reports' not in cache:
+        cache['live_reports']=_read_live_reports()
+    return cache['live_reports']
 
 
 def _live_bound(name: str, t: datetime):
@@ -230,12 +310,18 @@ def _live_bound(name: str, t: datetime):
     return best
 
 
+@_memo_depth
 def depth_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], name: str = "") -> DepthRange | None:
     level = tide_level(t)
-    rain = rain_rate(t, rain_scenario)
+    rain = _retained_rain(t, rain_scenario)
     lo = hi = 0.0
     drivers: list[str] = []
     rain_driven = False
+    unknown = []
+    if p is None or not p.records:
+        unknown.append("Chưa có hồ sơ đáp ứng ngập của đoạn đường")
+    if p and p.count("tide", "combined") and level is None:
+        unknown.append("Ngoài thời hạn dự báo triều")
     live = _live_bound(name, t) if name else None
     if live:
         d, r = live
@@ -259,30 +345,32 @@ def depth_at(p: FloodProfile | None, t: datetime, rain_scenario: list[dict], nam
                 rlo, rhi = 0.10, max(0.30, p.depth_pct(0.5, "rain", "combined") or 0)
             else:
                 rlo, rhi = 0.0, 0.15
-            if drivers:  # rain on top of a high tide backs up the drains
+            if any(d.startswith("Triều ") for d in drivers):
                 rlo, rhi = rlo + 0.1, rhi + 0.1
             lo, hi = max(lo, rlo), max(hi, rhi)
             rain_driven = True
             drivers.append(f"Mưa {rain:g} mm/h")
         elif rain >= 60:
-            lo, hi = max(lo, 0.0), max(hi, 0.10)
             rain_driven = True
+            unknown.append("Chưa biết độ sâu ứng với mưa lớn tại đoạn này")
             drivers.append(f"Mưa {rain:g} mm/h (chưa có ghi nhận ngập ở đoạn này)")
-    if hi <= 0:
-        return None
-    return DepthRange(lo, hi, drivers, rain_driven, bool(p and p.inferred_from))
+    if rain > rain_rate(t, rain_scenario):
+        drivers.append("Giả định nước mưa lưu lại 60 phút; chưa hiệu chuẩn thời gian rút")
+    return DepthRange(lo, hi, drivers, rain_driven, bool(p and p.inferred_from), not unknown, unknown)
 
 
-STATUS_ORDER = {"passable": 0, "risky": 1, "blocked": 2}
+STATUS_ORDER = {"passable": 0, "unknown": 1, "risky": 2, "blocked": 3}
 
 
 def flood_status(d: DepthRange | None, safe_depth: float) -> str:
     if d is None:
-        return "passable"
-    if d.rain_driven and d.lo >= MOVING_WATER_BLOCK_M:
+        return "unknown"
+    if d.rain_driven and d.hi >= MOVING_WATER_BLOCK_M:
         return "blocked"
     if d.lo >= safe_depth:
         return "blocked"
+    if not d.known:
+        return "unknown"
     if d.hi >= safe_depth or (d.rain_driven and d.hi >= MOVING_WATER_BLOCK_M):
         return "risky"
     return "passable"
@@ -291,11 +379,12 @@ def flood_status(d: DepthRange | None, safe_depth: float) -> str:
 def worst_over(p: FloodProfile | None, times: list[datetime], rain: list[dict], safe: float, name: str = ""):
     """Worst Flood Status over a set of times, with the depth that caused it."""
     worst, worst_d, worst_t = "passable", None, None
+    if not times:
+        return "unknown", None, None
+    times = sorted(set(times) | set(evaluation_times(min(times), max(times), rain)))
     for t in times:
         d = depth_at(p, t, rain, name)
         s = flood_status(d, safe)
-        if worst_d is None and d is not None:
-            worst_d, worst_t = d, t
-        if STATUS_ORDER[s] > STATUS_ORDER[worst]:
+        if (STATUS_ORDER[s], d.hi if d else -1) > (STATUS_ORDER[worst], worst_d.hi if worst_d else -1):
             worst, worst_d, worst_t = s, d, t
     return worst, worst_d, worst_t

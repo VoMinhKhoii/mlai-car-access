@@ -1,0 +1,53 @@
+         36602 function calls in 0.009 seconds
+
+   Ordered by: cumulative time
+   List reduced from 140 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.009    0.009 plan.py:175(plan)
+        6    0.001    0.000    0.003    0.001 plan.py:93(dijkstra)
+        4    0.000    0.000    0.003    0.001 plan.py:203(search)
+        2    0.001    0.000    0.002    0.001 plan.py:131(_project)
+     1055    0.001    0.000    0.001    0.000 osm.py:84(drivable)
+        2    0.000    0.000    0.001    0.001 plan.py:190(flood_at)
+        2    0.000    0.000    0.001    0.001 plan.py:191(<dictcomp>)
+      146    0.000    0.000    0.001    0.000 flood.py:294(worst_over)
+      148    0.000    0.000    0.001    0.000 flood.py:236(depth_at)
+     1342    0.001    0.000    0.001    0.000 plan.py:205(<lambda>)
+      150    0.001    0.000    0.001    0.000 flood.py:141(tide_level)
+        1    0.000    0.000    0.001    0.001 plan.py:687(_standard_route)
+     1316    0.000    0.000    0.001    0.000 plan.py:206(<lambda>)
+      411    0.000    0.000    0.001    0.000 plan.py:215(<lambda>)
+    12259    0.001    0.000    0.001    0.000 {method 'get' of 'dict' objects}
+     1845    0.000    0.000    0.000    0.000 osm.py:58(highway)
+        1    0.000    0.000    0.000    0.000 plan.py:55(compute_fit)
+        1    0.000    0.000    0.000    0.000 plan.py:710(_layers)
+      411    0.000    0.000    0.000    0.000 plan.py:212(<lambda>)
+     4000    0.000    0.000    0.000    0.000 plan.py:200(way_of)
+       60    0.000    0.000    0.000    0.000 flood.py:218(_live_bound)
+      411    0.000    0.000    0.000    0.000 osm.py:96(walkable)
+     1118    0.000    0.000    0.000    0.000 osm.py:62(name)
+      176    0.000    0.000    0.000    0.000 osm.py:70(kind)
+       60    0.000    0.000    0.000    0.000 flood.py:204(live_reports)
+     1128    0.000    0.000    0.000    0.000 {built-in method _heapq.heappop}
+        1    0.000    0.000    0.000    0.000 plan.py:194(<setcomp>)
+        1    0.000    0.000    0.000    0.000 plan.py:691(<setcomp>)
+       62    0.000    0.000    0.000    0.000 pathlib.py:1230(exists)
+       87    0.000    0.000    0.000    0.000 osm.py:44(haversine)
+     1342    0.000    0.000    0.000    0.000 plan.py:81(_usable)
+      891    0.000    0.000    0.000    0.000 {method 'search' of 're.Pattern' objects}
+       64    0.000    0.000    0.000    0.000 pathlib.py:1008(stat)
+     1316    0.000    0.000    0.000    0.000 plan.py:89(_cost)
+       64    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+      991    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+       60    0.000    0.000    0.000    0.000 flood.py:24(_street_key)
+        1    0.000    0.000    0.000    0.000 plan.py:27(area)
+        1    0.000    0.000    0.000    0.000 evidence.py:391(blocked_ways_today)
+       81    0.000    0.000    0.000    0.000 osm.py:66(is_alley)
+      652    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+      652    0.000    0.000    0.000    0.000 {built-in method math.hypot}
+        6    0.000    0.000    0.000    0.000 plan.py:96(<listcomp>)
+        1    0.000    0.000    0.000    0.000 parking_data.py:38(lots_near)
+        1    0.000    0.000    0.000    0.000 pathlib.py:1053(read_text)
+
+

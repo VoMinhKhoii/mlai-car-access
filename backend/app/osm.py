@@ -7,8 +7,10 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import unicodedata
 from dataclasses import dataclass, field
@@ -167,7 +169,7 @@ def _inside(lat: float, lon: float, bbox, margin_deg: float = 0.0) -> bool:
     return s + margin_deg <= lat <= n - margin_deg and w + margin_deg <= lon <= e - margin_deg
 
 
-def _fetch_overpass(lat: float, lon: float, radius: float) -> dict:
+def _fetch_overpass(lat: float, lon: float, radius: float, polite: bool = False) -> dict:
     r = int(radius)
     q = f"""[out:json][timeout:120];
 (
@@ -183,7 +185,7 @@ out skel qt;"""
     headers = {"User-Agent": "VaoDuoc/0.3 (MLAI Hackathon 2026; minhkhoitdn@gmail.com)"}
 
     def ask(ep: str) -> dict:
-        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=150)
+        resp = httpx.post(ep, data={"data": q}, headers=headers, timeout=45 if polite else 150)
         resp.raise_for_status()
         data = resp.json()
         if not data.get("elements"):
@@ -191,16 +193,28 @@ out skel qt;"""
         return data
 
     errors = []
-    pool = ThreadPoolExecutor(len(OVERPASS_ENDPOINTS))
-    futures = [pool.submit(ask, ep) for ep in OVERPASS_ENDPOINTS]
-    try:
-        for fut in as_completed(futures):
-            try:
-                return fut.result()
-            except Exception as exc:  # wait for the next mirror
-                errors.append(str(exc)[:120])
-    finally:
-        pool.shutdown(wait=False, cancel_futures=True)
+    if polite:  # overnight crawler: one mirror at a time, back off before retrying the set
+        for attempt in range(3):
+            for ep in OVERPASS_ENDPOINTS:
+                try:
+                    return ask(ep)
+                except Exception as exc:
+                    errors.append(type(exc).__name__)
+                    time.sleep(2)
+            time.sleep(10 * (attempt + 1))
+        raise RuntimeError(f"Overpass unavailable: {errors}")
+    for attempt in range(3):  # all mirrors at once; if every one fails (504s are common), wait and try again
+        pool = ThreadPoolExecutor(len(OVERPASS_ENDPOINTS))
+        futures = [pool.submit(ask, ep) for ep in OVERPASS_ENDPOINTS]
+        try:
+            for fut in as_completed(futures):
+                try:
+                    return fut.result()
+                except Exception as exc:  # wait for the next mirror
+                    errors.append(str(exc)[:120])
+        finally:
+            pool.shutdown(wait=False, cancel_futures=True)
+        time.sleep(8 * (attempt + 1))
     raise RuntimeError(f"Overpass unavailable: {errors}")
 
 
@@ -215,44 +229,65 @@ _fetch_locks: dict[str, threading.Lock] = {}
 _locks_guard = threading.Lock()
 
 
-def load_elements(lat: float, lon: float) -> tuple[list[dict], str]:
+def load_elements(lat: float, lon: float, polite: bool = False) -> tuple[list[dict], str]:
     key = area_key(lat, lon)
     with _locks_guard:
         lock = _fetch_locks.setdefault(key, threading.Lock())
     with lock:  # the plan request and the live build must not download the same area twice
-        return _load_elements(lat, lon, key)
+        return _load_elements(lat, lon, key, polite)
 
 
-def _load_elements(lat: float, lon: float, key: str) -> tuple[list[dict], str]:
+def _load_elements(lat: float, lon: float, key: str, polite: bool = False) -> tuple[list[dict], str]:
     if key == "demo":
         return json.loads(DEMO_FILE.read_text())["elements"], "demo-cache"
     path = CACHE / "osm" / f"area_{key}.json"
     if path.exists():
         return json.loads(path.read_text())["elements"], f"cache:{key}"
-    data = _fetch_overpass(lat, lon, AREA_RADIUS_M)
+    data = _fetch_overpass(lat, lon, AREA_RADIUS_M, polite=polite)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data))
+    tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+    tmp.write_text(json.dumps(data))
+    os.replace(tmp, path)  # the crawler and the live server may read this file concurrently
     return data["elements"], f"overpass:{key}"
 
 
 _GRAPHS: dict[str, AreaGraph] = {}
+_GRAPH_STAMPS: dict[str, tuple | None] = {}
+
+
+def _graph_stamp(key):
+    path = DEMO_FILE if key == "demo" else CACHE / "osm" / f"area_{key}.json"
+    try:
+        st = path.stat()
+        return st.st_mtime_ns, st.st_size
+    except OSError:
+        return None
 
 
 def cached_graph(lat: float, lon: float) -> AreaGraph | None:
     """The area graph only if it is already on disk or in memory (never downloads; used while typing)."""
     key = area_key(lat, lon)
     if key in _GRAPHS:
-        return _GRAPHS[key]
+        return build_graph(lat, lon) if _graph_stamp(key) is not None else _GRAPHS[key]
     if key == "demo" or (CACHE / "osm" / f"area_{key}.json").exists():
         return build_graph(lat, lon)
     return None
 
 
-def build_graph(lat: float, lon: float) -> AreaGraph:
+def build_graph(lat: float, lon: float, polite: bool = False) -> AreaGraph:
     key = area_key(lat, lon)
-    if key in _GRAPHS:
+    stamp = _graph_stamp(key)
+    if key in _GRAPHS and _GRAPH_STAMPS.get(key) == stamp:
         return _GRAPHS[key]
-    elements, source = load_elements(lat, lon)
+    elements, source = load_elements(lat, lon, polite=polite)
+    g = graph_from_elements(lat, lon, elements, source)
+    _GRAPHS[key] = g
+    _GRAPH_STAMPS[key] = stamp
+    return g
+
+
+def graph_from_elements(lat: float, lon: float, elements: list[dict], source: str = "cached-batch") -> AreaGraph:
+    """Build from an already fetched Overpass batch without another network request."""
     g = AreaGraph(center=(lat, lon), source=source)
     raw_ways = []
     for el in elements:
@@ -296,5 +331,4 @@ def build_graph(lat: float, lon: float) -> AreaGraph:
             if w.walkable:
                 g.walk_adj.setdefault(a, []).append((e.idx, b))
                 g.walk_adj.setdefault(b, []).append((e.idx, a))
-    _GRAPHS[key] = g
     return g

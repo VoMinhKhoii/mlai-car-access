@@ -1,0 +1,174 @@
+[
+  {
+    "vehicle": "vinfast-vf-3",
+    "three_point": 5.85,
+    "door_width": {
+      "lo": 0.0,
+      "hi": 5.79,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 2.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/32584409",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": ""
+        },
+        {
+          "lo": 0.0,
+          "hi": 5.79,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "observed_on": "",
+          "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": null,
+          "measurement_schema": "parcel-usable-v2"
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": []
+    },
+    "route": null,
+    "exit": {
+      "mode": "none",
+      "text": "Không vào được nên không xét đường ra",
+      "strict": false
+    },
+    "first_physical_junction": null,
+    "first_engine_turn_node": null,
+    "forward_path_without_candidate_edge_m": null,
+    "backtrack_nodes": [
+      {
+        "node": 9689499762,
+        "latlon": [
+          10.7992432,
+          106.7123911
+        ],
+        "distinct_ways": 2,
+        "reverse_so_far_m": 0.3720053530650844,
+        "physical_neighbors": 3,
+        "ways": [
+          {
+            "id": 32584409,
+            "name": "Hẻm 220/9 Xô Viết Nghệ Tĩnh",
+            "kind": "alley",
+            "fit": "unknown",
+            "width": [
+              0.0,
+              5.79
+            ]
+          },
+          {
+            "id": 1054386454,
+            "name": "Hẻm 220/9T Xô Viết Nghệ Tĩnh",
+            "kind": "alley",
+            "fit": "unknown",
+            "width": [
+              0.0,
+              3.7199999999999998
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "vehicle": "toyota-fortuner",
+    "three_point": 7.84,
+    "door_width": {
+      "lo": 0.0,
+      "hi": 5.79,
+      "label": "Chưa rõ bề rộng",
+      "top_tier": "Official",
+      "review": false,
+      "evidence": [
+        {
+          "lo": 2.5,
+          "hi": 15.0,
+          "tier": "Inferred",
+          "tier_vi": "Suy luận",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "observed_on": "",
+          "url": "https://www.openstreetmap.org/way/32584409",
+          "ai_feature": null,
+          "coverage_complete": true,
+          "coverage_m": null,
+          "measurement_schema": ""
+        },
+        {
+          "lo": 0.0,
+          "hi": 5.79,
+          "tier": "Official",
+          "tier_vi": "Số liệu chính thức",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m); p20 5,5 m, p80 5,5 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "observed_on": "",
+          "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+          "ai_feature": "parcel_widths",
+          "coverage_complete": false,
+          "coverage_m": null,
+          "measurement_schema": "parcel-usable-v2"
+        }
+      ],
+      "overruled": [],
+      "way_out_claims": []
+    },
+    "route": null,
+    "exit": {
+      "mode": "none",
+      "text": "Không vào được nên không xét đường ra",
+      "strict": false
+    },
+    "first_physical_junction": null,
+    "first_engine_turn_node": null,
+    "forward_path_without_candidate_edge_m": null,
+    "backtrack_nodes": [
+      {
+        "node": 9689499762,
+        "latlon": [
+          10.7992432,
+          106.7123911
+        ],
+        "distinct_ways": 2,
+        "reverse_so_far_m": 0.3720053530650844,
+        "physical_neighbors": 3,
+        "ways": [
+          {
+            "id": 32584409,
+            "name": "Hẻm 220/9 Xô Viết Nghệ Tĩnh",
+            "kind": "alley",
+            "fit": "unknown",
+            "width": [
+              0.0,
+              5.79
+            ]
+          },
+          {
+            "id": 1054386454,
+            "name": "Hẻm 220/9T Xô Viết Nghệ Tĩnh",
+            "kind": "alley",
+            "fit": "unknown",
+            "width": [
+              0.0,
+              3.7199999999999998
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

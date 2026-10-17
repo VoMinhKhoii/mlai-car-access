@@ -1,0 +1,107 @@
+{
+  "gate": "not_cleared_stop",
+  "reason": "Dataset use conditions and permission for automated raster reconstruction not established; city site has restrictive copying terms whose applicability to TNMT is unverified.",
+  "direct_http_requests": 9,
+  "getmap_requests": 0,
+  "wmts_tile_requests": 0,
+  "planning_point_requests": 0,
+  "arcgis_featureserver_requests": 0,
+  "validation": {
+    "matched_cuts_n": 0,
+    "matched_ways_n": 0,
+    "mae_m": null,
+    "bias_m": null,
+    "p90_absolute_error_m": null,
+    "per_cut": [],
+    "per_way": [],
+    "reason": "Step 0 not cleared; no map acquisition or vectorization"
+  },
+  "requests": [
+    {
+      "file": "backend/cache/wms_vectorize_pilot/binhthanh_catalog.meta.json",
+      "url": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search?any=B%C3%ACnh%20Th%E1%BA%A1nh",
+      "retrieved_at": "2026-10-17T00:37:34Z",
+      "status": 200,
+      "bytes": 73151,
+      "sha256": "070e2ff87381ee652fda8a1151b4de888a0abb8989984e7f001b587e42f38e9e",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/binhthanh_search.meta.json",
+      "url": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search?any=ranhthua_binhthanh",
+      "retrieved_at": "2026-10-17T00:37:18Z",
+      "status": 200,
+      "bytes": 16948,
+      "sha256": "f2b70739a86bd0c98a0c19ae228705ac5006360df174123adb9e1ce97f150df4",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/cadastral_record.meta.json",
+      "url": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/api/records/246a5939-530d-47e7-84b4-99d686e73811",
+      "retrieved_at": "2026-10-17T00:37:19Z",
+      "status": 200,
+      "bytes": 55578,
+      "sha256": "85f3f723b4e4482023570a37309283435a6d8e3648583244f1cf6395abf90e2b",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/cadastral_search.meta.json",
+      "url": "https://geoportal-stnmt.tphcm.gov.vn/geonetwork/srv/search?any=ranh%20th%E1%BB%ADa",
+      "retrieved_at": "2026-10-17T00:37:02Z",
+      "status": 200,
+      "bytes": 57952,
+      "sha256": "2345bef9a333df232b89f0569e5f5fbb31e28ffedb9cad036a7424b6162a47e1",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/city_terms.meta.json",
+      "url": "https://opendata.hochiminhcity.gov.vn/dieu-khoan-su-dung",
+      "retrieved_at": "2026-10-17T00:37:06Z",
+      "status": 200,
+      "bytes": 47670,
+      "sha256": "e76082effc4da081060fb59ffb660edc7d5f7fe4e29751918d292ac537311545",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/geodata-stnmt.tphcm.gov.vn_robots.meta.json",
+      "url": "https://geodata-stnmt.tphcm.gov.vn/robots.txt",
+      "retrieved_at": "2026-10-17T00:37:07Z",
+      "status": 404,
+      "bytes": 1084,
+      "sha256": "e355c479d81bbb8ab77514a1c5d6e937ae21affa28ff4ed606776280f7d8f51b",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/geoportal-stnmt.tphcm.gov.vn_robots.meta.json",
+      "url": "https://geoportal-stnmt.tphcm.gov.vn/robots.txt",
+      "retrieved_at": "2026-10-17T00:37:00Z",
+      "status": 404,
+      "bytes": 1412,
+      "sha256": "32d96263696347e3def15c838c96b8752c07d5aee36ab37a8c6b12f91d434818",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/opendata.hochiminhcity.gov.vn_robots.meta.json",
+      "url": "https://opendata.hochiminhcity.gov.vn/robots.txt",
+      "retrieved_at": "2026-10-17T00:37:04Z",
+      "status": 404,
+      "bytes": 162,
+      "sha256": "340c8464c2007ce3f80682e15dfafa4180b641d53c14201b929906b7b0284d87",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    },
+    {
+      "file": "backend/cache/wms_vectorize_pilot/wms_capabilities.meta.json",
+      "url": "https://geodata-stnmt.tphcm.gov.vn/geoserver/ows?service=WMS&version=1.3.0&request=GetCapabilities",
+      "retrieved_at": "2026-10-17T00:37:11Z",
+      "status": 200,
+      "bytes": 1471017,
+      "sha256": "aeae9b161d824162e09be07f0ffe0eadcce2af86114284ca4656fefe2cfebf34",
+      "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)"
+    }
+  ],
+  "external_web_search": {
+    "calls": 1,
+    "queries": 2,
+    "note": "Search discovery only; not included in direct HTTP count. No web-result pages opened."
+  }
+}

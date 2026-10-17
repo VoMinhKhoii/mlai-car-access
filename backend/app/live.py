@@ -13,6 +13,8 @@ street of this area. Coordinates are shifted ~90 m, so they are never used for m
 from __future__ import annotations
 
 import hashlib
+import fcntl
+import os
 import re
 import json
 import sys
@@ -37,7 +39,7 @@ API = "https://gateway.chotot.com/v1/public/ad-listing"
 REGIONS = "https://gateway.chotot.com/v1/public/web-proxy-api/loadRegions"
 HEADERS = {"User-Agent": "VaoDuoc-hackathon/0.2 (MLAI Hackathon 2026)"}
 DIR = CACHE / "live"
-TTL = timedelta(hours=12)
+TTL = timedelta(hours=float(os.environ.get("LISTINGS_TTL_H", "12")))
 PAGE, PAGES = 50, 4          # per district and listing type
 DISTRICTS = 2
 CHAIN_MAX_M = 1000.0
@@ -228,11 +230,107 @@ def review_photo(key: str, photo_id: str, approve: bool) -> None:
     path.write_text(json.dumps(photos, ensure_ascii=False, indent=1))
 
 
+AREAS = DIR / "areas"
+CITY_PARCELS = DIR / "city_parcels.json"
+_city_stamp = None
+_city_cache: dict = {}
+_city_lock = threading.Lock()
+
+
+def city_parcels() -> dict:
+    """Crawler-owned shallow results, reloaded only after an atomic replacement."""
+    global _city_stamp, _city_cache
+    with _city_lock:
+        try:
+            st = CITY_PARCELS.stat()
+            stamp = (st.st_mtime_ns, st.st_size)
+        except FileNotFoundError:
+            _city_stamp, _city_cache = None, {}
+            return _city_cache
+        if stamp != _city_stamp:
+            data = json.loads(CITY_PARCELS.read_text())
+            _city_cache, _city_stamp = data, stamp
+        return _city_cache
+
+
+def _merge_city(g, measured: list[dict]) -> list[dict]:
+    city = city_parcels()
+    by_way = {wid: {"way_id": wid, **city[str(wid)], "deep": bool(city[str(wid)].get("deep"))}
+              for wid in g.ways if city.get(str(wid))}
+    for p in measured:
+        current = by_way.get(p["way_id"], {})
+        if current.get("sample_strategy") == "campus-full-5m" and p.get("queried_at", "") <= current.get("queried_at", ""):
+            continue  # an older partial destination scan must not mask the fresh full-way scan
+        if p.get("deep") or not by_way.get(p["way_id"], {}).get("deep"):
+            by_way[p["way_id"]] = p
+    return list(by_way.values())
+
+
+def _atomic_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
+    with tmp.open("w") as f:
+        json.dump(value, f, ensure_ascii=False)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)
+
+
+def _save_parcel_cache(path, cache, original=None):
+    with path.with_suffix(".lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        current = json.loads(path.read_text()) if path.exists() else {}
+        changes = cache if original is None else {k: v for k, v in cache.items() if k not in original or original[k] != v}
+        current.update(changes)
+        _atomic_json(path, current)
+
+
+HIT_M = 150.0  # parcel deep scans follow the path into one destination, so reuse a build only near one
+
+
+def cached_area(key: str, lat: float | None = None, lon: float | None = None) -> dict | None:
+    """A finished build saved on this server (pre-built for the demo by pipelines/prebuild_demo.py).
+    With a point, only a build made within HIT_M of it counts."""
+    path = AREAS / f"{key}.json"
+    if not path.exists():
+        return None
+    area = json.loads(path.read_text())
+    if lat is not None and not any(haversine(lat, lon, *d) <= HIT_M for d in area.get("dests", [])):
+        return None
+    return area
+
+
+def _save_area(area: dict, lat: float, lon: float) -> None:
+    """Keep one file per area key; parcels and destinations from every build of it are merged."""
+    AREAS.mkdir(parents=True, exist_ok=True)
+    with (AREAS / f"{area['key']}.lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        old = cached_area(area["key"]) or {}
+        parcels_by_way = {p["way_id"]: p for p in old.get("parcels", [])}
+        for p in area["parcels"]:
+            if p.get("deep") or p["way_id"] not in parcels_by_way:
+                parcels_by_way[p["way_id"]] = p
+        # Campuses sharing one routing key still need each centre's listings/news.
+        # Preserve all source rows collected for that key instead of dropping the
+        # preceding centre's evidence on the next forced build.
+        for field, identity in (("listings", lambda r: r.get("id") or r.get("url") or json.dumps(r, sort_keys=True)),
+                                ("photos", lambda r: r.get("image_url") or r.get("id")),
+                                ("news", lambda r: (r.get("url"), r.get("street")))):
+            rows = {identity(row): row for row in old.get(field, [])}
+            rows.update({identity(row): row for row in area.get(field, [])})
+            area[field] = list(rows.values())
+        area = {**area, "parcels": list(parcels_by_way.values()), "dests": old.get("dests", []) + [[lat, lon]]}
+        _atomic_json(AREAS / f"{area['key']}.json", area)
+
+
 def apply(area: dict | None, lat: float, lon: float) -> str:
     """Load a build result the browser sent back, so any server instance can plan with it."""
     key = area_key(lat, lon)
-    if area and area.get("key") == key:
-        STORE_EVIDENCE.set_live(key, area.get("listings") or [], area.get("photos") or [], area.get("parcels") or [])
+    if not (area and area.get("key") == key):
+        area = cached_area(key)
+    area = area or {}
+    measured = _merge_city(build_graph(lat, lon), area.get("parcels") or [])
+    STORE_EVIDENCE.set_live(key, area.get("listings") or [], area.get("photos") or [], measured)
     return key
 
 
@@ -247,6 +345,9 @@ def _run(job: dict, lat: float, lon: float) -> None:
     try:
         _step(job, "map", "running")
         g = build_graph(lat, lon)
+        city = city_parcels()
+        path = parcels.path_into(g, lat, lon) if city else []
+        warm_path = bool(path) and all(str(wid) in city for wid, _ in path)
         origin = {"demo-cache": "bản tải sẵn", "cache": "cache"}.get(g.source.split(":")[0], "Overpass trực tiếp")
         _step(job, "map", "done", f"{len(g.ways)} đoạn đường OSM ({origin})")
 
@@ -254,13 +355,18 @@ def _run(job: dict, lat: float, lon: float) -> None:
             _step(job, "parcels", "running")
             cache_path = DIR / "parcels.json"
             cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+            original_cache = cache.copy()
             try:
-                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine)
+                job["parcels"] = parcels.measure_area(g, lat, lon, cache, haversine, city_cache=city,
+                                                      parcel_lookup=parcels.point_cache())
                 detail = f"{len(job['parcels'])} hẻm gần điểm đến có bề rộng theo thửa đất"
             except parcels.Blocked:
                 detail = "Cổng quy hoạch tạm chặn truy vấn; thử lại sau"
+            except parcels.Unavailable:
+                detail = "Cổng quy hoạch tạm không phản hồi; dùng bề rộng đã lưu"
+            job["parcels"] = _merge_city(g, job["parcels"])
             cache_path.parent.mkdir(parents=True, exist_ok=True)
-            cache_path.write_text(json.dumps(cache))
+            _save_parcel_cache(cache_path, cache, original_cache)
             _step(job, "parcels", "done", detail)
         else:
             _step(job, "parcels", "skipped", "Đã tắt")
@@ -291,14 +397,16 @@ def _run(job: dict, lat: float, lon: float) -> None:
 
         _step(job, "news", "running")
         streets = _streets_near(g, lat, lon)
-        job["news"] = news.news_for(streets)
+        job["news"] = news.news_for(streets, use_ai=not warm_path)
         _step(job, "news", "done", f"{len(job['news'])} tin về {', '.join(streets[:3])}" if streets else "không có tên đường gần")
 
         if flags.enabled("ai_photo_evidence") and ai.provider():
             _step(job, "photos", "running")
-            job["photos"] = _photos(key, rows, job)
+            job["photos"] = _photos(key, [] if warm_path else rows, job)
             useful = [p for p in job["photos"] if p.get("width_m")]
-            _step(job, "photos", "done", f"{len(job['photos'])} ảnh đã đọc, {len(useful)} ảnh có bề rộng (chờ duyệt)")
+            detail = ("Đường vào đã được tra cứu thửa đất; dùng ảnh đã lưu" if warm_path else
+                      f"{len(job['photos'])} ảnh đã đọc, {len(useful)} ảnh có bề rộng (chờ duyệt)")
+            _step(job, "photos", "done", detail)
         else:
             _step(job, "photos", "skipped", "Bật “AI đọc ảnh tài xế gửi” để đọc ảnh tin rao")
         job["state"] = "done"
@@ -330,7 +438,7 @@ def _streets_near(g, lat: float, lon: float, n: int = 4) -> list[str]:
     return [v[1] for v in sorted(best.values())][:n]
 
 
-def build(lat: float, lon: float):
+def build(lat: float, lon: float, force: bool = False):
     """Run one area build inside the request and yield its status as it changes (NDJSON lines).
 
     The last line carries the result ({"area": {key, listings, photos}}); the browser keeps it and
@@ -345,6 +453,10 @@ def build(lat: float, lon: float):
     if not flags.enabled("live_crawl"):
         yield json.dumps({"status": {"key": key, "state": "off"}}) + "\n"
         return
+    if not force and (area := cached_area(key, lat, lon)):
+        yield json.dumps({"status": {**_status(job), **(area.get("status") or {}), "state": "done"}, "area": area},
+                         ensure_ascii=False) + "\n"
+        return
     t = threading.Thread(target=_run, args=(job, lat, lon), daemon=True)
     t.start()
     last = None
@@ -355,4 +467,7 @@ def build(lat: float, lon: float):
             last = snap
         t.join(0.7)
     area = {"key": key, "listings": job["listings"], "photos": job["photos"], "news": job["news"], "parcels": job["parcels"]}
+    if job["state"] == "done":
+        _save_area({**area, "status": _status(job)}, lat, lon)
+        area = cached_area(key)
     yield json.dumps({"status": _status(job), "area": area}, ensure_ascii=False) + "\n"

@@ -1,5 +1,5 @@
 import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, CircleHelp, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, TriangleAlert } from 'lucide-react'
-import type { AreaBuild, NewsItem, Plan, StopPoint } from '../api'
+import type { AreaBuild, NewsItem, Plan, StopPoint, Estimate } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
 
@@ -9,8 +9,7 @@ const hhmm = (iso: string) => new Date(new Date(iso).getTime() + 7 * 3600e3).toI
 
 export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBefore: (hhmm: string) => void; stale: boolean }) {
   const best = plan.stop_points[0]
-  const verb = plan.intent === 'park' ? 'Đỗ' : 'Dừng đón'
-  const doorWhy = plan.door && !plan.door.ok ? plan.door.fail_reasons[0] : null
+  const estimate = plan.verdict.estimate
   let tone: Tone = 'ok'
   let icon = <CircleCheck size={18} />
   let head = plan.verdict.headline
@@ -22,19 +21,15 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
     head = `Lúc ${hhmm(plan.window.depart)} đường ra sẽ ngập`
     sub = [plan.timing.leave_before && `Rời trước ${plan.timing.leave_before}`, plan.timing.or_after && `hoặc ở lại tới sau ${plan.timing.or_after}`]
       .filter(Boolean).join(' ') + '.'
-  } else if (plan.verdict.code === 'door') {
-    head = plan.intent === 'park' ? 'Vào tận cửa được' : 'Dừng đón ngay trước cửa được'
-    sub = best ? vnt(best.way_out.text) : sub
+  } else if (best?.legality.status === 'Restricted' || estimate?.answer === 'no') {
+    tone = 'bad'
+    icon = <Ban size={18} />
   } else if (plan.verdict.code === 'nearby' && best) {
     tone = 'brand'
     icon = <ArrowRightLeft size={18} />
-    head = `${verb} ở ${best.name}, đi bộ ${minutes(best.walk.minutes || 1)}`
-    sub = doorWhy ? `Không nên vào tận cửa: ${lower(vnt(doorWhy))}` : null
   } else if (plan.verdict.code === 'unverified') {
     tone = 'muted'
     icon = <CircleHelp size={18} />
-    head = 'Chưa chắc xe vào được tận cửa'
-    sub = best ? `Chắc nhất: ${verb.toLowerCase()} ở ${best.name}, đi bộ ${minutes(best.walk.minutes || 1)}.` : sub
   } else if (plan.verdict.code === 'none') {
     tone = 'bad'
     icon = <Ban size={18} />
@@ -45,6 +40,7 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
     <section className={`verdict tone-${tone} ${stale ? 'is-stale' : ''}`} aria-live="polite">
       <div className="verdict-kicker">{icon}<span>{KICKER[tone]}</span>{stale && <LoaderCircle size={14} className="spin" aria-label="Đang cập nhật" />}</div>
       <h2 className="display">{head}</h2>
+      {estimate && <EstimateLine estimate={estimate} />}
       {sub && <p className="verdict-sub">{sub}</p>}
       {plan.timing?.leave_before && (
         <div className="verdict-actions">
@@ -64,9 +60,14 @@ export function Verdict({ plan, onLeaveBefore, stale }: { plan: Plan; onLeaveBef
     </section>
   )
 }
-const KICKER: Record<Tone, string> = { ok: 'Vào được', brand: 'Dừng gần đó', warn: 'Cẩn thận giờ về', muted: 'Thiếu dữ liệu bề rộng', bad: 'Không có chỗ phù hợp', water: '' }
-const THEN: Record<string, string> = { door: 'vào và ra tận cửa được', nearby: 'đỗ gần đó, ra được', unverified: 'ra được, nhưng chưa chắc vào tận cửa', none: 'vẫn chưa có chỗ phù hợp' }
+const KICKER: Record<Tone, string> = { ok: 'Ước tính đến cửa', brand: 'Ước tính dừng gần đó', warn: 'Cẩn thận giờ về', muted: 'Ước tính theo bằng chứng hiện có', bad: 'Giới hạn cần chú ý', water: '' }
+const THEN: Record<string, string> = { door: 'có thể đến cửa theo mô hình', nearby: 'có điểm dừng gần đó theo mô hình', unverified: 'còn điểm chưa xác minh', none: 'vẫn chưa có chỗ phù hợp' }
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
+const CONFIDENCE = { high: 'cao', medium: 'trung bình', low: 'thấp' }
+const ESTIMATE = { fits: 'Ước tính vừa xe', tight: 'Ước tính khá chật', no: 'Không phù hợp', unknown: 'Chưa đủ bề rộng để ước tính' }
+function EstimateLine({ estimate }: { estimate: Estimate }) {
+  return <div className="estimate"><p><b>{ESTIMATE[estimate.answer]}</b> · Độ tin cậy {CONFIDENCE[estimate.confidence]}</p><p className="estimate-basis">Vì sao: {estimate.basis}</p></div>
+}
 
 /* ---------- live area build ---------- */
 
@@ -128,21 +129,23 @@ const FIT = {
   fits: { tone: 'ok', label: 'Vừa xe' }, tight: { tone: 'warn', label: 'Chật' }, no: { tone: 'bad', label: 'Không vừa' },
   unknown: { tone: 'muted', label: 'Chưa rõ bề rộng' }, blocked: { tone: 'bad', label: 'Đang bị chặn' }, lot: { tone: 'ok', label: 'Bãi đỗ' },
 } as const
-const LEGAL = { Permitted: { tone: 'ok', label: 'Được phép' }, Restricted: { tone: 'warn', label: 'Hạn chế' }, Prohibited: { tone: 'bad', label: 'Cấm' }, Unverified: { tone: 'muted', label: 'Chưa rõ luật' } } as const
-const FLOOD = { passable: { tone: 'ok', label: 'Trong ngưỡng xe' }, risky: { tone: 'warn', label: 'Có thể ngập' }, blocked: { tone: 'bad', label: 'Quá ngưỡng xe' } } as const
+const LEGAL = { Permitted: { tone: 'ok', label: 'Được phép' }, Restricted: { tone: 'warn', label: 'Luật cấm dừng' }, Prohibited: { tone: 'bad', label: 'Cấm' }, Unverified: { tone: 'muted', label: 'Không thấy quy định cấm đã biết' } } as const
+const FLOOD = { passable: { tone: 'ok', label: 'Trong ngưỡng theo mô hình' }, risky: { tone: 'warn', label: 'Có thể ngập' }, blocked: { tone: 'bad', label: 'Quá ngưỡng xe' }, unknown: { tone: 'muted', label: 'Chưa rõ ngập' } } as const
 
 function kindLabel(s: StopPoint) {
   if (s.kind === 'door') return 'Trước cửa'
   if (s.kind === 'lot') return s.lot?.source === 'VETC' ? 'Bãi đỗ · thanh toán VETC' : 'Bãi đỗ'
   return 'Lề đường'
 }
-function exitTone(s: StopPoint): Tone { return s.way_out.mode === 'none' ? 'bad' : s.way_out.tight_exit ? 'warn' : 'ok' }
+function exitUnknown(s: StopPoint) { return s.way_out.mode === 'unknown' || s.way_out.manoeuvre_status === 'unknown' }
+function exitTone(s: StopPoint): Tone { return s.way_out.mode === 'none' ? 'bad' : exitUnknown(s) ? 'muted' : s.way_out.tight_exit ? 'warn' : 'ok' }
 function exitShort(s: StopPoint) {
+  if (exitUnknown(s)) return 'Chưa rõ đường ra'
   if (s.kind === 'lot') return 'Ra theo cổng bãi'
   if (s.way_out.mode === 'reverse') return `Lùi ${s.way_out.reverse_m ?? ''} m`.replace('  ', ' ')
   if (s.way_out.mode === 'turn_here') return 'Quay đầu tại chỗ'
   if (s.way_out.mode === 'through') return 'Đi thẳng ra'
-  return s.way_out.mode === 'none' ? 'Khó ra' : 'Ra được'
+  return s.way_out.mode === 'none' ? 'Khó ra' : 'Chưa rõ đường ra'
 }
 
 export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
@@ -162,6 +165,7 @@ export function StopRow({ s, plan, index, selected, onSelect, onEvidence }: {
         </span>
         <span className="stop-time display num">{s.trip ? minutes(s.trip.total_min) : `${s.walk.minutes || 1}′`}</span>
       </button>
+      {s.estimate && <EstimateLine estimate={s.estimate} />}
       <div className="stop-tags">
         <Tag tone={fit.tone} icon={<CarFront size={13} />}>{fit.label}</Tag>
         <Tag tone={exitTone(s)} icon={<Navigation size={13} />}>{exitShort(s)}</Tag>
@@ -190,7 +194,7 @@ function StopChecks({ s, plan, onEvidence }: { s: StopPoint; plan: Plan; onEvide
       </Check>
       <Check icon={<Navigation size={16} />} title="Đường ra" tone={exitTone(s)}>{vnt(s.way_out.text)}</Check>
       <Check icon={<Droplets size={16} />} title="Ngập lúc ở lại" tone={FLOOD[s.flood.stay.status].tone}>
-        {d ? `Nước ${Math.round(d.lo * 100)}–${Math.round(d.hi * 100)} cm${s.flood.stay.at ? ` lúc ${s.flood.stay.at}` : ''}` : 'Chưa ghi nhận ngập ở đây'}
+        {d?.lo != null && d.hi != null ? `Nước ${Math.round(d.lo * 100)}–${Math.round(d.hi * 100)} cm${s.flood.stay.at ? ` lúc ${s.flood.stay.at}` : ''} theo mô hình` : `Chưa đủ dữ liệu ngập${d?.unknown_reasons?.length ? ': ' + d.unknown_reasons.join('; ') : ''}`}
         {`; xe chịu được ${Math.round(plan.vehicle.safe_water_depth * 100)} cm.`}
         {d?.inferred && ' Suy từ đường ngập liền kề.'}
       </Check>

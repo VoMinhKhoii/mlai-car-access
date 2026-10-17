@@ -1,0 +1,56 @@
+{
+  "demo": {
+    "cached_graph_cold_apply_area_s": 1.9428975000046194,
+    "first_plan_s": 1.129562749993056,
+    "warm_median_s": 0.5391232499969192,
+    "warm_max_s": 0.5443852909957059,
+    "ways": 4968,
+    "edges": 20561,
+    "candidates": {
+      "candidates": 736,
+      "passed": 221,
+      "rejected": 515
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Chưa đủ bằng chứng để khẳng định",
+      "detail": "Gợi ý: đỗ tại Hẻm 220/9 Xô Viết Nghệ Tĩnh, đi bộ 6 m"
+    }
+  },
+  "campus": {
+    "cached_graph_cold_apply_area_s": 0.17357516702031717,
+    "first_plan_s": 0.08728575002169237,
+    "warm_median_s": 0.061100375023670495,
+    "warm_max_s": 0.1361817920114845,
+    "ways": 605,
+    "edges": 3186,
+    "candidates": {
+      "candidates": 161,
+      "passed": 153,
+      "rejected": 8
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Chưa đủ bằng chứng để khẳng định",
+      "detail": "Gợi ý: đỗ tại Đường D6, đi bộ 51 m"
+    }
+  },
+  "sparse": {
+    "cached_graph_cold_apply_area_s": 0.07822804199531674,
+    "first_plan_s": 0.007997832959517837,
+    "warm_median_s": 0.004680707992520183,
+    "warm_max_s": 0.004711707995738834,
+    "ways": 73,
+    "edges": 411,
+    "candidates": {
+      "candidates": 0,
+      "passed": 0,
+      "rejected": 0
+    },
+    "verdict": {
+      "code": "none",
+      "headline": "Không có điểm dừng phù hợp trong 400 m đi bộ",
+      "detail": "Thử đổi giờ đến, thời gian ở lại hoặc chọn xe nhỏ hơn."
+    }
+  }
+}

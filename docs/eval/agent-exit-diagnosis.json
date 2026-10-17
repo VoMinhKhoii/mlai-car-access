@@ -1,0 +1,42 @@
+[
+  {
+    "vehicle": "toyota-fortuner",
+    "door_clear_width_lo": 5.49,
+    "three_point_width": 7.84,
+    "exit_checks": [
+      {
+        "strict": true,
+        "entry_has_exit": true,
+        "forward_has_exit": true,
+        "reverse_m": 224.0
+      },
+      {
+        "strict": false,
+        "entry_has_exit": true,
+        "forward_has_exit": true,
+        "reverse_m": 224.0
+      }
+    ],
+    "way_out": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+  },
+  {
+    "vehicle": "vinfast-vf-3",
+    "door_clear_width_lo": 5.49,
+    "three_point_width": 5.85,
+    "exit_checks": [
+      {
+        "strict": true,
+        "entry_has_exit": true,
+        "forward_has_exit": true,
+        "reverse_m": 224.0
+      },
+      {
+        "strict": false,
+        "entry_has_exit": true,
+        "forward_has_exit": true,
+        "reverse_m": 224.0
+      }
+    ],
+    "way_out": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+  }
+]

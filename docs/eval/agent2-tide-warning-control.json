@@ -1,0 +1,199 @@
+{
+  "destination": {
+    "lat": 10.7992432,
+    "lon": 106.7123911,
+    "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh"
+  },
+  "vehicle": {
+    "id": "toyota-vios",
+    "label": "Toyota Vios",
+    "mirror_width": 1.98
+  },
+  "window": {
+    "arrive": "2026-10-15T18:00:00+07:00",
+    "depart": "2026-10-15T20:00:00+07:00",
+    "dwell_min": 120,
+    "tide_arrive": {
+      "level_m": 0.86,
+      "alarm": null
+    },
+    "tide_depart": {
+      "level_m": 1.42,
+      "alarm": "BĐ1"
+    },
+    "rain": []
+  },
+  "tide_source": {
+    "station": "Phú An (sông Sài Gòn)",
+    "bulletin": "Bản tin dự báo đặc trưng thủy triều 5 ngày, số 289/2026 — Đài KTTV Nam Bộ",
+    "issued_at": "2026-10-16T09:08:00+07:00",
+    "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf",
+    "note": "Đỉnh và chân triều Phú An chép từ bản tin chính thức 289/2026, phát 09:08 ngày 16/10/2026. Ngày 15/10 là thực đo; 16–20/10 là dự báo. Mực nước giữa các cực trị được nội suy cosin, không phải số đo hay dự báo ngập đường. Ô ct ngày 18/10 không có đỉnh nên không tự thêm. Phạm vi có số liệu: 00:00 15/10 đến 18:00 20/10 (+07:00); ngoài phạm vi trả thiếu dữ liệu."
+  },
+  "tide_note": null,
+  "verdict": {
+    "code": "nearby",
+    "headline": "Đỗ tại Hẻm 294/22 Đường Xô Viết Nghệ Tĩnh, đi bộ 53 m (~1 phút)",
+    "detail": "Xe không nên vào tận cửa"
+  },
+  "timing": null,
+  "stop_points": [
+    {
+      "name": "Hẻm 294/22 Đường Xô Viết Nghệ Tĩnh",
+      "kind": "street",
+      "walk": {
+        "meters": 53,
+        "minutes": 1
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 7.75,
+        "hi": 8.05,
+        "label": "Đường phố",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,8 m (thửa cách nhau 8,8 m)"
+      },
+      "way_out": "Quay đầu tại chỗ (đường rộng ≥ 7.8 m)",
+      "flood": {
+        "status": "passable",
+        "depth": null,
+        "at": null
+      },
+      "legality": {
+        "status": "Permitted",
+        "rule": {
+          "code": "no-rule",
+          "status": "Permitted",
+          "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": []
+    },
+    {
+      "name": "Hẻm 502 Điện Biên Phủ",
+      "kind": "street",
+      "walk": {
+        "meters": 339,
+        "minutes": 5
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 6.48,
+        "hi": 6.78,
+        "label": "Đường phố",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 6,5 m (thửa cách nhau 7,5 m)"
+      },
+      "way_out": "Phải lùi 42 m (quá giới hạn 30 m) mới quay đầu được",
+      "flood": {
+        "status": "passable",
+        "depth": {
+          "lo": 0.0,
+          "hi": 0.1,
+          "drivers": [
+            "Triều 1.41 m (BĐ1)"
+          ],
+          "rain_driven": false,
+          "inferred": true
+        },
+        "at": "19:45"
+      },
+      "legality": {
+        "status": "Permitted",
+        "rule": {
+          "code": "no-rule",
+          "status": "Permitted",
+          "text": "Không có quy định cấm dừng/đỗ được biết tại vị trí này",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": []
+    },
+    {
+      "name": "Nhánh cạnh Xô Viết Nghệ Tĩnh",
+      "kind": "street",
+      "walk": {
+        "meters": 129,
+        "minutes": 2
+      },
+      "fit": "fits",
+      "width": {
+        "lo": 4.74,
+        "hi": 6.01,
+        "label": "Ô tô tránh",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt): hẹp nhất 4,7 m (thửa cách nhau 5,7 m)"
+      },
+      "way_out": "Phải lùi 53 m (quá giới hạn 30 m) mới quay đầu được",
+      "flood": {
+        "status": "passable",
+        "depth": {
+          "lo": 0.0,
+          "hi": 0.1,
+          "drivers": [
+            "Triều 1.41 m (BĐ1)"
+          ],
+          "rain_driven": false,
+          "inferred": true
+        },
+        "at": "19:45"
+      },
+      "legality": {
+        "status": "Unverified",
+        "rule": {
+          "code": "lane-unknown",
+          "status": "Unverified",
+          "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": []
+    }
+  ],
+  "door": {
+    "name": "Trước cửa nhà",
+    "kind": "door",
+    "walk": {
+      "meters": 0,
+      "minutes": 0
+    },
+    "fit": "fits",
+    "width": {
+      "lo": 5.49,
+      "hi": 5.79,
+      "label": "Ô tô tránh",
+      "top_tier": "Official",
+      "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+      "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 5,5 m (thửa cách nhau 6,5 m)"
+    },
+    "way_out": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)",
+    "flood": {
+      "status": "passable",
+      "depth": null,
+      "at": null
+    },
+    "legality": {
+      "status": "Unverified",
+      "rule": {
+        "code": "lane-unknown",
+        "status": "Unverified",
+        "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+        "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+      }
+    },
+    "lot": null,
+    "fail_reasons": [
+      "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"
+    ]
+  },
+  "standard_route": {
+    "unfit_ways": []
+  }
+}

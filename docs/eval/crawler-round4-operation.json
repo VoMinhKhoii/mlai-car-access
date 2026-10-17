@@ -1,0 +1,10 @@
+{
+  "scheduled_pid": 69173,
+  "scheduled_at_epoch": 1792197894.490009,
+  "start_at": "2026-10-17T21:00:00+07:00",
+  "stop_at": "2026-10-18T07:00:00+07:00",
+  "recurring": false,
+  "stdout": "backend/cache/live/crawl_night.out",
+  "crawler_log": "backend/cache/live/crawl_city.log",
+  "stop_command": "kill -TERM 69173"
+}

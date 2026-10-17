@@ -1,0 +1,18 @@
+{
+  "url": "https://geodata-stnmt.tphcm.gov.vn/robots.txt",
+  "retrieved_at": "2026-10-17T00:37:07Z",
+  "user_agent": "NgoNgach-WMSResearch/1.0 (HCMC alley parcel-gap pilot; terms audit only; contact pkhoa1331@gmail.com)",
+  "status": 404,
+  "headers": {
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "content-type": "text/html;charset=utf-8",
+    "content-language": "en",
+    "content-length": "1084",
+    "date": "Sat, 17 Oct 2026 00:36:35 GMT",
+    "set-cookie": "_frontend=!3z/XudmikAmfkzagCwsyXMX4tpbVZmrfFPNxBDMD4brW67uT4/699Bs2E3f8ptIIfhacYDp4yYlXzOA=; path=/; HttpOnly; secure, TS0165f63c=0150c7cfd17ab72f39edf2b0c6ae162dc1128d2a385d00e7f172a75280a782481bca843927c3c7874980f9469d8eccf35751cf82ea2e6149b825974f027ccf1f0589b38d39; path=/; domain=.geodata-stnmt.tphcm.gov.vn; HttpOnly; secure"
+  },
+  "bytes": 1084,
+  "sha256": "e355c479d81bbb8ab77514a1c5d6e937ae21affa28ff4ed606776280f7d8f51b"
+}

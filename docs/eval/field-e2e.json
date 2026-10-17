@@ -1,0 +1,63 @@
+{
+  "synthetic_test_only": true,
+  "storage": "temporary directory, not production measurements.csv",
+  "queue_way_id": 610102928,
+  "submitted_width_m": 2.4,
+  "measurement": {
+    "ok": true,
+    "created": true,
+    "tier": "Measured",
+    "recorded": {
+      "osm_way_id": 610102928,
+      "alley_name": "Hẻm 306/76 Xô Viết Nghệ Tĩnh",
+      "width_m": 2.4,
+      "date": "2026-10-17T00:46:07+00:00",
+      "recorded_at": "2026-10-17T00:46:07+00:00",
+      "measured_by": "Đội hiện trường",
+      "note": "",
+      "photo_url": "",
+      "submission_id": "f8038cef-5a20-4411-8516-d996af4ea65b",
+      "source": "Nhóm đo hiện trường (thước dây)",
+      "method": "tape",
+      "lat": 10.804317,
+      "lon": 106.7123523,
+      "accuracy_m": null,
+      "position_note": "",
+      "obstructions": "",
+      "turn_space": "unknown",
+      "turn_width_m": null,
+      "turn_length_m": null,
+      "coverage_complete": "true"
+    },
+    "distance_m": 0.0,
+    "evidence_version": 24
+  },
+  "api_plan_layer": {
+    "way_id": 610102928,
+    "name": "Hẻm 306/76 Xô Viết Nghệ Tĩnh",
+    "kind": "alley",
+    "fit": "tight",
+    "label": "Hẻm ba gác",
+    "lo": 2.3,
+    "hi": 2.5,
+    "top_tier": "Measured",
+    "review": false,
+    "note": null
+  },
+  "measured_bound": {
+    "lo": 2.3,
+    "hi": 2.5,
+    "tier": "Measured",
+    "tier_vi": "Đo thực tế",
+    "source": "Nhóm đo hiện trường (thước dây)",
+    "detail": "2.4 m; thước dây; Đội hiện trường. Đã kiểm tra cả đoạn và đo chỗ hẹp nhất.",
+    "observed_on": "2026-10-17T00:46:07+00:00",
+    "url": "",
+    "ai_feature": null,
+    "coverage_complete": true,
+    "coverage_m": null,
+    "measurement_schema": "field-clear-width-v1",
+    "estimate_m": 2.4
+  },
+  "network": "socket connections forbidden; no Gemini or portal calls"
+}

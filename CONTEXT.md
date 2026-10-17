@@ -29,7 +29,7 @@ The answer for one destination, one vehicle and one Stop Intent: up to three ran
 _Avoid_: result, recommendation
 
 **Verdict**:
-The one-line headline of an Arrival Plan: the vehicle can reach the door, must stop elsewhere, or the evidence is insufficient to say.
+The one-line headline of an Arrival Plan: the best estimate of reaching the door or stopping elsewhere, with an explicit confidence level and sourced reasons. Missing evidence lowers confidence; it does not suppress a useful estimate (D47).
 _Avoid_: score, rating
 
 **Alley Fit**:
@@ -151,7 +151,7 @@ One legal constraint on stopping or parking at a place, from traffic law, a road
 _Avoid_: regulation, ban
 
 **Permitted**:
-Stop Legality where no Stop Rule forbids the Stop Intent at that place and time.
+Stop Legality backed by affirmative authorization for the Stop Intent at that place and time. No known prohibition without affirmative coverage is Unverified, not Permitted (D35).
 _Avoid_: legal, allowed, OK
 
 **Restricted**:

@@ -1,0 +1,93 @@
+{
+  "n": 300,
+  "completed_destinations": 300,
+  "seed": 3317,
+  "arrive": "2026-10-17T12:00:00+07:00",
+  "vehicles": [
+    "vinfast-vf-3",
+    "toyota-vios",
+    "toyota-fortuner",
+    "kia-carnival",
+    "ford-transit"
+  ],
+  "counts": {
+    "plans_completed": 1500,
+    "walk_geometry_mismatch": 2141,
+    "stops_offered": 3309,
+    "monotonic_plan_pairs": 3000,
+    "monotonic_fit_pairs": 4005700,
+    "walk_geometry_over_cap": 319,
+    "plan_monotonicity": 108,
+    "door_monotonicity": 26
+  },
+  "timing": {
+    "cached_apply_s": {
+      "n": 300,
+      "min": 5.545798921957612e-05,
+      "median": 0.0002864999696612358,
+      "p95": 0.16248699999414384,
+      "max": 0.3260617920313962
+    },
+    "vinfast-vf-3": {
+      "n": 300,
+      "min": 0.0046511670225299895,
+      "median": 0.06588349948287942,
+      "p95": 0.34739545796765015,
+      "max": 0.6900011250399984
+    },
+    "toyota-vios": {
+      "n": 300,
+      "min": 0.004258125030901283,
+      "median": 0.060302209021756425,
+      "p95": 0.3805347919696942,
+      "max": 0.5359042920172215
+    },
+    "toyota-fortuner": {
+      "n": 300,
+      "min": 0.004193041997496039,
+      "median": 0.059638541482854635,
+      "p95": 0.342791875009425,
+      "max": 0.5932278750115074
+    },
+    "kia-carnival": {
+      "n": 300,
+      "min": 0.004147459054365754,
+      "median": 0.0594859164848458,
+      "p95": 0.3458087909966707,
+      "max": 0.6290959159960039
+    },
+    "ford-transit": {
+      "n": 300,
+      "min": 0.004158209019806236,
+      "median": 0.05742647949955426,
+      "p95": 0.35478674998739734,
+      "max": 0.4625187080237083
+    }
+  },
+  "source_sha256_start": {
+    "backend/app/plan.py": "1bcbdd33ef6016af47e0b5a2084cfa840c621d8254a49e5d520aac553437add9",
+    "backend/app/evidence.py": "0256d198e3ffc355a53dfbb8f82429530c8f8e7ec66fc52f8fcd669979fa73d2",
+    "backend/app/vehicles.py": "4d40478ddd65804a76f41d550a9029cd4041e804183fc08467bc88698b43c64b",
+    "backend/app/parcels.py": "e8ed7aba9f5c047298c620d50bf39258e78a3e4eeaa221732d30bf74c063c742",
+    "backend/app/geometry.py": "9536092f2abc8cdfe6c44c08beeecc9070b5388bed5322eb64a28fa9f35cf2fa",
+    "backend/app/osm.py": "eedea7d77697645e1b90f18ce53b647272948b3d6553ee70cd10db766a1ddb7e",
+    "backend/app/flood.py": "2f8933a1f1770af0e69fde66f7c4455c546eaea6d1110827cd90e59611d106a8",
+    "backend/app/legality.py": "00ec300863dab84d22eac3ead8bfc8b0a7326c6e3a87fce15f0abca6335ff306",
+    "backend/app/live.py": "09a87e91e8e0fc82aaed55b072f59cedd164060127ff28f1c82642fc1a7fb1da",
+    "backend/app/config.py": "f7fa82dca31f864ed05b92b2cf2a19885a238d7906c9c2fbf26a63682e32099c",
+    "backend/app/parking_data.py": "382e20f0492efe4db2f270de7da711ed3842551b37a788e82c7ac5505eb8132b"
+  },
+  "source_sha256_end": {
+    "backend/app/plan.py": "5e8a7573cdd4eb9af13d29e83b5f537d4f8396895253adfd5ced9a51750f045a",
+    "backend/app/evidence.py": "0256d198e3ffc355a53dfbb8f82429530c8f8e7ec66fc52f8fcd669979fa73d2",
+    "backend/app/vehicles.py": "c56573c3f9ea68253fe821533cc14c3c90e86ce689751975b6622f3491a31c59",
+    "backend/app/parcels.py": "e8ed7aba9f5c047298c620d50bf39258e78a3e4eeaa221732d30bf74c063c742",
+    "backend/app/geometry.py": "9536092f2abc8cdfe6c44c08beeecc9070b5388bed5322eb64a28fa9f35cf2fa",
+    "backend/app/osm.py": "eedea7d77697645e1b90f18ce53b647272948b3d6553ee70cd10db766a1ddb7e",
+    "backend/app/flood.py": "2f8933a1f1770af0e69fde66f7c4455c546eaea6d1110827cd90e59611d106a8",
+    "backend/app/legality.py": "00ec300863dab84d22eac3ead8bfc8b0a7326c6e3a87fce15f0abca6335ff306",
+    "backend/app/live.py": "09a87e91e8e0fc82aaed55b072f59cedd164060127ff28f1c82642fc1a7fb1da",
+    "backend/app/config.py": "f7fa82dca31f864ed05b92b2cf2a19885a238d7906c9c2fbf26a63682e32099c",
+    "backend/app/parking_data.py": "382e20f0492efe4db2f270de7da711ed3842551b37a788e82c7ac5505eb8132b"
+  }
+}

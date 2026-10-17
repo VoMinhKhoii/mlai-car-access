@@ -1,0 +1,1397 @@
+[
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/call",
+      "params": {
+        "name": "lap_ke_hoach",
+        "arguments": {
+          "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh",
+          "lat": 10.792106,
+          "lon": 106.716661,
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T19:00:00+07:00",
+          "dwell_min": 120
+        }
+      }
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Nên đỗ ở Đường Võ Duy Ninh, đi bộ 39 m — độ tin cậy thấp",
+      "detail": "Tại cửa: Trong phạm vi 5 m tính từ mép đường giao nhau (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4); Phần đường chỉ đủ một làn xe cơ giới: không được đỗ (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+      "estimate": {
+        "answer": "fits",
+        "confidence": "low",
+        "basis": "suy luận ≈3,5 m · 0/24 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 24,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Đường ra lúc rời đi chưa đủ bằng chứng",
+        "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+      ]
+    },
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "way_id": 464839550,
+      "lat": 10.792105888393326,
+      "lon": 106.71666136514123,
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "unknown",
+      "width": {
+        "lo": 0.0,
+        "hi": 4.5,
+        "label": "Chưa rõ bề rộng",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+        "evidence": [
+          {
+            "lo": 1.5,
+            "hi": 4.5,
+            "tier": "Inferred",
+            "tier_vi": "Suy luận",
+            "source": "OSM phân loại đường",
+            "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+            "observed_on": "",
+            "url": "https://www.openstreetmap.org/way/464839550",
+            "ai_feature": null,
+            "coverage_complete": true,
+            "coverage_m": null,
+            "measurement_schema": "",
+            "estimate_m": null
+          },
+          {
+            "lo": 0.0,
+            "hi": 7.27,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+            "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+            "observed_on": "",
+            "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+            "ai_feature": "parcel_widths",
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "parcel-usable-v2",
+            "estimate_m": 6.97
+          }
+        ]
+      },
+      "way_out": "Lùi khoảng 31 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+      "flood": {
+        "status": "passable",
+        "depth": {
+          "lo": 0.0,
+          "hi": 0.0,
+          "drivers": [],
+          "rain_driven": false,
+          "inferred": true,
+          "known": true,
+          "unknown_reasons": []
+        },
+        "at": "19:00"
+      },
+      "legality": {
+        "status": "Prohibited",
+        "rule": {
+          "code": "junction-5m",
+          "status": "Prohibited",
+          "text": "Trong phạm vi 5 m tính từ mép đường giao nhau",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": [
+        "Trong phạm vi 5 m tính từ mép đường giao nhau; Phần đường chỉ đủ một làn xe cơ giới: không được đỗ"
+      ],
+      "estimate": {
+        "answer": "no",
+        "confidence": "high",
+        "basis": "suy luận ≈3,5 m · 1/11 đoạn có mẫu đo (13% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · Trong phạm vi 5 m tính từ mép đường giao nhau (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4) · Phần đường chỉ đủ một làn xe cơ giới: không được đỗ (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+        "coverage": {
+          "sampled_segments": 1,
+          "total_segments": 11,
+          "sample_supported_fraction": 0.126,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (0.0–4.5 m; xe cần ≥ 2.31 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+        "Đường ra lúc rời đi chưa đủ bằng chứng"
+      ],
+      "way_out_status": {
+        "mode": "unknown",
+        "reverse_m": 31,
+        "tight_exit": true,
+        "text": "Lùi khoảng 31 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+      },
+      "legal_rules": [
+        {
+          "code": "junction-5m",
+          "status": "Prohibited",
+          "text": "Trong phạm vi 5 m tính từ mép đường giao nhau",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        },
+        {
+          "code": "single-lane",
+          "status": "Prohibited",
+          "text": "Phần đường chỉ đủ một làn xe cơ giới: không được đỗ",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      ]
+    },
+    "stop_points": [
+      {
+        "name": "Đường Võ Duy Ninh",
+        "kind": "street",
+        "way_id": 193085738,
+        "lat": 10.791805007531996,
+        "lon": 106.7166424858583,
+        "walk": {
+          "meters": 39,
+          "minutes": 1
+        },
+        "fit": "unknown",
+        "width": {
+          "lo": 2.0,
+          "hi": 8.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=service",
+          "evidence": [
+            {
+              "lo": 2.0,
+              "hi": 8.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=service",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/193085738",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈3,5 m · 0/24 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 24,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (2.0–8.0 m; xe cần ≥ 2.31 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      {
+        "name": "Hẻm 75 Nguyễn Hữu Cảnh",
+        "kind": "street",
+        "way_id": 604837651,
+        "lat": 10.792209595567076,
+        "lon": 106.71718047693496,
+        "walk": {
+          "meters": 58,
+          "minutes": 1
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 2.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "evidence": [
+            {
+              "lo": 2.5,
+              "hi": 15.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=residential",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/604837651",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Lùi khoảng 35 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": true,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈4,0 m · 0/3 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 3,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "unknown",
+          "reverse_m": 35,
+          "tight_exit": true,
+          "text": "Lùi khoảng 35 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      {
+        "name": "Hẻm 75/2 Nguyễn Hữu Cảnh",
+        "kind": "street",
+        "way_id": 609967226,
+        "lat": 10.79268935,
+        "lon": 106.71746005,
+        "walk": {
+          "meters": 138,
+          "minutes": 2
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 2.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "evidence": [
+            {
+              "lo": 2.5,
+              "hi": 15.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=residential",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/609967226",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+        "flood": {
+          "status": "unknown",
+          "depth": {
+            "lo": null,
+            "hi": null,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": false,
+            "unknown_reasons": [
+              "Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+            ]
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈4,0 m · 0/3 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa rõ ngập · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 3,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 3.00 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu ngập: Chưa có hồ sơ đáp ứng ngập của đoạn đường",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "unknown",
+          "reverse_m": 46,
+          "tight_exit": true,
+          "text": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      }
+    ],
+    "isError": false
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/call",
+      "params": {
+        "name": "lap_ke_hoach",
+        "arguments": {
+          "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh",
+          "lat": 10.792106,
+          "lon": 106.716661,
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T19:00:00+07:00",
+          "dwell_min": 120
+        }
+      }
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Nên đỗ ở Đường Võ Duy Ninh, đi bộ 39 m — độ tin cậy thấp",
+      "detail": "Tại cửa: Trong phạm vi 5 m tính từ mép đường giao nhau (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4); Phần đường chỉ đủ một làn xe cơ giới: không được đỗ (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+      "estimate": {
+        "answer": "fits",
+        "confidence": "low",
+        "basis": "suy luận ≈3,5 m · 0/24 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+        "coverage": {
+          "sampled_segments": 0,
+          "total_segments": 24,
+          "sample_supported_fraction": 0.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 2.65 m)",
+        "Đường ra lúc rời đi chưa đủ bằng chứng",
+        "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+      ]
+    },
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "way_id": 464839550,
+      "lat": 10.792105888393326,
+      "lon": 106.71666136514123,
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "unknown",
+      "width": {
+        "lo": 0.0,
+        "hi": 4.5,
+        "label": "Chưa rõ bề rộng",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+        "evidence": [
+          {
+            "lo": 1.5,
+            "hi": 4.5,
+            "tier": "Inferred",
+            "tier_vi": "Suy luận",
+            "source": "OSM phân loại đường",
+            "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+            "observed_on": "",
+            "url": "https://www.openstreetmap.org/way/464839550",
+            "ai_feature": null,
+            "coverage_complete": true,
+            "coverage_m": null,
+            "measurement_schema": "",
+            "estimate_m": null
+          },
+          {
+            "lo": 0.0,
+            "hi": 7.27,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+            "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 1 mặt cắt): hẹp nhất 7,0 m (thửa cách nhau 8,0 m); p20 7,0 m, p80 7,0 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+            "observed_on": "",
+            "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+            "ai_feature": "parcel_widths",
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "parcel-usable-v2",
+            "estimate_m": 6.97
+          }
+        ]
+      },
+      "way_out": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+      "flood": {
+        "status": "passable",
+        "depth": {
+          "lo": 0.0,
+          "hi": 0.0,
+          "drivers": [],
+          "rain_driven": false,
+          "inferred": true,
+          "known": true,
+          "unknown_reasons": []
+        },
+        "at": "19:00"
+      },
+      "legality": {
+        "status": "Prohibited",
+        "rule": {
+          "code": "junction-5m",
+          "status": "Prohibited",
+          "text": "Trong phạm vi 5 m tính từ mép đường giao nhau",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": [
+        "Trong phạm vi 5 m tính từ mép đường giao nhau; Phần đường chỉ đủ một làn xe cơ giới: không được đỗ"
+      ],
+      "estimate": {
+        "answer": "no",
+        "confidence": "high",
+        "basis": "địa chính / chính thức ≈1,9 m · 2/15 đoạn có mẫu đo (20% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · Trong phạm vi 5 m tính từ mép đường giao nhau (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4) · Phần đường chỉ đủ một làn xe cơ giới: không được đỗ (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+        "coverage": {
+          "sampled_segments": 2,
+          "total_segments": 15,
+          "sample_supported_fraction": 0.201,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (0.0–4.5 m; xe cần ≥ 1.95 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 2.65 m)",
+        "Đường ra lúc rời đi chưa đủ bằng chứng"
+      ],
+      "way_out_status": {
+        "mode": "through",
+        "reverse_m": 0,
+        "tight_exit": false,
+        "manoeuvre_status": "unknown",
+        "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ"
+      },
+      "legal_rules": [
+        {
+          "code": "junction-5m",
+          "status": "Prohibited",
+          "text": "Trong phạm vi 5 m tính từ mép đường giao nhau",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        },
+        {
+          "code": "single-lane",
+          "status": "Prohibited",
+          "text": "Phần đường chỉ đủ một làn xe cơ giới: không được đỗ",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      ]
+    },
+    "stop_points": [
+      {
+        "name": "Đường Võ Duy Ninh",
+        "kind": "street",
+        "way_id": 193085738,
+        "lat": 10.791805007531996,
+        "lon": 106.7166424858583,
+        "walk": {
+          "meters": 39,
+          "minutes": 1
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 2.0,
+          "hi": 8.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=service",
+          "evidence": [
+            {
+              "lo": 2.0,
+              "hi": 8.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=service",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/193085738",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈3,5 m · 0/24 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 24,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.65 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      {
+        "name": "Hẻm 75 Nguyễn Hữu Cảnh",
+        "kind": "street",
+        "way_id": 604837651,
+        "lat": 10.792209595567076,
+        "lon": 106.71718047693496,
+        "walk": {
+          "meters": 58,
+          "minutes": 1
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 2.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "evidence": [
+            {
+              "lo": 2.5,
+              "hi": 15.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=residential",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/604837651",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": true,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "no",
+          "confidence": "low",
+          "basis": "địa chính / chính thức ≈1,9 m · 2/15 đoạn có mẫu đo (20% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 2,
+            "total_segments": 15,
+            "sample_supported_fraction": 0.205,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.65 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "unknown",
+          "text": "Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      {
+        "name": "Hẻm 75/2 Nguyễn Hữu Cảnh",
+        "kind": "street",
+        "way_id": 609967226,
+        "lat": 10.79268935,
+        "lon": 106.71746005,
+        "walk": {
+          "meters": 138,
+          "minutes": 2
+        },
+        "fit": "tight",
+        "width": {
+          "lo": 2.5,
+          "hi": 15.0,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "highway=residential",
+          "evidence": [
+            {
+              "lo": 2.5,
+              "hi": 15.0,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "highway=residential",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/609967226",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+        "flood": {
+          "status": "unknown",
+          "depth": {
+            "lo": null,
+            "hi": null,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": false,
+            "unknown_reasons": [
+              "Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+            ]
+          },
+          "at": "19:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈4,0 m · 0/3 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa rõ ngập · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 3,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.65 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu ngập: Chưa có hồ sơ đáp ứng ngập của đoạn đường",
+          "Chưa đủ dữ liệu pháp lý: Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)"
+        ],
+        "way_out_status": {
+          "mode": "unknown",
+          "reverse_m": 46,
+          "tight_exit": true,
+          "text": "Lùi khoảng 46 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+        },
+        "legal_rules": [
+          {
+            "code": "lane-unknown",
+            "status": "Unverified",
+            "text": "Chưa đủ bằng chứng hẻm rộng hơn 5.5 m (đủ hai làn xe)",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      }
+    ],
+    "isError": false
+  },
+  {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "method": "tools/call",
+      "params": {
+        "name": "lap_ke_hoach",
+        "arguments": {
+          "label": "328",
+          "lat": 10.8034189,
+          "lon": 106.711972,
+          "vehicle_id": "vinfast-vf-5",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T20:00:00+07:00",
+          "dwell_min": 15
+        }
+      }
+    },
+    "verdict": {
+      "code": "unverified",
+      "headline": "Luật cấm dừng tại Hẻm 306 Xô Viết Nghệ Tĩnh — độ tin cậy cao",
+      "detail": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+      "estimate": {
+        "answer": "no",
+        "confidence": "high",
+        "basis": "địa chính / chính thức ≈4,0 m · 1/1 đoạn có mẫu đo (100% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+        "coverage": {
+          "sampled_segments": 1,
+          "total_segments": 1,
+          "sample_supported_fraction": 1.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+        "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+        "Chưa đủ bằng chứng bề rộng (0.0–4.3 m; xe cần ≥ 2.17 m)",
+        "Chưa chắc đủ chỗ mở cửa xe (cần 2.87 m)",
+        "Đường ra lúc rời đi chưa đủ bằng chứng"
+      ]
+    },
+    "door": {
+      "name": "Trước cửa nhà",
+      "kind": "door",
+      "way_id": 610102931,
+      "lat": 10.8034189,
+      "lon": 106.711972,
+      "walk": {
+        "meters": 0,
+        "minutes": 0
+      },
+      "fit": "unknown",
+      "width": {
+        "lo": 0.0,
+        "hi": 2.66,
+        "label": "Hẻm xe máy",
+        "top_tier": "Official",
+        "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+        "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt, cách nhau 5 m): hẹp nhất 2,4 m (thửa cách nhau 3,4 m); p20 2,4 m, p80 5,2 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+        "evidence": [
+          {
+            "lo": 1.5,
+            "hi": 4.5,
+            "tier": "Inferred",
+            "tier_vi": "Suy luận",
+            "source": "OSM phân loại đường",
+            "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+            "observed_on": "",
+            "url": "https://www.openstreetmap.org/way/610102931",
+            "ai_feature": null,
+            "coverage_complete": true,
+            "coverage_m": null,
+            "measurement_schema": "",
+            "estimate_m": null
+          },
+          {
+            "lo": 0.0,
+            "hi": 2.66,
+            "tier": "Official",
+            "tier_vi": "Số liệu chính thức",
+            "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+            "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt, cách nhau 5 m): hẹp nhất 2,4 m (thửa cách nhau 3,4 m); p20 2,4 m, p80 5,2 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+            "observed_on": "",
+            "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+            "ai_feature": "parcel_widths",
+            "coverage_complete": false,
+            "coverage_m": null,
+            "measurement_schema": "parcel-usable-v2",
+            "estimate_m": 2.36
+          }
+        ]
+      },
+      "way_out": "Không vào được nên không xét đường ra",
+      "flood": {
+        "status": "unknown",
+        "depth": {
+          "lo": null,
+          "hi": null,
+          "drivers": [],
+          "rain_driven": false,
+          "inferred": false,
+          "known": false,
+          "unknown_reasons": [
+            "Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+          ]
+        },
+        "at": "20:00"
+      },
+      "legality": {
+        "status": "Restricted",
+        "rule": {
+          "code": "single-lane",
+          "status": "Restricted",
+          "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      },
+      "lot": null,
+      "fail_reasons": [
+        "Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)",
+        "Không đủ chỗ mở cửa xe (cần 2.87 m)",
+        "Không vào được nên không xét đường ra"
+      ],
+      "estimate": {
+        "answer": "no",
+        "confidence": "high",
+        "basis": "địa chính / chính thức ≈2,4 m · 1/1 đoạn có mẫu đo (100% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ ngập · Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+        "coverage": {
+          "sampled_segments": 1,
+          "total_segments": 1,
+          "sample_supported_fraction": 1.0,
+          "complete_strong_fraction": 0.0,
+          "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+        }
+      },
+      "verified": false,
+      "unverified_reasons": [
+        "Chưa đủ bằng chứng bề rộng (0.0–2.7 m; xe cần ≥ 2.17 m)",
+        "Chưa đủ dữ liệu ngập: Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+      ],
+      "way_out_status": {
+        "mode": "none",
+        "text": "Không vào được nên không xét đường ra"
+      },
+      "legal_rules": [
+        {
+          "code": "single-lane",
+          "status": "Restricted",
+          "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+          "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+        }
+      ]
+    },
+    "stop_points": [
+      {
+        "name": "Hẻm 306 Xô Viết Nghệ Tĩnh",
+        "kind": "street",
+        "way_id": 1330786034,
+        "lat": 10.802785885294876,
+        "lon": 106.71184745453112,
+        "walk": {
+          "meters": 79,
+          "minutes": 1
+        },
+        "fit": "unknown",
+        "width": {
+          "lo": 0.0,
+          "hi": 4.3,
+          "label": "Chưa rõ bề rộng",
+          "top_tier": "Official",
+          "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+          "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt): hẹp nhất 4,0 m (thửa cách nhau 5,0 m); p20 4,0 m, p80 4,8 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+          "evidence": [
+            {
+              "lo": 1.5,
+              "hi": 4.5,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/1330786034",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            },
+            {
+              "lo": 2.2,
+              "hi": null,
+              "tier": "Observed",
+              "tier_vi": "Đã quan sát",
+              "source": "OSM: ô tô được vào",
+              "detail": "motorcar=destination",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/1330786034",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            },
+            {
+              "lo": 0.0,
+              "hi": 4.3,
+              "tier": "Official",
+              "tier_vi": "Số liệu chính thức",
+              "source": "Thửa đất hai bên hẻm (cổng Thông tin quy hoạch TP.HCM)",
+              "detail": "Khoảng cách hai thửa đất đối diện trừ 1 m (đo 2 mặt cắt): hẹp nhất 4,0 m (thửa cách nhau 5,0 m); p20 4,0 m, p80 4,8 m; bất định ±0,3 m; chưa xác minh toàn bộ đoạn nếu thiếu phạm vi khảo sát",
+              "observed_on": "",
+              "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+              "ai_feature": "parcel_widths",
+              "coverage_complete": false,
+              "coverage_m": null,
+              "measurement_schema": "parcel-usable-v2",
+              "estimate_m": 4.0
+            }
+          ]
+        },
+        "way_out": "Lùi khoảng 49 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": true,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "20:00"
+        },
+        "legality": {
+          "status": "Restricted",
+          "rule": {
+            "code": "single-lane",
+            "status": "Restricted",
+            "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "no",
+          "confidence": "high",
+          "basis": "địa chính / chính thức ≈4,0 m · 1/1 đoạn có mẫu đo (100% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+          "coverage": {
+            "sampled_segments": 1,
+            "total_segments": 1,
+            "sample_supported_fraction": 1.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (0.0–4.3 m; xe cần ≥ 2.17 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.87 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng"
+        ],
+        "way_out_status": {
+          "mode": "unknown",
+          "reverse_m": 49,
+          "tight_exit": true,
+          "text": "Lùi khoảng 49 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+        },
+        "legal_rules": [
+          {
+            "code": "single-lane",
+            "status": "Restricted",
+            "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      },
+      {
+        "name": "Xô Viết Nghệ Tĩnh",
+        "kind": "street",
+        "way_id": 1330784594,
+        "lat": 10.803715156637857,
+        "lon": 106.71145139611659,
+        "walk": {
+          "meters": 109,
+          "minutes": 2
+        },
+        "fit": "fits",
+        "width": {
+          "lo": 8.25,
+          "hi": 13.75,
+          "label": "Đường phố",
+          "top_tier": "Inferred",
+          "source": "OSM số làn xe",
+          "detail": "highway=primary, lanes=3",
+          "evidence": [
+            {
+              "lo": 8.25,
+              "hi": 13.75,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM số làn xe",
+              "detail": "highway=primary, lanes=3",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/1330784594",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Đi tiếp ra đường lớn",
+        "flood": {
+          "status": "passable",
+          "depth": {
+            "lo": 0.0,
+            "hi": 0.0,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": true,
+            "unknown_reasons": []
+          },
+          "at": "20:00"
+        },
+        "legality": {
+          "status": "Unverified",
+          "rule": {
+            "code": "no-rule",
+            "status": "Unverified",
+            "text": "Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ",
+            "citation": "Dữ liệu pháp lý tại vị trí chưa đầy đủ"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "fits",
+          "confidence": "low",
+          "basis": "suy luận ≈9,8 m · 0/1 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa xác minh pháp lý",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 1,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Chưa đủ dữ liệu pháp lý: Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ"
+        ],
+        "way_out_status": {
+          "mode": "through",
+          "reverse_m": 0,
+          "tight_exit": false,
+          "manoeuvre_status": "verified_model",
+          "text": "Đi tiếp ra đường lớn"
+        },
+        "legal_rules": [
+          {
+            "code": "no-rule",
+            "status": "Unverified",
+            "text": "Không thấy quy định cấm đã biết trong dữ liệu hiện có; chưa xác minh đầy đủ biển báo và vị trí dừng/đỗ",
+            "citation": "Dữ liệu pháp lý tại vị trí chưa đầy đủ"
+          }
+        ]
+      },
+      {
+        "name": "Hẻm 306/76 Xô Viết Nghệ Tĩnh",
+        "kind": "street",
+        "way_id": 610102928,
+        "lat": 10.804322140270672,
+        "lon": 106.71209269785965,
+        "walk": {
+          "meters": 111,
+          "minutes": 2
+        },
+        "fit": "unknown",
+        "width": {
+          "lo": 1.5,
+          "hi": 4.5,
+          "label": "Hẻm xe hơi",
+          "top_tier": "Inferred",
+          "source": "OSM phân loại đường",
+          "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+          "evidence": [
+            {
+              "lo": 1.5,
+              "hi": 4.5,
+              "tier": "Inferred",
+              "tier_vi": "Suy luận",
+              "source": "OSM phân loại đường",
+              "detail": "service=alley (1 ô tô hoặc 2 xe máy)",
+              "observed_on": "",
+              "url": "https://www.openstreetmap.org/way/610102928",
+              "ai_feature": null,
+              "coverage_complete": true,
+              "coverage_m": null,
+              "measurement_schema": "",
+              "estimate_m": null
+            }
+          ]
+        },
+        "way_out": "Lùi khoảng 28 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu",
+        "flood": {
+          "status": "unknown",
+          "depth": {
+            "lo": null,
+            "hi": null,
+            "drivers": [],
+            "rain_driven": false,
+            "inferred": false,
+            "known": false,
+            "unknown_reasons": [
+              "Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+            ]
+          },
+          "at": "20:00"
+        },
+        "legality": {
+          "status": "Restricted",
+          "rule": {
+            "code": "single-lane",
+            "status": "Restricted",
+            "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        },
+        "lot": null,
+        "fail_reasons": [],
+        "estimate": {
+          "answer": "no",
+          "confidence": "high",
+          "basis": "suy luận ≈3,0 m · 0/3 đoạn có mẫu đo (0% chiều dài có mẫu) · chưa đo kín tuyến · chưa rõ đường ra / thao tác rẽ · chưa rõ ngập · Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới (Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4)",
+          "coverage": {
+            "sampled_segments": 0,
+            "total_segments": 3,
+            "sample_supported_fraction": 0.0,
+            "complete_strong_fraction": 0.0,
+            "scope": "Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn"
+          }
+        },
+        "verified": false,
+        "unverified_reasons": [
+          "Chưa xác minh lối nối, vỉa hè và chỗ qua đường",
+          "Đường vào đi qua đoạn chưa đủ bằng chứng (bề rộng hoặc ngập)",
+          "Chưa đủ bằng chứng bề rộng (1.5–4.5 m; xe cần ≥ 2.17 m)",
+          "Chưa chắc đủ chỗ mở cửa xe (cần 2.87 m)",
+          "Đường ra lúc rời đi chưa đủ bằng chứng",
+          "Chưa đủ dữ liệu ngập: Chưa có hồ sơ đáp ứng ngập của đoạn đường"
+        ],
+        "way_out_status": {
+          "mode": "unknown",
+          "reverse_m": 28,
+          "tight_exit": false,
+          "text": "Lùi khoảng 28 m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu"
+        },
+        "legal_rules": [
+          {
+            "code": "single-lane",
+            "status": "Restricted",
+            "text": "Không dừng, đỗ xe nơi phần đường chỉ đủ một làn xe cơ giới",
+            "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+          }
+        ]
+      }
+    ],
+    "isError": false
+  }
+]

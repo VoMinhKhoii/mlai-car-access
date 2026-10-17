@@ -56,7 +56,7 @@ def _keyword(item: dict) -> dict | None:
     return {**item, "kind": kind, "depth_cm": None, "summary": item["title"]} if kind else None
 
 
-def news_for(streets: list[str]) -> list[dict]:
+def news_for(streets: list[str], use_ai: bool = True) -> list[dict]:
     items, seen = [], set()
     with ThreadPoolExecutor(4) as pool:
         for batch in pool.map(lambda s: _safe(_search, s), streets):
@@ -67,7 +67,7 @@ def news_for(streets: list[str]) -> list[dict]:
     if not items:
         return []
     kept = []
-    if ai.provider():
+    if use_ai and ai.provider():
         try:
             listing = "\n".join(f"{i}. [{it['street']}] {it['title']} ({it['source']}, {it['date']})" for i, it in enumerate(items))
             out = ai._call(PROMPT + listing)

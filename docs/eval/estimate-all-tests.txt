@@ -1,0 +1,58 @@
+.................................. [ 17%]
+........................................................................ [ 54%]
+..........................F............................................. [ 91%]
+.................                                   [100%]
+=================================== FAILURES ===================================
+_ CityCacheTests.test_warm_path_keeps_destination_deep_scan_and_preserves_existing_deep _
+
+self = <test_crawl_city.CityCacheTests testMethod=test_warm_path_keeps_destination_deep_scan_and_preserves_existing_deep>
+
+    def test_warm_path_keeps_destination_deep_scan_and_preserves_existing_deep(self):
+        branch = SimpleNamespace(id=43, kind="alley", drivable=True, nodes=[1, 2])
+        graph = SimpleNamespace(ways={43: branch}, nodes={1: (10.8, 106.7), 2: (10.8001, 106.7)})
+        with patch.object(parcels, "path_into", return_value=[(42, [])]), \
+                patch.object(parcels, "measure", return_value=None) as measure:
+>           self.assertEqual(parcels.measure_area(graph, 10.8, 106.7, {}, osm.haversine, {"42": None}), [])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipelines/test_crawl_city.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+g = namespace(ways={43: namespace(id=43, kind='alley', drivable=True, nodes=[1, 2])}, nodes={1: (10.8, 106.7), 2: (10.8001, 106.7)})
+dest_lat = 10.8, dest_lon = 106.7, cache = {}
+haversine = <function haversine at 0x104a45c60>, city_cache = {'42': None}
+parcel_lookup = None
+
+    def measure_area(g, dest_lat: float, dest_lon: float, cache: dict, haversine, city_cache: dict | None = None,
+                     parcel_lookup=None) -> list[dict]:
+        """Deep scan of the path into the destination (a cut every 5 m), plus 2 cuts on the nearest other roads.
+        cache: key → result or None (keys "deep:<lat>,<lon>:<way>" and "<way>")."""
+        # Breadth samples never replace the destination-specific 5 m scan. On a portal
+        # failure live._merge_city still keeps those shallow samples, honestly labelled.
+        city_cache = city_cache or {}
+        out: dict[int, dict] = {}
+        budget = DEEP_MAX_CUTS
+        neighbors = {}
+>       for edge in g.edges:
+                    ^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'edges'
+
+backend/app/parcels.py:237: AttributeError
+=============================== warnings summary ===============================
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/formparsers.py:10
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/formparsers.py:10: PendingDeprecationWarning: Please use `import python_multipart` instead.
+    import multipart
+
+../../../../Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113
+  /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+    warnings.warn(
+
+backend/tests/test_agent_production.py::AgentProductionTests::test_raw_http_protocol_and_new_tools
+pipelines/test_evidence_city.py::test_router_augments_config_and_logs_without_changing_plan
+  /Users/khoivo/Library/Python/3.11/lib/python/site-packages/httpx/_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED pipelines/test_crawl_city.py::CityCacheTests::test_warm_path_keeps_destination_deep_scan_and_preserves_existing_deep
+1 failed, 194 passed, 4 warnings, 59 subtests passed in 53.02s

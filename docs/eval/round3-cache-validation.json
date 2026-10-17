@@ -1,0 +1,8 @@
+{
+  "validation": "Round 3 null-side query pruning preserves centre-cut widths using official polygon cache only",
+  "ways_compared": 40,
+  "median_abs_diff_m": 0.0,
+  "max_abs_diff_m": 0.0,
+  "incomplete_polygon_cache": [],
+  "network_requests": 0
+}

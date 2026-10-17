@@ -1,0 +1,15 @@
+{
+  "legacy_keys_retained": [
+    "station",
+    "bulletin",
+    "issued_at",
+    "source_url",
+    "alarm_levels_m",
+    "note",
+    "highs",
+    "low_level_m"
+  ],
+  "extension": "optional lows array; legacy highs + scalar low_level_m still supported",
+  "high_count": 11,
+  "low_count": 12
+}

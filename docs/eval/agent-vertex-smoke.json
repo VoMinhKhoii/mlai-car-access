@@ -1,0 +1,181 @@
+{
+  "recorded_at": "2026-10-16T18:54:27.389108+00:00",
+  "paid_attempts_this_task": 2,
+  "paid_attempt_limit": 3,
+  "plain": {
+    "call": 1,
+    "endpoint": "https://aiplatform.googleapis.com/v1/publishers/google/models/gemini-3.5-flash:generateContent",
+    "usageMetadata": {
+      "promptTokenCount": 6,
+      "candidatesTokenCount": 3,
+      "totalTokenCount": 63,
+      "trafficType": "ON_DEMAND",
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 6
+        }
+      ],
+      "candidatesTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 3
+        }
+      ],
+      "thoughtsTokenCount": 54
+    },
+    "answer": "Vertex OK.",
+    "ledger_delta_usd": 0.000522,
+    "ledger_before": {
+      "spent_usd": 0.0,
+      "free_calls": 186,
+      "paid_calls": 1,
+      "reservations": {},
+      "updated_at": "2026-10-16T18:33:43.180173+00:00",
+      "limit_usd": 3.0,
+      "reserved_usd": 0,
+      "paid_enabled": false
+    },
+    "ledger_after": {
+      "spent_usd": 0.000522,
+      "free_calls": 186,
+      "paid_calls": 2,
+      "reservations": {},
+      "updated_at": "2026-10-16T18:49:05.391488+00:00",
+      "prompt_tokens": 6,
+      "output_tokens": 57,
+      "thought_tokens": 54,
+      "limit_usd": 3.0,
+      "reserved_usd": 0,
+      "paid_enabled": false
+    }
+  },
+  "paid_function_smoke": {
+    "harness": "Real Vertex lap_ke_hoach calls, real HTTP /api/agent and engine; deterministic geocode scheduling and grounded final answers. Not a full model-synthesized-answer smoke.",
+    "calls": [
+      {
+        "number": 2,
+        "status": "failed_without_usage_metadata",
+        "countTokens": {
+          "totalTokens": 284,
+          "totalBillableCharacters": 686,
+          "promptTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 284
+            }
+          ]
+        },
+        "token_cost_bound_usd": 0.0027300000000000002,
+        "prior_signed_parts_sent": 0,
+        "prior_signatures_unchanged": true,
+        "ledger_charge_usd": 0.010818000000000001
+      }
+    ],
+    "plain_spend_usd": 0.000522
+  },
+  "paid_function_http_result": [
+    {
+      "turn": "fortuner",
+      "http_status": 200,
+      "answer": "",
+      "errors": [
+        "Nguồn dữ liệu tạm gián đoạn. Bạn có thể thử lại."
+      ],
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+          }
+        }
+      ],
+      "terminal": "error"
+    }
+  ],
+  "fallback_http_results": [
+    {
+      "turn": "fortuner",
+      "http_status": 200,
+      "answer": "Chưa đủ bằng chứng để khẳng định\nĐường Võ Duy Ninh; đi bộ 35 m; nguồn: OSM phân loại đường.\nHẻm 75 Nguyễn Hữu Cảnh; đi bộ 58 m; nguồn: OSM phân loại đường.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn.",
+      "errors": [],
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "name": "tim_dia_diem",
+          "args": {
+            "query": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+          }
+        },
+        {
+          "type": "tool_call",
+          "name": "lap_ke_hoach",
+          "args": {
+            "vehicle_id": "toyota-fortuner",
+            "intent": "park",
+            "dwell_min": 120,
+            "arrive_at": "2026-10-17T19:00:00+07:00",
+            "rain_mm_per_h": 0,
+            "lat": 10.792106,
+            "lon": 106.716661,
+            "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh"
+          }
+        }
+      ],
+      "terminal": "done"
+    },
+    {
+      "turn": "vf3",
+      "http_status": 200,
+      "answer": "Chưa đủ bằng chứng để khẳng định\nĐường Võ Duy Ninh; đi bộ 35 m; nguồn: OSM phân loại đường.\nHẻm 75 Nguyễn Hữu Cảnh; đi bộ 58 m; nguồn: OSM phân loại đường.\nBằng chứng có thể chỉ là suy luận; chưa xác minh cổng địa chính hoặc khoảng thông thủy tại chỗ. Không coi thiếu dữ liệu là an toàn.",
+      "errors": [],
+      "tool_calls": [
+        {
+          "type": "tool_call",
+          "name": "lap_ke_hoach",
+          "args": {
+            "lat": 10.792106,
+            "lon": 106.716661,
+            "label": "Hẻm 113/4 Võ Duy Ninh, Bình Thạnh",
+            "vehicle_id": "vinfast-vf-3",
+            "intent": "park",
+            "arrive_at": "2026-10-17T19:00:00+07:00",
+            "dwell_min": 120,
+            "rain_mm_per_h": 0
+          }
+        }
+      ],
+      "terminal": "done"
+    }
+  ],
+  "free_probe": {
+    "http_status": 200,
+    "daily_project_quota": false,
+    "usageMetadata": {
+      "promptTokenCount": 4,
+      "candidatesTokenCount": 1,
+      "totalTokenCount": 5,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 4
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "cooldown_until": null
+  },
+  "ledger_after": {
+    "spent_usd": 0.011340000000000001,
+    "free_calls": 187,
+    "paid_calls": 3,
+    "reservations": {},
+    "updated_at": "2026-10-16T18:51:14.908771+00:00",
+    "prompt_tokens": 6,
+    "output_tokens": 57,
+    "thought_tokens": 54
+  },
+  "invoice_spend": "Unknown for failed transport; ledger conservatively charges full reservation.",
+  "signed_history_verification": "Offline HTTP-boundary tests pass. Live Vertex multi-turn function-call signature acceptance remains unverified."
+}

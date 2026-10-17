@@ -1,0 +1,77 @@
+{
+  "purpose": "Reviewed public source URLs and pinned research-body SHA256; no keys",
+  "downloads": [
+    {
+      "cache_label": "maps_layers",
+      "url": "https://maps.hcmgis.vn/layers.json",
+      "sha256": "aed47dcee918b42eafac2c698c2762b85b9077164d7915c1c4106565f78f29a0",
+      "retrieved_at": "2026-10-17T00:06:24Z"
+    },
+    {
+      "cache_label": "maps_ht_lg_hem_pla_line",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=thuduc:ht_lg_hem_pla_line&outputFormat=application/json&srsName=EPSG:4326&count=1000",
+      "sha256": "6983849e0292f867a3e4c29c710a08e21614c64a506ab97bb814c485873a924d",
+      "retrieved_at": "2026-10-17T00:07:29Z"
+    },
+    {
+      "cache_label": "maps_ht_lg_hem_pla_pol",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=thuduc:ht_lg_hem_pla_pol&outputFormat=application/json&srsName=EPSG:4326&count=1000",
+      "sha256": "7a60fedb34acdfc365af5f3d8330772e685573b11455dc6eccbf221769090faa",
+      "retrieved_at": "2026-10-17T00:07:31Z"
+    },
+    {
+      "cache_label": "maps_qh_lg_hem_pla",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=thuduc:qh_lg_hem_pla&outputFormat=application/json&srsName=EPSG:4326&count=1000",
+      "sha256": "631f4d685c502e73af3c9d1931484411823ec81fe686158e77402ca626e53206",
+      "retrieved_at": "2026-10-17T00:07:33Z"
+    },
+    {
+      "cache_label": "maps_qhgiaothong_lg_pla",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=thuduc:qhgiaothong_lg_pla&outputFormat=application/json&srsName=EPSG:4326&count=1000",
+      "sha256": "9d88f6551f4f08a1196cc1e859148a7c0403f415d7b29d5cc2adbb793787edc6",
+      "retrieved_at": "2026-10-17T00:07:35Z"
+    },
+    {
+      "cache_label": "maps_wfs_caps",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WFS&version=2.0.0&request=GetCapabilities",
+      "sha256": "e3424d33d6a6624e9fc66797dddc9709547ae8be3ed4f18c75c54bce31b4fe15",
+      "retrieved_at": "2026-10-17T00:06:47Z"
+    },
+    {
+      "cache_label": "maps_wms_caps",
+      "url": "https://thuduc-maps.hcmgis.vn/thuducserver/ows?service=WMS&request=GetCapabilities",
+      "sha256": "0c901cc5001b8aec250b8b741e5a45fcd7fd471a96d3840dc372ed32a7c7db17",
+      "retrieved_at": "2026-10-17T00:07:01Z"
+    },
+    {
+      "cache_label": "q9_2009_download",
+      "url": "https://congbao.hochiminhcity.gov.vn/cong-bao/van-ban/quyet-dinh/so/01-2009-qd-ubnd/ngay/16-02-2009/tai-ve/30822",
+      "sha256": "5bac4433b588237b5a02f74f2cd06bbb0eeb090427074ae02ec19a2656894d81",
+      "retrieved_at": "2026-10-17T00:05:51Z"
+    },
+    {
+      "cache_label": "q9_2012_download",
+      "url": "https://congbao.hochiminhcity.gov.vn/cong-bao/van-ban/quyet-dinh/so/09-2012-qd-ubnd/ngay/14-08-2012/tai-ve/32152",
+      "sha256": "fe3ecc3f0154f87716d64b054c7a407213f56123b3946fb3e6831e0a446a765f",
+      "retrieved_at": "2026-10-17T00:06:32Z"
+    },
+    {
+      "cache_label": "q9_2009_page",
+      "url": "https://congbao.hochiminhcity.gov.vn/cong-bao/van-ban/quyet-dinh/so/01-2009-qd-ubnd/ngay/16-02-2009/30822",
+      "sha256": "abcb4642d4dc45b1c2c2beb5bd8ea8d9c1d41e5859dc8361215c00bdc475926c",
+      "retrieved_at": "2026-10-17T00:05:19Z"
+    },
+    {
+      "cache_label": "q9_2012_status",
+      "url": "https://congbao.hochiminhcity.gov.vn/cong-bao/van-ban/quyet-dinh/so/09-2012-qd-ubnd/ngay/14-08-2012/32152",
+      "sha256": "65715cadffb483f193e94f4dd78e68a7d1c6945ce2a74510a6f870dd0c927c32",
+      "retrieved_at": "2026-10-17T00:11:12Z"
+    },
+    {
+      "cache_label": "qd88_status",
+      "url": "https://congbao.hochiminhcity.gov.vn/cong-bao/van-ban/quyet-dinh/so/88-2007-qd-ubnd/ngay/04-07-2007/29606",
+      "sha256": "85c82230287b32a0c1a7256bf5581e9b3f06e74e3c58e735b03518a22ad4da9b",
+      "retrieved_at": "2026-10-17T00:11:14Z"
+    }
+  ]
+}

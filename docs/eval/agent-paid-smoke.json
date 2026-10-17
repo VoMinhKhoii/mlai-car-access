@@ -1,0 +1,8 @@
+{
+  "attempts": 1,
+  "http_status": 403,
+  "result": "Paid key rejected by provider; successful paid inference could not be proven. No retry under one-attempt authorization.",
+  "spent_usd": 0.0,
+  "reservations": {},
+  "paid_enabled_after": false
+}

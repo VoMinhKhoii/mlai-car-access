@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import heapq
 import math
+import hashlib
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 
@@ -10,10 +11,10 @@ from . import flags, parking_data
 from .config import GOONG_API_KEY, PICKUP_DWELL_MIN, REVERSE_LIMIT_M, WALK_CAP_M, WALK_WADE_M
 from .evidence import STORE_EVIDENCE, WidthRange, blocked_ways_today, width_ranges
 from .flood import (FloodProfile, FloodRecord, alarm_label, depth_at, flood_profiles, flood_status, tide_level,
-                    worst_over)
+                    worst_over, request_cache, evaluation_times, STATUS_ORDER)
 from .legality import ORDER as LEGAL_ORDER
-from .legality import legality_for_lot, legality_on_street
-from .osm import AreaGraph, build_graph, haversine
+from .legality import legality_for_lot, legality_on_street, junction_distance
+from .osm import AreaGraph, build_graph, haversine, DRIVABLE, MOTORBIKE_ONLY
 from .vehicles import VehicleProfile, get_profile, three_point_width, turn_in_width
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -22,15 +23,34 @@ INF = float("inf")
 
 _WR: dict = {}
 _FP: dict = {}
+_PAID_REVISION: dict = {}
 
 
 def area(lat: float, lon: float):
+    STORE_EVIDENCE.refresh_footprints()
     g = build_graph(lat, lon)
-    key = (g.source, tuple(f["enabled"] for f in flags.describe()))
+    revision = getattr(g, '_engine_revision', None)
+    if revision is None:
+        revision = hashlib.sha256(repr((sorted(g.nodes.items()),
+            [(w.id,w.nodes,sorted(w.tags.items())) for w in g.ways.values()])).encode()).hexdigest()
+        g._engine_revision = revision
+    key = (g.source, revision, tuple(f["enabled"] for f in flags.describe()))
+    prior = _PAID_REVISION.get(g.source)
+    if prior != revision:
+        parking_data._PAID.pop(g.source, None)
+        if len(_PAID_REVISION) >= 16:
+            old_source = next(iter(_PAID_REVISION))
+            _PAID_REVISION.pop(old_source)
+            parking_data._PAID.pop(old_source, None)
+        _PAID_REVISION[g.source] = revision
     wkey = key + (STORE_EVIDENCE.version,)
     if wkey not in _WR:
+        if len(_WR) >= 16:
+            _WR.pop(next(iter(_WR)))
         _WR[wkey] = width_ranges(g)
     if key not in _FP:
+        if len(_FP) >= 16:
+            _FP.pop(next(iter(_FP)))
         _FP[key] = flood_profiles(g)
     return g, _WR[wkey], _FP[key]
 
@@ -39,9 +59,39 @@ def invalidate_evidence() -> None:
     _WR.clear()
 
 
+def _access(tags, mode):
+    keys = ('motorcar','motor_vehicle','vehicle','access') if mode=='car' else ('foot','access')
+    return next((tags[k] for k in keys if k in tags),'yes')
+
+
+def _car_way_allowed(w):
+    if w.highway not in DRIVABLE or w.tags.get('area')=='yes' or _access(w.tags,'car') in ('private','no'):
+        return False
+    return not MOTORBIKE_ONLY.search(w.name) or w.tags.get('motorcar') in ('yes','destination')
+
+
+def _car_adjacency(g):
+    if hasattr(g,'_engine_car_adj'):
+        return g._engine_car_adj
+    adj={}
+    for e in g.edges:
+        w=g.ways[e.way_id]
+        if not _car_way_allowed(w) or any(_access(g.node_tags.get(n,{}),'car') in ('private','no') for n in (e.u,e.v)):
+            continue
+        direction=w.oneway or (1 if w.tags.get('junction')=='roundabout' else 0)
+        if direction>=0:
+            adj.setdefault(e.u,[]).append((e.idx,e.v))
+        if direction<=0:
+            adj.setdefault(e.v,[]).append((e.idx,e.u))
+    g._engine_car_adj=adj
+    return adj
+
+
 # ---- per-vehicle fit ----------------------------------------------------------
 
 def fit_class(wr: WidthRange, p: VehicleProfile) -> str:
+    if wr.review:
+        return "unknown"
     if wr.lo >= p.fits_min:
         return "fits"
     if wr.lo >= p.tight_min:
@@ -54,20 +104,20 @@ def fit_class(wr: WidthRange, p: VehicleProfile) -> str:
 def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
     fit, notes = {}, {}
     for wid, w in g.ways.items():
-        fit[wid] = fit_class(wrs[wid], p) if w.drivable else "no"
-    # D16: turning in from the parent street; failing it downgrades "fits" to "tight".
-    for wid, w in g.ways.items():
-        if fit[wid] != "fits" or w.kind == "main" or wrs[wid].lo >= 6:
-            continue
-        for n in (w.nodes[0], w.nodes[-1]):
-            for pid in g.node_ways.get(n, ()):
-                if pid == wid or not g.ways[pid].drivable or wrs[pid].lo <= wrs[wid].lo:
-                    continue
-                street = min(round(wrs[pid].lo * 2) / 2, 12.0)
-                need = turn_in_width(p.id, street)
-                if wrs[wid].lo < need:
-                    fit[wid] = "tight"
-                    notes[wid] = f"Rẽ vào từ {g.ways[pid].name or 'đường chính'} cần đánh lái nhiều lần (rẽ một lần cần hẻm ≥ {need:.1f} m)"
+        fit[wid] = fit_class(wrs[wid], p) if _car_way_allowed(w) else "no"
+        for limit_key in ('maxwidth:physical', 'maxwidth'):
+            limit = w.tags.get(limit_key)
+            if not limit or fit[wid] in ('no', 'blocked'):
+                continue
+            try:
+                max_width = float(limit.removesuffix(' m'))
+                if p.mirror_width > max_width:
+                    fit[wid], notes[wid] = 'no', 'Xe vượt giới hạn bề rộng được ghi trên đường'
+            except ValueError:
+                fit[wid], notes[wid] = 'unknown', 'Chưa đọc được đơn vị giới hạn bề rộng'
+        limits = [k for k in ('maxweight','maxaxleload','maxheight','maxlength') if k in w.tags]
+        if limits and fit[wid] not in ('no','blocked'):
+            fit[wid], notes[wid] = 'unknown', 'Chưa xác minh xe đáp ứng giới hạn: '+', '.join(limits)
     for wid, b in blocked_ways_today().items():
         if wid in fit:
             fit[wid] = "blocked"
@@ -80,7 +130,7 @@ def compute_fit(g: AreaGraph, wrs: dict[int, WidthRange], p: VehicleProfile):
 def _usable(fit: str, flood: str, strict: bool) -> bool:
     if fit in ("no", "blocked") or flood == "blocked":
         return False
-    if strict and (fit == "unknown" or flood == "risky"):
+    if strict and (fit == "unknown" or flood in ("risky", "unknown")):
         return False
     return True
 
@@ -148,6 +198,331 @@ def _project(g: AreaGraph, lat: float, lon: float, predicate):
     return best
 
 
+# Directed edge states preserve heading at every junction. A state is
+# (node, incoming edge); immediate edge reversal is a separate manoeuvre.
+class _DriveSearch:
+    def __init__(self, g, wrs, fit, p, fl_arr, fl_dep, estimate_only=False):
+        self.g, self.wrs, self.fit, self.p = g, wrs, fit, p
+        self.fl_arr, self.fl_dep = fl_arr, fl_dep
+        self.estimate_only = estimate_only
+        self.adj = _car_adjacency(g)
+        self.main = {n for w in g.ways.values() if w.kind == 'main' and _car_way_allowed(w) for n in w.nodes}
+        self.incoming = {}
+        for a, es in self.adj.items():
+            for ei, b in es:
+                self.incoming.setdefault(b, []).append(ei)
+        self.turns = {}
+        self.arr = {strict: self._search(False, strict) for strict in (True, False)}
+        self.ext = {strict: self._search(True, strict) for strict in (True, False)}
+
+    def edge_ok(self, ei, departure, strict):
+        wid = self.g.edges[ei].way_id
+        if self.estimate_only:
+            value = _width_estimate(self.wrs[wid])
+            if value is None or value < self.p.tight_min:
+                return False
+        fm = self.fl_dep if departure else self.fl_arr
+        return _usable(self.fit.get(wid, 'unknown'), fm[wid][0], strict)
+
+    def turn(self, incoming, node, outgoing):
+        if incoming == -1:
+            # A local handoff may align with the main road. It does not prove
+            # an arbitrary turn from that road into an alley.
+            return 'pass' if self.g.ways[self.g.edges[outgoing].way_id].kind == 'main' else 'unknown'
+        key = incoming, node, outgoing
+        if key not in self.turns:
+            self.turns[key] = _junction_turn(self.g, self.wrs, self.p, incoming, node, outgoing)
+        return self.turns[key]
+
+    def _search(self, reverse, strict):
+        g = self.g
+        if reverse:
+            sources = {}
+            for n in self.main:
+                for ei in self.incoming.get(n, ()):
+                    if not self.edge_ok(ei, True, strict):
+                        continue
+                    already_main = g.ways[g.edges[ei].way_id].kind == 'main'
+                    turns_onto_main = any(g.ways[g.edges[oj].way_id].kind == 'main' and
+                        self.edge_ok(oj, True, strict) and self.turn(ei, n, oj) != 'no' and
+                        (not strict or self.turn(ei, n, oj) == 'pass') for oj, _ in self.adj.get(n, ()))
+                    if already_main or turns_onto_main:
+                        sources[n, ei] = 0.0
+        else:
+            sources = {(n, -1): 0.0 for n in self.main}
+            sources.update({(n, ei): 0.0 for n in self.main for ei in self.incoming.get(n, ())
+                            if g.ways[g.edges[ei].way_id].kind == 'main' and self.edge_ok(ei, False, strict)})
+        dist, pred, queue = dict(sources), {}, [(0.0, state) for state in sources]
+        heapq.heapify(queue)
+        while queue:
+            cost, state = heapq.heappop(queue)
+            if cost != dist.get(state):
+                continue
+            node, incoming = state
+            if reverse:
+                edge = g.edges[incoming]
+                if not self.edge_ok(incoming, True, strict):
+                    continue
+                prev = edge.v if edge.u == node else edge.u
+                steps = [((prev, ei), incoming, self.turn(ei, prev, incoming))
+                         for ei in self.incoming.get(prev, ())]
+            else:
+                steps = [((n, ei), ei, self.turn(incoming, node, ei)) for ei, n in self.adj.get(node, ())]
+            for target, ei, turn in steps:
+                if turn == 'no' or (strict and turn != 'pass') or not self.edge_ok(ei, reverse, strict):
+                    continue
+                nd = cost + _cost(g.edges[ei].length, self.fit[g.edges[ei].way_id])
+                if nd < dist.get(target, INF):
+                    dist[target], pred[target] = nd, state
+                    heapq.heappush(queue, (nd, target))
+        return dist, pred
+
+    def arrival_options(self, c):
+        if c.kind == 'lot':
+            for strict in (True, False):
+                dist, pred = self.arr[strict]
+                states = [s for s in dist if s[0] == c.entrance]
+                if states:
+                    state = min(states, key=dist.get)
+                    nodes = self._nodes(pred, state)[::-1]
+                    geom = _coords(self.g, nodes) + [[c.lon, c.lat]]
+                    yield {'strict': False, 'meters': round(_geometry_length(geom)), 'geometry': geom,
+                           'flood': None, 'connector_unverified': True,
+                           '_segments': self._segments(pred, state)}
+                    return
+            return
+        e = self.g.edges[c.edge_idx]
+        for side, a, b, tail in [('u',e.u,e.v,c.offset),('v',e.v,e.u,e.length-c.offset)]:
+            if (e.idx,b) not in self.adj.get(a, ()):
+                continue
+            for strict in (True, False):
+                if not self.edge_ok(e.idx, False, strict):
+                    continue
+                dist, pred = self.arr[strict]
+                states = [(a, ei) for ei in [-1] + self.incoming.get(a, [])]
+                states = [s for s in states if s in dist and self.turn(s[1],a,e.idx) != 'no' and
+                          (not strict or self.turn(s[1],a,e.idx) == 'pass')]
+                if not states:
+                    continue
+                state = min(states, key=dist.get)
+                geom = _coords(self.g, self._nodes(pred,state)[::-1]) + [[c.lon,c.lat]]
+                yield {'strict': strict, 'side': side, 'meters': round(_geometry_length(geom)),
+                       'geometry': geom, 'flood': None,
+                       '_segments': self._segments(pred, state) + [(e.idx, tail)]}
+                break
+
+    @staticmethod
+    def _nodes(pred, state):
+        nodes = [state[0]]
+        while state in pred:
+            state = pred[state]
+            nodes.append(state[0])
+        return nodes
+
+    def _segments(self, pred, state, departure=False):
+        segments = []
+        while state in pred:
+            previous = pred[state]
+            ei = previous[1] if departure else state[1]
+            segments.append((ei, self.g.edges[ei].length))
+            state = previous
+        return segments
+
+    def exit(self, c, route):
+        if c.kind == 'lot':
+            return {'mode':'unknown','strict':False,'reverse_m':0,'tight_exit':False,
+                    'text':'Chưa xác minh đường nối vào bãi và diện tích quay đầu', 'geometry':[]}
+        g = self.g
+        e = g.edges[c.edge_idx]
+        a,b = (e.u,e.v) if route['side']=='u' else (e.v,e.u)
+        back = c.offset if a==e.u else e.length-c.offset
+        for strict in (True,False):
+            dist,pred = self.ext[strict]
+            if not self.edge_ok(e.idx,True,strict):
+                continue
+            state = (b,e.idx)
+            if (e.idx,b) in self.adj.get(a,()) and state in dist:
+                geom = [[c.lon,c.lat]] + _coords(g,self._nodes(pred,state))
+                return {'mode':'through','strict':strict,'reverse_m':0,'tight_exit':False,
+                        'manoeuvre_status':'verified_model' if strict else 'unknown',
+                        '_segments': [(e.idx, e.length-back)] + self._segments(pred, state, True),
+                        'text':'Đi tiếp ra đường lớn' if strict else 'Có đường thông trên bản đồ; chưa xác minh đủ bề rộng, ngập hoặc thao tác rẽ',
+                        'geometry':geom}
+            # Backing/turning against a one-way direction is never authorized.
+            if (e.idx,a) not in self.adj.get(b,()):
+                continue
+            if _turning_space(c,g,self.wrs,self.p):
+                states = [(a,e.idx)] if (a,e.idx) in dist else []
+                if states:
+                    state=min(states,key=dist.get)
+                    return {'mode':'turn_here','strict':strict,'reverse_m':0,'tight_exit':False,
+                            'manoeuvre_status':'verified_model' if strict else 'unknown',
+                            '_segments': [(e.idx, back)] + self._segments(pred, state, True),
+                            'text':'Quay đầu trong hành lang đủ bề rộng và chiều dài theo mô hình',
+                            'geometry':[[c.lon,c.lat]]+_coords(g,self._nodes(pred,state))}
+        # A physical junction is evidence of a possible manoeuvre, not proof of a K-turn.
+        # Search the actual bidirectional reverse path up to the unchanged 60 m limit.
+        if (e.idx,a) in self.adj.get(b,()) and self.edge_ok(e.idx,True,False):
+            queue=[(back,a,e.idx,[a])];seen={}
+            while queue:
+                rev,n,previous,path=heapq.heappop(queue)
+                if rev>2*REVERSE_LIMIT_M or rev>=seen.get((n,previous),INF):
+                    continue
+                seen[n,previous]=rev
+                arms={m for ei,m in self.adj.get(n,()) if self.edge_ok(ei,True,False)}
+                if n in self.main or len(arms)>=3:
+                    dist,pred=self.ext[False]
+                    states=[(n,ei) for ei in self.incoming.get(n,()) if (n,ei) in dist and ei!=previous]
+                    if states:
+                        state=min(states,key=dist.get)
+                        return {'mode':'unknown','strict':False,'reverse_m':round(rev),'tight_exit':rev>REVERSE_LIMIT_M,
+                                'text':f'Lùi khoảng {rev:.0f} m tới nút giao; chưa xác minh đủ diện tích và thao tác quay đầu',
+                                'geometry':[[c.lon,c.lat]]+_coords(g,path+self._nodes(pred,state)[1:])}
+                for ei,m in self.adj.get(n,()):
+                    if ei==previous or not self.edge_ok(ei,True,False):
+                        continue
+                    if (ei,n) not in self.adj.get(m,()):
+                        continue
+                    if self.turn(previous,n,ei)=='no':
+                        continue
+                    heapq.heappush(queue,(rev+g.edges[ei].length,m,ei,path+[m]))
+        return {'mode':'none','strict':False,'text':'Không tìm thấy đường ra theo chiều được phép trong dữ liệu hiện có'}
+
+
+def _geometry_length(geometry):
+    return sum(haversine(a[1],a[0],b[1],b[0]) for a,b in zip(geometry,geometry[1:]))
+
+
+def _junction_turn(g,wrs,p,incoming,node,outgoing):
+    if incoming==outgoing:
+        return 'no'
+    ie,oe=g.edges[incoming],g.edges[outgoing]
+    before=ie.v if ie.u==node else ie.u
+    after=oe.v if oe.u==node else oe.u
+    la,lo=g.nodes[node]
+    ax=(lo-g.nodes[before][1])*math.cos(math.radians(la)); ay=la-g.nodes[before][0]
+    bx=(g.nodes[after][1]-lo)*math.cos(math.radians(la)); by=g.nodes[after][0]-la
+    denom=math.hypot(ax,ay)*math.hypot(bx,by)
+    angle=math.degrees(math.acos(max(-1,min(1,(ax*bx+ay*by)/denom)))) if denom else 180
+    if angle<=15:
+        return 'pass'
+    a,b=wrs[ie.way_id],wrs[oe.way_id]
+    if a.review or b.review or min(a.lo,b.lo)<=0 or angle>90+1e-6:
+        return 'unknown'
+    # The one-arc model covers a right-angle turn. Smaller angles use the same
+    # conservative envelope; sharper turns need surveyed swept-path evidence.
+    need=turn_in_width(p.id, min(12.0,math.floor(a.lo*2)/2))
+    return 'pass' if b.lo>=need else 'unknown'
+
+
+def _turning_space(c,g,wrs,p):
+    from .vehicles import three_point_envelope
+    width,length=three_point_envelope(p.id)
+    e=g.edges[c.edge_idx]
+    if wrs[e.way_id].review or wrs[e.way_id].lo<width:
+        return False
+    # Sum collinear corridor space in both directions, independent of way IDs.
+    total=0.0
+    for node,tail in [(e.u,c.offset),(e.v,e.length-c.offset)]:
+        available=tail;prev=e.idx;seen={prev}
+        while available<length:
+            options=[(ei,n) for ei,n in _car_adjacency(g).get(node,()) if ei not in seen and
+                     wrs[g.edges[ei].way_id].lo>=width and not wrs[g.edges[ei].way_id].review and
+                     (ei,node) in _car_adjacency(g).get(n,())]
+            if len(options)!=1:
+                break
+            ei,n=options[0]
+            if _junction_angle(g,prev,node,ei)>15:
+                break
+            available+=g.edges[ei].length;seen.add(ei);prev,node=ei,n
+        total+=available
+    return total>=length
+
+
+def _junction_angle(g,incoming,node,outgoing):
+    ie,oe=g.edges[incoming],g.edges[outgoing]
+    a=ie.v if ie.u==node else ie.u;b=oe.v if oe.u==node else oe.u
+    lat,lon=g.nodes[node];scale=math.cos(math.radians(lat))
+    x,y=(lon-g.nodes[a][1])*scale,lat-g.nodes[a][0]
+    xx,yy=(g.nodes[b][1]-lon)*scale,g.nodes[b][0]-lat
+    den=math.hypot(x,y)*math.hypot(xx,yy)
+    return math.degrees(math.acos(max(-1,min(1,(x*xx+y*yy)/den)))) if den else 180
+
+
+def _foot_allowed(w):
+    mode = w.tags.get('foot', w.tags.get('access', 'yes'))
+    return w.walkable and mode not in ('no','private')
+
+
+class _WalkSearch:
+    """One virtual-position pedestrian route supplies every walk field and cap."""
+    def __init__(self,g,lat,lon,cap):
+        self.g,self.dest,self.cap=g,(lat,lon),cap
+        self.edge,self.offset,_=_project(g,lat,lon,_foot_allowed)
+        self.dist,self.pred={},{}
+        if self.edge is None:
+            return
+        e=self.edge
+        self.snap=_interp(g,e.u,e.v,self.offset,e.length)
+        if any(_access(g.node_tags.get(n,{}),'foot') in ('private','no') and
+               haversine(*g.nodes[n],*self.snap)<.1 for n in (e.u,e.v)):
+            self.edge=None
+            return
+        connector=haversine(*self.snap,lat,lon)
+        src={e.u:connector+haversine(*g.nodes[e.u],*self.snap),
+             e.v:connector+haversine(*g.nodes[e.v],*self.snap)}
+        src={n:d for n,d in src.items() if _access(g.node_tags.get(n,{}),'foot') not in ('private','no')}
+        self.dist,self.pred=dijkstra(g.walk_adj,src,
+            lambda ei:_foot_allowed(g.ways[g.edges[ei].way_id]) and
+            all(g.node_tags.get(n,{}).get('foot',g.node_tags.get(n,{}).get('access','yes')) not in ('private','no')
+                for n in (g.edges[ei].u,g.edges[ei].v)),lambda ei:g.edges[ei].length,limit=cap)
+
+    def path(self,c):
+        if self.edge is None:
+            return None
+        g=self.g
+        if c.kind=='lot':
+            ce,off,_=_project(g,c.lat,c.lon,_foot_allowed)
+            if ce is None:
+                return None
+            start=_interp(g,ce.u,ce.v,off,ce.length)
+        else:
+            ce,off=g.edges[c.edge_idx],c.offset
+            if not _foot_allowed(g.ways[ce.way_id]):
+                return None
+            start=(c.lat,c.lon)
+        prefix=[[c.lon,c.lat],[start[1],start[0]]]
+        if any(_access(g.node_tags.get(n,{}),'foot') in ('private','no') and
+               haversine(*g.nodes[n],*start)<.1 for n in (ce.u,ce.v)):
+            return None
+        options=[]
+        if ce.idx==self.edge.idx:
+            options.append((prefix+[[self.snap[1],self.snap[0]],[self.dest[1],self.dest[0]]],
+                            [ce.idx] if abs(off-self.offset)>1e-6 else []))
+        for node in (ce.u,ce.v):
+            if node not in self.dist or _access(g.node_tags.get(node,{}),'foot') in ('private','no'):
+                continue
+            nodes=_path_nodes(self.pred,node)
+            edges=([ce.idx] if haversine(*start,*g.nodes[node])>1e-6 else [])
+            edges += [self.pred[n][0] for n in nodes if n in self.pred]
+            if haversine(*g.nodes[nodes[-1]],*self.snap)>1e-6:
+                edges.append(self.edge.idx)
+            options.append((prefix+_coords(g,nodes)+[[self.snap[1],self.snap[0]],[self.dest[1],self.dest[0]]],edges))
+        if not options:
+            return None
+        geom,edges=min(options,key=lambda option:_geometry_length(option[0]))
+        # Remove identical points, leaving all actual connectors in the length.
+        geom=[p for i,p in enumerate(geom) if i==0 or p!=geom[i-1]]
+        meters=_geometry_length(geom)
+        if meters>self.cap:
+            return None
+        connectors=haversine(c.lat,c.lon,*start)+haversine(*self.snap,*self.dest)
+        uncertain=connectors>.5 or any(g.ways[g.edges[ei].way_id].tags.get('sidewalk') not in ('both','left','right','yes','separate')
+                                       and g.ways[g.edges[ei].way_id].kind!='foot' for ei in edges)
+        return {'geometry':geom,'edges':edges,'meters':meters,'unverified':uncertain,
+                'note':'Chưa xác minh lối nối, vỉa hè và chỗ qua đường' if uncertain else None}
+
+
 # ---- plan -------------------------------------------------------------------------
 
 @dataclass
@@ -171,15 +546,19 @@ def _fmt_t(t: datetime) -> str:
     return t.astimezone(VN_TZ).strftime("%H:%M")
 
 
+@request_cache
 def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_at: datetime | None,
          dwell_min: int | None, rain_scenario: list[dict] | None = None, dest_label: str = "",
          _nested: bool = False, origin: tuple[float, float] | None = None) -> dict:
     p = get_profile(vehicle_id)
     arrive = (arrive_at or datetime.now(VN_TZ)).astimezone(VN_TZ)
-    dwell = dwell_min if dwell_min else (PICKUP_DWELL_MIN if intent == "pickup" else 120)
+    dwell = dwell_min if dwell_min is not None else (PICKUP_DWELL_MIN if intent == "pickup" else 120)
+    if dwell < 0:
+        raise ValueError("Dwell duration must be nonnegative")
     depart = arrive + timedelta(minutes=dwell)
     stay_times = [arrive + timedelta(minutes=m) for m in range(0, dwell + 1, 15)] + [depart]
     rain = rain_scenario or []
+    stay_times = sorted(set(stay_times) | set(evaluation_times(arrive, depart, rain)))
     cap = WALK_CAP_M[intent]
 
     g, wrs, fps = area(dest_lat, dest_lon)
@@ -190,55 +569,37 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         return {wid: worst_over(fps.get(wid), times, rain, p.safe_water_depth, g.ways[wid].name) for wid in g.ways}
 
     fl_arr, fl_dep, fl_stay = flood_at([arrive]), flood_at([depart]), None
-    main_nodes = {n for w in g.ways.values() if w.kind == "main" and w.drivable for n in w.nodes}
-    rev_adj: dict[int, list[tuple[int, int]]] = {}
-    for a, lst in g.drive_adj.items():
-        for eidx, b in lst:
-            rev_adj.setdefault(b, []).append((eidx, a))
+    arr = ext = _DriveSearch(g, wrs, fit, p, fl_arr, fl_dep)
 
-    def way_of(eidx):
-        return g.edges[eidx].way_id
-
-    def search(adj, flood_map, strict):
-        return dijkstra(adj, {n: 0.0 for n in main_nodes},
-                        lambda e: _usable(fit[way_of(e)], flood_map[way_of(e)][0], strict),
-                        lambda e: _cost(g.edges[e].length, fit[way_of(e)]))
-
-    arr = {True: search(g.drive_adj, fl_arr, True), False: search(g.drive_adj, fl_arr, False)}
-    ext = {True: search(rev_adj, fl_dep, True), False: search(rev_adj, fl_dep, False)}
-
-    # Walk from the destination door outward.
-    we, woff, wd = _project(g, dest_lat, dest_lon, lambda w: w.walkable)
-    walk_src = {we.u: wd + woff, we.v: wd + (we.length - woff)}
-    wdist, wpred = dijkstra(g.walk_adj, walk_src, lambda e: True, lambda e: g.edges[e].length, limit=cap + 60)
-    de, doff, ddist = _project(g, dest_lat, dest_lon, lambda w: w.drivable)
-
-    # ---- candidates
+    walks = _WalkSearch(g, dest_lat, dest_lon, cap)
+    de, doff, ddist = _project(g, dest_lat, dest_lon, lambda w: _car_way_allowed(w))
     cands: list[Candidate] = []
+
+    def add_candidate(c):
+        path = walks.path(c)
+        if path is not None:
+            c.walk_m = path['meters']
+            c.data['walk_path'] = path
+            cands.append(c)
+
     if de is not None and ddist <= 35:
         la, lo = _interp(g, de.u, de.v, doff, de.length)
-        cands.append(Candidate("door", la, lo, "Trước cửa nhà" , de.way_id, de.idx, doff,
-                               walk_m=ddist))
+        add_candidate(Candidate('door', la, lo, 'Trước cửa nhà', de.way_id, de.idx, doff))
     for e in g.edges:
         w = g.ways[e.way_id]
-        if not w.drivable or min(wdist.get(e.u, INF), wdist.get(e.v, INF)) > cap + 20:
+        if not _car_way_allowed(w) or not _foot_allowed(w):
             continue
-        offs = [e.length / 2] if e.length < 16 else [8.0, e.length / 2, e.length - 8.0]
-        for s in offs:
-            walk = min(wdist.get(e.u, INF) + s, wdist.get(e.v, INF) + e.length - s)
-            if walk > cap:
-                continue
-            la, lo = _interp(g, e.u, e.v, s, e.length)
-            cands.append(Candidate("street", la, lo, g.display_name(w.id), w.id, e.idx, s, walk_m=walk))
-    for lot in parking_data.lots_near(g, dest_lat, dest_lon, radius=cap + 150):
-        ent, ent_d = g.nearest_node(lot["lat"], lot["lon"], lambda n: n in g.drive_adj)
-        wn, wnd = g.nearest_node(lot["lat"], lot["lon"], lambda n: n in wdist)
-        if ent is None or ent_d > 80 or wn is None:
+        if min(walks.dist.get(e.u, INF), walks.dist.get(e.v, INF)) > cap and (walks.edge is None or walks.edge.idx!=e.idx):
             continue
-        walk = wdist[wn] + wnd
-        if walk <= cap:
-            cands.append(Candidate("lot", lot["lat"], lot["lon"], lot["name"], None, walk_m=walk, lot=lot,
-                                   entrance=ent, data={"entrance_d": ent_d}))
+        offs = [e.length/2] if e.length<16 else [8.0,e.length/2,e.length-8.0]
+        for off in offs:
+            la,lo=_interp(g,e.u,e.v,off,e.length)
+            add_candidate(Candidate('street',la,lo,g.display_name(w.id),w.id,e.idx,off))
+    for lot in parking_data.lots_near(g, dest_lat, dest_lon, radius=cap+150):
+        ent,ent_d=g.nearest_node(lot['lat'],lot['lon'],lambda n:n in arr.adj)
+        if ent is not None and ent_d<=80:
+            add_candidate(Candidate('lot',lot['lat'],lot['lon'],lot['name'],None,lot=lot,
+                                    entrance=ent,data={'entrance_d':ent_d}))
 
     # ---- evaluate each candidate
     results, rejected = [], []
@@ -260,8 +621,8 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
             break
     for i, r in enumerate(chosen, 1):
         r["rank"] = i
-        r["walk"]["geometry"] = _walk_geometry(g, r["_c"], wpred, dest_lat, dest_lon)
-        r["walk"]["wade"] = _walk_wade(g, fps, r["_c"], wpred, arrive, rain)
+        r["walk"]["geometry"] = r["_c"].data["walk_path"]["geometry"]
+        r["walk"]["wade"] = _walk_wade(g, fps, r["_c"], {}, arrive, rain)
     for r in results + rejected:
         r.pop("_c", None)
 
@@ -275,24 +636,40 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
         _add_trips(chosen, origin)
 
     verdict = _verdict(chosen, door_eval, intent, cap)
+    if not chosen and (walks.edge is None or de is None or not arr.main):
+        verdict.update(coverage="unknown", headline="Chưa thể ước tính đường đi — độ tin cậy thấp",
+                       detail="Thiếu mạng đường ô tô, đường đi bộ hoặc kết nối đường chính để lập điểm dừng.",
+                       estimate={"answer":"unknown", "confidence":"low", "basis":"Thiếu mạng đường vào/ra hoặc đi bộ"},
+                       unverified_reasons=["Thiếu mạng đường vào/ra hoặc đi bộ"])
     timing = None
-    exit_trouble = (not chosen or (door_eval and not door_eval["ok"])) and any(
-        "lúc rời đi" in x for r in rejected for x in r["fail_reasons"])
-    if exit_trouble and not _nested:
-        timing = _flood_timing(p, arrive, depart, rain)
-        if timing and timing.get("leave_before"):
-            dwell_ok = int((timing["_before"] - arrive).total_seconds() // 60)
-            alt = plan(dest_lat, dest_lon, vehicle_id, intent, arrive, dwell_ok, rain, dest_label, _nested=True)
-            timing["if_leave_before"] = {"headline": alt["verdict"]["headline"], "code": alt["verdict"]["code"]}
+    if (not _nested and door_eval and not door_eval['ok'] and
+            door_eval['legality']['status']=='Permitted' and
+            not door_eval.get('unverified_reasons') and any(v[0]=='blocked' for v in fl_dep.values())):
+        # Every proposed time is checked against this destination and the actual
+        # full engine, including the revised dwell, route, exit and legal checks.
+        def recheck(leave):
+            minutes=int((leave-arrive).total_seconds()//60)
+            if minutes<0:
+                return None
+            alt=plan(dest_lat,dest_lon,vehicle_id,intent,arrive,minutes,rain,dest_label,_nested=True)
+            target=alt.get('door')
+            if not target or not target['ok'] or target['flood']['stay']['status']!='passable':
+                return None
+            wo=target['way_out']
+            if wo['mode'] not in ('through','turn_here') or wo.get('manoeuvre_status')=='unknown':
+                return None
+            if target.get('unverified_reasons'):
+                return None
+            return {'headline':alt['verdict']['headline'],'code':alt['verdict']['code'],
+                    'checked_departure':leave.isoformat()}
+        timing=_flood_timing(p,arrive,depart,rain,recheck=recheck)
         if timing:
-            timing.pop("_before", None)
-            parts = []
-            if timing.get("leave_before"):
+            parts=[]
+            if timing.get('leave_before'):
                 parts.append(f"rời trước {timing['leave_before']}")
-            if timing.get("or_after"):
-                parts.append(f"hoặc ở lại tới sau {timing['or_after']}")
-            verdict["timing"] = (f"Triều lên làm ngập đường ra lúc {_fmt_t(depart)}. Để xe này ra được: "
-                                 + " ".join(parts) + ".")
+            if timing.get('or_after'):
+                parts.append(f"ở lại tới sau {timing['or_after']}")
+            verdict['timing']='Đã kiểm tra lại toàn bộ kế hoạch theo mô hình: '+', hoặc '.join(parts)+'.'
 
     return {
         "destination": {"lat": dest_lat, "lon": dest_lon, "label": dest_label},
@@ -311,31 +688,27 @@ def plan(dest_lat: float, dest_lon: float, vehicle_id: str, intent: str, arrive_
     }
 
 
-def _flood_timing(p: VehicleProfile, arrive, depart, rain) -> dict | None:
-    """Latest departure before, or earliest after, the flood that traps this vehicle on tide-prone streets."""
-    probe = FloodProfile([FloodRecord(0, 0, "", None, "", "tide", None, "high", "")])
+def _flood_timing(p: VehicleProfile, arrive, depart, rain, *, recheck=None) -> dict | None:
+    """No generic tide proxy: only publish alternatives accepted by the full planner.
 
-    def ok(t):
-        return flood_status(depth_at(probe, t, rain), p.safe_water_depth) == "passable"
-
-    if ok(depart):
+    Search is bounded to two hours earlier / twelve hours later. Unknown or
+    otherwise failed plans produce no timing instruction.
+    """
+    if recheck is None:
         return None
-    before, t = None, depart
-    while t - timedelta(minutes=15) >= arrive + timedelta(minutes=15):
-        t -= timedelta(minutes=15)
-        if ok(t):
-            before = t
-            break
-    after, t = None, depart
-    for _ in range(48):
-        t += timedelta(minutes=15)
-        if ok(t):
-            after = t
-            break
-    if not before and not after:
-        return None
-    return {"leave_before": _fmt_t(before) if before else None, "_before": before,
-            "or_after": _fmt_t(after) if after else None}
+    result={}
+    for direction,key,label in [(-1,'leave_before','if_leave_before'),(1,'or_after','if_stay_until')]:
+        steps=8 if direction<0 else 48
+        for step in range(1,steps+1):
+            leave=depart+timedelta(minutes=15*direction*step)
+            if leave<=arrive:
+                break
+            checked=recheck(leave)
+            if checked:
+                result[key]=_fmt_t(leave)
+                result[label]=checked
+                break
+    return result or None
 
 
 def _tide_json(t):
@@ -343,14 +716,146 @@ def _tide_json(t):
     return {"level_m": None if lvl is None else round(lvl, 2), "alarm": alarm_label(lvl)}
 
 
+CONFIDENCE_VI = {"high": "cao", "medium": "trung bình", "low": "thấp"}
+
+
+def _width_estimate(wr):
+    """A point hypothesis inside the fused range, never a certified lower bound."""
+    if wr.review or wr.top_tier is None:
+        return None
+    samples = [b.estimate_m for b in wr.evidence if b.tier == wr.top_tier and b.estimate_m is not None and b not in wr.overruled]
+    if samples:
+        return max(wr.lo, min(wr.hi, min(samples)))
+    if wr.lo == 0 and wr.hi >= 40:
+        # An unresolved survey can retain a weak prior for estimation only.
+        priors = [b for b in wr.evidence if b.lo > 0 and b not in wr.overruled]
+        if not priors:
+            return None
+        b = priors[0]
+        return (b.lo + min(b.hi, b.lo + 3)) / 2
+    return (wr.lo + min(wr.hi, wr.lo + 3)) / 2
+
+
+def _estimate(c, g, wrs, p, checks, failures):
+    """D47: useful hypothesis + ordinal evidence confidence; hard checks are unchanged."""
+    route, wo = checks['route_in'], checks['way_out']
+    segments = {}
+    for ei, length in (route or {}).get('_segments', []) + wo.get('_segments', []):
+        segments[ei] = max(segments.get(ei, 0), length)
+    if c.way_id is not None and c.edge_idx is not None:
+        segments.setdefault(c.edge_idx, .01)
+    total = sum(segments.values())
+    widths = [wrs[g.edges[ei].way_id] for ei in segments]
+    values = [_width_estimate(wr) for wr in widths]
+    strong_m = quantitative_m = 0.0
+    measured = 0
+    for (ei, length), wr in zip(segments.items(), widths):
+        numeric = [b for b in wr.evidence if b.tier in ('Measured', 'Official', 'Observed')
+                   and (b.estimate_m is not None or (b.hi < 40 and b.hi > 0 and
+                        b.measurement_schema != 'parcel-survey-unresolved-v2'))]
+        if numeric:
+            measured += 1
+            quantitative_m += length
+        if wr.top_tier in ('Measured', 'Official') and wr.lo > 0 and not wr.review and (
+                not wr.evidence or any(b.tier == wr.top_tier and b.coverage_complete for b in wr.evidence)):
+            strong_m += length
+    coverage = {'sampled_segments': measured, 'total_segments': len(segments),
+                'sample_supported_fraction': round(quantitative_m / total, 3) if total else 0,
+                'complete_strong_fraction': round(strong_m / total, 3) if total else 0,
+                'scope': 'Đoạn trên đường vào/ra có mẫu bề rộng; mẫu rời không bảo đảm toàn đoạn'}
+    # Passage uses tight_min; opening the door uses the separate stop threshold.
+    stop_value = _width_estimate(wrs[c.way_id]) if c.way_id is not None else None
+    if not widths or any(v is None for v in values):
+        answer = 'unknown'
+    elif min(values) >= p.fits_min and (stop_value is None or stop_value >= p.door_min):
+        answer = 'fits'
+    else:
+        # A point below a threshold is a low-confidence negative, not a hard exclusion.
+        answer = 'tight' if min(values) >= p.tight_min and (stop_value is None or stop_value >= p.door_min) else 'no'
+    if failures:
+        answer = 'no'
+    confidence = 'low'
+    legal = checks['legality']
+    flood = checks['flood']['stay']['status']
+    if total and quantitative_m / total >= .5 and not any(w.review for w in widths):
+        confidence = 'medium'
+    threshold_clear = all(wr.lo >= p.fits_min for wr in widths) and (
+        c.way_id is None or wrs[c.way_id].lo >= p.door_min)
+    if (total and strong_m / total >= 1 - 1e-9 and threshold_clear and route and route.get('strict')
+            and wo.get('strict') and flood == 'passable' and legal['status'] == 'Permitted'
+            and not c.data.get('walk_path', {}).get('unverified', True)):
+        confidence = 'high'
+    if answer == 'unknown' or wo['mode'] in ('unknown', 'none') or any(w.review for w in widths):
+        confidence = 'low'
+    hard_legal = legal['status'] in ('Prohibited', 'Restricted')
+    hard_width = any(not wr.review and any(
+        b.tier in ('Measured', 'Official') and b not in wr.overruled and
+        b.hi < (p.door_min if g.edges[ei].way_id == c.way_id else p.tight_min)
+        for b in wr.evidence) for ei, wr in zip(segments, widths))
+    if hard_legal or hard_width or flood == 'blocked':
+        answer, confidence = 'no', 'high'
+    elif not route or failures:
+        confidence = 'low'
+    if c.kind == 'lot' and not failures:
+        answer = 'unknown'  # no measured entrance / internal manoeuvre envelope
+    tier_names = {'Measured':'đo thực tế', 'Official':'địa chính / chính thức', 'Observed':'quan sát',
+                  'Declared':'tin rao / tự khai', 'Inferred':'suy luận'}
+    finite = [(v, wr) for v, wr in zip(values, widths) if v is not None]
+    if finite:
+        value, limiting = min(finite, key=lambda x: x[0])
+        tier = limiting.top_tier
+        if limiting.lo == 0 and limiting.hi >= 40 and not any(b.estimate_m is not None for b in limiting.evidence):
+            tier = next((b.tier for b in limiting.evidence if b.lo > 0 and b not in limiting.overruled), tier)
+        basis = [f"{tier_names.get(tier, 'thiếu nguồn')} ≈{value:.1f} m".replace('.', ',')]
+    else:
+        basis = ['chưa có bề rộng đủ để ước lượng']
+    basis.append(f"{measured}/{len(segments)} đoạn có mẫu đo ({coverage['sample_supported_fraction']:.0%} chiều dài có mẫu)")
+    if strong_m < total:
+        basis.append('chưa đo kín tuyến')
+    if wo['mode'] == 'unknown' or wo.get('manoeuvre_status') == 'unknown':
+        basis.append('chưa rõ đường ra / thao tác rẽ')
+    if flood in ('unknown', 'risky'):
+        basis.append('chưa rõ ngập' if flood == 'unknown' else 'có thể ngập')
+    if legal['status'] == 'Unverified':
+        basis.append('chưa xác minh pháp lý')
+    if hard_legal:
+        basis.extend(r['text'] + ' (' + r['citation'] + ')' for r in legal['rules']
+                     if r['status'] in ('Prohibited', 'Restricted'))
+    elif failures:
+        basis.append(failures[0])
+    return {'answer': answer, 'confidence': confidence, 'basis': ' · '.join(basis), 'coverage': coverage}
+
+
 def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, stay_times, rain,
               arr, ext, fl_arr, fl_dep) -> dict:
     checks, reasons_fail, unverified = {}, [], []
     tier_bump = 0
+    if c.data.get("walk_path", {}).get("unverified"):
+        unverified.append(c.data["walk_path"]["note"])
     way_id = c.way_id if c.kind != "lot" else None
 
     # 1. Route in (on the Fit Network, flood at arrival).
-    route = _route_in(c, g, arr)
+    if isinstance(arr, _DriveSearch):
+        pairs = [(r, arr.exit(c, r)) for r in arr.arrival_options(c)]
+        viable = [(r, e) for r, e in pairs if e["mode"] != "none"]
+        def plausible(pair):
+            segments = pair[0].get('_segments', []) + pair[1].get('_segments', [])
+            return bool(segments) and all((_width_estimate(wrs[g.edges[ei].way_id]) or 0) >= p.tight_min
+                                          for ei, _ in segments)
+        # A smaller car's larger permissive network may choose a short, doubtful
+        # bottleneck. Look for a plausible detour before giving a negative estimate.
+        # This search only removes doubtful edges; it never relaxes a Hard Check.
+        if viable and not any(plausible(pair) for pair in viable):
+            if not hasattr(arr, 'estimate_search'):
+                arr.estimate_search = _DriveSearch(g, wrs, fit, p, fl_arr, fl_dep, estimate_only=True)
+            alternate = arr.estimate_search
+            viable += [(r, e) for r in alternate.arrival_options(c)
+                       if (e := alternate.exit(c, r))['mode'] != 'none']
+        route, selected_exit = min(viable or pairs, key=lambda pair: (
+            not (pair[0]["strict"] and pair[1]["strict"]),
+            pair[1].get("tight_exit", False), not plausible(pair), pair[0]["meters"]), default=(None, None))
+    else:
+        route, selected_exit = _route_in(c, g, arr), None
     if route is None:
         reasons_fail.append("Không có đường vào phù hợp với xe (hẻm hẹp hoặc ngập lúc đến)")
     elif not route["strict"]:
@@ -380,7 +885,7 @@ def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, s
         checks["fit"] = {"class": "lot", "note": "Bãi đỗ ngoài đường"}
 
     # 3. Way Out (at departure).
-    wo = _way_out(c, g, wrs, fit, p, ext, route)
+    wo = selected_exit or _way_out(c, g, wrs, fit, p, ext, route)
     checks["way_out"] = wo
     if wo["mode"] == "none":
         reasons_fail.append(wo["text"])
@@ -400,6 +905,8 @@ def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, s
                             f"({', '.join(d.drivers)}), quá mức an toàn {p.safe_water_depth * 100:.0f} cm của xe")
     elif st == "risky":
         unverified.append(f"Có thể ngập {d.lo * 100:.0f}–{d.hi * 100:.0f} cm lúc {_fmt_t(t)}")
+    elif st == "unknown":
+        unverified.append("Chưa đủ dữ liệu ngập: " + "; ".join(d.unknown_reasons if d else ["Thiếu hồ sơ hoặc dự báo"]))
     checks["flood"] = flood
 
     # 5. Stop Legality.
@@ -407,10 +914,9 @@ def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, s
         lstatus, rules = legality_for_lot(c.lot, intent)
     else:
         e = g.edges[c.edge_idx]
-        dj = min(c.offset if g.drive_degree(e.u) >= 3 else INF,
-                 e.length - c.offset if g.drive_degree(e.v) >= 3 else INF)
+        dj = junction_distance(g, e, c.offset, wrs)
         lstatus, rules = legality_on_street(g, g.ways[way_id], wrs[way_id], c.lat, c.lon, dj, intent, arrive,
-                                            paid.get(way_id))
+                                            paid.get(way_id), until=depart)
     checks["legality"] = {"status": lstatus, "rules": [r.to_json() for r in rules]}
     if lstatus == "Prohibited" or (intent == "park" and lstatus == "Restricted"):
         reasons_fail.append("; ".join(r.text for r in rules if r.status in ("Prohibited", "Restricted")))
@@ -425,10 +931,11 @@ def _evaluate(c, g, wrs, fps, fit, fit_notes, paid, p, intent, arrive, depart, s
         "ok": ok, "kind": c.kind, "name": c.name, "lat": c.lat, "lon": c.lon, "way_id": way_id,
         "tier": tier, "verified": ok and tier <= 1,
         "badges": _badges(checks, tier, lstatus),
-        "walk": {"meters": round(c.walk_m), "minutes": max(1, round(walk_min)) if c.walk_m > 20 else 0},
-        "route_in": route and {k: v for k, v in route.items() if k != "strict"},
-        "fit": checks["fit"], "way_out": {k: v for k, v in wo.items() if k != "strict"},
+        "walk": {"meters": round(c.walk_m), "verified": not c.data.get("walk_path", {}).get("unverified", True), "minutes": max(1, round(walk_min)) if c.walk_m > 20 else 0},
+        "route_in": route and {k: v for k, v in route.items() if k != "strict" and not k.startswith('_')},
+        "fit": checks["fit"], "way_out": {k: v for k, v in wo.items() if k != "strict" and not k.startswith('_')},
         "flood": flood, "legality": checks["legality"],
+        "estimate": _estimate(c, g, wrs, p, checks, reasons_fail),
         "fail_reasons": reasons_fail, "unverified_reasons": unverified, "lot": c.lot, "_c": c,
     }
 
@@ -440,7 +947,7 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
             n = c.entrance
             if n in dist:
                 nodes = _path_nodes(pred, n)[::-1]
-                return {"strict": strict, "meters": round(dist[n] + c.data.get("entrance_d", 0)),
+                return {"strict": strict and c.data.get("entrance_d", 0) <= .5, "meters": round(_geometry_length(_coords(g,nodes)+[[c.lon,c.lat]])),
                         "geometry": _coords(g, nodes) + [[c.lon, c.lat]], "flood": None}
             continue
         e = g.edges[c.edge_idx]
@@ -453,7 +960,7 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
         if opts:
             dmin, n, side = min(opts)
             nodes = _path_nodes(pred, n)[::-1]
-            return {"strict": strict, "meters": round(dmin), "side": side,
+            return {"strict": strict, "meters": round(_geometry_length(_coords(g,nodes)+[[c.lon,c.lat]])), "side": side,
                     "geometry": _coords(g, nodes) + [[c.lon, c.lat]], "flood": None}
     return None
 
@@ -461,50 +968,11 @@ def _route_in(c: Candidate, g: AreaGraph, arr) -> dict | None:
 def _way_out(c: Candidate, g: AreaGraph, wrs, fit, p: VehicleProfile, ext, route) -> dict:
     if route is None:
         return {"mode": "none", "text": "Không vào được nên không xét đường ra", "strict": False}
-    for strict in (True, False):
-        dist, pred = ext[strict]
-        if c.kind == "lot":
-            n = c.entrance
-            if n in dist:
-                return {"mode": "lot", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                        "text": "Quay đầu trong bãi rồi ra theo đường vào",
-                        "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, n))}
-            continue
-        e = g.edges[c.edge_idx]
-        w = g.ways[e.way_id]
-        a, b = (e.u, e.v) if route["side"] == "u" else (e.v, e.u)
-        s_a = c.offset if route["side"] == "u" else e.length - c.offset
-        forward_ok = (w.oneway == 0) or (w.oneway == 1 and a == e.u) or (w.oneway == -1 and a == e.v)
-        if wrs[w.id].lo >= three_point_width(p.id) and a in dist:
-            return {"mode": "turn_here", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                    "text": f"Quay đầu tại chỗ (đường rộng ≥ {wrs[w.id].lo:.1f} m)",
-                    "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, a))}
-        if forward_ok and b in dist and pred.get(b, (None,))[0] != e.idx:
-            return {"mode": "through", "strict": strict, "reverse_m": 0, "tight_exit": False,
-                    "text": "Đi thẳng ra đường lớn, không phải lùi",
-                    "geometry": [[c.lon, c.lat]] + _coords(g, _path_nodes(pred, b))}
-        if a in dist:
-            path = _path_nodes(pred, a)
-            rev = s_a
-            turn_at = None
-            for i, n in enumerate(path):
-                usable = [wid for wid in g.node_ways.get(n, ()) if fit.get(wid) in ("fits", "tight")]
-                if len(usable) >= 3 or (usable and any(g.ways[x].kind == "main" for x in usable) and i > 0):
-                    turn_at = i
-                    break
-                if i + 1 < len(path):
-                    rev += g.edges[pred[n][0]].length
-            if turn_at is None:
-                turn_at = len(path) - 1
-            if rev > 2 * REVERSE_LIMIT_M:  # nobody reverses a car this far in an alley: not a way out (D29)
-                continue
-            tight = rev > REVERSE_LIMIT_M
-            txt = (f"Lùi {rev:.0f} m rồi quay đầu tại ngã ba" if not tight
-                   else f"Phải lùi {rev:.0f} m (quá giới hạn {REVERSE_LIMIT_M:.0f} m) mới quay đầu được")
-            return {"mode": "reverse", "strict": strict, "reverse_m": round(rev), "tight_exit": tight,
-                    "text": txt, "geometry": [[c.lon, c.lat]] + _coords(g, path)}
-    return {"mode": "none", "strict": False,
-            "text": "Không có đường ra phù hợp lúc rời đi (hẻm cụt hoặc ngập lúc về)"}
+    if isinstance(ext, _DriveSearch):
+        return ext.exit(c, route)
+    # Compatibility for diagnostic callers supplying legacy node search trees.
+    flood_map = {wid: ('passable', None, None) for wid in g.ways}
+    return _DriveSearch(g, wrs, fit, p, flood_map, flood_map).exit(c, route)
 
 
 def _badges(checks, tier, lstatus) -> list[str]:
@@ -512,59 +980,70 @@ def _badges(checks, tier, lstatus) -> list[str]:
     fc = checks["fit"]["class"]
     out.append({"fits": "Vừa xe", "tight": "Chật", "unknown": "Chưa rõ bề rộng", "lot": "Bãi đỗ"}.get(fc, fc))
     wo = checks["way_out"]
-    out.append({"through": "Đi thẳng ra", "turn_here": "Quay đầu tại chỗ", "lot": "Quay đầu trong bãi",
-                "reverse": f"Lùi {wo.get('reverse_m', 0)} m"}.get(wo["mode"], "Không có đường ra"))
-    out.append({"passable": "Không ngập", "risky": "Có thể ngập", "blocked": "Ngập"}[checks["flood"]["stay"]["status"]])
+    if wo["mode"] != "none" and not wo.get("strict", False):
+        out.append("Chưa xác minh đường ra")
+    else:
+        out.append({"through": "Đi thẳng ra", "turn_here": "Quay đầu tại chỗ", "lot": "Quay đầu trong bãi",
+                    "unknown": "Chưa xác minh thao tác ra", "reverse": f"Lùi {wo.get('reverse_m', 0)} m"}.get(wo["mode"], "Không có đường ra"))
+    out.append({"passable": "Trong mức nước theo mô hình", "unknown": "Chưa rõ ngập", "risky": "Có thể ngập", "blocked": "Ngập"}[checks["flood"]["stay"]["status"]])
     if lstatus == "Unverified":
         codes = {r["code"] for r in checks["legality"]["rules"] if r["status"] == "Unverified"}
-        out.append("Chưa rõ đủ 2 làn xe" if "lane-unknown" in codes else "Chưa rõ biển báo")
+        out.append("Chưa rõ đủ 2 làn xe" if "lane-unknown" in codes else "Chưa xác minh pháp lý")
     else:
         out.append({"Permitted": "Được phép", "Restricted": "Hạn chế theo luật", "Prohibited": "Cấm"}[lstatus])
     return out
 
 
 def _walk_geometry(g, c: Candidate, wpred, dlat, dlon):
-    if c.kind == "door":
-        return [[c.lon, c.lat], [dlon, dlat]]
-    if c.kind == "lot":
-        n, _ = g.nearest_node(c.lat, c.lon, lambda x: x in wpred)
-        return [[c.lon, c.lat]] + (_coords(g, _path_nodes(wpred, n)) if n else []) + [[dlon, dlat]]
-    e = g.edges[c.edge_idx]
-    best = min((e.u, e.v), key=lambda n: (0 if n in wpred else 1, 0))
-    return [[c.lon, c.lat]] + _coords(g, _path_nodes(wpred, best)) + [[dlon, dlat]]
+    if 'walk_path' not in c.data:
+        c.data['walk_path'] = _WalkSearch(g,dlat,dlon,INF).path(c)
+    return (c.data['walk_path'] or {}).get('geometry', [])
 
 
 def _walk_wade(g, fps, c: Candidate, wpred, arrive, rain):
     worst = None
-    if c.kind == "door":
-        return None
-    start = g.nearest_node(c.lat, c.lon, lambda x: x in wpred)[0] if c.kind == "lot" else g.edges[c.edge_idx].u
-    node = start
-    while node in wpred:
-        eidx, node = wpred[node]
-        d = depth_at(fps.get(g.edges[eidx].way_id), arrive, rain, g.ways[g.edges[eidx].way_id].name)
-        if d and d.hi > WALK_WADE_M and (worst is None or d.hi > worst["hi"]):
-            worst = {"lo": round(d.lo, 2), "hi": round(d.hi, 2), "street": g.ways[g.edges[eidx].way_id].name,
-                     "label": "Lội nước"}
+    for ei in (c.data.get('walk_path') or {}).get('edges', []):
+        wid=g.edges[ei].way_id
+        d=depth_at(fps.get(wid),arrive,rain,g.ways[wid].name)
+        if d and d.hi>WALK_WADE_M and (worst is None or d.hi>worst['hi']):
+            worst={'lo':round(d.lo,2),'hi':round(d.hi,2),'street':g.ways[wid].name,'label':'Lội nước'}
     return worst
 
 
 def _verdict(chosen, door_eval, intent, cap) -> dict:
     if not chosen:
-        return {"code": "none", "headline": f"Không có điểm dừng phù hợp trong {cap:.0f} m đi bộ",
-                "detail": "Thử đổi giờ đến, thời gian ở lại hoặc chọn xe nhỏ hơn."}
+        return {"code": "none", "headline": f"Không tìm thấy điểm dừng phù hợp trong {cap:.0f} m đi bộ — độ tin cậy thấp",
+                "detail": "; ".join((door_eval or {}).get('fail_reasons', [])), "verified": False,
+                "unverified_reasons": (door_eval or {}).get('unverified_reasons', []),
+                "estimate": {"answer":"no", "confidence":"low", "basis":"Không có điểm vượt qua các kiểm tra trong mạng đường hiện có"}}
     best = chosen[0]
     verb = "đỗ" if intent == "park" else "dừng đón/trả"
-    if best["kind"] == "door" and best["verified"]:
-        return {"code": "door", "headline": "Xe vào tận cửa được", "detail": best["way_out"]["text"]}
-    if not best["verified"]:
-        head = ("Chỉ có điểm dừng hạn chế theo luật" if best["legality"]["status"] == "Restricted"
-                else "Chưa đủ bằng chứng để khẳng định")
-        return {"code": "unverified", "headline": head,
-                "detail": f"Gợi ý: {verb} tại {best['name']}, đi bộ {best['walk']['meters']} m"}
-    return {"code": "nearby", "headline": f"{verb.capitalize()} tại {best['name']}, đi bộ {best['walk']['meters']} m"
-                                          f" (~{best['walk']['minutes']} phút)",
-            "detail": "Xe không nên vào tận cửa" if door_eval and not door_eval["ok"] else ""}
+    estimate = best.get('estimate') or {'answer':'unknown', 'confidence':'low', 'basis':'Thiếu bằng chứng bề rộng'}
+    code = ('door' if best['kind'] == 'door' else 'nearby') if best['verified'] else 'unverified'
+    detail = best.get('way_out', {}).get('text', '')
+    if best['legality']['status'] == 'Restricted':
+        head = f"Luật cấm dừng tại {best['name']}"
+        detail = '; '.join(r['text'] + ' (' + r['citation'] + ')' for r in best['legality']['rules']
+                           if r['status'] == 'Restricted')
+        if not best.get('estimate'):
+            estimate = {'answer':'no', 'confidence':'high', 'basis':detail}
+    elif estimate['answer'] == 'no':
+        head = f"Ước tính xe khó dừng tại {best['name']}, cách cửa {best['walk']['meters']} m"
+    elif best['kind'] == 'door':
+        head = "Có thể vào tận cửa" if estimate['answer'] == 'fits' else "Ước tính vào tận cửa khá chật"
+        if estimate['answer'] == 'unknown':
+            head = 'Ước tính có thể tới cửa, còn thiếu bề rộng'
+    else:
+        head = f"Nên {verb} ở {best['name']}, đi bộ {best['walk']['meters']} m"
+        if estimate['answer'] == 'tight':
+            head += ' (khá chật)'
+        if door_eval and not door_eval['ok']:
+            rules = [r['text'] + ' (' + r['citation'] + ')' for r in door_eval['legality']['rules']
+                     if r['status'] in ('Prohibited', 'Restricted')]
+            detail = 'Tại cửa: ' + ('; '.join(rules) if rules else '; '.join(door_eval['fail_reasons']))
+    return {'code':code, 'headline':head + ' — độ tin cậy ' + CONFIDENCE_VI[estimate['confidence']],
+            'detail':detail, 'estimate':dict(estimate), 'verified':best['verified'],
+            'unverified_reasons':list(best.get('unverified_reasons', []))}
 
 
 def _decode_polyline(s: str) -> list[list[float]]:
@@ -676,8 +1155,10 @@ _NEAR_CACHE: dict = {}
 
 
 def _ways_near(g, lat, lon):
-    key = (g.source, round(lat, 3), round(lon, 3))
+    key = (g.source, getattr(g, "_engine_revision", id(g)), round(lat, 3), round(lon, 3))
     if key not in _NEAR_CACHE:
+        if len(_NEAR_CACHE) >= 256:
+            _NEAR_CACHE.pop(next(iter(_NEAR_CACHE)))
         _NEAR_CACHE[key] = [wid for wid, w in g.ways.items() if w.drivable and any(
             abs(g.nodes[n][0] - lat) < 0.0012 and abs(g.nodes[n][1] - lon) < 0.0012 for n in w.nodes)]
     return _NEAR_CACHE[key]
