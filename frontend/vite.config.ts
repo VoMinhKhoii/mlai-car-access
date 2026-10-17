@@ -8,8 +8,12 @@ const backend = process.env.BACKEND_ORIGIN ?? 'http://127.0.0.1:8787'
 // (needed when the dev server is opened through a tunnel or a non-default port).
 const toBackend = {
   target: backend, changeOrigin: true,
-  configure: (proxy: { on: (e: 'proxyReq', cb: (req: { getHeader: (n: string) => unknown; setHeader: (n: string, v: string) => void }) => void) => void }) =>
-    proxy.on('proxyReq', (req) => { if (req.getHeader('origin')) req.setHeader('origin', backend) }),
+  configure: (proxy: { on: (e: 'proxyReq', cb: (req: { getHeader: (n: string) => unknown; setHeader: (n: string, v: string) => void; removeHeader: (n: string) => void }) => void) => void }) =>
+    proxy.on('proxyReq', (req) => {
+      if (req.getHeader('origin')) req.setHeader('origin', backend)
+      // A tunnel's x-forwarded-proto: https would make the backend see itself as https and reject the http origin.
+      req.removeHeader('x-forwarded-proto')
+    }),
 }
 
 export default defineConfig({
