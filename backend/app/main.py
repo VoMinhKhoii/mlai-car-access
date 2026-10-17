@@ -13,7 +13,7 @@ import math
 import json
 from contextlib import asynccontextmanager
 import re
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from functools import lru_cache
 from typing import Annotated, Literal
@@ -469,7 +469,7 @@ def confirm(c: Confirmation, request: Request):
     way_out_ids = list(dict.fromkeys(way_id for way_id, _ in parcels.path_out(g, c.stop_lat, c.stop_lon)))
     way_ids = [stop_way_id]
     payload = {
-        "date": date.today().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
+        "date": datetime.now(VN_TZ).date().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
         "body_width": vehicles.min_body_width(p.id), "mirror_width": p.mirror_width,
         "result": c.result, "exit": c.exit, "way_ids": way_ids, "way_out_ids": way_out_ids,
         "stop_lat": c.stop_lat, "stop_lon": c.stop_lon,
@@ -506,7 +506,7 @@ class Blockage(Strict):
 def blockage(b: Blockage, request: Request):
     _guest_limit(request)
     _graph_with(b.lat, b.lon, [b.way_id])
-    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Driver report", "date": date.today().isoformat()}
+    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Driver report", "date": datetime.now(VN_TZ).date().isoformat()}
     rec = reports.submit("blockage", payload, "Driver blockage report")
     return {"status": "pending", "report_id": rec["report_id"]}
 

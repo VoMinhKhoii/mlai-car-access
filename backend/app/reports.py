@@ -123,11 +123,13 @@ def list_reports(status: str | None = None, cursor: str | None = None, limit: in
     with _lock:
         items = [_effective(r, now) for r in _load()["reports"].values()]
     items.sort(key=lambda r: (r["created_at"], r["report_id"]))
-    if status:
-        items = [r for r in items if r["status"] == status]
     if cursor:
         ids = [r["report_id"] for r in items]
         items = items[ids.index(cursor) + 1:] if cursor in ids else []
+    # Locate the cursor before filtering: reviewing the last row of a page
+    # changes its status, but must not hide the rest of the pending queue.
+    if status:
+        items = [r for r in items if r["status"] == status]
     page = items[:limit]
     return {"items": page, "next_cursor": page[-1]["report_id"] if len(items) > limit else None,
             "remaining": len(items)}

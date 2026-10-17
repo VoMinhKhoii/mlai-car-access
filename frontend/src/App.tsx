@@ -15,6 +15,7 @@ import { TideTimeline } from './components/TideTimeline'
 import { Segmented, metres, useOutside, vnt } from './ds/ui'
 
 import { fromLocal, timestamp, toLocal } from './datetime'
+import { planningRain } from './rain'
 const DEMO_ORIGIN: Place = { lat: 10.7725, lon: 106.698, label: 'Chợ Bến Thành, Quận 1' }
 const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
@@ -36,6 +37,7 @@ export default function App() {
   const [arrive, setArrive] = useState(() => toLocal(new Date().toISOString())!)
   const [rainOn, setRainOn] = useState(false)
   const [rainMm, setRainMm] = useState(45)
+  const [rainScenario, setRainScenario] = useState<RainSpell[] | null>(null)
   const [plan, setPlan] = useState<Plan | null>(null)
   const [planTripKey, setPlanTripKey] = useState('')
   const [selected, setSelected] = useState(0)
@@ -85,13 +87,8 @@ export default function App() {
   // "Go now" = the next 5-minute mark, so the plan only refreshes when that mark moves.
   const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString())! : arrive
   const arriveISO = fromLocal(arriveLocal)
-  const rain: RainSpell[] = useMemo(() => {
-    if (!rainOn || !arriveISO) return []
-    const at = timestamp(arriveISO)
-    if (at == null) return []
-    const start = new Date(at + 30 * 60e3)
-    return [{ start: start.toISOString(), end: new Date(start.getTime() + 3600e3).toISOString(), mm_per_h: rainMm }]
-  }, [rainOn, rainMm, arriveISO])
+  const rain = useMemo(() => planningRain(rainOn, arriveISO, rainMm, rainScenario),
+    [rainOn, rainMm, arriveISO, rainScenario])
   const activePlanRequest = useMemo(() => dest && vehicleId ? ({
     lat: dest.lat, lon: dest.lon, label: dest.label, vehicle_id: vehicleId, intent,
     arrive_at: arriveISO, dwell_min: intent === 'pickup' ? 15 : dwell, rain,
@@ -326,6 +323,7 @@ export default function App() {
     setArrive(local)
     setDwell(p.dwell_min)
     setRainOn(p.rain.length > 0)
+    setRainScenario(p.rain)
     if (p.rain[0]) setRainMm(p.rain[0].mm_per_h)
     setSelected(0)
     setSheet('half')
@@ -376,6 +374,7 @@ export default function App() {
     setArriveNow(false)
     setArrive(local)
     setRainOn((p.rain ?? []).length > 0)
+    setRainScenario(p.rain ?? null)
     if (p.rain?.[0]) setRainMm(p.rain[0].mm_per_h)
     setOrigin((o) => o ?? DEMO_ORIGIN)
     setDest({ lat: p.lat, lon: p.lon, label: p.label })
@@ -487,7 +486,8 @@ export default function App() {
             <span className="brand-name display">Ngõ Ngách</span>
             <span className="brand-sub">the alley layer for T-Maps</span>
             <DemoMenu open={menu === 'demo'} onOpen={(o) => setMenu(o ? 'demo' : null)} cfg={cfg} loadPreset={loadPreset}
-              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm} setRainMm={setRainMm} setFlag={setFlag}
+              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm}
+              setRainMm={(mm) => { setRainMm(mm); setRainScenario(null) }} setFlag={setFlag}
               canArrive={!!plan} onArrive={() => { setArrived(true); setMenu(null) }}
               onLogin={login} onLogout={logout} onApproved={() => runRef.current()} />
           </header>
