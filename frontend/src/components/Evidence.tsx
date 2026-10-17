@@ -6,6 +6,8 @@ import { metres } from '../ds/ui'
 import { fmtWidth } from './Directions'
 
 type TabId = 'width' | 'photos' | 'flood' | 'lookup'
+const widthTier = (b: Bound) => (b.sample_count ?? 0) > 0 ? b.tier : 'Inferred'
+const widthTierLabel = (b: Bound) => (b.sample_count ?? 0) > 0 ? b.tier : /osm/i.test(b.source) ? 'Assumed from OSM tag, not measured' : 'Inferred, not measured'
 const TIER_ORDER = ['Synthetic', 'Measured', 'Official', 'Observed', 'Declared', 'Inferred']
 const WIDTH_BASIS_LABEL: Record<WidthBasis, string> = {
   measured_clear_width: 'Measured clear width',
@@ -33,7 +35,7 @@ function CoverageDetails({ coverage }: { coverage: WidthCoverage | null }) {
 function BoundWidthMetadata({ bound }: { bound: Bound }) {
   return (
     <div className="width-meta-block">
-      <small className="width-basis">{WIDTH_BASIS_LABEL[bound.width_basis]}</small>
+      <small className="width-basis">{(bound.sample_count ?? 0) > 0 ? WIDTH_BASIS_LABEL[bound.width_basis] : widthTierLabel(bound)}</small>
       <small>Uncertainty: {bound.uncertainty_m == null ? 'not specified' : `±${metres(bound.uncertainty_m)}`}</small>
       <CoverageDetails coverage={bound.coverage} />
       {bound.width_basis === 'parcel_gap_estimate' && (
@@ -79,7 +81,7 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
         <div>
           <span className="faint">Road segment evidence</span>
           <h3 className="display">{way.name || 'Unnamed segment'}</h3>
-          <p><b>{wr.decisive_clearance && !wr.review ? wr.label : 'Unverified'}</b> · {fmtWidth(wr.lo, wr.hi)}{wr.top_tier && wr.width_basis !== 'synthetic_demo_width' && <span className="faint"> · strongest source: {wr.evidence.find((b) => b.tier === wr.top_tier)?.tier_vi}</span>}</p>
+          <p><b>{wr.decisive_clearance && !wr.review ? wr.label : 'Unverified'}</b> · {fmtWidth(wr.lo, wr.hi)}{wr.evidence.length > 0 && wr.top_tier && wr.width_basis !== 'synthetic_demo_width' && <span className="faint"> · strongest source: {widthTierLabel(wr.evidence.find((b) => b.tier === wr.top_tier) ?? wr.evidence[0])}</span>}</p>
           {wr.review && <p className="warn-line">Conflicting evidence needs review. Vehicle clearance cannot yet be confirmed.</p>}
         </div>
         <button type="button" className="icon-btn" aria-label="Close" onClick={onClose}><X size={18} /></button>
@@ -94,7 +96,7 @@ export function EvidencePanel({ way, at, google, grounding, canReview, onClose, 
             <ol className="tiers">
               {[...visibleEvidence].sort((a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier)).map((b, i) => (
                 <li key={i} className={wr.overruled.some((o) => o.detail === b.detail) ? 'overruled' : ''}>
-                  <span className={`tier tier-${b.tier}`}>{b.tier_vi}</span>
+                  <span className={`tier tier-${widthTier(b)}`}>{widthTierLabel(b)}</span>
                   <div>
                     <p>{b.detail}</p>
                     <small>{b.width_basis === 'parcel_gap_estimate' ? `Original data source: ${b.source}` : b.source} · {b.hi == null ? `≥ ${metres(b.lo)}` : fmtWidth(b.lo, b.hi)}{b.observed_on && ` · ${b.observed_on}`}{b.ai_feature && ' · AI'}

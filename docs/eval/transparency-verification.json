@@ -1,0 +1,246 @@
+[
+  {
+    "width": 1440,
+    "model": "toyota-fortuner",
+    "request": {
+      "lat": 10.802498,
+      "lon": 106.713094,
+      "label": "Hẻm 429 Điện Biên Phủ",
+      "vehicle_id": "toyota-fortuner",
+      "intent": "park",
+      "arrive_at": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 60,
+      "rain": [],
+      "origin": null,
+      "demo_scenario": null
+    },
+    "headline": "Access to Hẻm 429 Điện Biên Phủ may not fit the vehicle, 56 m walk — low confidence",
+    "layout": {
+      "text": "Why this answer\nWidth along the arrival route\n57 m\n\nStreet → Stop. Segment length follows distance; height shows width.\n\nNeeds 3.41 m\nStreet · 0 m\nStop · 57 m\n\nNarrowest 2.90 m · Inferred · Cadastral parcel-gap estimate\n\nHẻm 429 Điện Biên Phủ\n0.00–3.20 m · 1 sample · Inferred\nSource: Cadastral parcel-gap estimate\n\nMeasured\nOfficial\nObserved\nDeclared\nInferred\nNo data\n\nIsolated samples and inferred widths do not confirm continuous clear width.\n\nChecks, in order\n\nLimiting check: width: not verified\n\nWidth\nUnknown\n\n0.00–3.20 m; needs 3.41 m for comfortable clearance Source: Cadastral parcel-gap estimate.\n\nTurning / way out\nUnknown\n\nMust reverse 57 m (over the 30 m reverse limit); turning space is unverified Source: OSM route geometry.\n\nFlood during stay\nPass\n\nForecast within vehicle limits for the stay window Source: model.\n\nStopping law\nUnknown\n\nInsufficient clear-width measurements to determine the number of motor-vehicle lanes Source: Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4.\n\nWalk\nPass\n\n56 m · 1 min Source: OSM walking connection.\n\nConfidence: low\n\n0/1 segments measured · way out not verified · flood forecast covers stay.\n\nFull confidence basis\nAll vehicle classes · same route\n\nWidth-only comparison. Full route comparison unavailable; other checks still apply.\n\nVehicle\nMirrors\nNeeds\nAnswer\nXS\n1.93 m\n3.23 m\nUnknown\nS\n2.10 m\n3.39 m\nUnknown\nM\n2.21 m\n3.51 m\nUnknown\nL\n2.26 m\n3.56 m\nUnknown\nXL\n2.47 m\n3.77 m\nUnknown\nToyota Fortuner\n2.10 m\n3.41 m\nUnknown\n\nNeeds = comfortable width including the vehicle margin. Unknown means evidence is insufficient.",
+      "overflow": false,
+      "scrollWidth": 356,
+      "clientWidth": 356,
+      "buttons": [
+        {
+          "text": "Hẻm 429 Điện Biên Phủ: 0.00–3.20 m, Inferred",
+          "width": 356,
+          "height": 103
+        },
+        {
+          "text": "XS",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "S",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "M",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "L",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "XL",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "Toyota Fortuner",
+          "width": 142,
+          "height": 44
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "model": "vinfast-vf-3",
+    "request": {
+      "lat": 10.802498,
+      "lon": 106.713094,
+      "label": "Hẻm 429 Điện Biên Phủ",
+      "vehicle_id": "vinfast-vf-3",
+      "intent": "park",
+      "arrive_at": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 60,
+      "rain": [],
+      "origin": null,
+      "demo_scenario": null
+    },
+    "headline": "Park on Hẻm 429 Điện Biên Phủ, 56 m walk — low confidence",
+    "layout": {
+      "text": "Why this answer\nWidth along the arrival route\n57 m\n\nStreet → Stop. Segment length follows distance; height shows width.\n\nNeeds 3.05 m\nStreet · 0 m\nStop · 57 m\n\nNarrowest 2.90 m · Inferred · Cadastral parcel-gap estimate\n\nHẻm 429 Điện Biên Phủ\n0.00–3.20 m · 1 sample · Inferred\nSource: Cadastral parcel-gap estimate\n\nMeasured\nOfficial\nObserved\nDeclared\nInferred\nNo data\n\nIsolated samples and inferred widths do not confirm continuous clear width.\n\nChecks, in order\n\nLimiting check: width: not verified\n\nWidth\nUnknown\n\n0.00–3.20 m; needs 3.05 m for comfortable clearance Source: Cadastral parcel-gap estimate.\n\nTurning / way out\nUnknown\n\nMust reverse 57 m (over the 30 m reverse limit); turning space is unverified Source: OSM route geometry.\n\nFlood during stay\nPass\n\nForecast within vehicle limits for the stay window Source: model.\n\nStopping law\nUnknown\n\nInsufficient clear-width measurements to determine the number of motor-vehicle lanes Source: Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4.\n\nWalk\nPass\n\n56 m · 1 min Source: OSM walking connection.\n\nConfidence: low\n\n0/1 segments measured · way out not verified · flood forecast covers stay.\n\nFull confidence basis\nAll vehicle classes · same route\n\nWidth-only comparison. Full route comparison unavailable; other checks still apply.\n\nVehicle\nMirrors\nNeeds\nAnswer\nXS\n1.93 m\n3.23 m\nUnknown\nS\n2.10 m\n3.39 m\nUnknown\nM\n2.21 m\n3.51 m\nUnknown\nL\n2.26 m\n3.56 m\nUnknown\nXL\n2.47 m\n3.77 m\nUnknown\nVinFast VF 3\n1.75 m\n3.05 m\nUnknown\n\nNeeds = comfortable width including the vehicle margin. Unknown means evidence is insufficient.",
+      "overflow": false,
+      "scrollWidth": 356,
+      "clientWidth": 356,
+      "buttons": [
+        {
+          "text": "Hẻm 429 Điện Biên Phủ: 0.00–3.20 m, Inferred",
+          "width": 356,
+          "height": 103
+        },
+        {
+          "text": "XS",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "S",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "M",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "L",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "XL",
+          "width": 142,
+          "height": 44
+        },
+        {
+          "text": "VinFast VF 3",
+          "width": 142,
+          "height": 44
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "model": "toyota-fortuner",
+    "request": {
+      "lat": 10.802498,
+      "lon": 106.713094,
+      "label": "Hẻm 429 Điện Biên Phủ",
+      "vehicle_id": "toyota-fortuner",
+      "intent": "park",
+      "arrive_at": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 60,
+      "rain": [],
+      "origin": null,
+      "demo_scenario": null
+    },
+    "headline": "Access to Hẻm 429 Điện Biên Phủ may not fit the vehicle, 56 m walk — low confidence",
+    "layout": {
+      "text": "Why this answer\nWidth along the arrival route\n57 m\n\nStreet → Stop. Segment length follows distance; height shows width.\n\nNeeds 3.41 m\nStreet · 0 m\nStop · 57 m\n\nNarrowest 2.90 m · Inferred · Cadastral parcel-gap estimate\n\nHẻm 429 Điện Biên Phủ\n0.00–3.20 m · 1 sample · Inferred\nSource: Cadastral parcel-gap estimate\n\nMeasured\nOfficial\nObserved\nDeclared\nInferred\nNo data\n\nIsolated samples and inferred widths do not confirm continuous clear width.\n\nChecks, in order\n\nLimiting check: width: not verified\n\nWidth\nUnknown\n\n0.00–3.20 m; needs 3.41 m for comfortable clearance Source: Cadastral parcel-gap estimate.\n\nTurning / way out\nUnknown\n\nMust reverse 57 m (over the 30 m reverse limit); turning space is unverified Source: OSM route geometry.\n\nFlood during stay\nPass\n\nForecast within vehicle limits for the stay window Source: model.\n\nStopping law\nUnknown\n\nInsufficient clear-width measurements to determine the number of motor-vehicle lanes Source: Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4.\n\nWalk\nPass\n\n56 m · 1 min Source: OSM walking connection.\n\nConfidence: low\n\n0/1 segments measured · way out not verified · flood forecast covers stay.\n\nFull confidence basis\nAll vehicle classes · same route\n\nWidth-only comparison. Full route comparison unavailable; other checks still apply.\n\nVehicle\nMirrors\nNeeds\nAnswer\nXS\n1.93 m\n3.23 m\nUnknown\nS\n2.10 m\n3.39 m\nUnknown\nM\n2.21 m\n3.51 m\nUnknown\nL\n2.26 m\n3.56 m\nUnknown\nXL\n2.47 m\n3.77 m\nUnknown\nToyota Fortuner\n2.10 m\n3.41 m\nUnknown\n\nNeeds = comfortable width including the vehicle margin. Unknown means evidence is insufficient.",
+      "overflow": false,
+      "scrollWidth": 334,
+      "clientWidth": 334,
+      "buttons": [
+        {
+          "text": "Hẻm 429 Điện Biên Phủ: 0.00–3.20 m, Inferred",
+          "width": 334,
+          "height": 103
+        },
+        {
+          "text": "XS",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "S",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "M",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "L",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "XL",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "Toyota Fortuner",
+          "width": 132,
+          "height": 44
+        }
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "model": "vinfast-vf-3",
+    "request": {
+      "lat": 10.802498,
+      "lon": 106.713094,
+      "label": "Hẻm 429 Điện Biên Phủ",
+      "vehicle_id": "vinfast-vf-3",
+      "intent": "park",
+      "arrive_at": "2026-10-17T14:00:00+07:00",
+      "dwell_min": 60,
+      "rain": [],
+      "origin": null,
+      "demo_scenario": null
+    },
+    "headline": "Park on Hẻm 429 Điện Biên Phủ, 56 m walk — low confidence",
+    "layout": {
+      "text": "Why this answer\nWidth along the arrival route\n57 m\n\nStreet → Stop. Segment length follows distance; height shows width.\n\nNeeds 3.05 m\nStreet · 0 m\nStop · 57 m\n\nNarrowest 2.90 m · Inferred · Cadastral parcel-gap estimate\n\nHẻm 429 Điện Biên Phủ\n0.00–3.20 m · 1 sample · Inferred\nSource: Cadastral parcel-gap estimate\n\nMeasured\nOfficial\nObserved\nDeclared\nInferred\nNo data\n\nIsolated samples and inferred widths do not confirm continuous clear width.\n\nChecks, in order\n\nLimiting check: width: not verified\n\nWidth\nUnknown\n\n0.00–3.20 m; needs 3.05 m for comfortable clearance Source: Cadastral parcel-gap estimate.\n\nTurning / way out\nUnknown\n\nMust reverse 57 m (over the 30 m reverse limit); turning space is unverified Source: OSM route geometry.\n\nFlood during stay\nPass\n\nForecast within vehicle limits for the stay window Source: model.\n\nStopping law\nUnknown\n\nInsufficient clear-width measurements to determine the number of motor-vehicle lanes Source: Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4.\n\nWalk\nPass\n\n56 m · 1 min Source: OSM walking connection.\n\nConfidence: low\n\n0/1 segments measured · way out not verified · flood forecast covers stay.\n\nFull confidence basis\nAll vehicle classes · same route\n\nWidth-only comparison. Full route comparison unavailable; other checks still apply.\n\nVehicle\nMirrors\nNeeds\nAnswer\nXS\n1.93 m\n3.23 m\nUnknown\nS\n2.10 m\n3.39 m\nUnknown\nM\n2.21 m\n3.51 m\nUnknown\nL\n2.26 m\n3.56 m\nUnknown\nXL\n2.47 m\n3.77 m\nUnknown\nVinFast VF 3\n1.75 m\n3.05 m\nUnknown\n\nNeeds = comfortable width including the vehicle margin. Unknown means evidence is insufficient.",
+      "overflow": false,
+      "scrollWidth": 334,
+      "clientWidth": 334,
+      "buttons": [
+        {
+          "text": "Hẻm 429 Điện Biên Phủ: 0.00–3.20 m, Inferred",
+          "width": 334,
+          "height": 103
+        },
+        {
+          "text": "XS",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "S",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "M",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "L",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "XL",
+          "width": 132,
+          "height": 44
+        },
+        {
+          "text": "VinFast VF 3",
+          "width": 132,
+          "height": 44
+        }
+      ]
+    },
+    "errors": []
+  }
+]

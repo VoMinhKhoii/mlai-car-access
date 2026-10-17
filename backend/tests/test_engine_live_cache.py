@@ -61,7 +61,8 @@ def test_ministop_legacy_cache_reaches_http_evidence_and_plan(cached_http):
     assert parcel['sample_quality']['accepted_cuts'] == 5
     assert parcel['sample_quality']['rejected_cuts'] == []
     assert parcel['estimate_m'] == 5.56
-    assert parcel['tier'] == 'Inferred'  # Automatic geometry does not become Official clearance.
+    assert parcel['tier'] == 'Official'  # Portal provenance, never a continuous clearance guarantee.
+    assert 'not continuous clear width' in width['clear_width_caveat']
     assert width['sampled_estimate']['lo'] == 5.26
     assert width['sampled_estimate']['hi'] == 5.86
     assert width['lo'] == 0 and not width['decisive_clearance']
@@ -85,7 +86,7 @@ def test_ministop_legacy_cache_reaches_http_evidence_and_plan(cached_http):
 
 
 @pytest.mark.parametrize('mutation,expected_state', [
-    ('expired', 'stale'), ('missing_time', 'missing'), ('naive_time', 'missing'),
+    ('missing_time', 'missing'), ('naive_time', 'missing'),
     ('future_time', 'missing'), ('unfinished', 'missing'), ('wrong_key', 'missing'),
     ('unknown_schema', 'missing'),
 ])
@@ -111,3 +112,48 @@ def test_legacy_cache_fails_closed_without_fresh_completed_server_record(cached_
     response = client.post(f'/api/evidence/way/{WAY}', json={'lat': LAT, 'lon': LON})
     assert response.status_code == 200
     assert not any(b['ai_feature'] == 'parcel_widths' for b in response.json()['width_range']['evidence'])
+
+
+@pytest.mark.parametrize('versioned', [False, True])
+def test_expired_area_retains_only_dated_static_portal_cuts_through_http(cached_http, versioned):
+    client, path, record = cached_http
+    observed = (datetime.now(live.VN_TZ)-timedelta(days=30)).isoformat()
+    record['status']['finished_at'] = observed
+    if versioned:
+        record.update(schema_version=live.SCHEMA_VERSION, revision=7, collected_at=observed,
+                      expires_at=(datetime.fromisoformat(observed)+live.TTL).isoformat(), complete=True,
+                      steps={}, counts={})
+    path.write_text(json.dumps(record))
+    original = path.read_bytes()
+    assert live.area_status(LAT, LON)[0] is None  # Dynamic evidence remains expired.
+    data = client.post(f'/api/evidence/way/{WAY}', json={'lat': LAT, 'lon': LON}).json()
+    parcel = next(b for b in data['width_range']['evidence'] if b['ai_feature'] == 'parcel_widths')
+    assert parcel['tier'] == 'Official' and parcel['estimate_m'] == 5.56
+    assert parcel['sample_quality']['accepted_cuts'] == 5
+    assert parcel['observed_on'] == observed
+    assert parcel['url'] == 'https://thongtinquyhoach.hochiminhcity.gov.vn/'
+    assert 'not continuous clear width' in data['width_range']['clear_width_caveat']
+    assert not data['photos']
+    assert not any('Legacy unreviewed' in b['source'] for b in data['width_range']['evidence'])
+    result = client.post('/api/plan', json={'lat': LAT, 'lon': LON, 'vehicle_id': 'class-m',
+        'intent': 'park', 'dwell_min': 60, 'arrive_at': '2026-10-17T14:00:00+07:00'}).json()
+    assert result['area']['state'] == 'stale'
+    assert result['door']['estimate']['coverage']['all_sampled_segments'] == 6
+    assert result['door']['estimate']['stop_width']['value_m'] == 5.56
+    assert not result['door']['verified']
+    assert path.read_bytes() == original
+
+
+def test_expired_legacy_partial_does_not_mask_richer_city_deep_survey(cached_http):
+    client, path, record = cached_http
+    record['status']['finished_at'] = (datetime.now(live.VN_TZ)-timedelta(days=30)).isoformat()
+    path.write_text(json.dumps(record))
+    parcel = next(p for p in record['parcels'] if p['way_id'] == WAY)
+    city = {**parcel, 'deep': False, 'prior_scan_deep': True}
+    assert len(city['cuts']) == 5
+    record['parcels'] = [{**parcel, 'cuts': parcel['cuts'][:1], 'samples': parcel['samples'][:1], 'deep': True}]
+    path.write_text(json.dumps(record))
+    live.CITY_PARCELS.write_text(json.dumps({str(WAY): city}))
+    result = client.post(f'/api/evidence/way/{WAY}', json={'lat': LAT, 'lon': LON}).json()
+    parcel = next(b for b in result['width_range']['evidence'] if b['ai_feature'] == 'parcel_widths')
+    assert parcel['sample_quality']['accepted_cuts'] == 5

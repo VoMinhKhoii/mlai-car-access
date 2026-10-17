@@ -1,0 +1,87 @@
+name: Product checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FLAG_LIVE_HYDRO: '0'
+      NGONGACH_CACHED_ONLY: '0'
+      PYTHONPATH: backend:pipelines
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Configure isolated runtime directories
+        run: |
+          cat >> "$GITHUB_ENV" <<EOF
+          VAODUOC_STORE=$RUNNER_TEMP/vaoduoc/store
+          VAODUOC_CACHE=$RUNNER_TEMP/vaoduoc/cache
+          VAODUOC_FLAGS=$RUNNER_TEMP/vaoduoc/flags.json
+          MPLCONFIGDIR=$RUNNER_TEMP/matplotlib
+          EOF
+      - name: Install dependencies and seed isolated cache
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements.txt -r pipelines/requirements-footprints.txt pytest
+          npm --prefix frontend ci
+          mkdir -p "$VAODUOC_CACHE" "$VAODUOC_STORE"
+          cp -a backend/cache/. "$VAODUOC_CACHE/"
+      - name: Build frontend and run its regressions
+        run: |
+          npm --prefix frontend run build
+          npm --prefix frontend test
+          npm --prefix frontend run lint
+      - name: Backend and pipeline regressions
+        run: .venv/bin/python -m pytest backend/tests pipelines/test_*.py -q
+      - name: Cached product smoke test
+        run: |
+          NGONGACH_CACHED_ONLY=1 .venv/bin/python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8787 --workers 1 > "$RUNNER_TEMP/backend.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          .venv/bin/python - <<'PY'
+          import time
+          import httpx
+          with httpx.Client(base_url='http://127.0.0.1:8787', timeout=30) as client:
+              for attempt in range(30):
+                  try:
+                      config = client.get('/api/config')
+                      config.raise_for_status()
+                      break
+                  except httpx.HTTPError:
+                      if attempt == 29:
+                          raise
+                      time.sleep(1)
+              page = client.get('/')
+              page.raise_for_status()
+              assert '<html' in page.text
+              preset = config.json()['presets'][0]
+              result = client.post('/api/plan', json={
+                  'lat': preset['lat'], 'lon': preset['lon'], 'label': preset['label'],
+                  'vehicle_id': 'class-s', 'intent': 'park', 'arrive_at': None,
+                  'dwell_min': 15, 'rain': [], 'origin': None,
+              })
+              result.raise_for_status()
+              assert result.json()['verdict']['code']
+              assert result.json()['stop_points']
+              print('Frontend and cached planning smoke test passed')
+          PY

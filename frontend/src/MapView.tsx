@@ -2,11 +2,11 @@ import maplibregl, { type GeoJSONSource, type Map as MLMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type * as GeoJSON from 'geojson'
 import { useEffect, useRef, useState } from 'react'
-import { floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type ManeuverState, type Plan } from './api'
+import { evidenceTier, floodKnowledgeLabel, routeSourceLabel, type CameraInfo, type Corridor, type FloodLayerProperties, type ManeuverState, type Plan } from './api'
 import { featurePlace, type MapContext, type MapPlace } from './mapSearch'
 import { floodPresentation, floodTimeLabel } from './components/Result'
 
-export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean }
+export interface LayerToggles { fit: boolean; flood: boolean; standard: boolean; cams: boolean; evidence: boolean }
 export type FloodMoment = 'arrive' | 'depart'
 type LL = { lat: number; lon: number }
 export interface ManeuverOverlay {
@@ -151,7 +151,7 @@ export function MapView(p: Props) {
     m.on('load', () => {
       for (const l of m.getStyle().layers ?? []) if (l.type === 'fill-extrusion') m.setLayoutProperty(l.id, 'visibility', 'none')
       const fit = { fits: css('--fit-fits'), tight: css('--fit-tight'), no: css('--fit-no'), unknown: css('--fit-unknown'), blocked: css('--fit-blocked') }
-      ;['corridor', 'flood', 'fit', 'standard', 'approach', 'route', 'wayout', 'walk', 'cams', 'maneuver'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
+      ;['corridor', 'flood', 'fit', 'standard', 'approach', 'route', 'wayout', 'walk', 'cams', 'maneuver', 'evidence'].forEach((id) => m.addSource(id, { type: 'geojson', data: EMPTY }))
       // Large-road alternatives under everything else; the chosen one is drawn like the route itself.
       m.addLayer({ id: 'corridor-alt', type: 'line', source: 'corridor', filter: ['!', ['get', 'sel']], layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: { 'line-color': css('--n-500'), 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 6], 'line-opacity': 0.45 } })
@@ -183,6 +183,11 @@ export function MapView(p: Props) {
         paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 5, 17, 9], 'line-opacity': 0.9 } })
       m.addLayer({ id: 'standard', type: 'line', source: 'standard', layout: { 'line-cap': 'butt', 'line-join': 'round' },
         paint: { 'line-color': css('--route-standard'), 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 17, 5], 'line-dasharray': [2, 1.5] } })
+      m.addLayer({ id: 'evidence', type: 'line', source: 'evidence', layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': ['match', ['get', 'evidence_tier'],
+          'Measured', css('--evidence-measured'), 'Official', css('--evidence-official'), 'Observed', css('--evidence-observed'),
+          'Declared', css('--evidence-declared'), 'Inferred', css('--evidence-inferred'), css('--evidence-no-data')],
+          'line-width': ['interpolate', ['linear'], ['zoom'], 13, 2, 17, 6], 'line-opacity': 0.95 } })
       const cam = { ok: css('--fit-fits'), un: css('--fit-tight'), jam: css('--fit-no'), water: css('--flood-risky'), none: css('--fit-unknown') }
       m.addLayer({ id: 'cams', type: 'circle', source: 'cams', minzoom: 10.5,
         paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, ['case', ['get', 'read'], 4, 2.5], 16, ['case', ['get', 'read'], 8, 5]],
@@ -213,6 +218,10 @@ export function MapView(p: Props) {
       for (const f of features) {
         const place = featurePlace(f, f.sourceLayer ?? f.layer.id, { lat: e.lngLat.lat, lon: e.lngLat.lng })
         if (place) { cb.current.onPlaceClick(place); return }
+      }
+      if (cb.current.toggles.evidence) {
+        const evidenceHit = m.queryRenderedFeatures(e.point, { layers: ['evidence'] })[0]
+        if (evidenceHit) return cb.current.onWayClick(Number(evidenceHit.properties?.way_id), e.lngLat.lat, e.lngLat.lng)
       }
       if (cb.current.toggles.flood && cb.current.plan) {
         const waterHit = m.queryRenderedFeatures(e.point, { layers: ['flood'] })[0]
@@ -261,7 +270,7 @@ export function MapView(p: Props) {
           return
         }
       }
-      const hit = m.queryRenderedFeatures(e.point, { layers: ['fit', 'fit-unknown'] })
+      const hit = m.queryRenderedFeatures(e.point, { layers: ['evidence', 'fit', 'fit-unknown'] })
       if (hit.length) cb.current.onWayClick(Number(hit[0].properties?.way_id), e.lngLat.lat, e.lngLat.lng)
     })
     m.on('contextmenu', (e) => cb.current.onPick(e.lngLat.lat, e.lngLat.lng, e.point.x, e.point.y))
@@ -271,7 +280,7 @@ export function MapView(p: Props) {
       press = window.setTimeout(() => cb.current.onPick(e.lngLat.lat, e.lngLat.lng, e.point.x, e.point.y), 550)
     })
     for (const ev of ['touchend', 'touchmove', 'dragstart'] as const) m.on(ev, () => window.clearTimeout(press))
-    for (const id of ['fit', 'fit-unknown', 'flood', 'cams']) {
+    for (const id of ['fit', 'fit-unknown', 'evidence', 'flood', 'cams']) {
       m.on('mouseenter', id, () => { m.getCanvas().style.cursor = 'pointer' })
       m.on('mouseleave', id, () => { m.getCanvas().style.cursor = '' })
     }
@@ -294,7 +303,11 @@ export function MapView(p: Props) {
     const { plan, selected, toggles, floodMoment, destination, origin, corridor, routeSel, cams, maneuver } = cb.current
     const set = (id: string, data: GeoJSON.FeatureCollection) => (m.getSource(id) as GeoJSONSource | undefined)?.setData(data)
     const sp = plan?.stop_points[selected]
-    set('fit', plan && toggles.fit ? plan.layers.fit : EMPTY)
+    set('fit', plan && toggles.fit && !toggles.evidence ? plan.layers.fit : EMPTY)
+    const profileTiers = new Map((sp?.profile ?? plan?.verdict.profile ?? []).map((segment) => [segment.way_id, segment.tier]))
+    set('evidence', plan && toggles.evidence ? { ...plan.layers.fit, features: plan.layers.fit.features.map((f) => ({ ...f,
+      properties: { ...f.properties, evidence_tier: evidenceTier(profileTiers.get(f.properties?.way_id) ?? f.properties?.top_tier) },
+    })) } : EMPTY)
     set('flood', plan && toggles.flood ? plan.layers.flood : EMPTY)
     set('standard', line(toggles.standard ? plan?.standard_route?.geometry : undefined))
     // With a corridor, its chosen large-road route replaces the stop's own approach.

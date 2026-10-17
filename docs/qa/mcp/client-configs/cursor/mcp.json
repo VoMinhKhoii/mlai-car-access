@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ngo-ngach": {
+      "command": "python3",
+      "args": [
+        "/Users/khoivo/Developer/mlai-car-access/mcp/vaoduoc_mcp.py"
+      ],
+      "env": {
+        "VAODUOC_API": "http://127.0.0.1:8787"
+      }
+    }
+  }
+}

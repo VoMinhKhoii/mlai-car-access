@@ -1,3 +1,4 @@
+import { canonicalSuggestions } from '../qaFixes'
 import { ArrowUpDown, Car, Clock, Crosshair, MapPin, ParkingSquare, Search, UserRound, X } from 'lucide-react'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { api, matchVisiblePlaces, type Intent, type SearchResult, type Vehicle } from '../api'
@@ -58,20 +59,20 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
     controller.current = request
     const local: SearchResult[] = mapContext ? matchVisiblePlaces(v, mapContext.candidates, mapContext.center, 6)
       .map((p) => ({ label: p.name, lat: p.lat, lon: p.lon, source: 'On the map' })) : []
-    setResults(local)
-    setStatus(local.length ? 'idle' : 'loading')
+    setResults([])
+    setStatus('loading')
     setMessage('Finding places…')
     timer.current = window.setTimeout(async () => {
       try {
-        const r = await api.search(v, kind === 'dest' ? mapContext?.center ?? near : near, request.signal)
+        const r = await api.search(v, near, request.signal)
         if (gen !== generation.current || request.signal.aborted) return
-        const remote = r.results.filter((p) => !local.some((x) => x.label === p.label && p.lat != null && p.lon != null && Math.abs(x.lat! - p.lat) < .0002 && Math.abs(x.lon! - p.lon) < .0002))
-        setResults([...local, ...remote].slice(0, 6))
+        const canonical = canonicalSuggestions(r.results, local)
+        setResults(canonical)
         setStatus((local.length + r.results.length) ? 'idle' : 'empty')
         setMessage('Could not find that place. Try a street name or tap the map.')
       } catch {
         if (gen !== generation.current || request.signal.aborted) return
-        setResults(local)
+        setResults(canonicalSuggestions([], local))
         setStatus(local.length ? 'idle' : 'error')
         setMessage('Search is unavailable. Choose a map result or try again.')
       }
@@ -132,7 +133,7 @@ function PlaceField({ kind, value, onPick, placeholder, extra, near, mapContext 
         {results.map((r, i) => (
           <li key={r.place_id ?? `${r.label}-${i}`} id={`${id}-${i}`} role="option" aria-selected={active === i}
             onPointerDown={(e) => e.preventDefault()} onClick={() => void pick(r)} onPointerMove={() => setActive(i)}>
-            <Search size={15} /><span>{r.label}<small>{r.source}</small></span>
+            <Search size={15} /><span>{r.label}<small>{r.subtitle ?? r.source}</small></span>
           </li>
         ))}
       </ul>

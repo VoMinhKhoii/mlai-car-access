@@ -1,0 +1,122 @@
+{
+  "Hẻm 441/14 Điện Biên Phủ": {
+    "results": [
+      {
+        "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.802092539999743,
+        "lon": 106.71365960299639,
+        "source": "Goong",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": []
+  },
+  "Hẻm 429 Điện Biên Phủ": {
+    "results": [
+      {
+        "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.80204457691327,
+        "lon": 106.71296886819937,
+        "source": "Goong",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": []
+  },
+  "137/41/18 Trần Đình Xu": {
+    "results": [
+      {
+        "label": "Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh",
+        "lat": 10.76193523007979,
+        "lon": 106.68747716896263,
+        "source": "Goong",
+        "precision": "alley"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": [],
+    "house_unpinned": true,
+    "requested_address": "137/41/18 Trần Đình Xu",
+    "selection_reason": "Located at Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh; house 18 is not pinned within address 137/41/18. The estimate applies to the mapped alley; the final branch to the house has not been checked.",
+    "note": "Located at Hẻm 137/41 Trần Đình Xu, Cầu Ông Lãnh, Hồ Chí Minh; house 18 is not pinned within address 137/41/18. The estimate applies to the mapped alley; the final branch to the house has not been checked."
+  },
+  "HUTECH": {
+    "results": [
+      {
+        "label": "Hutech - Cơ sở D Điện Biên Phủ, 276 Đường Điện Biên Phủ, Gia Định, Hồ Chí Minh",
+        "lat": 10.799468,
+        "lon": 106.7069006,
+        "source": "HUTECH / verified address",
+        "precision": "place"
+      },
+      {
+        "label": "Hutech - Đại Học Công Nghệ Tp.hcm, 475A Đường Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.801617,
+        "lon": 106.714455,
+        "source": "HUTECH / verified address",
+        "precision": "place"
+      },
+      {
+        "label": "HUTECH - Đại học Công nghệ TP.HCM (Ung Van Khiem Campus), 31/36 Ung Văn Khiêm, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.8095728,
+        "lon": 106.7149885,
+        "source": "HUTECH / verified address",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": true
+  },
+  "Hẻm 479 Điện Biên Phủ": {
+    "results": [
+      {
+        "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.801333784850947,
+        "lon": 106.71470119500829,
+        "source": "Goong",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": []
+  },
+  "Hẻm 220/9 Xô Viết Nghệ Tĩnh": {
+    "results": [
+      {
+        "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+        "lat": 10.7992432,
+        "lon": 106.7123911,
+        "source": "Demo location / OSM",
+        "precision": "alley"
+      }
+    ],
+    "requires_clarification": false
+  },
+  "Hẻm 246 Xô Viết Nghệ Tĩnh": {
+    "results": [
+      {
+        "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.799394717905345,
+        "lon": 106.71141064198751,
+        "source": "Goong",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": []
+  },
+  "Hẻm 356 Xô Viết Nghệ Tĩnh": {
+    "results": [
+      {
+        "label": "Hẻm 356 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "lat": 10.803764057800487,
+        "lon": 106.71230495589315,
+        "source": "Goong",
+        "precision": "place"
+      }
+    ],
+    "requires_clarification": false,
+    "source_warnings": []
+  }
+}

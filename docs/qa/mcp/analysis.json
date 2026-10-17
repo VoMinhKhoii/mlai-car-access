@@ -1,0 +1,1181 @@
+{
+  "public-certifi.jsonl": {
+    "records": 30,
+    "tool_calls": 14,
+    "plans": 4,
+    "errors": [
+      {
+        "name": "missing",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Unknown tool"
+          }
+        },
+        "exception": null
+      },
+      {
+        "name": "plan_arrival",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Missing required tool arguments"
+          }
+        },
+        "exception": null
+      },
+      {
+        "name": "missing",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Unknown tool"
+          }
+        },
+        "exception": null
+      },
+      {
+        "name": "plan_arrival",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Missing required tool arguments"
+          }
+        },
+        "exception": null
+      }
+    ],
+    "max_tool_bytes": 16945,
+    "missing_estimate_confidence_citations": [],
+    "api_pairs": [
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      }
+    ],
+    "monotonicity": [
+      {
+        "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      }
+    ],
+    "inversions": [],
+    "rate_limit": null
+  },
+  "before.jsonl": {
+    "records": 195,
+    "tool_calls": 138,
+    "plans": 44,
+    "errors": [
+      {
+        "name": "missing",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Unknown tool"
+          }
+        },
+        "exception": null
+      },
+      {
+        "name": "plan_arrival",
+        "args": {},
+        "status": 200,
+        "body": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "error": {
+            "code": -32602,
+            "message": "Missing required tool arguments"
+          }
+        },
+        "exception": null
+      },
+      {
+        "name": "missing",
+        "args": {},
+        "status": null,
+        "body": null,
+        "exception": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>"
+      },
+      {
+        "name": "plan_arrival",
+        "args": {},
+        "status": null,
+        "body": null,
+        "exception": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>"
+      }
+    ],
+    "max_tool_bytes": 18001,
+    "missing_estimate_confidence_citations": [],
+    "api_pairs": [
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.802092539999743,
+          "lon": 106.71365960299639,
+          "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unlikely — low confidence",
+        "api_headline": "Door access unlikely — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unlikely — low confidence",
+        "api_headline": "Door access unlikely — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Điện Biên Phủ, 63 m walk — low confidence",
+        "api_headline": "Park on Điện Biên Phủ, 63 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.80204457691327,
+          "lon": 106.71296886819937,
+          "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 63 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 63 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Park on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.801333784850947,
+          "lon": 106.71470119500829,
+          "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "toyota-vios",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "toyota-vios",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "class-xl",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.7992432,
+          "lon": 106.7123911,
+          "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+          "vehicle_id": "class-xl",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Door access unverified — low confidence",
+        "api_headline": "Door access unverified — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-vios",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "toyota-fortuner",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Can reach the door — low confidence",
+        "api_headline": "Can reach the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.799394717905345,
+          "lon": 106.71141064198751,
+          "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "class-xl",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Tight access to the door — low confidence",
+        "api_headline": "Tight access to the door — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.803764057800487,
+          "lon": 106.71230495589315,
+          "label": "Hẻm 356 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "park",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Park on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence",
+        "api_headline": "Park on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence"
+      },
+      {
+        "args": {
+          "lat": 10.803764057800487,
+          "lon": 106.71230495589315,
+          "label": "Hẻm 356 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+          "vehicle_id": "vinfast-vf-3",
+          "intent": "pickup",
+          "arrive_at": "2026-10-17T14:00:00+07:00",
+          "dwell_min": 120
+        },
+        "headline_equal": true,
+        "estimate_answer_equal": true,
+        "mcp_headline": "Stop for pickup/drop-off on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence",
+        "api_headline": "Stop for pickup/drop-off on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence"
+      }
+    ],
+    "monotonicity": [
+      {
+        "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Hẻm 441 Điện Biên Phủ, 34 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          },
+          "toyota-vios": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          },
+          "toyota-fortuner": {
+            "answer": "no",
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 63 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          },
+          "toyota-vios": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          },
+          "toyota-fortuner": {
+            "answer": "no",
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 63 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 479 Điện biên phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          },
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 24 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "toyota-vios": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "toyota-fortuner": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "class-xl": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 220/9 Xô Viết Nghệ Tĩnh, Bình Thạnh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "toyota-vios": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "toyota-fortuner": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          },
+          "class-xl": {
+            "answer": "unknown",
+            "code": "unverified",
+            "headline": "Door access unverified — low confidence",
+            "door_answer": "unknown"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "class-xl": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 246 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "toyota-vios": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "toyota-fortuner": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Can reach the door — low confidence",
+            "door_answer": "fits"
+          },
+          "class-xl": {
+            "answer": "tight",
+            "code": "unverified",
+            "headline": "Tight access to the door — low confidence",
+            "door_answer": "tight"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 356 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence",
+            "door_answer": "unknown"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 356 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "vehicles": {
+          "vinfast-vf-3": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Hẻm 356 Xô Viết Nghệ Tĩnh, 43 m walk — low confidence",
+            "door_answer": "unknown"
+          }
+        }
+      }
+    ],
+    "inversions": [
+      {
+        "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "park",
+        "field": "answer",
+        "smaller": {
+          "toyota-fortuner": {
+            "answer": "no",
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "door_answer": "no"
+          }
+        },
+        "bigger": {
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 63 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      },
+      {
+        "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+        "intent": "pickup",
+        "field": "answer",
+        "smaller": {
+          "toyota-fortuner": {
+            "answer": "no",
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "door_answer": "no"
+          }
+        },
+        "bigger": {
+          "class-xl": {
+            "answer": "fits",
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 63 m walk — low confidence",
+            "door_answer": "no"
+          }
+        }
+      }
+    ],
+    "rate_limit": null
+  },
+  "protocol-extra.jsonl": {
+    "records": 4,
+    "tool_calls": 0,
+    "plans": 0,
+    "errors": [],
+    "max_tool_bytes": 0,
+    "missing_estimate_confidence_citations": [],
+    "api_pairs": [],
+    "monotonicity": [],
+    "inversions": [],
+    "rate_limit": null
+  }
+}

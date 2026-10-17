@@ -20,3 +20,40 @@
 2026-10-17 11:12:13,825 INFO RANKED_CUT phase=queue way=517513511 score=24.0 at_m=25.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
 2026-10-17 11:24:12,250 INFO RANKED_DONE way=517513511 status=measured
 2026-10-17 11:24:13,085 INFO RANKED_CUT phase=queue way=517523880 score=24.0 at_m=25.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 11:33:12,587 INFO RANKED_DONE way=517523880 status=measured
+2026-10-17 11:33:13,116 INFO RANKED_CUT phase=queue way=610980178 score=24.0 at_m=45.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 11:39:12,452 INFO RANKED_DONE way=610980178 status=no_valid_frontage
+2026-10-17 11:39:21,907 INFO RANKED_QUEUE source=GET /api/evidence/queue?limit=1000 first20=[192512360, 192512293, 610102928, 1330786039, 610102930, 517513511, 192512393, 609856624, 609856625, 609856629, 609856631, 1217025632, 193085738, 610980178, 1253891038, 1193480227, 35114030, 35114191, 158671321, 408266095]
+2026-10-17 11:39:22,214 INFO RANKED_CUT phase=queue way=192512293 score=47.146274 at_m=35.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 11:42:12,517 INFO RANKED_DONE way=192512293 status=measured
+2026-10-17 11:42:12,886 INFO RANKED_CUT phase=queue way=192512393 score=27.509775 at_m=11.398 reason=longest_straight_interior_no_located_width_hint thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 11:51:12,363 INFO RANKED_DONE way=192512393 status=measured
+2026-10-17 11:51:12,679 INFO RANKED_CUT phase=queue way=609856624 score=27.509775 at_m=12.631 reason=longest_straight_interior_no_located_width_hint thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:00:13,498 INFO RANKED_DONE way=609856624 status=measured
+2026-10-17 12:00:13,797 INFO RANKED_CUT phase=queue way=609856625 score=27.509775 at_m=15.413 reason=longest_straight_interior_no_located_width_hint thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:06:12,432 INFO RANKED_DONE way=609856625 status=measured
+2026-10-17 12:06:12,738 INFO RANKED_CUT phase=queue way=609856629 score=27.509775 at_m=15.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:15:12,517 INFO RANKED_DONE way=609856629 status=measured
+2026-10-17 12:15:20,851 INFO RANKED_QUEUE source=GET /api/evidence/queue?limit=1000 first20=[192512360, 192512293, 609856625, 1330786039, 610102928, 610102930, 609856631, 1217025632, 192512373, 268563988, 609856664, 192512429, 517513511, 609856659, 609856676, 610102929, 1040123788, 192512323, 192512446, 263603378]
+2026-10-17 12:15:21,198 INFO RANKED_CUT phase=queue way=609856631 score=35.725178 at_m=65.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:21:12,821 INFO RANKED_DONE way=609856631 status=measured
+2026-10-17 12:21:13,317 INFO RANKED_CUT phase=queue way=1217025632 score=35.725178 at_m=5.213 reason=longest_straight_interior_no_located_width_hint thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:21:13,317 INFO RANKED_DONE way=1217025632 status=no_valid_frontage
+2026-10-17 12:21:13,840 INFO RANKED_CUT phase=queue way=192512373 score=34.783567 at_m=40.945 reason=narrowest_cached_parcel_cut thresholds=['vf3', 'sedan', 'suv']
+{"pid": 14651, "state": "waiting", "start_at": "2026-10-17T12:25:00+07:00", "stop_at": "2026-10-17T13:25:00+07:00", "nice": 15, "recurring": false, "portal_requests_before_start": 0, "command": ["pipelines/crawl_city.py", "--ranked", "--portal-interval", "180", "--stop-at", "2026-10-17T13:25:00+07:00"]}
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (1.26.20) or chardet (6.0.0.post1)/charset_normalizer (3.3.2) doesn't match a supported version!
+  warnings.warn(
+Another crawl_city process owns the cache
+2026-10-17 12:30:12,584 INFO RANKED_DONE way=192512373 status=measured
+2026-10-17 12:30:13,101 INFO RANKED_CUT phase=queue way=268563988 score=33.711039 at_m=127.764 reason=narrowest_cached_parcel_cut thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:36:13,277 INFO RANKED_DONE way=268563988 status=measured
+2026-10-17 12:36:13,631 INFO RANKED_CUT phase=queue way=609856664 score=32.525415 at_m=35.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:48:12,951 INFO RANKED_DONE way=609856664 status=measured
+2026-10-17 12:48:23,192 INFO RANKED_QUEUE source=GET /api/evidence/queue?limit=1000 first20=[192512360, 610082013, 609856631, 192512293, 1330786039, 609856625, 610102928, 192512373, 610102930, 268563988, 1217025632, 609856664, 192512323, 192512429, 609856656, 1040123788, 609856659, 609856676, 610102929, 604163783]
+2026-10-17 12:48:23,662 INFO RANKED_CUT phase=queue way=610082013 score=48.733835 at_m=86.557 reason=narrowest_cached_parcel_cut thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:48:23,675 INFO RANKED_DONE way=610082013 status=measured
+2026-10-17 12:48:24,042 INFO RANKED_CUT phase=queue way=192512323 score=36.266365 at_m=105.000 reason=narrowest_cached_footprint_station thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 12:57:18,219 INFO RANKED_DONE way=192512323 status=no_valid_frontage
+2026-10-17 12:57:18,683 INFO RANKED_CUT phase=queue way=192512429 score=35.762708 at_m=18.695 reason=longest_straight_interior_no_located_width_hint thresholds=['vf3', 'sedan', 'suv']
+2026-10-17 13:00:00,384 WARNING RANKED_RETRY way=192512429 error=Unavailable
+2026-10-17 13:00:00,571 INFO Deadline 2026-10-17T13:00:00+07:00 reached; saved 317 ways and exiting

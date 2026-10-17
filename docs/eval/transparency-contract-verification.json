@@ -1,0 +1,15 @@
+{
+  "contract_fixture": true,
+  "backend_plan": "real :8787 response",
+  "width": 390,
+  "profile_segments": 3,
+  "segment_widths_px": [
+    44,
+    176,
+    220
+  ],
+  "segment_tap": true,
+  "decided_by": true,
+  "class_answers": true,
+  "page_errors": []
+}

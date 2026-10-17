@@ -1,8 +1,10 @@
 import { ArrowRightLeft, Ban, Newspaper, CarFront, ChevronDown, CircleCheck, Droplets, Footprints, Landmark, LoaderCircle, Navigation, OctagonAlert, Play, RotateCcw, TriangleAlert, X } from 'lucide-react'
-import { floodKnowledgeLabel, routeSourceLabel, type AreaBuild, type FloodCheck, type LegFloodCheck, type ManeuverState, type NewsItem, type Plan, type StopPoint } from '../api'
+import { floodKnowledgeLabel, routeSourceLabel, type AreaBuild, type FloodCheck, type LegFloodCheck, type ManeuverState, type NewsItem, type Plan, type PlanComparison, type Vehicle, type StopPoint } from '../api'
 import { Tag, distance, metres, minutes, vn, vnt, type Tone } from '../ds/ui'
 import { fmtWidth } from './Directions'
 import { timestamp, toLocal } from '../datetime'
+import { Transparency } from './Transparency'
+import { negativeAccess, stopLocation } from '../qaFixes'
 
 export const floodTimeLabel = (iso: string | null | undefined) => {
   const local = iso ? toLocal(iso) : null
@@ -18,8 +20,8 @@ function knownPassable(check: LegFloodCheck | null | undefined): boolean {
 
 /* ---------- verdict: say what to do, then why ---------- */
 
-export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture: (iso: string) => void; stale: boolean }) {
-  const best = plan.stop_points[0]
+export function Verdict({ plan, onDeparture, stale, comparison, fleet, onVehicle }: { plan: Plan; onDeparture: (iso: string) => void; stale: boolean; comparison: PlanComparison | null; fleet: Vehicle[]; onVehicle: (id: string) => void }) {
+  const best = plan.stop_points.find((s) => !negativeAccess(s))
   const verb = plan.intent === 'park' ? 'Park' : 'Pick up'
   const door = plan.door
   const accessSuccess = !!door && door.kind === 'door' && door.ok && door.fit.class === 'fits'
@@ -32,7 +34,7 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
     && knownPassable(door.route_in.flood) && knownPassable(door.flood.stay) && knownPassable(door.way_out.flood)
   const isUnverified = plan.verdict.code === 'unverified' || !!(best && !best.verified)
   const recommendation = isUnverified && best && !accessSuccess
-    ? `Suggested: ${verb} at ${best.name} · walk ${minutes(best.walk.minutes)}`
+    ? `Suggested: ${verb} ${stopLocation(best)} · walk ${minutes(best.walk.minutes)}`
     : null
   const doorWhy = plan.door && !plan.door.ok ? plan.door.fail_reasons[0] : null
   let tone: Tone = 'ok'
@@ -70,7 +72,7 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
   } else if (plan.verdict.code === 'nearby' && best) {
     tone = 'brand'
     icon = <ArrowRightLeft size={18} />
-    head = `${verb} at ${best.name}, walk ${minutes(best.walk.minutes)}`
+    head = `${verb} ${stopLocation(best)}, walk ${minutes(best.walk.minutes)}`
     sub = doorWhy ? `Avoid driving to the door: ${lower(vnt(doorWhy))}` : null
   } else if (plan.verdict.code === 'none') {
     tone = 'bad'
@@ -99,6 +101,7 @@ export function Verdict({ plan, onDeparture, stale }: { plan: Plan; onDeparture:
         </div>
       )}
       {plan.intent === 'pickup' && timing && <p className="faint">Pickup uses a {plan.window.dwell_min} min window. For a longer stay, select parking and recalculate.</p>}
+      {!best && plan.door && <Transparency plan={plan} stop={plan.door} comparison={comparison} fleet={fleet} onVehicle={onVehicle} disabled={stale} top />}
       {trip && (
         <div className="trip">
           <span className="trip-big display num">{minutes(trip.total_min)}</span>
@@ -240,8 +243,9 @@ function exitShort(s: StopPoint) {
   return s.way_out.observed?.length ? `${label} · Exit information available` : label
 }
 
-export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, maneuver, maneuverDisabled, onManeuver, onReplay, onDismiss }: {
+export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, maneuver, maneuverDisabled, onManeuver, onReplay, onDismiss, comparison, fleet, onVehicle }: {
   s: StopPoint; plan: Plan; index: number; selected: boolean; open: boolean
+  comparison: PlanComparison | null; fleet: Vehicle[]; onVehicle: (id: string) => void
   onSelect: () => void; onEvidence: (wayId: number) => void
   maneuver: ManeuverState | null; maneuverDisabled: boolean
   onManeuver: () => void; onReplay: () => void; onDismiss: () => void
@@ -266,11 +270,13 @@ export function StopRow({ s, plan, index, selected, open, onSelect, onEvidence, 
         <span className="stop-time display num">{s.trip ? minutes(s.trip.total_min) : `${s.walk.minutes} min`}</span>
       </button>
       <div className="stop-tags">
+        {negativeAccess(s) && <Tag tone="bad" icon={<Ban size={13} />}>Access unlikely</Tag>}
         <Tag tone={fit.tone} icon={<CarFront size={13} />}>{fit.label}</Tag>
         <Tag tone={exitTone(s)} icon={<Navigation size={13} />}>{exitShort(s)}</Tag>
         <Tag tone={flood.tone === 'ok' ? 'water' : flood.tone} icon={<Droplets size={13} />}>{flood.label}</Tag>
         <Tag tone={legal.tone} icon={<Landmark size={13} />}>{legal.label}</Tag>
       </div>
+      {selected && <Transparency key={`${s.lat},${s.lon}`} plan={plan} stop={s} comparison={comparison} fleet={fleet} onVehicle={onVehicle} disabled={maneuverDisabled} top={index === 0} />}
       {selected && <div className="maneuver-entry">
         <button type="button" className="btn btn-outline" onClick={onManeuver} disabled={maneuverDisabled} aria-expanded={!!maneuver}>
           <CarFront size={16} />

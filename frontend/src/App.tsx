@@ -1,6 +1,7 @@
+import { orderStops } from './qaFixes'
 import { CloudRain, FlaskConical, Layers, LogIn, LogOut, MapPin, Navigation, Sparkles, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ApiError, api, poll, routeSourceLabel, type AgentPlan, type AreaBuild, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type ManeuverState, type Plan, type Preset, type RainSpell, type Report, type RouteSource, type Vehicle, type WayEvidence } from './api'
+import { ApiError, api, poll, routeSourceLabel, type AgentPlan, type AreaBuild, type CameraInfo, type CameraReading, type Config, type Corridor, type Flag, type Intent, type ManeuverState, type Plan, type PlanComparison, type Preset, type RainSpell, type Report, type RouteSource, type Vehicle, type WayEvidence } from './api'
 import { MapView, type FloodMoment, type LayerToggles, type ManeuverOverlay } from './MapView'
 import { Agent } from './components/Agent'
 import type { MapContext } from './mapSearch'
@@ -10,11 +11,13 @@ import { StandardRouteContrast, LiveStrip, NewsList, StopRow, Verdict, exitFlood
 import { VoiceReport } from './components/VoiceReport'
 import { useParkingWatch } from './parkingWatch'
 import { EvidencePanel } from './components/Evidence'
+import { TierLegend } from './components/Transparency'
 import { CameraPanel, CorridorCard } from './components/Corridor'
 import { TideTimeline } from './components/TideTimeline'
 import { Segmented, metres, useOutside, vnt } from './ds/ui'
 
 import { fromLocal, timestamp, toLocal } from './datetime'
+import { planningRain } from './rain'
 const DEMO_ORIGIN: Place = { lat: 10.7725, lon: 106.698, label: 'Chợ Bến Thành, Quận 1' }
 const isMobile = () => window.matchMedia('(max-width: 760px)').matches
 
@@ -36,13 +39,15 @@ export default function App() {
   const [arrive, setArrive] = useState(() => toLocal(new Date().toISOString())!)
   const [rainOn, setRainOn] = useState(false)
   const [rainMm, setRainMm] = useState(45)
+  const [rainScenario, setRainScenario] = useState<RainSpell[] | null>(null)
   const [plan, setPlan] = useState<Plan | null>(null)
   const [planTripKey, setPlanTripKey] = useState('')
+  const [comparison, setComparison] = useState<{ plan: Plan; data: PlanComparison } | null>(null)
   const [selected, setSelected] = useState(0)
   const [stopOpen, setStopOpen] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, standard: false, cams: true })
+  const [toggles, setToggles] = useState<LayerToggles>({ fit: true, flood: true, standard: false, cams: true, evidence: false })
   const [floodMoment, setFloodMoment] = useState<FloodMoment>('arrive')
   const [way, setWay] = useState<WayEvidence | null>(null)
   const [wayAt, setWayAt] = useState<[number, number]>([0, 0])
@@ -85,13 +90,8 @@ export default function App() {
   // "Go now" = the next 5-minute mark, so the plan only refreshes when that mark moves.
   const arriveLocal = arriveNow ? toLocal(new Date(Math.ceil(now / 300e3) * 300e3).toISOString())! : arrive
   const arriveISO = fromLocal(arriveLocal)
-  const rain: RainSpell[] = useMemo(() => {
-    if (!rainOn || !arriveISO) return []
-    const at = timestamp(arriveISO)
-    if (at == null) return []
-    const start = new Date(at + 30 * 60e3)
-    return [{ start: start.toISOString(), end: new Date(start.getTime() + 3600e3).toISOString(), mm_per_h: rainMm }]
-  }, [rainOn, rainMm, arriveISO])
+  const rain = useMemo(() => planningRain(rainOn, arriveISO, rainMm, rainScenario),
+    [rainOn, rainMm, arriveISO, rainScenario])
   const activePlanRequest = useMemo(() => dest && vehicleId ? ({
     lat: dest.lat, lon: dest.lon, label: dest.label, vehicle_id: vehicleId, intent,
     arrive_at: arriveISO, dwell_min: intent === 'pickup' ? 15 : dwell, rain,
@@ -196,7 +196,7 @@ export default function App() {
     setBusy(true)
     setError('')
     try {
-      const r = await api.plan(activePlanRequest!, ctl.signal)
+      const r = orderStops(await api.plan(activePlanRequest!, ctl.signal))
       if (id !== reqId.current) return
       maneuverCtl.current?.abort()
       maneuverCtl.current = null
@@ -217,6 +217,24 @@ export default function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePlanRequest, tripKey])
+  useEffect(() => {
+    if (!plan || !activePlanRequest || planTripKey !== tripKey) return
+    const ctl = new AbortController()
+    const vehicle_ids = [...new Set([...fleet.classes.map((v) => v.id), plan.vehicle.id])]
+    api.compare({ ...activePlanRequest, vehicle_ids }, ctl.signal).then((data) => {
+      if (!ctl.signal.aborted && Array.isArray(data.vehicles) && Array.isArray(data.profile)) setComparison({ plan, data })
+    }).catch(() => { /* Optional endpoint: existing plan evidence remains usable. */ })
+    return () => ctl.abort()
+  }, [plan, activePlanRequest, planTripKey, tripKey, fleet.classes])
+
+  function selectComparedVehicle(id: string) {
+    const v = [...fleet.classes, ...fleet.models].find((item) => item.id === id)
+    if (!v) return
+    setVMode(v.kind)
+    if (v.kind === 'class') setClassId(id)
+    else setModelId(id)
+  }
+
   const runRef = useRef(run)
   runRef.current = run
 
@@ -326,6 +344,7 @@ export default function App() {
     setArrive(local)
     setDwell(p.dwell_min)
     setRainOn(p.rain.length > 0)
+    setRainScenario(p.rain)
     if (p.rain[0]) setRainMm(p.rain[0].mm_per_h)
     setSelected(0)
     setSheet('half')
@@ -376,6 +395,7 @@ export default function App() {
     setArriveNow(false)
     setArrive(local)
     setRainOn((p.rain ?? []).length > 0)
+    setRainScenario(p.rain ?? null)
     if (p.rain?.[0]) setRainMm(p.rain[0].mm_per_h)
     setOrigin((o) => o ?? DEMO_ORIGIN)
     setDest({ lat: p.lat, lon: p.lon, label: p.label })
@@ -487,7 +507,8 @@ export default function App() {
             <span className="brand-name display">Ngõ Ngách</span>
             <span className="brand-sub">the alley layer for T-Maps</span>
             <DemoMenu open={menu === 'demo'} onOpen={(o) => setMenu(o ? 'demo' : null)} cfg={cfg} loadPreset={loadPreset}
-              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm} setRainMm={setRainMm} setFlag={setFlag}
+              rainOn={rainOn} setRainOn={setRainOn} rainMm={rainMm}
+              setRainMm={(mm) => { setRainMm(mm); setRainScenario(null) }} setFlag={setFlag}
               canArrive={!!plan} onArrive={() => { setArrived(true); setMenu(null) }}
               onLogin={login} onLogout={logout} onApproved={() => runRef.current()} />
           </header>
@@ -510,7 +531,7 @@ export default function App() {
               <>
                 <ErrorBoundary key={`${plan.window.arrive}-${plan.window.depart}`} label="Trip results">
                 {story && <details className="why scenario-note"><summary>Demo scenario</summary><p>{story}</p></details>}
-                <Verdict plan={plan} onDeparture={setDepartureAt} stale={busy || planTripKey !== tripKey} />
+                <Verdict plan={plan} comparison={comparison?.plan === plan ? comparison.data : null} fleet={[...fleet.classes, ...fleet.models]} onVehicle={selectComparedVehicle} onDeparture={setDepartureAt} stale={busy || planTripKey !== tripKey} />
                 {origin && <CorridorCard corridor={corridor} busy={corridorBusy} selected={routeSel}
                   onSelect={(i) => { setRouteSel(i); setFrame('trip') }} onCamera={(c) => { setWay(null); setCam(c) }} />}
                 {plan.live_crawl && <AreaStatusLine plan={plan} build={build} operator={operator} onBuild={startBuild} />}
@@ -520,6 +541,7 @@ export default function App() {
                 <div className="stops">
                   {plan.stop_points.map((s, i) => (
                     <StopRow key={`${s.lat},${s.lon}`} s={s} plan={plan} index={i} selected={i === selected} open={i === selected && stopOpen}
+                      comparison={i === 0 && comparison?.plan === plan ? comparison.data : null} fleet={[...fleet.classes, ...fleet.models]} onVehicle={selectComparedVehicle}
                       maneuver={i === selected ? activeManeuver : null}
                       onSelect={() => { if (i === selected) setStopOpen((o) => !o); else { setSelected(i); setStopOpen(false) } }}
                       onEvidence={(id) => openEvidence(id, s.lat, s.lon)}
@@ -727,9 +749,11 @@ function LayersMenu({ open, onOpen, toggles, setToggles, floodMoment, setFloodMo
       <button type="button" className={`icon-btn raised ${open ? 'on' : ''}`} aria-label="Map layers" aria-expanded={open} onClick={() => onOpen(!open)}><Layers size={19} /></button>
       {open && (
         <div className="popover pop-right layers" role="dialog" aria-label="Map layers">
-          <h4>Map layers</h4>
+          <div className="layer-heading"><h4>Map layers</h4><button type="button" className="icon-btn" aria-label="Close map layers" onClick={() => onOpen(false)}><X size={16} /></button></div>
           {row('fit', 'Alley clearance for your vehicle', <span className="sw-fit" />)}
           <div className="fit-key"><span><i style={{ background: 'var(--fit-fits)' }} />Fits</span><span><i style={{ background: 'var(--fit-tight)' }} />Tight</span><span><i style={{ background: 'var(--fit-no)' }} />Does not fit</span><span><i className="dash" />Unknown</span><span><i style={{ background: 'var(--fit-blocked)' }} />Blocked</span></div>
+          {row('evidence', 'Evidence strength', <span className="sw-evidence" />)}
+          {toggles.evidence && <TierLegend />}
           {row('flood', 'Flooding relative to your vehicle', <span className="sw-flood" />)}
           {toggles.flood && <Segmented label="Flood time" value={floodMoment} onChange={setFloodMoment} options={[{ value: 'arrive', label: 'On arrival' }, { value: 'depart', label: 'On departure' }]} />}
           {row('standard', standardSource ? `Reference route ${routeSourceLabel(standardSource)}` : 'Reference route (no data yet)', <span className="sw-standard" />)}

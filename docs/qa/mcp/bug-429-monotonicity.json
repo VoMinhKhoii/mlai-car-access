@@ -1,0 +1,3108 @@
+[
+  {
+    "time": "2026-10-17T13:00:33.454145",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "plan_arrival",
+          "arguments": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+            "vehicle_id": "toyota-fortuner",
+            "intent": "park",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 16638,
+    "seconds": 2.519,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:00:30 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "16638",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Arrival estimate: no. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent."
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh"
+          },
+          "window": {
+            "arrive": "2026-10-17T14:00:00+07:00",
+            "depart": "2026-10-17T16:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -1.09,
+              "kind": "model"
+            },
+            "tide_depart": {
+              "level_m": -0.71,
+              "kind": "model"
+            },
+            "rain": [
+              {
+                "start": "2026-10-17T12:00:00+07:00",
+                "end": "2026-10-17T14:00:00+07:00",
+                "mm_per_h": 6.0,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T13:00:00+07:00",
+                "end": "2026-10-17T15:00:00+07:00",
+                "mm_per_h": 1.4,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T14:00:00+07:00",
+                "end": "2026-10-17T16:00:00+07:00",
+                "mm_per_h": 3.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T15:00:00+07:00",
+                "end": "2026-10-17T17:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T16:00:00+07:00",
+                "end": "2026-10-17T18:00:00+07:00",
+                "mm_per_h": 0.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T17:00:00+07:00",
+                "end": "2026-10-17T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T01:00:00+07:00",
+                "end": "2026-10-18T03:00:00+07:00",
+                "mm_per_h": 1.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T02:00:00+07:00",
+                "end": "2026-10-18T04:00:00+07:00",
+                "mm_per_h": 1.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T03:00:00+07:00",
+                "end": "2026-10-18T05:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T04:00:00+07:00",
+                "end": "2026-10-18T06:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T05:00:00+07:00",
+                "end": "2026-10-18T07:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T06:00:00+07:00",
+                "end": "2026-10-18T08:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T09:00:00+07:00",
+                "end": "2026-10-18T11:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T10:00:00+07:00",
+                "end": "2026-10-18T12:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T11:00:00+07:00",
+                "end": "2026-10-18T13:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T12:00:00+07:00",
+                "end": "2026-10-18T14:00:00+07:00",
+                "mm_per_h": 7.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T13:00:00+07:00",
+                "end": "2026-10-18T15:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T14:00:00+07:00",
+                "end": "2026-10-18T16:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T15:00:00+07:00",
+                "end": "2026-10-18T17:00:00+07:00",
+                "mm_per_h": 2.8,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T16:00:00+07:00",
+                "end": "2026-10-18T18:00:00+07:00",
+                "mm_per_h": 0.6,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T17:00:00+07:00",
+                "end": "2026-10-18T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              }
+            ]
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "detail": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified · Arrival route includes unverified width or flood conditions · Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m) · Door-opening space unverified (needs 3.00 m) · Must reverse 58 m (over the 30 m reverse limit); turning space is unverified · Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 2,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "all_sampled_segments": 2,
+                "all_sample_supported_fraction": 1.0,
+                "scope": "Arrival/exit segments with width samples; isolated samples do not establish continuous clearance"
+              },
+              "limiting_width": {
+                "value_m": 2.9,
+                "tier": "Inferred",
+                "source": "Cadastral parcel-gap estimate",
+                "sampled": true,
+                "sample_count": 1,
+                "sampled_range": {
+                  "value_m": 2.9,
+                  "lo": 2.6,
+                  "hi": 3.2,
+                  "tier": "Inferred",
+                  "source": "Cadastral parcel-gap estimate",
+                  "conflicted": false,
+                  "scope": "sampled_bottleneck_only",
+                  "guarantees_clearance": false
+                },
+                "bottleneck_support": 1,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 610082009,
+                "way_name": "Hẻm 429 Điện Biên Phủ",
+                "osm_url": "https://www.openstreetmap.org/way/610082009"
+              },
+              "stop_width": {
+                "value_m": 2.9,
+                "tier": "Inferred",
+                "source": "Cadastral parcel-gap estimate",
+                "sampled": true,
+                "sample_count": 1,
+                "sampled_range": {
+                  "value_m": 2.9,
+                  "lo": 2.6,
+                  "hi": 3.2,
+                  "tier": "Inferred",
+                  "source": "Cadastral parcel-gap estimate",
+                  "conflicted": false,
+                  "scope": "sampled_bottleneck_only",
+                  "guarantees_clearance": false
+                },
+                "bottleneck_support": 1,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "park",
+          "vehicle": {
+            "id": "toyota-fortuner",
+            "label": "Toyota Fortuner",
+            "mirror_width": 2.105
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Five-day tide forecast bulletin 289/2026 — Southern Regional Hydro-Meteorological Centre",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "At the door",
+              "kind": "door",
+              "way_id": 610082009,
+              "lat": 10.802046364942235,
+              "lon": 106.71297672095699,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "no",
+                "confidence": "low",
+                "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Arrival route includes unverified width or flood conditions",
+                "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m)",
+                "Door-opening space unverified (needs 3.00 m)",
+                "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 0,
+                  "hi": 3.2,
+                  "label": "Motorcycle alley",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "parcel_gap_estimate",
+                  "coverage": {
+                    "cut_count": 1,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Cuts do not cover both endpoints and the whole way"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM road class",
+                      "detail": "service=alley (one car or two motorcycles)",
+                      "url": "https://www.openstreetmap.org/way/610082009",
+                      "lo": 1.5,
+                      "hi": 4.5,
+                      "width_basis": "inferred"
+                    },
+                    {
+                      "tier": "Inferred",
+                      "source": "Cadastral parcel-gap estimate",
+                      "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                      "lo": 0,
+                      "hi": 3.2,
+                      "width_basis": "parcel_gap_estimate",
+                      "uncertainty_m": 0.3
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 15,
+                "minutes": 0,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "reverse",
+                "reverse_m": 58,
+                "tight_exit": true,
+                "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 58
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 1421503181,
+              "lat": 10.80152735,
+              "lon": 106.71308805,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (11.0–17.5 m; vehicle needs ≥ 2.31 m)",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes; Main road: no parking-sign data for this segment"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 11.0,
+                  "hi": 17.5,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=4",
+                      "url": "https://www.openstreetmap.org/way/1421503181",
+                      "lo": 11.0,
+                      "hi": 17.5,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 63,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "main-road-signs",
+                    "status": "Unverified",
+                    "text": "Main road: no parking-sign data for this segment",
+                    "citation": "Incomplete sign data"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 4
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 55880235,
+              "lat": 10.801531328615232,
+              "lon": 106.71351840880322,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈9.75 m (Điện Biên Phủ; OSM 55880235) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (8.2–13.8 m; vehicle needs ≥ 2.31 m)",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes; Main road: no parking-sign data for this segment"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 8.25,
+                  "hi": 13.75,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=3",
+                      "url": "https://www.openstreetmap.org/way/55880235",
+                      "lo": 8.25,
+                      "hi": 13.75,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 111,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "main-road-signs",
+                    "status": "Unverified",
+                    "text": "Main road: no parking-sign data for this segment",
+                    "citation": "Incomplete sign data"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 16
+              }
+            }
+          ],
+          "door": {
+            "name": "At the door",
+            "kind": "door",
+            "way_id": 610082009,
+            "lat": 10.802046364942235,
+            "lon": 106.71297672095699,
+            "ok": true,
+            "tier": 2,
+            "verified": false,
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+            },
+            "failure_codes": [],
+            "fail_reasons": [],
+            "unverified_reasons": [
+              "Arrival route includes unverified width or flood conditions",
+              "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m)",
+              "Door-opening space unverified (needs 3.00 m)",
+              "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+            ],
+            "fit": {
+              "class": "unknown",
+              "width_range": {
+                "lo": 0,
+                "hi": 3.2,
+                "label": "Motorcycle alley",
+                "top_tier": "Inferred",
+                "review": false,
+                "width_basis": "parcel_gap_estimate",
+                "coverage": {
+                  "cut_count": 1,
+                  "start_covered": false,
+                  "end_covered": false,
+                  "truncated": false,
+                  "complete": false,
+                  "reason": "Cuts do not cover both endpoints and the whole way"
+                },
+                "decisive_clearance": false,
+                "evidence": [
+                  {
+                    "tier": "Inferred",
+                    "source": "OSM road class",
+                    "detail": "service=alley (one car or two motorcycles)",
+                    "url": "https://www.openstreetmap.org/way/610082009",
+                    "lo": 1.5,
+                    "hi": 4.5,
+                    "width_basis": "inferred"
+                  },
+                  {
+                    "tier": "Inferred",
+                    "source": "Cadastral parcel-gap estimate",
+                    "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                    "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                    "lo": 0,
+                    "hi": 3.2,
+                    "width_basis": "parcel_gap_estimate",
+                    "uncertainty_m": 0.3
+                  }
+                ]
+              }
+            },
+            "walk": {
+              "meters": 15,
+              "minutes": 0,
+              "connection": {
+                "mapped": true
+              }
+            },
+            "way_out": {
+              "available": true,
+              "mode": "reverse",
+              "reverse_m": 58,
+              "tight_exit": true,
+              "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "route_verified": false,
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T16:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T16:00:00+07:00",
+                  "end": "2026-10-17T16:15:00+07:00",
+                  "approximate": true
+                }
+              }
+            },
+            "flood": {
+              "stay": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T14:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T14:00:00+07:00",
+                  "end": "2026-10-17T16:00:00+07:00",
+                  "approximate": false
+                }
+              }
+            },
+            "legality": {
+              "status": "Unverified",
+              "rules": [
+                {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              ]
+            },
+            "route_in": {
+              "meters": 58
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "time": "2026-10-17T13:00:51.841735",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "plan_arrival",
+          "arguments": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+            "vehicle_id": "toyota-fortuner",
+            "intent": "pickup",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 16258,
+    "seconds": 3.281,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:00:48 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "16258",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Arrival estimate: no. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent."
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh"
+          },
+          "window": {
+            "arrive": "2026-10-17T14:00:00+07:00",
+            "depart": "2026-10-17T16:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -1.09,
+              "kind": "model"
+            },
+            "tide_depart": {
+              "level_m": -0.71,
+              "kind": "model"
+            },
+            "rain": [
+              {
+                "start": "2026-10-17T12:00:00+07:00",
+                "end": "2026-10-17T14:00:00+07:00",
+                "mm_per_h": 6.0,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T13:00:00+07:00",
+                "end": "2026-10-17T15:00:00+07:00",
+                "mm_per_h": 1.4,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T14:00:00+07:00",
+                "end": "2026-10-17T16:00:00+07:00",
+                "mm_per_h": 3.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T15:00:00+07:00",
+                "end": "2026-10-17T17:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T16:00:00+07:00",
+                "end": "2026-10-17T18:00:00+07:00",
+                "mm_per_h": 0.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T17:00:00+07:00",
+                "end": "2026-10-17T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T01:00:00+07:00",
+                "end": "2026-10-18T03:00:00+07:00",
+                "mm_per_h": 1.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T02:00:00+07:00",
+                "end": "2026-10-18T04:00:00+07:00",
+                "mm_per_h": 1.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T03:00:00+07:00",
+                "end": "2026-10-18T05:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T04:00:00+07:00",
+                "end": "2026-10-18T06:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T05:00:00+07:00",
+                "end": "2026-10-18T07:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T06:00:00+07:00",
+                "end": "2026-10-18T08:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T09:00:00+07:00",
+                "end": "2026-10-18T11:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T10:00:00+07:00",
+                "end": "2026-10-18T12:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T11:00:00+07:00",
+                "end": "2026-10-18T13:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T12:00:00+07:00",
+                "end": "2026-10-18T14:00:00+07:00",
+                "mm_per_h": 7.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T13:00:00+07:00",
+                "end": "2026-10-18T15:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T14:00:00+07:00",
+                "end": "2026-10-18T16:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T15:00:00+07:00",
+                "end": "2026-10-18T17:00:00+07:00",
+                "mm_per_h": 2.8,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T16:00:00+07:00",
+                "end": "2026-10-18T18:00:00+07:00",
+                "mm_per_h": 0.6,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T17:00:00+07:00",
+                "end": "2026-10-18T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              }
+            ]
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Door access unlikely — low confidence",
+            "detail": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified · Arrival route includes unverified width or flood conditions · Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m) · Door-opening space unverified (needs 3.00 m) · Must reverse 58 m (over the 30 m reverse limit); turning space is unverified · Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 2,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "all_sampled_segments": 2,
+                "all_sample_supported_fraction": 1.0,
+                "scope": "Arrival/exit segments with width samples; isolated samples do not establish continuous clearance"
+              },
+              "limiting_width": {
+                "value_m": 2.9,
+                "tier": "Inferred",
+                "source": "Cadastral parcel-gap estimate",
+                "sampled": true,
+                "sample_count": 1,
+                "sampled_range": {
+                  "value_m": 2.9,
+                  "lo": 2.6,
+                  "hi": 3.2,
+                  "tier": "Inferred",
+                  "source": "Cadastral parcel-gap estimate",
+                  "conflicted": false,
+                  "scope": "sampled_bottleneck_only",
+                  "guarantees_clearance": false
+                },
+                "bottleneck_support": 1,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 610082009,
+                "way_name": "Hẻm 429 Điện Biên Phủ",
+                "osm_url": "https://www.openstreetmap.org/way/610082009"
+              },
+              "stop_width": {
+                "value_m": 2.9,
+                "tier": "Inferred",
+                "source": "Cadastral parcel-gap estimate",
+                "sampled": true,
+                "sample_count": 1,
+                "sampled_range": {
+                  "value_m": 2.9,
+                  "lo": 2.6,
+                  "hi": 3.2,
+                  "tier": "Inferred",
+                  "source": "Cadastral parcel-gap estimate",
+                  "conflicted": false,
+                  "scope": "sampled_bottleneck_only",
+                  "guarantees_clearance": false
+                },
+                "bottleneck_support": 1,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "pickup",
+          "vehicle": {
+            "id": "toyota-fortuner",
+            "label": "Toyota Fortuner",
+            "mirror_width": 2.105
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Five-day tide forecast bulletin 289/2026 — Southern Regional Hydro-Meteorological Centre",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "At the door",
+              "kind": "door",
+              "way_id": 610082009,
+              "lat": 10.802046364942235,
+              "lon": 106.71297672095699,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "no",
+                "confidence": "low",
+                "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Arrival route includes unverified width or flood conditions",
+                "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m)",
+                "Door-opening space unverified (needs 3.00 m)",
+                "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 0,
+                  "hi": 3.2,
+                  "label": "Motorcycle alley",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "parcel_gap_estimate",
+                  "coverage": {
+                    "cut_count": 1,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Cuts do not cover both endpoints and the whole way"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM road class",
+                      "detail": "service=alley (one car or two motorcycles)",
+                      "url": "https://www.openstreetmap.org/way/610082009",
+                      "lo": 1.5,
+                      "hi": 4.5,
+                      "width_basis": "inferred"
+                    },
+                    {
+                      "tier": "Inferred",
+                      "source": "Cadastral parcel-gap estimate",
+                      "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                      "lo": 0,
+                      "hi": 3.2,
+                      "width_basis": "parcel_gap_estimate",
+                      "uncertainty_m": 0.3
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 15,
+                "minutes": 0,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "reverse",
+                "reverse_m": 58,
+                "tight_exit": true,
+                "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 58
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 1421503181,
+              "lat": 10.80152735,
+              "lon": 106.71308805,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (11.0–17.5 m; vehicle needs ≥ 2.31 m)",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 11.0,
+                  "hi": 17.5,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=4",
+                      "url": "https://www.openstreetmap.org/way/1421503181",
+                      "lo": 11.0,
+                      "hi": 17.5,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 63,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 4
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 55880235,
+              "lat": 10.801531328615232,
+              "lon": 106.71351840880322,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈9.75 m (Điện Biên Phủ; OSM 55880235) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (8.2–13.8 m; vehicle needs ≥ 2.31 m)",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 8.25,
+                  "hi": 13.75,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=3",
+                      "url": "https://www.openstreetmap.org/way/55880235",
+                      "lo": 8.25,
+                      "hi": 13.75,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 111,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 16
+              }
+            }
+          ],
+          "door": {
+            "name": "At the door",
+            "kind": "door",
+            "way_id": 610082009,
+            "lat": 10.802046364942235,
+            "lon": 106.71297672095699,
+            "ok": true,
+            "tier": 2,
+            "verified": false,
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+            },
+            "failure_codes": [],
+            "fail_reasons": [],
+            "unverified_reasons": [
+              "Arrival route includes unverified width or flood conditions",
+              "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.31 m)",
+              "Door-opening space unverified (needs 3.00 m)",
+              "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+            ],
+            "fit": {
+              "class": "unknown",
+              "width_range": {
+                "lo": 0,
+                "hi": 3.2,
+                "label": "Motorcycle alley",
+                "top_tier": "Inferred",
+                "review": false,
+                "width_basis": "parcel_gap_estimate",
+                "coverage": {
+                  "cut_count": 1,
+                  "start_covered": false,
+                  "end_covered": false,
+                  "truncated": false,
+                  "complete": false,
+                  "reason": "Cuts do not cover both endpoints and the whole way"
+                },
+                "decisive_clearance": false,
+                "evidence": [
+                  {
+                    "tier": "Inferred",
+                    "source": "OSM road class",
+                    "detail": "service=alley (one car or two motorcycles)",
+                    "url": "https://www.openstreetmap.org/way/610082009",
+                    "lo": 1.5,
+                    "hi": 4.5,
+                    "width_basis": "inferred"
+                  },
+                  {
+                    "tier": "Inferred",
+                    "source": "Cadastral parcel-gap estimate",
+                    "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                    "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                    "lo": 0,
+                    "hi": 3.2,
+                    "width_basis": "parcel_gap_estimate",
+                    "uncertainty_m": 0.3
+                  }
+                ]
+              }
+            },
+            "walk": {
+              "meters": 15,
+              "minutes": 0,
+              "connection": {
+                "mapped": true
+              }
+            },
+            "way_out": {
+              "available": true,
+              "mode": "reverse",
+              "reverse_m": 58,
+              "tight_exit": true,
+              "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "route_verified": false,
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T16:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T16:00:00+07:00",
+                  "end": "2026-10-17T16:15:00+07:00",
+                  "approximate": true
+                }
+              }
+            },
+            "flood": {
+              "stay": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T14:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T14:00:00+07:00",
+                  "end": "2026-10-17T16:00:00+07:00",
+                  "approximate": false
+                }
+              }
+            },
+            "legality": {
+              "status": "Unverified",
+              "rules": [
+                {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              ]
+            },
+            "route_in": {
+              "meters": 58
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "time": "2026-10-17T13:01:05.090893",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "plan_arrival",
+          "arguments": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+            "vehicle_id": "class-xl",
+            "intent": "park",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 16250,
+    "seconds": 2.94,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:01:01 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "16250",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Arrival estimate: fits. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent."
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh"
+          },
+          "window": {
+            "arrive": "2026-10-17T14:00:00+07:00",
+            "depart": "2026-10-17T16:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -1.09,
+              "kind": "model"
+            },
+            "tide_depart": {
+              "level_m": -0.71,
+              "kind": "model"
+            },
+            "rain": [
+              {
+                "start": "2026-10-17T12:00:00+07:00",
+                "end": "2026-10-17T14:00:00+07:00",
+                "mm_per_h": 6.0,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T13:00:00+07:00",
+                "end": "2026-10-17T15:00:00+07:00",
+                "mm_per_h": 1.4,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T14:00:00+07:00",
+                "end": "2026-10-17T16:00:00+07:00",
+                "mm_per_h": 3.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T15:00:00+07:00",
+                "end": "2026-10-17T17:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T16:00:00+07:00",
+                "end": "2026-10-17T18:00:00+07:00",
+                "mm_per_h": 0.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T17:00:00+07:00",
+                "end": "2026-10-17T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T01:00:00+07:00",
+                "end": "2026-10-18T03:00:00+07:00",
+                "mm_per_h": 1.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T02:00:00+07:00",
+                "end": "2026-10-18T04:00:00+07:00",
+                "mm_per_h": 1.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T03:00:00+07:00",
+                "end": "2026-10-18T05:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T04:00:00+07:00",
+                "end": "2026-10-18T06:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T05:00:00+07:00",
+                "end": "2026-10-18T07:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T06:00:00+07:00",
+                "end": "2026-10-18T08:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T09:00:00+07:00",
+                "end": "2026-10-18T11:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T10:00:00+07:00",
+                "end": "2026-10-18T12:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T11:00:00+07:00",
+                "end": "2026-10-18T13:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T12:00:00+07:00",
+                "end": "2026-10-18T14:00:00+07:00",
+                "mm_per_h": 7.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T13:00:00+07:00",
+                "end": "2026-10-18T15:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T14:00:00+07:00",
+                "end": "2026-10-18T16:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T15:00:00+07:00",
+                "end": "2026-10-18T17:00:00+07:00",
+                "mm_per_h": 2.8,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T16:00:00+07:00",
+                "end": "2026-10-18T18:00:00+07:00",
+                "mm_per_h": 0.6,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T17:00:00+07:00",
+                "end": "2026-10-18T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              }
+            ]
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Park on Điện Biên Phủ, 63 m walk — low confidence",
+            "detail": "Continue to the main road in the permitted direction · Width unverified (11.0–17.5 m; vehicle needs ≥ 2.67 m) · Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes; Main road: no parking-sign data for this segment",
+            "estimate": {
+              "answer": "fits",
+              "confidence": "low",
+              "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 1,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "all_sampled_segments": 0,
+                "all_sample_supported_fraction": 0.0,
+                "scope": "Arrival/exit segments with width samples; isolated samples do not establish continuous clearance"
+              },
+              "limiting_width": {
+                "value_m": 12.5,
+                "tier": "Inferred",
+                "source": "OSM lane count",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 1421503181,
+                "way_name": "Điện Biên Phủ",
+                "osm_url": "https://www.openstreetmap.org/way/1421503181"
+              },
+              "stop_width": {
+                "value_m": 12.5,
+                "tier": "Inferred",
+                "source": "OSM lane count",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "park",
+          "vehicle": {
+            "id": "class-xl",
+            "label": "XL · 16-seat minibus & van",
+            "mirror_width": 2.474
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Five-day tide forecast bulletin 289/2026 — Southern Regional Hydro-Meteorological Centre",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 1421503181,
+              "lat": 10.80152735,
+              "lon": 106.71308805,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (11.0–17.5 m; vehicle needs ≥ 2.67 m)",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes; Main road: no parking-sign data for this segment"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 11.0,
+                  "hi": 17.5,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=4",
+                      "url": "https://www.openstreetmap.org/way/1421503181",
+                      "lo": 11.0,
+                      "hi": 17.5,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 63,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "main-road-signs",
+                    "status": "Unverified",
+                    "text": "Main road: no parking-sign data for this segment",
+                    "citation": "Incomplete sign data"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 4
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 55880235,
+              "lat": 10.801531328615232,
+              "lon": 106.71351840880322,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈9.75 m (Điện Biên Phủ; OSM 55880235) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (8.2–13.8 m; vehicle needs ≥ 2.67 m)",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes; Main road: no parking-sign data for this segment"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 8.25,
+                  "hi": 13.75,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=3",
+                      "url": "https://www.openstreetmap.org/way/55880235",
+                      "lo": 8.25,
+                      "hi": 13.75,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 111,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "main-road-signs",
+                    "status": "Unverified",
+                    "text": "Main road: no parking-sign data for this segment",
+                    "citation": "Incomplete sign data"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 16
+              }
+            },
+            {
+              "name": "Hẻm 441 Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 737495706,
+              "lat": 10.801996669084753,
+              "lon": 106.71339174209123,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈5.56 m (Hẻm 441 Điện Biên Phủ; OSM 737495706) · 1/1 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (0.0–5.9 m; vehicle needs ≥ 2.67 m)",
+                "Door-opening space unverified (needs 3.37 m)",
+                "Must reverse 48 m (over the 30 m reverse limit); turning space is unverified",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 0,
+                  "hi": 5.86,
+                  "label": "Width unknown",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "parcel_gap_estimate",
+                  "coverage": {
+                    "cut_count": 2,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "max_spacing_m": 67.7,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Cuts do not cover both endpoints and the whole way"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM road class",
+                      "detail": "highway=residential",
+                      "url": "https://www.openstreetmap.org/way/737495706",
+                      "lo": 2.5,
+                      "hi": 15.0,
+                      "width_basis": "inferred"
+                    },
+                    {
+                      "tier": "Inferred",
+                      "source": "Cadastral parcel-gap estimate",
+                      "detail": "Narrowest valid sample 5.56 m; retained 2/2 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                      "lo": 0,
+                      "hi": 5.86,
+                      "width_basis": "parcel_gap_estimate",
+                      "uncertainty_m": 0.3
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 137,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "reverse",
+                "reverse_m": 48,
+                "tight_exit": true,
+                "text": "Must reverse 48 m (over the 30 m reverse limit); turning space is unverified",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 48
+              }
+            }
+          ],
+          "door": {
+            "name": "At the door",
+            "kind": "door",
+            "way_id": 610082009,
+            "lat": 10.802046364942235,
+            "lon": 106.71297672095699,
+            "ok": false,
+            "tier": 2,
+            "verified": false,
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified · Insufficient door-opening space (needs 3.37 m)"
+            },
+            "failure_codes": [
+              "no_fit"
+            ],
+            "fail_reasons": [
+              "Insufficient door-opening space (needs 3.37 m)"
+            ],
+            "unverified_reasons": [
+              "Arrival route includes unverified width or flood conditions",
+              "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.67 m)",
+              "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+            ],
+            "fit": {
+              "class": "unknown",
+              "width_range": {
+                "lo": 0,
+                "hi": 3.2,
+                "label": "Motorcycle alley",
+                "top_tier": "Inferred",
+                "review": false,
+                "width_basis": "parcel_gap_estimate",
+                "coverage": {
+                  "cut_count": 1,
+                  "start_covered": false,
+                  "end_covered": false,
+                  "truncated": false,
+                  "complete": false,
+                  "reason": "Cuts do not cover both endpoints and the whole way"
+                },
+                "decisive_clearance": false,
+                "evidence": [
+                  {
+                    "tier": "Inferred",
+                    "source": "OSM road class",
+                    "detail": "service=alley (one car or two motorcycles)",
+                    "url": "https://www.openstreetmap.org/way/610082009",
+                    "lo": 1.5,
+                    "hi": 4.5,
+                    "width_basis": "inferred"
+                  },
+                  {
+                    "tier": "Inferred",
+                    "source": "Cadastral parcel-gap estimate",
+                    "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                    "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                    "lo": 0,
+                    "hi": 3.2,
+                    "width_basis": "parcel_gap_estimate",
+                    "uncertainty_m": 0.3
+                  }
+                ]
+              }
+            },
+            "walk": {
+              "meters": 15,
+              "minutes": 0,
+              "connection": {
+                "mapped": true
+              }
+            },
+            "way_out": {
+              "available": true,
+              "mode": "reverse",
+              "reverse_m": 58,
+              "tight_exit": true,
+              "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "route_verified": false,
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T16:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T16:00:00+07:00",
+                  "end": "2026-10-17T16:15:00+07:00",
+                  "approximate": true
+                }
+              }
+            },
+            "flood": {
+              "stay": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T14:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T14:00:00+07:00",
+                  "end": "2026-10-17T16:00:00+07:00",
+                  "approximate": false
+                }
+              }
+            },
+            "legality": {
+              "status": "Unverified",
+              "rules": [
+                {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              ]
+            },
+            "route_in": {
+              "meters": 58
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "time": "2026-10-17T13:01:17.640101",
+    "name": "tools/call",
+    "args": {
+      "base": "http://127.0.0.1:8787",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "name": "plan_arrival",
+          "arguments": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh",
+            "vehicle_id": "class-xl",
+            "intent": "pickup",
+            "arrive_at": "2026-10-17T14:00:00+07:00",
+            "dwell_min": 120
+          }
+        }
+      },
+      "headers": null
+    },
+    "status": 200,
+    "bytes": 15840,
+    "seconds": 1.618,
+    "headers": {
+      "date": "Sat, 17 Oct 2026 06:01:15 GMT",
+      "server": "uvicorn",
+      "cache-control": "no-store",
+      "content-length": "15840",
+      "content-type": "application/json",
+      "Connection": "close"
+    },
+    "body": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Arrival estimate: fits. Confidence: low. Physical access does not authorize stopping. Check the legal status, evidence and caveats in structuredContent."
+          }
+        ],
+        "structuredContent": {
+          "destination": {
+            "lat": 10.80204457691327,
+            "lon": 106.71296886819937,
+            "label": "Hẻm 429 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh"
+          },
+          "window": {
+            "arrive": "2026-10-17T14:00:00+07:00",
+            "depart": "2026-10-17T16:00:00+07:00",
+            "dwell_min": 120,
+            "tide_arrive": {
+              "level_m": -1.09,
+              "kind": "model"
+            },
+            "tide_depart": {
+              "level_m": -0.71,
+              "kind": "model"
+            },
+            "rain": [
+              {
+                "start": "2026-10-17T12:00:00+07:00",
+                "end": "2026-10-17T14:00:00+07:00",
+                "mm_per_h": 6.0,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T13:00:00+07:00",
+                "end": "2026-10-17T15:00:00+07:00",
+                "mm_per_h": 1.4,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T14:00:00+07:00",
+                "end": "2026-10-17T16:00:00+07:00",
+                "mm_per_h": 3.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T15:00:00+07:00",
+                "end": "2026-10-17T17:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T16:00:00+07:00",
+                "end": "2026-10-17T18:00:00+07:00",
+                "mm_per_h": 0.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-17T17:00:00+07:00",
+                "end": "2026-10-17T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T01:00:00+07:00",
+                "end": "2026-10-18T03:00:00+07:00",
+                "mm_per_h": 1.7,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T02:00:00+07:00",
+                "end": "2026-10-18T04:00:00+07:00",
+                "mm_per_h": 1.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T03:00:00+07:00",
+                "end": "2026-10-18T05:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T04:00:00+07:00",
+                "end": "2026-10-18T06:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T05:00:00+07:00",
+                "end": "2026-10-18T07:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T06:00:00+07:00",
+                "end": "2026-10-18T08:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T09:00:00+07:00",
+                "end": "2026-10-18T11:00:00+07:00",
+                "mm_per_h": 0.3,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T10:00:00+07:00",
+                "end": "2026-10-18T12:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T11:00:00+07:00",
+                "end": "2026-10-18T13:00:00+07:00",
+                "mm_per_h": 0.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T12:00:00+07:00",
+                "end": "2026-10-18T14:00:00+07:00",
+                "mm_per_h": 7.2,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T13:00:00+07:00",
+                "end": "2026-10-18T15:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T14:00:00+07:00",
+                "end": "2026-10-18T16:00:00+07:00",
+                "mm_per_h": 1.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T15:00:00+07:00",
+                "end": "2026-10-18T17:00:00+07:00",
+                "mm_per_h": 2.8,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T16:00:00+07:00",
+                "end": "2026-10-18T18:00:00+07:00",
+                "mm_per_h": 0.6,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              },
+              {
+                "start": "2026-10-18T17:00:00+07:00",
+                "end": "2026-10-18T19:00:00+07:00",
+                "mm_per_h": 0.1,
+                "source": "Open-Meteo forecast",
+                "measured": false
+              }
+            ]
+          },
+          "verdict": {
+            "code": "unverified",
+            "headline": "Stop for pickup/drop-off on Điện Biên Phủ, 63 m walk — low confidence",
+            "detail": "Continue to the main road in the permitted direction · Width unverified (11.0–17.5 m; vehicle needs ≥ 2.67 m) · Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+            "estimate": {
+              "answer": "fits",
+              "confidence": "low",
+              "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified",
+              "coverage": {
+                "sampled_segments": 0,
+                "total_segments": 1,
+                "sample_supported_fraction": 0.0,
+                "complete_strong_fraction": 0.0,
+                "all_sampled_segments": 0,
+                "all_sample_supported_fraction": 0.0,
+                "scope": "Arrival/exit segments with width samples; isolated samples do not establish continuous clearance"
+              },
+              "limiting_width": {
+                "value_m": 12.5,
+                "tier": "Inferred",
+                "source": "OSM lane count",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false,
+                "way_id": 1421503181,
+                "way_name": "Điện Biên Phủ",
+                "osm_url": "https://www.openstreetmap.org/way/1421503181"
+              },
+              "stop_width": {
+                "value_m": 12.5,
+                "tier": "Inferred",
+                "source": "OSM lane count",
+                "sampled": false,
+                "isolated_low_outlier": false,
+                "fallback_from_unresolved": false
+              }
+            }
+          },
+          "intent": "pickup",
+          "vehicle": {
+            "id": "class-xl",
+            "label": "XL · 16-seat minibus & van",
+            "mirror_width": 2.474
+          },
+          "tide_source": {
+            "station": "Phú An (sông Sài Gòn)",
+            "bulletin": "Five-day tide forecast bulletin 289/2026 — Southern Regional Hydro-Meteorological Centre",
+            "issued_at": "2026-10-16T09:08:00+07:00",
+            "source_url": "https://kttvnb.vn/attachments/article/29368/HCMC_TVHN_20261016.pdf"
+          },
+          "stop_points": [
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 1421503181,
+              "lat": 10.80152735,
+              "lon": 106.71308805,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈12.50 m (Điện Biên Phủ; OSM 1421503181) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (11.0–17.5 m; vehicle needs ≥ 2.67 m)",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 11.0,
+                  "hi": 17.5,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=4",
+                      "url": "https://www.openstreetmap.org/way/1421503181",
+                      "lo": 11.0,
+                      "hi": 17.5,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 63,
+                "minutes": 1,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 4
+              }
+            },
+            {
+              "name": "Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 55880235,
+              "lat": 10.801531328615232,
+              "lon": 106.71351840880322,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈9.75 m (Điện Biên Phủ; OSM 55880235) · 0/1 segments sampled (0% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (8.2–13.8 m; vehicle needs ≥ 2.67 m)",
+                "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 8.25,
+                  "hi": 13.75,
+                  "label": "Street",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "inferred",
+                  "coverage": {
+                    "cut_count": 0,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Longitudinal coverage is unavailable"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM lane count",
+                      "detail": "highway=primary, lanes=3",
+                      "url": "https://www.openstreetmap.org/way/55880235",
+                      "lo": 8.25,
+                      "hi": 13.75,
+                      "width_basis": "inferred"
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 111,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "through",
+                "reverse_m": 0,
+                "tight_exit": false,
+                "text": "Continue to the main road in the permitted direction",
+                "route_verified": true,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 16
+              }
+            },
+            {
+              "name": "Hẻm 441 Điện Biên Phủ",
+              "kind": "street",
+              "way_id": 737495706,
+              "lat": 10.801996669084753,
+              "lon": 106.71339174209123,
+              "ok": true,
+              "tier": 2,
+              "verified": false,
+              "estimate": {
+                "answer": "fits",
+                "confidence": "low",
+                "basis": "inferred ≈5.56 m (Hẻm 441 Điện Biên Phủ; OSM 737495706) · 1/1 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified"
+              },
+              "failure_codes": [],
+              "fail_reasons": [],
+              "unverified_reasons": [
+                "Width unverified (0.0–5.9 m; vehicle needs ≥ 2.67 m)",
+                "Door-opening space unverified (needs 3.37 m)",
+                "Must reverse 48 m (over the 30 m reverse limit); turning space is unverified",
+                "Stopping permission unverified: Junction edge is unknown; cannot check the 5 m setback; Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+              ],
+              "fit": {
+                "class": "unknown",
+                "width_range": {
+                  "lo": 0,
+                  "hi": 5.86,
+                  "label": "Width unknown",
+                  "top_tier": "Inferred",
+                  "review": false,
+                  "width_basis": "parcel_gap_estimate",
+                  "coverage": {
+                    "cut_count": 2,
+                    "start_covered": false,
+                    "end_covered": false,
+                    "max_spacing_m": 67.7,
+                    "truncated": false,
+                    "complete": false,
+                    "reason": "Cuts do not cover both endpoints and the whole way"
+                  },
+                  "decisive_clearance": false,
+                  "evidence": [
+                    {
+                      "tier": "Inferred",
+                      "source": "OSM road class",
+                      "detail": "highway=residential",
+                      "url": "https://www.openstreetmap.org/way/737495706",
+                      "lo": 2.5,
+                      "hi": 15.0,
+                      "width_basis": "inferred"
+                    },
+                    {
+                      "tier": "Inferred",
+                      "source": "Cadastral parcel-gap estimate",
+                      "detail": "Narrowest valid sample 5.56 m; retained 2/2 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                      "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                      "lo": 0,
+                      "hi": 5.86,
+                      "width_basis": "parcel_gap_estimate",
+                      "uncertainty_m": 0.3
+                    }
+                  ]
+                }
+              },
+              "walk": {
+                "meters": 137,
+                "minutes": 2,
+                "connection": {
+                  "mapped": true
+                }
+              },
+              "way_out": {
+                "available": true,
+                "mode": "reverse",
+                "reverse_m": 48,
+                "tight_exit": true,
+                "text": "Must reverse 48 m (over the 30 m reverse limit); turning space is unverified",
+                "route_verified": false,
+                "flood": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T16:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T16:00:00+07:00",
+                    "end": "2026-10-17T16:15:00+07:00",
+                    "approximate": true
+                  }
+                }
+              },
+              "flood": {
+                "stay": {
+                  "status": "passable",
+                  "depth": null,
+                  "knowledge": "known",
+                  "freshness": {
+                    "source": "model"
+                  },
+                  "at": "2026-10-17T14:00:00+07:00",
+                  "source": "model",
+                  "interval": {
+                    "start": "2026-10-17T14:00:00+07:00",
+                    "end": "2026-10-17T16:00:00+07:00",
+                    "approximate": false
+                  }
+                }
+              },
+              "legality": {
+                "status": "Unverified",
+                "rules": [
+                  {
+                    "code": "junction-5m",
+                    "status": "Unverified",
+                    "text": "Junction edge is unknown; cannot check the 5 m setback",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  },
+                  {
+                    "code": "lane-unknown",
+                    "status": "Unverified",
+                    "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                    "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                  }
+                ]
+              },
+              "route_in": {
+                "meters": 48
+              }
+            }
+          ],
+          "door": {
+            "name": "At the door",
+            "kind": "door",
+            "way_id": 610082009,
+            "lat": 10.802046364942235,
+            "lon": 106.71297672095699,
+            "ok": false,
+            "tier": 2,
+            "verified": false,
+            "estimate": {
+              "answer": "no",
+              "confidence": "low",
+              "basis": "inferred ≈2.90 m (Hẻm 429 Điện Biên Phủ; OSM 610082009) · bottleneck lacks two consistent independent cuts · 2/2 segments sampled (100% of route length with samples) · incomplete route survey · stopping permission unverified · Insufficient door-opening space (needs 3.37 m)"
+            },
+            "failure_codes": [
+              "no_fit"
+            ],
+            "fail_reasons": [
+              "Insufficient door-opening space (needs 3.37 m)"
+            ],
+            "unverified_reasons": [
+              "Arrival route includes unverified width or flood conditions",
+              "Width unverified (0.0–3.2 m; vehicle needs ≥ 2.67 m)",
+              "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "Stopping permission unverified: Insufficient clear-width measurements to determine the number of motor-vehicle lanes"
+            ],
+            "fit": {
+              "class": "unknown",
+              "width_range": {
+                "lo": 0,
+                "hi": 3.2,
+                "label": "Motorcycle alley",
+                "top_tier": "Inferred",
+                "review": false,
+                "width_basis": "parcel_gap_estimate",
+                "coverage": {
+                  "cut_count": 1,
+                  "start_covered": false,
+                  "end_covered": false,
+                  "truncated": false,
+                  "complete": false,
+                  "reason": "Cuts do not cover both endpoints and the whole way"
+                },
+                "decisive_clearance": false,
+                "evidence": [
+                  {
+                    "tier": "Inferred",
+                    "source": "OSM road class",
+                    "detail": "service=alley (one car or two motorcycles)",
+                    "url": "https://www.openstreetmap.org/way/610082009",
+                    "lo": 1.5,
+                    "hi": 4.5,
+                    "width_basis": "inferred"
+                  },
+                  {
+                    "tier": "Inferred",
+                    "source": "Cadastral parcel-gap estimate",
+                    "detail": "Narrowest valid sample 2.90 m; retained 1/1 cuts; 1 cuts corroborate the bottleneck. Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.",
+                    "url": "https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                    "lo": 0,
+                    "hi": 3.2,
+                    "width_basis": "parcel_gap_estimate",
+                    "uncertainty_m": 0.3
+                  }
+                ]
+              }
+            },
+            "walk": {
+              "meters": 15,
+              "minutes": 0,
+              "connection": {
+                "mapped": true
+              }
+            },
+            "way_out": {
+              "available": true,
+              "mode": "reverse",
+              "reverse_m": 58,
+              "tight_exit": true,
+              "text": "Must reverse 58 m (over the 30 m reverse limit); turning space is unverified",
+              "route_verified": false,
+              "flood": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T16:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T16:00:00+07:00",
+                  "end": "2026-10-17T16:15:00+07:00",
+                  "approximate": true
+                }
+              }
+            },
+            "flood": {
+              "stay": {
+                "status": "passable",
+                "depth": null,
+                "knowledge": "known",
+                "freshness": {
+                  "source": "model"
+                },
+                "at": "2026-10-17T14:00:00+07:00",
+                "source": "model",
+                "interval": {
+                  "start": "2026-10-17T14:00:00+07:00",
+                  "end": "2026-10-17T16:00:00+07:00",
+                  "approximate": false
+                }
+              }
+            },
+            "legality": {
+              "status": "Unverified",
+              "rules": [
+                {
+                  "code": "lane-unknown",
+                  "status": "Unverified",
+                  "text": "Insufficient clear-width measurements to determine the number of motor-vehicle lanes",
+                  "citation": "Luật Trật tự, an toàn giao thông đường bộ 2024 (Luật 36/2024/QH15), Điều 18 khoản 4"
+                }
+              ]
+            },
+            "route_in": {
+              "meters": 58
+            }
+          }
+        },
+        "isError": false
+      }
+    }
+  }
+]

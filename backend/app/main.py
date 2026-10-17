@@ -13,7 +13,7 @@ import math
 import json
 from contextlib import asynccontextmanager
 import re
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from functools import lru_cache
 from typing import Annotated, Literal
@@ -158,6 +158,17 @@ Operator = Annotated[str, Depends(auth.require_operator)]
 
 # ---- read-only -------------------------------------------------------------------------
 
+def _preset_today(p: dict) -> dict:
+    """Presets keep their time of day but move to today, so the tide bulletin covers the stay."""
+    today = datetime.now(timezone(timedelta(hours=7))).date().isoformat()
+    def shift(s: str) -> str:
+        return today + s[10:] if isinstance(s, str) and len(s) > 10 else s
+    out = {**p, "arrive_at": shift(p.get("arrive_at"))}
+    if p.get("rain"):
+        out["rain"] = [{**r, "start": shift(r["start"]), "end": shift(r["end"])} for r in p["rain"]]
+    return out
+
+
 @app.get("/api/config")
 def config(request: Request):
     return {
@@ -169,7 +180,7 @@ def config(request: Request):
         "coverage": coverage.summary(),
         "demo_center": DEMO_CENTER,
         "synthetic_demo_data": bool(getattr(app.state, "synthetic_demo_data", False)),
-        "presets": [{**p, "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
+        "presets": [{**_preset_today(p), "lat": _way_mid(p["way_id"])[0], "lon": _way_mid(p["way_id"])[1]} for p in PRESETS],
         "personas": [
             {"id": "park", "label": "Private driver, parking needed", "enabled": True},
             {"id": "pickup", "label": "Ride-hailing pickup/drop-off", "enabled": True},
@@ -324,6 +335,34 @@ def make_plan(req: PlanRequest, request: Request):
     return result
 
 
+class ComparePlanRequest(PlanRequest):
+    vehicle_ids: Annotated[list[Annotated[str, Field(max_length=80)]], Field(min_length=1, max_length=40)] | None = None
+
+
+@app.post("/api/plan/compare")
+def compare_plan(req: ComparePlanRequest, request: Request):
+    if not in_hcmc(req.lat, req.lon):
+        raise HTTPException(422, "Destinations must be in HCMC.")
+    if req.origin and not in_hcmc(*req.origin):
+        raise HTTPException(422, 'Origin must be in HCMC.')
+    ids = req.vehicle_ids if req.vehicle_ids is not None else [
+        'class-xs', 'class-s', 'class-m', 'class-l', 'class-xl', req.vehicle_id]
+    try:
+        vehicles.get_profile(req.vehicle_id)
+        for vid in ids:
+            vehicles.get_profile(vid)
+    except KeyError as exc:
+        raise HTTPException(404, f"Unknown vehicle {exc.args[0]}")
+    live_area, area_status = live.area_status(req.lat, req.lon)
+    _, fixture = _synthetic_demo_input(request, req.demo_scenario, req.lat, req.lon)
+    result = plan.compare_vehicles(req.lat, req.lon, req.intent, req.arrive_at, req.dwell_min,
+                                   [r.as_dict() for r in req.rain], req.label, ids,
+                                   live_area=live_area, synthetic_demo_file=fixture)
+    result['area_key'] = area_status['key']
+    result['area'] = area_status
+    return result
+
+
 @app.get("/api/reverse")
 def reverse(lat: Lat, lon: Lon):
     return geocoding.reverse(lat, lon)
@@ -469,7 +508,7 @@ def confirm(c: Confirmation, request: Request):
     way_out_ids = list(dict.fromkeys(way_id for way_id, _ in parcels.path_out(g, c.stop_lat, c.stop_lon)))
     way_ids = [stop_way_id]
     payload = {
-        "date": date.today().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
+        "date": datetime.now(VN_TZ).date().isoformat(), "vehicle_id": p.id, "vehicle_label": p.label,
         "body_width": vehicles.min_body_width(p.id), "mirror_width": p.mirror_width,
         "result": c.result, "exit": c.exit, "way_ids": way_ids, "way_out_ids": way_out_ids,
         "stop_lat": c.stop_lat, "stop_lon": c.stop_lon,
@@ -506,7 +545,7 @@ class Blockage(Strict):
 def blockage(b: Blockage, request: Request):
     _guest_limit(request)
     _graph_with(b.lat, b.lon, [b.way_id])
-    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Driver report", "date": date.today().isoformat()}
+    payload = {"way_id": b.way_id, "reason": b.reason, "source": "Driver report", "date": datetime.now(VN_TZ).date().isoformat()}
     rec = reports.submit("blockage", payload, "Driver blockage report")
     return {"status": "pending", "report_id": rec["report_id"]}
 

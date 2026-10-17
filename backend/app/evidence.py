@@ -11,7 +11,7 @@ import json
 import math
 import re
 from dataclasses import dataclass, field, replace
-from datetime import date
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from functools import lru_cache
 
@@ -252,7 +252,10 @@ class WidthRange:
                 "width_basis": self.width_basis, "coverage": self.coverage,
                 "decisive_clearance": self.decisive_clearance,
                 "sampled_estimate": self.sampled_estimate(),
-                "official_width_records": self.official_width_records}
+                "official_width_records": self.official_width_records,
+                "clear_width_caveat": ("Parcel geometry; usable = gap minus 1 m (minimum 0.5 m). "
+                                       "Sampled estimate, not continuous clear width."
+                                       if self.width_basis == "parcel_gap_estimate" else None)}
 
     def sampled_estimate(self) -> dict | None:
         """Diagnostic sampled bottleneck, separate from the whole-way bounds."""
@@ -326,7 +329,9 @@ def _width_metadata(bounds: list[Bound], review: bool) -> tuple[str, dict, bool]
                             and item.get("start_covered", False) and item.get("end_covered", False)
                             and not item.get("truncated", False)
                             and (_num(item.get("max_spacing_m")) or float("inf")) <= 5.1
-                            for item in coverages))
+                            for item in coverages)
+                    and all(bound.width_basis != 'parcel_gap_estimate' or
+                            bound.sample_quality.get('geometry_checked', False) for bound in bounds))
         coverage = {
             "cut_count": sum(int(item.get("cut_count", 0)) for item in coverages),
             "start_covered": not missing_coverage and all(item.get("start_covered", False) for item in coverages),
@@ -486,6 +491,9 @@ class EvidenceIndex:
                     way_id = int(way_id)
                 except (TypeError, ValueError):
                     continue
+                observed = str(pc.get("observed_on") or pc.get("queried_at")
+                               or area.get("collected_at") or "")
+                source_url = pc.get("source_url") or "https://thongtinquyhoach.hochiminhcity.gov.vn/"
                 raw_cuts, raw_samples = pc.get("cuts"), pc.get("samples")
                 invalid = not isinstance(raw_cuts, list) or not isinstance(raw_samples, list)
                 raw_cuts = raw_cuts if isinstance(raw_cuts, list) else []
@@ -513,7 +521,10 @@ class EvidenceIndex:
                             and (lat is None or lon is None)):
                         invalid = True
                         continue
-                    cuts.append(({**cut, 'width_m': width, 'gap_m': gap, 'at_m': at_m,
+                    cuts.append(({**cut, 'observed_on': cut.get('observed_on') or cut.get('queried_at') or observed,
+                                  'source': cut.get('source') or 'Cadastral parcel-gap estimate',
+                                  'source_url': cut.get('source_url') or source_url,
+                                  'width_m': width, 'gap_m': gap, 'at_m': at_m,
                                   'lat': lat, 'lon': lon}, width, at_m))
                 sample_values = [_num(value) for value in raw_samples]
                 if any(value is None for value in sample_values):
@@ -546,8 +557,8 @@ class EvidenceIndex:
                 how = f"sampled {len(cuts)} cuts" + (" at ≤5 m intervals" if pc.get("deep") else "")
                 detail = (f"Estimated cadastral gap ({how}): narrowest "
                           f"{width:.1f} m (parcel gap {narrow['gap_m']:.1f} m)")
-                self._add(Bound(width, width, "Inferred", "Cadastral parcel-gap estimate",
-                                detail, url="https://thongtinquyhoach.hochiminhcity.gov.vn/",
+                self._add(Bound(width, width, "Official", "Cadastral parcel-gap estimate",
+                                detail, observed_on=observed, url=source_url,
                                 feature="parcel_widths", width_basis="parcel_gap_estimate", coverage=coverage,
                                 estimate_m=width, sample_count=len(cuts), sample_cuts=[item[0] for item in cuts],
                                 measurement_schema="parcel-usable-v2"),
@@ -865,7 +876,8 @@ def _validate_parcel_bound(g, w, b):
                    sample_quality=quality,
                    detail=(f"Narrowest valid sample {narrow:.2f} m; retained {len(cuts)}/{len(b.sample_cuts)} cuts; "
                            f"{quality['bottleneck_support']} cuts corroborate the bottleneck. "
-                           'Parcel gap minus 1 m, ±0.3 m allowance; no whole-way clearance guarantee.'))
+                           'Planning-portal parcel gap minus 1 m (minimum 0.5 m), ±0.3 m allowance; '
+                           'sampled estimate, not continuous clear width.'))
 
 
 STORE_EVIDENCE = EvidenceStore()
@@ -880,7 +892,7 @@ def width_ranges(g: AreaGraph, evidence: EvidenceView | None = None) -> dict[int
         candidates, city_ignored, city_review = declared_index.prepare(way.id, bounds)
         # A road-class prior cannot contradict a geometry-checked parcel cap or
         # manufacture a positive floor for an incomplete sampled survey. The
-        # automatic estimate keeps the team's Inferred tier (not Official).
+        # Official identifies the portal geometry's provenance, not physical clearance.
         parcel_ignored = []
         if any(b.feature == 'parcel_widths' and
                (b.sample_quality.get('geometry_checked') or b.measurement_schema == 'parcel-survey-unresolved-v2')
@@ -914,7 +926,7 @@ def blocked_ways_today() -> dict[int, dict]:
     out = {}
     if not BLOCKAGE_FILE.exists():
         return out
-    today = date.today().isoformat()
+    today = datetime.now(timezone(timedelta(hours=7))).date().isoformat()
     for line in BLOCKAGE_FILE.read_text(encoding="utf-8").splitlines():
         try:
             b = json.loads(line) if line.strip() else None

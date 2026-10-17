@@ -30,3 +30,9 @@ backend/cache/flood/
 backend/cache/live/parcels.lock
 backend/cache/live/areas/*.lock
 .operator-secret
+
+docs/qa/mcp/codex-home/
+docs/qa/shots/
+docs/qa/mcp/client-configs/claude-state/
+docs/qa/mcp/before.jsonl
+docs/qa/mcp/public-certifi.jsonl

@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":2,"result":{"content":[{"type":"text","text":"Place search returned 1 candidate(s)."}],"structuredContent":{"results":[{"label":"Hẻm 441/14 Điện Biên Phủ, Thạnh Mỹ Tây, Hồ Chí Minh","lat":10.802092539999743,"lon":106.71365960299639,"source":"Goong","precision":"place"}],"requires_clarification":false,"source_warnings":[]},"isError":false}}

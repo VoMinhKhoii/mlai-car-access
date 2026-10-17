@@ -89,6 +89,7 @@ export interface Bound {
   lo: number; hi: number | null; tier: string; tier_vi: string; source: string
   detail: string; observed_on: string; url: string; ai_feature: string | null
   width_basis: WidthBasis; uncertainty_m: number | null; coverage: WidthCoverage | null
+  estimate_m?: number | null; sample_count?: number | null
 }
 export interface WidthRange {
   lo: number; hi: number | null; label: string; top_tier: string | null; review: boolean
@@ -125,7 +126,24 @@ export const floodKnowledgeLabel = (knowledge: FloodKnowledge | undefined): stri
   }
 }
 export interface Rule { code: string; status: Legal; text: string; citation: string }
+export const EVIDENCE_TIERS = ['Measured', 'Official', 'Observed', 'Declared', 'Inferred', 'No data'] as const
+export type EvidenceTier = typeof EVIDENCE_TIERS[number]
+export const evidenceTier = (tier: unknown): EvidenceTier => EVIDENCE_TIERS.find((t) => t.toLowerCase() === String(tier).toLowerCase()) ?? 'No data'
+export interface WidthProfileSegment {
+  way_id: number; name: string; length_m: number; start_m: number
+  width_lo: number | null; width_hi: number | null; estimate_m: number | null
+  tier: string | null; source: string | null; sampled: boolean; sample_count?: number | null
+}
+export type DecidedBy = string | { check?: string; reason?: string; source?: string; status?: string }
+export interface VehicleComparison {
+  vehicle_id: string; label: string; mirror_width: number; needed_m: number
+  answer: string; confidence: string
+  limiting: { way_id: number; name: string; width_lo: number | null; width_hi: number | null; estimate_m: number | null; tier: string | null; source: string | null } | null
+  decided_by?: DecidedBy | null
+}
+export interface PlanComparison { vehicles: VehicleComparison[]; profile: WidthProfileSegment[] }
 export interface StopPoint {
+  estimate?: Estimate; profile?: WidthProfileSegment[]; decided_by?: DecidedBy | null
   rank?: number; ok: boolean; kind: 'door' | 'street' | 'lot'; name: string; lat: number; lon: number
   way_id: number | null; tier: number; verified: boolean; badges: string[]
   walk: { meters: number; minutes: number; geometry?: number[][]
@@ -149,7 +167,7 @@ export interface Plan {
   window: { arrive: string; depart: string; dwell_min: number; tide_arrive: { level_m: number | null; alarm: string | null; kind: string | null }; tide_depart: { level_m: number | null; alarm: string | null; kind: string | null }; rain: RainSpell[] }
   synthetic_demo_data: boolean
   synthetic_demo_scenario: string | null
-  verdict: { code: string; headline: string; detail: string }
+  verdict: { code: string; headline: string; detail: string; estimate?: Estimate; profile?: WidthProfileSegment[]; decided_by?: DecidedBy | null }
   timing: {
     leave_before_at: string | null; or_after_at: string | null
     reason: string | null; approximate: boolean; failure_codes: string[]
@@ -243,7 +261,7 @@ export type AgentEvent =
   | { type: 'validation'; violations: string[]; action: string }
   | { type: 'done'; contents: Record<string, unknown>[] }
   | { type: 'error'; text: string }
-export interface SearchResult { label: string; lat?: number; lon?: number; place_id?: string; source: string }
+export interface SearchResult { subtitle?: string; label: string; lat?: number; lon?: number; place_id?: string; source: string }
 
 export interface VoiceParseResult {
   kind: 'confirmation' | 'blockage' | 'unclear'
@@ -300,7 +318,11 @@ export function delay(ms: number): Promise<void> {
   return promise
 }
 
-export interface Estimate { answer: 'fits' | 'tight' | 'no' | 'unknown'; confidence: 'high' | 'medium' | 'low'; basis: string }
+export interface Estimate {
+  answer: 'fits' | 'tight' | 'no' | 'unknown'; confidence: 'high' | 'medium' | 'low'; basis: string
+  coverage?: { sampled_segments: number; total_segments: number; all_sampled_segments?: number; scope?: string }
+  limiting_width?: { value_m: number | null; tier: string | null; source: string | null; way_id?: number; way_name?: string; sample_count?: number | null }
+}
 
 export const api = {
   cancelAgent: (requestId: string) => post(`/api/agent/cancel/${encodeURIComponent(requestId)}`, {}).then(j<{ cancelled: boolean }>),
@@ -341,6 +363,7 @@ export const api = {
   maneuver: (vehicleId: string, width: number, signal?: AbortSignal) =>
     fetch(`/api/vehicles/${encodeURIComponent(vehicleId)}/maneuver?width=${encodeURIComponent(String(width))}`, { signal }).then(j<Maneuver>),
   plan: (body: PlanRequest, signal?: AbortSignal) => post('/api/plan', body, signal).then(j<Plan>),
+  compare: (body: PlanRequest & { vehicle_ids?: string[] }, signal?: AbortSignal) => post('/api/plan/compare', body, signal).then(j<PlanComparison>),
   wayEvidence: (wayId: number, lat: number, lon: number, demoScenario?: string | null, signal?: AbortSignal) =>
     post(`/api/evidence/way/${wayId}`, { lat, lon, demo_scenario: demoScenario ?? null }, signal).then(j<WayEvidence>),
   tide: (start: string, hours = 36) =>

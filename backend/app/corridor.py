@@ -57,18 +57,22 @@ def goong_route(origin, dest, via=None) -> dict | None:
                       params={"api_key": GOONG_API_KEY, "origin": f"{origin[0]},{origin[1]}",
                               "destination": ";".join(stops), "vehicle": "car"}, timeout=15).json()
         legs = r["routes"][0]["legs"]
-    except Exception:
+        steps, coords = [], []
+        for leg in legs:
+            for s in leg["steps"]:
+                pts = _decode_polyline(s["polyline"]["points"])
+                m = STEP_NAME.search(re.sub(r"<[^>]+>", "", s.get("html_instructions", "")))
+                steps.append({"name": m.group(1) if m else "", "coords": pts, "m": s["distance"]["value"]})
+                coords += pts
+        distance = sum(l["distance"]["value"] for l in legs)
+        duration = sum(l["duration"]["value"] for l in legs)
+        if len(coords) < 2 or not all(math.isfinite(v) for point in coords for v in point) \
+                or not math.isfinite(distance) or not math.isfinite(duration) or distance < 0 or duration < 0:
+            return None
+        return {"geometry": coords, "steps": steps, "via": via,
+                "distance_m": distance, "duration_s": duration}
+    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError, OverflowError):
         return None
-    steps, coords = [], []
-    for leg in legs:
-        for s in leg["steps"]:
-            pts = _decode_polyline(s["polyline"]["points"])
-            m = STEP_NAME.search(re.sub(r"<[^>]+>", "", s.get("html_instructions", "")))
-            steps.append({"name": m.group(1) if m else "", "coords": pts, "m": s["distance"]["value"]})
-            coords += pts
-    return {"geometry": coords, "steps": steps, "via": via,
-            "distance_m": sum(l["distance"]["value"] for l in legs),
-            "duration_s": sum(l["duration"]["value"] for l in legs)}
 
 
 def _samples(route: dict) -> list[tuple[float, float, float, str]]:
