@@ -187,7 +187,10 @@ def execute(name: str, args: dict, origin=None, map_context=None):
                 "scope":"Chỉ kiểm tra bề rộng đoạn hẻm; chưa kiểm tra toàn tuyến, đường ra, ngập hay luật dừng đỗ."}, None
     if name in ("lap_ke_hoach", "tim_cho_do_gan"):
         ui = Arrival(**args).ui()
-        p = main.make_plan(main.PlanRequest(**ui, origin=list(origin) if origin else None))
+        req = main.PlanRequest(**ui, origin=list(origin) if origin else None)
+        live_area, _ = main.live.area_status(req.lat, req.lon)
+        p = main.plan.plan(req.lat, req.lon, req.vehicle_id, req.intent, req.arrive_at, req.dwell_min,
+                           [r.as_dict() for r in req.rain], req.label, origin=origin, live_area=live_area)
         result = compact_plan(p)
         result["request"] = ui
         result["evidence_note"] = "; ".join(p.get('verdict', {}).get('unverified_reasons', []))
@@ -439,8 +442,9 @@ def events(req: AgentRequest):
         yield {"type":"error", "text":safe_error(exc)}
 
 
-def stream(req):
-    for event in events(req):
+def stream(req, allow_model=True):
+    iterator = events(req) if allow_model else fallback_events(req, copy.deepcopy(req.contents) + [{"role":"user", "parts":[{"text": req.message}]}])
+    for event in iterator:
         yield json.dumps(event, ensure_ascii=False) + "\n"
 
 

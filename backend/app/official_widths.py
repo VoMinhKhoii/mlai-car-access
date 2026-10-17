@@ -1,7 +1,7 @@
 """Read-only Official historical widths/planned ROW, separate from Clear Width.
 
 A planning corridor is not a measured usable carriageway, nor a guaranteed upper
-bound on today's width. No record in this module produces a Bound (D46).
+bound on today's width. No record in this module produces a Bound (D49).
 """
 from __future__ import annotations
 

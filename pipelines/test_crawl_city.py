@@ -35,36 +35,40 @@ class CityCacheTests(unittest.TestCase):
         self.assertFalse(self.path.with_suffix(".json.tmp").exists())
 
     def test_apply_without_area_and_browser_deep_precedence(self):
+        # Canonical request overlays replace the removed browser/global set_live API.
         crawl.atomic_json(self.path, {"42": self.res})
-        with patch.object(live, "cached_area", return_value=None), patch.object(live, "build_graph", return_value=self.g), \
-                patch.object(live.STORE_EVIDENCE, "set_live") as store:
-            key = live.apply(None, 10.8017, 106.7148)
-            self.assertEqual(store.call_args.args[-1], [{"way_id": 42, **self.res, "deep": False}])
-            deep = {"way_id": 42, **self.res, "deep": True}
-            live.apply({"key": key, "parcels": [deep]}, 10.8017, 106.7148)
-            self.assertEqual(store.call_args.args[-1], [deep])
+        shallow = live._merge_city(self.g, [])
+        self.assertEqual(shallow, [{"way_id": 42, **self.res, "deep": False}])
+        deep = {"way_id": 42, **self.res, "deep": True}
+        self.assertEqual(live._merge_city(self.g, [deep]), [deep])
+        self.assertEqual(live._merge_city(self.g, []), shallow)
 
     def test_warm_path_keeps_destination_deep_scan_and_preserves_existing_deep(self):
-        branch = SimpleNamespace(id=43, kind="alley", drivable=True, nodes=[1, 2])
-        graph = SimpleNamespace(ways={43: branch}, nodes={1: (10.8, 106.7), 2: (10.8001, 106.7)},
-                                edges=[SimpleNamespace(way_id=43, u=1, v=2)])
+        # The product scans complete legal ingress/egress ways under versioned keys.
+        graph = osm.graph_from_elements(10.8, 106.7, [
+            {"type":"node", "id":1, "lat":10.8, "lon":106.7},
+            {"type":"node", "id":2, "lat":10.8002, "lon":106.7},
+            {"type":"way", "id":42, "nodes":[1,2], "tags":{"highway":"residential"}}])
+        cache = {}
         with patch.object(parcels, "path_into", return_value=[(42, [])]), \
-                patch.object(parcels, "measure", return_value=None) as measure:
-            self.assertEqual(parcels.measure_area(graph, 10.8, 106.7, {}, osm.haversine, {"42": None}), [])
+             patch.object(parcels, "path_out", return_value=[]), \
+             patch.object(parcels, "measure", return_value=self.res) as measure:
+            rows = parcels.measure_area(graph, 10.8, 106.7, cache, osm.haversine, city_cache={"42":self.res})
+            self.assertTrue(rows[0]["deep"])
             self.assertEqual(measure.call_args.kwargs["step"], 5.0)
-            out = parcels.measure_area(graph, 10.8, 106.7, {}, osm.haversine, {"42": self.res})
-            self.assertFalse(out[0]["deep"])
             measure.reset_mock()
-            out = parcels.measure_area(graph, 10.8, 106.7, {"deep:10.80000,106.70000:42": self.res},
-                                       osm.haversine, {"42": self.res})
-            self.assertTrue(out[0]["deep"])
+            parcels.measure_area(graph, 10.8, 106.7, cache, osm.haversine, city_cache={"42":self.res})
             measure.assert_not_called()
+        with patch.object(parcels, "path_into") as into, patch.object(parcels, "measure") as measure:
+            rows = parcels.measure_area(graph, 10.8, 106.7, {}, osm.haversine, deep=False, city_cache={"42":self.res})
+            into.assert_not_called(); measure.assert_not_called()
+            self.assertFalse(rows[0]["deep"])
 
     def test_full_warm_build_reuses_photos_and_keyword_news(self):
         crawl.atomic_json(self.path, {"42": self.res})
         self.g.source = "cache:test"
         job = {"key": "test", "steps": {}, "counts": {"in_area": 0, "matched": 0, "alleys": 0},
-               "state": "running", "parcels": [], "error": None}
+               "state": "running", "parcels": [], "error": None, "complete": True, "listings": [], "photos": [], "news": []}
         with patch.object(live, "DIR", Path(self.tmp.name)), patch.object(live, "build_graph", return_value=self.g), \
                 patch.object(live.parcels, "path_into", return_value=[(42, [])]), \
                 patch.object(live.parcels, "measure_area", return_value=[]), \
@@ -74,11 +78,13 @@ class CityCacheTests(unittest.TestCase):
                 patch.object(live, "_listings", return_value=[]), \
                 patch.object(live, "_streets_near", return_value=["Test Street"]), \
                 patch.object(live.news, "news_for", return_value=[]) as news, \
-                patch.object(live, "_photos", return_value=[]) as photos:
+                patch.object(live, "_photos", return_value=[]) as photos, \
+                patch.object(live, "_publish", return_value={"revision":1}):
             live._run(job, 10.8, 106.7)
         self.assertEqual(job["state"], "done")
         self.assertIsNone(job["error"])
-        news.assert_called_once_with(["Test Street"], use_ai=False)
+        self.assertEqual(news.call_args.args[0], ["Test Street"])
+        self.assertGreater(news.call_args.args[1], 0)
         self.assertEqual(photos.call_args.args[1], [])
 
     def test_transport_failure_is_retryable_not_null(self):

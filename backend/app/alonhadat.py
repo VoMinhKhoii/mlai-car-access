@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
+from .deadline import timeout
 from .osm import strip_accents
 
 VN_TZ = timezone(timedelta(hours=7))
@@ -27,8 +28,8 @@ PAGES = 5          # 20 listings per page
 TTL = timedelta(hours=float(os.environ.get("LISTINGS_TTL_H", "12")))
 
 
-def _get(url: str) -> str:
-    r = httpx.get(url, headers=HEADERS, timeout=25, follow_redirects=True)
+def _get(url: str, deadline: float | None = None) -> str:
+    r = httpx.get(url, headers=HEADERS, timeout=timeout(deadline, 25), follow_redirects=True)
     r.raise_for_status()
     return r.text
 
@@ -37,12 +38,12 @@ def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", strip_accents(name)).strip("-")
 
 
-def district_index(cache_dir) -> dict[str, tuple[int, str]]:
+def district_index(cache_dir, deadline: float | None = None) -> dict[str, tuple[int, str]]:
     """Folded district slug ("quan-binh-thanh") → (alonhadat id, slug)."""
     path = cache_dir / "alonhadat_hcmc_districts.json"
     if path.exists():
         return {k: tuple(v) for k, v in json.loads(path.read_text()).items()}
-    t = _get(f"{BASE}/can-ban-nha-dat/ho-chi-minh")
+    t = _get(f"{BASE}/can-ban-nha-dat/ho-chi-minh", deadline)
     out = {m.group(2): (int(m.group(1)), m.group(2))
            for m in re.finditer(r"/nha-dat/can-ban/nha-dat/ho-chi-minh/(\d+)/([a-z0-9-]+)\.html", t)}
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -54,8 +55,8 @@ def _text(fragment: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
 
 
-def _detail(url: str) -> dict | None:
-    t = _get(url)
+def _detail(url: str, deadline: float | None = None) -> dict | None:
+    t = _get(url, deadline)
     cells = [_text(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", t, re.S)]
     table = {cells[i]: cells[i + 1] for i in range(0, len(cells) - 1, 2)}
     street = re.search(r"itemprop='streetAddress'>(.*?)</span>", t, re.S)
@@ -81,9 +82,9 @@ def _detail(url: str) -> dict | None:
     }
 
 
-def pull_district(district_name: str, cache_dir, counts: dict) -> list[dict]:
-    """Alley-house listings of one HCMC district (cached 12 h)."""
-    idx = district_index(cache_dir)
+def pull_district(district_name: str, cache_dir, counts: dict, deadline: float | None = None) -> list[dict]:
+    """Alley-house listings of one HCMC district (cached 12 h). Every request is bounded by `deadline`."""
+    idx = district_index(cache_dir, deadline)
     hit = idx.get(_slug(district_name))
     if not hit:
         return []
@@ -97,11 +98,11 @@ def pull_district(district_name: str, cache_dir, counts: dict) -> list[dict]:
     urls: list[str] = []
     for page in range(1, PAGES + 1):
         suffix = "" if page == 1 else f"/trang--{page}"
-        t = _get(f"{BASE}/nha-dat/can-ban/nha-dat/ho-chi-minh/{aid}/{slug}{suffix}.html")
+        t = _get(f"{BASE}/nha-dat/can-ban/nha-dat/ho-chi-minh/{aid}/{slug}{suffix}.html", deadline)
         urls += [BASE + u for u in re.findall(r"href=['\"](/[a-z0-9-]+-\d{6,}\.html)['\"]", t)]
     urls = list(dict.fromkeys(urls))
     with ThreadPoolExecutor(4) as pool:
-        ads = [a for a in pool.map(_safe_detail, urls) if a]
+        ads = [a for a in pool.map(lambda u: _safe_detail(u, deadline), urls) if a]
     counts["fetched"] = counts.get("fetched", 0) + len(ads)
     ads = [a for a in ads if "hẻm" in a["kind"].lower() or "/" in a["street_number"]]
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -109,8 +110,8 @@ def pull_district(district_name: str, cache_dir, counts: dict) -> list[dict]:
     return ads
 
 
-def _safe_detail(url: str) -> dict | None:
+def _safe_detail(url: str, deadline: float | None = None) -> dict | None:
     try:
-        return _detail(url)
+        return _detail(url, deadline)
     except Exception:
         return None

@@ -14,14 +14,18 @@ import math
 import sys
 
 
+def _overhangs(L, WB, FOH=None, ROH=None):
+    return (FOH if FOH is not None else 0.45 * (L - WB),
+            ROH if ROH is not None else 0.55 * (L - WB))
+
+
 def radii(W, L, WB, R, T=None, FOH=None, ROH=None, extra=0.0):
     """Return turning radii about the turn centre for rear-axle radius Rr >= Rr_min.
 
     extra: additional radius added to the rear axle (driver uses less than full lock).
     """
-    T = T if T else W - 0.28
-    FOH = FOH if FOH is not None else 0.45 * (L - WB)
-    ROH = ROH if ROH is not None else 0.55 * (L - WB)
+    T = T if T is not None else W - 0.28
+    FOH, ROH = _overhangs(L, WB, FOH, ROH)
     Rr = math.sqrt(R * R - WB * WB) - T / 2 + extra          # rear-axle centre
     r_in = Rr - W / 2                                          # inner body side at rear axle
     r_out = math.hypot(Rr + W / 2, WB + FOH)                   # outer FRONT corner (front swing)
@@ -64,9 +68,13 @@ def body_corners(x, y, psi, W, FOH, ROH, WB):
     return pts
 
 
-def k_turn(W, L, WB, R, D, c=0.3, max_moves=9, step_deg=0.25, **kw):
-    """Simulate a multi-point turn in a straight corridor of width D (walls x=0, x=D).
-    Returns (moves_needed, corridor_length_used) or (None, None)."""
+def body_center_offset(L, WB, FOH=None, ROH=None):
+    """Forward offset from rear-axle pose to body-centre pose."""
+    FOH, ROH = _overhangs(L, WB, FOH, ROH)
+    return (WB + FOH - ROH) / 2
+
+
+def _k_turn(W, L, WB, R, D, c, max_moves, step_deg, collect_poses, **kw):
     g = radii(W, L, WB, R, **kw)
     Rr, FOH, ROH = g["Rr"], g["FOH"], g["ROH"]
     lo, hi = c, D - c
@@ -75,13 +83,14 @@ def k_turn(W, L, WB, R, D, c=0.3, max_moves=9, step_deg=0.25, **kw):
     target = 3 * math.pi / 2
     d = math.radians(step_deg)
     ys = []
+    poses = [(x, y, psi)] if collect_poses else None
 
     def ok(px, py, pp):
         cs = body_corners(px, py, pp, W, FOH, ROH, WB)
         return all(lo - 1e-9 <= cx <= hi + 1e-9 for cx, _ in cs), cs
 
     if not ok(x, y, psi)[0]:
-        return None, None
+        return None, None, poses
     for move in range(1, max_moves + 1):
         forward = move % 2 == 1
         # forward: left lock (centre on left); reverse: right lock (centre on right)
@@ -97,12 +106,33 @@ def k_turn(W, L, WB, R, D, c=0.3, max_moves=9, step_deg=0.25, **kw):
                 break
             x, y, psi = nx, ny, psi + d
             ys.extend(p[1] for p in cs)
+            if poses is not None:
+                poses.append((x, y, psi))
             progressed = True
         if psi >= target:
-            return move, (max(ys) - min(ys)) if ys else 0.0
+            return move, (max(ys) - min(ys)) if ys else 0.0, poses
         if not progressed:
-            return None, None
-    return None, None
+            return None, None, poses
+    return None, None, poses
+
+
+def k_turn(W, L, WB, R, D, c=0.3, max_moves=9, step_deg=0.25, **kw):
+    """Simulate a multi-point turn. Returns (moves_needed, corridor_length_used) or (None, None)."""
+    moves, length, _ = _k_turn(W, L, WB, R, D, c, max_moves, step_deg, False, **kw)
+    return moves, length
+
+
+def k_turn_path(W, L, WB, R, D, c=0.3, max_moves=9, step_deg=0.25, max_poses=120, **kw):
+    """Simulate a turn and return a bounded sequence of (x, y, heading) poses for visualization."""
+    if max_poses < 2:
+        raise ValueError("max_poses must be at least 2")
+    moves, length, poses = _k_turn(W, L, WB, R, D, c, max_moves, step_deg, True, **kw)
+    if moves is None:
+        return moves, length, []
+    if len(poses) > max_poses:
+        last = len(poses) - 1
+        poses = [poses[round(i * last / (max_poses - 1))] for i in range(max_poses)]
+    return moves, length, poses
 
 
 def min_width_for_moves(W, L, WB, R, moves, c=0.3, **kw):

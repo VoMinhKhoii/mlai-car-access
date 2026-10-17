@@ -20,11 +20,8 @@ EXTRA = [
 points = [(p["label"], *_way_mid(p["way_id"])) for p in PRESETS] + EXTRA
 for label, lat, lon in points:
     t = time.time()
-    last = {}
-    for line in live.build(lat, lon, force="--force" in sys.argv):
-        last = json.loads(line)
-    st = last.get("status", {})
-    area = last.get("area") or {}
+    area = live.run_sync(lat, lon) or {}
+    st = {"state": "done" if area else "error", "key": area.get("key")}
     print(f"{label}: {st.get('state')} in {time.time() - t:.0f}s, key={st.get('key')}, "
           f"parcels={len(area.get('parcels', []))}, listings={len(area.get('listings', []))}, "
           f"photos={len(area.get('photos', []))} {st.get('error') or ''}", flush=True)

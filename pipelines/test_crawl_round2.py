@@ -213,16 +213,16 @@ class CampusTests(unittest.TestCase):
 
     def test_shared_area_preserves_each_campus_listing_and_news(self):
         from app import live
-        with tempfile.TemporaryDirectory() as temp,patch.object(live,'AREAS',Path(temp)):
+        with tempfile.TemporaryDirectory() as temp,patch.object(live,'AREAS_DIR',Path(temp)),patch.object(live,'_areas',__import__('app.storage',fromlist=['LRU']).LRU(32)):
             def area(wid,url):
-                return {'key':'test','parcels':[], 'listings':[{'listing_id':wid,'url':url}],
+                return {'key':'demo','complete':True,'steps':{},'counts':{},'parcels':[], 'listings':[{'listing_id':wid,'url':url}],
                         'news':[{'street':str(wid),'url':url}], 'photos':[]}
-            live._save_area(area(1,'first'),10.8,106.7)
-            live._save_area(area(2,'second'),10.81,106.71)
-            saved=live.cached_area('test')
+            live._publish(area(1,'first'))
+            live._publish(area(2,'second'))
+            saved=live._load_area('demo')
             self.assertEqual(len(saved['listings']),2)
             self.assertEqual(len(saved['news']),2)
-            self.assertEqual(len(saved['dests']),2)
+            self.assertEqual(saved['revision'],2)
 
     def test_cooldown_scan_is_offline_and_never_completes_a_cache_miss(self):
         import campus_priority

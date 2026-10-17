@@ -59,9 +59,9 @@ class AgentProductionTests(unittest.TestCase):
     def test_ambiguity_nearest_origin_and_exact_house(self):
         places=[{'label':'Highlands A','lat':10.8,'lon':106.7,'source':'fixture'}, {'label':'Highlands B','lat':10.9,'lon':106.7,'source':'fixture'}]
         with patch('app.config.GOONG_API_KEY',''),patch.object(geocoding,'local_search',return_value=[]),patch.object(agent,'_nominatim',return_value=places):
-            r=agent.resolve_place('Highlands test disambiguation')
+            r=agent.resolve_place('Highlands')
             self.assertTrue(r['requires_clarification'])
-            r=agent.resolve_place('Highlands test disambiguation',(10.89,106.7))
+            r=agent.resolve_place('Highlands',(10.89,106.7))
             self.assertFalse(r['requires_clarification']);self.assertEqual(r['results'][0]['label'],'Highlands B')
             self.assertIn('gần',r['selection_reason'])
 

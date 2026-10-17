@@ -52,7 +52,7 @@ def width_summary():
             try:
                 data = json.loads(p.read_text())
                 rows = data.get("parcels", []) if p.parent.name == "areas" else [{"way_id": k, **v} for k, v in data.items() if isinstance(v, dict)]
-                by_tier["Official"].update(str(r["way_id"]) for r in rows if r.get("samples") and str(r["way_id"]) in cohort)
+                by_tier["Inferred"].update(str(r["way_id"]) for r in rows if r.get("samples") and str(r["way_id"]) in cohort)
             except (OSError, ValueError):
                 continue
     assigned, strongest = set(), {}

@@ -122,7 +122,7 @@ Progress/log: `backend/cache/live/imagery/run.json` and `run.log`. The review
 product is `backend/cache/live/imagery_widths.json`; validation is also written
 to `backend/cache/live/imagery/validation.json`. Pending/ACCEPT readings never
 enter planning. A named human approval activates Observed evidence with incomplete
-coverage and no whole-way minimum-width guarantee (D45). Rejected, blurred,
+coverage and no whole-way minimum-width guarantee (D48). Rejected, blurred,
 night-time, off-alley or reference-free readings cannot be approved. A listing's
 posted date does not establish image capture time.
 
@@ -134,7 +134,7 @@ thumbnail, and sends it through the same budget/review path. No token is written
 to products or logs. This optional token path has offline coverage but has not
 been authenticated during this run.
 
-## Official bulk historical widths and planned ROW (D46)
+## Official bulk historical widths and planned ROW (D49)
 
 The separate [official bulk research/import](eval/official-bulk.md) publishes
 `backend/cache/live/official_widths.json`. `app.official_widths` exposes these as

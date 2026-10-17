@@ -422,7 +422,7 @@ def sweep(n,seed):
     t0=time.perf_counter()
     for c in points:
         t=time.perf_counter()
-        live.apply(None,c["lat"],c["lon"])  # cached_area + cached city cuts only; never live.build
+        live.area_status(c["lat"],c["lon"])  # cached_area + cached city cuts only; never live.build
         timing["cached_apply_s"].append(time.perf_counter()-t)
         g,wrs,fps=engine.area(c["lat"],c["lon"])
         sample={**c,"graph_ways":len(g.ways),"graph_edges":len(g.edges),"profiles":{}}
@@ -448,9 +448,14 @@ def sweep(n,seed):
                             if len(failures[label])<12: failures[label].append({**c,"vehicle":vid,"stop":brief(r)["stops"][s["rank"]-1]})
                     coords=s["walk"].get("geometry",[])
                     length=sum(osm.haversine(a[1],a[0],b[1],b[0]) for a,b in zip(coords,coords[1:]))
-                    if abs(length-s["walk"]["meters"])>5:
+                    # The product deliberately draws only mapped walk edges. Estimated
+                    # endpoint connectors are counted in metres but remain absent from the map.
+                    connection = s["walk"].get("connection", {})
+                    undrawn = sum(connection.get(k, 0) for k in ("stop_to_walk_m", "destination_to_walk_m")
+                                  if connection.get(k, 0) > engine.WALK_SNAP_M)
+                    if abs(length + undrawn - s["walk"]["meters"])>5:
                         counts["walk_geometry_mismatch"]+=1
-                        if len(failures["walk_geometry_mismatch"])<12: failures["walk_geometry_mismatch"].append({**c,"vehicle":vid,"stop":s["name"],"reported_m":s["walk"]["meters"],"drawn_m":length})
+                        if len(failures["walk_geometry_mismatch"])<12: failures["walk_geometry_mismatch"].append({**c,"vehicle":vid,"stop":s["name"],"reported_m":s["walk"]["meters"],"drawn_m":length,"undrawn_connector_m":undrawn})
                     if length>cap+1:
                         counts["walk_geometry_over_cap"]+=1
                     counts["stops_offered"]+=1
@@ -497,7 +502,7 @@ def profile():
     cells=[("demo",10.79924,106.71239),("campus",10.840,106.808),("city",10.744,106.760)]
     out={}
     for name,la,lo in cells:
-        t=time.perf_counter();live.apply(None,la,lo);apply_s=time.perf_counter()-t
+        t=time.perf_counter();live.area_status(la,lo);apply_s=time.perf_counter()-t
         times=[]
         for _ in range(5):
             t=time.perf_counter();r=engine.plan(la,lo,"toyota-vios","park",ARRIVE,120);times.append(time.perf_counter()-t)
@@ -511,7 +516,7 @@ def profile():
 
 
 def diagnose():
-    live.apply(None,10.79924,106.71239)
+    live.area_status(10.79924,106.71239)
     g,wrs,fps=engine.area(10.79924,106.71239)
     out=[]
     for vid in [IDS[0],IDS[2]]:
@@ -562,7 +567,7 @@ def explain():
         key=(c["i"],c["smaller"],c["wider"])
         if key in done:continue
         done.add(key)
-        live.apply(None,c["lat"],c["lon"])
+        live.area_status(c["lat"],c["lon"])
         captured={}
         original=engine._evaluate
         for vid in [c["smaller"],c["wider"]]:
@@ -595,7 +600,7 @@ def seams():
         if not (10.70<la<10.88 and 106.58<lo<106.80):continue
         pair=[]
         for lon in [lo+.002-.00001,lo+.002+.00001]:
-            live.apply(None,la,lon)
+            live.area_status(la,lon)
             g,wrs,_=engine.area(la,lon)
             r=engine.plan(la,lon,"toyota-vios","pickup",ARRIVE,15)
             e,off,d=engine._project(g,la,lon,lambda w:w.drivable)
@@ -613,7 +618,7 @@ def route_checks():
     for c in data["results"]:selected.setdefault(c["key"],c)
     counts=Counter();examples=[]
     for c in selected.values():
-        live.apply(None,c["lat"],c["lon"])
+        live.area_status(c["lat"],c["lon"])
         g,wrs,_=engine.area(c["lat"],c["lon"])
         coord_nodes={(lo,la):n for n,(la,lo) in g.nodes.items()}
         by_pair=defaultdict(list)

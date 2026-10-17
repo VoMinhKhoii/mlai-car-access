@@ -1,0 +1,99 @@
+{
+  "n": 20,
+  "completed_destinations": 20,
+  "seed": 3317,
+  "arrive": "2026-10-17T12:00:00+07:00",
+  "vehicles": [
+    "vinfast-vf-3",
+    "toyota-vios",
+    "toyota-fortuner",
+    "kia-carnival",
+    "ford-transit"
+  ],
+  "counts": {
+    "plans_completed": 100,
+    "stops_offered": 205,
+    "monotonic_plan_pairs": 200,
+    "monotonic_fit_pairs": 347020
+  },
+  "timing": {
+    "cached_apply_s": {
+      "n": 20,
+      "min": 2.7458008844405413e-05,
+      "median": 8.206249913200736e-05,
+      "p95": 0.0019919999758712947,
+      "max": 0.0019919999758712947
+    },
+    "vinfast-vf-3": {
+      "n": 20,
+      "min": 0.023635708028450608,
+      "median": 0.2091207079938613,
+      "p95": 1.916527875000611,
+      "max": 1.916527875000611
+    },
+    "toyota-vios": {
+      "n": 20,
+      "min": 0.013694207998923957,
+      "median": 0.14049945800798014,
+      "p95": 1.3112965420004912,
+      "max": 1.3112965420004912
+    },
+    "toyota-fortuner": {
+      "n": 20,
+      "min": 0.013237458013463765,
+      "median": 0.11663587499060668,
+      "p95": 1.4861823749961331,
+      "max": 1.4861823749961331
+    },
+    "kia-carnival": {
+      "n": 20,
+      "min": 0.013120874995365739,
+      "median": 0.10511545851477422,
+      "p95": 1.5014080830151215,
+      "max": 1.5014080830151215
+    },
+    "ford-transit": {
+      "n": 20,
+      "min": 0.013003583997488022,
+      "median": 0.11713308352045715,
+      "p95": 1.0278473750222474,
+      "max": 1.0278473750222474
+    }
+  },
+  "source_sha256_start": {
+    "backend/app/plan.py": "581d6d19b8f903b0234a4fe05df1b57ec62130a0d8dafad0d3d5ecaa5df632c1",
+    "backend/app/evidence.py": "b07ab0cf11885a3ee425c187c59fb1f0fcec7ef28a12aa8581a1287ee3107955",
+    "backend/app/vehicles.py": "5e934e55e53348f1e638d24754c2cea7d834fbaa7f451fd29371280ca558dc0a",
+    "backend/app/parcels.py": "a894ac5ab03490766993824676d5d0b140d5157b26a88450a6e01d33d5599aec",
+    "backend/app/geometry.py": "d951a04b4f9002d8010af434462e7d597388765655732ce3c72fddb2ecaecbb8",
+    "backend/app/osm.py": "2df76c03341bcaa5cd59e0df7c269324686099875bac0c7418a37c90f97d6de5",
+    "backend/app/flood.py": "cd24c09e9582420ed3d214fa3aa81b6f2468fddfb6e2b29329f36811d830296b",
+    "backend/app/legality.py": "2659d82a2f9fdcfd58fdef0be2fcf0702497ae1068d65777fa290e6a4cdf147e",
+    "backend/app/live.py": "b92bba3122756fde3b7da321ee35df49746053d82cdcca7999973350b47a7e56",
+    "backend/app/config.py": "5d2f09f7a61706417a5a1437d671beb1e9642e678754b81a45a76085e026754a",
+    "backend/app/parking_data.py": "382e20f0492efe4db2f270de7da711ed3842551b37a788e82c7ac5505eb8132b"
+  },
+  "source_sha256_end": {
+    "backend/app/plan.py": "581d6d19b8f903b0234a4fe05df1b57ec62130a0d8dafad0d3d5ecaa5df632c1",
+    "backend/app/evidence.py": "b07ab0cf11885a3ee425c187c59fb1f0fcec7ef28a12aa8581a1287ee3107955",
+    "backend/app/vehicles.py": "5e934e55e53348f1e638d24754c2cea7d834fbaa7f451fd29371280ca558dc0a",
+    "backend/app/parcels.py": "a894ac5ab03490766993824676d5d0b140d5157b26a88450a6e01d33d5599aec",
+    "backend/app/geometry.py": "d951a04b4f9002d8010af434462e7d597388765655732ce3c72fddb2ecaecbb8",
+    "backend/app/osm.py": "2df76c03341bcaa5cd59e0df7c269324686099875bac0c7418a37c90f97d6de5",
+    "backend/app/flood.py": "cd24c09e9582420ed3d214fa3aa81b6f2468fddfb6e2b29329f36811d830296b",
+    "backend/app/legality.py": "2659d82a2f9fdcfd58fdef0be2fcf0702497ae1068d65777fa290e6a4cdf147e",
+    "backend/app/live.py": "b92bba3122756fde3b7da321ee35df49746053d82cdcca7999973350b47a7e56",
+    "backend/app/config.py": "5d2f09f7a61706417a5a1437d671beb1e9642e678754b81a45a76085e026754a",
+    "backend/app/parking_data.py": "382e20f0492efe4db2f270de7da711ed3842551b37a788e82c7ac5505eb8132b"
+  },
+  "examples": {},
+  "verification_scope": "20 cached destinations × 5 vehicles; cached-only, no network; canonical product engine",
+  "zero_counts": {
+    "crashes": 0,
+    "fit_monotonicity": 0,
+    "plan_monotonicity": 0,
+    "reported_walk_over_cap": 0,
+    "walk_geometry_over_cap": 0,
+    "walk_geometry_mismatch": 0
+  }
+}

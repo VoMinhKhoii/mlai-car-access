@@ -22,7 +22,7 @@ v2 ways. During the v1 audit, one such convenience overlap differed by +1.51 m;
 that quarantined reading is not a calibration result. Independent surveyed Clear
 Width and full-way coverage are absent.
 
-D45 keeps everything REVIEW-only. Gate `ACCEPT` only means a structurally usable
+D48 keeps everything REVIEW-only. Gate `ACCEPT` only means a structurally usable
 reading; it stays pending. A named human must approve a candidate. Approved
 imagery enters Observed as [0, visible upper bound], with incomplete coverage,
 so the unseen remainder cannot be certified by a single photograph. Stronger
@@ -81,7 +81,7 @@ Source/document changes made by this task:
 - `backend/app/evidence.py` — small delimited load/refresh hooks, preserving existing concurrent edits.
 - `backend/app/evidence_queue.py` — approved imagery content invalidates queue/coverage.
 - `requirements.txt` — Pillow for bounded image resizing.
-- `docs/decision-log.md` — D45 and the v1 failure/audit decision.
+- `docs/decision-log.md` — D48 and the v1 failure/audit decision.
 - `docs/evidence-engine.md` — run/review/Mapillary instructions.
 - `docs/eval/imagery-widths-report.md` and `imagery-widths-run.json` — this report and machine-readable paid-stage snapshot.
 

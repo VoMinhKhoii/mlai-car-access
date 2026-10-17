@@ -105,7 +105,7 @@ def goong(endpoint, params, deadline=None):
         db.execute(f'PRAGMA busy_timeout={max(1, int((deadline - time.monotonic()) * 1000))}')
         db.execute('BEGIN IMMEDIATE')
         row = db.execute("SELECT value FROM state WHERE key='goong_blocked_until'").fetchone()
-        if (row and row[0] > time.time()) or not config.GOONG_API_KEY:
+        if (row and row[0] > time.time()) or not config.GOONG_API_KEY or config.CACHED_ONLY:
             return {}
         row = db.execute("SELECT body FROM responses WHERE provider='goong' AND key=?", (key,)).fetchone()
         if row:
@@ -226,7 +226,11 @@ def distinctive_coverage(query, label):
 
 
 def fallback_matches(query, label):
-    return distinctive_coverage(query, label) >= .7
+    # A house-address query names its street before district/city qualifiers.
+    # Require the distinctive street words together; never combine unrelated
+    # words across a POI name and its address to manufacture a match.
+    core = query.split(',', 1)[0] if re.match(r'(?:hem\s+)?\d', strip_accents(str(query))) else query
+    return distinctive_coverage(core, label) >= .7
 
 
 def _matches(query, label):
@@ -278,6 +282,8 @@ def _nominatim_request(endpoint, params):
         db.execute("INSERT OR REPLACE INTO state VALUES ('nominatim_at', ?)", (time.time(),))
         # Commit the request timestamp even if the HTTP request fails.
         db.commit()
+        if config.CACHED_ONLY:
+            raise ValueError('Nominatim cache miss in cached-only mode')
         response = httpx.get('https://nominatim.openstreetmap.org/' + endpoint, params=params,
                              headers={'User-Agent': 'NgoNgach/1.0 (HCMC address resolver; local demo)'}, timeout=3)
         response.raise_for_status()

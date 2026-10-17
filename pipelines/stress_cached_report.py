@@ -215,7 +215,7 @@ def main():
         'The 1.5 m is **not a cadastral cut**. [Nguyễn Thành Ý, way 1185234990](https://www.openstreetmap.org/way/1185234990) has eleven failed cuts and zero usable samples. '
         'Its unresolved Official `[0,40]` survey was fused with a residential `[3.5,15]` prior to `[0,15]`; the old midpoint `(0+min(15,3))/2` invented 1.5 m and retained the Official badge. '
         '[Trần Doãn Khanh, way 35115025](https://www.openstreetmap.org/way/35115025) has five valid usable samples 5.56–5.65 m. '
-        'The strict lower bound is zero because its 32.08 m destination-prefix survey does not certify the whole OSM way (D36), not because any sample is zero.','',
+        'The strict lower bound is zero because its 32.08 m destination-prefix survey does not certify the whole OSM way (D39), not because any sample is zero.','',
         'After: **fits / medium**, still unverified. Basis names [Cây Điệp, way 35113132](https://www.openstreetmap.org/way/35113132), whose ten samples have a 3.58 m bottleneck. '
         'Trần Doãn Khanh exposes a separate sampled range 5.26–5.86 m; the strict interval and legal/flood/turning caveats remain. '
         'See [before](stress-known-before.json), [route provenance](stress-known-route-before.json), and [after](stress-known-after.json).','',

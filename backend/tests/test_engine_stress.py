@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 from app import evidence as ev, osm, plan, vehicles
-from test_engine_routes import graph, candidate
+from .test_engine_routes import graph, candidate
 
 
 class StressWidthRules(unittest.TestCase):

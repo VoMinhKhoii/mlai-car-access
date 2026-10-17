@@ -16,6 +16,7 @@ from urllib.parse import quote
 import httpx
 
 from . import ai
+from .deadline import Expired, timeout
 from .osm import strip_accents
 
 RSS = "https://news.google.com/rss/search?q={q}+when:365d&hl=vi&gl=VN&ceid=VN:vi"
@@ -29,9 +30,10 @@ PROMPT = """Dưới đây là các tiêu đề báo (đánh số). Với mỗi t
 """
 
 
-def _search(street: str) -> list[dict]:
+def _search(street: str, deadline: float | None = None) -> list[dict]:
     q = quote(f'"{street}" {TOPICS}')
-    r = httpx.get(RSS.format(q=q), timeout=20, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
+    r = httpx.get(RSS.format(q=q), timeout=timeout(deadline, 20), follow_redirects=True,
+                  headers={"User-Agent": "Mozilla/5.0"})
     out = []
     for it in re.findall(r"<item>(.*?)</item>", r.text, re.S)[:12]:
         title = html.unescape(re.search(r"<title>(.*?)</title>", it, re.S).group(1))
@@ -56,10 +58,10 @@ def _keyword(item: dict) -> dict | None:
     return {**item, "kind": kind, "depth_cm": None, "summary": item["title"]} if kind else None
 
 
-def news_for(streets: list[str], use_ai: bool = True) -> list[dict]:
+def news_for(streets: list[str], deadline: float | None = None) -> list[dict]:
     items, seen = [], set()
     with ThreadPoolExecutor(4) as pool:
-        for batch in pool.map(lambda s: _safe(_search, s), streets):
+        for batch in pool.map(lambda s: _safe(_search, s, deadline), streets):
             for it in batch or []:
                 if it["url"] not in seen:
                     seen.add(it["url"])
@@ -67,15 +69,18 @@ def news_for(streets: list[str], use_ai: bool = True) -> list[dict]:
     if not items:
         return []
     kept = []
-    if use_ai and ai.provider():
+    if ai.provider():
         try:
+            timeout(deadline, 60)  # fail before building a request after expiry
             listing = "\n".join(f"{i}. [{it['street']}] {it['title']} ({it['source']}, {it['date']})" for i, it in enumerate(items))
-            out = ai._call(PROMPT + listing)
+            out = ai._call(PROMPT + listing, deadline=deadline)
             for x in out.get("items", []):
                 i = x.get("i")
                 if isinstance(i, int) and 0 <= i < len(items) and x.get("relevant") and x.get("kind") in ("flood", "works", "ban"):
                     kept.append({**items[i], "kind": x["kind"], "depth_cm": x.get("depth_cm"),
                                  "summary": x.get("summary") or items[i]["title"], "filter": "gemini"})
+        except Expired:
+            raise
         except Exception:
             kept = []
     if not kept:
@@ -86,5 +91,7 @@ def news_for(streets: list[str], use_ai: bool = True) -> list[dict]:
 def _safe(fn, *a):
     try:
         return fn(*a)
+    except Expired:
+        raise
     except Exception:
         return []

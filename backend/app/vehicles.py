@@ -189,6 +189,12 @@ def _members(pid: str) -> list[VehicleProfile]:
     return [m for m in _load_models().values() if m.size_class == p.size_class]
 
 
+@lru_cache(maxsize=4096)
+def min_body_width(pid: str) -> float:
+    """Narrowest body width in a class, used when an observed vehicle is identified only by class."""
+    return min(member.body_width for member in _members(pid))
+
+
 def turn_in_width(pid: str, street_width: float) -> float:
     return _turn_in_cached(_geometry_key(pid), street_width)
 

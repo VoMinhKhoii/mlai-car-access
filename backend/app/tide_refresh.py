@@ -194,8 +194,8 @@ def refresh() -> dict:
             if changed:
                 atomic_json(TARGET, parsed)
             from . import flood
-            flood.tide_meta.cache_clear()
-            flood._extremes.cache_clear()
+            flood._tide_meta.cache_clear()
+            flood._cached_extremes.cache_clear()
             status.update(state="updated" if changed else "current", issued_at=parsed["issued_at"],
                           source_url=url, sha256=hashlib.sha256(content).hexdigest(),
                           highs=len(parsed["highs"]), lows=len(parsed["lows"]),

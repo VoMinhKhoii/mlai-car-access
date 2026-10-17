@@ -15,6 +15,9 @@ backend/cache/osm/area_*
 *.log
 backend/cache/live/alonhadat/
 .gstack/
+key.txt
+.venv/
+.coverage
 backend/cache/live/city_parcels.json
 backend/cache/live/city_parcels.json.tmp
 backend/cache/live/crawl_city_state.json*

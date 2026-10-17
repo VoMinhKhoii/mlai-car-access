@@ -34,7 +34,7 @@ Both 113/4 vehicles now use a plausible approach to the same 39 m stop. VF 3 no 
 
 ## Confidence / limitations
 
-The exact policy is [D47](../decision-log.md). Fits/tight/no/unknown are best hypotheses; verified remains the strict engine result. High positive confidence requires complete strong width coverage plus strict entry/exit, passable model flood, affirmative legality and verified walking. Sample support on at least half the traversed metres can support medium confidence; unknown checks cap it. The displayed sample-supported fraction counts way-associated observations, not continuously measured metres. Strong cited prohibitions or measured/official own upper bounds below the vehicle need stay hard negatives. Planning right-of-way metadata never supplies current Clear Width. No field-calibrated probability or swept-path/hydrology accuracy is claimed.
+The exact policy is [D50](../decision-log.md). Fits/tight/no/unknown are best hypotheses; verified remains the strict engine result. High positive confidence requires complete strong width coverage plus strict entry/exit, passable model flood, affirmative legality and verified walking. Sample support on at least half the traversed metres can support medium confidence; unknown checks cap it. The displayed sample-supported fraction counts way-associated observations, not continuously measured metres. Strong cited prohibitions or measured/official own upper bounds below the vehicle need stay hard negatives. Planning right-of-way metadata never supplies current Clear Width. No field-calibrated probability or swept-path/hydrology accuracy is claimed.
 
 ## Changed files
 
@@ -51,7 +51,7 @@ The exact policy is [D47](../decision-log.md). Fits/tight/no/unknown are best hy
 | `frontend/src/App.tsx` | Restricted list called stopping suggestions | Restricted list headed “Các vị trí đã kiểm tra” |
 | `frontend/src/index.css` | No estimate typography | Compact basis and stop-row spacing using existing tokens |
 | `mcp/protocol.py` | Generic uncertainty instruction | Estimate/confidence/basis contract; explicit unknown and Restricted handling |
-| `docs/decision-log.md` | No precise estimate confidence policy | D47 rubric, thresholds, coverage semantics and invariants |
+| `docs/decision-log.md` | No precise estimate confidence policy | D50 rubric, thresholds, coverage semantics and invariants |
 | `pipelines/serve_cached_estimate.py` | No isolated live-like review harness | 8788 real app/agent with cached-only builds and portal/Overpass denial; shared-ledger calls capped at ten across restarts |
 | `pipelines/verify_estimate_sweep.py` | Random cell selection can move with crawler | Reuse original 300 frozen points; freeze graph/ranges per cell while calling audit_algorithm.sweep |
 | `frontend/dist/` | Previous frontend bundle | Rebuilt production assets, current HTML points to the new hash |

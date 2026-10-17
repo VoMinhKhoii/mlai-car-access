@@ -145,8 +145,10 @@ def city_state():
                 wid = str(r['way_id'])
                 if r.get("samples") and (wid not in cad or r.get("deep")):
                     cad[wid] = r
-        store.live = {"city-queue-readonly": {"listings": listings, "photos": photos, "parcels": list(cad.values())}}
-        store.reload()
+        from . import live
+        reviews = live._photo_reviews()
+        photos = [{**p, "status": reviews.get(p.get("id"), {}).get("status", "pending")} for p in photos]
+        store = store.view({"listings": listings, "photos": photos, "parcels": list(cad.values())})
         tiers = {t: set() for t in TIERS}
         strongest = {t: set() for t in TIERS}
         alley_ids, drivable_ids, states = set(), set(), {}
@@ -166,7 +168,7 @@ def city_state():
                     active = [b for b in active if b not in fp]
                 else:
                     active = [b for b in active if not (b.tier == "Inferred" and b.source in ("OSM phân loại đường", "OSM số làn xe"))]
-            lo, hi, top, conflict, _ = _combine(active)
+            lo, hi, top, conflict, _, _ = _combine(active)
             # Coverage credits sourced bounds, never generic road/lanes priors.
             source_bounds = [b for b in bounds if b.source not in ("OSM phân loại đường", "OSM số làn xe")]
             present = {b.tier for b in source_bounds}
@@ -200,7 +202,7 @@ def city_state():
 
 def rank(row, demand):
     crossed = [name for name, threshold in THRESHOLDS.items() if row['lo'] < threshold <= row['hi']]
-    scarcity = {"Measured": .05, "Official": .15, "Observed": .7, "Declared": 1., "Inferred": 1.3, None: 1.5}[row["top_tier"]]
+    scarcity = {"Synthetic": .05, "Measured": .05, "Official": .15, "Observed": .7, "Declared": 1., "Inferred": 1.3, None: 1.5}[row["top_tier"]]
     score = (1 + math.log2(1 + demand)) * (1 + len(crossed)) * scarcity
     if row.get("review"):
         score *= 1.5
@@ -226,6 +228,6 @@ def queue(limit=100, bbox=None, min_score=0):
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "available": state.get('available', False),
             "eligible_ways": len(candidates), "items": candidates[:limit], "thresholds_m": THRESHOLDS,
             "score_formula": "(1+log2(1+plan_requests)) × (1+thresholds_straddled) × tier_scarcity × (1.5 if review else 1)",
-            "tier_scarcity": {"Measured": .05, "Official": .15, "Observed": .7, "Declared": 1., "Inferred": 1.3, "unknown": 1.5},
+            "tier_scarcity": {"Synthetic": .05, "Measured": .05, "Official": .15, "Observed": .7, "Declared": 1., "Inferred": 1.3, "unknown": 1.5},
             "demand_scope": "Successful /api/plan responses: door/stops, explicit ways and overlapping returned route geometry; counted once per request. No destinations retained.",
             "coverage": state.get('coverage', {})}

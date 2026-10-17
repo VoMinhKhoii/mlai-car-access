@@ -77,8 +77,8 @@ def test_plan_width_cache_reloads_after_atomic_replacement(monkeypatch, tmp_path
     path, _, graph = setup_store(monkeypatch, tmp_path, product())
     monkeypatch.setattr(plan, 'build_graph', lambda *a: graph)
     monkeypatch.setattr(plan, 'flood_profiles', lambda g: {})
-    monkeypatch.setattr(plan, '_WR', {})
-    monkeypatch.setattr(plan, '_FP', {})
+    monkeypatch.setattr(plan, '_WR', __import__('app.storage', fromlist=['LRU']).LRU(32))
+    monkeypatch.setattr(plan, '_FP', __import__('app.storage', fromlist=['LRU']).LRU(32))
     assert plan.area(10.8, 106.7)[1][9876543210].hi == 12.
     new = tmp_path / 'new.json'
     new.write_text(json.dumps(product(.5, 9.)))

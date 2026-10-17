@@ -222,12 +222,8 @@ def prebuild(points, state, stop, save, log, guard):
                 save()
             started = time.monotonic()
             try:
-                last = {}
-                for line in live.build(lat, lon, force=True):
-                    last = json.loads(line)
-                    if stop.is_set():
-                        return
-                status, area = last.get("status", {}), last.get("area") or {}
+                area = live.run_sync(lat, lon) or {}
+                status = {"state": "done" if area else "error"}
                 with guard:
                     info["build"] = {**info["build"], "state": status.get("state"), "finished_at": now(),
                                       "elapsed_s": round(time.monotonic() - started, 1), "key": area.get("key"),

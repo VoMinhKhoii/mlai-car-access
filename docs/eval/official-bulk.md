@@ -100,7 +100,7 @@ PYTHONPATH=backend:. python3 -m unittest backend.tests.test_official_widths pipe
 
 The fetcher is bounded by `data/official/official-bulk-downloads.json`, uses an identified contact user agent, checks robots, spaces requests, keeps immutable responses, verifies normal TLS, and persists HTTP/application 401/403/429 refusals. It does not refresh existing successful bodies automatically. The recorded SHA256 values identify this research snapshot; a fresh server export can change timestamps/content and requires source/date review. `build` is offline and uses the current existing OSM inventory; regenerate that inventory separately with the repository workflow if it becomes stale. No build stage loads Gemini keys or invokes an LLM.
 
-The loader exposes `official_width_records` in each `WidthRange` JSON. Every record is tagged `tier:Official` **and** `affects_clear_width:false`, carries original source date, metadata meaning, URL and rights note, and remains outside the tier combiner. Atomic publication and mtime/size refresh invalidate cached API serialization; a malformed replacement retains the last good product and deletion removes metadata. It contributes neither strongest-width tier nor resolved-fit counts. The decision and justification are [D46](../decision-log.md). No process was restarted or deployment performed.
+The loader exposes `official_width_records` in each `WidthRange` JSON. Every record is tagged `tier:Official` **and** `affects_clear_width:false`, carries original source date, metadata meaning, URL and rights note, and remains outside the tier combiner. Atomic publication and mtime/size refresh invalidate cached API serialization; a malformed replacement retains the last good product and deletion removes metadata. It contributes neither strongest-width tier nor resolved-fit counts. The decision and justification are [D49](../decision-log.md). No process was restarted or deployment performed.
 
 ## Files written by this task
 
@@ -110,7 +110,7 @@ The loader exposes `official_width_records` in each `WidthRange` JSON. Every rec
 - `data/official/alley_widths_q9_2009.json`, `data/official/official-bulk-downloads.json`.
 - `backend/cache/live/official_widths.json` — generated runtime product.
 - `docs/eval/official-bulk.md`, `official-bulk-sources.json`, `official-bulk-validation.json`, `official-bulk-runtime-validation.json`, `official-bulk-http-audit.json`, `official-bulk-requests-vi.md`; visual summary `.html` and renderer.
-- Appended D46 to `docs/decision-log.md` and an integration note to `docs/evidence-engine.md`.
+- Appended D49 to `docs/decision-log.md` and an integration note to `docs/evidence-engine.md`.
 - Private `data/raw/official_bulk/`: original responses, hashes, source matching diagnostics, frozen cadastral cut snapshot; one PDF layout QA image under `tmp/pdfs/`.
 
 Pre-existing/concurrent edits were preserved, including other loaders/hooks. No commit was made. Concurrent decision-log entries were preserved.

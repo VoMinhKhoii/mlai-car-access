@@ -36,7 +36,7 @@ class AgentRoundTwoTests(unittest.TestCase):
         vehicle = vehicles.get_profile('toyota-vios')
         for minute in range(0, 24 * 60, 15):
             arrive = start + timedelta(minutes=minute)
-            self.assertIsNone(plan._flood_timing(vehicle, arrive, arrive + timedelta(hours=2), []))
+            self.assertIsNone(flood.FloodSnapshot([]).assess(None, arrive, vehicle.safe_water_depth).depth)
 
     def test_reuse_successful_free_key_between_tool_rounds(self):
         import httpx

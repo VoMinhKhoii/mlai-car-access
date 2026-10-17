@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 from datetime import datetime
 from app import plan, flood
-from test_engine_routes import graph, candidate, xy
+from .test_engine_routes import graph, candidate, xy
 
 
 class WalkPathTests(unittest.TestCase):

@@ -100,20 +100,27 @@ Chosen: **B + C + D** (not A, a bare yes/no verdict).
 ## Q12: Flood time window (2026-09-28)
 
 - **The Dwell Window.** Park asks how long the driver stays (default 2 h); Pickup/Drop-off uses ~15 min.
-- **What's checked:** the route in, the Stop Point and the Way Out, across the whole window.
+- **Three flood-check windows (D25 refinement).**
+  1. **Route in:** `[..., arrive]`, using a conservative traversal duration of `2 × route length / ALLEY_SPEED_MPS + FLOOD_TRAVERSAL_MARGIN_MIN`; durations are rounded up to the `FLOOD_TIMING_STEP_MIN` sampling bucket.
+  2. **Stop Point:** the exact requested Dwell Window `[arrive, depart]`.
+  3. **Way Out:** `[depart, ...]`, with the same conservative traversal-duration rule.
+- Route-in and Way-Out windows are approximate; the checks include sampled interval boundaries and known tide, rain, and report boundaries, but do not prove continuous real-world conditions. `backend/app/plan.py` owns the windows and `backend/app/flood.py` owns evidence assessment.
 - **Drivers:** the tide forecast (daily bulletin, peak hours) and rain now plus the next few hours (gauges, radar).
 - **History as a prior:** it says *which* streets flood at a given tide or rain level. The window says *whether* that happens during the stay.
 
+## Q13: Flood depth vs vehicle, and observation validity (2026-09-28)
 
-
-
-
-## Q13: Flood depth vs vehicle (2026-09-28)
-
-- **Depth Range vs Safe Water Depth.** Each segment gets a Depth Range for the Dwell Window, from tide level, rain intensity and street history. Compared with the car's Safe Water Depth:
-  - passable: the whole range is below the limit
-  - risky: the range straddles the limit; treated as Unverified
-  - blocked: the whole range is above the limit
+- **Depth Range vs Safe Water Depth.** A Depth Range is the expected minimum and maximum water depth for a street and Dwell Window. A missing numeric range is not a verdict by itself; interpret it together with Flood Knowledge and the status.
+  - **passable:** valid evidence supports staying within the limit; no Depth Range may mean no flood depth was estimated, not missing evidence.
+  - **risky:** the range straddles the limit, or required knowledge is incomplete (missing history, tide, or a stale positive observation); treated as Unverified.
+  - **blocked:** known evidence puts even the lower bound at or above the vehicle limit.
+- **Knowledge dimension (R-03/R-04).** A Flood Status is only "known" when all required evidence is valid:
+  - **known:** assessment is sound, all required sources present and valid
+  - **missing_history:** no past flood records exist for this street
+  - **missing_tide:** tide is required for this street but unavailable at the required time
+  - **stale_positive_observation:** the latest positive flood observation has expired, and no newer, still-valid dry observation has arrived; expiry or a dry report that has itself expired does not prove the water receded.
+- When knowledge is not "known" and status would be "passable", status is elevated to "risky". See `FloodAssessment` / `FloodSnapshot` in `backend/app/flood.py`.
+- **Observation validity and persistence (R-03/R-04).** A flood or dry report is valid within `FLOOD_REPORT_VALID_H` from observation. The latest expired positive persists as stale evidence until a newer, still-valid dry observation clears it. This is not "no record = no risk"; it is "knowledge incomplete until proven dry". `FloodSnapshot` in `backend/app/flood.py` owns report validity and stale-positive handling.
 
 ---
 
@@ -282,18 +289,54 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 
 - **QĐ 4582/QĐ-UBND (24/7/2026), Phụ lục 2:** roads and alleys fire trucks cannot enter, ward by ward. Parsed 6,742 items in 50 wards from the luatvietnam.vn text (PDF-converted: numbering restarts per ward, stray spaces in words). Ward centres geocoded with Goong. Matched 1,024 items → 1,354 OSM ways by space- and accent-insensitive name, nearest the ward centre (≤ 3 km; ≤ 1.5 km for short generic names). Pipeline `fire_access_4582.py`.
   - **Encoded as Declared [0.5, 3.5 m], not Official.** QCVN 06:2022 needs 3.5 m for a fire truck, but validation shows the list is not width alone: of 20 listed alleys with a listing width, 11 are ≤ 3.5 m and 9 are 6–8 m (long dead ends, bends and low wires also qualify). A conflict with a listing at the same tier asks for review instead of silently overriding.
-- **Cadastral parcel gaps (live, per destination):** the HCMC planning portal returns the land parcel at a point. For up to 12 non-main roads within 400 m of the destination: two cross-sections each, a query 3 m (then 5 m) to each side, and the gap between the two parcels along the cross-section. About 20 s per area, cached per way, stops when the portal says "blocked". Official tier [narrowest cut − 0.6 m, widest cut + 0.3 m]: legal width, narrowed by ~0.3 m of steps or stalls per side. Flag `parcel_widths` (on). Module `backend/app/parcels.py`.
-  - **Validation:** consistent with listings on the same alleys ("xe hơi" claims 2.7–5.6 m, "ba gác" 2.6–3.4 m; listing "8 m" vs parcel 5.0–5.6 m). Demo: the Hẻm 220/9 door goes from "tight" to "fits" for the Vios.
+- **Cadastral parcel gaps (live, per destination):** the HCMC planning portal returns the land parcel at a point; cross-sections measure the gap between the two parcels. The gap is an **Inferred `parcel_gap_estimate`**, not a measured clear width: official provenance does not make it Official-tier width evidence. Flag `parcel_widths` (on). Module `backend/app/parcels.py`.
+  - **Validation (earlier, before this revision):** consistent with listings on the same alleys ("xe hơi" 2.7–5.6 m, "ba gác" 2.6–3.4 m). That supports the estimate as a hint, not as strict-fit proof; the earlier demo claim that parcels turn "tight" into "fits" no longer holds.
 
-## D33: Parcel widths: usable = gap − 1 m, a cut every 5 m into the destination (user request, 2026-10-02)
+## D33: Parcel widths: usable = gap − 1 m; narrowest cut kept; coverage tracked (revised 2026-10-12)
 
-- **How a cut works:** the portal returns parcel boundary polygons, not only areas. Draw the line across the alley, query 1.5 m (then 3 m, 5 m) to each side, and measure from the centreline to each parcel boundary; left + right = parcel gap. A cut is rejected if one side is under 0.3 m (the map line sits on a parcel edge) or both queries return the same parcel.
-- **Usable width = parcel gap − 1.0 m** (steps, ramps, stalls, parked motorbikes).
-- **Deep scan:** the shortest drivable path from the nearest main road to the door point gets a cut every 5 m (up to 60 cuts = 300 m). The 6 nearest other roads get 2 cuts each. About 1–2 minutes for a new destination, cached.
-- **Evidence (Official):** [20th percentile of usable cuts, 80th percentile + 0.3 m] when there are ≥ 5 cuts, else [min, max + 0.3 m], so one bad cut cannot sink or inflate an alley. The narrowest cut is shown in the evidence text.
-- **Effect:** widths decide fit, which decides the way out, the Stop Points and the walk. Demo: with parcels, a Fortuner's exit through Hẻm 246 (parcels 1.9 m apart) is ruled out, so it parks at Hẻm 294/22 (53 m walk) instead of the door. City-wide check: `pipelines/eval_city.py` → `docs/eval/city-eval.md`.
+- **How a cut works:** draw the line across the alley, query 1.5 m (then 3 m, 5 m) to each side, and measure from the centreline to each parcel boundary; left + right = parcel gap. A cut is rejected if one side is under 0.3 m or both queries return the same parcel.
+- **Usable estimate = parcel gap − 1.0 m** (steps, ramps, stalls, parked motorbikes). It is an estimate: it cannot see obstructions between cuts.
+- **Bound = the narrowest valid cut**, not a percentile: dropping the narrow cut hides the bottleneck a car actually hits. Malformed or mismatched cuts mark the way for review instead of being dropped silently.
+- **Coverage is evidence:** each result records endpoint coverage, maximum spacing and truncation. Deep scan samples both endpoints and about every 5 m (shared cap of 60 cuts) over full ways on the legal ingress **and** egress paths. Sparse or truncated scans are diagnostic only.
+- **Decisive clearance** needs a physical measured/observed basis, finite uncertainty, complete endpoint coverage and no cross-tier conflict (`backend/app/evidence.py`). Anything weaker is Unverified in strict fit, turn and legality predicates; relaxed suggestions stay visibly unverified. Not yet calibrated against field data.
+- **Way Out and Walk Leg (R-06):** one-way ±1 is honoured on entry, exit and reverse; a turn or lot exit is never marked verified without swept-space or gate evidence; the 5 m junction rule subtracts half the crossing road's width or is Unverified; a stop with no walk connection within 35 m is rejected with `missing_walk_connection`; unmapped connectors are flagged and not drawn.
+- **Toggle (2026-10-05):** the deep scan is its own switch, `parcel_deep_scan`. Flipping either parcel switch re-runs the area build in the open page; a build that started before the flip is discarded.
 
-## D34: City footprint calibration fails vehicle-access accuracy; keep opt-in (2026-10-17)
+## D34: Large-road route choice from live traffic cameras (user request, 2026-10-05)
+
+- **Why:** the arrival plan only judged the last stretch. A driver going home from Quận 1 at 17:30 also needs to know which large road to take, e.g. Phạm Văn Đồng instead of a Hàng Xanh / Cầu Sài Gòn that has not moved for an hour, and whether standing water on the way is deeper than the car can wade.
+- **Cameras:** the ~800 public cameras of Cổng thông tin giao thông TP.HCM, read straight from the portal: the backend refreshes its camera layer hourly in a bounded background worker while requests continue using the last published registry; the shipped `data/cameras/hcmc_cameras.json` is the cold-start/outage fallback. The public map page's request is anonymous AjaxPro `FolderAjax.SearchQuery`; the 5 Oct sample had 684 `UP`, 112 `NOT_IMAGE`, and portal status matched 40 sampled images. Stills come from `render/ImageHandler.ashx` (`:8007` CameraHandler answers 403); a still refreshes every ~12–13 s with ~4 s lag (clock burned into the frame). A camera that returns the fixed 2,638-byte `IMAGE NOT AVAILABLE` placeholder is never sent to the model.
+- **Reading:** the job tries for two frames one refresh apart, so "kẹt cứng" (not moving) is based on movement between frames, never on one still. If the bounded job deadline cannot cover the next refresh, it may use one frame for observable flooding only; traffic is forced to `khong_ro`, not used to score route delay. The reading and any promoted flood observation record the frame count; the UI shows it. A one-frame flood observation does not verify traffic flow. Gemini returns, per camera: printed clock, usable, flooded and depth class (wet ≠ flooded), traffic, evidence, confidence. A frame whose clock is more than 10 min off is stale and ignored. Readings are cached 3 min and logged to `store/camera_readings.jsonl`. A confident flooded reading also becomes flood-now evidence for the arrival plan (same ACCEPT gate as before).
+- **Alternatives:** Goong returns one car route and ignores `alternatives`. Other routes come from routing through cameras that lie to either side of Goong's route mid-trip (cameras sit on arterials); a route more than 1.6× longer or overlapping another by ≥ 80 % is dropped. Vạn Phúc City ↔ Quận 1 gives Xô Viết Nghệ Tĩnh (Goong), Điện Biên Phủ, Phan Đăng Lưu and Phạm Văn Đồng.
+- **Score:** Goong's time × a traffic factor on the stretch each camera watches (±700 m: thông thoáng 1.0, đông 1.3, ùn ứ 2.0, kẹt cứng 4.0) plus a queue a still cannot measure (ùn ứ +3, kẹt cứng +10 min). Stretches no camera watches take the median factor of all cameras read, so a route is not "faster" just because fewer cameras watch it. Water from a camera or from the flood forecast along the route (tide, rain, IRD history at the time the car passes, the alley model) deeper than the car's Safe Water Depth blocks the route; risky water adds 5 min. Alleys more than 400 m from either end add 2 min and a "width not checked" note. Fastest unblocked route wins, with its biggest reason stated.
+- **A group of cameras at one junction** is rated by the lower median of its confident traffic readings (one camera catching a passing queue no longer rates a junction its neighbours see moving; a real jam shows on most of them) and by the deepest water any of them sees. The group is shown under the camera that set its rating. Found on a live walk-through (5 Oct, 11:06): Đinh Bộ Lĩnh – Bạch Đằng 3 read a red-light queue as "ùn ứ" and added 7 min to every route while Bạch Đằng 2 next to it read clear. The prompt asks for the more congested direction when the two differ. (A red-light rule was tried and removed: on a 07:02 frame it turned a carriageway packed end to end at Hàng Xanh into "đông". Missing a real jam costs far more than a few minutes of detour, and the median already absorbs one camera fooled by a red light.)
+- **Time:** cameras describe now, so they count only for departures from 15 min ago to 45 min ahead; later trips are chosen on the flood forecast alone, and the card says so.
+- **Flag:** `ai_camera_flood`, now on by default. With it off, routes still compare on Goong time and the flood forecast.
+- **Model quota:** the free tier gives `gemini-3.5-flash` only 20 requests per key per day (11 valid keys → ~220 calls, ~25–35 route checks). Camera reads now fall back model by model (`CAMERA_MODELS`, default `gemini-3.5-flash,gemini-3.1-flash-lite`): a model that answers 429 on every key rests 10 min (503: 1 min) and the next one reads; each model has its own daily quota. Check on 36 rush-hour frames (5 Oct, 07:07–07:37, one frame each): `3.1-flash-lite` matched `3.5-flash` on 28, never more than one level off (1 jam missed, 2 extra). `3.5-flash-lite` called a busy road gridlocked; `3.6-flash` timed out on 2 of 6 batches.
+- **Placeholders to tune from the reading log:** traffic factors, queue minutes, coverage, the 0.5 confidence floor.
+
+## D35: Tide and rain near real time (user request, 2026-10-05)
+
+- **Why:** the tide came from a bulletin copied by hand into `data/flood/tide_forecast.json`. It ran out on 3 Oct, so from then on no street flooded from the tide, and nothing said so. Rain was only the app's what-if toggle, so a real downpour counted for nothing unless the user switched it on.
+- **Tide:** the measured Saigon River level at Phú An (station 71600, the station BĐ1–3 refer to) from the national disaster-monitoring portal vndms.gov.vn, read the way its public map does (visitor session, `POST /home/detailRain`, 7 days). It has about one reading every 3–6 h, 1–3 h behind. Between and after readings, the level follows Open-Meteo's sea-level model at the Soài Rạp mouth, shifted and scaled to fit the last 7 days of readings. Best of three coastal points, 5 Oct: lag 2.5–3 h, scale ~1.1, offset ~−0.65 m, error on 2 held-out days 0.14 m RMSE. The model is pinned to the readings on both sides between two readings, so that stretch counts as measured. After the last reading its offset fades over 6 h. A model hour carries a ±0.15 m band in the depth range, so a level of 1.45 m reads as anywhere from below BĐ1 to above BĐ2. Check: on 5 Oct the model put the 9 Oct peak at 1.56 m, and the official bulletin forecast 1.55–1.60 m. The bulletin file is the fallback when the portal and the model are unreachable.
+- **Rain:** hourly totals from the HCMC gauges on the same portal that report every hour through the current hour: 18 VRAIN street gauges and 22 citizen gauges. KTTV and hydrology stations report daily, so they are not used. The wetter of the two nearest gauges within 5 km counts, because rain is patchy and missing a downpour costs more than a false alarm. Hours after the last reading use Open-Meteo's hourly forecast for the point. Each wet hour keeps counting for 1 h after it ends, because streets drain slowly. That 1 h is an estimate.
+- **What-if:** the rain toggle still overrides live rain. With it off, plans and route checks use the measured and forecast rain at the destination, or at each flooding street along a route.
+- **Shown:** the tide timeline draws measured hours solid, with dots for the readings, and model hours dashed. It shows the latest reading and the model band, and draws rain bars (measured dark, forecast pale) with the latest measured wet hour and its gauge.
+- **Flag:** `live_hydro`, on by default. With it off, the app uses the bulletin file and what-if rain only. Sources are cached 15 min (tide readings), 10 min (each gauge), 30 min (rain forecast), 1 h (sea-level model) and 1 day (gauge list). The last good answer is kept while a source is down, and a failure is retried after a minute.
+- **Not yet:** street-level water still comes only from cameras, photos and reviewed text. Neither the portal nor Open-Meteo measures street flooding. The depth bands per alarm level and rain rate are still our estimates (D14).
+
+## D36: One persistent backend owns evidence, reviews, quotas and jobs (2026-10-12)
+
+- **Why:** the browser carried each area build back with every plan, so any client could send made-up listings, parcel cuts or "approved" photos and the plan would reason from them. Any visitor could also flip flags, approve photos, write confirmations and blockages straight into evidence, schedule unbounded crawls and spend AI quota. A corridor request waited 13–19 s inside the request for camera frames.
+- **Deployment:** one continuously running `uvicorn --workers 1` with persistent store, cache and flags directories, serving the frontend from the same origin. It supersedes the serverless deployment that `vercel.json` and `api/index.py` set up for the Vercel function: per-instance state cannot hold sessions, reviews or quotas, so the backend refuses to start on Vercel and those files are removed. Scaling past one process needs a shared store first.
+- **Area evidence is server-owned:** an operator schedules a build; it runs in a bounded pool (one per area, 2 running, 4 waiting, 300 s monotonic job budget) and only a completed build is published as a versioned record (12 h). Every upstream attempt receives a timeout capped by the remaining budget; retries, inter-attempt waits and steps check the deadline. Individual HTTP phase timeouts do not prove a strict end-to-end 300 s wall-clock ceiling. Plans read the record from the server and say when it is missing, partial or stale; an expired record is not used. The static evidence index is rebuilt off to the side and published by one reference swap; an area build is a per-request overlay and never mutates the shared index.
+- **Operator access:** a server-side secret, a random session in an HttpOnly SameSite=Strict cookie, logout revokes, and an Origin check on every state-changing request. Without a configured secret operator features are unavailable, never open. Guests plan, read cached camera readings and submit reports.
+- **Reviewed reports:** guest confirmations and blockages, and AI text and driver-photo extractions, become pending reports keyed by id. Only an operator approval publishes; the approved state is written before its projection and every projected line carries the report id, so a crash or a repeated approval never publishes twice or loses one. Expired reports never promote. Old unreviewed community lines were moved to `store/quarantine/` and queued, not deleted. The demo funeral-tent blockage is a read-only fixture labelled as simulated.
+- **Exception: camera flood sightings still publish immediately** (gated by the deterministic ACCEPT rule). They come from the city's own camera portal, not from users, and holding a positive flood sighting back could let a plan call a flooded street dry.
+- **Cameras:** a corridor answers at once from the forecast and cached readings. An operator request queues at most 12 unread cameras (Goong route's stretches first, one camera each, then alternatives); the rest are listed as dropped and their stretches stay "unknown", never "clear". 2 jobs run at once, at most 24 cameras wait, a camera already being read is not read twice, and a failed or model-less reading stays unknown.
+- **Spend:** every upstream AI attempt reserves quota first (per provider/model/key fingerprint, configurable daily caps), including retries on another key or model; an unreadable counter stops spending. Paid Google calls keep their per-SKU caps. These protect this backend's own spend, not a shared billing account.
+
+## D37: City footprint calibration fails vehicle-access accuracy; keep opt-in (2026-10-17)
 
 - **Open data, no portal requests:** Overture buildings release 2026-09-23.1, downloaded 17 October ICT: 1,157,746 footprints over 10.68–10.90 N / 106.55–106.88 E plus a 30 m halo. Combined theme ODbL 1.0; Microsoft/OSM ODbL, Google Open Buildings CC BY 4.0. Attribution and provenance are recorded in `docs/eval/footprint-report.md` and `footprint-calibration.json`. Existing crawler OSM batches and cadastral results are read only; four OSM bbox edge strips complete the rectangle. No paid AI.
 - **Breadth, with missing observations explicit:** 100,388 drivable non-main ways sampled at 10 m, ±15 m perpendicular rays, STRtree, 54 tiles / 6 local processes, 32.4 s compute. Full polygons and multipolygons; reject roofs covering the centreline and shared/misaligned buildings. Open sides remain unknown. 18,268 ways (18.2%) pass ≥3 two-sided cuts and ≥40% valid cuts; 7,650 of 35,657 named/tagged alleys (21.45%). This does not satisfy “every alley has a reliable width”.
@@ -303,34 +346,34 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - **Ship the research product; default OFF:** new `footprint_widths` flag is separate from D31's `building_gaps`. Atomic `backend/cache/live/footprint_widths.json`, mtime reload before plan-cache lookup, source/date text and uncertainty, live `/api/config.coverage` strongest-tier counts. Broad intervals should leave vehicle fit unknown. No confident width-class or “all alleys resolved” pitch claim is justified.
 - **Verification and image:** six real cached-graph HTTP plans via FastAPI TestClient: Q8/Gò Vấp/Tân Phú expose Inferred footprint bounds and unknown door fit; three Bình Thạnh Official overlaps are unchanged when footprints are toggled. No OSM/Goong/AI/portal calls in verification. `docs/eval/coverage-footprints.png` is a 3840×2160 experimental point-estimate map, explicitly labelled with ±11.4 m error and unknown coverage. Detailed requests, metrics, tier counts, limitations and reproduction commands: `docs/eval/footprint-report.md`.
 
-## D35: Missing legal coverage is Unverified (2026-10-17)
+## D38: Missing legal coverage is Unverified (2026-10-17)
 
 - Replaces Q6's/D25's implicit permission from absence of a recorded ban. Streets without affirmative authorization remain Unverified for both intents: “Không thấy quy định cấm đã biết trong dữ liệu hiện có”. Existing prohibitions and Restricted pickup rules retain precedence.
 - A mapped or VETC-listed lot alone does not establish admission or operating hours. Until authorization is explicitly verified, lot legality is Unverified; customer/private access cannot be certified by a listing.
 - The no-rule fallback appears only when there is no applicable rule; it is never appended beside a known prohibition or restriction.
 - “Được phép” is reserved for affirmative authorization. This is a knowledge-policy correction, not a claim of complete statutory coverage; exact local legal clauses/curb/sign scope still require archived evidence.
 
-## D36: Spatial bottlenecks and coverage replace width quantiles (2026-10-17)
+## D39: Spatial bottlenecks and coverage replace width quantiles (2026-10-17)
 
 - Replaces D33's P20/P80 certification rule. Every credible valid cut constrains the bottleneck upper bound; quantiles remain descriptive. Sample uncertainty is ±0.3 m, an explicit uncalibrated modelling allowance, separate from the 1 m usable-width deduction.
 - Legacy cuts and destination prefixes carry no whole-way lower guarantee. An incomplete Official survey cannot be certified by lower-tier listing/class bounds. Complete coverage must be explicit, valid, and cover the whole OSM way; current automatic sampling does not assert continuous clear-width coverage.
 - A conflict at the decisive tier propagates as unknown vehicle fit. Lower tiers cannot choose a winner; conflicts wholly below an uncontested stronger tier do not poison that stronger survey. Dates are retained.
 - Reject cadastral cross-sections within 5 m of a bend greater than 15 degrees; destination/nearby scans also reject frontage cuts within 5 m of a known physical junction; preserve polygon holes and select the component containing the actual side query. New cuts expose schema, heading, margin, attempted locations and coverage. Intersections without validated frontage/coverage cannot certify a whole corridor. Existing crawler processes retain their imported code; `measure()` remains call-compatible.
 
-## D37: Directed joint arrival and Way Out search (2026-10-17)
+## D40: Directed joint arrival and Way Out search (2026-10-17)
 
 - Replaces D16/D25's way-wide turn downgrade and D29's single predecessor exit test. Routing now carries incoming-edge heading; arrival side and departure feasibility are selected jointly. Alternative directed paths are searched, with physical angles independent of OSM way IDs. Immediate reversal is a manoeuvre, not an ordinary forward graph edge.
 - A failed/unsupported one-arc turn is explicitly unknown; it cannot certify an assumed multi-point turn. A physical three-arm junction within 60 m permits an Unverified manoeuvre hypothesis only. The 30/60 m reverse policy is unchanged. Reversing and turning may not traverse a one-way edge against its direction.
 - A modelled turnaround needs both width and contiguous straight corridor length; one broad sample or short widening is insufficient. The required ideal corridor length conservatively includes the simulator's extent and vehicle length plus turning diameter. This remains a kinematic model awaiting field/swept-area validation.
 - Vehicle manoeuvre cache keys include dimensions, track, mirror width, margins and solver revision. Old ID-only disk values are not reused. Lot access/internal turning is explicitly unknown until mapped/surveyed.
 
-## D38: One pedestrian path defines the Walk Leg (2026-10-17)
+## D41: One pedestrian path defines the Walk Leg (2026-10-17)
 
 - Replaces endpoint-only distance plus separately reconstructed geometry. Virtual stop/destination edge positions support direct same-edge walking; one chosen edge sequence supplies metres, drawn geometry, partial-edge flood exposure and the unrounded intent cap.
 - `foot=no` and private/no-access tails are unavailable. Unmapped connectors and pedestrian centreline paths without sidewalk/crossing evidence are Unverified. No claim of surveyed pedestrian entrances/curb crossings is implied.
 - Missing drive/walk projections or main-road coverage return insufficient-data wording without a fabricated path or a crash.
 
-## D39: Flood missingness, dwell events and timing verification (2026-10-17)
+## D42: Flood missingness, dwell events and timing verification (2026-10-17)
 
 - Missing street response or an out-of-forecast tide is `unknown`, not predicted dry. Unknown depth serializes null bounds and reasons, propagates to Unverified routes/stops, and never produces a “Không ngập” badge. Known historical profiles under inactive modelled drivers may be predicted passable; this remains a heuristic, not a validated depth forecast.
 - D14's hard policy now uses the rain-driven upper bound reaching 0.30 m to block every vehicle. A missing rain-history profile no longer receives an unsupported 0.10 m ceiling. Rain-on-tide increment requires an actual tide driver, not any live report.
@@ -338,14 +381,14 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - Timing alternatives no longer use a generic tide street. Both earlier and later departures require a full nested planner recheck for the same destination/door and revised dwell; unknown or failed plans suppress the instruction. The bounded search covers two hours earlier and twelve hours later in 15-minute steps. No timing guarantee is emitted from insufficient evidence.
 - Flood calculations/live-report reads are memoized per request; nested rechecks retain their own time keys. Negative dwell and invalid rain intervals are rejected independently of rule evaluation.
 
-## D40: Scope legal evidence and evaluate the parked interval (2026-10-17)
+## D43: Scope legal evidence and evaluate the parked interval (2026-10-17)
 
 - Junction exclusions use physical neighbor arms and along-road distance through shape nodes, subtracting an available intersecting-road half-width; changing OSM way IDs cannot create/remove a T junction. This is still a corridor proxy, not a surveyed curb polygon.
 - Signs require association to the candidate way; unassociated nearby signs are not attached by radius. An associated sign is retained beyond the old 40 m cutoff. Full directed curb-side and until-next-intersection scope remains incomplete and is not claimed as legally complete.
 - Park and pickup legal checks evaluate arrival, departure and each midnight transition for the currently supported odd/even-day signs. Fee/access/marking keys are not blanket bans; side-only restriction tags remain Unverified without a curb side.
 - `covered=yes`, a name beginning “cầu/hầm”, and the functional class `trunk` alone no longer assert a bridge/tunnel/expressway prohibition. Explicit bridge/tunnel/motorway evidence retains the existing rule. Exact archived point-level legal clauses remain outstanding; the engine does not claim statutory completeness.
 
-## D41: Mode restrictions, cache revisions and parcel budgets (2026-10-17)
+## D44: Mode restrictions, cache revisions and parcel budgets (2026-10-17)
 
 - The engine's routing view now applies `motorcar > motor_vehicle > vehicle > access`, private/no-access gate nodes, and implicit one-way roundabouts. Known maxwidth restrictions remain independent of physical evidence. Weight/axle/height/length limits without adequate vehicle attributes are Unverified; a measured wide bridge cannot certify an unknown-weight Transit. Fetching/enforcing relation-based and conditional turn restrictions remains outstanding in the graph loader.
 - Off-network lot links and internal turnaround are Unverified. Real mapped/surveyed entrance paths remain outstanding.
@@ -353,27 +396,27 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - Parcel destination scans consume attempted locations, not successful cuts, from the 60-cut/300 m budget; path ways cannot re-enter as nearby samples. A city `deep` boolean alone cannot skip destination-specific coverage. Failed samples retain attempt locations/validity and no positive clearance floor is invented. `measure()` arguments are unchanged, and no portal/HTTP transport code was changed.
 - Driving preference penalties remain search costs; reported driving metres come from the selected physical geometry.
 
-## D42: Vehicle envelope, units and provenance (2026-10-17)
+## D45: Vehicle envelope, units and provenance (2026-10-17)
 
 - Door clearance now follows D15's mirror-inclusive width +0.3+0.6 m. An arrival confirmation uses mirror width unless folded mirrors are explicitly recorded. The published-wading comparison uses metres on both sides.
 - Derived VF 8 radius and composite Size Class geometry are labelled estimated; CSV assumptions are exposed, missing ground-clearance fallback is visible, Fortuner water depth explicitly identifies the Australian diesel reference, and Xpander uses the CSV note's conservative 5.5 m radius.
 - Legacy raw parcel CSV gaps are converted once using the same 1 m usable-width deduction and explicit raw-to-usable schema. Their unobserved span has no guaranteed lower width. Current live cut values are already usable and are not deducted twice.
 - The additional 0.7 m D15 operating margin remains conservative and uncalibrated alongside D33's deduction; resolving overlap against field observations remains outstanding. No accuracy claim is based on these assumptions.
 
-## D43: Preserve failed-survey uncertainty and avoid positive wording (2026-10-17)
+## D46: Preserve failed-survey uncertainty and avoid positive wording (2026-10-17)
 
 - A parcel survey with no valid cuts remains an unresolved Official coverage bound [0, open], rather than disappearing and allowing a weaker listing/class prior to certify the whole way. Rejected geometry does not contribute a width; it does retain the missing-coverage fact.
 - A permissive through/turn route gets “Chưa xác minh đường ra”, rather than a positive Way Out badge, even when the map contains a topological path.
 - Restricted pickup verdicts state the place, walk and prohibition/citation without the former “Gợi ý” stopping advice. This preserves Q7's law-vs-practice policy while removing advice to stop where the displayed rule forbids it.
 
-## D44: Main-road handoffs must pass the junction turn (2026-10-17)
+## D47: Main-road handoffs must pass the junction turn (2026-10-17)
 
 - Arrival source states include actual incoming main-road headings. An unspecified local handoff can align with a main road, but cannot certify an arbitrary main-to-alley turn; an unsupported turn remains unknown.
 - Reaching a main-road junction is not sufficient for a verified Way Out: the incoming alley heading must have a permitted feasible transition onto a main-road arm. This closes a source/target boundary exception to the directed-turn checks.
 - The one-arc model covers turns up to 90 degrees. Sharper turns remain unknown without additional manoeuvre evidence, even when widths look generous; no 100-degree tolerance is treated as a validated model.
 
 
-## D45: Street-level width observations require human review (2026-10-17)
+## D48: Street-level width observations require human review (2026-10-17)
 
 - The explicitly requested imagery batch uses the demand-ranked evidence queue, all named/tagged alleys intersecting HUTECH's 500 m circles, and a preselected cadastral validation pool. This research batch differs from D26's display-only Google lookup; the existing lookup UI and saved flags remain unchanged. Google Maps terms §3.2.3 restrict creating content from Maps content; this implementation is not a determination of permission under those terms (https://cloud.google.com/maps-platform/terms). No raw Google image is stored.
 - Reject off-centreline (>3 m), frontage/endpoints (<8 m), ambiguous nearby-way panoramas before fetching Static images. Vision must identify daylight, inside-alley placement and a visible reference object. Wall-to-wall space and visible obstruction-adjusted clearance are separate. Dates come from source metadata; a listing post date is not an image capture date. Cache provider/pano/heading readings, including rejected results, rather than repeatedly paying for a failed image.
@@ -384,7 +427,7 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - **Money:** every Google metadata/Static request still reserves through budget.spend(), with caps unchanged; added interprocess locking prevents batch/live lost updates. Gemini uses gemini-2.5-flash, ≤640 px JPEG, zero thinking budget and ≥2048 output tokens. Free AI Studio is tried first whenever the shared project cooldown expires. Vertex calls reserve/settle through agent_budget in one locked transaction with a persistent imagery job ceiling of $1.00 and an additional shared ceiling of $1.10, leaving $1.90 of the $3 pool unconsumed by this job. Existing conservative ledger token prices are retained. No reservation or allowance resets on worker restart.
 - The worker is detached, resumes cached work, stops Google on denial/caps, and can wait until today's free-project reset before one free-only continuation. Mapillary is skipped without MAPILLARY_CLIENT_TOKEN; its discovery/download/position-check/vision path is available via --mapillary.
 
-## D46: Official bulk road widths and planned right-of-way stay separate from current Clear Width (2026-10-17)
+## D49: Official bulk road widths and planned right-of-way stay separate from current Clear Width (2026-10-17)
 
 - Public HCMGIS WFS supplies 2021 Phước Long A road lines with `chieurong`; the official Quận 9 QĐ 01/2009 annex separately lists historical road/base width and planned lộ giới. Store sourced, dated numeric fields as **Official metadata**, exposed in `WidthRange.official_width_records`, outside `Bound` and `_combine`. A file retrieval date is not a survey date.
 - Planned lộ giới is a planning/legal corridor, not today's narrowest usable passage. It cannot establish a positive lower bound. It is also not necessarily an upper bound on today's physical width: implementation, later amendments, source extent and correspondence are unverified. A separate field avoids an unsupported upper-bound assumption, and cannot change fits/blocked decisions, strongest-tier coverage or measurement-queue scarcity. Historical base/road widths also remain metadata until present-day meaning and validation are established.
@@ -393,7 +436,7 @@ Let W = width incl. mirrors (body + 0.25 m where not published).
 - The current 213-way city cadastral reference becomes 244 ways after deduplicating area caches. Compare raw `gap_m`, not the gap-minus-1 usable estimate. Neither imported source overlaps this reference, so agreement and width errors are **N/A**, never zero-error/100%-agreement. Current Clear Width coverage gain is **zero**. Detailed import/matching counts and source rights are in `docs/eval/official-bulk.md` and its validation JSON.
 - WFS advertises `Fees=NONE` and `AccessConstraints=NONE`, but no explicit redistribution licence was found. Keep original geometries in the private research cache and expose only dated, attributed factual metadata; request written terms before external redistribution. The city open-data catalogue's relevant PDF is a data dictionary with unspecified licence and restrictive site terms. The newer advertised ArcGIS parcel FeatureServer returned application status 401; no token, credential, alternate path or workaround is used. A formal account/data request is the next step for city-wide data.
 
-## D47: Best estimate with explicit confidence, without weakening Hard Checks (2026-10-17)
+## D50: Best estimate with explicit confidence, without weakening Hard Checks (2026-10-17)
 
 - Product-owner option 1: every evaluated stop (including a rejected door) and every verdict carries `estimate = {answer: fits|tight|no|unknown, confidence: high|medium|low, basis}`. `verified`, `unverified_reasons`, strict fit, Hard Checks, ranking, legal exclusions, water limits and walk caps remain separate and unchanged. The verdict estimate describes its first stop; the door's own estimate describes the door. No returned stop is promoted to verified by an estimate. A missing graph produces unknown/low; no eligible stop produces no/low, meaning none found in the available network, not proof about the whole neighborhood.
 - Width hypothesis: use the minimum valid sampled bottleneck at the decisive tier when available (legacy raw gaps use the already-converted gap minus 1 m, not half of the missing-coverage interval; a numeric Declared listing retains its stated width for estimation only), clamped inside the fused Width Range. Otherwise use `(lo + min(hi, lo+3 m))/2`. The cap avoids treating an open upper bound as an implausibly wide road. An entirely unresolved survey may retain a non-overruled weaker prior for a low-confidence hypothesis only. A decisive conflict has no point estimate. A sample point is never installed as a lower bound. Existing upper-bound bottlenecks and no/blocked fit exclusions remain hard.

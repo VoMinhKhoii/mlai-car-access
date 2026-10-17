@@ -1,11 +1,11 @@
-.arrival-confirm { color: oklch(22% .02 190); background: oklch(94% .025 190); border: 1px solid oklch(83% .035 190); border-radius: 14px; padding: 20px; font-family: system-ui, -apple-system, sans-serif; }
+.arrival-confirm { color: oklch(22% .02 190); background: oklch(94% .025 190); border: 1px solid oklch(83% .035 190); border-radius: 14px; padding: 20px; font-family: "Be Vietnam Pro", system-ui, -apple-system, sans-serif; }
 .arrival-eyebrow { display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.09em; font-weight:750; color:oklch(35% .065 205); }
 .arrival-confirm h2 { font-size:21px; line-height:1.35; margin:12px 0; letter-spacing:-.025em; }
 .arrival-confirm p { font-size:14px; line-height:1.6; }
 .arrival-check { display:flex; align-items:center; gap:10px; min-height:48px; font-size:14px; }
 .arrival-check input { width:22px; height:22px; accent-color:oklch(35% .065 205); }
 .arrival-actions { display:grid; gap:8px; margin-top:10px; }
-.arrival-actions button { min-height:50px; padding:10px 16px; font:600 15px system-ui,sans-serif; color:oklch(28% .03 190); background:oklch(99% .005 190); border:1px solid oklch(75% .025 190); border-radius:8px; cursor:pointer; }
+.arrival-actions button { min-height:50px; padding:10px 16px; font:600 15px "Be Vietnam Pro", system-ui,sans-serif; color:oklch(28% .03 190); background:oklch(99% .005 190); border:1px solid oklch(75% .025 190); border-radius:8px; cursor:pointer; }
 .arrival-actions button:hover { background:oklch(91% .03 190); }
 .arrival-actions button:disabled { opacity:.55; cursor:default; }
 .arrival-actions button:focus-visible,.arrival-check input:focus-visible { outline:3px solid oklch(55% .12 220); outline-offset:3px; }

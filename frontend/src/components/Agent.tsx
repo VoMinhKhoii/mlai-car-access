@@ -98,7 +98,7 @@ export function Agent({ origin, onPlan, open, setOpen, mapContext }: { origin: P
   function dictate() {
     if (!Recognition) return
     if (listening) { speech.current?.stop(); return }
-    const rec = new Recognition()
+    const rec = new Recognition() as unknown as Speech
     speech.current = rec
     rec.lang = 'vi-VN'
     rec.interimResults = false
@@ -191,8 +191,8 @@ export function Agent({ origin, onPlan, open, setOpen, mapContext }: { origin: P
       </form>
     </section>}
     {open && evidence && <div className="agent-evidence-panel" onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); setEvidence(null) } }}>
-      <EvidencePanel way={evidence.way} at={evidence.at} google={false} grounding={false} onClose={() => setEvidence(null)}
-        onReview={() => {}} onBlockage={() => { void api.blockage({ way_id: evidence.way.way_id, reason: 'Vật cản tạm thời (tài xế báo)' }).catch(() => setEvidenceError('Chưa gửi được báo cáo.')) }} />
+      <EvidencePanel way={evidence.way} at={evidence.at} google={false} grounding={false} canReview={false} onClose={() => setEvidence(null)}
+        onReview={() => {}} onBlockage={() => { void api.blockage({ lat: evidence.at[0], lon: evidence.at[1], way_id: evidence.way.way_id, reason: 'Vật cản tạm thời (tài xế báo)' }).catch(() => setEvidenceError('Chưa gửi được báo cáo.')) }} />
     </div>}
   </>
 }

@@ -1,24 +1,9 @@
 """Paths, environment and the tunable numbers from docs/decision-log.md."""
 import os
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
-CACHE = ROOT / "backend" / "cache"
-STORE = ROOT / "backend" / "store"
-FLAG_FILE = ROOT / "backend" / "flags.json"
-FRONTEND_DIST = ROOT / "frontend" / "dist"
-
-# On Vercel the bundle is read-only: copy the shipped caches and state to /tmp once per instance and write there.
-if os.environ.get("VERCEL"):
-    _tmp = Path("/tmp/vaoduoc")
-    for src, name in ((CACHE, "cache"), (STORE, "store")):
-        if not (_tmp / name).exists() and src.exists():
-            shutil.copytree(src, _tmp / name)
-    if FLAG_FILE.exists() and not (_tmp / "flags.json").exists():
-        shutil.copy(FLAG_FILE, _tmp / "flags.json")
-    CACHE, STORE, FLAG_FILE = _tmp / "cache", _tmp / "store", _tmp / "flags.json"
 
 
 def _load_env_file(path: Path) -> None:
@@ -33,7 +18,22 @@ def _load_env_file(path: Path) -> None:
         os.environ.setdefault(key.strip(), value)
 
 
+def _path_override(name: str, default: Path) -> Path:
+    value = os.environ.get(name)
+    return Path(value).expanduser().resolve() if value else default
+
+
 _load_env_file(ROOT / ".env.local")
+
+# One continuously running process owns operator sessions, review state, quotas and background jobs. A serverless
+# platform gives each instance its own throwaway copy of that state, so it is refused rather than silently wrong.
+if os.environ.get("VERCEL"):
+    raise RuntimeError("Vào Được backend needs one persistent process; run it with uvicorn --workers 1, not serverless")
+
+CACHE = _path_override("VAODUOC_CACHE", ROOT / "backend" / "cache")
+STORE = _path_override("VAODUOC_STORE", ROOT / "backend" / "store")
+FLAG_FILE = _path_override("VAODUOC_FLAGS", ROOT / "backend" / "flags.json")
+FRONTEND_DIST = _path_override("VAODUOC_DIST", ROOT / "frontend" / "dist")
 
 GOONG_API_KEY = os.environ.get("GOONG_API_KEY", "")
 GOONG_MAPTILES_KEY = os.environ.get("GOONG_MAPTILES_KEY", "")
@@ -51,6 +51,12 @@ REVERSE_LIMIT_M = 30.0
 WALK_CAP_M = {"park": 400.0, "pickup": 150.0}
 # Q12: Dwell Window default for Pickup/Drop-off.
 PICKUP_DWELL_MIN = 15
+# R-04: conservative traversal windows cover a return-speed allowance plus this fixed uncertainty margin.
+ALLEY_SPEED_MPS = 15 / 3.6
+FLOOD_TRAVERSAL_MARGIN_MIN = 5
+FLOOD_TIMING_STEP_MIN = 15
+FLOOD_TIMING_HORIZON_H = 12
+FLOOD_REPORT_VALID_H = 2
 # D15: Alley Fit margins (metres).
 SIDE_CLEARANCE_M = 0.3
 PARKED_MOTORBIKE_ROW_M = 0.7
@@ -73,3 +79,15 @@ def in_hcmc(lat: float, lon: float) -> bool:
 
 # Area graph radius around a destination.
 AREA_RADIUS_M = 1200.0
+
+# D34: live traffic cameras. A reading is reused for this long; a frame whose clock is further off is stale.
+CAMERA_READ_TTL_S = 180
+CAMERA_STALE_MIN = 10
+# D34: travel-time factor on the stretch a camera watches, per traffic level, plus a queue a still cannot
+# measure. Stretches no camera watches take the typical factor of all cameras read (placeholders; tune from
+# store/camera_readings.jsonl).
+TRAFFIC_FACTOR = {"thong_thoang": 1.0, "dong": 1.3, "un_u": 2.0, "ket_cung": 4.0}
+TRAFFIC_QUEUE_MIN = {"un_u": 3, "ket_cung": 10}
+
+# Read-only local verification: refuse cache misses rather than contacting upstream services.
+CACHED_ONLY = os.environ.get("NGONGACH_CACHED_ONLY", "0") == "1"
